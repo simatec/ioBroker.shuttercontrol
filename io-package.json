@@ -1,0 +1,105 @@
+{
+    "common": {
+        "name": "shutter",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "shutter",
+        "titleLang": {
+            "en": "shutter",
+            "de": "Verschluss",
+            "ru": "затвор",
+            "pt": "obturador",
+            "nl": "Luik",
+            "fr": "obturateur",
+            "it": "otturatore",
+            "es": "obturador",
+            "pl": "migawka",
+            "zh-cn": "快门"
+        },
+        "desc": {
+            "en": "Automatic control for shutters",
+            "de": "Automatische Steuerung für Rollläden",
+            "ru": "Автоматическое управление жалюзи",
+            "pt": "Controle automático para persianas",
+            "nl": "Automatische controle voor luiken",
+            "fr": "Contrôle automatique des volets",
+            "it": "Controllo automatico per tapparelle",
+            "es": "Control automático de persianas.",
+            "pl": "Automatyczne sterowanie żaluzjami",
+            "zh-cn": "百叶窗的自动控制"
+        },
+        "authors": [
+            "simatec <nais@gmx.net>"
+        ],
+        "keywords": [
+            "ioBroker",
+            "template",
+            "Smart Home",
+            "home automation"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "shutter.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/simatec/ioBroker.shutter/master/admin/shutter.png",
+        "readme": "https://github.com/simatec/ioBroker.shutter/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "climate-control",
+        "compact": true,
+        "materialize": true,
+        "materializeTab": true,
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "shutter",
+                "de": "Verschluss",
+                "ru": "затвор",
+                "pt": "obturador",
+                "nl": "Luik",
+                "fr": "obturateur",
+                "it": "otturatore",
+                "es": "obturador",
+                "pl": "migawka",
+                "zh-cn": "快门"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "dependencies": [
+            {
+                "admin": ">=3.0.0"
+            }
+        ]
+    },
+    "native": {
+        "UseAstro": true,
+        "W_shutterUpSleep": "06:00",
+        "W_shutterDownSleep": "20:00",
+        "W_shutterDownLiving": "22:00",
+        "W_shutterUpLiving": "06:00",
+        "astroDelay": 30,
+        "WE_shutterUpSleep": "22:00",
+        "WE_shutterDownSleep": "10:30",
+        "WE_shutterDownLiving": "08:00",
+        "WE_shutterUpLiving": "22:00",
+        "publicHolidays": true,
+        "stateHoliday": false
+    },
+    "objects": [],
+    "instanceObjects": []
+}
