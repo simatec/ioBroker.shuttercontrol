@@ -17,6 +17,59 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="words.js"></script>
 
+    <style>
+        .m .col .select-wrapper + label {
+            top: -26px;
+        }
+        .m span {
+            font-size: 0.9em;
+        }
+        .m .tabs {
+            height: 48px;
+        }
+        .m .page {
+            height: calc(100% - 118px);
+        }
+        #dialog-command {
+            width: calc(100% - 100px);
+        }
+        #dialog-command .title {
+            background: #64b5f6;
+            color: #FFF;
+            padding: 0.5rem;
+        }
+        #dialog-command .textarea {
+            margin-bottom: 0;
+        }
+        #dialog-command textarea {
+            background: #e9e9e9;
+            font-family: courier, monospace;
+            font-size: 11px;
+            resize: none;
+            width: 100%;
+            height: calc(100% - 125px);
+            margin-bottom: 0;
+        }
+        #dialog-command .progress-dont-close {
+            float: left;
+            padding-left: 1rem;
+            padding-top: 1rem;
+        }
+        #dialog-command .command {
+            font-style: italic;
+        }
+        #dialog-command .btn {
+            margin-right: 1.5rem;
+        }
+        .do-restore {
+            cursor: pointer;
+        }
+        .collapsible-body {
+            margin-left: 2rem !important;
+            padding-top: 0 !important;
+        }
+    </style>
+
     <script type="text/javascript">
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
@@ -27,9 +80,10 @@
                 var id = $key.attr('id');
                 if ($key.attr('type') === 'checkbox') {
                     // do not call onChange direct, because onChange could expect some arguments
-                    $key.prop('checked', settings[id])
-                        .on('change', () => onChange())
-                        ;
+                    $key.prop('checked', settings[id]).on('change', function () {
+                        showHideSettings();
+                        onChange();
+                    });
                 } else {
                     // do not call onChange direct, because onChange could expect some arguments
                     $key.val(settings[id])
@@ -38,9 +92,38 @@
                         ;
                 }
             });
+            showHideSettings();
             onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             if (M) M.updateTextFields();
+            getAdapterInstances('feiertage', function (instances) {
+                fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
+            });
+            getAdapterInstances('enum.functions', function (instances) {
+                fillEnum('livingEnum', instances, settings['livingEnum']);
+            });
+        }
+        function fillInstances(id, arr, val) {
+            var $sel = $('#' + id);
+            $sel.html('<option value="">' + _('none') + '</option>');
+            for (var i = 0; i < arr.length; i++) {
+                var _id = arr[i]._id.replace('system.adapter.', '');
+                // Take first value
+                // if (!val) val = _id;enum.functions.rollladen_schlafen
+                $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
+            }
+            $sel.select();
+        }
+        function fillEnum(id, arr, val) {
+            var $sel = $('#' + id);
+            $sel.html('<option value="">' + _('none') + '</option>');
+            for (var i = 0; i < arr.length; i++) {
+                var _id = arr[i]._id.replace('enum.functions.', '');
+                // Take first value
+                // if (!val) val = _id;enum.functions.rollladen_schlafen
+                $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
+            }
+            $sel.select();
         }
 
         // This will be called by the admin adapter when the user presses the save button
@@ -57,6 +140,28 @@
             });
             callback(obj);
         }
+        function showHideSettings() {
+            if ($('#UseAstro').prop('checked')) {
+                $('.tab-astro').removeClass('disabled');
+            } else {
+                $('.tab-astro').addClass('disabled');
+            }
+            if ($('#UseAutoMode').prop('checked')) {
+                $('.tab-auto_manu').removeClass('disabled');
+            } else {
+                $('.tab-auto_manu').addClass('disabled');
+            }
+            if ($('#UseSunMode').prop('checked')) {
+                $('.tab-sun').removeClass('disabled');
+            } else {
+                $('.tab-sun').addClass('disabled');
+            }
+            if ($('#publicHolidays').prop('checked')) {
+                $('.publicHol').show();
+            } else {
+                $('.publicHol').hide();
+            }
+        }
     </script>
 
 </head>
@@ -70,6 +175,7 @@
                     <li class="tab col s6 l2"><a href="#tab-settings" class="translate active">main settings</a></li>
                     <li class="tab col s6 l2 tab-living"><a href="#tab-living" class="translate">Living Area</a></li>
                     <li class="tab col s6 l2 tab-sleep"><a href="#tab-sleep" class="translate">Sleep Area</a></li>
+                    <li class="tab col s6 l2 tab-auto_manu"><a href="#tab-auto_manu" class="translate">Auto/Manu Area</a></li>
                     <li class="tab col s6 l2 tab-astro"><a href="#tab-astro" class="translate">Astro settings</a></li>
                     <li class="tab col s6 l2 tab-sun"><a href="#tab-sun" class="translate">Sun settings</a></li>
                 </ul>
@@ -83,63 +189,167 @@
                         </div>
                     </div>
         
-                    <!-- For example columns with settings: -->
-                    <div class="col s6 input-field">
-                        <input type="checkbox" class="value" id="publicHolidays" />
-                        <span for="publicHolidays" class="translate">Use public holidays</span>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="checkbox" class="value" id="stateHoliday" />
-                        <span for="stateHoliday" class="translate">State for Holiday</span>
-                    </div>
-                </div>
-                <div id="tab-living" class="col s12 page">
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="WE_shutterDownLiving" />
-                        <label for="WE_shutterDownLiving" class="translate">Shutters down in the living area on Weekend</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="WE_shutterUpLiving" />
-                        <label for="WE_shutterUpLiving" class="translate">Shutters up in the living area on Weekend</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="W_shutterDownLiving" />
-                        <label for="W_shutterDownLiving" class="translate">Shutters down in the living area on Week</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="W_shutterUpLiving" />
-                        <label for="W_shutterUpLiving" class="translate">Shutters up in the living area on Week</label>
-                    </div>
-                </div>
-                <div id="tab-sleep" class="col s12 page">
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="WE_shutterUpSleep" />
-                        <label for="WE_shutterUpSleep" class="translate">Shutters up in the sleeping area on Weekend</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="WE_shutterDownSleep" />
-                        <label for="WE_shutterDownSleep" class="translate">Shutters down in the sleeping area on Weekend</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="W_shutterUpSleep" />
-                        <label for="W_shutterUpSleep" class="translate">Shutters up in the sleeping area on Week</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="W_shutterDownSleep" />
-                        <label for="W_shutterDownSleep" class="translate">Shutters down in the sleeping area on Week</label>
-                    </div>
-                </div>
-                <div id="tab-astro" class="col s12 page">
-                        <div class="col s6 input-field">
+                    <!-- main settings -->
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="checkbox" class="value" id="stateHoliday" />
+                            <span for="stateHoliday" class="translate">State for Holiday</span>
+                        </div>
+                        <div class="col s6 l4 input-field">
                             <input type="checkbox" class="value" id="UseAstro" />
                             <span for="UseAstro" class="translate">Use astronomical time</span>
                         </div>
-                        <div class="col s6 input-field">
-                            <input type="number" class="value" id="astroDelay" />
-                            <label for="astroDelay" class="translate">Time delay astro time (minutes)</label>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="checkbox" class="value" id="UseAutoMode" />
+                            <span for="UseAutoMode" class="translate">Use Auto Mode</span>
                         </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="checkbox" class="value" id="UseSunMode" />
+                            <span for="UseSunMode" class="translate">Use Sun Mode</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="checkbox" class="value" id="publicHolidays" />
+                            <span for="publicHolidays" class="translate">Use public holidays</span>
+                        </div>
+                        <div class="input-field col s12 m6 l4 publicHol">
+                            <select id="publicHolInstance" class="value"></select>
+                            <label for="publicHolInstance" class="translate">public holidays Instance</label>
+                        </div>
+                    </div>
                 </div>
+                <!-- livving settings -->
+                <div id="tab-living" class="col s12 page">
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="input-field col s12 m6 l4">
+                            <select id="livingEnum" class="value"></select>
+                            <label for="livingEnum" class="translate">Enum Living</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterDownLiving" />
+                            <label for="WE_shutterDownLiving" class="translate">Shutters down in the living area on Weekend</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterUpLiving" />
+                            <label for="WE_shutterUpLiving" class="translate">Shutters up in the living area on Weekend</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterDownLiving" />
+                            <label for="W_shutterDownLiving" class="translate">Shutters down in the living area on Week</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterUpLiving" />
+                            <label for="W_shutterUpLiving" class="translate">Shutters up in the living area on Week</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- sleep settings -->
+                <div id="tab-sleep" class="col s12 page">
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="input-field col s12 m6 l4">
+                            <select id="sleepEnum" class="value"></select>
+                            <label for="sleepEnum" class="translate">Enum Sleep</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterUpSleep" />
+                            <label for="WE_shutterUpSleep" class="translate">Shutters up in the sleeping area on Weekend</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterDownSleep" />
+                            <label for="WE_shutterDownSleep" class="translate">Shutters down in the sleeping area on Weekend</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterUpSleep" />
+                            <label for="W_shutterUpSleep" class="translate">Shutters up in the sleeping area on Week</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterDownSleep" />
+                            <label for="W_shutterDownSleep" class="translate">Shutters down in the sleeping area on Week</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- auto/manu settings -->
+                <div id="tab-auto_manu" class="col s12 page">
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="input-field col s12 m6 l4">
+                            <select id="autoEnum" class="value"></select>
+                            <label for="autoEnum" class="translate">Enum Auto/Manu</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterUpAuto" />
+                            <label for="WE_shutterUpAuto" class="translate">Shutters up in the Auto/Manu area on Weekend</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="WE_shutterDownAuto" />
+                            <label for="we_shutterDownAuto" class="translate">Shutters down in the Auto/Manu area on Weekend</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterUpAuto" />
+                            <label for="W_shutterUpAuto" class="translate">Shutters up in the Auto/Manu area on Week</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterDownAuto" />
+                            <label for="W_shutterDownAuto" class="translate">Shutters down in the Auto/Manu area on Week</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- astro settings -->
+                <div id="tab-astro" class="col s12 page">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="astroDelayUp" />
+                            <label for="astroDelayUp" class="translate">Time delay astro time for Up (minutes)</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="astroDelayDown" />
+                            <label for="astroDelayDown" class="translate">Time delay astro time for Down (minutes)</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- sun settings -->
                 <div id="tab-sun" class="col s12 page">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="sunWeekStart" min="1" max="52" />
+                            <label for="sunWeekStart" class="translate">Start week for sun protection</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="sunWeekEnd" min="1" max="52" />
+                            <label for="sunWeekEnd" class="translate">End week for sun protection</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="sun_shutterUp" />
+                            <label for="sun_shutterUp" class="translate">Shutters up for sun protection</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="sun_shutterDown" />
+                            <label for="sun_shutterDown" class="translate">Shutters down for sun protection</label>
+                        </div>
+                    </div>
 
                 </div>
             </div>
