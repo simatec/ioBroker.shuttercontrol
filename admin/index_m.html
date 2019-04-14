@@ -99,8 +99,8 @@
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
-            getAdapterInstances('enum.functions', function (instances) {
-                fillEnum('livingEnum', instances, settings['livingEnum']);
+            getEnums('functions', function (enums) {
+                fillEnum('livingEnum', enums, settings['livingEnum']);
             });
         }
         function fillInstances(id, arr, val) {
@@ -108,8 +108,6 @@
             $sel.html('<option value="">' + _('none') + '</option>');
             for (var i = 0; i < arr.length; i++) {
                 var _id = arr[i]._id.replace('system.adapter.', '');
-                // Take first value
-                // if (!val) val = _id;enum.functions.rollladen_schlafen
                 $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
             }
             $sel.select();
@@ -117,10 +115,9 @@
         function fillEnum(id, arr, val) {
             var $sel = $('#' + id);
             $sel.html('<option value="">' + _('none') + '</option>');
-            for (var i = 0; i < arr.length; i++) {
-                var _id = arr[i]._id.replace('enum.functions.', '');
-                // Take first value
-                // if (!val) val = _id;enum.functions.rollladen_schlafen
+            rooms = getEnums('functions');
+            for (var i in functions){
+                var _id = functions[i].name.replace;
                 $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
             }
             $sel.select();
