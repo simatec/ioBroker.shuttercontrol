@@ -115,9 +115,9 @@
         function fillEnum(id, arr, val) {
             var $sel = $('#' + id);
             $sel.html('<option value="">' + _('none') + '</option>');
-            rooms = getEnums('functions');
-            for (var i in functions){
-                var _id = functions[i].name.replace;
+            var rooms = getEnums('functions');
+            for (var i = 0; i < rooms.length; i++){
+                var _id = rooms[i].name.replace;
                 $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
             }
             $sel.select();
