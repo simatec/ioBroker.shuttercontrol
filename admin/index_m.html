@@ -99,9 +99,10 @@
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
-            getEnums('functions', function (enums) {
-                fillEnum('livingEnum', enums, settings['livingEnum']);
-            });
+
+            if(id==="livingEnum") {
+                getEnums(id, settings[id]);
+            }
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -112,14 +113,28 @@
             }
             $sel.select();
         }
-        function fillEnum(id, arr, val) {
+        function getEnums(id, val) {  
+            const socket = io.connect();  
+            socket.emit('getObjectView', 'system', 'enum', {startkey: 'enum.', endkey: 'enum.\u9999'}, function (err, res) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+                
+                const enums = {};
+                for (var i = 0; i < res.rows.length; i++) {
+                    enums[res.rows[i].id] = res.rows[i].value;           
+                }
+                fillEnums(id, val, enums);        
+            });            
+        }
+        function fillEnums(id, val, enums){
             var $sel = $('#' + id);
             $sel.html('<option value="">' + _('none') + '</option>');
-            var rooms = getEnums('functions');
-            for (var i = 0; i < rooms.length; i++){
-                var _id = rooms[i].name.replace;
-                $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
-            }
+            Object.keys(enums).forEach(function (key) {
+                const _enum = enums[key];
+                $sel.append('<option value="' + key + '"' + (key === val ? ' selected' : '') + '>' + _enum.name + '</option>');
+            });
             $sel.select();
         }
 
