@@ -99,10 +99,9 @@
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
-
-            if(id==="livingEnum") {
-                getEnums(id, settings[id]);
-            }
+            getEnums('livingEnum', settings['livingEnum']);
+            getEnums('sleepEnum', settings['sleepEnum']);
+            getEnums('autoEnum', settings['autoEnum']);
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -115,12 +114,11 @@
         }
         function getEnums(id, val) {  
             const socket = io.connect();  
-            socket.emit('getObjectView', 'system', 'enum', {startkey: 'enum.', endkey: 'enum.\u9999'}, function (err, res) {
+            socket.emit('getObjectView', 'system', 'enum', {startkey: 'enum.functions.', endkey: 'enum.functions.\u9999'}, function (err, res) {
                 if (err) {
                     callback(err);
                     return;
                 }
-                
                 const enums = {};
                 for (var i = 0; i < res.rows.length; i++) {
                     enums[res.rows[i].id] = res.rows[i].value;           
@@ -132,12 +130,12 @@
             var $sel = $('#' + id);
             $sel.html('<option value="">' + _('none') + '</option>');
             Object.keys(enums).forEach(function (key) {
-                const _enum = enums[key];
-                $sel.append('<option value="' + key + '"' + (key === val ? ' selected' : '') + '>' + _enum.name + '</option>');
+                key = key.replace('enum.functions.', '');
+                $sel.append('<option value="' + key + '"' + (key === val ? ' selected' : '') + '>' + key + '</option>');
             });
             $sel.select();
         }
-
+        
         // This will be called by the admin adapter when the user presses the save button
         function save(callback) {
             // example: select elements with class=value and build settings object

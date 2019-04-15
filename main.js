@@ -94,6 +94,9 @@ function main() {
     adapter.log.info('config WE_shutterUpLiving: ' + adapter.config.WE_shutterUpLiving);
     adapter.log.info('config publicHolidays: ' + adapter.config.publicHolidays);
     adapter.log.info('config stateHoliday: ' + adapter.config.stateHoliday);
+    adapter.log.info('config livingEnum: ' + adapter.config.livingEnum);
+    adapter.log.info('config sleepEnum: ' + adapter.config.sleepEnum);
+    adapter.log.info('config autoEnum: ' + adapter.config.autoEnum);
 
     /*
         For every state in the system there has to be also an object of type state
