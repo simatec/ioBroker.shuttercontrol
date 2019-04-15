@@ -25,3 +25,12 @@ admin/i18n
 
 # maintenance scripts
 maintenance/**
+gulpfile.js
+admin/i18n
+tasks
+node_modules
+/node_modules
+test
+.vscode
+/package-lock.json
+.DS_Store
