@@ -59,9 +59,9 @@ function startAdapter(options) {
         },
     }));
 }
-const calc = schedule.scheduleJob('54 13 * * *', function() {
+const calc = schedule.scheduleJob('30 2 * * *', function() {
     // get today's sunlight times
-    let times = SunCalc.getTimes(new Date(), 52.175011, 11.425717);
+    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
 
     // format sunrise time from the Date object
     sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
