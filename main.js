@@ -1,28 +1,24 @@
 'use strict';
 
-/*
- * Created with @iobroker/create-adapter vunknown
- */
-
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
+const schedule  = require('node-schedule');
+const SunCalc = require('suncalc2');
 
 /**
  * The adapter instance
  * @type {ioBroker.Adapter}
  */
 let adapter;
+let sunsetStr;
+/** @type {string} */
+let sunriseStr;
 
 /**
  * Starts the adapter instance
  * @param {Partial<ioBroker.AdapterOptions>} [options]
  */
 function startAdapter(options) {
-    // Create the adapter and define its methods
+
     return adapter = utils.adapter(Object.assign({}, options, {
         name: 'shutter',
 
@@ -61,24 +57,46 @@ function startAdapter(options) {
                 adapter.log.info(`state ${id} deleted`);
             }
         },
-
-        // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
-        // requires "common.message" property to be set to true in io-package.json
-        // message: (obj) => {
-        // 	if (typeof obj === "object" && obj.message) {
-        // 		if (obj.command === "send") {
-        // 			// e.g. send email or pushover or whatever
-        // 			adapter.log.info("send command");
-
-        // 			// Send response in callback if required
-        // 			if (obj.callback) adapter.sendTo(obj.from, obj.command, "Message received", obj.callback);
-        // 		}
-        // 	}
-        // },
     }));
+}
+const calc = schedule.scheduleJob('54 13 * * *', function() {
+    // get today's sunlight times
+    let times = SunCalc.getTimes(new Date(), 52.175011, 11.425717);
+
+    // format sunrise time from the Date object
+    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
+    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+
+    adapter.log.debug('Sunrise: ' + sunriseStr);
+    adapter.log.debug('Sunset: ' + sunsetStr);
+});
+
+function suncalculation () {
+    // get today's sunlight times 
+    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+
+    // format sunrise time from the Date object
+    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
+    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+
+    adapter.log.debug('Sunrise: ' + sunriseStr);
+    adapter.log.debug('Sunset: ' + sunsetStr);
 }
 
 function main() {
+    suncalculation ();
+    let Testzeit;
+    let sonnena;
+
+    Testzeit = adapter.config.W_shutterUpLiving;
+    sonnena = sunriseStr;
+
+    if ((sonnena) > (Testzeit)) {
+        adapter.log.debug(('Sonnenaufgang nach Startzeit'));
+    } else if ((sonnena) < (Testzeit)) {
+        adapter.log.debug(('Sonnenaufgang vor Startzeit'));
+    }
+
 
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
@@ -131,15 +149,6 @@ function main() {
 
     // same thing, but the state is deleted after 30s (getState will return null afterwards)
     adapter.setState('testVariable', { val: true, ack: true, expire: 30 });
-
-    // examples for the checkPassword/checkGroup functions
-    adapter.checkPassword('admin', 'iobroker', (res) => {
-        adapter.log.info('check user admin pw ioboker: ' + res);
-    });
-
-    adapter.checkGroup('admin', 'admin', (res) => {
-        adapter.log.info('check group user admin group admin: ' + res);
-    });
 }
 
 if (module.parent) {

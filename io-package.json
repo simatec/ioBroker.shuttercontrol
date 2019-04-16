@@ -97,6 +97,8 @@
         "W_shutterDownAuto": "22:00",
         "W_shutterUpAuto": "06:00",
         "astroDelayUp": 30,
+        "longitude": "13.404954",
+        "latitude": "52.520007",
         "astroDelayDown": 30,
         "WE_shutterUpSleep": "22:00",
         "WE_shutterDownSleep": "10:30",

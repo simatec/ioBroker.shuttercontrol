@@ -19,7 +19,9 @@
     "url": "https://github.com/simatec/ioBroker.shutter"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^1.0.3"
+    "@iobroker/adapter-core": "^1.0.3",
+    "node-schedule": "^1.3.0",
+    "suncalc2": "^1.8.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
@@ -55,3 +57,4 @@
   },
   "readmeFilename": "README.md"
 }
+ 
