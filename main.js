@@ -96,7 +96,12 @@ function main() {
     } else if ((sonnena) < (Testzeit)) {
         adapter.log.debug(('Sonnenaufgang vor Startzeit'));
     }
-
+    
+    adapter.getEnum('Rollladen_Wohnen', (err, res) => {
+        //adapter.setForeignState(JSON.stringify.res, 100);
+        adapter.log.warn(JSON.stringify.res);
+        adapter.log.error(err);
+        });
 
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
