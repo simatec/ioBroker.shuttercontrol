@@ -19,7 +19,18 @@ let sunriseStr;
  */
 function startAdapter(options) {
 
-    return adapter = utils.adapter(Object.assign({}, options, {
+    return adapter = utils.adapter(Object.assign({}, options, /**
+         * @param {{ (): void; (): void; }} callback
+         */
+ /**
+         * @param {any} id
+         * @param {any} obj
+         */
+ /**
+         * @param {any} id
+         * @param {{ val: any; ack: any; }} state
+         */
+ {
         name: 'shutter',
 
         // The ready callback is called when databases are connected and adapter received configuration.
@@ -83,8 +94,14 @@ function suncalculation () {
     adapter.log.debug('Sunset: ' + sunsetStr);
 }
 
+async function testfunc() {
+    const test = await adapter.getEnumsAsync('functions')
+  adapter.log.warn("Result : " + JSON.stringify(test))
+}
+
 function main() {
     suncalculation ();
+    testfunc();
     let Testzeit;
     let sonnena;
 
@@ -97,9 +114,12 @@ function main() {
         adapter.log.debug(('Sonnenaufgang vor Startzeit'));
     }
     
-    adapter.getEnum('Rollladen_Wohnen', (err, res) => {
+    adapter.getEnums('functions', (err, res) => {
         //adapter.setForeignState(JSON.stringify.res, 100);
-        adapter.log.warn(JSON.stringify.res);
+        for ( const i in res) {
+            adapter.log.warn(JSON.stringify(res[i]))
+            }
+        adapter.log.warn(JSON.stringify(res));
         adapter.log.error(err);
         });
 
