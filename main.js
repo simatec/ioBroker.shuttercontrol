@@ -89,6 +89,9 @@ function suncalculation () {
     // format sunrise time from the Date object
     sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
     sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+    let dayStr = times.sunrise.getDay();
+    adapter.log.debug(dayStr);
+
 
     adapter.log.debug('Sunrise: ' + sunriseStr);
     adapter.log.debug('Sunset: ' + sunsetStr);
@@ -110,10 +113,23 @@ adapter.log.warn('Resultat: ' + JSON.stringify(test));
     }, 2000);
 }
 */
+function getDate(d) {
+    d = d || new Date();
+
+    return d.getFullYear() + '_' +
+        ('0' + (d.getMonth() + 1)).slice(-2) + '_' +
+        ('0' + d.getDay()).slice(-2) + '-' +
+        ('0' + d.getDate()).slice(-2) + '-' +
+        ('0' + d.getHours()).slice(-2) + '_' +
+        ('0' + d.getMinutes()).slice(-2) + '_' +
+        ('0' + d.getSeconds()).slice(-2);
+    
+}
 
 function main() {
     suncalculation ();
     //testfunc();
+    getDate();
     let Testzeit;
     let sonnena;
 
