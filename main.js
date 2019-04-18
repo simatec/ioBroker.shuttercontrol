@@ -93,15 +93,27 @@ function suncalculation () {
     adapter.log.debug('Sunrise: ' + sunriseStr);
     adapter.log.debug('Sunset: ' + sunsetStr);
 }
-
+/*
 async function testfunc() {
-    const test = await adapter.getEnumsAsync('functions')
-  adapter.log.warn("Result : " + JSON.stringify(test))
+const test = await adapter.getEnumAsync('functions')
+adapter.log.warn('Resultat: ' + JSON.stringify(test));
+  const test_1 = test['result']
+  const test_2 = test_1['enum.functions.' + adapter.config.livingEnum];
+  adapter.log.warn(JSON.stringify(test_2.common.members));
+  setTimeout(function() {
+  for (const i in test_2.common.members) {
+    
+        adapter.log.warn(test_2.common.members[i])
+        adapter.setForeignState(test_2.common.members[i], 60, true);
+    
+   }
+    }, 2000);
 }
+*/
 
 function main() {
     suncalculation ();
-    testfunc();
+    //testfunc();
     let Testzeit;
     let sonnena;
 
@@ -113,15 +125,23 @@ function main() {
     } else if ((sonnena) < (Testzeit)) {
         adapter.log.debug(('Sonnenaufgang vor Startzeit'));
     }
-    
+
+    // Test Set Shutter State
     adapter.getEnums('functions', (err, res) => {
-        //adapter.setForeignState(JSON.stringify.res, 100);
-        for ( const i in res) {
-            adapter.log.warn(JSON.stringify(res[i]))
+        if (res) {
+            const _result = res['enum.functions'];
+            const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+
+            for ( const i in resultID.common.members) {
+                setTimeout(function() {
+                    adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.livingEnum)
+                    adapter.setForeignState(resultID.common.members[i], 100, true);
+                }, 2000 * i, i);
             }
-        adapter.log.warn(JSON.stringify(res));
-        adapter.log.error(err);
-        });
+        } else if (err) {
+            adapter.log.warn('Enum: ' + adapter.config.livingEnum + ' not found!!')
+        }
+    });
 
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
