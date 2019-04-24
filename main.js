@@ -300,10 +300,10 @@ function main() {
     adapter.subscribeStates('control.*');
 }
 
-if (module.parent) {
-    // Export startAdapter in compact mode
+// If started as allInOne/compact mode => return function to create instance
+if (module && module.parent) {
     module.exports = startAdapter;
 } else {
-    // otherwise start the instance directly
+    // or start the instance directly
     startAdapter();
 }
