@@ -41,16 +41,15 @@
     "proxyquire": "^2.1.0",
     "sinon": "^7.3.1",
     "sinon-chai": "^3.3.0",
-    "tslint": "^5.15.0"
+    "tslint": "^5.15.0",
+    "@iobroker/testing": "^1.1.10"
   },
   "main": "main.js",
   "scripts": {
-    "test:js": "mocha --opts test/mocha.custom.opts",
-    "test:package": "mocha test/testPackageFiles.js --exit",
-    "test:iobroker": "mocha test/testStartup.js --exit",
-    "test": "npm run test:js && npm run test:package",
-    "lint": "npm run lint:ts \"src/**/*.ts\"",
-    "lint:ts": "tslint"
+    "test": "npm run test:package && npm run test:unit",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit"
   },
   "bugs": {
     "url": "https://github.com/simatec/ioBroker.shutter/issues"
