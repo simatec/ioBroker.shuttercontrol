@@ -126,6 +126,9 @@ function checkStates() {
         }
     });
     adapter.getState('control.Holiday', (err, state) => {
+        if (err) {
+            return;
+        }
         if (state === true || state.val === true) {
             HolidayStr = true;
         } else {
