@@ -9,6 +9,7 @@ const SunCalc = require('suncalc2');
  * @type {ioBroker.Adapter}
  */
 let adapter;
+const adapterName = require('./package.json').name.split('.').pop();
 
 let sunsetStr;
 let sunriseStr;
@@ -28,87 +29,79 @@ let autoSleepStr;
  */
 function startAdapter(options) {
 
-    return adapter = utils.adapter(Object.assign({}, options, /**
-         * @param {{ (): void; (): void; }} callback
-         */
- /**
-         * @param {any} id
-         * @param {any} obj
-         */
- /**
-         * @param {any} id
-         * @param {{ val: any; ack: any; }} state
-         */
- {
-        name: 'shutter',
+    options = options || {};
+    Object.assign(options, {name: adapterName});
 
-        // The ready callback is called when databases are connected and adapter received configuration.
-        // start here!
-        ready: main, // Main method defined below for readability
+    adapter = new utils.Adapter(options);
+ 
+    //name: 'shutter',
 
-        // is called when adapter shuts down - callback has to be called under any circumstances!
-        unload: (callback) => {
-            try {
-                adapter.log.info('cleaned everything up...');
-                callback();
-            } catch (e) {
-                callback();
-            }
-        },
+    // The ready callback is called when databases are connected and adapter received configuration.
+    // start here!
+    adapter.on('ready', main); // Main method defined below for readability
 
-        // is called if a subscribed object changes
-        objectChange: (id, obj) => {
-            if (obj) {
-                // The object was changed
-                adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-                suncalculation();
-            } else {
-                // The object was deleted
-                adapter.log.info(`object ${id} deleted`);
-            }
-        },
+    // is called when adapter shuts down - callback has to be called under any circumstances!
+    adapter.on('unload', (callback) => {
+        try {
+            adapter.log.info('cleaned everything up...');
+            callback();
+        } catch (e) {
+            callback();
+        }
+    });
 
-        // is called if a subscribed state changes
-        stateChange: (id, state) => {
-            if (state) {
-                // The state was changed
-                adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+    // is called if a subscribed object changes
+    adapter.on('objectChange', (id, obj) => {
+        if (obj) {
+            // The object was changed
+            adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+            suncalculation();
+        } else {
+            // The object was deleted
+            adapter.log.info(`object ${id} deleted`);
+        }
+    });
 
-                if ((state.val === true || state.val === 'true') && !state.ack) {
-                    if (id === adapter.namespace + '.control.Holiday') {
-                        HolidayStr = true;
-                    } 
-                    if (id === adapter.namespace + '.control.publicHoliday') {
-                        publicHolidayStr = true;
-                    }
-                    if (id === adapter.namespace + '.control.autoLiving') {
-                        autoLivingStr = true;
-                    } 
-                    if (id === adapter.namespace + '.control.autoSleep') {
-                        autoSleepStr = true;
-                    }
+    // is called if a subscribed state changes
+    adapter.on('stateChange', (id, state) => {
+        if (state) {
+            // The state was changed
+            adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+
+            if ((state.val === true || state.val === 'true') && !state.ack) {
+                if (id === adapter.namespace + '.control.Holiday') {
+                    HolidayStr = true;
+                } 
+                if (id === adapter.namespace + '.control.publicHoliday') {
+                    publicHolidayStr = true;
                 }
-                if ((state.val === false || state.val === 'false') && !state.ack) {
-                    if (id === adapter.namespace + '.control.Holiday') {
-                        HolidayStr = false;
-                    } 
-                    if (id === adapter.namespace + '.control.publicHoliday') {
-                        publicHolidayStr = false;
-                    }
-                    if (id === adapter.namespace + '.control.autoLiving') {
-                        autoLivingStr = false;
-                    } 
-                    if (id === adapter.namespace + '.control.autoSleep') {
-                        autoSleepStr = false;
-                    }
+                if (id === adapter.namespace + '.control.autoLiving') {
+                    autoLivingStr = true;
+                } 
+                if (id === adapter.namespace + '.control.autoSleep') {
+                    autoSleepStr = true;
                 }
-                suncalculation();
-            } else {
-                // The state was deleted
-                adapter.log.info(`state ${id} deleted`);
             }
-        },
-    }));
+            if ((state.val === false || state.val === 'false') && !state.ack) {
+                if (id === adapter.namespace + '.control.Holiday') {
+                    HolidayStr = false;
+                } 
+                if (id === adapter.namespace + '.control.publicHoliday') {
+                    publicHolidayStr = false;
+                }
+                if (id === adapter.namespace + '.control.autoLiving') {
+                    autoLivingStr = false;
+                } 
+                if (id === adapter.namespace + '.control.autoSleep') {
+                    autoSleepStr = false;
+                }
+            }
+            suncalculation();
+        } else {
+            // The state was deleted
+            adapter.log.info(`state ${id} deleted`);
+        }
+    });
 }
 
 function checkStates() {
