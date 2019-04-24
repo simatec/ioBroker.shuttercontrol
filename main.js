@@ -239,7 +239,7 @@ adapter.log.warn('Resultat: ' + JSON.stringify(test));
 */
 
 function main() {
-    
+    /*
     adapter.getState('control.Holiday', (err, state) => {
         if (state === true || state.val === true) {
             HolidayStr = true;
@@ -268,10 +268,8 @@ function main() {
             autoSleepStr = false;
         }
     });
+    */
     
-    setTimeout(function() {
-        suncalculation ();
-    }, 1000)
 
     // Test Set Shutter State
     /*
@@ -298,6 +296,10 @@ function main() {
 
     // in this template all states changes inside the adapters namespace are subscribed
     adapter.subscribeStates('control.*');
+
+    setTimeout(function() {
+        suncalculation ();
+    }, 1000)
 }
 
 // If started as allInOne/compact mode => return function to create instance
