@@ -9,9 +9,18 @@ const SunCalc = require('suncalc2');
  * @type {ioBroker.Adapter}
  */
 let adapter;
+
 let sunsetStr;
-/** @type {string} */
 let sunriseStr;
+let upTimeSleep;
+let upTimeLiving;
+let downTimeSleep;
+let downTimeLiving;
+let dayStr;
+let HolidayStr;
+let publicHolidayStr;
+let autoLivingStr;
+let autoSleepStr;
 
 /**
  * Starts the adapter instance
@@ -52,6 +61,7 @@ function startAdapter(options) {
             if (obj) {
                 // The object was changed
                 adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+                suncalculation();
             } else {
                 // The object was deleted
                 adapter.log.info(`object ${id} deleted`);
@@ -63,6 +73,36 @@ function startAdapter(options) {
             if (state) {
                 // The state was changed
                 adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+
+                if ((state.val === true || state.val === 'true') && !state.ack) {
+                    if (id === adapter.namespace + '.control.Holiday') {
+                        HolidayStr = true;
+                    } 
+                    if (id === adapter.namespace + '.control.publicHoliday') {
+                        publicHolidayStr = true;
+                    }
+                    if (id === adapter.namespace + '.control.autoLiving') {
+                        autoLivingStr = true;
+                    } 
+                    if (id === adapter.namespace + '.control.autoSleep') {
+                        autoSleepStr = true;
+                    }
+                }
+                if ((state.val === false || state.val === 'false') && !state.ack) {
+                    if (id === adapter.namespace + '.control.Holiday') {
+                        HolidayStr = false;
+                    } 
+                    if (id === adapter.namespace + '.control.publicHoliday') {
+                        publicHolidayStr = false;
+                    }
+                    if (id === adapter.namespace + '.control.autoLiving') {
+                        autoLivingStr = false;
+                    } 
+                    if (id === adapter.namespace + '.control.autoSleep') {
+                        autoSleepStr = false;
+                    }
+                }
+                suncalculation();
             } else {
                 // The state was deleted
                 adapter.log.info(`state ${id} deleted`);
@@ -70,32 +110,123 @@ function startAdapter(options) {
         },
     }));
 }
+
+function checkStates() {
+    adapter.getState('control.Holiday', (err, state) => {
+        if (state === null || state.val === null) {
+            adapter.setState('control.Holiday', {val: false, ack: true});
+        }
+    });
+    adapter.getState('control.autoLiving', (err, state) => {
+        if (state === null || state.val === null) {
+            adapter.setState('control.autoLiving', {val: false, ack: true});
+        }
+    });
+    adapter.getState('control.autoSleep', (err, state) => {
+        if (state === null || state.val === null) {
+            adapter.setState('control.autoSleep', {val: false, ack: true});
+        }
+    });
+    adapter.getState('control.publicHoliday', (err, state) => {
+        if (state === null || state.val === null) {
+            adapter.setState('control.publicHoliday', {val: false, ack: true});
+        }
+    });
+};
+
+function shuterUpLiving() {
+    
+    upTimeLiving = upTimeLiving.split(':');
+    const upLiving = schedule.scheduleJob(upTimeLiving[1] + ' ' + upTimeLiving[0] + ' * * *', function() {
+        adapter.getEnums('functions', (err, res) => {
+            if (res) {
+                const _result = res['enum.functions'];
+                const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+
+                for ( const i in resultID.common.members) {
+                    setTimeout(function() {
+                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.livingEnum)
+                        adapter.setForeignState(resultID.common.members[i], 100, true);
+                    }, 2000 * i, i);
+                }
+            } else if (err) {
+                adapter.log.warn('Enum: ' + adapter.config.livingEnum + ' not found!!')
+            }
+        });
+    });
+}
 const calc = schedule.scheduleJob('30 2 * * *', function() {
-    // get today's sunlight times
-    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
-
-    // format sunrise time from the Date object
-    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
-    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
-
-    adapter.log.debug('Sunrise: ' + sunriseStr);
-    adapter.log.debug('Sunset: ' + sunsetStr);
+    suncalculation();
 });
 
-function suncalculation () {
+function suncalculation() {
     // get today's sunlight times 
     let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
 
     // format sunrise time from the Date object
     sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
     sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
-    let dayStr = times.sunrise.getDay();
-    adapter.log.debug(dayStr);
+    dayStr = times.sunrise.getDay();
 
-
+    adapter.log.debug('Day: ' + dayStr);
     adapter.log.debug('Sunrise: ' + sunriseStr);
+    adapter.setState('info.Sunrise', { val: sunriseStr, ack: true });
     adapter.log.debug('Sunset: ' + sunsetStr);
+    adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
+
+    addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
+    addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
+
+    // Set Up-Time Living Area 
+    if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
+        upTimeLiving = adapter.config.WE_shutterUpLiving;
+        adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+    } else {
+        if ((dayStr) < 6 && (sunriseStr) < (adapter.config.W_shutterUpLiving)) {
+            upTimeLiving = adapter.config.W_shutterUpLiving;
+            adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+        } else if ((dayStr) < 6 && (sunriseStr) > (adapter.config.W_shutterUpLiving)) {
+            upTimeLiving = sunriseStr;
+            adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+        } else if ((dayStr) < 6 && (sunriseStr) == (adapter.config.W_shutterUpLiving)) {
+                upTimeLiving = sunriseStr;
+                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+        }
+    }
+    shuterUpLiving();
+
+    // Set Up-Time for Auto/Manu Living Area 
+
+    // Set Up-Time Sleep Area 
+
+    // Set Up-Time Auto/Manu Sleep Area 
+
+    // Set Down-Time Living Area 
+
+    // Set Down-Time for Auto/Manu Living Area 
+
+    // Set Down-Time Sleep Area 
+
+    // Set Down-Time Auto/Manu Sleep Area 
 }
+// Add delay Time for Sunrise
+function addMinutesSunrise(time, minsToAdd) {
+    function D(J){ return (J<10? '0':'') + J;};
+    var piece = time.split(':');
+    var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    sunriseStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
+    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+}
+// Add delay Time for Sunset
+function addMinutesSunset(time, minsToAdd) {
+    function D(J){ return (J<10? '0':'') + J;};
+    var piece = time.split(':');
+    var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    sunsetStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
+    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+}
+  
+  
 /*
 async function testfunc() {
 const test = await adapter.getEnumAsync('functions')
@@ -113,36 +244,44 @@ adapter.log.warn('Resultat: ' + JSON.stringify(test));
     }, 2000);
 }
 */
-function getDate(d) {
-    d = d || new Date();
-
-    return d.getFullYear() + '_' +
-        ('0' + (d.getMonth() + 1)).slice(-2) + '_' +
-        ('0' + d.getDay()).slice(-2) + '-' +
-        ('0' + d.getDate()).slice(-2) + '-' +
-        ('0' + d.getHours()).slice(-2) + '_' +
-        ('0' + d.getMinutes()).slice(-2) + '_' +
-        ('0' + d.getSeconds()).slice(-2);
-    
-}
 
 function main() {
-    suncalculation ();
-    //testfunc();
-    getDate();
-    let Testzeit;
-    let sonnena;
-
-    Testzeit = adapter.config.W_shutterUpLiving;
-    sonnena = sunriseStr;
-
-    if ((sonnena) > (Testzeit)) {
-        adapter.log.debug(('Sonnenaufgang nach Startzeit'));
-    } else if ((sonnena) < (Testzeit)) {
-        adapter.log.debug(('Sonnenaufgang vor Startzeit'));
-    }
+    
+    adapter.getState('control.Holiday', (err, state) => {
+        if (state === true || state.val === true) {
+            HolidayStr = true;
+        } else {
+            HolidayStr = false;
+        }
+    });
+    adapter.getState('control.publicHoliday', (err, state) => {
+        if (state === true || state.val === true) {
+            publicHolidayStr = true;
+        } else {
+            publicHolidayStr = false;
+        }
+    });
+    adapter.getState('control.autoLiving', (err, state) => {
+        if (state === true || state.val === true) {
+            autoLivingStr = true;
+        } else {
+            autoLivingStr = false;
+        }
+    });
+    adapter.getState('control.autoSleep', (err, state) => {
+        if (state === true || state.val === true) {
+            autoSleepStr = true;
+        } else {
+            autoSleepStr = false;
+        }
+    });
+    
+    setTimeout(function() {
+        suncalculation ();
+    }, 1000)
 
     // Test Set Shutter State
+    /*
     adapter.getEnums('functions', (err, res) => {
         if (res) {
             const _result = res['enum.functions'];
@@ -158,58 +297,14 @@ function main() {
             adapter.log.warn('Enum: ' + adapter.config.livingEnum + ' not found!!')
         }
     });
-
-    // The adapters config (in the instance object everything under the attribute "native") is accessible via
-    // adapter.config:
-    adapter.log.info('config UseAstro: ' + adapter.config.UseAstro);
-    adapter.log.info('config W_shutterUpSleep: ' + adapter.config.W_shutterUpSleep);
-    adapter.log.info('config W_shutterDownSleep: ' + adapter.config.W_shutterDownSleep);
-    adapter.log.info('config W_shutterDownLiving: ' + adapter.config.W_shutterDownLiving);
-    adapter.log.info('config W_shutterUpLiving: ' + adapter.config.W_shutterUpLiving);
-    adapter.log.info('config astroDelay: ' + adapter.config.astroDelay);
-    adapter.log.info('config WE_shutterUpSleep: ' + adapter.config.WE_shutterUpSleep);
-    adapter.log.info('config WE_shutterDownSleep: ' + adapter.config.WE_shutterDownSleep);
-    adapter.log.info('config WE_shutterDownLiving: ' + adapter.config.WE_shutterDownLiving);
-    adapter.log.info('config WE_shutterUpLiving: ' + adapter.config.WE_shutterUpLiving);
-    adapter.log.info('config publicHolidays: ' + adapter.config.publicHolidays);
-    adapter.log.info('config stateHoliday: ' + adapter.config.stateHoliday);
-    adapter.log.info('config livingEnum: ' + adapter.config.livingEnum);
-    adapter.log.info('config sleepEnum: ' + adapter.config.sleepEnum);
-    adapter.log.info('config autoEnum: ' + adapter.config.autoEnum);
-
-    /*
-        For every state in the system there has to be also an object of type state
-        Here a simple template for a boolean variable named "testVariable"
-        Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
     */
-    adapter.setObject('testVariable', {
-        type: 'state',
-        common: {
-            name: 'testVariable',
-            type: 'boolean',
-            role: 'indicator',
-            read: true,
-            write: true,
-        },
-        native: {},
+
+    adapter.getForeignObject('system.config', (err, obj) => {
+        checkStates();
     });
 
     // in this template all states changes inside the adapters namespace are subscribed
-    adapter.subscribeStates('*');
-
-    /*
-        setState examples
-        you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-    */
-    // the variable testVariable is set to true as command (ack=false)
-    adapter.setState('testVariable', true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    adapter.setState('testVariable', { val: true, ack: true });
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    adapter.setState('testVariable', { val: true, ack: true, expire: 30 });
+    adapter.subscribeStates('control.*');
 }
 
 if (module.parent) {

@@ -117,5 +117,152 @@
         "sun_shutterDown": "10:00"
     },
     "objects": [],
-    "instanceObjects": []
+    "instanceObjects": [
+        {
+            "_id":  "info",
+            "type": "channel",
+            "common": {
+                "name": "Info Logs"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "control",
+            "type": "channel",
+            "common": {
+                "name": "Control Buttons"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "control.publicHoliday",
+            "type": "state",
+            "common": {
+                "role":  "switch",
+                "name":  "Public Holiday",
+                "type":  "boolean",
+                "read":  true,
+                "write": true,
+                "def":   false
+            },
+            "native": {}
+        },
+        {
+            "_id":  "control.Holiday",
+            "type": "state",
+            "common": {
+                "role":  "switch",
+                "name":  "Holiday",
+                "type":  "boolean",
+                "read":  true,
+                "write": true,
+                "def":   false
+            },
+            "native": {}
+        },
+        {
+            "_id":  "control.autoLiving",
+            "type": "state",
+            "common": {
+                "role":  "switch",
+                "name":  "Auto / Manu Living Area",
+                "type":  "boolean",
+                "read":  true,
+                "write": true,
+                "def":   false
+            },
+            "native": {}
+        },
+        {
+            "_id":  "control.autoSleep",
+            "type": "state",
+            "common": {
+                "role":  "switch",
+                "name":  "Auto / Manu Sleep Area",
+                "type":  "boolean",
+                "read":  true,
+                "write": true,
+                "def":   false
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.upTimeSleep",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Up Time Sleep Area",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.upTimeLiving",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Up Time Living Area",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.downTimeSleep",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "down Time Sleep Area",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.downTimeLiving",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "down Time Living Area",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.Sunrise",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Sunrise Time",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.Sunset",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Sunset Time",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        }
+    ]
 }
