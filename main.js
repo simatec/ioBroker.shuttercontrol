@@ -125,10 +125,9 @@ function checkStates() {
             adapter.setState('control.publicHoliday', {val: false, ack: true});
         }
     });
+};
+function checkActualStates () {
     adapter.getState('control.Holiday', (err, state) => {
-        if (err) {
-            return;
-        }
         if (state === true || state.val === true) {
             HolidayStr = true;
         } else {
@@ -156,7 +155,10 @@ function checkStates() {
             autoSleepStr = false;
         }
     });
-};
+    setTimeout(function() {
+        suncalculation()
+    }, 1000)
+}
 
 function shuterUpLiving() {
     
@@ -323,10 +325,12 @@ function main() {
 
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
-        setTimeout(function() {
-            suncalculation ();
-        }, 2000)
     });
+    setTimeout(function() {
+        checkActualStates()
+    }, 2000)
+
+
 
     // in this template all states changes inside the adapters namespace are subscribed
     adapter.subscribeStates('control.*');
