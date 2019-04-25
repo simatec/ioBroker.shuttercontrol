@@ -101,7 +101,8 @@
             });
             getEnums('livingEnum', settings['livingEnum']);
             getEnums('sleepEnum', settings['sleepEnum']);
-            getEnums('autoEnum', settings['autoEnum']);
+            getEnums('livingEnumAuto', settings['livingEnumAuto']);
+            getEnums('sleepEnumAuto', settings['sleepEnumAuto']);
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -156,11 +157,6 @@
             } else {
                 $('.tab-astro').addClass('disabled');
             }
-            if ($('#UseAutoMode').prop('checked')) {
-                $('.tab-auto_manu').removeClass('disabled');
-            } else {
-                $('.tab-auto_manu').addClass('disabled');
-            }
             if ($('#UseSunMode').prop('checked')) {
                 $('.tab-sun').removeClass('disabled');
             } else {
@@ -185,9 +181,9 @@
                     <li class="tab col s6 l2"><a href="#tab-settings" class="translate active">main settings</a></li>
                     <li class="tab col s6 l2 tab-living"><a href="#tab-living" class="translate">Living Area</a></li>
                     <li class="tab col s6 l2 tab-sleep"><a href="#tab-sleep" class="translate">Sleep Area</a></li>
-                    <li class="tab col s6 l2 tab-auto_manu"><a href="#tab-auto_manu" class="translate">Auto/Manu Area</a></li>
                     <li class="tab col s6 l2 tab-astro"><a href="#tab-astro" class="translate">Astro settings</a></li>
-                    <li class="tab col s6 l2 tab-sun"><a href="#tab-sun" class="translate">Sun settings</a></li>
+                    <li class="tab col s6 l2 tab-sun"><a href="#tab-sun" class="translate">sun protection settings</a></li>
+                    <li class="tab col s6 l2 tab-message"><a href="#tab-message" class="translate">Messages</a></li>
                 </ul>
             </div>
             <div class="row">
@@ -202,22 +198,12 @@
                     <!-- main settings -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
-                            <input type="checkbox" class="value" id="stateHoliday" />
-                            <span for="stateHoliday" class="translate">State for Holiday</span>
-                        </div>
-                        <div class="col s6 l4 input-field">
                             <input type="checkbox" class="value" id="UseAstro" />
                             <span for="UseAstro" class="translate">Use astronomical time</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="checkbox" class="value" id="UseAutoMode" />
-                            <span for="UseAutoMode" class="translate">Use Auto Mode</span>
-                        </div>
                         <div class="col s6 l4 input-field">
                             <input type="checkbox" class="value" id="UseSunMode" />
-                            <span for="UseSunMode" class="translate">Use Sun Mode</span>
+                            <span for="UseSunMode" class="translate">Use sun protection</span>
                         </div>
                     </div>
                     <div class="row">
@@ -239,25 +225,39 @@
                             <select id="livingEnum" class="value"></select>
                             <label for="livingEnum" class="translate">Enum Living</label>
                         </div>
+                        <div class="input-field col s12 m6 l4">
+                            <select id="livingEnumAuto" class="value"></select>
+                            <label for="livingEnumAuto" class="translate">Enum Living Auto / Manu</label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterDownLiving" />
-                            <label for="WE_shutterDownLiving" class="translate">Shutters down in the living area on Weekend</label>
+                            <label for="WE_shutterDownLiving" class="translate">Shut down on the weekend</label>
                         </div>
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterUpLiving" />
-                            <label for="WE_shutterUpLiving" class="translate">Shutters up in the living area on Weekend</label>
+                            <label for="WE_shutterUpLiving" class="translate">Driving up on the weekend</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="W_shutterDownLiving" />
-                            <label for="W_shutterDownLiving" class="translate">Shutters down in the living area on Week</label>
+                            <label for="W_shutterDownLiving" class="translate">Shut down on the week</label>
                         </div>
                         <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="W_shutterUpLiving" />
-                            <label for="W_shutterUpLiving" class="translate">Shutters up in the living area on Week</label>
+                            <input type="text" class="value" id="W_shutterUpLivingMax" />
+                            <label for="W_shutterUpLivingMax" class="translate">Max Time for Driving up on the week</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterUpLivingMin" />
+                            <label for="W_shutterUpLivingMin" class="translate">Min Time for Driving up on the week</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveDelayUpLiving" />
+                            <label for="driveDelayUpLiving" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
                 </div>
@@ -269,56 +269,46 @@
                             <select id="sleepEnum" class="value"></select>
                             <label for="sleepEnum" class="translate">Enum Sleep</label>
                         </div>
+                        <div class="input-field col s12 m6 l4">
+                            <select id="sleepEnumAuto" class="value"></select>
+                            <label for="sleepEnumAuto" class="translate">Enum Sleep Auto / Manu</label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterUpSleep" />
-                            <label for="WE_shutterUpSleep" class="translate">Shutters up in the sleeping area on Weekend</label>
+                            <label for="WE_shutterUpSleep" class="translate">Driving up on the weekend</label>
                         </div>
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterDownSleep" />
-                            <label for="WE_shutterDownSleep" class="translate">Shutters down in the sleeping area on Weekend</label>
+                            <label for="WE_shutterDownSleep" class="translate">Shut down on the weekend</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="W_shutterUpSleep" />
-                            <label for="W_shutterUpSleep" class="translate">Shutters up in the sleeping area on Week</label>
+                            <input type="text" class="value" id="W_shutterDownSleep" />
+                            <label for="W_shutterDownSleep" class="translate">Shut down on the week</label>
                         </div>
                         <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="W_shutterDownSleep" />
-                            <label for="W_shutterDownSleep" class="translate">Shutters down in the sleeping area on Week</label>
+                            <input type="text" class="value" id="W_shutterUpSleepMax" />
+                            <label for="W_shutterUpSleepMax" class="translate">Max Time for Driving up on the week</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="W_shutterUpSleepMin" />
+                            <label for="W_shutterUpSleepMin" class="translate">Min Time for Driving up on the week</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveDelayUpSleep" />
+                            <label for="driveDelayUpSleep" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
                 </div>
                 <!-- auto/manu settings -->
-                <div id="tab-auto_manu" class="col s12 page">
-                    <div class="row"></div>
+                <div id="tab-message" class="col s12 page">
                     <div class="row">
-                        <div class="input-field col s12 m6 l4">
-                            <select id="autoEnum" class="value"></select>
-                            <label for="autoEnum" class="translate">Enum Auto/Manu</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="WE_shutterUpAuto" />
-                            <label for="WE_shutterUpAuto" class="translate">Shutters up in the Auto/Manu area on Weekend</label>
-                        </div>
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="WE_shutterDownAuto" />
-                            <label for="we_shutterDownAuto" class="translate">Shutters down in the Auto/Manu area on Weekend</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="W_shutterUpAuto" />
-                            <label for="W_shutterUpAuto" class="translate">Shutters up in the Auto/Manu area on Week</label>
-                        </div>
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="W_shutterDownAuto" />
-                            <label for="W_shutterDownAuto" class="translate">Shutters down in the Auto/Manu area on Week</label>
-                        </div>
+
                     </div>
                 </div>
                 <!-- astro settings -->
@@ -338,11 +328,11 @@
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="astroDelayUp" />
-                            <label for="astroDelayUp" class="translate">Time delay astro time for Up (minutes)</label>
+                            <label for="astroDelayUp" class="translate">Time delay for Driving up (minutes)</label>
                         </div>
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="astroDelayDown" />
-                            <label for="astroDelayDown" class="translate">Time delay astro time for Down (minutes)</label>
+                            <label for="astroDelayDown" class="translate">Time delay for Driving down (minutes)</label>
                         </div>
                     </div>
                 </div>
@@ -353,21 +343,31 @@
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="sunWeekStart" min="1" max="52" />
-                            <label for="sunWeekStart" class="translate">Start week for sun protection</label>
+                            <label for="sunWeekStart" class="translate">First week for sun protection</label>
                         </div>
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="sunWeekEnd" min="1" max="52" />
-                            <label for="sunWeekEnd" class="translate">End week for sun protection</label>
+                            <label for="sunWeekEnd" class="translate">Last week for sun protection</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="sun_shutterUp" />
-                            <label for="sun_shutterUp" class="translate">Shutters up for sun protection</label>
+                            <input type="text" class="value" id="sun_shutterDown" />
+                            <label for="sun_shutterDown" class="translate">Start time for sun protection</label>
                         </div>
                         <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="sun_shutterDown" />
-                            <label for="sun_shutterDown" class="translate">Shutters down for sun protection</label>
+                            <input type="text" class="value" id="sun_shutterUp" />
+                            <label for="sun_shutterUp" class="translate">End time for sun protection</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="text" class="value" id="actualValueTemp" />
+                            <label for="actualValueTemp" class="translate">Object ID Actual value of the sun protection temperature</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="setpointValue" min="1" max="52" />
+                            <label for="setpointValue" class="translate">setpoint of the sun protection temperature</label>
                         </div>
                     </div>
 
