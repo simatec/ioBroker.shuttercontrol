@@ -222,7 +222,7 @@ function suncalculation() {
     }
     setTimeout(function() {
         shutterUpLiving();
-    }, 1000)
+    },500)
 
     // ******** Set Up-Time Sleep Area ********
     if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
@@ -243,7 +243,9 @@ function suncalculation() {
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         }
     }
-    shutterUpSleep();
+    setTimeout(function() {
+        shutterUpSleep();
+    },500)
 
     // ******** Set Down-Time Living Area ********
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (sunsetStr)) {
@@ -265,7 +267,9 @@ function suncalculation() {
             downTimeLiving = sunsetStr;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
     }
-    shutterDownLiving();
+    setTimeout(function() {
+        shutterDownLiving();
+    },500)
 
     // ******** Set Down-Time Sleep Area ******** 
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (sunsetStr)) {
@@ -287,7 +291,9 @@ function suncalculation() {
             downTimeSleep = sunsetStr;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     }
-    shutterDownSleep();
+    setTimeout(function() {
+        shutterDownSleep();
+    },500)
 
 }
 // Add delay Time for Sunrise
