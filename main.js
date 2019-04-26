@@ -220,9 +220,7 @@ function suncalculation() {
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
         }
     }
-    setTimeout(function() {
-        shutterUpLiving();
-    },1000)
+    shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
     if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
@@ -243,9 +241,7 @@ function suncalculation() {
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         }
     }
-    setTimeout(function() {
-        shutterUpSleep();
-    },1000)
+    shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (sunsetStr)) {
@@ -267,9 +263,7 @@ function suncalculation() {
             downTimeLiving = sunsetStr;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
     }
-    setTimeout(function() {
-        shutterDownLiving();
-    },1000)
+    shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (sunsetStr)) {
@@ -291,9 +285,7 @@ function suncalculation() {
             downTimeSleep = sunsetStr;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     }
-    setTimeout(function() {
-        shutterDownSleep();
-    },1000)
+    shutterDownSleep();
 
 }
 // Add delay Time for Sunrise
@@ -316,6 +308,10 @@ function addMinutesSunset(time, minsToAdd) {
 function shutterUpLiving() {
     
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
+    
+    if ((upTimeLiving) == undefined) {
+        upTimeLiving = adapter.config.W_shutterUpLivingMax
+    }
     upTimeLiving = upTimeLiving.split(':');
 
     schedule.cancelJob('shutterUpLiving');
@@ -361,6 +357,10 @@ function shutterUpLiving() {
 function shutterDownLiving() {
     
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
+
+    if ((downTimeLiving) == undefined) {
+        downTimeLiving = adapter.config.W_shutterDownLiving
+    }
     downTimeLiving = downTimeLiving.split(':');
 
     schedule.cancelJob('shutterDownLiving');
@@ -406,6 +406,10 @@ function shutterDownLiving() {
 function shutterUpSleep() {
     
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+
+    if ((upTimeSleep) == undefined) {
+        upTimeSleep = adapter.config.W_shutterUpSleepMax
+    }
     upTimeSleep = upTimeSleep.split(':');
     
     schedule.cancelJob('shutterUpSleep');
@@ -451,6 +455,10 @@ function shutterUpSleep() {
 function shutterDownSleep() {
     
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+
+    if ((downTimeSleep) == undefined) {
+        downTimeSleep = adapter.config.W_shutterDownSleep
+    }
     downTimeSleep = downTimeSleep.split(':');
 
     schedule.cancelJob('shutterDownSleep');
