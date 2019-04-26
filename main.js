@@ -14,6 +14,7 @@ const adapterName = require('./package.json').name.split('.').pop();
 let sunsetStr;
 let sunriseStr;
 let upTimeSleep;
+/** @type {string | string[]} */
 let upTimeLiving;
 let downTimeSleep;
 let downTimeLiving;
