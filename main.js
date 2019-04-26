@@ -23,10 +23,6 @@ let publicHolidayStr;
 let publicHolidayTomorowStr;
 let autoLivingStr;
 let autoSleepStr;
-let upLiving;
-let upSleep;
-let downLiving;
-let downSleep;
 
 /**
  * Starts the adapter instance
@@ -298,16 +294,16 @@ function suncalculation() {
 // Add delay Time for Sunrise
 function addMinutesSunrise(time, minsToAdd) {
     function D(J){ return (J<10? '0':'') + J;};
-    var piece = time.split(':');
-    var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    const piece = time.split(':');
+    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
     sunriseStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
     return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
 }
 // Add delay Time for Sunset
 function addMinutesSunset(time, minsToAdd) {
     function D(J){ return (J<10? '0':'') + J;};
-    var piece = time.split(':');
-    var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    const piece = time.split(':');
+    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
     sunsetStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
     return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
 }
@@ -323,7 +319,7 @@ function shutterUpLiving() {
 
     schedule.cancelJob('shutterUpLiving');
     
-    upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+    const upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -372,7 +368,7 @@ function shutterDownLiving() {
 
     schedule.cancelJob('shutterDownLiving');
     
-    downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
+    const downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -421,7 +417,7 @@ function shutterUpSleep() {
     
     schedule.cancelJob('shutterUpSleep');
 
-    upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+    const upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -470,7 +466,7 @@ function shutterDownSleep() {
 
     schedule.cancelJob('shutterDownSleep');
 
-    downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
+    const downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
