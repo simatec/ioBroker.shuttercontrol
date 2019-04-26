@@ -109,10 +109,6 @@ function startAdapter(options) {
                     }
                 }
             }
-            upLiving.cancel();
-            upSleep.cancel();
-            downLiving.cancel();
-            downSleep.cancel();
             suncalculation();
         } else {
             // The state was deleted
@@ -186,7 +182,10 @@ function shutterUpLiving() {
     
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
     upTimeLiving = upTimeLiving.split(':');
-    upLiving = schedule.scheduleJob(upTimeLiving[1] + ' ' + upTimeLiving[0] + ' * * *', function() {
+
+    schedule.cancelJob('shutterUpLiving');
+    
+    upLiving = schedule.scheduleJob('shutterUpLiving', upTimeLiving[1] + ' ' + upTimeLiving[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -228,7 +227,10 @@ function shutterDownLiving() {
     
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
     downTimeLiving = downTimeLiving.split(':');
-    downLiving = schedule.scheduleJob(downTimeLiving[1] + ' ' + downTimeLiving[0] + ' * * *', function() {
+
+    schedule.cancelJob('shutterDownLiving');
+    
+    downLiving = schedule.scheduleJob('shutterDownLiving', downTimeLiving[1] + ' ' + downTimeLiving[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -270,7 +272,10 @@ function shutterUpSleep() {
     
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
     upTimeSleep = upTimeSleep.split(':');
-    upSleep = schedule.scheduleJob(upTimeSleep[1] + ' ' + upTimeSleep[0] + ' * * *', function() {
+    
+    schedule.cancelJob('shutterUpSleep');
+
+    upSleep = schedule.scheduleJob('shutterUpSleep', upTimeSleep[1] + ' ' + upTimeSleep[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -312,7 +317,10 @@ function shutterDownSleep() {
     
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
     downTimeSleep = downTimeSleep.split(':');
-    downSleep = schedule.scheduleJob(downTimeSleep[1] + ' ' + downTimeSleep[0] + ' * * *', function() {
+
+    schedule.cancelJob('shutterDownSleep');
+
+    downSleep = schedule.scheduleJob('shutterDownSleep', downTimeSleep[1] + ' ' + downTimeSleep[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -350,7 +358,7 @@ function shutterDownSleep() {
     });
 }
 
-const calc = schedule.scheduleJob('30 2 * * *', function() {
+const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function() {
     suncalculation();
 });
 
