@@ -360,11 +360,11 @@ function shutterDownLiving() {
     if ((downTimeLiving) == undefined) {
         downTimeLiving = adapter.config.W_shutterDownLiving
     }
-    downTimeLiving = downTimeLiving.split(':');
+    let downTime = downTimeLiving.split(':');
 
     schedule.cancelJob('shutterDownLiving');
     
-    downLiving = schedule.scheduleJob('shutterDownLiving', downTimeLiving[1] + ' ' + downTimeLiving[0] + ' * * *', function() {
+    downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -409,11 +409,11 @@ function shutterUpSleep() {
     if ((upTimeSleep) == undefined) {
         upTimeSleep = adapter.config.W_shutterUpSleepMax
     }
-    upTimeSleep = upTimeSleep.split(':');
+    let upTime = upTimeSleep.split(':');
     
     schedule.cancelJob('shutterUpSleep');
 
-    upSleep = schedule.scheduleJob('shutterUpSleep', upTimeSleep[1] + ' ' + upTimeSleep[0] + ' * * *', function() {
+    upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
@@ -458,11 +458,11 @@ function shutterDownSleep() {
     if ((downTimeSleep) == undefined) {
         downTimeSleep = adapter.config.W_shutterDownSleep
     }
-    downTimeSleep = downTimeSleep.split(':');
+    let downTime = downTimeSleep.split(':');
 
     schedule.cancelJob('shutterDownSleep');
 
-    downSleep = schedule.scheduleJob('shutterDownSleep', downTimeSleep[1] + ' ' + downTimeSleep[0] + ' * * *', function() {
+    downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
