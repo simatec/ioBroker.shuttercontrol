@@ -88,7 +88,7 @@
     },
     "native": {
         "UseAstro": true,
-        "publicHolidays": true,
+        "publicHolidays": false,
         "publicHolInstance": "",
         "UseSunMode": true,
         
