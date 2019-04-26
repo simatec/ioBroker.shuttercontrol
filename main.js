@@ -157,7 +157,7 @@ function checkActualStates () {
         }
     });
 
-    if (adapter.config.publicHolidays === true) {
+    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance !== 'none' || adapter.config.publicHolInstance !== '')) {
         adapter.getForeignState(adapter.config.publicHolInstance + '.heute.boolean', (err, state) => {
             if (state !== null || state.val !== null) {
                 if (state === true || state.val === true) {
