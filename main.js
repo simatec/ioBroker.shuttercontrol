@@ -309,13 +309,13 @@ function shutterUpLiving() {
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
     
     if ((upTimeLiving) == undefined) {
-        upTimeLiving = adapter.config.W_shutterUpLivingMax
+        upTimeLiving = adapter.config.W_shutterUpLivingMax;
     }
-    upTimeLiving = upTimeLiving.split(':');
+    let upTime = upTimeLiving.split(':');
 
     schedule.cancelJob('shutterUpLiving');
     
-    upLiving = schedule.scheduleJob('shutterUpLiving', upTimeLiving[1] + ' ' + upTimeLiving[0] + ' * * *', function() {
+    upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
