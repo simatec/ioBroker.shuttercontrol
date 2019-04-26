@@ -159,17 +159,21 @@ function checkActualStates () {
 
     if (adapter.config.publicHolidays === true) {
         adapter.getForeignState(adapter.config.publicHolInstance + '.heute.boolean', (err, state) => {
-            if (state === true || state.val === true) {
-                publicHolidayStr = true;
-            } else {
-                publicHolidayStr = false;
+            if (state !== null || state.val !== null) {
+                if (state === true || state.val === true) {
+                    publicHolidayStr = true;
+                } else {
+                    publicHolidayStr = false;
+                }
             }
         });
         adapter.getForeignState(adapter.config.publicHolInstance + '.morgen.boolean', (err, state) => {
-            if (state === true || state.val === true) {
-                publicHolidayTomorowStr = true;
-            } else {
-                publicHolidayTomorowStr = false;
+            if (state !== null || state.val !== null) {
+                if (state === true || state.val === true) {
+                    publicHolidayTomorowStr = true;
+                } else {
+                    publicHolidayTomorowStr = false;
+                }
             }
         });
     }
