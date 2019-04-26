@@ -195,10 +195,10 @@ function suncalculation() {
     sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
     dayStr = times.sunrise.getDay();
 
-    adapter.log.debug('Day: ' + dayStr);
-    adapter.log.debug('Sunrise: ' + sunriseStr);
+    adapter.log.debug('current day: ' + dayStr);
+    adapter.log.debug('Sunrise today: ' + sunriseStr);
     adapter.setState('info.Sunrise', { val: sunriseStr, ack: true });
-    adapter.log.debug('Sunset: ' + sunsetStr);
+    adapter.log.debug('Sunset today: ' + sunsetStr);
     adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
 
     addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
@@ -223,6 +223,7 @@ function suncalculation() {
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
         }
     }
+    adapter.log.debug('Starting up shutters living area: ' + upTimeLiving);
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
@@ -244,6 +245,7 @@ function suncalculation() {
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         }
     }
+    adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep);
     shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
@@ -266,6 +268,7 @@ function suncalculation() {
             downTimeLiving = sunsetStr;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
     }
+    adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving);
     shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
@@ -288,6 +291,7 @@ function suncalculation() {
             downTimeSleep = sunsetStr;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     }
+    adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
     shutterDownSleep();
 
 }
