@@ -222,7 +222,7 @@ function suncalculation() {
     }
     setTimeout(function() {
         shutterUpLiving();
-    },500)
+    },1000)
 
     // ******** Set Up-Time Sleep Area ********
     if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
@@ -245,7 +245,7 @@ function suncalculation() {
     }
     setTimeout(function() {
         shutterUpSleep();
-    },500)
+    },1000)
 
     // ******** Set Down-Time Living Area ********
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (sunsetStr)) {
@@ -269,7 +269,7 @@ function suncalculation() {
     }
     setTimeout(function() {
         shutterDownLiving();
-    },500)
+    },1000)
 
     // ******** Set Down-Time Sleep Area ******** 
     if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (sunsetStr)) {
@@ -293,7 +293,7 @@ function suncalculation() {
     }
     setTimeout(function() {
         shutterDownSleep();
-    },500)
+    },1000)
 
 }
 // Add delay Time for Sunrise
