@@ -23,6 +23,7 @@ let publicHolidayStr;
 let publicHolidayTomorowStr;
 let autoLivingStr;
 let autoSleepStr;
+let actualValueStr;
 
 /**
  * Starts the adapter instance
@@ -82,9 +83,10 @@ function startAdapter(options) {
                         publicHolidayStr = true;
                     }
                     if (id === adapter.config.publicHolInstance + '.morgen.boolean') {
-                        publicHolidayTomorowStr = true;
+                        publicHolidayTomorowStr = true;                        
                     }
                 }
+                suncalculation();
             }
             if ((state.val === false || state.val === 'false') && !state.ack) {
                 if (id === adapter.namespace + '.control.Holiday') {
@@ -104,8 +106,12 @@ function startAdapter(options) {
                         publicHolidayTomorowStr = false;
                     }
                 }
+                suncalculation();
             }
-            suncalculation();
+            if (adapter.config.UseSunMode === true && id === adapter.config.actualValueTemp) {
+                    actualValueStr = state['val'];
+                    sunProtect();
+            }
         } else {
             // The state was deleted
             adapter.log.info(`state ${id} deleted`);
@@ -522,6 +528,47 @@ adapter.log.warn('Resultat: ' + JSON.stringify(test));
 }
 */
 
+function sunProtect() {
+
+    if (adapter.config.UseSunMode === true) {
+        let date = new Date();
+        let monthIndex = (date.getMonth() +1);
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let currentTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
+
+        adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
+        adapter.log.debug('current time: ' + currentTime);
+        adapter.log.debug('current month: ' + monthIndex);
+
+        const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+        
+        if (adapter.config.sun_shutterDown > (currentTime) && adapter.config.sun_shutterUp < (currentTime) && adapter.config.sunMonthStart > (monthIndex) && adapter.config.sunMonthEnd < (monthIndex)) {
+            adapter.getEnums('functions', (err, res) => {
+                if (res) {
+                    const _result = res['enum.functions'];
+                    const resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+
+                    for ( const i in resultID.common.members) {
+                        setTimeout(function() {
+                            if (adapter.config.setpointValue < (actualValueStr)) {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 30 ' + ' from Enum ' + adapter.config.sunProtecEnum)
+                                adapter.setForeignState(resultID.common.members[i], 30, true);
+                            } else if (adapter.config.setpointValue > (actualValueStr)) {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.sunProtecEnum)
+                                adapter.setForeignState(resultID.common.members[i], 100, true);
+                            }
+                        }, driveDelayUpSleep * i, i);
+                    }
+                } else if (err) {
+                    adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
+                }
+            });
+        } else {
+            adapter.log.debug('Sunprotect is not activ');
+        }
+    }
+}
 function main() {
 
     adapter.getForeignObject('system.config', (err, obj) => {
@@ -537,6 +584,9 @@ function main() {
     if (adapter.config.publicHolidays === true) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
+    }
+    if (adapter.config.UseSunMode === true) {
+        adapter.subscribeForeignStates(adapter.config.actualValueTemp);
     }
 }
 

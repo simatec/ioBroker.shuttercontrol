@@ -118,8 +118,8 @@
         "livingEnumAuto": "",
         "sleepEnumAuto": "",
 
-        "sunWeekStart": 20,
-        "sunWeekEnd": 40,
+        "sunMonthStart": 5,
+        "sunMonthEnd": 9,
         "sun_shutterUp": "19:00",
         "sun_shutterDown": "10:00",
         "actualValueTemp": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
