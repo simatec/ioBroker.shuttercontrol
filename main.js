@@ -283,18 +283,20 @@ function suncalculation() {
     } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (sunsetStr)) {
         downTimeSleep = sunsetStr;
         adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) > (adapter.config.W_shutterDownSleep)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) > (adapter.config.W_shutterDownSleep)) {
         downTimeSleep = adapter.config.W_shutterDownSleep;
         adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) < (adapter.config.W_shutterDownSleep)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) < (adapter.config.W_shutterDownSleep)) {
         downTimeSleep = sunsetStr;
         adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) == (adapter.config.W_shutterDownSleep)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) == (adapter.config.W_shutterDownSleep)) {
             downTimeSleep = sunsetStr;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     }
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
-    shutterDownSleep();
+    //shutterDownSleep();
+    shutterDownSleep(() => shutterDownSleepAuto());
+    //executeScripts(null, config, () => startIOB());
 
 }
 // Add delay Time for Sunrise
@@ -333,8 +335,8 @@ function shutterUpLiving() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.livingEnum)
-                        adapter.setForeignState(resultID.common.members[i], 100, true);
+                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnum)
+                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
                     }, driveDelayUpLiving * i, i);
                 }
             } else if (err) {
@@ -350,8 +352,8 @@ function shutterUpLiving() {
         
                         for ( const i in resultID.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], 100, true);
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
                             }, driveDelayUpLiving * i, i);
                         }
                     } else if (err) {
@@ -382,8 +384,8 @@ function shutterDownLiving() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 0 ' + ' from Enum ' + adapter.config.livingEnum)
-                        adapter.setForeignState(resultID.common.members[i], 0, true);
+                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnum)
+                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
                     }, driveDelayUpLiving * i, i);
                 }
             } else if (err) {
@@ -399,8 +401,8 @@ function shutterDownLiving() {
         
                         for ( const i in resultID.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 0 ' + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], 0, true);
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
                             }, driveDelayUpLiving * i, i);
                         }
                     } else if (err) {
@@ -431,8 +433,8 @@ function shutterUpSleep() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.sleepEnum)
-                        adapter.setForeignState(resultID.common.members[i], 100, true);
+                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnum)
+                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
                     }, driveDelayUpSleep * i, i);
                 }
             } else if (err) {
@@ -448,8 +450,8 @@ function shutterUpSleep() {
         
                         for ( const i in resultID.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], 100, true);
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
                             }, driveDelayUpSleep * i, i);
                         }
                     } else if (err) {
@@ -476,18 +478,21 @@ function shutterDownSleep() {
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
-                const resultID = _result['enum.functions.' + adapter.config.sleepEnum];
+                let resultID = _result['enum.functions.' + adapter.config.sleepEnum];
+                let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 0 ' + ' from Enum ' + adapter.config.sleepEnum)
-                        adapter.setForeignState(resultID.common.members[i], 0, true);
+                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnum)
+                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
                     }, driveDelayUpSleep * i, i);
                 }
+                
             } else if (err) {
                 adapter.log.warn('Enum: ' + adapter.config.sleepEnum + ' not found!!')
             }
         });
+        /*
         setTimeout(function() {
             if ((autoSleepStr) === true) {
                 adapter.getEnums('functions', (err, res) => {
@@ -497,8 +502,8 @@ function shutterDownSleep() {
         
                         for ( const i in resultID.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 0 ' + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], 0, true);
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
                             }, driveDelayUpSleep * i, i);
                         }
                     } else if (err) {
@@ -507,9 +512,38 @@ function shutterDownSleep() {
                 });
             }
         }, driveDelayUpSleep)
+        */
+        
+        /*
+        setImmediate(function () {
+            shutterDownSleepAuto();
+        });
+        */
     });
 }
-  
+
+function shutterDownSleepAuto() {
+    const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+    setTimeout(function() {
+        if ((autoSleepStr) === true) {
+            adapter.getEnums('functions', (err, res) => {
+                if (res) {
+                    const _result = res['enum.functions'];
+                    const resultID = _result['enum.functions.' + adapter.config.sleepEnumAuto];
+    
+                    for ( const i in resultID.common.members) {
+                        setTimeout(function() {
+                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
+                        }, driveDelayUpSleep * i, i);
+                    }
+                } else if (err) {
+                    adapter.log.warn('Enum: ' + adapter.config.sleepEnumAuto + ' not found!!')
+                }
+            });
+        }
+    }, driveDelayUpSleep)
+}
 /*
 async function testfunc() {
 const test = await adapter.getEnumAsync('functions')
@@ -537,13 +571,13 @@ function sunProtect() {
         let minutes = date.getMinutes();
         let currentTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
 
-        adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
-        adapter.log.debug('current time: ' + currentTime);
-        adapter.log.debug('current month: ' + monthIndex);
-
-        const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
-        
         if (adapter.config.sun_shutterDown > (currentTime) && adapter.config.sun_shutterUp < (currentTime) && adapter.config.sunMonthStart > (monthIndex) && adapter.config.sunMonthEnd < (monthIndex)) {
+            adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
+            adapter.log.debug('current time: ' + currentTime);
+            adapter.log.debug('current month: ' + monthIndex);
+
+            const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+        
             adapter.getEnums('functions', (err, res) => {
                 if (res) {
                     const _result = res['enum.functions'];
@@ -552,11 +586,19 @@ function sunProtect() {
                     for ( const i in resultID.common.members) {
                         setTimeout(function() {
                             if (adapter.config.setpointValue < (actualValueStr)) {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 30 ' + ' from Enum ' + adapter.config.sunProtecEnum)
-                                adapter.setForeignState(resultID.common.members[i], 30, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) > 30)  {
+                                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightSun + ' from Enum ' + adapter.config.sunProtecEnum)
+                                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightSun, true);
+                                    }
+                                });
                             } else if (adapter.config.setpointValue > (actualValueStr)) {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: 100 ' + ' from Enum ' + adapter.config.sunProtecEnum)
-                                adapter.setForeignState(resultID.common.members[i], 100, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) < 100)  {
+                                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum)
+                                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                    }
+                                });
                             }
                         }, driveDelayUpSleep * i, i);
                     }
@@ -569,6 +611,7 @@ function sunProtect() {
         }
     }
 }
+
 function main() {
 
     adapter.getForeignObject('system.config', (err, obj) => {

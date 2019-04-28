@@ -103,6 +103,7 @@
             getEnums('sleepEnum', settings['sleepEnum']);
             getEnums('livingEnumAuto', settings['livingEnumAuto']);
             getEnums('sleepEnumAuto', settings['sleepEnumAuto']);
+            getEnums('sunProtecEnum', settings['sunProtecEnum']);
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -260,6 +261,16 @@
                             <label for="driveDelayUpLiving" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveHeightUpLiving" min="0" max="100" />
+                            <label for="driveHeightUpLiving" class="translate">shutter height for drive up (percent)</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveHeightDownLiving" min="0" max="100" />
+                            <label for="driveHeightDownLiving" class="translate">shutter height for drive down (percent)</label>
+                        </div>
+                    </div>
                 </div>
                 <!-- sleep settings -->
                 <div id="tab-sleep" class="col s12 page">
@@ -304,11 +315,15 @@
                             <label for="driveDelayUpSleep" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
-                </div>
-                <!-- auto/manu settings -->
-                <div id="tab-message" class="col s12 page">
                     <div class="row">
-
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveHeightUpSleep" min="0" max="100" />
+                            <label for="driveHeightUpSleep" class="translate">shutter height for drive up (percent)</label>
+                        </div>
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveHeightDownSleep" min="0" max="100" />
+                            <label for="driveHeightDownSleep" class="translate">shutter height for drive down (percent)</label>
+                        </div>
                     </div>
                 </div>
                 <!-- astro settings -->
@@ -341,6 +356,12 @@
                     <div class="row">
                     </div>
                     <div class="row">
+                        <div class="input-field col s12 m6 l4">
+                            <select id="sunProtecEnum" class="value"></select>
+                            <label for="sunProtecEnum" class="translate">Enum Sun Protect</label>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="sunMonthStart" min="1" max="12" />
                             <label for="sunWeekStart" class="translate">First month for sun protection</label>
@@ -366,11 +387,26 @@
                             <label for="actualValueTemp" class="translate">Object ID Actual value of the sun protection temperature</label>
                         </div>
                         <div class="col s6 l4 input-field">
-                            <input type="number" class="value" id="setpointValue" min="1" max="52" />
+                            <input type="number" class="value" id="setpointValue" min="1" max="40" />
                             <label for="setpointValue" class="translate">setpoint of the sun protection temperature</label>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col s6 l4 input-field">
+                            <input type="number" class="value" id="driveHeightSun" min="0" max="100" />
+                            <label for="driveHeightSun" class="translate">shutter height for sun protection (percent)</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tab Messages -->
+                <div id="tab-message" class="col s12 page">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="translate">comming son</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

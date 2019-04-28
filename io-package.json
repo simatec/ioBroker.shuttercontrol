@@ -99,6 +99,8 @@
         "WE_shutterDownLiving": "22:00",
         "WE_shutterUpLiving": "08:00",
         "driveDelayUpLiving": 10,
+        "driveHeightUpLiving": 100,
+        "driveHeightDownLiving": 0,
         
 
         "W_shutterUpSleepMax": "06:30",
@@ -107,6 +109,8 @@
         "WE_shutterUpSleep": "10:30",
         "WE_shutterDownSleep": "21:00",
         "driveDelayUpSleep": 10,
+        "driveHeightUpSleep": 100,
+        "driveHeightDownSleep": 0,
 
         "astroDelayUp": 30,
         "longitude": "13.404954",
@@ -123,7 +127,9 @@
         "sun_shutterUp": "19:00",
         "sun_shutterDown": "10:00",
         "actualValueTemp": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
-        "setpointValue": 23
+        "setpointValue": 23,
+        "sunProtecEnum": "",
+        "driveHeightSun": 30
         
     },
     "objects": [],
