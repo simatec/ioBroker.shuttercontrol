@@ -294,11 +294,9 @@ function suncalculation() {
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     }
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
-    //shutterDownSleep();
-    shutterDownSleep(() => shutterDownSleepAuto());
-    //executeScripts(null, config, () => startIOB());
-
+    shutterDownSleep();
 }
+
 // Add delay Time for Sunrise
 function addMinutesSunrise(time, minsToAdd) {
     function D(J){ return (J<10? '0':'') + J;};
@@ -324,6 +322,7 @@ function shutterUpLiving() {
         upTimeLiving = adapter.config.W_shutterUpLivingMax;
     }
     let upTime = upTimeLiving.split(':');
+    let timeoutLivingAuto;
 
     schedule.cancelJob('shutterUpLiving');
     
@@ -332,6 +331,14 @@ function shutterUpLiving() {
             if (res) {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                let number = 0;
+
+                for ( const i in resultID.common.members) {
+                    number = number + 1;
+                }
+
+                timeoutLivingAuto = number * driveDelayUpLiving;
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
@@ -339,29 +346,20 @@ function shutterUpLiving() {
                         adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
                     }, driveDelayUpLiving * i, i);
                 }
-            } else if (err) {
-                adapter.log.warn('Enum: ' + adapter.config.livingEnum + ' not found!!')
-            }
-        });
-        setTimeout(function() {
-            if ((autoLivingStr) === true) {
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        const _result = res['enum.functions'];
-                        const resultID = _result['enum.functions.' + adapter.config.livingEnumAuto];
-        
-                        for ( const i in resultID.common.members) {
+                if ((autoLivingStr) === true) {
+                    setTimeout(function() {
+                        for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpLiving, true);
                             }, driveDelayUpLiving * i, i);
                         }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.livingEnumAuto + ' not found!!')
-                    }
-                });
+                    }, timeoutLivingAuto)
+                }
+            } else if (err) {
+                adapter.log.warn('Enum not found!!')
             }
-        }, driveDelayUpLiving)
+        });
     });
 }
 
@@ -373,6 +371,7 @@ function shutterDownLiving() {
         downTimeLiving = adapter.config.W_shutterDownLiving
     }
     let downTime = downTimeLiving.split(':');
+    let timeoutLivingAuto;
 
     schedule.cancelJob('shutterDownLiving');
     
@@ -381,6 +380,14 @@ function shutterDownLiving() {
             if (res) {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                let number = 0;
+
+                for ( const i in resultID.common.members) {
+                    number = number + 1;
+                }
+
+                timeoutLivingAuto = number * driveDelayUpLiving;
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
@@ -388,29 +395,20 @@ function shutterDownLiving() {
                         adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
                     }, driveDelayUpLiving * i, i);
                 }
-            } else if (err) {
-                adapter.log.warn('Enum: ' + adapter.config.livingEnum + ' not found!!')
-            }
-        });
-        setTimeout(function() {
-            if ((autoLivingStr) === true) {
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        const _result = res['enum.functions'];
-                        const resultID = _result['enum.functions.' + adapter.config.livingEnumAuto];
-        
-                        for ( const i in resultID.common.members) {
+                if ((autoLivingStr) === true) {
+                    setTimeout(function() {
+                        for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
+                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownLiving, true);
                             }, driveDelayUpLiving * i, i);
                         }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.livingEnumAuto + ' not found!!')
-                    }
-                });
+                    }, timeoutLivingAuto)
+                }
+            } else if (err) {
+                adapter.log.warn('Enum not found!!')
             }
-        }, driveDelayUpLiving)
+        });
     });
 }
 
@@ -422,6 +420,7 @@ function shutterUpSleep() {
         upTimeSleep = adapter.config.W_shutterUpSleepMax
     }
     let upTime = upTimeSleep.split(':');
+    let timeoutSleepAuto;
     
     schedule.cancelJob('shutterUpSleep');
 
@@ -430,6 +429,14 @@ function shutterUpSleep() {
             if (res) {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.sleepEnum];
+                let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
+                let number = 0;
+
+                for ( const i in resultID.common.members) {
+                    number = number + 1;
+                }
+
+                timeoutSleepAuto = number * driveDelayUpSleep;
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
@@ -437,29 +444,21 @@ function shutterUpSleep() {
                         adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
                     }, driveDelayUpSleep * i, i);
                 }
-            } else if (err) {
-                adapter.log.warn('Enum: ' + adapter.config.sleepEnum + ' not found!!')
-            }
-        });
-        setTimeout(function() {
-            if ((autoSleepStr) === true) {
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        const _result = res['enum.functions'];
-                        const resultID = _result['enum.functions.' + adapter.config.sleepEnumAuto];
-        
-                        for ( const i in resultID.common.members) {
+
+                if ((autoSleepStr) === true) {
+                    setTimeout(function() {
+                        for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
+                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpSleep, true);
                             }, driveDelayUpSleep * i, i);
                         }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.sleepEnumAuto + ' not found!!')
-                    }
-                });
+                    }, timeoutSleepAuto)
+                }
+            } else if (err) {
+                adapter.log.warn('Enum not found!!')
             }
-        }, driveDelayUpSleep)
+        });
     });
 }
 
@@ -471,6 +470,7 @@ function shutterDownSleep() {
         downTimeSleep = adapter.config.W_shutterDownSleep
     }
     let downTime = downTimeSleep.split(':');
+    let timeoutSleepAuto;
 
     schedule.cancelJob('shutterDownSleep');
 
@@ -480,70 +480,39 @@ function shutterDownSleep() {
                 const _result = res['enum.functions'];
                 let resultID = _result['enum.functions.' + adapter.config.sleepEnum];
                 let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
+                let number = 0;
+
+                for ( const i in resultID.common.members) {
+                    number = number + 1;
+                }
+
+                timeoutSleepAuto = number * driveDelayUpSleep;
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
                         adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnum)
                         adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
                     }, driveDelayUpSleep * i, i);
+                    
                 }
-                
-            } else if (err) {
-                adapter.log.warn('Enum: ' + adapter.config.sleepEnum + ' not found!!')
-            }
-        });
-        /*
-        setTimeout(function() {
-            if ((autoSleepStr) === true) {
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        const _result = res['enum.functions'];
-                        const resultID = _result['enum.functions.' + adapter.config.sleepEnumAuto];
-        
-                        for ( const i in resultID.common.members) {
+
+                if ((autoSleepStr) === true) {
+                    setTimeout(function() {
+                        for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
+                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownSleep, true);
                             }, driveDelayUpSleep * i, i);
                         }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.sleepEnumAuto + ' not found!!')
-                    }
-                });
+                    }, timeoutSleepAuto)
+                }
+            } else if (err) {
+                adapter.log.warn('Enum not found!!')
             }
-        }, driveDelayUpSleep)
-        */
-        
-        /*
-        setImmediate(function () {
-            shutterDownSleepAuto();
         });
-        */
     });
 }
 
-function shutterDownSleepAuto() {
-    const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
-    setTimeout(function() {
-        if ((autoSleepStr) === true) {
-            adapter.getEnums('functions', (err, res) => {
-                if (res) {
-                    const _result = res['enum.functions'];
-                    const resultID = _result['enum.functions.' + adapter.config.sleepEnumAuto];
-    
-                    for ( const i in resultID.common.members) {
-                        setTimeout(function() {
-                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
-                        }, driveDelayUpSleep * i, i);
-                    }
-                } else if (err) {
-                    adapter.log.warn('Enum: ' + adapter.config.sleepEnumAuto + ' not found!!')
-                }
-            });
-        }
-    }, driveDelayUpSleep)
-}
 /*
 async function testfunc() {
 const test = await adapter.getEnumAsync('functions')
