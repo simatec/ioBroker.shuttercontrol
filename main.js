@@ -36,7 +36,6 @@ function startAdapter(options) {
 
     adapter = new utils.Adapter(options);
  
-    // The ready callback is called when databases are connected and adapter received configuration.
     // start here!
     adapter.on('ready', main); // Main method defined below for readability
 
@@ -55,7 +54,7 @@ function startAdapter(options) {
         if (obj) {
             // The object was changed
             adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-            suncalculation();
+            shutterDriveCalc();
         } else {
             // The object was deleted
             adapter.log.info(`object ${id} deleted`);
@@ -68,45 +67,27 @@ function startAdapter(options) {
             // The state was changed
             adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 
-            if ((state.val === true || state.val === 'true') && !state.ack) {
-                if (id === adapter.namespace + '.control.Holiday') {
-                    HolidayStr = true;
-                }
-                if (id === adapter.namespace + '.control.autoLiving') {
-                    autoLivingStr = true;
-                } 
-                if (id === adapter.namespace + '.control.autoSleep') {
-                    autoSleepStr = true;
-                }
-                if (adapter.config.publicHolidays === true) {
-                    if (id === adapter.config.publicHolInstance + '.heute.boolean') {
-                        publicHolidayStr = true;
-                    }
-                    if (id === adapter.config.publicHolInstance + '.morgen.boolean') {
-                        publicHolidayTomorowStr = true;                        
-                    }
-                }
-                suncalculation();
+            if (id === adapter.namespace + '.control.Holiday') {
+                HolidayStr = state['val'];
+                shutterDriveCalc();
             }
-            if ((state.val === false || state.val === 'false') && !state.ack) {
-                if (id === adapter.namespace + '.control.Holiday') {
-                    HolidayStr = false;
+            if (id === adapter.namespace + '.control.autoLiving') {
+                autoLivingStr = state['val'];
+                shutterDriveCalc();
+            }
+            if (id === adapter.namespace + '.control.autoSleep') {
+                autoSleepStr = state['val'];
+                shutterDriveCalc();
+            }
+            if (adapter.config.publicHolidays === true) {
+                if (id === adapter.config.publicHolInstance + '.heute.boolean') {
+                    publicHolidayStr = state['val'];
+                    shutterDriveCalc();
                 }
-                if (id === adapter.namespace + '.control.autoLiving') {
-                    autoLivingStr = false;
-                } 
-                if (id === adapter.namespace + '.control.autoSleep') {
-                    autoSleepStr = false;
+                if (id === adapter.config.publicHolInstance + '.morgen.boolean') {
+                    publicHolidayTomorowStr = state['val'];
+                    shutterDriveCalc();
                 }
-                if (adapter.config.publicHolidays === true) {
-                    if (id === adapter.config.publicHolInstance + '.heute.boolean') {
-                        publicHolidayStr = false;
-                    }
-                    if (id === adapter.config.publicHolInstance + '.morgen.boolean') {
-                        publicHolidayTomorowStr = false;
-                    }
-                }
-                suncalculation();
             }
             if (adapter.config.UseSunMode === true && id === adapter.config.actualValueTemp) {
                     actualValueStr = state['val'];
@@ -138,57 +119,42 @@ function checkStates() {
 };
 function checkActualStates () {
     adapter.getState('control.Holiday', (err, state) => {
-        if (state === true || state.val === true) {
-            HolidayStr = true;
-        } else {
-            HolidayStr = false;
+        if (state) {
+            HolidayStr = state['val'];
         }
     });
     adapter.getState('control.autoLiving', (err, state) => {
-        if (state === true || state.val === true) {
-            autoLivingStr = true;
-        } else {
-            autoLivingStr = false;
+        if (state) {
+            autoLivingStr = state['val'];
         }
     });
     adapter.getState('control.autoSleep', (err, state) => {
-        if (state === true || state.val === true) {
-            autoSleepStr = true;
-        } else {
-            autoSleepStr = false;
+        if (state) {
+            autoSleepStr = state['val'];
         }
     });
-
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance !== 'none' || adapter.config.publicHolInstance !== '')) {
         adapter.getForeignState(adapter.config.publicHolInstance + '.heute.boolean', (err, state) => {
-            if (state !== null || state.val !== null) {
-                if (state === true || state.val === true) {
-                    publicHolidayStr = true;
-                } else {
-                    publicHolidayStr = false;
-                }
+            if (state) {
+                publicHolidayStr = state['val'];
             }
         });
         adapter.getForeignState(adapter.config.publicHolInstance + '.morgen.boolean', (err, state) => {
-            if (state !== null || state.val !== null) {
-                if (state === true || state.val === true) {
-                    publicHolidayTomorowStr = true;
-                } else {
-                    publicHolidayTomorowStr = false;
-                }
+            if (state) {
+                publicHolidayTomorowStr = state['val'];
             }
         });
     }
     setTimeout(function() {
-        suncalculation()
+        shutterDriveCalc()
     }, 1000)
 }
 
 const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function() {
-    suncalculation();
+    shutterDriveCalc();
 });
 
-function suncalculation() {
+function shutterDriveCalc() {
     // get today's sunlight times 
     let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
 
@@ -342,16 +308,24 @@ function shutterUpLiving() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnum)
-                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                        adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnum)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                            }
+                        });
                     }, driveDelayUpLiving * i, i);
                 }
                 if ((autoLivingStr) === true) {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                        adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                        adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                    }
+                                });
                             }, driveDelayUpLiving * i, i);
                         }
                     }, timeoutLivingAuto)
@@ -391,16 +365,24 @@ function shutterDownLiving() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnum)
-                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
+                        adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnum)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
+                            }
+                        });
                     }, driveDelayUpLiving * i, i);
                 }
                 if ((autoLivingStr) === true) {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownLiving, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                        adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
+                                        adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownLiving, true);
+                                    }
+                                });
                             }, driveDelayUpLiving * i, i);
                         }
                     }, timeoutLivingAuto)
@@ -440,8 +422,12 @@ function shutterUpSleep() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnum)
-                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
+                        adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnum)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
+                            }
+                        });
                     }, driveDelayUpSleep * i, i);
                 }
 
@@ -449,8 +435,12 @@ function shutterUpSleep() {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpSleep, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                        adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                        adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpSleep, true);
+                                    }
+                                });
                             }, driveDelayUpSleep * i, i);
                         }
                     }, timeoutSleepAuto)
@@ -490,8 +480,12 @@ function shutterDownSleep() {
 
                 for ( const i in resultID.common.members) {
                     setTimeout(function() {
-                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnum)
-                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
+                        adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnum)
+                                adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
+                            }
+                        });
                     }, driveDelayUpSleep * i, i);
                     
                 }
@@ -500,8 +494,12 @@ function shutterDownSleep() {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             setTimeout(function() {
-                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownSleep, true);
+                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                        adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
+                                        adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownSleep, true);
+                                    }
+                                });
                             }, driveDelayUpSleep * i, i);
                         }
                     }, timeoutSleepAuto)
