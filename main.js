@@ -207,20 +207,20 @@ function suncalculation() {
     addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
 
     // ******** Set Up-Time Living Area ******** 
-    if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
+    if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
         upTimeLiving = adapter.config.WE_shutterUpLiving;
         adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
     } else {
-        if ((dayStr) < 6 && (sunriseStr) > (adapter.config.W_shutterUpLivingMax)) {
+        if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpLivingMax)) {
             upTimeLiving = adapter.config.W_shutterUpLivingMax;
             adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        } else if ((dayStr) < 6 && (sunriseStr) > (adapter.config.W_shutterUpLivingMin) && (sunriseStr) < (adapter.config.W_shutterUpLivingMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpLivingMin) && (sunriseStr) < (adapter.config.W_shutterUpLivingMax)) {
             upTimeLiving = sunriseStr;
             adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        } else if ((dayStr) < 6 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
             upTimeLiving = adapter.config.W_shutterUpLivingMax;
             adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        } else if ((dayStr) < 6 && (sunriseStr) == (adapter.config.W_shutterUpLivingMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) == (adapter.config.W_shutterUpLivingMax)) {
                 upTimeLiving = sunriseStr;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
         }
@@ -229,20 +229,20 @@ function suncalculation() {
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
-    if ((dayStr) > 5 || (HolidayStr) === true || (publicHolidayStr) === true) {
+    if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
         upTimeSleep = adapter.config.WE_shutterUpSleep;
         adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
     } else {
-        if ((dayStr) < 6 && (sunriseStr) > (adapter.config.W_shutterUpSleepMax)) {
+        if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpSleepMax)) {
             upTimeSleep = adapter.config.W_shutterUpSleepMax;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (sunriseStr) > (adapter.config.W_shutterUpSleepMin) && (sunriseStr) < (adapter.config.W_shutterUpSleepMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpSleepMin) && (sunriseStr) < (adapter.config.W_shutterUpSleepMax)) {
             upTimeSleep = sunriseStr;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
             upTimeSleep = adapter.config.W_shutterUpSleepMax;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (sunriseStr) == (adapter.config.W_shutterUpSleepMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) == (adapter.config.W_shutterUpSleepMax)) {
                 upTimeSleep = sunriseStr;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         }
@@ -260,13 +260,13 @@ function suncalculation() {
     } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (sunsetStr)) {
         downTimeLiving = sunsetStr;
         adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) > (adapter.config.W_shutterDownLiving)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) > (adapter.config.W_shutterDownLiving)) {
         downTimeLiving = adapter.config.W_shutterDownLiving;
         adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) < (adapter.config.W_shutterDownLiving)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) < (adapter.config.W_shutterDownLiving)) {
         downTimeLiving = sunsetStr;
         adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 7) && (sunsetStr) == (adapter.config.W_shutterDownLiving)) {
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) == (adapter.config.W_shutterDownLiving)) {
             downTimeLiving = sunsetStr;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
     }
@@ -512,24 +512,6 @@ function shutterDownSleep() {
         });
     });
 }
-
-/*
-async function testfunc() {
-const test = await adapter.getEnumAsync('functions')
-adapter.log.warn('Resultat: ' + JSON.stringify(test));
-  const test_1 = test['result']
-  const test_2 = test_1['enum.functions.' + adapter.config.livingEnum];
-  adapter.log.warn(JSON.stringify(test_2.common.members));
-  setTimeout(function() {
-  for (const i in test_2.common.members) {
-    
-        adapter.log.warn(test_2.common.members[i])
-        adapter.setForeignState(test_2.common.members[i], 60, true);
-    
-   }
-    }, 2000);
-}
-*/
 
 function sunProtect() {
 
