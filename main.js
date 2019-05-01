@@ -473,7 +473,6 @@ function shutterUpSleep() {
     const upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
 
         delayUp = delayUp * driveDelayUpLiving;
-        adapter.log.warn(delayUp);
         setTimeout(function() {
             adapter.getEnums('functions', (err, res) => {
                 if (res) {
@@ -545,7 +544,6 @@ function shutterDownSleep() {
 
     const downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         delayDown = delayDown * driveDelayUpLiving;
-        adapter.log.warn(delayDown);
         setTimeout(function() {
             adapter.getEnums('functions', (err, res) => {
                 if (res) {
@@ -648,27 +646,42 @@ function sunProtect() {
                         adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
                     }
                 });
-            } else if (adapter.config.sun_shutterUp < (currentTime) && adapter.config.sunMonthStart <= (monthIndex) && adapter.config.sunMonthEnd >= (monthIndex)) {
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        let _result = res['enum.functions'];
-                        let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
-
-                        for ( const i in resultID.common.members) {
-                            setTimeout(function() {
-                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
-                                    if ((state['val']) < adapter.config.driveHeightUpLiving) {
-                                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
-                                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
-                    }
-                });
             }
+
+            let upSunProtect = adapter.config.sun_shutterUp;
+
+            if ((upSunProtect) == undefined) {
+                upSunProtect = adapter.config.sun_shutterUp;
+            }
+            let upTimeSun = upSunProtect.split(':');
+        
+            schedule.cancelJob('upSunProtect');
+
+            const upSunStr = schedule.scheduleJob('upSunProtect', upTimeSun[1] + ' ' + upTimeSun[0] + ' * * *', function() {
+                if (adapter.config.sunMonthStart <= (monthIndex) && adapter.config.sunMonthEnd >= (monthIndex)) {
+                    adapter.getEnums('functions', (err, res) => {
+                        if (res) {
+                            let _result = res['enum.functions'];
+                            let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+                            const valueStr = adapter.config.driveHeightUpLiving;
+
+                            for ( const i in resultID.common.members) {
+                                setTimeout(function() {
+                                    adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                        let stateStr = state['val'];
+                                        if ((stateStr) != valueStr) {
+                                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
+                                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                        }
+                                    });
+                                }, driveDelayUpSleep * i, i);
+                            }
+                        } else if (err) {
+                            adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
+                        }
+                    });
+                }
+            });
         }, 2000);
     }
 }
