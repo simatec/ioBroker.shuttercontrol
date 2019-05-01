@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shutter",
-        "version": "0.0.1",
+        "version": "0.1.0",
         "news": {
+            "0.1.0": {
+                "en": "First Beta",
+                "de": "Erste Beta Version",
+                "ru": "Первая бета",
+                "pt": "Primeiro beta",
+                "nl": "Eerste bèta",
+                "fr": "Première bêta",
+                "it": "Prima beta",
+                "es": "Primera beta",
+                "pl": "Pierwsza beta",
+                "zh-cn": "第一个Beta"
+            },
             "0.0.1": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",
@@ -19,7 +31,7 @@
         "title": "shutter",
         "titleLang": {
             "en": "shutter",
-            "de": "Verschluss",
+            "de": "Rollladen",
             "ru": "затвор",
             "pt": "obturador",
             "nl": "Luik",
@@ -46,9 +58,11 @@
         ],
         "keywords": [
             "ioBroker",
-            "template",
             "Smart Home",
-            "home automation"
+            "home automation",
+            "Rollladen",
+            "Jalousie",
+            "Rollladensteuerung"
         ],
         "license": "MIT",
         "platform": "Javascript/Node.js",
@@ -67,7 +81,7 @@
             "singleton": true,
             "name": {
                 "en": "shutter",
-                "de": "Verschluss",
+                "de": "Rollladen",
                 "ru": "затвор",
                 "pt": "obturador",
                 "nl": "Luik",

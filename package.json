@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shutter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Automatic control for shutters",
   "author": {
     "name": "simatec",
@@ -10,9 +10,11 @@
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "template",
     "Smart Home",
-    "home automation"
+    "home automation",
+    "Rollladen",
+    "Jalousie",
+    "Rollladensteuerung"
   ],
   "repository": {
     "type": "git",
@@ -56,4 +58,3 @@
   },
   "readmeFilename": "README.md"
 }
- 
