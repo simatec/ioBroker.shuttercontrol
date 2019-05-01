@@ -681,7 +681,7 @@ function delayCalc() {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
                 let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                if (resultID.common.members != undefined) {
+                if (resultID != undefined) {
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
                         if ((type) == 'LEVEL') {
@@ -690,7 +690,7 @@ function delayCalc() {
                     }
                 }
                 if ((autoLivingStr) === true) {
-                    if (resultID2.common.members != undefined) {
+                    if (resultID2 != undefined) {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
                             if ((type) == 'LEVEL') {
@@ -711,7 +711,7 @@ function delayCalc() {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
                 let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                if (resultID.common.members != undefined) {
+                if (resultID != undefined) {
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
                         if ((type) == 'LEVEL') {
@@ -719,7 +719,7 @@ function delayCalc() {
                         }
                     }
                 }
-                if (resultID2.common.members != undefined) {
+                if (resultID2 != undefined) {
                     if ((autoLivingStr) === true) {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
