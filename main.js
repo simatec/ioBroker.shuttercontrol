@@ -681,18 +681,21 @@ function delayCalc() {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
                 let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
-                        delayUp = delayUp + 1;
+                if (resultID.common.members != undefined) {
+                    for ( const i in resultID.common.members) {
+                        const type = resultID.common.members[i].split('.').pop();
+                        if ((type) == 'LEVEL') {
+                            delayUp = delayUp + 1;
+                        }
                     }
                 }
                 if ((autoLivingStr) === true) {
-                    for ( const i in resultID2.common.members) {
-                        const type = resultID2.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
-                            delayUp = delayUp + 1;
+                    if (resultID2.common.members != undefined) {
+                        for ( const i in resultID2.common.members) {
+                            const type = resultID2.common.members[i].split('.').pop();
+                            if ((type) == 'LEVEL') {
+                                delayUp = delayUp + 1;
+                            }
                         }
                     }
                 }
@@ -702,23 +705,27 @@ function delayCalc() {
         });
     }
     if ((downTimeLiving) === (downTimeSleep)) {
+        
         adapter.getEnums('functions', (err, res) => {
             if (res) {
                 const _result = res['enum.functions'];
                 const resultID = _result['enum.functions.' + adapter.config.livingEnum];
                 let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
-                        delayDown = delayDown + 1;
-                    }
-                }
-                if ((autoLivingStr) === true) {
-                    for ( const i in resultID2.common.members) {
-                        const type = resultID2.common.members[i].split('.').pop();
+                if (resultID.common.members != undefined) {
+                    for ( const i in resultID.common.members) {
+                        const type = resultID.common.members[i].split('.').pop();
                         if ((type) == 'LEVEL') {
                             delayDown = delayDown + 1;
+                        }
+                    }
+                }
+                if (resultID2.common.members != undefined) {
+                    if ((autoLivingStr) === true) {
+                        for ( const i in resultID2.common.members) {
+                            const type = resultID2.common.members[i].split('.').pop();
+                            if ((type) == 'LEVEL') {
+                                delayDown = delayDown + 1;
+                            }
                         }
                     }
                 }
