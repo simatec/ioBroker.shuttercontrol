@@ -56,7 +56,7 @@ function startAdapter(options) {
         if (obj) {
             // The object was changed
             adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-            shutterDriveCalc();
+            //shutterDriveCalc();
         } else {
             // The object was deleted
             adapter.log.info(`object ${id} deleted`);
@@ -620,21 +620,21 @@ function sunProtect() {
 
                 adapter.getEnums('functions', (err, res) => {
                     if (res) {
-                        const _result = res['enum.functions'];
-                        const resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+                        let _result = res['enum.functions'];
+                        let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
 
                         for ( const i in resultID.common.members) {
                             setTimeout(function() {
-                                if (adapter.config.setpointValue < (actualValueStr)) {
+                                if ((adapter.config.setpointValue) < actualValueStr) {
                                     adapter.getForeignState(resultID.common.members[i], (err, state) => {
-                                        if ((state['val']) > adapter.config.driveHeightSun)  {
+                                        if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
                                             adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightSun + ' from Enum ' + adapter.config.sunProtecEnum)
                                             adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightSun, true);
                                         }
                                     });
-                                } else if (adapter.config.setpointValue > (actualValueStr)) {
+                                } else if ((adapter.config.setpointValue) > actualValueStr) {
                                     adapter.getForeignState(resultID.common.members[i], (err, state) => {
-                                        if ((state['val']) < adapter.config.driveHeightUpLiving)  {
+                                        if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
                                             adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum)
                                             adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
                                         }
@@ -663,13 +663,11 @@ function sunProtect() {
                         if (res) {
                             let _result = res['enum.functions'];
                             let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
-                            const valueStr = adapter.config.driveHeightUpLiving;
 
                             for ( const i in resultID.common.members) {
                                 setTimeout(function() {
                                     adapter.getForeignState(resultID.common.members[i], (err, state) => {
-                                        let stateStr = state['val'];
-                                        if ((stateStr) != valueStr) {
+                                        if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
                                             adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
                                             adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
                                         }
