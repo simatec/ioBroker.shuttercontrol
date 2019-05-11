@@ -1,6 +1,6 @@
 {
     "common": {
-        "name": "shutter",
+        "name": "shuttercontrol",
         "version": "0.1.0",
         "news": {
             "0.1.0": {
@@ -28,10 +28,10 @@
                 "zh-cn": "首次出版"
             }
         },
-        "title": "shutter",
+        "title": "shuttercontrol",
         "titleLang": {
-            "en": "shutter",
-            "de": "Rollladen",
+            "en": "shuttercontrol",
+            "de": "Rolladensteuerung",
             "ru": "затвор",
             "pt": "obturador",
             "nl": "Luik",
@@ -67,33 +67,16 @@
         "license": "MIT",
         "platform": "Javascript/Node.js",
         "main": "main.js",
-        "icon": "shutter.png",
+        "icon": "shuttercontrol.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/simatec/ioBroker.shutter/master/admin/shutter.png",
-        "readme": "https://github.com/simatec/ioBroker.shutter/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/simatec/ioBroker.shuttercontrol/master/admin/shuttercontrol.png",
+        "readme": "https://github.com/simatec/ioBroker.shuttercontrol/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "climate-control",
         "compact": true,
         "materialize": true,
-        "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "shutter",
-                "de": "Rollladen",
-                "ru": "затвор",
-                "pt": "obturador",
-                "nl": "Luik",
-                "fr": "obturateur",
-                "it": "otturatore",
-                "es": "obturador",
-                "pl": "migawka",
-                "zh-cn": "快门"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
+        
         "dependencies": [
             {
                 "admin": ">=3.0.0",

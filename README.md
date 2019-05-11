@@ -1,28 +1,28 @@
 <h1>
-    <img src="admin/shutter.png" width="64"/>
-    ioBroker.shutter
+    <img src="admin/shuttercontrol.png" width="64"/>
+    ioBroker.shuttercontrol
 </h1>
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.shutter.svg)](https://www.npmjs.com/package/iobroker.shutter)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.shutter.svg)](https://www.npmjs.com/package/iobroker.shutter)
-[![Dependency Status](https://img.shields.io/david/simatec/iobroker.shutter.svg)](https://david-dm.org/simatec/iobroker.shutter)
-[![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shutter/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shutter)
+[![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
+[![Dependency Status](https://img.shields.io/david/simatec/iobroker.shuttercontrol.svg)](https://david-dm.org/simatec/iobroker.shuttercontrol)
+[![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol)
 
-[![NPM](https://nodei.co/npm/iobroker.shutter.png?downloads=true)](https://nodei.co/npm/iobroker.shutter/)
+[![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
 
-**Tests:** Linux/Mac: [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shutter/master.svg)](https://travis-ci.org/simatec/ioBroker.shutter)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shutter?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shutter/)
+**Tests:** Linux/Mac: [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shuttercontrol?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shuttercontrol/)
 
-## shutter adapter for ioBroker
+## shuttercontrol adapter for ioBroker
 
 Automatic control for shutters
 
 ## Changelog
 
-### 0.1.0
+### 0.1.0 (11.05.2019)
 * (simatec) First Beta
 
-### 0.0.1
+### 0.0.1 (02.04.2019)
 * (simatec) initial release
 
 

@@ -1,12 +1,12 @@
 {
-  "name": "iobroker.shutter",
+  "name": "iobroker.shuttercontrol",
   "version": "0.1.0",
   "description": "Automatic control for shutters",
   "author": {
     "name": "simatec",
     "email": "nais@gmx.net"
   },
-  "homepage": "https://github.com/simatec/ioBroker.shutter",
+  "homepage": "https://github.com/simatec/ioBroker.shuttercontrol",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/simatec/ioBroker.shutter"
+    "url": "https://github.com/simatec/ioBroker.shuttercontrol"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
@@ -54,7 +54,7 @@
     "test:integration": "mocha test/integration --exit"
   },
   "bugs": {
-    "url": "https://github.com/simatec/ioBroker.shutter/issues"
+    "url": "https://github.com/simatec/ioBroker.shuttercontrol/issues"
   },
   "readmeFilename": "README.md"
 }
