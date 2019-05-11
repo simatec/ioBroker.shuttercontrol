@@ -15,7 +15,17 @@ Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec
 
 ## shuttercontrol adapter for ioBroker
 
-Automatic control for shutters
+automatische Rollladensteuerung
+
+[Deutsche Beschreibung hier](docs/de/shuttercontrol.md)
+
+automatic control for shutters
+
+[English Description here](docs/en/shuttercontrol.md)
+
+*************************************************************************************************************************************
+
+
 
 ## Changelog
 
