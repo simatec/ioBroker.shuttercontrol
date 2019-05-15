@@ -750,7 +750,7 @@ function delayCalc() {
 }
 
 function main() {
-
+    adapter.log.warn(JSON.stringify(adapter.config.events))
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });

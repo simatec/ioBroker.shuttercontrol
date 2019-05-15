@@ -8,6 +8,7 @@
 
     <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../../lib/js/selectID.js"></script>
 
     <script type="text/javascript" src="../../js/translate.js"></script>
     <script type="text/javascript" src="../../lib/js/materialize.js"></script>
@@ -71,6 +72,48 @@
     </style>
 
     <script type="text/javascript">
+
+    // Test Start
+    var events = [];
+    var selectId;
+
+    function initSelectId(callback) {
+        if (selectId) {
+            return callback(selectId);
+        }
+        socket.emit('getObjects', function (err, objs) {
+            selectId = $('#dialog-select-member').selectId('init',  {
+                noMultiselect: true,
+                objects: objs,
+                imgPath:       '../../lib/css/fancytree/',
+                filter:        {type: 'state'},
+                name:          'scenes-select-state',
+                texts: {
+                    select:          _('Select'),
+                    cancel:          _('Cancel'),
+                    all:             _('All'),
+                    id:              _('ID'),
+                    name:            _('Name'),
+                    role:            _('Role'),
+                    room:            _('Room'),
+                    value:           _('Value'),
+                    selectid:        _('Select ID'),
+                    from:            _('From'),
+                    lc:              _('Last changed'),
+                    ts:              _('Time stamp'),
+                    wait:            _('Processing...'),
+                    ack:             _('Acknowledged'),
+                    selectAll:       _('Select all'),
+                    unselectAll:     _('Deselect all'),
+                    invertSelection: _('Invert selection')
+                },
+                columns: ['image', 'name', 'role', 'room']
+            });
+            callback(selectId);
+        });
+    }
+    // Test ende
+
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
             // example: select elements with id=key and class=value and insert value
@@ -92,8 +135,39 @@
                         ;
                 }
             });
-            showHideSettings();
+                // Test Start
+            events    = settings.events    || [];
+            $('#select_ID').on('click', function () {
+                initSelectId(function (sid) {
+                    sid.selectId('show', function (newId) {
+                        if (newId) {
+                            //$('#' + id).val(newId || '');
+                            socket.emit('getObject', newId, function (err, obj) {
+                                var name = getName(obj);
+                                updateSmartName(obj, null, (name || _('Device name')).replace(/[-_.]+/g, ' '));
+                                idToEdit = obj._id;
+                                // check if the object is capable to be controlled by cloud
+                                var res = getActions(obj);
+                                if (!res || !res.actions || !res.actions.length) {
+                                    showMessage(_('Cannot add this object'));
+                                } else {
+                                    socket.emit('setObject', obj._id, obj, function (err) {
+                                        informInstance(obj._id);
+                                        if (err) {
+                                            window.alert(err);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }).addClass('disabled');
             onChange(false);
+            values2table('events', events, onChange);
+            //Test ende
+            showHideSettings();
+            //onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             if (M) M.updateTextFields();
             getAdapterInstances('feiertage', function (instances) {
@@ -150,6 +224,10 @@
                     obj[$this.attr('id')] = $this.val();
                 }
             });
+            // Test start
+            // Get edited table
+            obj.events    = table2values('events');
+            // Test ende
             callback(obj);
         }
         function showHideSettings() {
@@ -170,7 +248,11 @@
             }
         }
     </script>
-
+<style>
+    .m .select-wrapper+label {
+        top: 100%;
+    }
+</style>
 </head>
 
 <body>
@@ -217,6 +299,28 @@
                             <label for="publicHolInstance" class="translate">public holidays Instance</label>
                         </div>
                     </div>
+                    <!-- Test start-->
+                    <div class="row">
+                        <div class="col s12" id="events">
+                            
+                            <a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+
+                            <div class="table-values-div">
+                                <table class="table-values">
+                                    <thead>
+                                    <tr>
+                                        <th data-name="name"  style="width: 30%" class="translate">name</th>
+                                        <th id="select_ID" data-buttons="edit"  style="width: 20px" ></th>
+                                        <th data-name="enabled"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
+                                        <th data-name="display"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">display</th>
+                                        <th data-buttons="delete up down" style="width: 120px"></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Test ende-->
                 </div>
                 <!-- living settings -->
                 <div id="tab-living" class="col s12 page">
@@ -410,9 +514,26 @@
                 </div>
             </div>
         </div>
-
     </div>
-
+    <div class="material-dialogs m">
+        <div id="dialog-select-member" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 title"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 dialog-content">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons">check</i><span
+                        class="translate">Select</span></a>
+                <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons">close</i><span
+                        class="translate">Cancel</span></a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

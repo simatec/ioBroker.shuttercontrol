@@ -126,7 +126,9 @@
         "actualValueTemp": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
         "setpointValue": 23,
         "sunProtecEnum": "",
-        "driveHeightSun": 30
+        "driveHeightSun": 30,
+
+        "events": ""
         
     },
     "objects": [],
