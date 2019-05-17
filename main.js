@@ -100,6 +100,78 @@ function startAdapter(options) {
             adapter.log.info(`state ${id} deleted`);
         }
     });
+    adapter.on('message', obj => {
+        if (obj) {
+            switch (obj.command) {
+                case 'update':
+                    recalcTimeout && clearTimeout(recalcTimeout);
+
+                    recalcTimeout = setTimeout(() => {
+                        recalcTimeout = null;
+                        alexaSH2 && alexaSH2.updateDevices(obj.message, analyseAddedId =>
+                            adapter.setState('smart.updatesResult', analyseAddedId || '', true, () =>
+                                adapter.setState('smart.updates', true, true)));
+
+                        alexaSH3 && alexaSH3.updateDevices(obj.message, analyseAddedId =>
+                            adapter.setState('smart.updatesResult', analyseAddedId || '', true, () =>
+                                adapter.setState('smart.updates3', true, true)));
+                    }, 1000);
+                    break;
+
+                case 'browse':
+                    if (obj.callback) {
+                        adapter.log.info('Request devices');
+                        alexaSH2 && alexaSH2.updateDevices(() => {
+                            adapter.sendTo(obj.from, obj.command, alexaSH2.getDevices(), obj.callback);
+                            adapter.setState('smart.updates', false, true);
+                        });
+                    }
+                    break;
+
+                case 'browse3':
+                    if (obj.callback) {
+                        adapter.log.info('Request V3 devices');
+                        alexaSH3 && alexaSH3.updateDevices(() => {
+                            adapter.sendTo(obj.from, obj.command, alexaSH3.getDevices(), obj.callback);
+                            adapter.setState('smart.updates3', false, true);
+                        });
+                    }
+                    break;
+
+                case 'browseGH':
+                    if (obj.callback) {
+                        adapter.log.info('Request google home devices');
+                        googleHome && googleHome.updateDevices(() => {
+                            adapter.sendTo(obj.from, obj.command, googleHome.getDevices(), obj.callback);
+                            adapter.setState('smart.updatesGH', false, true);
+                        });
+                    }
+                    break;
+                case 'enums':
+                    if (obj.callback) {
+                        adapter.log.info('Request enums');
+                        alexaSH2 && alexaSH2.updateDevices(() => {
+                            adapter.sendTo(obj.from, obj.command, alexaSH2.getEnums(), obj.callback);
+                            adapter.setState('smart.updates', false, true);
+                        });
+                    }
+                    break;
+
+                case 'ifttt':
+                    sendDataToIFTTT(obj.message);
+                    break;
+
+                case 'alexaCustomResponse':
+                    alexaCustom && alexaCustom.setResponse(obj.message);
+                    break;
+
+                default:
+                    adapter.log.warn('Unknown command: ' + obj.command);
+                    break;
+            }
+        }
+    });
+
 }
 
 function checkStates() {
@@ -347,7 +419,7 @@ function shutterUpLiving() {
 
                 for ( const i in resultID.common.members) {
                     const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
+                    if ((type) == 'LEVEL' || (type) == 'Position') {
                         number = number + 1;
                     }
                 }
@@ -356,7 +428,7 @@ function shutterUpLiving() {
 
                 for ( const i in resultID.common.members) {
                     const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
+                    if ((type) == 'LEVEL' || (type) == 'Position') {
                         setTimeout(function() {
                             adapter.getForeignState(resultID.common.members[i], (err, state) => {
                                 if ((state['val']) != adapter.config.driveHeightUpLiving)  {
@@ -371,7 +443,7 @@ function shutterUpLiving() {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL') {
+                            if ((type) == 'LEVEL' || (type) == 'Position') {
                                 setTimeout(function() {
                                     adapter.getForeignState(resultID2.common.members[i], (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightUpLiving)  {
@@ -413,7 +485,7 @@ function shutterDownLiving() {
 
                 for ( const i in resultID.common.members) {
                     const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
+                    if ((type) == 'LEVEL' || (type) == 'Position') {
                         number = number + 1;
                     }
                 }
@@ -422,7 +494,7 @@ function shutterDownLiving() {
 
                 for ( const i in resultID.common.members) {
                     const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL') {
+                    if ((type) == 'LEVEL' || (type) == 'Position') {
                         setTimeout(function() {
                             adapter.getForeignState(resultID.common.members[i], (err, state) => {
                                 if ((state['val']) != adapter.config.driveHeightDownLiving)  {
@@ -437,7 +509,7 @@ function shutterDownLiving() {
                     setTimeout(function() {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL') {
+                            if ((type) == 'LEVEL' || (type) == 'Position') {
                                 setTimeout(function() {
                                     adapter.getForeignState(resultID2.common.members[i], (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightDownLiving)  {
@@ -483,7 +555,7 @@ function shutterUpSleep() {
 
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             number = number + 1;
                         }
                     }
@@ -492,7 +564,7 @@ function shutterUpSleep() {
 
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             setTimeout(function() {
                                 adapter.getForeignState(resultID.common.members[i], (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightUpSleep)  {
@@ -508,7 +580,7 @@ function shutterUpSleep() {
                         setTimeout(function() {
                             for ( const i in resultID2.common.members) {
                                 const type = resultID2.common.members[i].split('.').pop();
-                                if ((type) == 'LEVEL') {
+                                if ((type) == 'LEVEL' || (type) == 'Position') {
                                     setTimeout(function() {
                                         adapter.getForeignState(resultID2.common.members[i], (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightUpSleep)  {
@@ -554,7 +626,7 @@ function shutterDownSleep() {
 
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             number = number + 1;
                         }
                     }
@@ -563,7 +635,7 @@ function shutterDownSleep() {
 
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             setTimeout(function() {
                                 adapter.getForeignState(resultID.common.members[i], (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightDownSleep)  {
@@ -580,7 +652,7 @@ function shutterDownSleep() {
                         setTimeout(function() {
                             for ( const i in resultID2.common.members) {
                                 const type = resultID2.common.members[i].split('.').pop();
-                                if ((type) == 'LEVEL') {
+                                if ((type) == 'LEVEL' || (type) == 'Position') {
                                     setTimeout(function() {
                                         adapter.getForeignState(resultID2.common.members[i], (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightDownSleep)  {
@@ -695,7 +767,7 @@ function delayCalc() {
                 if (resultID != undefined) {
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             delayUp = delayUp + 1;
                         }
                     }
@@ -704,7 +776,7 @@ function delayCalc() {
                     if (resultID2 != undefined) {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL') {
+                            if ((type) == 'LEVEL' || (type) == 'Position') {
                                 delayUp = delayUp + 1;
                             }
                         }
@@ -725,7 +797,7 @@ function delayCalc() {
                 if (resultID != undefined) {
                     for ( const i in resultID.common.members) {
                         const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL') {
+                        if ((type) == 'LEVEL' || (type) == 'Position') {
                             delayDown = delayDown + 1;
                         }
                     }
@@ -734,7 +806,7 @@ function delayCalc() {
                     if ((autoLivingStr) === true) {
                         for ( const i in resultID2.common.members) {
                             const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL') {
+                            if ((type) == 'LEVEL' || (type) == 'Position') {
                                 delayDown = delayDown + 1;
                             }
                         }

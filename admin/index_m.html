@@ -3,6 +3,7 @@
 <head>
 
     <!-- Load ioBroker scripts and styles-->
+    <link rel="stylesheet" type="text/css" href="../../lib/css/fancytree/ui.fancytree.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
 
@@ -68,6 +69,9 @@
         .collapsible-body {
             margin-left: 2rem !important;
             padding-top: 0 !important;
+        }
+        .m .modal.modal-fixed-footer .modal-footer {
+            right: 10px;
         }
     </style>
 
@@ -136,8 +140,10 @@
                 }
             });
                 // Test Start
+              
             events    = settings.events    || [];
-            $('#select_ID').on('click', function () {
+            
+            $('#responseOIDDialog').on('click', function () {
                 initSelectId(function (sid) {
                     sid.selectId('show', function (newId) {
                         if (newId) {
@@ -162,7 +168,19 @@
                         }
                     });
                 });
-            }).addClass('disabled');
+            })
+            
+            sendTo(null, 'browse', null, function (list) {
+                $('#responseOIDDialog').on('click', function () {
+                    initSelectId(function (sid) {
+                        sid.selectId('show', $('#responseOID').val(), function (newId) {
+                            if (newId) {
+                                $('#responseOID').val(newId).trigger('change');
+                            }
+                        });
+                    });
+                });
+            });
             onChange(false);
             values2table('events', events, onChange);
             //Test ende
@@ -246,13 +264,13 @@
             } else {
                 $('.publicHol').hide();
             }
+            
+            $('#responseOIDDialog').on('click', function () {
+                $('#dialog-select-member').show();
+            });
         }
     </script>
-<style>
-    .m .select-wrapper+label {
-        top: 100%;
-    }
-</style>
+
 </head>
 
 <body>
@@ -300,17 +318,19 @@
                         </div>
                     </div>
                     <!-- Test start-->
+                    <!--
                     <div class="row">
+                    
                         <div class="col s12" id="events">
                             
-                            <a class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-
+                           <a id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                            
                             <div class="table-values-div">
                                 <table class="table-values">
                                     <thead>
                                     <tr>
-                                        <th data-name="name"  style="width: 30%" class="translate">name</th>
-                                        <th id="select_ID" data-buttons="edit"  style="width: 20px" ></th>
+                                        <th data-name="name" data-type="link" style="width: 30%" class="translate">name</th>
+                                        <th data-buttons="edit" style="width: 20px" ></th>
                                         <th data-name="enabled"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
                                         <th data-name="display"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">display</th>
                                         <th data-buttons="delete up down" style="width: 120px"></th>
@@ -320,6 +340,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <!-- Test ende-->
                 </div>
                 <!-- living settings -->
@@ -514,26 +535,25 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="material-dialogs m">
-        <div id="dialog-select-member" class="modal modal-fixed-footer">
-            <div class="modal-content">
-                <div class="row">
-                    <div class="col s12 title"></div>
-                </div>
-                <div class="row">
-                    <div class="col s12 dialog-content">
+        <div class="m material-dialogs">
+            <div id="dialog-select-member" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col s12 title"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 dialog-content">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons">check</i><span
-                        class="translate">Select</span></a>
-                <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons">close</i><span
-                        class="translate">Cancel</span></a>
+                <div class="modal-footer">
+                    <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Select</span></a>
+                    <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
+                </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
