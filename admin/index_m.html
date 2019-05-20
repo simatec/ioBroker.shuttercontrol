@@ -109,7 +109,7 @@
             showHideSettings();
             $('#responseOIDDialog').on('click', function () {
                 initSelectId(function (sid) {
-                    sid.selectId('show', $('#responseOID').val(), function (newId) {
+                    sid.selectId('show', function (newId) {
                         if (newId) {
                             $('#responseOID').val(newId).trigger('change');
                         }
