@@ -3,6 +3,7 @@
 <head>
 
     <!-- Load ioBroker scripts and styles-->
+    <!--
     <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
 
@@ -15,6 +16,23 @@
     <script type="text/javascript" src="../../js/translate.js"></script>
     <script type="text/javascript" src="../../lib/js/materialize.js"></script>
     <script type="text/javascript" src="../../js/adapter-settings.js"></script>
+    -->
+    <link rel="stylesheet" type="text/css" href="../../lib/css/fancytree/ui.fancytree.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
+
+    <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
+    <script type="text/javascript" src="../../lib/js/materialize.js"></script>
+    <script type="text/javascript" src="../../lib/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/jquery.fancytree-all.min.js"></script>
+
+    <script type="text/javascript" src="../../js/translate.js"></script>
+    <script type="text/javascript" src="../../lib/js/selectID.js"></script>
+    <script type="text/javascript" src="../../js/adapter-settings.js"></script>
+    <!--<script type="text/javascript" src="words.js"></script>-->
+    <script type="text/javascript" src="actions.js"></script>
 
     <!-- Load our own files -->
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -101,22 +119,26 @@
                         ;
                 }
             });
-              
-            events    = settings.events    || [];
             
+            events = settings.events    || [];
+            
+            showHideSettings();
+            
+            onChange(false);
+
             values2table('events', events, onChange);
 
-            showHideSettings();
-            $('#responseOIDDialog').on('click', function () {
+            $('#events .values-buttons[data-command="edit"]').on('click', function () {
+                var id = $(this).data('index');
                 initSelectId(function (sid) {
-                    sid.selectId('show', $('#responseOID').val(), function (newId) {
+                    sid.selectId('show', $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
-                            $('#responseOID').val(newId).trigger('change');
+                            $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(newId).trigger('change');
                         }
                     });
                 });
             });
-            onChange(false);
+
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             if (M) M.updateTextFields();
             getAdapterInstances('feiertage', function (instances) {
@@ -173,10 +195,10 @@
                     obj[$this.attr('id')] = $this.val();
                 }
             });
-            // Test start
+            
             // Get edited table
             obj.events    = table2values('events');
-            // Test ende
+
             callback(obj);
         }
         function showHideSettings() {
@@ -283,15 +305,17 @@
                     </div>
                     <div class="row">
                         <div class="col s12" id="events"> 
-                            <a id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                            <a  id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                             <div class="table-values-div">
                                 <table class="table-values">
                                     <thead>
                                     <tr>
-                                        <th data-name="name" id="responseOID" data-type="link" style="width: 30%" class="translate">name</th>
-                                        <th data-buttons="edit" style="width: 20px" ></th>
+                                        <th data-name="_index" style="width: 30px"></th>
+                                        <th data-name="name" data-type="text" style="width: 30%" class="translate">name</th>
+                                        <th data-buttons="edit" style="width: 70px" ></th>
+                                        <th data-name="type" style="width: 30px" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
                                         <th data-name="enabled"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
-                                        <th data-name="display"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">display</th>
+                                        <th data-name="sunProt"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">sunProtec</th>
                                         <th data-buttons="delete up down" style="width: 120px"></th>
                                     </tr>
                                     </thead>
@@ -491,27 +515,25 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="m material-dialogs">
-                <div id="dialog-select-member" class="modal modal-fixed-footer">
-                    <div class="modal-content">
-                        <div class="row">
-                            <div class="col s12 title"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 dialog-content">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Select</span></a>
-                        <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
+        </div>
+    </div>
+    <div class="m material-dialogs">
+        <div id="dialog-select-member" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 title"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 dialog-content">
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Select</span></a>
+                <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
