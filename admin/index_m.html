@@ -127,9 +127,14 @@
             onChange(false);
 
             values2table('events', events, onChange);
-
-            $('#events .values-buttons[data-command="edit"]').on('click', function () {
-                var id = $(this).data('index');
+            $('#responseOIDDialog').on('click', function () {
+            //$('#events .values-buttons[data-command="edit"]').on('click', function () {
+                devices = table2values('events');
+                var id = 0;
+                for (var i = 0; i < devices.length; i++) {
+                id = id + 1;
+                }
+                //var id = $(this).data('index');
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
@@ -304,18 +309,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12" id="events"> 
-                            <a  id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        <div class="col s12" id="events">
+                            <div class="row">
+                                <a  id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                            </div>
                             <div class="table-values-div">
                                 <table class="table-values">
                                     <thead>
                                     <tr>
                                         <th data-name="_index" style="width: 30px"></th>
+                                        <th data-name="enabled"  style="width: 70px; text-align: center" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
                                         <th data-name="name" data-type="text" style="width: 30%" class="translate">name</th>
-                                        <th data-buttons="edit" style="width: 70px" ></th>
-                                        <th data-name="type" style="width: 30px" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
-                                        <th data-name="enabled"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
-                                        <th data-name="sunProt"  style="width: 70px" data-style="width: 70px" data-type="checkbox" class="translate">sunProtec</th>
+                                        <!--<th data-buttons="edit" style="width: 70px" ></th>-->
+                                        <th data-name="type" style="width: 30%" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
+                                        
+                                        <th data-name="sunProt"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">sunProtec</th>
+                                        <th data-name="astro"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">astroUse</th>
+                                        <th data-name="nextStep"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">nextStep</th>
                                         <th data-buttons="delete up down" style="width: 120px"></th>
                                     </tr>
                                     </thead>
