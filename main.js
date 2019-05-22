@@ -771,97 +771,97 @@ function delayCalc() {
     delayDown = 0;
     // Full Result
     const resultFull = adapter.config.events;
+    if (resultFull != undefined) {
+        if ((upTimeLiving) === (upTimeSleep)) {
+            
+            // Filter Area Living
+            let resLiving = resultFull.filter(d => d.type == 'living');
+            // Filter enabled
+            let resEnabled = resLiving.filter(d => d.enabled === true);
 
-    if ((upTimeLiving) === (upTimeSleep)) {
-        
-        // Filter Area Living
-        let resLiving = resultFull.filter(d => d.type == 'living');
-        // Filter enabled
-        let resEnabled = resLiving.filter(d => d.enabled === true);
-
-        let result = resEnabled;
-        //adapter.getEnums('functions', (err, res) => {
-            //if (res) {
-                //const _result = res['enum.functions'];
-                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                //if (resultID != undefined) {
-                    for ( const i in result) {
-                        //const type = resultID.common.members[i].split('.').pop();
-                        //if ((type) == 'LEVEL' || (type) == 'Position') {
-                            delayUp++;
-                        //}
-                    }
-                //}
-                if ((autoLivingStr) === true) {
-                    
-                    // Filter Area Living
-                    let resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
-                    // Filter enabled
-                    let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
-
-                    let result2 = resEnabled2;
-
-                    //if (resultID2 != undefined) {
-                        for ( const i in result2) {
-                            //const type = resultID2.common.members[i].split('.').pop();
+            let result = resEnabled;
+            //adapter.getEnums('functions', (err, res) => {
+                //if (res) {
+                    //const _result = res['enum.functions'];
+                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                    //if (resultID != undefined) {
+                        for ( const i in result) {
+                            //const type = resultID.common.members[i].split('.').pop();
                             //if ((type) == 'LEVEL' || (type) == 'Position') {
                                 delayUp++;
                             //}
                         }
                     //}
-                }
-            //} else if (err) {
-                //adapter.log.warn('Enum not found!!')
-            //}
-        //});
-    }
-    if ((downTimeLiving) === (downTimeSleep)) {
-        
-        // Filter Area Living
-        let resLiving2 = resultFull.filter(d => d.type == 'living');
-        // Filter enabled
-        let resEnabled3 = resLiving2.filter(d => d.enabled === true);
-
-        let result3 = resEnabled3;
-
-        //adapter.getEnums('functions', (err, res) => {
-            //if (res) {
-                //const _result = res['enum.functions'];
-                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                //if (resultID != undefined) {
-                    for ( const i in result3) {
-                        //const type = resultID.common.members[i].split('.').pop();
-                        //if ((type) == 'LEVEL' || (type) == 'Position') {
-                            delayDown++;
-                        //}
-                    }
-                //}
-                //if (resultID2 != undefined) {
                     if ((autoLivingStr) === true) {
                         
                         // Filter Area Living
-                        let resLivingAuto2 = resultFull.filter(d => d.type == 'living-auto');
+                        let resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
                         // Filter enabled
-                        let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
+                        let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
 
-                        let result4 = resEnabled4;
+                        let result2 = resEnabled2;
 
-                        for ( const i in result4) {
-                            //const type = resultID2.common.members[i].split('.').pop();
+                        //if (resultID2 != undefined) {
+                            for ( const i in result2) {
+                                //const type = resultID2.common.members[i].split('.').pop();
+                                //if ((type) == 'LEVEL' || (type) == 'Position') {
+                                    delayUp++;
+                                //}
+                            }
+                        //}
+                    }
+                //} else if (err) {
+                    //adapter.log.warn('Enum not found!!')
+                //}
+            //});
+        }
+        if ((downTimeLiving) === (downTimeSleep)) {
+            
+            // Filter Area Living
+            let resLiving2 = resultFull.filter(d => d.type == 'living');
+            // Filter enabled
+            let resEnabled3 = resLiving2.filter(d => d.enabled === true);
+
+            let result3 = resEnabled3;
+
+            //adapter.getEnums('functions', (err, res) => {
+                //if (res) {
+                    //const _result = res['enum.functions'];
+                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                    //if (resultID != undefined) {
+                        for ( const i in result3) {
+                            //const type = resultID.common.members[i].split('.').pop();
                             //if ((type) == 'LEVEL' || (type) == 'Position') {
                                 delayDown++;
                             //}
                         }
-                    }
+                    //}
+                    //if (resultID2 != undefined) {
+                        if ((autoLivingStr) === true) {
+                            
+                            // Filter Area Living
+                            let resLivingAuto2 = resultFull.filter(d => d.type == 'living-auto');
+                            // Filter enabled
+                            let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
+
+                            let result4 = resEnabled4;
+
+                            for ( const i in result4) {
+                                //const type = resultID2.common.members[i].split('.').pop();
+                                //if ((type) == 'LEVEL' || (type) == 'Position') {
+                                    delayDown++;
+                                //}
+                            }
+                        }
+                    //}
+                //} else if (err) {
+                    //adapter.log.warn('Enum not found!!')
                 //}
-            //} else if (err) {
-                //adapter.log.warn('Enum not found!!')
-            //}
-        //});
+            //});
+        }
     }
-    
     
 }
 
