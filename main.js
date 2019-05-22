@@ -819,7 +819,7 @@ function delayCalc() {
         if ((downTimeLiving) === (downTimeSleep)) {
             
             // Filter Area Living
-            let resLiving2 = resultFull.filter(d => d.type == 'living');
+            let resLiving2 = adapter.config.events.filter(d => d.type == 'living');
             // Filter enabled
             let resEnabled3 = resLiving2.filter(d => d.enabled === true);
 
