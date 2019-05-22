@@ -766,11 +766,11 @@ function sunProtect() {
         }, 2000);
     }
 }
-function delayCalc() {
+function delayCalc(resultFull) {
     delayUp = 0;
     delayDown = 0;
     // Full Result
-    let resultFull = adapter.config.events;
+    resultFull = adapter.config.events;
     if (JSON.stringify(resultFull) !== "") {
         if ((upTimeLiving) === (upTimeSleep)) {
             
@@ -819,7 +819,7 @@ function delayCalc() {
         if ((downTimeLiving) === (downTimeSleep)) {
             
             // Filter Area Living
-            let resLiving2 = adapter.config.events.filter(d => d.type == 'living');
+            let resLiving2 = resultFull.filter(d => d.type == 'living');
             // Filter enabled
             let resEnabled3 = resLiving2.filter(d => d.enabled === true);
 
