@@ -771,7 +771,7 @@ function delayCalc() {
     delayDown = 0;
     // Full Result
     let resultFull = adapter.config.events;
-    if (resultFull !== '""') {
+    if (JSON.stringify(resultFull) !== "") {
         if ((upTimeLiving) === (upTimeSleep)) {
             
             // Filter Area Living
