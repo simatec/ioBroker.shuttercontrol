@@ -766,12 +766,12 @@ function sunProtect() {
         }, 2000);
     }
 }
-function delayCalc(resultFull) {
+function delayCalc() {
     delayUp = 0;
     delayDown = 0;
     // Full Result
-    resultFull = adapter.config.events;
-    if (JSON.stringify(resultFull) !== "") {
+    let resultFull = adapter.config.events;
+    if (resultFull) {
         if ((upTimeLiving) === (upTimeSleep)) {
             
             // Filter Area Living
