@@ -338,56 +338,70 @@ function shutterUpLiving() {
     schedule.cancelJob('shutterUpLiving');
     
     const upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
-        adapter.getEnums('functions', (err, res) => {
-            if (res) {
-                const _result = res['enum.functions'];
-                const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+        // Full Result
+        const resultFull = adapter.config.events;
+        // Filter Area Living
+        const resLiving = resultFull.filter(d => d.type == 'living');
+        // Filter enabled
+        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+        let result = resEnabled;
+        
+
+        //adapter.getEnums('functions', (err, res) => {
+            //if (res) {
+                //const _result = res['enum.functions'];
+                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
                 let number = 0;
 
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL' || (type) == 'Position') {
-                        number = number + 1;
-                    }
+                for ( const i in result) {
+                        number++;
                 }
 
                 timeoutLivingAuto = number * driveDelayUpLiving;
 
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL' || (type) == 'Position') {
+                for ( const i in result) {
+                    //const type = resultID.common.members[i].split('.').pop();
+                    //if ((type) == 'LEVEL' || (type) == 'Position') {
                         setTimeout(function() {
-                            adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                                    adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnum)
-                                    adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
                                 }
                             });
                         }, driveDelayUpLiving * i, i);
-                    }
+                    //}
                 }
                 if ((autoLivingStr) === true) {
                     setTimeout(function() {
-                        for ( const i in resultID2.common.members) {
-                            const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL' || (type) == 'Position') {
+                        // Filter Area Living Auto
+                        const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                        // Filter enabled
+                        resEnabled = resLivingAuto.filter(d => d.enabled === true);
+
+                        result = resEnabled;
+
+                        for ( const i in result) {
+                            //const type = resultID2.common.members[i].split('.').pop();
+                            //if ((type) == 'LEVEL' || (type) == 'Position') {
                                 setTimeout(function() {
-                                    adapter.getForeignState(resultID2.common.members[i], (err, state) => {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                                            adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                            adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
                                         }
                                     });
                                 }, driveDelayUpLiving * i, i);
-                            }
+                            //}
                         }
                     }, timeoutLivingAuto)
                 }
-            } else if (err) {
-                adapter.log.warn('Enum not found!!')
-            }
-        });
+            //} else if (err) {
+               // adapter.log.warn('Enum not found!!')
+            //}
+        //});
     });
 }
 
@@ -404,56 +418,72 @@ function shutterDownLiving() {
     schedule.cancelJob('shutterDownLiving');
     
     const downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
-        adapter.getEnums('functions', (err, res) => {
-            if (res) {
-                const _result = res['enum.functions'];
-                const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+        // Full Result
+        const resultFull = adapter.config.events;
+        // Filter Area Living
+        const resLiving = resultFull.filter(d => d.type == 'living');
+        // Filter enabled
+        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+        let result = resEnabled;
+
+        //adapter.getEnums('functions', (err, res) => {
+            //if (res) {
+                //const _result = res['enum.functions'];
+                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
                 let number = 0;
 
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL' || (type) == 'Position') {
-                        number = number + 1;
-                    }
+                for ( const i in result) {
+                    //const type = resultID.common.members[i].split('.').pop();
+                    //if ((type) == 'LEVEL' || (type) == 'Position') {
+                        number++;
+                    //}
                 }
 
                 timeoutLivingAuto = number * driveDelayUpLiving;
 
-                for ( const i in resultID.common.members) {
-                    const type = resultID.common.members[i].split('.').pop();
-                    if ((type) == 'LEVEL' || (type) == 'Position') {
+                for ( const i in result) {
+                    //const type = resultID.common.members[i].split('.').pop();
+                    //if ((type) == 'LEVEL' || (type) == 'Position') {
                         setTimeout(function() {
-                            adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                            adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                                    adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnum)
-                                    adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownLiving, true);
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, true);
                                 }
                             });
                         }, driveDelayUpLiving * i, i);
-                    }
+                    //}
                 }
                 if ((autoLivingStr) === true) {
                     setTimeout(function() {
-                        for ( const i in resultID2.common.members) {
-                            const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL' || (type) == 'Position') {
+                        // Filter Area Living Auto
+                        const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                        // Filter enabled
+                        resEnabled = resLivingAuto.filter(d => d.enabled === true);
+
+                        result = resEnabled;
+
+                        for ( const i in result) {
+                            //const type = resultID2.common.members[i].split('.').pop();
+                            //if ((type) == 'LEVEL' || (type) == 'Position') {
                                 setTimeout(function() {
-                                    adapter.getForeignState(resultID2.common.members[i], (err, state) => {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                                            adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownLiving + ' from Enum ' + adapter.config.livingEnumAuto)
-                                            adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownLiving, true);
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, true);
                                         }
                                     });
                                 }, driveDelayUpLiving * i, i);
-                            }
+                            //}
                         }
                     }, timeoutLivingAuto)
                 }
-            } else if (err) {
-                adapter.log.warn('Enum not found!!')
-            }
-        });
+            //} else if (err) {
+                //adapter.log.warn('Enum not found!!')
+            //}
+        //});
     });
 }
 
@@ -474,57 +504,75 @@ function shutterUpSleep() {
 
         delayUp = delayUp * driveDelayUpLiving;
         setTimeout(function() {
-            adapter.getEnums('functions', (err, res) => {
-                if (res) {
-                    const _result = res['enum.functions'];
-                    const resultID = _result['enum.functions.' + adapter.config.sleepEnum];
-                    let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
+            // Full Result
+            const resultFull = adapter.config.events;
+            // Filter Area sleep
+            const resSleep = resultFull.filter(d => d.type == 'sleep');
+            // Filter enabled
+            let resEnabled = resSleep.filter(d => d.enabled === true);
+
+            let result = resEnabled;
+
+            //adapter.getEnums('functions', (err, res) => {
+                //if (res) {
+                    //const _result = res['enum.functions'];
+                    //const resultID = _result['enum.functions.' + adapter.config.sleepEnum];
+                    //let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
                     let number = 0;
 
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
-                            number = number + 1;
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
+                            number++;
                         }
-                    }
+                    //}
 
                     timeoutSleepAuto = number * driveDelayUpSleep;
 
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
                             setTimeout(function() {
-                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnum)
-                                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpSleep, true);
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, true);
                                     }
                                 });
                             }, driveDelayUpSleep * i, i);
-                        }
+                        //}
                     }
 
                     if ((autoSleepStr) === true) {
                         setTimeout(function() {
-                            for ( const i in resultID2.common.members) {
-                                const type = resultID2.common.members[i].split('.').pop();
-                                if ((type) == 'LEVEL' || (type) == 'Position') {
+                            // Full Result
+                            const resultFull = adapter.config.events;
+                            // Filter Area sleep
+                            const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                            // Filter enabled
+                            let resEnabled = resSleep.filter(d => d.enabled === true);
+
+                            let result = resEnabled;
+
+                            for ( const i in result) {
+                                //const type = resultID2.common.members[i].split('.').pop();
+                                //if ((type) == 'LEVEL' || (type) == 'Position') {
                                     setTimeout(function() {
-                                        adapter.getForeignState(resultID2.common.members[i], (err, state) => {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightUpSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightUpSleep, true);
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, true);
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                }
+                                //}
                             }
                         }, timeoutSleepAuto)
                     }
-                } else if (err) {
-                    adapter.log.warn('Enum not found!!')
-                }
-            });
+                //} else if (err) {
+                    //adapter.log.warn('Enum not found!!')
+                //}
+            //});
         }, delayUp)
     });
 }
@@ -545,58 +593,76 @@ function shutterDownSleep() {
     const downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
         delayDown = delayDown * driveDelayUpLiving;
         setTimeout(function() {
-            adapter.getEnums('functions', (err, res) => {
-                if (res) {
-                    const _result = res['enum.functions'];
-                    let resultID = _result['enum.functions.' + adapter.config.sleepEnum];
-                    let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
+            // Full Result
+            const resultFull = adapter.config.events;
+            // Filter Area sleep
+            const resSleep = resultFull.filter(d => d.type == 'sleep');
+            // Filter enabled
+            let resEnabled = resSleep.filter(d => d.enabled === true);
+
+            let result = resEnabled;
+
+            //adapter.getEnums('functions', (err, res) => {
+                //if (res) {
+                    //const _result = res['enum.functions'];
+                    //let resultID = _result['enum.functions.' + adapter.config.sleepEnum];
+                    //let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
                     let number = 0;
 
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
-                            number = number + 1;
-                        }
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
+                            number++;
+                        //}
                     }
 
                     timeoutSleepAuto = number * driveDelayUpSleep;
 
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
                             setTimeout(function() {
-                                adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightDownSleep)  {
-                                        adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnum)
-                                        adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightDownSleep, true);
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, true);
                                     }
                                 });
                             }, driveDelayUpSleep * i, i);
-                        }
+                        //}
                         
                     }
 
                     if ((autoSleepStr) === true) {
                         setTimeout(function() {
-                            for ( const i in resultID2.common.members) {
-                                const type = resultID2.common.members[i].split('.').pop();
-                                if ((type) == 'LEVEL' || (type) == 'Position') {
+                            // Full Result
+                            const resultFull = adapter.config.events;
+                            // Filter Area sleep
+                            const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                            // Filter enabled
+                            let resEnabled = resSleep.filter(d => d.enabled === true);
+
+                            let result = resEnabled;
+
+                            for ( const i in result) {
+                                //const type = resultID2.common.members[i].split('.').pop();
+                                //if ((type) == 'LEVEL' || (type) == 'Position') {
                                     setTimeout(function() {
-                                        adapter.getForeignState(resultID2.common.members[i], (err, state) => {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightDownSleep)  {
-                                                adapter.log.debug('Set ID: ' + resultID2.common.members[i] + ' value: ' + adapter.config.driveHeightDownSleep + ' from Enum ' + adapter.config.sleepEnumAuto)
-                                                adapter.setForeignState(resultID2.common.members[i], adapter.config.driveHeightDownSleep, true);
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, true);
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                }
+                                //}
                             }
                         }, timeoutSleepAuto)
                     }
-                } else if (err) {
-                    adapter.log.warn('Enum not found!!')
-                }
-            });
+                //} else if (err) {
+                    //adapter.log.warn('Enum not found!!')
+                //}
+            //});
         }, delayDown)
     });
 }
@@ -618,34 +684,43 @@ function sunProtect() {
                 adapter.log.debug('current time: ' + currentTime);
                 adapter.log.debug('current month: ' + monthIndex);
 
-                adapter.getEnums('functions', (err, res) => {
-                    if (res) {
-                        let _result = res['enum.functions'];
-                        let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+                // Full Result
+                const resultFull = adapter.config.events;
+                // Filter Sun Protect
+                const resSunProtect = resultFull.filter(d => d.sunProt === true);
+                // Filter enabled
+                let resEnabled = resSunProtect.filter(d => d.enabled === true);
 
-                        for ( const i in resultID.common.members) {
+                let result = resEnabled;
+
+                //adapter.getEnums('functions', (err, res) => {
+                    //if (res) {
+                        //let _result = res['enum.functions'];
+                        //let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+
+                        for ( const i in result) {
                             setTimeout(function() {
                                 if ((adapter.config.setpointValue) < actualValueStr) {
-                                    adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
                                         if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
-                                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightSun + ' from Enum ' + adapter.config.sunProtecEnum)
-                                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightSun, true);
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, true);
                                         }
                                     });
                                 } else if ((adapter.config.setpointValue) > actualValueStr) {
-                                    adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
                                         if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
-                                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum)
-                                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
                                         }
                                     });
                                 }
                             }, driveDelayUpSleep * i, i);
                         }
-                    } else if (err) {
-                        adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
-                    }
-                });
+                    //} else if (err) {
+                        //adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
+                    //}
+                //});
             }
 
             let upSunProtect = adapter.config.sun_shutterUp;
@@ -659,25 +734,33 @@ function sunProtect() {
 
             const upSunStr = schedule.scheduleJob('upSunProtect', upTimeSun[1] + ' ' + upTimeSun[0] + ' * * *', function() {
                 if (adapter.config.sunMonthStart <= (monthIndex) && adapter.config.sunMonthEnd >= (monthIndex)) {
-                    adapter.getEnums('functions', (err, res) => {
-                        if (res) {
-                            let _result = res['enum.functions'];
-                            let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+                    // Full Result
+                    const resultFull = adapter.config.events;
+                    // Filter Sun Protect
+                    const resSunProtect = resultFull.filter(d => d.sunProt === true);
+                    // Filter enabled
+                    let resEnabled = resSunProtect.filter(d => d.enabled === true);
 
-                            for ( const i in resultID.common.members) {
+                    let result = resEnabled;
+                    //adapter.getEnums('functions', (err, res) => {
+                        //if (res) {
+                            //let _result = res['enum.functions'];
+                            //let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
+
+                            for ( const i in result) {
                                 setTimeout(function() {
-                                    adapter.getForeignState(resultID.common.members[i], (err, state) => {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
                                         if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
-                                            adapter.log.debug('Set ID: ' + resultID.common.members[i] + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
-                                            adapter.setForeignState(resultID.common.members[i], adapter.config.driveHeightUpLiving, true);
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
                                         }
                                     });
                                 }, driveDelayUpSleep * i, i);
                             }
-                        } else if (err) {
-                            adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
-                        }
-                    });
+                        //} else if (err) {
+                            //adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
+                        //}
+                    //});
                 }
             });
         }, 2000);
@@ -687,63 +770,97 @@ function delayCalc() {
     delayUp = 0;
     delayDown = 0;
     if ((upTimeLiving) === (upTimeSleep)) {
-        adapter.getEnums('functions', (err, res) => {
-            if (res) {
-                const _result = res['enum.functions'];
-                const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                if (resultID != undefined) {
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
-                            delayUp = delayUp + 1;
-                        }
+        // Full Result
+        const resultFull = adapter.config.events;
+        // Filter Area Living
+        const resLiving = resultFull.filter(d => d.type == 'living');
+        // Filter enabled
+        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+        let result = resEnabled;
+        //adapter.getEnums('functions', (err, res) => {
+            //if (res) {
+                //const _result = res['enum.functions'];
+                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                //if (resultID != undefined) {
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
+                            delayUp++;
+                        //}
                     }
-                }
+                //}
                 if ((autoLivingStr) === true) {
-                    if (resultID2 != undefined) {
-                        for ( const i in resultID2.common.members) {
-                            const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL' || (type) == 'Position') {
-                                delayUp = delayUp + 1;
-                            }
+                    // Full Result
+                    const resultFull = adapter.config.events;
+                    // Filter Area Living
+                    const resLiving = resultFull.filter(d => d.type == 'living-auto');
+                    // Filter enabled
+                    let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                    let result = resEnabled;
+
+                    //if (resultID2 != undefined) {
+                        for ( const i in result) {
+                            //const type = resultID2.common.members[i].split('.').pop();
+                            //if ((type) == 'LEVEL' || (type) == 'Position') {
+                                delayUp++;
+                            //}
                         }
-                    }
+                    //}
                 }
-            } else if (err) {
-                adapter.log.warn('Enum not found!!')
-            }
-        });
+            //} else if (err) {
+                //adapter.log.warn('Enum not found!!')
+            //}
+        //});
     }
     if ((downTimeLiving) === (downTimeSleep)) {
-        
-        adapter.getEnums('functions', (err, res) => {
-            if (res) {
-                const _result = res['enum.functions'];
-                const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                if (resultID != undefined) {
-                    for ( const i in resultID.common.members) {
-                        const type = resultID.common.members[i].split('.').pop();
-                        if ((type) == 'LEVEL' || (type) == 'Position') {
-                            delayDown = delayDown + 1;
-                        }
+        // Full Result
+        const resultFull = adapter.config.events;
+        // Filter Area Living
+        const resLiving = resultFull.filter(d => d.type == 'living');
+        // Filter enabled
+        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+        let result = resEnabled;
+
+        //adapter.getEnums('functions', (err, res) => {
+            //if (res) {
+                //const _result = res['enum.functions'];
+                //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
+                //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
+                //if (resultID != undefined) {
+                    for ( const i in result) {
+                        //const type = resultID.common.members[i].split('.').pop();
+                        //if ((type) == 'LEVEL' || (type) == 'Position') {
+                            delayDown++;
+                        //}
                     }
-                }
-                if (resultID2 != undefined) {
+                //}
+                //if (resultID2 != undefined) {
                     if ((autoLivingStr) === true) {
-                        for ( const i in resultID2.common.members) {
-                            const type = resultID2.common.members[i].split('.').pop();
-                            if ((type) == 'LEVEL' || (type) == 'Position') {
-                                delayDown = delayDown + 1;
-                            }
+                        // Full Result
+                        const resultFull = adapter.config.events;
+                        // Filter Area Living
+                        const resLiving = resultFull.filter(d => d.type == 'living-auto');
+                        // Filter enabled
+                        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                        let result = resEnabled;
+
+                        for ( const i in result) {
+                            //const type = resultID2.common.members[i].split('.').pop();
+                            //if ((type) == 'LEVEL' || (type) == 'Position') {
+                                delayDown++;
+                            //}
                         }
                     }
-                }
-            } else if (err) {
-                adapter.log.warn('Enum not found!!')
-            }
-        });
+                //}
+            //} else if (err) {
+                //adapter.log.warn('Enum not found!!')
+            //}
+        //});
     }
     
     
