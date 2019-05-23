@@ -98,6 +98,7 @@
         "driveDelayUpLiving": 10,
         "driveHeightUpLiving": 100,
         "driveHeightDownLiving": 0,
+        "triggerAutoLiving": "hm-rpc.0.MEQ1234567.2.STATE",
         
 
         "W_shutterUpSleepMax": "06:30",
@@ -108,11 +109,14 @@
         "driveDelayUpSleep": 10,
         "driveHeightUpSleep": 100,
         "driveHeightDownSleep": 0,
+        "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
 
         "astroDelayUp": 30,
         "longitude": "13.404954",
         "latitude": "52.520007",
         "astroDelayDown": 30,
+        "setpointValueLight": 10,
+        "actualValueLight": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
 
         "sleepEnum": "",
         "livingEnum": "",
