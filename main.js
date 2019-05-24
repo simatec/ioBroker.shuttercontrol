@@ -370,7 +370,7 @@ function shutterUpLiving() {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightUpLiving)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                     }
                                 });
                             }, driveDelayUpLiving * i, i);
@@ -394,7 +394,7 @@ function shutterUpLiving() {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightUpLiving)  {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                             }
                                         });
                                     }, driveDelayUpLiving * i, i);
@@ -457,7 +457,7 @@ function shutterDownLiving() {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != adapter.config.driveHeightDownLiving)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, true);
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
                                     }
                                 });
                             }, driveDelayUpLiving * i, i);
@@ -481,7 +481,7 @@ function shutterDownLiving() {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if ((state['val']) != adapter.config.driveHeightDownLiving)  {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, true);
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
                                             }
                                         });
                                     }, driveDelayUpLiving * i, i);
@@ -548,7 +548,7 @@ function shutterUpSleep() {
                                     adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightUpSleep)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, true);
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
                                         }
                                     });
                                 }, driveDelayUpSleep * i, i);
@@ -575,7 +575,7 @@ function shutterUpSleep() {
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if ((state['val']) != adapter.config.driveHeightUpSleep)  {
                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, true);
+                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
                                                 }
                                             });
                                         }, driveDelayUpSleep * i, i);
@@ -642,7 +642,7 @@ function shutterDownSleep() {
                                     adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightDownSleep)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
-                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, true);
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
                                         }
                                     });
                                 }, driveDelayUpSleep * i, i);
@@ -671,7 +671,7 @@ function shutterDownSleep() {
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if ((state['val']) != adapter.config.driveHeightDownSleep)  {
                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
-                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, true);
+                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
                                                 }
                                             });
                                         }, driveDelayUpSleep * i, i);
@@ -727,14 +727,14 @@ function sunProtect() {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, true);
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, false);
                                             }
                                         });
                                     } else if ((adapter.config.setpointValue) > actualValueStr) {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                             }
                                         });
                                     }
@@ -778,7 +778,7 @@ function sunProtect() {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, true);
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
