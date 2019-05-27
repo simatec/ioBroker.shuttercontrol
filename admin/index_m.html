@@ -108,22 +108,29 @@
             events = settings.events    || [];
             
             showHideSettings();
-            
-            onChange(false);
 
             values2table('events', events, onChange);
             $('#responseOIDDialog').on('click', function () {
-            //$('#events .values-buttons[data-command="edit"]').on('click', function () {
                 devices = table2values('events');
                 var id = 0;
                 for (var i = 0; i < devices.length; i++) {
-                id = id + 1;
+                id = id +1;
                 }
                 //var id = $(this).data('index');
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
                             $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
+            $('#events .values-buttons[data-command="edit"]').on('click', function () {
+                var id = $(this).data('index');
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
+                        if (newId) {
+                            $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
                         }
                     });
                 });
@@ -167,8 +174,9 @@
                     });
                 });
             });
-
+            onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
+            
             if (M) M.updateTextFields();
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
@@ -341,10 +349,10 @@
                                     <tr>
                                         <th data-name="_index" style="width: 30px"></th>
                                         <th data-name="enabled"  style="width: 70px; text-align: center" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
-                                        <th data-name="name" data-type="text" style="width: 30%" class="translate">name</th>
-                                        <!--<th data-buttons="edit" style="width: 70px" ></th>-->
+                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">name</th>
                                         <th data-name="type" style="width: 30%" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
-                                        
+                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
+                                        <th data-buttons="edit" style="width: 70px" ></th>
                                         <th data-name="sunProt"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">sunProtec</th>
                                         <th data-name="astro"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">astroUse</th>
                                         <th data-name="nextStep"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">nextStep</th>
