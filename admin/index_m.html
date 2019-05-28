@@ -81,7 +81,7 @@
 
     <script type="text/javascript">
 
-    var events = [];
+    
 
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
@@ -104,19 +104,21 @@
                         ;
                 }
             });
+
+            var events = [];
             
             events = settings.events    || [];
             
             showHideSettings();
-
-            values2table('events', events, onChange);
+            
+            values2table('events', events, onChange, tableOnReady);
+            
             $('#responseOIDDialog').on('click', function () {
-                devices = table2values('events');
+                var devices = table2values('events');
                 var id = 0;
                 for (var i = 0; i < devices.length; i++) {
                 id = id +1;
                 }
-                //var id = $(this).data('index');
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
@@ -125,16 +127,7 @@
                     });
                 });
             });
-            $('#events .values-buttons[data-command="edit"]').on('click', function () {
-                var id = $(this).data('index');
-                initSelectId(function (sid) {
-                    sid.selectId('show', $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
-                        if (newId) {
-                            $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
-                        }
-                    });
-                });
-            });
+            
             $('#actualValueTempDialog').on('click', function () {
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#actualValueTemp').val(), function (newId) {
@@ -178,6 +171,7 @@
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             
             if (M) M.updateTextFields();
+            
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
@@ -195,6 +189,18 @@
                 $sel.append('<option value="' + _id + '"' + (_id === val ? ' selected' : '') + '>' + _id + '</option>');
             }
             $sel.select();
+        }
+        function tableOnReady() {
+            $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
+                let id = $(this).data('index');
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
+                        if (newId) {
+                            $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
         }
         function getEnums(id, val) {  
             const socket = io.connect();  
@@ -347,10 +353,10 @@
                                 <table class="table-values">
                                     <thead>
                                     <tr>
-                                        <th data-name="_index" style="width: 30px"></th>
-                                        <th data-name="enabled"  style="width: 70px; text-align: center" data-style="width: 70px" data-type="checkbox" class="translate">enabled</th>
+                                        <!--<th data-name="_index" style="width: 30px"></th>-->
+                                        <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">enabled</th>
                                         <th data-name="name" data-type="text" style="width: 20%" class="translate">name</th>
-                                        <th data-name="type" style="width: 30%" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
+                                        <th data-name="type" style="width: 20%" class="translate" data-options="living;living-auto;sleep;sleep-auto;astro" data-type="select">type</th>
                                         <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
                                         <th data-buttons="edit" style="width: 70px" ></th>
                                         <th data-name="sunProt"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">sunProtec</th>
@@ -367,18 +373,6 @@
                 <!-- living settings -->
                 <div id="tab-living" class="col s12 page">
                     <div class="row"></div>
-                    <!--
-                    <div class="row">
-                        <div class="input-field col s12 m6 l4">
-                            <select id="livingEnum" class="value"></select>
-                            <label for="livingEnum" class="translate">Enum Living</label>
-                        </div>
-                        <div class="input-field col s12 m6 l4">
-                            <select id="livingEnumAuto" class="value"></select>
-                            <label for="livingEnumAuto" class="translate">Enum Living Auto / Manu</label>
-                        </div>
-                    </div>
-                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterDownLiving" />
@@ -432,18 +426,6 @@
                 <!-- sleep settings -->
                 <div id="tab-sleep" class="col s12 page">
                     <div class="row"></div>
-                    <!--
-                    <div class="row">
-                        <div class="input-field col s12 m6 l4">
-                            <select id="sleepEnum" class="value"></select>
-                            <label for="sleepEnum" class="translate">Enum Sleep</label>
-                        </div>
-                        <div class="input-field col s12 m6 l4">
-                            <select id="sleepEnumAuto" class="value"></select>
-                            <label for="sleepEnumAuto" class="translate">Enum Sleep Auto / Manu</label>
-                        </div>
-                    </div>
-                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="WE_shutterUpSleep" />
@@ -523,14 +505,6 @@
                 <div id="tab-sun" class="col s12 page">
                     <div class="row">
                     </div>
-                    <!--
-                    <div class="row">
-                        <div class="input-field col s12 m6 l4">
-                            <select id="sunProtecEnum" class="value"></select>
-                            <label for="sunProtecEnum" class="translate">Enum Sun Protect</label>
-                        </div>
-                    </div>
-                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="sunMonthStart" min="1" max="12" />

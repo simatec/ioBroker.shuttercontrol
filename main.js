@@ -348,65 +348,48 @@ function shutterUpLiving() {
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
-            
+            let number = 0;
 
-            //adapter.getEnums('functions', (err, res) => {
-                //if (res) {
-                    //const _result = res['enum.functions'];
-                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                    let number = 0;
-
-                    for ( const i in result) {
-                            number++;
-                    }
-
-                    timeoutLivingAuto = number * driveDelayUpLiving;
-
-                    for ( const i in result) {
-                        //const type = resultID.common.members[i].split('.').pop();
-                        //if ((type) == 'LEVEL' || (type) == 'Position') {
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].name, (err, state) => {
-                                    if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
-                                    }
-                                });
-                            }, driveDelayUpLiving * i, i);
-                        //}
-                    }
+            for ( const i in result) {
+                    number++;
             }
-                if ((autoLivingStr) === true) {
-                    setTimeout(function() {
-                        // Filter Area Living Auto
-                        if (resultFull) {
-                            const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
-                            // Filter enabled
-                            resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
-                            result = resEnabled;
+            timeoutLivingAuto = number * driveDelayUpLiving;
 
-                            for ( const i in result) {
-                                //const type = resultID2.common.members[i].split('.').pop();
-                                //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                    setTimeout(function() {
-                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                            if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
-                                            }
-                                        });
-                                    }, driveDelayUpLiving * i, i);
-                                //}
-                            }
+            for ( const i in result) {
+                setTimeout(function() {
+                    adapter.getForeignState(result[i].name, (err, state) => {
+                        if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                         }
-                    }, timeoutLivingAuto)
+                    });
+                }, driveDelayUpLiving * i, i);
+            }
+        }
+        if ((autoLivingStr) === true) {
+            setTimeout(function() {
+                // Filter Area Living Auto
+                if (resultFull) {
+                    const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                    // Filter enabled
+                    resEnabled = resLivingAuto.filter(d => d.enabled === true);
+
+                    result = resEnabled;
+
+                    for ( const i in result) {
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                }
+                            });
+                        }, driveDelayUpLiving * i, i);
+                    }
                 }
-            //} else if (err) {
-               // adapter.log.warn('Enum not found!!')
-            //}
-        //});
+            }, timeoutLivingAuto)
+        }
     });
 }
 
@@ -433,67 +416,48 @@ function shutterDownLiving() {
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
+            let number = 0;
 
-            //adapter.getEnums('functions', (err, res) => {
-                //if (res) {
-                    //const _result = res['enum.functions'];
-                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                    let number = 0;
-
-                    for ( const i in result) {
-                        //const type = resultID.common.members[i].split('.').pop();
-                        //if ((type) == 'LEVEL' || (type) == 'Position') {
-                            number++;
-                        //}
-                    }
-
-                    timeoutLivingAuto = number * driveDelayUpLiving;
-
-                    for ( const i in result) {
-                        //const type = resultID.common.members[i].split('.').pop();
-                        //if ((type) == 'LEVEL' || (type) == 'Position') {
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].name, (err, state) => {
-                                    if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
-                                    }
-                                });
-                            }, driveDelayUpLiving * i, i);
-                        //}
-                    }
+            for ( const i in result) {
+                number++;
             }
-                if ((autoLivingStr) === true) {
-                    setTimeout(function() {
-                        if (resultFull) {
-                            // Filter Area Living Auto
-                            const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
-                            // Filter enabled
-                            resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
-                            result = resEnabled;
+            timeoutLivingAuto = number * driveDelayUpLiving;
 
-                            for ( const i in result) {
-                                //const type = resultID2.common.members[i].split('.').pop();
-                                //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                    setTimeout(function() {
-                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                            if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
-                                            }
-                                        });
-                                    }, driveDelayUpLiving * i, i);
-                                //}
-                            }
+            for ( const i in result) {
+                setTimeout(function() {
+                    adapter.getForeignState(result[i].name, (err, state) => {
+                        if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
                         }
-                    }, timeoutLivingAuto)
+                    });
+                }, driveDelayUpLiving * i, i);
+            }
+        }
+        if ((autoLivingStr) === true) {
+            setTimeout(function() {
+                if (resultFull) {
+                    // Filter Area Living Auto
+                    const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                    // Filter enabled
+                    resEnabled = resLivingAuto.filter(d => d.enabled === true);
+
+                    result = resEnabled;
+
+                    for ( const i in result) {
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                                }
+                            });
+                        }, driveDelayUpLiving * i, i);
+                    }
                 }
-            //} else if (err) {
-                //adapter.log.warn('Enum not found!!')
-            //}
-        //});
+            }, timeoutLivingAuto)
+        }
     });
 }
 
@@ -524,70 +488,50 @@ function shutterUpSleep() {
                 let resEnabled = resSleep.filter(d => d.enabled === true);
 
                 let result = resEnabled;
+                let number = 0;
 
-                //adapter.getEnums('functions', (err, res) => {
-                    //if (res) {
-                        //const _result = res['enum.functions'];
-                        //const resultID = _result['enum.functions.' + adapter.config.sleepEnum];
-                        //let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
-                        let number = 0;
+                for ( const i in result) {
+                        number++;
+                }
 
-                        for ( const i in result) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                number++;
+                timeoutSleepAuto = number * driveDelayUpSleep;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].name, (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
                             }
-                        //}
+                        });
+                    }, driveDelayUpSleep * i, i);
+                }
+            }
+            if ((autoSleepStr) === true) {
+                setTimeout(function() {
+                    // Full Result
+                    const resultFull = adapter.config.events;
+                    // Filter Area sleep
+                    if (resultFull) {
+                        const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                        // Filter enabled
+                        let resEnabled = resSleep.filter(d => d.enabled === true);
 
-                        timeoutSleepAuto = number * driveDelayUpSleep;
+                        let result = resEnabled;
 
                         for ( const i in result) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                setTimeout(function() {
-                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                        if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
-                                        }
-                                    });
-                                }, driveDelayUpSleep * i, i);
-                            //}
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
                         }
                     }
-
-                    if ((autoSleepStr) === true) {
-                        setTimeout(function() {
-                            // Full Result
-                            const resultFull = adapter.config.events;
-                            // Filter Area sleep
-                            if (resultFull) {
-                                const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
-                                // Filter enabled
-                                let resEnabled = resSleep.filter(d => d.enabled === true);
-
-                                let result = resEnabled;
-
-                                for ( const i in result) {
-                                    //const type = resultID2.common.members[i].split('.').pop();
-                                    //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                        setTimeout(function() {
-                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
-                                                }
-                                            });
-                                        }, driveDelayUpSleep * i, i);
-                                    //}
-                                }
-                            }
-                        }, timeoutSleepAuto)
-                    }
-                //} else if (err) {
-                    //adapter.log.warn('Enum not found!!')
-                //}
-            //});
+                }, timeoutSleepAuto)
+            }
         }, delayUp)
     });
 }
@@ -618,26 +562,39 @@ function shutterDownSleep() {
                 let resEnabled = resSleep.filter(d => d.enabled === true);
 
                 let result = resEnabled;
+                let number = 0;
 
-                //adapter.getEnums('functions', (err, res) => {
-                    //if (res) {
-                        //const _result = res['enum.functions'];
-                        //let resultID = _result['enum.functions.' + adapter.config.sleepEnum];
-                        //let resultID2 = _result['enum.functions.' + adapter.config.sleepEnumAuto];
-                        let number = 0;
+                for ( const i in result) {
+                    number++;
+                }
+
+                timeoutSleepAuto = number * driveDelayUpSleep;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].name, (err, state) => {
+                            if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                            }
+                        });
+                    }, driveDelayUpSleep * i, i);
+                }
+            }
+            if ((autoSleepStr) === true) {
+                setTimeout(function() {
+                    // Full Result
+                    const resultFull = adapter.config.events;
+
+                    if (resultFull) {
+                        // Filter Area sleep
+                        const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                        // Filter enabled
+                        let resEnabled = resSleep.filter(d => d.enabled === true);
+
+                        let result = resEnabled;
 
                         for ( const i in result) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                number++;
-                            //}
-                        }
-
-                        timeoutSleepAuto = number * driveDelayUpSleep;
-
-                        for ( const i in result) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != adapter.config.driveHeightDownSleep)  {
@@ -647,43 +604,10 @@ function shutterDownSleep() {
                                     });
                                 }, driveDelayUpSleep * i, i);
                             //}
-                            
                         }
-                }
-
-                    if ((autoSleepStr) === true) {
-                        setTimeout(function() {
-                            // Full Result
-                            const resultFull = adapter.config.events;
-
-                            if (resultFull) {
-                                // Filter Area sleep
-                                const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
-                                // Filter enabled
-                                let resEnabled = resSleep.filter(d => d.enabled === true);
-
-                                let result = resEnabled;
-
-                                for ( const i in result) {
-                                    //const type = resultID2.common.members[i].split('.').pop();
-                                    //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                        setTimeout(function() {
-                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                if ((state['val']) != adapter.config.driveHeightDownSleep)  {
-                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
-                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
-                                                }
-                                            });
-                                        }, driveDelayUpSleep * i, i);
-                                    //}
-                                }
-                            }
-                        }, timeoutSleepAuto)
                     }
-                //} else if (err) {
-                    //adapter.log.warn('Enum not found!!')
-                //}
-            //});
+                }, timeoutSleepAuto)
+            }
         }, delayDown)
     });
 }
@@ -716,35 +640,26 @@ function sunProtect() {
 
                     let result = resEnabled;
 
-                    //adapter.getEnums('functions', (err, res) => {
-                        //if (res) {
-                            //let _result = res['enum.functions'];
-                            //let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
-
-                            for ( const i in result) {
-                                setTimeout(function() {
-                                    if ((adapter.config.setpointValue) < actualValueStr) {
-                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, false);
-                                            }
-                                        });
-                                    } else if ((adapter.config.setpointValue) > actualValueStr) {
-                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
-                                            }
-                                        });
+                    for ( const i in result) {
+                        setTimeout(function() {
+                            if ((adapter.config.setpointValue) < actualValueStr) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, false);
                                     }
-                                }, driveDelayUpSleep * i, i);
+                                });
+                            } else if ((adapter.config.setpointValue) > actualValueStr) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                    }
+                                });
                             }
+                        }, driveDelayUpSleep * i, i);
                     }
-                    //} else if (err) {
-                        //adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
-                    //}
-                //});
+                }
             }
 
             let upSunProtect = adapter.config.sun_shutterUp;
@@ -768,26 +683,18 @@ function sunProtect() {
                         let resEnabled = resSunProtect.filter(d => d.enabled === true);
 
                         let result = resEnabled;
-                        //adapter.getEnums('functions', (err, res) => {
-                            //if (res) {
-                                //let _result = res['enum.functions'];
-                                //let resultID = _result['enum.functions.' + adapter.config.sunProtecEnum];
 
-                                for ( const i in result) {
-                                    setTimeout(function() {
-                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
-                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
-                                            }
-                                        });
-                                    }, driveDelayUpSleep * i, i);
-                                }
+                        for ( const i in result) {
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
                         }
-                        //} else if (err) {
-                            //adapter.log.warn('Enum: ' + adapter.config.sunProtecEnum + ' not found!!')
-                        //}
-                    //});
+                    }
                 }
             });
         }, 2000);
@@ -807,41 +714,23 @@ function delayCalc() {
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
-            //adapter.getEnums('functions', (err, res) => {
-                //if (res) {
-                    //const _result = res['enum.functions'];
-                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                    //if (resultID != undefined) {
-                        for ( const i in result) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                delayUp++;
-                            //}
-                        }
-                    //}
-                    if ((autoLivingStr) === true) {
-                        
-                        // Filter Area Living
-                        let resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
-                        // Filter enabled
-                        let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
 
-                        let result2 = resEnabled2;
+            for ( const i in result) {
+                delayUp++;
+            }
+            if ((autoLivingStr) === true) {
+            
+                // Filter Area Living
+                let resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                // Filter enabled
+                let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
 
-                        //if (resultID2 != undefined) {
-                            for ( const i in result2) {
-                                //const type = resultID2.common.members[i].split('.').pop();
-                                //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                    delayUp++;
-                                //}
-                            }
-                        //}
+                let result2 = resEnabled2;
+
+                    for ( const i in result2) {
+                        delayUp++;
                     }
-                //} else if (err) {
-                    //adapter.log.warn('Enum not found!!')
-                //}
-            //});
+            }
         }
         if ((downTimeLiving) === (downTimeSleep)) {
             
@@ -852,48 +741,29 @@ function delayCalc() {
 
             let result3 = resEnabled3;
 
-            //adapter.getEnums('functions', (err, res) => {
-                //if (res) {
-                    //const _result = res['enum.functions'];
-                    //const resultID = _result['enum.functions.' + adapter.config.livingEnum];
-                    //let resultID2 = _result['enum.functions.' + adapter.config.livingEnumAuto];
-                    //if (resultID != undefined) {
-                        for ( const i in result3) {
-                            //const type = resultID.common.members[i].split('.').pop();
-                            //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                delayDown++;
-                            //}
-                        }
-                    //}
-                    //if (resultID2 != undefined) {
-                        if ((autoLivingStr) === true) {
-                            
-                            // Filter Area Living
-                            let resLivingAuto2 = resultFull.filter(d => d.type == 'living-auto');
-                            // Filter enabled
-                            let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
+            for ( const i in result3) {
+                delayDown++;
+            }
+            if ((autoLivingStr) === true) {
+                
+                // Filter Area Living
+                let resLivingAuto2 = resultFull.filter(d => d.type == 'living-auto');
+                // Filter enabled
+                let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
 
-                            let result4 = resEnabled4;
+                let result4 = resEnabled4;
 
-                            for ( const i in result4) {
-                                //const type = resultID2.common.members[i].split('.').pop();
-                                //if ((type) == 'LEVEL' || (type) == 'Position') {
-                                    delayDown++;
-                                //}
-                            }
-                        }
-                    //}
-                //} else if (err) {
-                    //adapter.log.warn('Enum not found!!')
-                //}
-            //});
+                for ( const i in result4) {
+                    delayDown++;
+                }
+            }
         }
     }
     
 }
 
 function main() {
-    adapter.log.warn(JSON.stringify(adapter.config.events))
+    adapter.log.debug(JSON.stringify(adapter.config.events))
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });
