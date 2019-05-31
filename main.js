@@ -13,6 +13,8 @@ const adapterName = require('./package.json').name.split('.').pop();
 
 let sunsetStr;
 let sunriseStr;
+let goldenHour;
+let goldenHourEnd;
 let upTimeSleep;
 let upTimeLiving;
 let downTimeSleep;
@@ -22,10 +24,20 @@ let HolidayStr;
 let publicHolidayStr;
 let publicHolidayTomorowStr;
 let autoLivingStr;
+/** @type {any} */
 let autoSleepStr;
+/** @type {string | number} */
 let actualValueStr;
+/** @type {string | number} */
+let actualValueLightStr;
 let delayUp;
+/** @type {number | undefined} */
 let delayDown;
+let astroTimeLivingUp;
+let astroTimeLivingDown;
+let astroTimeSleepUp;
+/** @type {string} */
+let astroTimeSleepDown;
 
 /**
  * Starts the adapter instance
@@ -52,6 +64,7 @@ function startAdapter(options) {
     });
 
     // is called if a subscribed object changes
+    /*
     adapter.on('objectChange', (id, obj) => {
         if (obj) {
             // The object was changed
@@ -62,6 +75,7 @@ function startAdapter(options) {
             adapter.log.info(`object ${id} deleted`);
         }
     });
+    */
 
     // is called if a subscribed state changes
     adapter.on('stateChange', (id, state) => {
@@ -95,6 +109,10 @@ function startAdapter(options) {
                     actualValueStr = state['val'];
                     sunProtect();
             }
+            if (adapter.config.UseSunMode === true && id === adapter.config.actualValueLight) {
+                actualValueLightStr = state['val'];
+                sunProtect();
+        }
         } else {
             // The state was deleted
             adapter.log.info(`state ${id} deleted`);
@@ -161,10 +179,19 @@ function shutterDriveCalc() {
         // get today's sunlight times 
         let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
 
-        // format sunrise time from the Date object
+        adapter.log.debug('Astro-Times: ' + JSON.stringify(times));
+
+        // format sunset/sunrise time from the Date object
         sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
         sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
         dayStr = times.sunrise.getDay();
+
+        // format goldenhour/goldenhourend time from the Date object
+        goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
+        goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+
+        adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
+        adapter.log.debug('goldenHour today: ' + goldenHour);
 
         adapter.log.debug('current day: ' + dayStr);
         adapter.log.debug('Sunrise today: ' + sunriseStr);
@@ -174,9 +201,34 @@ function shutterDriveCalc() {
 
         addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
         addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
+        addMinutesGoldenHour(goldenHour, adapter.config.astroDelayUp); // Add Delay for GoldenHour
+        addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayDown); // Add Delay for GoldenHourEnd
+
+        adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
+        adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
+        adapter.log.debug('Starting up shutters Sunrise area: ' + sunriseStr);
+        adapter.log.debug('Shutdown shutters Sunset area: ' + sunsetStr);
+
+        shutterGoldenHour();
+        shutterSunriseSunset();
+
+        if (adapter.config.livingAutomatic == 'livingSunriseSunset') {
+            astroTimeLivingUp = sunriseStr;
+            astroTimeLivingDown = sunsetStr;
+        } else if (adapter.config.livingAutomatic == "livingGoldenHour") {
+            astroTimeLivingUp = goldenHourEnd;
+            astroTimeLivingDown = goldenHour;
+        }
+        if (adapter.config.sleepAutomatic == "sleepSunriseSunset") {
+            astroTimeSleepUp = sunriseStr;
+            astroTimeSleepDown = sunsetStr;
+        } else if (adapter.config.livingAutomatic == "sleepGoldenHour") {
+            astroTimeSleepUp = goldenHourEnd;
+            astroTimeSleepDown = goldenHour;
+        }
     }
     // ******** Set Up-Time Living Area ********
-    if (adapter.config.UseAstro === false) {
+    if (adapter.config.livingAutomatic == "livingTime") {
         if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
             upTimeLiving = adapter.config.WE_shutterUpLiving;
             adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
@@ -189,17 +241,17 @@ function shutterDriveCalc() {
             upTimeLiving = adapter.config.WE_shutterUpLiving;
             adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
         } else {
-            if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpLivingMax)) {
+            if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMax)) {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpLivingMin) && (sunriseStr) < (adapter.config.W_shutterUpLivingMax)) {
-                upTimeLiving = sunriseStr;
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMin) && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMax)) {
+                upTimeLiving = astroTimeLivingUp;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
             } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) == (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = sunriseStr;
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
+                    upTimeLiving = astroTimeLivingUp;
                     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
             }
         }
@@ -221,17 +273,17 @@ function shutterDriveCalc() {
             upTimeSleep = adapter.config.WE_shutterUpSleep;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         } else {
-            if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpSleepMax)) {
+            if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
                 upTimeSleep = adapter.config.W_shutterUpSleepMax;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) > (adapter.config.W_shutterUpSleepMin) && (sunriseStr) < (adapter.config.W_shutterUpSleepMax)) {
-                upTimeSleep = sunriseStr;
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
+                upTimeSleep = astroTimeSleepUp;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
             } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
                 upTimeSleep = adapter.config.W_shutterUpSleepMax;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (sunriseStr) == (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = sunriseStr;
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
+                    upTimeSleep = astroTimeSleepUp;
                     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
             }
         }
@@ -249,23 +301,23 @@ function shutterDriveCalc() {
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
         }
     } else {
-        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (sunsetStr)) {
+        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
             downTimeLiving = adapter.config.WE_shutterDownLiving;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (sunsetStr)) {
-            downTimeLiving = sunsetStr;
+        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
+            downTimeLiving = astroTimeLivingDown;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (sunsetStr)) {
-            downTimeLiving = sunsetStr;
+        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
+            downTimeLiving = astroTimeLivingDown;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) > (adapter.config.W_shutterDownLiving)) {
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
             downTimeLiving = adapter.config.W_shutterDownLiving;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) < (adapter.config.W_shutterDownLiving)) {
-            downTimeLiving = sunsetStr;
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
+            downTimeLiving = astroTimeLivingDown;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) == (adapter.config.W_shutterDownLiving)) {
-                downTimeLiving = sunsetStr;
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
+                downTimeLiving = astroTimeLivingDown;
                 adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
         }
     }
@@ -282,23 +334,23 @@ function shutterDriveCalc() {
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
         }
     } else {
-        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (sunsetStr)) {
+        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
             downTimeSleep = adapter.config.WE_shutterDownSleep;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (sunsetStr)) {
-            downTimeSleep = sunsetStr;
+        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+            downTimeSleep = astroTimeSleepDown;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (sunsetStr)) {
-            downTimeSleep = sunsetStr;
+        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
+            downTimeSleep = astroTimeSleepDown;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) > (adapter.config.W_shutterDownSleep)) {
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
             downTimeSleep = adapter.config.W_shutterDownSleep;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) < (adapter.config.W_shutterDownSleep)) {
-            downTimeSleep = sunsetStr;
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
+            downTimeSleep = astroTimeSleepDown;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (sunsetStr) == (adapter.config.W_shutterDownSleep)) {
-                downTimeSleep = sunsetStr;
+        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
+                downTimeSleep = astroTimeSleepDown;
                 adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
         }
     }
@@ -306,6 +358,187 @@ function shutterDriveCalc() {
     shutterDownSleep();
 
     delayCalc();
+}
+function shutterGoldenHour() {
+
+    const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
+    
+    if (goldenHourEnd) {
+
+        let upTime = goldenHourEnd.split(':');
+
+        schedule.cancelJob('shutterUpGoldenHourEnd');
+        
+        const upGoldenHour = schedule.scheduleJob('shutterUpGoldenHourEnd', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+            // Full Result
+            const resultFull = adapter.config.events;
+
+            if (resultFull) {
+                // Filter Area Living
+                const resLiving = resultFull.filter(d => d.typeUp == 'goldenhour');
+                // Filter enabled
+                let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                let result = resEnabled;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpAstro, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpAstro, false);
+                                    }
+                                });
+                            }
+                        });
+                    }, driveDelayUpAstro * i, i);
+                }
+            }
+        });
+    }
+
+    if (goldenHour) {
+
+        let upTime = goldenHour.split(':');
+
+        schedule.cancelJob('shutterDownGoldenHour');
+        
+        const downGoldenHour = schedule.scheduleJob('shutterDownGoldenHour', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+            // Full Result
+            const resultFull = adapter.config.events;
+
+            if (resultFull) {
+                // Filter Area Living
+                const resLiving = resultFull.filter(d => d.typeDown == 'goldenhour');
+                // Filter enabled
+                let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                let result = resEnabled;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownAstro, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownAstro, false);
+                                    }
+                                });
+                            }
+                        });
+                    }, driveDelayUpAstro * i, i);
+                }
+            }
+        });
+    }
+}
+
+function shutterSunriseSunset() {
+
+    const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
+    
+    if (sunriseStr) {
+
+        let upTime = sunriseStr.split(':');
+
+        schedule.cancelJob('shutterUpSunrise');
+        
+        const upSunrise = schedule.scheduleJob('shutterUpSunrise', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+            // Full Result
+            const resultFull = adapter.config.events;
+
+            if (resultFull) {
+                // Filter Area Living
+                const resLiving = resultFull.filter(d => d.typeUp == 'sunrise');
+                // Filter enabled
+                let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                let result = resEnabled;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpAstro, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpAstro, false);
+                                    }
+                                });
+                            }
+                        });
+                    }, driveDelayUpAstro * i, i);
+                }
+            }
+        });
+    }
+
+    if (sunsetStr) {
+
+        let upTime = sunsetStr.split(':');
+
+        schedule.cancelJob('shutterDownSunset');
+        
+        const downSunset = schedule.scheduleJob('shutterDownSunset', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+            // Full Result
+            const resultFull = adapter.config.events;
+
+            if (resultFull) {
+                // Filter Area Living
+                const resLiving = resultFull.filter(d => d.typeDown == 'sunset');
+                // Filter enabled
+                let resEnabled = resLiving.filter(d => d.enabled === true);
+
+                let result = resEnabled;
+
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownAstro, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownAstro)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownAstro)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownAstro, false);
+                                    }
+                                });
+                            }
+                        });
+                    }, driveDelayUpAstro * i, i);
+                }
+            }
+        });
+    }
 }
 
 // Add delay Time for Sunrise
@@ -322,6 +555,22 @@ function addMinutesSunset(time, minsToAdd) {
     const piece = time.split(':');
     const mins = piece[0]*60 + +piece[1] + +minsToAdd;
     sunsetStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
+    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+}
+// Add delay Time for GoldenHour
+function addMinutesGoldenHour(time, minsToAdd) {
+    function D(J){ return (J<10? '0':'') + J;};
+    const piece = time.split(':');
+    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    goldenHour = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
+    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+}
+// Add delay Time for GoldenHour
+function addMinutesGoldenHourEnd(time, minsToAdd) {
+    function D(J){ return (J<10? '0':'') + J;};
+    const piece = time.split(':');
+    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
+    goldenHourEnd = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
     return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
 }
 
@@ -343,7 +592,7 @@ function shutterUpLiving() {
 
         if (resultFull) {
             // Filter Area Living
-            const resLiving = resultFull.filter(d => d.type == 'living');
+            const resLiving = resultFull.filter(d => d.typeUp == 'living');
             // Filter enabled
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
@@ -358,10 +607,21 @@ function shutterUpLiving() {
 
             for ( const i in result) {
                 setTimeout(function() {
-                    adapter.getForeignState(result[i].name, (err, state) => {
-                        if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                    adapter.getForeignState(result[i].triggerID, (err, state) => {
+                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                }
+                            });
+                        } else if (!result[i].triggerID) {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                }
+                            });
                         }
                     });
                 }, driveDelayUpLiving * i, i);
@@ -371,7 +631,7 @@ function shutterUpLiving() {
             setTimeout(function() {
                 // Filter Area Living Auto
                 if (resultFull) {
-                    const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                    const resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
                     // Filter enabled
                     resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
@@ -379,10 +639,21 @@ function shutterUpLiving() {
 
                     for ( const i in result) {
                         setTimeout(function() {
-                            adapter.getForeignState(result[i].name, (err, state) => {
-                                if ((state['val']) != adapter.config.driveHeightUpLiving)  {
-                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
-                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                        }
+                                    });
+                                } else if (!result[i].triggerID) {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if ((state['val']) != adapter.config.driveHeightUpLiving)  {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
+                                        }
+                                    });
                                 }
                             });
                         }, driveDelayUpLiving * i, i);
@@ -411,7 +682,7 @@ function shutterDownLiving() {
 
         if (resultFull) {
             // Filter Area Living
-            const resLiving = resultFull.filter(d => d.type == 'living');
+            const resLiving = resultFull.filter(d => d.typeDown == 'living');
             // Filter enabled
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
@@ -423,13 +694,25 @@ function shutterDownLiving() {
             }
 
             timeoutLivingAuto = number * driveDelayUpLiving;
-
+            
             for ( const i in result) {
                 setTimeout(function() {
-                    adapter.getForeignState(result[i].name, (err, state) => {
-                        if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                    adapter.log.warn(result[i].triggerID)
+                    adapter.getForeignState(result[i].triggerID, (err, state) => {
+                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                                }
+                            });
+                        } else if (!result[i].triggerID) {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                                }
+                            });
                         }
                     });
                 }, driveDelayUpLiving * i, i);
@@ -439,18 +722,29 @@ function shutterDownLiving() {
             setTimeout(function() {
                 if (resultFull) {
                     // Filter Area Living Auto
-                    const resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                    const resLivingAuto = resultFull.filter(d => d.typeDown == 'living-auto');
                     // Filter enabled
-                    resEnabled = resLivingAuto.filter(d => d.enabled === true);
+                    let resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
-                    result = resEnabled;
+                    let result = resEnabled;
 
                     for ( const i in result) {
                         setTimeout(function() {
-                            adapter.getForeignState(result[i].name, (err, state) => {
-                                if ((state['val']) != adapter.config.driveHeightDownLiving)  {
-                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
-                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                                        }
+                                    });
+                                } else if (!result[i].triggerID) {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if ((state['val']) != adapter.config.driveHeightDownLiving)  {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownLiving)
+                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownLiving, false);
+                                        }
+                                    });
                                 }
                             });
                         }, driveDelayUpLiving * i, i);
@@ -483,7 +777,7 @@ function shutterUpSleep() {
 
             if (resultFull) {
                 // Filter Area sleep
-                const resSleep = resultFull.filter(d => d.type == 'sleep');
+                const resSleep = resultFull.filter(d => d.typeUp == 'sleep');
                 // Filter enabled
                 let resEnabled = resSleep.filter(d => d.enabled === true);
 
@@ -498,10 +792,21 @@ function shutterUpSleep() {
 
                 for ( const i in result) {
                     setTimeout(function() {
-                        adapter.getForeignState(result[i].name, (err, state) => {
-                            if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                    }
+                                });
                             }
                         });
                     }, driveDelayUpSleep * i, i);
@@ -513,7 +818,7 @@ function shutterUpSleep() {
                     const resultFull = adapter.config.events;
                     // Filter Area sleep
                     if (resultFull) {
-                        const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                        const resSleep = resultFull.filter(d => d.typeUp == 'sleep-auto');
                         // Filter enabled
                         let resEnabled = resSleep.filter(d => d.enabled === true);
 
@@ -521,10 +826,21 @@ function shutterUpSleep() {
 
                         for ( const i in result) {
                             setTimeout(function() {
-                                adapter.getForeignState(result[i].name, (err, state) => {
-                                    if ((state['val']) != adapter.config.driveHeightUpSleep)  {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
-                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                            }
+                                        });
+                                    } else if (!result[i].triggerID) {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if ((state['val']) != adapter.config.driveHeightUpSleep)  {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpSleep)
+                                                adapter.setForeignState(result[i].name, adapter.config.driveHeightUpSleep, false);
+                                            }
+                                        });
                                     }
                                 });
                             }, driveDelayUpSleep * i, i);
@@ -545,6 +861,7 @@ function shutterDownSleep() {
         downTimeSleep = adapter.config.W_shutterDownSleep
     }
     let downTime = downTimeSleep.split(':');
+    /** @type {number | undefined} */
     let timeoutSleepAuto;
 
     schedule.cancelJob('shutterDownSleep');
@@ -557,7 +874,7 @@ function shutterDownSleep() {
 
             if (resultFull) {
                 // Filter Area sleep
-                const resSleep = resultFull.filter(d => d.type == 'sleep');
+                const resSleep = resultFull.filter(d => d.typeDown == 'sleep');
                 // Filter enabled
                 let resEnabled = resSleep.filter(d => d.enabled === true);
 
@@ -572,10 +889,21 @@ function shutterDownSleep() {
 
                 for ( const i in result) {
                     setTimeout(function() {
-                        adapter.getForeignState(result[i].name, (err, state) => {
-                            if ((state['val']) != adapter.config.driveHeightDownSleep)  {
-                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
-                                adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                        adapter.getForeignState(result[i].triggerID, (err, state) => {
+                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                                    }
+                                });
+                            } else if (!result[i].triggerID) {
+                                adapter.getForeignState(result[i].name, (err, state) => {
+                                    if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                        adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                                    }
+                                });
                             }
                         });
                     }, driveDelayUpSleep * i, i);
@@ -588,7 +916,7 @@ function shutterDownSleep() {
 
                     if (resultFull) {
                         // Filter Area sleep
-                        const resSleep = resultFull.filter(d => d.type == 'sleep-auto');
+                        const resSleep = resultFull.filter(d => d.typeDown == 'sleep-auto');
                         // Filter enabled
                         let resEnabled = resSleep.filter(d => d.enabled === true);
 
@@ -596,10 +924,21 @@ function shutterDownSleep() {
 
                         for ( const i in result) {
                                 setTimeout(function() {
-                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                        if ((state['val']) != adapter.config.driveHeightDownSleep)  {
-                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
-                                            adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                                    adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                                                }
+                                            });
+                                        } else if (!result[i].triggerID) {
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if ((state['val']) != adapter.config.driveHeightDownSleep)  {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightDownSleep)
+                                                    adapter.setForeignState(result[i].name, adapter.config.driveHeightDownSleep, false);
+                                                }
+                                            });
                                         }
                                     });
                                 }, driveDelayUpSleep * i, i);
@@ -626,6 +965,7 @@ function sunProtect() {
         setTimeout(function() {
             if (adapter.config.sun_shutterDown < (currentTime) && adapter.config.sun_shutterUp > (currentTime) && adapter.config.sunMonthStart <= (monthIndex) && adapter.config.sunMonthEnd >= (monthIndex)) {
                 adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
+                adapter.log.debug('current outside Lux: ' + actualValueLightStr + ' lux');
                 adapter.log.debug('current time: ' + currentTime);
                 adapter.log.debug('current month: ' + monthIndex);
 
@@ -642,16 +982,16 @@ function sunProtect() {
 
                     for ( const i in result) {
                         setTimeout(function() {
-                            if ((adapter.config.setpointValue) < actualValueStr) {
+                            if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun)) {
+                                    if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun) && result[i].sunProt == true) {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun)
                                         adapter.setForeignState(result[i].name, adapter.config.driveHeightSun, false);
                                     }
                                 });
-                            } else if ((adapter.config.setpointValue) > actualValueStr) {
+                            } else if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
+                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving)
                                         adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                     }
@@ -687,7 +1027,7 @@ function sunProtect() {
                         for ( const i in result) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving)) {
+                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + ' from Enum ' + adapter.config.sunProtecEnum);
                                         adapter.setForeignState(result[i].name, adapter.config.driveHeightUpLiving, false);
                                     }
@@ -709,7 +1049,7 @@ function delayCalc() {
         if ((upTimeLiving) === (upTimeSleep)) {
             
             // Filter Area Living
-            let resLiving = resultFull.filter(d => d.type == 'living');
+            let resLiving = resultFull.filter(d => d.typeUp == 'living');
             // Filter enabled
             let resEnabled = resLiving.filter(d => d.enabled === true);
 
@@ -721,7 +1061,7 @@ function delayCalc() {
             if ((autoLivingStr) === true) {
             
                 // Filter Area Living
-                let resLivingAuto = resultFull.filter(d => d.type == 'living-auto');
+                let resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
                 // Filter enabled
                 let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
 
@@ -735,7 +1075,7 @@ function delayCalc() {
         if ((downTimeLiving) === (downTimeSleep)) {
             
             // Filter Area Living
-            let resLiving2 = resultFull.filter(d => d.type == 'living');
+            let resLiving2 = resultFull.filter(d => d.typeDown == 'living');
             // Filter enabled
             let resEnabled3 = resLiving2.filter(d => d.enabled === true);
 
@@ -747,7 +1087,7 @@ function delayCalc() {
             if ((autoLivingStr) === true) {
                 
                 // Filter Area Living
-                let resLivingAuto2 = resultFull.filter(d => d.type == 'living-auto');
+                let resLivingAuto2 = resultFull.filter(d => d.typeDown == 'living-auto');
                 // Filter enabled
                 let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
 
@@ -763,7 +1103,7 @@ function delayCalc() {
 }
 
 function main() {
-    adapter.log.debug(JSON.stringify(adapter.config.events))
+    //adapter.log.debug(JSON.stringify(adapter.config.events))
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });

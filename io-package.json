@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "news": {
+            "0.2.0": {
+                "en": "complete restructuring of functions",
+                "de": "vollständige Umstrukturierung der Funktionen",
+                "ru": "полная перестройка функций",
+                "pt": "reestruturação completa de funções",
+                "nl": "complete herstructurering van functies",
+                "fr": "restructuration complète des fonctions",
+                "it": "completa ristrutturazione delle funzioni",
+                "es": "Reestructuración completa de funciones.",
+                "pl": "pełna restrukturyzacja funkcji",
+                "zh-cn": "完成职能重组"
+            },
             "0.1.0": {
                 "en": "First Beta",
                 "de": "Erste Beta Version",
@@ -99,6 +111,7 @@
         "driveHeightUpLiving": 100,
         "driveHeightDownLiving": 0,
         "triggerAutoLiving": "hm-rpc.0.MEQ1234567.2.STATE",
+        "livingAutomatic": "livingSunriseSunset",
         
 
         "W_shutterUpSleepMax": "06:30",
@@ -110,13 +123,15 @@
         "driveHeightUpSleep": 100,
         "driveHeightDownSleep": 0,
         "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
+        "sleepAutomatic": "sleepSunriseSunset",
 
         "astroDelayUp": 30,
         "longitude": "13.404954",
         "latitude": "52.520007",
         "astroDelayDown": 30,
-        "setpointValueLight": 10,
-        "actualValueLight": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
+        "driveHeightUpAstro": 100,
+        "driveHeightDownAstro": 0,
+        "driveDelayUpAstro": 10,
 
         "sleepEnum": "",
         "livingEnum": "",
@@ -128,6 +143,8 @@
         "sun_shutterUp": "19:00",
         "sun_shutterDown": "10:00",
         "actualValueTemp": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
+        "setpointValueLight": 10,
+        "actualValueLight": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
         "setpointValue": 23,
         "sunProtecEnum": "",
         "driveHeightSun": 30,

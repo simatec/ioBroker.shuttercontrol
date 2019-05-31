@@ -29,6 +29,9 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.0 (31.05.2019)
+* (simatec) complete restructuring of functions
+
 ### 0.1.0 (11.05.2019)
 * (simatec) First Beta
 
