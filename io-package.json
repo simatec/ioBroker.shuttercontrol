@@ -1,8 +1,12 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "news": {
+            "0.2.1": {
+                "en": "Shutters drive when the trigger is changed; Add Trigger ID for Auto-Living; Add Trigger ID for Auto-Sleep; add shutter height for trigger; Add boolean for drive on change Trigger",
+                "de": "Rollläden fahrn bei Änderung des Triggers; Trigger ID für den Auto-Wohnbereich hinzugefügt; Trigger ID für den Auto-Schlafbereich hinzugefügt; Rolladenhöhe bei Änderung des Triggers einstellbar; Schalter für Auslösung bei Änderung des Triggers hinzugefügt"
+            },
             "0.2.0": {
                 "en": "complete restructuring of functions",
                 "de": "vollständige Umstrukturierung der Funktionen",

@@ -29,6 +29,13 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.1 (01.06.2019)
+* (simatec) Shutters drive when the trigger is changed
+* (simatec) Add Trigger ID for Auto-Living
+* (simatec) Add Trigger ID for Auto-Sleep
+* (simatec) add shutter height for trigger
+* (simatec) Add boolean for drive on change Trigger
+
 ### 0.2.0 (31.05.2019)
 * (simatec) complete restructuring of functions
 
