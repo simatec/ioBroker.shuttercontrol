@@ -1176,15 +1176,17 @@ function main() {
 
     // Change State from Trigger ID's
     let result = adapter.config.events;
-    let res = result.map(({ triggerID }) => ({ triggerID }));
-    let resTriggerActive = res.filter(d => d.triggerID != '');
-    
-    for ( const i in resTriggerActive) {
-        resTrigger.push(resTriggerActive[i].triggerID)
+    if (result) {
+        let res = result.map(({ triggerID }) => ({ triggerID }));
+        let resTriggerActive = res.filter(d => d.triggerID != '');
+        
+        for ( const i in resTriggerActive) {
+            resTrigger.push(resTriggerActive[i].triggerID)
+        }
+        resTrigger.forEach(function(element) {
+            adapter.subscribeForeignStates(element);
+        });
     }
-    resTrigger.forEach(function(element) {
-        adapter.subscribeForeignStates(element);
-    });
 }
 
 // If started as allInOne/compact mode => return function to create instance
