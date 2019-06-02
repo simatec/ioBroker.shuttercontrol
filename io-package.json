@@ -153,7 +153,8 @@
         "sunProtecEnum": "",
         "driveHeightSun": 30,
 
-        "events": ""
+        "events": "",
+        "eventsSun": ""
         
     },
     "objects": [],

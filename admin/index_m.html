@@ -108,11 +108,30 @@
             var events = [];
             
             events = settings.events    || [];
+
+            var eventsSun = [];
+            
+            eventsSun = settings.eventsSun    || [];
             
             showHideSettings();
             
             values2table('events', events, onChange, tableOnReady);
-            
+            values2table('eventsSun', eventsSun, onChange, tableOnReady);
+
+            $('#responseSunDialog').on('click', function () {
+                var devicesSun = table2values('eventsSun');
+                var idSun = 0;
+                for (var i = 0; i < devicesSun.length; i++) {
+                idSun = idSun +1;
+                }
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#eventsSun .values-input[data-name="name"][data-index="' + idSun + '"]').val(), function (newId) {
+                        if (newId) {
+                            $('#eventsSun .values-input[data-name="name"][data-index="' + idSun + '"]').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
             $('#responseOIDDialog').on('click', function () {
                 var devices = table2values('events');
                 var id = 0;
@@ -201,6 +220,26 @@
                     });
                 });
             });
+            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit2"]').on('click', function () {
+                let id = $(this).data('index');
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
+                        if (newId) {
+                            $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
+            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit1"]').on('click', function () {
+                let id = $(this).data('index');
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val(), function (newId) {
+                        if (newId) {
+                            $('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
         }
         function getEnums(id, val) {  
             const socket = io.connect();  
@@ -241,6 +280,8 @@
             
             // Get edited table
             obj.events    = table2values('events');
+            obj.eventsSun    = table2values('eventsSun');
+
 
             callback(obj);
         }
@@ -605,6 +646,36 @@
                         </div>
                         <div class="col s1 m2 l2">
                             <a id="actualValueLightDialog" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12" id="eventsSun">
+                                <a  id="responseSunDialog" class="btn table-button-add"><i class="material-icons">add_circle_outline</i></a>
+                            <div class="table-values-div">
+                                <table class="table-values">
+                                    <thead>
+                                    <tr>
+                                        <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
+                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">name</th>
+                                        <th data-name="type" style="width: 20%" class="translate" data-options="tempsensor;tempsensor and outside temp;direction;temsensor and direction; outside temp and direction" data-type="select">Type of control</th>
+                                        <th data-name="tempSensor" data-type="text" style="width: 20%" class="translate">Temp sensor Inside</th>
+                                        <th data-buttons="edit1" style="width: 50px" ></th>
+                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
+                                        <th data-buttons="edit2" style="width: 50px" ></th>
+                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
+                                        <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
+                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger </th>
+                                        <th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>
+                                        <th data-name="direction" data-type="number" style="width: 50px" class="translate">direction</th>
+                                        <th data-name="tempInside" data-type="number" style="width: 50px" class="translate">Temp Inside</th>
+                                        <!-- ********************** only for temp states ********************** -->
+                                        <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
+                                        <!-- ****************************************************************** -->
+                                        <th data-buttons="delete" style="width: 60px"></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
