@@ -1151,6 +1151,25 @@ function delayCalc() {
     }
     
 }
+const calcPos = schedule.scheduleJob('calcPosTimer', '*/10 * * * *', function() {
+    sunPos();
+});
+
+function sunPos() {
+    // get today's sunlight times 
+    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+
+    let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
+    adapter.log.debug('current Pos: ' + JSON.stringify(currentPos));
+ 
+    // get sunrise azimuth in degrees
+    let currentAzimuth = currentPos.azimuth * 180 / Math.PI;
+    adapter.log.debug('current Azimuth: ' + currentAzimuth);
+
+    // get sunrise altitude in degrees
+    let currentAltitude = currentPos.altitude * 180 / Math.PI / 2;
+    adapter.log.debug('current Altitude: ' + currentAltitude);
+}
 
 function main() {
     //adapter.log.debug(JSON.stringify(adapter.config.events))
@@ -1158,7 +1177,8 @@ function main() {
         checkStates();
     });
     setTimeout(function() {
-        checkActualStates()
+        checkActualStates();
+        sunPos();
     }, 2000)
 
     // in this template all states changes inside are subscribed
