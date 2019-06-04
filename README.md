@@ -3,6 +3,8 @@
     ioBroker.shuttercontrol
 </h1>
 
+![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
+<!--![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)-->
 [![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Dependency Status](https://img.shields.io/david/simatec/iobroker.shuttercontrol.svg)](https://david-dm.org/simatec/iobroker.shuttercontrol)
@@ -10,8 +12,8 @@
 
 [![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
 
-**Tests:** Linux/Mac: [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shuttercontrol?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shuttercontrol/)
+[![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shuttercontrol?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shuttercontrol/)
 
 ## shuttercontrol adapter for ioBroker
 
