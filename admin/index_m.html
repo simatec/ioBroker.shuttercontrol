@@ -400,20 +400,22 @@
                                     <tr>
                                         <!--<th data-name="_index" style="width: 30px"></th>-->
                                         <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
-                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">name</th>
-                                        <th data-name="typeUp" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunrise;goldenhour;only sunprotect" data-type="select">type up</th>
-                                        <th data-name="typeDown" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunset;goldenhour;only sunprotect" data-type="select">type down</th>
+                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">Object-ID shutter</th>
+                                        <th data-name="typeUp" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunrise;goldenhour End" data-type="select">type up</th>
+                                        <th data-name="typeDown" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunset;goldenhour;elevation" data-type="select">type down</th>
                                         <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
                                         <th data-buttons="edit" style="width: 50px" ></th>
+                                        <th data-name="heightUp" data-type="number" style="width: 50px" class="translate">height up</th>
+                                        <th data-name="heightDown" data-type="number" style="width: 50px" class="translate">height down</th>
                                         <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
                                         <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
                                         <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger </th>
                                         <!--<th data-name="sunProt" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Sun Protec</th>-->
                                         <!--<th data-name="astro" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use Astro</th>-->
                                         <th data-name="useHoliday" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use holiday</th>
-                                        <th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>
+                                        <!--<th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>-->
                                         <!--<th data-name="option" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">option</th>-->
-                                        <th data-name="direction" data-type="number" style="width: 50px" class="translate">direction</th>
+                                        <th data-name="elevation" data-type="number" style="width: 50px" class="translate">Elevation</th>
                                         <!-- ********************** only for temp states ********************** -->
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
                                         <!-- ****************************************************************** -->
@@ -468,6 +470,7 @@
                             <label for="driveDelayUpLiving" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
+                    <!--
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="driveHeightUpLiving" min="0" max="100" />
@@ -478,6 +481,7 @@
                             <label for="driveHeightDownLiving" class="translate">shutter height for drive down (percent)</label>
                         </div>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="triggerAutoLiving" />
@@ -531,6 +535,7 @@
                             <label for="driveDelayUpSleep" class="translate">Time delay for driving the shutters (seconds)</label>
                         </div>
                     </div>
+                    <!--
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="driveHeightUpSleep" min="0" max="100" />
@@ -541,6 +546,7 @@
                             <label for="driveHeightDownSleep" class="translate">shutter height for drive down (percent)</label>
                         </div>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="text" class="value" id="triggerAutoSleep" />
@@ -575,6 +581,7 @@
                             <label for="astroDelayDown" class="translate">Time delay for Driving down (minutes)</label>
                         </div>
                     </div>
+                    <!--
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="driveHeightUpAstro" min="0" max="100" />
@@ -585,6 +592,7 @@
                             <label for="driveHeightDownAstro" class="translate">shutter height for drive down (percent)</label>
                         </div>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="driveDelayUpAstro" />
@@ -616,12 +624,14 @@
                             <label for="sun_shutterUp" class="translate">End time for sun protection</label>
                         </div>
                     </div>
+                    <!--
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="driveHeightSun" min=0 max=100/>
                             <label for="driveHeightSun" class="translate">shutter height for sun protection (percent)</label>
                         </div>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col s6 l4 input-field">
                             <input type="number" class="value" id="setpointValue" min=1 max=40 />
@@ -656,17 +666,19 @@
                                     <thead>
                                     <tr>
                                         <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
-                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">name</th>
+                                        <th data-name="name" data-type="link" style="width: 20%" class="translate">Object-ID shutter</th>
                                         <th data-name="type" style="width: 20%" class="translate" data-options="tempsensor;tempsensor and outside temp;direction;temsensor and direction; outside temp and direction" data-type="select">Type of control</th>
-                                        <th data-name="tempSensor" data-type="text" style="width: 20%" class="translate">Temp sensor Inside</th>
+                                        <th data-name="tempSensor" data-type="link" style="width: 20%" class="translate">Temp sensor Inside</th>
                                         <th data-buttons="edit1" style="width: 50px" ></th>
-                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
+                                        <th data-name="triggerID" data-type="link" style="width: 20%" class="translate">Trigger ID</th>
                                         <th data-buttons="edit2" style="width: 50px" ></th>
                                         <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
                                         <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
                                         <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger </th>
-                                        <th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>
+                                        <!--<th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>-->
+                                        <th data-name="heightDown" data-type="number" style="width: 50px" class="translate">height down</th>
                                         <th data-name="direction" data-type="number" style="width: 50px" class="translate">direction</th>
+                                        <th data-name="directionRange" data-type="number" style="width: 50px" class="translate">+/- range direction</th>
                                         <th data-name="tempInside" data-type="number" style="width: 50px" class="translate">Temp Inside</th>
                                         <!-- ********************** only for temp states ********************** -->
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>

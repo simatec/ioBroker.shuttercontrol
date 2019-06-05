@@ -11,18 +11,31 @@ const SunCalc = require('suncalc2');
 let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
 
+/** @type {string} */
 let sunsetStr;
+/** @type {string} */
 let sunriseStr;
+/** @type {string} */
 let goldenHour;
+/** @type {string} */
 let goldenHourEnd;
+/** @type {string} */
 let upTimeSleep;
+/** @type {string} */
 let upTimeLiving;
+/** @type {string} */
 let downTimeSleep;
+/** @type {string} */
 let downTimeLiving;
+/** @type {string} */
 let dayStr;
+/** @type {any} */
 let HolidayStr;
+/** @type {any} */
 let publicHolidayStr;
+/** @type {any} */
 let publicHolidayTomorowStr;
+/** @type {any} */
 let autoLivingStr;
 /** @type {any} */
 let autoSleepStr;
@@ -30,15 +43,21 @@ let autoSleepStr;
 let actualValueStr;
 /** @type {string | number} */
 let actualValueLightStr;
+/** @type {number | undefined} */
 let delayUp;
 /** @type {number | undefined} */
 let delayDown;
+/** @type {string} */
 let astroTimeLivingUp;
+/** @type {string} */
 let astroTimeLivingDown;
+/** @type {string} */
 let astroTimeSleepUp;
 /** @type {string} */
 let astroTimeSleepDown;
+/** @type {any[] | never[]} */
 let resTrigger = [];
+/** @type {any} */
 let resTriggerChange;
 
 /**
@@ -1020,33 +1039,35 @@ function sunProtect() {
                 adapter.log.debug('current month: ' + monthIndex);
 
                 // Full Result
-                const resultFull = adapter.config.events;
+                const resultFull = adapter.config.eventsSun;
 
                 if (resultFull) {
-                    // Filter Sun Protect
-                    const resSunProtect = resultFull.filter(d => d.sunProt === true);
                     // Filter enabled
-                    let resEnabled = resSunProtect.filter(d => d.enabled === true);
-
+                    let resEnabled = resultFull.filter(d => d.enabled === true);
                     let result = resEnabled;
 
                     for ( const i in result) {
                         setTimeout(function() {
-                            if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
-                                adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) > parseFloat(adapter.config.driveHeightSun) && result[i].sunProt == true) {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightSun + '%')
-                                        adapter.setForeignState(result[i].name, parseFloat(adapter.config.driveHeightSun), false);
+                            // Todo function
+                            adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                if (state && parseFloat(state['val']) > result[i].tempInside) {
+                                    if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDown) && result[i].sunProt == true) {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                            }
+                                        });
+                                    } else if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + '%')
+                                                adapter.setForeignState(result[i].name, parseFloat(adapter.config.driveHeightUpLiving), false);
+                                            }
+                                        });
                                     }
-                                });
-                            } else if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
-                                adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + '%')
-                                        adapter.setForeignState(result[i].name, parseFloat(adapter.config.driveHeightUpLiving), false);
-                                    }
-                                });
-                            }
+                                }
+                            });
                         }, driveDelayUpSleep * i, i);
                     }
                 }
@@ -1156,9 +1177,6 @@ const calcPos = schedule.scheduleJob('calcPosTimer', '*/10 * * * *', function() 
 });
 
 function sunPos() {
-    // get today's sunlight times 
-    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
-
     let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
  
     // get sunrise azimuth in degrees
