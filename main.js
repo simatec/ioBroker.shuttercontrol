@@ -27,7 +27,6 @@ let upTimeLiving;
 let downTimeSleep;
 /** @type {string} */
 let downTimeLiving;
-/** @type {string} */
 let dayStr;
 /** @type {any} */
 let HolidayStr;
@@ -57,8 +56,14 @@ let astroTimeSleepUp;
 let astroTimeSleepDown;
 /** @type {any[] | never[]} */
 let resTrigger = [];
+let resSunTrigger = [];
+let resSunInsideTemp = [];
 /** @type {any} */
 let resTriggerChange;
+let resSunTriggerChange;
+
+let azimuth;
+let elevation;
 
 /**
  * Starts the adapter instance
@@ -146,9 +151,28 @@ function startAdapter(options) {
                 if (id === resultTriggerID) {
                     resTriggerChange = resultTriggerID;
                     adapter.log.debug('TriggerID Change: ' +  resultTriggerID);
-                    trigggerChange();
+                    triggerChange();
                 }
             });
+            resSunTrigger.forEach(function(resSunTriggerID) {
+                if (id === resSunTriggerID) {
+                    resSunTriggerChange = resSunTriggerID;
+                    adapter.log.debug('TriggerID Change: ' +  resSunTriggerID);
+                    sunTriggerChange();
+                }
+            });
+            resSunInsideTemp.forEach(function(resSunInsideTempID) {
+                if (id === resSunInsideTempID) {
+                    adapter.log.debug('TriggerID Change: ' +  resSunInsideTempID);
+                    sunProtect();
+                }
+            });
+            if (id === adapter.namespace + '.info.Azimut') {
+                sunProtect();
+            }
+            if (id === adapter.namespace + '.info.Elevation') {
+                elevationDown();
+            }
         } else {
             // The state was deleted
             adapter.log.info(`state ${id} deleted`);
@@ -156,7 +180,40 @@ function startAdapter(options) {
     });
 }
 
-function trigggerChange() {
+function sunTriggerChange() {
+    
+    const resultID = adapter.config.eventsSun;
+    // Filter changed Trigger
+    const arrayChangeTrigger = resultID.filter(d => d.triggerID == resSunTriggerChange);
+    
+    for ( const i in arrayChangeTrigger) {
+        setTimeout(function() {
+            if (arrayChangeTrigger[i].triggerChange == true) {
+                adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
+                    if (arrayChangeTrigger[i].triggerID && (state['val']) != arrayChangeTrigger[i].triggerState)  {
+                        adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
+                            arrayChangeTrigger[i].currentHeight = (state['val']);
+                            adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
+                            if ((state['val']) != arrayChangeTrigger[i].triggerDrive)  {
+                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
+                                adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
+                            }
+                        });
+                    } else if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
+                        adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
+                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  {
+                                adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
+                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
+                                adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
+                            }
+                        });
+                    }
+                });
+            }
+        }, 1000 * i, i);
+    }
+}
+function triggerChange() {
     
     const resultID = adapter.config.events;
     // Filter changed Trigger
@@ -261,7 +318,9 @@ function shutterDriveCalc() {
         goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
 
         adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
+        adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
         adapter.log.debug('goldenHour today: ' + goldenHour);
+        adapter.setState('info.GoldenHour', { val: goldenHour, ack: true });
 
         adapter.log.debug('current day: ' + dayStr);
         adapter.log.debug('Sunrise today: ' + sunriseStr);
@@ -428,6 +487,44 @@ function shutterDriveCalc() {
     shutterDownSleep();
 
     delayCalc();
+}
+function elevationDown(){
+    // Full Result
+    const resultFull = adapter.config.events;
+
+    if (resultFull) {
+        const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
+        // Filter Area Living
+        const resLiving = resultFull.filter(d => d.typeDown == 'elevation');
+        // Filter enabled
+        let resEnabled = resLiving.filter(d => d.enabled === true);
+
+        let result = resEnabled;
+
+        for ( const i in result) {
+            if (elevation <= result[i].elevation) {
+                setTimeout(function() {
+                    adapter.getForeignState(result[i].triggerID, (err, state) => {
+                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != result[i].heightDown)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                }
+                            });
+                        } else if (!result[i].triggerID) {
+                            adapter.getForeignState(result[i].name, (err, state) => {
+                                if ((state['val']) != result[i].heightDown)  {
+                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                }
+                            });
+                        }
+                    });
+                }, driveDelayUpAstro * i, i);
+            }
+        }
+    }
 }
 function shutterGoldenHour() {
 
@@ -1046,29 +1143,158 @@ function sunProtect() {
                     let resEnabled = resultFull.filter(d => d.enabled === true);
                     let result = resEnabled;
 
+                    // in- & outside temperature
                     for ( const i in result) {
-                        setTimeout(function() {
-                            // Todo function
-                            adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                if (state && parseFloat(state['val']) > result[i].tempInside) {
+                        if (result[i].type == 'in- & outside temperature') {
+                            setTimeout(function() {
+                                if (result[i].tempSensor != '') {
+                                    let insideTemp;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
+                                        }
+                                    });
+                                    adapter.log.warn(insideTemp);
+                                    if (insideTemp > result[i].tempInside) {
+                                        if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                }
+                                            });
+                                        }
+                                    } else if (insideTemp < result[i].tempInside) {
+                                        if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // in- & outside temperature and direction
+                    for ( const i in result) {
+                        if (result[i].type == 'in- & outside temperature and direction') {
+                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                            const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
+                            setTimeout(function() {
+                                if (result[i].tempSensor != '') {
+                                    let insideTemp;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
+                                        }
+                                    });
+
+                                    if ((resultDirectionRangeMinus) > azimuth && (resultDirectionRangePlus) < azimuth && insideTemp > result[i].tempInside) {
+                                        if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                }
+                                            });
+                                        }
+                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) > azimuth) {
+                                        if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
+                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // outside temperature and direction
+                    for ( const i in result) {
+                        if (result[i].type == 'outside temperature and direction') {
+                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                            const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
+                            setTimeout(function() {
+                                if ((resultDirectionRangeMinus) > azimuth && (resultDirectionRangePlus) < azimuth) {
                                     if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDown) && result[i].sunProt == true) {
+                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                             }
                                         });
-                                    } else if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
+                                    }
+                                } else if ((resultDirectionRangePlus) > azimuth) {
+                                    if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
-                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + '%')
-                                                adapter.setForeignState(result[i].name, parseFloat(adapter.config.driveHeightUpLiving), false);
+                                            if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                             }
                                         });
                                     }
                                 }
-                            });
-                        }, driveDelayUpSleep * i, i);
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // only outside temperature
+                    for ( const i in result) {
+                        if (result[i].type == 'only outside temperature') {
+                            setTimeout(function() {
+                                if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        }
+                                    });
+                                } else if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
+                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                        if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                            adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                        }
+                                    });
+                                }
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // only inside temperature
+                    for ( const i in result) {
+                        if (result[i].type == 'only inside temperature') {
+                            setTimeout(function() {
+                                if (result[i].tempSensor != '') {
+                                    let insideTemp;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
+                                        }
+                                    });
+
+                                    if (insideTemp > result[i].tempInside) {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                            }
+                                        });
+                                    } else if (insideTemp < result[i].tempInside) {
+                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                            if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                            }
+                                        });
+                                    }
+                                }
+                            }, driveDelayUpSleep * i, i);
+                        }
                     }
                 }
             }
@@ -1085,22 +1311,20 @@ function sunProtect() {
             const upSunStr = schedule.scheduleJob('upSunProtect', upTimeSun[1] + ' ' + upTimeSun[0] + ' * * *', function() {
                 if (adapter.config.sunMonthStart <= (monthIndex) && adapter.config.sunMonthEnd >= (monthIndex)) {
                     // Full Result
-                    const resultFull = adapter.config.events;
+                    const resultFull = adapter.config.eventsSun;
 
                     if (resultFull) {
-                        // Filter Sun Protect
-                        const resSunProtect = resultFull.filter(d => d.sunProt === true);
                         // Filter enabled
-                        let resEnabled = resSunProtect.filter(d => d.enabled === true);
+                        let resEnabled = resultFull.filter(d => d.enabled === true);
 
                         let result = resEnabled;
 
                         for ( const i in result) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                    if (parseFloat(state['val']) < parseFloat(adapter.config.driveHeightUpLiving) && result[i].sunProt == true) {
-                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + adapter.config.driveHeightUpLiving + '%');
-                                        adapter.setForeignState(result[i].name, parseFloat(adapter.config.driveHeightUpLiving), false);
+                                    if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + parseFloat(result[i].triggerDrive) + '%');
+                                        adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                     }
                                 });
                             }, driveDelayUpSleep * i, i);
@@ -1185,14 +1409,16 @@ function sunPos() {
     // get sunrise altitude in degrees
     let currentAltitude = currentPos.altitude * 180 / Math.PI;
 
-    let azimuth = Math.round(10 * currentAzimuth) / 10
-    let elevation = Math.round(10 * currentAltitude) / 10
+    azimuth = Math.round(10 * currentAzimuth) / 10
+    elevation = Math.round(10 * currentAltitude) / 10
 
     adapter.log.debug('Sun current Altitude: ' + currentAltitude + '°');
     adapter.log.debug('Sun current azimuth: ' + currentAzimuth + '°');
 
     adapter.log.debug('Sun Azimut: ' + azimuth + '°');
+    adapter.setState('info.Azimut', { val: azimuth, ack: true });
     adapter.log.debug('Sun Elevation: ' + elevation + '°');
+    adapter.setState('info.Elevation', { val: elevation, ack: true });
 }
 
 function main() {
@@ -1207,6 +1433,8 @@ function main() {
 
     // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');
+    adapter.subscribeStates('info.Elevation');
+    adapter.subscribeStates('info.Azimut');
 
     if (adapter.config.publicHolidays === true) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
@@ -1228,6 +1456,30 @@ function main() {
             resTrigger.push(resTriggerActive[i].triggerID)
         }
         resTrigger.forEach(function(element) {
+            adapter.subscribeForeignStates(element);
+        });
+    }
+    let resultSun = adapter.config.eventsSun;
+    if (resultSun) {
+        let resSun = resultSun.map(({ triggerID }) => ({ triggerID }));
+        let resTriggerActiveSun = resSun.filter(d => d.triggerID != '');
+        
+        for ( const i in resTriggerActiveSun) {
+            resSunTrigger.push(resTriggerActiveSun[i].triggerID)
+        }
+        resSunTrigger.forEach(function(element) {
+            adapter.subscribeForeignStates(element);
+        });
+    }
+    let resultInsideTemp = adapter.config.eventsSun;
+    if (resultInsideTemp) {
+        let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
+        let rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
+        
+        for ( const i in rescurrentInsideTemp) {
+            resSunInsideTemp.push(rescurrentInsideTemp[i].tempSensor)
+        }
+        resSunInsideTemp.forEach(function(element) {
             adapter.subscribeForeignStates(element);
         });
     }

@@ -194,11 +194,13 @@
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
+            /*
             getEnums('livingEnum', settings['livingEnum']);
             getEnums('sleepEnum', settings['sleepEnum']);
             getEnums('livingEnumAuto', settings['livingEnumAuto']);
             getEnums('sleepEnumAuto', settings['sleepEnumAuto']);
             getEnums('sunProtecEnum', settings['sunProtecEnum']);
+            */
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -241,6 +243,7 @@
                 });
             });
         }
+        /*
         function getEnums(id, val) {  
             const socket = io.connect();  
             socket.emit('getObjectView', 'system', 'enum', {startkey: 'enum.functions.', endkey: 'enum.functions.\u9999'}, function (err, res) {
@@ -264,6 +267,7 @@
             });
             $sel.select();
         }
+        */
         
         // This will be called by the admin adapter when the user presses the save button
         function save(callback) {
@@ -666,11 +670,11 @@
                                     <thead>
                                     <tr>
                                         <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
-                                        <th data-name="name" data-type="link" style="width: 20%" class="translate">Object-ID shutter</th>
-                                        <th data-name="type" style="width: 20%" class="translate" data-options="tempsensor;tempsensor and outside temp;direction;temsensor and direction; outside temp and direction" data-type="select">Type of control</th>
-                                        <th data-name="tempSensor" data-type="link" style="width: 20%" class="translate">Temp sensor Inside</th>
+                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">Object-ID shutter</th>
+                                        <th data-name="type" style="width: 20%" class="translate" data-options="in- & outside temperature;only direction;in- & outside temperature and direction;outside temperature and direction;only outside temperature;only inside temperature" data-type="select">Type of control</th>
+                                        <th data-name="tempSensor" data-type="text" style="width: 20%" class="translate">Temp sensor Inside</th>
                                         <th data-buttons="edit1" style="width: 50px" ></th>
-                                        <th data-name="triggerID" data-type="link" style="width: 20%" class="translate">Trigger ID</th>
+                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
                                         <th data-buttons="edit2" style="width: 50px" ></th>
                                         <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
                                         <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>

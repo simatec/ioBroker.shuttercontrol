@@ -1,8 +1,12 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.1",
+        "version": "0.2.2",
         "news": {
+            "0.2.2": {
+                "en": "Beta 0.2.2",
+                "de": "Beta 0.2.2"
+            },
             "0.2.1": {
                 "en": "Shutters drive when the trigger is changed; Add Trigger ID for Auto-Living; Add Trigger ID for Auto-Sleep; add shutter height for trigger; Add boolean for drive on change Trigger",
                 "de": "Rollläden fahrn bei Änderung des Triggers; Trigger ID für den Auto-Wohnbereich hinzugefügt; Trigger ID für den Auto-Schlafbereich hinzugefügt; Rolladenhöhe bei Änderung des Triggers einstellbar; Schalter für Auslösung bei Änderung des Triggers hinzugefügt"
@@ -285,6 +289,58 @@
             "common": {
                 "role":  "indicator",
                 "name":  "Sunset Time",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.GoldenHour",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Goldenhour Time",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.GoldenHourEnd",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "Goldenhour end Time",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.Elevation",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "current Elevation",
+                "type":  "string",
+                "read":  true,
+                "write": false,
+                "def":   ""
+            },
+            "native": {}
+        },
+        {
+            "_id":  "info.Azimut",
+            "type": "state",
+            "common": {
+                "role":  "indicator",
+                "name":  "current Azimut",
                 "type":  "string",
                 "read":  true,
                 "write": false,
