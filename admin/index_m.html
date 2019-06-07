@@ -725,6 +725,59 @@
             </div>
         </div>
     </div>
+    <!-- ++++++++++ DIALOGS ++++++++++ -->
+    <div class="m material-dialogs">
+		<!-- DIALOG: DeviceEdit -->
+        <div id="dialogDeviceEdit" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <input type="hidden" id="dialogDeviceEditViewIndex" />
+                <input type="hidden" id="dialogDeviceEditDeviceIndex" />
+                <div class="row">
+                    <div class="col s12">
+                        <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditCommonName"></span></h6>
+                    </div>
+                </div>
+				<div class="row">
+					<div class="col s12">
+						<h6 class="translate sub-title">
+							<a class="btn-floating btn-small waves-effect waves-light" href="https://github.com/sbormann/ioBroker.iqontrol/blob/master/README.md#description-of-roles-and-associated-states" target="_blank"><i class="material-icons">live_help</i></a>
+							Select Role
+						</h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<select class="value icons" name='dialogDeviceEditCommonRole' id='dialogDeviceEditCommonRole'></select>
+						<label for='dialogDeviceEditCommonRole' class="translate"></label>
+						<span class="translate">Role</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+						<h6 class="translate sub-title">Set Corresponding States</h6>
+					</div>
+				</div>
+				<div class="col s12" id="tableDialogDeviceEditStates">
+					<div class="col s12 m12 l12">
+						<table class="table-values" style="width: 90%;">
+							<thead>
+								<tr>
+									<th data-name="state" class="translate">State</th>
+									<th data-name="commonRole" style="display: none;" data-type="select" data-options="linkedState;const;array" class="translate">Role</th>
+									<th data-name="value" class="translate">Value</th>
+									<th data-buttons="edit" style="width:50px;"></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Ok</span></a>
+                <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left">close</i><span class="translate">Cancel</span></a>
+            </div>
+        </div>
+    </div>    
 </body>
 
 </html>
