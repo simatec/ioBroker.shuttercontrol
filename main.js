@@ -1192,7 +1192,8 @@ function sunProtect() {
                     for ( const i in result) {
                         if (result[i].type == 'in- & outside temperature and direction') {
                             const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
-                            const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
+                            const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
+
                             setTimeout(function() {
                                 if (result[i].tempSensor != '') {
                                     let insideTemp;
@@ -1200,7 +1201,7 @@ function sunProtect() {
                                         if (state) {
                                             insideTemp = parseFloat(state['val']);
 
-                                            if ((resultDirectionRangeMinus) > azimuth && (resultDirectionRangePlus) < azimuth && insideTemp > result[i].tempInside) {
+                                            if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
                                                 if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
@@ -1209,7 +1210,7 @@ function sunProtect() {
                                                         }
                                                     });
                                                 }
-                                            } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) > azimuth) {
+                                            } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth) {
                                                 if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
@@ -1231,7 +1232,7 @@ function sunProtect() {
                             const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                             const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
                             setTimeout(function() {
-                                if ((resultDirectionRangeMinus) > azimuth && (resultDirectionRangePlus) < azimuth) {
+                                if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                     if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
@@ -1240,7 +1241,7 @@ function sunProtect() {
                                             }
                                         });
                                     }
-                                } else if ((resultDirectionRangePlus) > azimuth) {
+                                } else if ((resultDirectionRangePlus) < azimuth) {
                                     if ((adapter.config.setpointValue) > actualValueStr || (adapter.config.setpointValueLight) > actualValueLightStr){
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {

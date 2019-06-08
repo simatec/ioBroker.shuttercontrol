@@ -75,8 +75,17 @@
             padding-top: 0 !important;
         }
         .m .modal.modal-fixed-footer .modal-footer {
-            right: 10px;
+            right: 50px;
         }
+        
+        #dialog-name-edit {
+        width: 70%;
+        height: calc(100% + 125px);
+        }
+        #dialog-name-edit .title {
+            width: calc(100% + 30px);
+        }
+        
     </style>
 
     <script type="text/javascript">
@@ -242,6 +251,50 @@
                     });
                 });
             });
+            
+            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
+                let id = $(this).data('index');
+                
+                initDialog(function (sid) {
+                    var newTemInside = $('#tempInside').val();
+                    var newTriggerDrive = $('#triggerDrive').val();
+                    var newHeightDown = $('#heightDown').val();
+                    var newDirection = $('#direction').val();
+                    var newDirectionRange = $('#directionRange').val();
+                    //states
+                    var newTriggerState = $('#triggerState').val();
+                    var newTriggerChange = $('#triggerChange').val();
+                    $('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
+                    $('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
+                    $('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
+                    $('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val(newDirection).trigger('change');
+                    $('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val(newDirectionRange).trigger('change');
+                    // states 
+                    //$('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop(newTriggerState).trigger('change');
+                    //$('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop(newTriggerChange).trigger('change');
+                });
+                $('#dialogDeviceEditCommonName').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
+                $('#tempInside').val($('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
+                $('#triggerDrive').val($('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
+                $('#heightDown').val($('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
+                $('#direction').val($('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val());
+                $('#directionRange').val($('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
+                // states
+                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+                $('#triggerChange').val($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
+            });
+            /*
+            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
+                let id = $(this).data('index');
+                
+                initDialog(function (sid) {
+                    var newTriggerState = $('#triggerState').val();
+                    $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                });
+                $('#dialogDeviceEditCommonName').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
+                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+            });
+            */
         }
         /*
         function getEnums(id, val) {  
@@ -344,6 +397,30 @@
                 });
                 callback(selectId);
             });
+        }
+        function initDialog(callback) {
+            var $editDialog = $('#dialog-name-edit');
+            if (!$editDialog.data('inited')) {
+                $editDialog.data('inited', true);
+                $editDialog.modal({
+                    dismissible: false
+                });
+                $editDialog.find('.btn-set').on('click', function () {
+                    var $editDialog = $('#dialog-name-edit');
+                    var callback = $editDialog.data('callback');
+                    if (typeof callback === 'function') callback();
+                    $editDialog.data('callback', null);
+                });
+                $('#edit_name').on('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        setTimeout(function () {
+                            $editDialog.find('.btn-set').trigger('click');
+                        }, 100);
+                    }
+                });
+            }
+            $editDialog.data('callback', callback);
+            $editDialog.modal('open');
         }
     </script>
 
@@ -678,7 +755,7 @@
                                         <th data-buttons="edit2" style="width: 50px" ></th>
                                         <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
                                         <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
-                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger </th>
+                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger</th>
                                         <!--<th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>-->
                                         <th data-name="heightDown" data-type="number" style="width: 50px" class="translate">height down</th>
                                         <th data-name="direction" data-type="number" style="width: 50px" class="translate">direction</th>
@@ -687,7 +764,7 @@
                                         <!-- ********************** only for temp states ********************** -->
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
                                         <!-- ****************************************************************** -->
-                                        <th data-buttons="delete" style="width: 60px"></th>
+                                        <th data-buttons="edit delete" style="width: 80px"></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -707,7 +784,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="m material-dialogs">
         <div id="dialog-select-member" class="modal modal-fixed-footer">
             <div class="modal-content">
@@ -724,60 +800,53 @@
                 <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
             </div>
         </div>
-    </div>
-    <!-- ++++++++++ DIALOGS ++++++++++ -->
-    <div class="m material-dialogs">
-		<!-- DIALOG: DeviceEdit -->
-        <div id="dialogDeviceEdit" class="modal modal-fixed-footer">
+        <div id="dialog-name-edit" class="modal modal-fixed-footer">
             <div class="modal-content">
-                <input type="hidden" id="dialogDeviceEditViewIndex" />
-                <input type="hidden" id="dialogDeviceEditDeviceIndex" />
                 <div class="row">
                     <div class="col s12">
-                        <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditCommonName"></span></h6>
+                            <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditCommonName"></span></h6>
                     </div>
                 </div>
-				<div class="row">
-					<div class="col s12">
-						<h6 class="translate sub-title">
-							<a class="btn-floating btn-small waves-effect waves-light" href="https://github.com/sbormann/ioBroker.iqontrol/blob/master/README.md#description-of-roles-and-associated-states" target="_blank"><i class="material-icons">live_help</i></a>
-							Select Role
-						</h6>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<select class="value icons" name='dialogDeviceEditCommonRole' id='dialogDeviceEditCommonRole'></select>
-						<label for='dialogDeviceEditCommonRole' class="translate"></label>
-						<span class="translate">Role</span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s12">
-						<h6 class="translate sub-title">Set Corresponding States</h6>
-					</div>
-				</div>
-				<div class="col s12" id="tableDialogDeviceEditStates">
-					<div class="col s12 m12 l12">
-						<table class="table-values" style="width: 90%;">
-							<thead>
-								<tr>
-									<th data-name="state" class="translate">State</th>
-									<th data-name="commonRole" style="display: none;" data-type="select" data-options="linkedState;const;array" class="translate">Role</th>
-									<th data-name="value" class="translate">Value</th>
-									<th data-buttons="edit" style="width:50px;"></th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col s6 l3 input-field">
+                        <input type="checkbox" class="value" id="triggerState" />
+                        <span for="triggerState" class="translate">State from Trigger</span>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="checkbox" class="value" id="triggerChange" />
+                        <span for="triggerChange" class="translate">Drive by Trigger</span>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="triggerDrive" min=0 max=100 />
+                        <label for="triggerDrive" class="translate">height for trigger</label>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="heightDown" min=0 max=100 />
+                        <label for="heightDown" class="translate">height down</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="direction" min=0 max=400 />
+                        <label for="direction" class="translate">direction</label>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="directionRange" min=0 max=400 />
+                        <label for="directionRange" class="translate">+/- range direction</label>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="tempInside" min=0 max=40 />
+                        <label for="tempInside" class="translate">Temp Inside</label>
+                    </div>
+                </div>    
+                
             </div>
             <div class="modal-footer">
                 <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Ok</span></a>
                 <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left">close</i><span class="translate">Cancel</span></a>
             </div>
         </div>
-    </div>    
+    </div>  
 </body>
 
 </html>
