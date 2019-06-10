@@ -74,16 +74,163 @@
             margin-left: 2rem !important;
             padding-top: 0 !important;
         }
+        /*
         .m .modal.modal-fixed-footer .modal-footer {
             right: 50px;
         }
+        */
         
-        #dialog-name-edit {
+        #dialog-sun-edit {
         width: 70%;
         height: calc(100% + 125px);
         }
-        #dialog-name-edit .title {
-            width: calc(100% + 30px);
+        #dialog-sun-edit .title {
+            background: #64b5f6;
+            color: #FFF;
+            padding: 0.5rem;
+        }
+        #dialog-sun-edit .btn {
+            margin-right: 1.5rem;
+        }
+        #dialog-shutter-edit{
+            width: 70%;
+            height: calc(100% + 125px);
+        }
+        #dialog-shutter-edit.title {
+            background: #64b5f6;
+            color: #FFF;
+            padding: 0.5rem;
+        }
+        
+        #dialog-shutter-edit .btn {
+            margin-right: 1.5rem;
+        }
+        .hidden {
+            display:none;
+            width:0;
+            height:0;
+            opacity:0;
+            visibility: collapse;
+        }
+        #events td:nth-of-type(7){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(7){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(8){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(8){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(9){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(9){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(10){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(10){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(11){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(11){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(12){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(12){
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(13){
+            visibility: hidden;
+            display: none;
+        }
+        #events th:nth-of-type(13){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(8){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(8){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(9){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(9){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(10){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(10){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(11){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(11){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(12){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(12){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(13){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(13){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(14){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(14){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun td:nth-of-type(15){
+            visibility: hidden;
+            display: none;
+        }
+        #eventsSun th:nth-of-type(15){
+            visibility: hidden;
+            display: none;
         }
         
     </style>
@@ -221,7 +368,7 @@
             $sel.select();
         }
         function tableOnReady() {
-            $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
+            $('#events .table-values-div .table-values .values-buttons[data-command="edit1"]').on('click', function () {
                 let id = $(this).data('index');
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
@@ -255,46 +402,91 @@
             $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
                 let id = $(this).data('index');
                 
-                initDialog(function (sid) {
+                initDialogSun(function (sid) {
                     var newTemInside = $('#tempInside').val();
                     var newTriggerDrive = $('#triggerDrive').val();
                     var newHeightDown = $('#heightDown').val();
                     var newDirection = $('#direction').val();
                     var newDirectionRange = $('#directionRange').val();
-                    //states
-                    var newTriggerState = $('#triggerState').val();
-                    var newTriggerChange = $('#triggerChange').val();
+
                     $('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
                     $('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
                     $('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
                     $('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val(newDirection).trigger('change');
                     $('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val(newDirectionRange).trigger('change');
-                    // states 
-                    //$('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop(newTriggerState).trigger('change');
-                    //$('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop(newTriggerChange).trigger('change');
+
+                    if ($('#triggerState').prop('checked')) {
+                        $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
+                    } else {
+                        $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', false);
+                    }
+                    if ($('#triggerChange').prop('checked')) {
+                        $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', true);
+                    } else {
+                        $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
+                    }
                 });
-                $('#dialogDeviceEditCommonName').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
+                $('#dialogDeviceEditSun').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
                 $('#tempInside').val($('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
                 $('#triggerDrive').val($('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
                 $('#heightDown').val($('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
                 $('#direction').val($('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val());
                 $('#directionRange').val($('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
-                // states
-                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
-                $('#triggerChange').val($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
+
+                if ($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
+                    $('#triggerState').prop('checked', true);
+                } else {
+                    $('#triggerState').prop('checked', false);
+                }
+                if ($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked')) {
+                    $('#triggerChange').prop('checked', true);
+                } else {
+                    $('#triggerChange').prop('checked', false);
+                }
             });
-            /*
-            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
+
+            $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
                 let id = $(this).data('index');
                 
-                initDialog(function (sid) {
-                    var newTriggerState = $('#triggerState').val();
-                    $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                initDialogShutter(function (sid) {
+                    var newHeightUp = $('#heightUpShutter').val();
+                    var newHeightDown = $('#heightDownShutter').val();
+                    var newTriggerDrive = $('#triggerDriveShutter').val();
+                    var newElevation = $('#elevationShutter').val();
+
+                    $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val(newHeightUp).trigger('change');
+                    $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
+                    $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
+                    $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val(newElevation).trigger('change');
+
+                    if ($('#triggerStateShutter').prop('checked')) {
+                        $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
+                    } else {
+                        $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', false);
+                    }
+                    if ($('#triggerChangeShutter').prop('checked')) {
+                        $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', true);
+                    } else {
+                        $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
+                    }
                 });
-                $('#dialogDeviceEditCommonName').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
-                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+                $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="name"][data-index="' + id + '"]').val());
+                $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
+                $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
+                $('#triggerDriveShutter').val($('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
+                $('#elevationShutter').val($('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val());
+
+                if ($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
+                    $('#triggerStateShutter').prop('checked', true);
+                } else {
+                    $('#triggerStateShutter').prop('checked', false);
+                }
+                if ($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked')) {
+                    $('#triggerChangeShutter').prop('checked', true);
+                } else {
+                    $('#triggerChangeShutter').prop('checked', false);
+                }
             });
-            */
         }
         /*
         function getEnums(id, val) {  
@@ -398,19 +590,21 @@
                 callback(selectId);
             });
         }
-        function initDialog(callback) {
-            var $editDialog = $('#dialog-name-edit');
+        function initDialogSun(callback) {
+            var $editDialog = $('#dialog-sun-edit');
             if (!$editDialog.data('inited')) {
                 $editDialog.data('inited', true);
                 $editDialog.modal({
                     dismissible: false
                 });
+                
                 $editDialog.find('.btn-set').on('click', function () {
-                    var $editDialog = $('#dialog-name-edit');
+                    var $editDialog = $('#dialog-sun-edit');
                     var callback = $editDialog.data('callback');
                     if (typeof callback === 'function') callback();
                     $editDialog.data('callback', null);
                 });
+                /*
                 $('#edit_name').on('keyup', function (e) {
                     if (e.keyCode === 13) {
                         setTimeout(function () {
@@ -418,6 +612,34 @@
                         }, 100);
                     }
                 });
+                */
+            }
+            $editDialog.data('callback', callback);
+            $editDialog.modal('open');
+        }
+        function initDialogShutter(callback) {
+            var $editDialog = $('#dialog-shutter-edit');
+            if (!$editDialog.data('inited')) {
+                $editDialog.data('inited', true);
+                $editDialog.modal({
+                    dismissible: false
+                });
+                
+                $editDialog.find('.btn-set').on('click', function () {
+                    var $editDialog = $('#dialog-shutter-edit');
+                    var callback = $editDialog.data('callback');
+                    if (typeof callback === 'function') callback();
+                    $editDialog.data('callback', null);
+                });
+                /*
+                $('#edit_name').on('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        setTimeout(function () {
+                            $editDialog.find('.btn-set').trigger('click');
+                        }, 100);
+                    }
+                });
+                */
             }
             $editDialog.data('callback', callback);
             $editDialog.modal('open');
@@ -481,26 +703,21 @@
                                     <tr>
                                         <!--<th data-name="_index" style="width: 30px"></th>-->
                                         <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
-                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">Object-ID shutter</th>
-                                        <th data-name="typeUp" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunrise;goldenhour End" data-type="select">type up</th>
-                                        <th data-name="typeDown" style="width: 15%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunset;goldenhour;elevation" data-type="select">type down</th>
-                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
-                                        <th data-buttons="edit" style="width: 50px" ></th>
-                                        <th data-name="heightUp" data-type="number" style="width: 50px" class="translate">height up</th>
-                                        <th data-name="heightDown" data-type="number" style="width: 50px" class="translate">height down</th>
-                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
-                                        <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
-                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger </th>
-                                        <!--<th data-name="sunProt" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Sun Protec</th>-->
-                                        <!--<th data-name="astro" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use Astro</th>-->
-                                        <th data-name="useHoliday" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use holiday</th>
-                                        <!--<th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>-->
-                                        <!--<th data-name="option" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">option</th>-->
-                                        <th data-name="elevation" data-type="number" style="width: 50px" class="translate">Elevation</th>
+                                        <th data-name="name" data-type="text" style="width: 25%" class="translate">Object-ID shutter</th>
+                                        <th data-name="typeUp" style="width: 20%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunrise;goldenhour End" data-type="select">type up</th>
+                                        <th data-name="typeDown" style="width: 20%" class="translate" data-options="living;living-auto;sleep;sleep-auto;sunset;goldenhour;elevation" data-type="select">type down</th>
+                                        <th data-name="triggerID" data-type="text" style="width: 25%" class="translate">Trigger ID</th>
+                                        <th data-buttons="edit1" style="width: 50px" ></th>
                                         <!-- ********************** only for temp states ********************** -->
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="heightUp" data-type="number" style="width: 0px" class="translate">height up</th>
+                                        <th data-name="heightDown" data-type="number" style="width: 0px" class="translate">height down</th>
+                                        <th data-name="triggerState" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">State from Trigger</th>
+                                        <th data-name="triggerDrive" data-type="number" style="width: 0px" class="translate">height for trigger</th>
+                                        <th data-name="triggerChange" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">Drive by Trigger </th>
+                                        <th data-name="elevation" data-type="number" style="width: 0px" class="translate">Elevation</th>
                                         <!-- ****************************************************************** -->
-                                        <th data-buttons="delete" style="width: 100px"></th>
+                                        <th data-buttons="edit delete" style="width: 100px"></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -746,25 +963,27 @@
                                 <table class="table-values">
                                     <thead>
                                     <tr>
-                                        <th data-name="enabled"  style="width: 50px; text-align: center" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
-                                        <th data-name="name" data-type="text" style="width: 20%" class="translate">Object-ID shutter</th>
-                                        <th data-name="type" style="width: 20%" class="translate" data-options="in- & outside temperature;only direction;in- & outside temperature and direction;outside temperature and direction;only outside temperature;only inside temperature" data-type="select">Type of control</th>
-                                        <th data-name="tempSensor" data-type="text" style="width: 20%" class="translate">Temp sensor Inside</th>
+                                        <th data-name="enabled"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">active</th>
+                                        <th data-name="name" data-type="text" style="width: 25%" class="translate">Object-ID shutter</th>
+                                        <th data-name="type" style="width: 25%" class="translate" data-options="in- & outside temperature;only direction;in- & outside temperature and direction;outside temperature and direction;only outside temperature;only inside temperature" data-type="select">Type of control</th>
+                                        <th data-name="tempSensor" data-type="text" style="width: 25%" class="translate">Temp sensor Inside</th>
                                         <th data-buttons="edit1" style="width: 50px" ></th>
-                                        <th data-name="triggerID" data-type="text" style="width: 20%" class="translate">Trigger ID</th>
+                                        <th data-name="triggerID" data-type="text" style="width: 25%" class="translate">Trigger ID</th>
                                         <th data-buttons="edit2" style="width: 50px" ></th>
-                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">State from Trigger</th>
-                                        <th data-name="triggerDrive" data-type="number" style="width: 50px" class="translate">height for trigger</th>
-                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Drive by Trigger</th>
-                                        <!--<th data-name="usedirection"  style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate">Use direction</th>-->
-                                        <th data-name="heightDown" data-type="number" style="width: 50px" class="translate">height down</th>
-                                        <th data-name="direction" data-type="number" style="width: 50px" class="translate">direction</th>
-                                        <th data-name="directionRange" data-type="number" style="width: 50px" class="translate">+/- range direction</th>
-                                        <th data-name="tempInside" data-type="number" style="width: 50px" class="translate">Temp Inside</th>
                                         <!-- ********************** only for temp states ********************** -->
+                                        <th data-name="triggerDrive" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="heightDown" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="direction" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="directionRange" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="tempInside" data-type="number" style="width: 0px" class="translate"></th>
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
+                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate"></th>
+                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px"data-type="checkbox" class="translate"></th>
                                         <!-- ****************************************************************** -->
-                                        <th data-buttons="edit delete" style="width: 80px"></th>
+                                        <th data-buttons="edit delete" style="width: 100px"></th>
+                                        
+                                        
+                                        
                                     </tr>
                                     </thead>
                                 </table>
@@ -800,11 +1019,11 @@
                 <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
             </div>
         </div>
-        <div id="dialog-name-edit" class="modal modal-fixed-footer">
+        <div id="dialog-sun-edit" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <div class="row">
                     <div class="col s12">
-                            <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditCommonName"></span></h6>
+                            <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditSun"></span></h6>
                     </div>
                 </div>
                 <div class="row">
@@ -839,7 +1058,47 @@
                         <label for="tempInside" class="translate">Temp Inside</label>
                     </div>
                 </div>    
-                
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Ok</span></a>
+                <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left">close</i><span class="translate">Cancel</span></a>
+            </div>
+        </div>
+        <div id="dialog-shutter-edit" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12">
+                            <h6 class="title"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditShutter"></span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 l3 input-field">
+                        <input type="checkbox" class="value" id="triggerStateShutter" />
+                        <span for="triggerStateShutter" class="translate">State from Trigger</span>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="checkbox" class="value" id="triggerChangeShutter" />
+                        <span for="triggerChangeShutter" class="translate">Drive by Trigger</span>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="triggerDriveShutter" min=0 max=100 />
+                        <label for="triggerDriveShutter" class="translate">height for trigger</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="heightDownShutter" min=0 max=100 />
+                        <label for="heightDownShutter" class="translate">height down</label>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="heightUpShutter" min=0 max=100 />
+                        <label for="heightUpShutter" class="translate">height up</label>
+                    </div>
+                    <div class="col s6 l3 input-field">
+                        <input type="number" class="value" id="elevationShutter" min=0 max=100 />
+                        <label for="elevationShutter" class="translate">Elevation</label>
+                    </div>
+                </div>    
             </div>
             <div class="modal-footer">
                 <a class="modal-action modal-close waves-effect waves-green btn btn-set"><i class="large material-icons left">check</i><span class="translate">Ok</span></a>
