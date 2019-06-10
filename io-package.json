@@ -1,15 +1,43 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.2",
+        "version": "0.2.3",
         "news": {
+            "0.2.3": {
+                "en": "Fix Elevation, Fix direction, Add all translate, Add new popup for shutter config, clean table",
+                "ru": "Фиксировать высоту, Фиксировать направление, Добавить все переводы, Добавить новое всплывающее окно для конфигурации затвора, очистить таблицу",
+                "es": "Arreglar Elevación, Fijar dirección, Agregar todo traducir, Agregar nueva ventana emergente para la configuración del obturador, limpiar la tabla",
+                "de": "Fix Elevation, Fix direction, alle Übersetungen hinzugefügt, Neues Popup für die Rolladen Konfiguration hinzugefügt, Tabellen bereinigt",
+                "pl": "Fix Elevation, Fix direction, Add all translate, Add new popup dla konfiguracji migawki, czysta tabela",
+                "fr": "Fix Elevation, Fix direction, Ajouter tout traduire, Ajouter une nouvelle fenêtre contextuelle pour la configuration de l'obturateur, table propre",
+                "pt": "Corrigir elevação, direção de correção, adicionar todos os traduzir, adicionar novo pop-up para configuração do obturador, limpar a tabela",
+                "it": "Correzione altezza, Correzione direzione, Aggiungi tutto traduci, Aggiungi nuovo popup per la configurazione dell'otturatore, tavolo pulito",
+                "nl": "Hoogte herstellen, richting corrigeren, Alles vertalen, Nieuwe popup voor sluiterconfiguratie toevoegen, tabel opschonen",
+                "zh-cn": "修复高程，修正方向，添加所有翻译，为快门配置添加新弹出窗口，清洁表格"
+            },
             "0.2.2": {
                 "en": "Beta 0.2.2",
-                "de": "Beta 0.2.2"
+                "de": "Beta 0.2.2",
+                "ru": "Бета 0.2.2",
+                "pt": "Beta 0,2,2",
+                "nl": "Beta 0.2.2",
+                "fr": "Beta 0.2.2",
+                "it": "Beta 0.2.2",
+                "es": "Beta 0.2.2",
+                "pl": "Beta 0.2.2",
+                "zh-cn": "Beta 0.2.2"
             },
             "0.2.1": {
-                "en": "Shutters drive when the trigger is changed; Add Trigger ID for Auto-Living; Add Trigger ID for Auto-Sleep; add shutter height for trigger; Add boolean for drive on change Trigger",
-                "de": "Rollläden fahrn bei Änderung des Triggers; Trigger ID für den Auto-Wohnbereich hinzugefügt; Trigger ID für den Auto-Schlafbereich hinzugefügt; Rolladenhöhe bei Änderung des Triggers einstellbar; Schalter für Auslösung bei Änderung des Triggers hinzugefügt"
+                "en": "Shutters drive when the trigger is changed, Add Trigger ID for Auto-Living, Add Trigger ID for Auto-Sleep, add shutter height for trigger, Add boolean for drive on change Trigger",
+                "ru": "Затвор диска при изменении триггера, добавление идентификатора триггера для автоматического режима жизни, добавление идентификатора триггера для автоматического режима сна, добавление высоты затвора для триггера, добавление логического значения для привода при изменении триггера",
+                "fr": "Les volets roulent lorsque le déclencheur est modifié, Ajouter un identifiant de déclencheur pour l'auto-habitation, Ajouter un identifiant de déclencheur pour une veille automatique, ajouter une hauteur d'obturateur pour le déclencheur, Ajouter un booléen pour un changement de déclencheur",
+                "de": "Shutters fahren, wenn der Auslöser geändert wird, Trigger-ID für Auto-Living hinzugefügt, Trigger-ID für Auto-Sleep hinzugefügt, Rolladenhöhe für Auslöser hinzugefügt, Schalter für das fahren bei Auslöser-Änderung hinzugefügt",
+                "pt": "Shutters drive quando o gatilho é alterado, Add Trigger ID para Auto-Living, Add Trigger ID para Auto-Sleep, adicionar altura do obturador para gatilho, Adicionar booleano para a unidade na mudança Trigger",
+                "es": "Los obturadores se accionan cuando se cambia el disparador, Agregar ID de activador para la vida automática, Agregar Id. De activador para el apagado automático, Agregar altura de obturador para el activador, Agregar booleano para conducir al cambiar Activación",
+                "pl": "Napęd migawki po zmianie wyzwalacza, Dodaj ID wyzwalacza dla Auto-Living, Dodaj ID wyzwalacza dla Auto-Sleep, dodaj wysokość migawki dla wyzwalacza, Dodaj boolean dla napędu przy zmianie Wyzwalacz",
+                "nl": "Shuttersaandrijving wanneer de trigger wordt gewijzigd, Trigger-ID toevoegen voor Auto-Living, Trigger-ID toevoegen voor auto-slaapstand, sluiterhoogte voor trigger toevoegen, Boolean voor station toevoegen bij wijziging Trigger",
+                "it": "Azionamento otturatore quando viene modificato il grilletto, Aggiungi ID trigger per Auto-Living, Aggiungi ID trigger per Auto-Sleep, aggiungi l'altezza dell'otturatore per il trigger, Aggiungi booleano per l'unità al cambiamento. Trigger",
+                "zh-cn": "触发器更改时快门驱动，自动生成添加触发器ID，自动睡眠添加触发器ID，触发器添加快门高度，更改触发器时添加布尔值触发器"
             },
             "0.2.0": {
                 "en": "complete restructuring of functions",

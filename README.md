@@ -4,7 +4,7 @@
 </h1>
 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
-<!--![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)-->
+![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
 [![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Dependency Status](https://img.shields.io/david/simatec/iobroker.shuttercontrol.svg)](https://david-dm.org/simatec/iobroker.shuttercontrol)
@@ -31,7 +31,14 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.2.1 (01.06.2019)
+### 0.2.2 (10.06.2019)
+* (simatec) Fix Elevation
+* (simatec) Fix direction
+* (simatec) Add all translate
+* (simatec) Add new popup for shutter config
+* (simatec) clean table
+
+### 0.2.2 (01.06.2019)
 * (simatec) Beta 0.2.2
 
 ### 0.2.1 (01.06.2019)
