@@ -31,7 +31,7 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.2.2 (10.06.2019)
+### 0.2.3 (10.06.2019)
 * (simatec) Fix Elevation
 * (simatec) Fix direction
 * (simatec) Add all translate
