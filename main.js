@@ -1158,7 +1158,7 @@ function sunProtect() {
                         if (result[i].type == 'in- & outside temperature') {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '')  {
+                                    if ((result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                         let insideTemp;
                                         adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                             if (state) {
@@ -1196,7 +1196,7 @@ function sunProtect() {
 
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '')  {
+                                    if ((result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                         let insideTemp;
                                         adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                             if (state) {
@@ -1233,7 +1233,7 @@ function sunProtect() {
                             const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                    if ((result[i].triggerID && (state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
                                         if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                             if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
@@ -1261,7 +1261,7 @@ function sunProtect() {
                         if (result[i].type == 'only outside temperature') {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                    if ((result[i].triggerID && (state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
                                         if ((adapter.config.setpointValue) < actualValueStr || (adapter.config.setpointValueLight) < actualValueLightStr) {
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
@@ -1287,7 +1287,7 @@ function sunProtect() {
                         if (result[i].type == 'only inside temperature') {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '')  {
+                                    if (r(esult[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                         let insideTemp;
                                         adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                             if (state) {
