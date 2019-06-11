@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.3",
+        "version": "0.2.4",
         "news": {
+            "0.2.4": {
+                "en": "Beta 0.2.4",
+                "de": "Beta 0.2.4",
+                "it": "Beta 0.2.4",
+                "es": "Beta 0.2.4",
+                "pl": "Beta 0.2.4",
+                "ru": "Бета 0.2.4",
+                "zh-cn": "Beta 0.2.4",
+                "nl": "Beta 0.2.4",
+                "fr": "Beta 0.2.4",
+                "pt": "Beta 0,2,4"
+            },
             "0.2.3": {
                 "en": "Fix Elevation, Fix direction, Add all translate, Add new popup for shutter config, clean table",
                 "ru": "Фиксировать высоту, Фиксировать направление, Добавить все переводы, Добавить новое всплывающее окно для конфигурации затвора, очистить таблицу",

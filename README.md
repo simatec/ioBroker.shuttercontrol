@@ -1,7 +1,7 @@
-<h1>
-    <img src="admin/shuttercontrol.png" width="64"/>
-    ioBroker.shuttercontrol
-</h1>
+![Logo](admin/schuttercontrol.png)
+# ioBroker.shuttercontrol
+
+*************************************************************************************************************************************
 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
@@ -30,6 +30,9 @@ automatic control for shutters
 
 
 ## Changelog
+
+### 0.2.4 (11.06.2019)
+* (simatec) Beta 0.2.4
 
 ### 0.2.3 (10.06.2019)
 * (simatec) Fix Elevation

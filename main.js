@@ -552,7 +552,7 @@ function shutterGoldenHour() {
 
             if (resultFull) {
                 // Filter Area Living
-                const resLiving = resultFull.filter(d => d.typeUp == 'goldenhour');
+                const resLiving = resultFull.filter(d => d.typeUp == 'goldenhour End');
                 // Filter enabled
                 let resEnabled = resLiving.filter(d => d.enabled === true);
 
@@ -810,9 +810,9 @@ function shutterUpLiving() {
                 if (resultFull) {
                     const resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
                     // Filter enabled
-                    resEnabled = resLivingAuto.filter(d => d.enabled === true);
+                    let resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
-                    result = resEnabled;
+                    let result = resEnabled;
 
                     for ( const i in result) {
                         setTimeout(function() {
