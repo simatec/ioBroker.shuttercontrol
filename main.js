@@ -175,7 +175,7 @@ function startAdapter(options) {
             }
         } else {
             // The state was deleted
-            adapter.log.info(`state ${id} deleted`);
+            //adapter.log.info(`state ${id} deleted`);
         }
     });
 }
