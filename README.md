@@ -1,4 +1,4 @@
-![Logo](admin/schuttercontrol.png)
+![Logo](admin/shuttercontrol.png)
 # ioBroker.shuttercontrol
 
 *************************************************************************************************************************************
