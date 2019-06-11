@@ -107,7 +107,7 @@ function startAdapter(options) {
     adapter.on('stateChange', (id, state) => {
         if (state) {
             // The state was changed
-            adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+            //adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 
             if (id === adapter.namespace + '.control.Holiday') {
                 HolidayStr = state['val'];
