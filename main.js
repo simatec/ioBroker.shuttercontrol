@@ -188,7 +188,7 @@ function sunTriggerChange() {
     
     for ( const i in arrayChangeTrigger) {
         setTimeout(function() {
-            if (arrayChangeTrigger[i].triggerChange == true) {
+            if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                     if (arrayChangeTrigger[i].triggerID && (state['val']) != arrayChangeTrigger[i].triggerState)  {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
@@ -199,9 +199,14 @@ function sunTriggerChange() {
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
                         });
-                    } else if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
+                    }
+                });
+            }
+            if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
+                adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
+                    if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  {
+                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
@@ -221,7 +226,7 @@ function triggerChange() {
     
     for ( const i in arrayChangeTrigger) {
         setTimeout(function() {
-            if (arrayChangeTrigger[i].triggerChange == true) {
+            if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                     if (arrayChangeTrigger[i].triggerID && (state['val']) != arrayChangeTrigger[i].triggerState)  {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
@@ -232,9 +237,14 @@ function triggerChange() {
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
                         });
-                    } else if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
+                    }
+                });
+            }
+            if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
+                adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
+                    if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  {
+                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
@@ -1431,8 +1441,8 @@ function sunPos() {
     azimuth = Math.round(10 * currentAzimuth) / 10
     elevation = Math.round(10 * currentAltitude) / 10
 
-    adapter.log.debug('Sun current Altitude: ' + currentAltitude + '°');
-    adapter.log.debug('Sun current azimuth: ' + currentAzimuth + '°');
+    //adapter.log.debug('Sun current Altitude: ' + currentAltitude + '°');
+    //adapter.log.debug('Sun current azimuth: ' + currentAzimuth + '°');
 
     adapter.log.debug('Sun Azimut: ' + azimuth + '°');
     adapter.setState('info.Azimut', { val: azimuth, ack: true });

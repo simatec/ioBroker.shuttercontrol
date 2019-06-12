@@ -408,13 +408,18 @@
                     var newHeightDown = $('#heightDown').val();
                     var newDirection = $('#direction').val();
                     var newDirectionRange = $('#directionRange').val();
+                    var newTriggerState = $('#triggerState').val();
+                    var newTriggerChange = $('#triggerChange').val();
 
                     $('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
                     $('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
                     $('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
                     $('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val(newDirection).trigger('change');
                     $('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val(newDirectionRange).trigger('change');
-
+                    $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                    $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val(newTriggerChange).trigger('change');
+                    
+                    /*
                     if ($('#triggerState').prop('checked')) {
                         $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
                     } else {
@@ -425,6 +430,7 @@
                     } else {
                         $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
                     }
+                    */
                 });
                 $('#dialogDeviceEditSun').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
                 $('#tempInside').val($('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
@@ -432,7 +438,11 @@
                 $('#heightDown').val($('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
                 $('#direction').val($('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val());
                 $('#directionRange').val($('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
-
+                $('#triggerChange').val($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
+                $('#triggerChange').select()
+                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+                $('#triggerState').select()
+                /*
                 if ($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
                     $('#triggerState').prop('checked', true);
                 } else {
@@ -443,6 +453,7 @@
                 } else {
                     $('#triggerChange').prop('checked', false);
                 }
+                */
             });
 
             $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
@@ -453,12 +464,16 @@
                     var newHeightDown = $('#heightDownShutter').val();
                     var newTriggerDrive = $('#triggerDriveShutter').val();
                     var newElevation = $('#elevationShutter').val();
+                    var newTriggerState = $('#triggerStateShutter').val();
+                    var newTriggerChange = $('#triggerChangeShutter').val();
 
                     $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val(newHeightUp).trigger('change');
                     $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
                     $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
                     $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val(newElevation).trigger('change');
-
+                    $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                    $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val(newTriggerChange).trigger('change');
+                    /*
                     if ($('#triggerStateShutter').prop('checked')) {
                         $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
                     } else {
@@ -469,13 +484,18 @@
                     } else {
                         $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
                     }
+                    */
                 });
                 $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="name"][data-index="' + id + '"]').val());
                 $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
                 $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
                 $('#triggerDriveShutter').val($('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
                 $('#elevationShutter').val($('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val());
-
+                $('#triggerChangeShutter').val($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
+                $('#triggerChangeShutter').select()
+                $('#triggerStateShutter').val($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+                $('#triggerStateShutter').select()
+                /*
                 if ($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
                     $('#triggerStateShutter').prop('checked', true);
                 } else {
@@ -486,6 +506,7 @@
                 } else {
                     $('#triggerChangeShutter').prop('checked', false);
                 }
+                */
             });
         }
         /*
@@ -710,9 +731,9 @@
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
                                         <th data-name="heightUp" data-type="number" style="width: 0px" class="translate">height up</th>
                                         <th data-name="heightDown" data-type="number" style="width: 0px" class="translate">height down</th>
-                                        <th data-name="triggerState" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">State from Trigger</th>
+                                        <th data-name="triggerState" style="width: 0px" data-style="width: 0px" data-type="text" class="translate">State from Trigger</th>
                                         <th data-name="triggerDrive" data-type="number" style="width: 0px" class="translate">height for trigger</th>
-                                        <th data-name="triggerChange" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">Drive by Trigger </th>
+                                        <th data-name="triggerChange" style="width: 0px" data-style="width: 0px" data-type="text" class="translate">Drive by Trigger </th>
                                         <th data-name="elevation" data-type="number" style="width: 0px" class="translate">Elevation</th>
                                         <!-- ****************************************************************** -->
                                         <th data-buttons="edit delete" style="width: 100px"></th>
@@ -975,8 +996,8 @@
                                         <th data-name="directionRange" data-type="number" style="width: 0px" class="translate"></th>
                                         <th data-name="tempInside" data-type="number" style="width: 0px" class="translate"></th>
                                         <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
-                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="checkbox" class="translate"></th>
-                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px"data-type="checkbox" class="translate"></th>
+                                        <th data-name="triggerState" style="width: 50px" data-style="width: 50px" data-type="text" class="translate"></th>
+                                        <th data-name="triggerChange" style="width: 50px" data-style="width: 50px"data-type="text" class="translate"></th>
                                         <!-- ****************************************************************** -->
                                         <th data-buttons="edit delete" style="width: 100px"></th>
                                         
@@ -1025,6 +1046,26 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12 l3">
+                        <select class="value" id="triggerState">
+                            <option value="true" class="translate">true</option>
+                            <option value="false" class="translate">false</option>
+                            <option value="0" class="translate">0</option>
+                            <option value="1" class="translate">1</option>
+                            <option value="2" class="translate">2</option>
+                        </select>
+                        <label for="triggerState" class="translate">State from Trigger</label>
+                    </div>
+                    <div class="input-field col s12 l3">
+                        <select class="value" id="triggerChange">
+                            <option value="off" class="translate">off</option>
+                            <option value="onlyUp" class="translate">only up</option>
+                            <option value="onlyDown" class="translate">only Down</option>
+                            <option value="upDown" class="translate">up and down</option>
+                        </select>
+                        <label for="triggerChange" class="translate">Drive by Trigger</label>
+                    </div>
+                    <!--
                     <div class="col s6 l3 input-field">
                         <input type="checkbox" class="value" id="triggerState" />
                         <span for="triggerState" class="translate">State from Trigger</span>
@@ -1033,6 +1074,7 @@
                         <input type="checkbox" class="value" id="triggerChange" />
                         <span for="triggerChange" class="translate">Drive by Trigger</span>
                     </div>
+                    -->
                     <div class="col s6 l3 input-field">
                         <input type="number" class="value" id="triggerDrive" min=0 max=100 />
                         <label for="triggerDrive" class="translate">height for trigger</label>
@@ -1070,6 +1112,26 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12 l3">
+                        <select class="value" id="triggerStateShutter">
+                            <option value="true" class="translate">true</option>
+                            <option value="false" class="translate">false</option>
+                            <option value="0" class="translate">0</option>
+                            <option value="1" class="translate">1</option>
+                            <option value="2" class="translate">2</option>
+                        </select>
+                        <label for="triggerStateShutter" class="translate">State from Trigger</label>
+                    </div>
+                    <div class="input-field col s12 l3">
+                        <select class="value" id="triggerChangeShutter">
+                            <option value="off" class="translate">off</option>
+                            <option value="onlyUp" class="translate">only up</option>
+                            <option value="onlyDown" class="translate">only Down</option>
+                            <option value="upDown" class="translate">up and down</option>
+                        </select>
+                        <label for="triggerChangeShutter" class="translate">Drive by Trigger</label>
+                    </div>
+                    <!--
                     <div class="col s6 l3 input-field">
                         <input type="checkbox" class="value" id="triggerStateShutter" />
                         <span for="triggerStateShutter" class="translate">State from Trigger</span>
@@ -1078,6 +1140,7 @@
                         <input type="checkbox" class="value" id="triggerChangeShutter" />
                         <span for="triggerChangeShutter" class="translate">Drive by Trigger</span>
                     </div>
+                    -->
                     <div class="col s6 l3 input-field">
                         <input type="number" class="value" id="triggerDriveShutter" min=0 max=100 />
                         <label for="triggerDriveShutter" class="translate">height for trigger</label>
