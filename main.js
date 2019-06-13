@@ -1191,12 +1191,16 @@ function sunProtect() {
                                             insideTemp = parseFloat(state['val']);
 
                                             adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                outsideTemp = parseFloat(state['val']);
-                                                adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                                if (state) {
+                                                    outsideTemp = parseFloat(state['val']);
+                                                    adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                                }
 
                                                 adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                    sunLight = parseFloat(state['val']);
-                                                    adapter.log.warn('sunLight:' + sunLight);
+                                                    if (state) {
+                                                        sunLight = parseFloat(state['val']);
+                                                        adapter.log.warn('sunLight:' + sunLight);
+                                                    }
 
                                                     if (insideTemp > result[i].tempInside) {
                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
@@ -1242,12 +1246,16 @@ function sunProtect() {
                                             insideTemp = parseFloat(state['val']);
 
                                             adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                outsideTemp = parseFloat(state['val']);
-                                                adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                                if (state) {
+                                                    outsideTemp = parseFloat(state['val']);
+                                                    adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                                }
 
                                                 adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                    sunLight = parseFloat(state['val']);
-                                                    adapter.log.warn('sunLight:' + sunLight);
+                                                    if (state) {
+                                                        sunLight = parseFloat(state['val']);
+                                                        adapter.log.warn('sunLight:' + sunLight);
+                                                    }
 
                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
@@ -1287,12 +1295,16 @@ function sunProtect() {
                                     let sunLight;
 
                                     adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                        outsideTemp = parseFloat(state['val']);
-                                        adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                        if (state) {
+                                            outsideTemp = parseFloat(state['val']);
+                                            adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                        }
 
                                         adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                            sunLight = parseFloat(state['val']);
-                                            adapter.log.warn('sunLight:' + sunLight);
+                                            if (state) {
+                                                sunLight = parseFloat(state['val']);
+                                                adapter.log.warn('sunLight:' + sunLight);
+                                            }
 
                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
@@ -1328,12 +1340,16 @@ function sunProtect() {
                                     let sunLight;
 
                                     adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                        outsideTemp = parseFloat(state['val']);
-                                        adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                        if (state) {
+                                            outsideTemp = parseFloat(state['val']);
+                                            adapter.log.warn('OutsideTemp:' + outsideTemp);
+                                        }
 
                                         adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                            sunLight = parseFloat(state['val']);
-                                            adapter.log.warn('sunLight:' + sunLight);
+                                            if (state) {
+                                                sunLight = parseFloat(state['val']);
+                                                adapter.log.warn('sunLight:' + sunLight);
+                                            }
 
                                             if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
