@@ -202,12 +202,9 @@
         "sunMonthEnd": 9,
         "sun_shutterUp": "19:00",
         "sun_shutterDown": "10:00",
-        "actualValueTemp": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
-        "setpointValueLight": 10,
-        "actualValueLight": "hm-rpc.0.MEQ1234567.2.ACTUAL_TEMPERATURE",
-        "setpointValue": 23,
         "sunProtecEnum": "",
         "driveHeightSun": 30,
+        "sunProtEndElevation": 10,
 
         "events": "",
         "eventsSun": ""
