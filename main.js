@@ -205,11 +205,11 @@ function sunTriggerChange() {
         setTimeout(function() {
             if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && (state['val']) != arrayChangeTrigger[i].triggerState)  {
+                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) != arrayChangeTrigger[i].triggerState)  {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             arrayChangeTrigger[i].currentHeight = (state['val']);
                             adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                            if ((state['val']) != arrayChangeTrigger[i].triggerDrive)  {
+                            if (('' + state['val']) != arrayChangeTrigger[i].triggerDrive)  {
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
@@ -219,9 +219,9 @@ function sunTriggerChange() {
             }
             if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
+                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) == arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
+                            if (('' + state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
@@ -243,11 +243,11 @@ function triggerChange() {
         setTimeout(function() {
             if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && (state['val']) != arrayChangeTrigger[i].triggerState)  {
+                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) != arrayChangeTrigger[i].triggerState)  {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             arrayChangeTrigger[i].currentHeight = (state['val']);
                             adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                            if ((state['val']) != arrayChangeTrigger[i].triggerDrive)  {
+                            if (('' + state['val']) != arrayChangeTrigger[i].triggerDrive)  {
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
@@ -257,9 +257,9 @@ function triggerChange() {
             }
             if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && (state['val']) == arrayChangeTrigger[i].triggerState) {
+                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) == arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if ((state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
+                            if (('' + state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
@@ -540,7 +540,8 @@ function elevationDown(){
             if (elevation <= result[i].elevation) {
                 setTimeout(function() {
                     adapter.getForeignState(result[i].triggerID, (err, state) => {
-                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                        if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
+                            adapter.log.warn('' + state['val'])
                             adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -586,7 +587,7 @@ function shutterGoldenHour() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -629,7 +630,7 @@ function shutterGoldenHour() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -677,7 +678,7 @@ function shutterSunriseSunset() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -720,7 +721,7 @@ function shutterSunriseSunset() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -810,7 +811,7 @@ function shutterUpLiving() {
             for ( const i in result) {
                 setTimeout(function() {
                     adapter.getForeignState(result[i].triggerID, (err, state) => {
-                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                        if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                             adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != result[i].heightUp)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -842,7 +843,7 @@ function shutterUpLiving() {
                     for ( const i in result) {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                     adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != result[i].heightUp)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -900,7 +901,7 @@ function shutterDownLiving() {
             for ( const i in result) {
                 setTimeout(function() {
                     adapter.getForeignState(result[i].triggerID, (err, state) => {
-                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                        if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                             adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -932,7 +933,7 @@ function shutterDownLiving() {
                     for ( const i in result) {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                     adapter.getForeignState(result[i].name, (err, state) => {
                                         if ((state['val']) != result[i].heightDown)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -994,7 +995,7 @@ function shutterUpSleep() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -1028,7 +1029,7 @@ function shutterUpSleep() {
                         for ( const i in result) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                    if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if ((state['val']) != result[i].heightUp)  {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
@@ -1091,7 +1092,7 @@ function shutterDownSleep() {
                 for ( const i in result) {
                     setTimeout(function() {
                         adapter.getForeignState(result[i].triggerID, (err, state) => {
-                            if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                            if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                 adapter.getForeignState(result[i].name, (err, state) => {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -1126,7 +1127,7 @@ function shutterDownSleep() {
                         for ( const i in result) {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                        if (result[i].triggerID && (state['val']) == result[i].triggerState)  {
+                                        if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if ((state['val']) != result[i].heightDown)  {
                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -1182,7 +1183,7 @@ function sunProtect() {
                     if (result[i].type == 'in- & outside temperature') {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                     let insideTemp;
                                     let outsideTemp;
                                     let sunLight;
@@ -1237,7 +1238,7 @@ function sunProtect() {
 
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                     let insideTemp;
                                     let outsideTemp;
                                     let sunLight;
@@ -1290,7 +1291,7 @@ function sunProtect() {
                         const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && (state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
                                     let outsideTemp;
                                     let sunLight;
 
@@ -1335,7 +1336,7 @@ function sunProtect() {
                     if (result[i].type == 'only outside temperature') {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && (state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
                                     let outsideTemp;
                                     let sunLight;
 
@@ -1378,7 +1379,7 @@ function sunProtect() {
                     if (result[i].type == 'only inside temperature') {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && (state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
                                     let insideTemp;
                                     adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                         if (state) {
