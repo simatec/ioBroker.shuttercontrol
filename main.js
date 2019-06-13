@@ -108,8 +108,6 @@ function startAdapter(options) {
     // is called if a subscribed state changes
     adapter.on('stateChange', (id, state) => {
         if (state) {
-            // The state was changed
-            //adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 
             if (id === adapter.namespace + '.control.Holiday') {
                 HolidayStr = state['val'];
@@ -188,9 +186,6 @@ function startAdapter(options) {
                 elevationDown();
                 sunProtect();
             }
-        } else {
-            // The state was deleted
-            //adapter.log.info(`state ${id} deleted`);
         }
     });
 }
@@ -1569,6 +1564,7 @@ function main() {
             adapter.log.debug('trigger for sunprotect: ' + element);
         });
     }
+    /*
     let resultInsideTemp = adapter.config.eventsSun;
     if (resultInsideTemp) {
         let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
@@ -1600,6 +1596,7 @@ function main() {
             adapter.log.debug('trigger for outside temperature: ' + element);
         });
     }
+    
     let resultLight = adapter.config.eventsSun;
     if (resultLight) {
         let resLight = resultLight.map(({ lightSensor }) => ({ lightSensor }));
@@ -1615,6 +1612,7 @@ function main() {
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
     }
+    */
 
     
 }
