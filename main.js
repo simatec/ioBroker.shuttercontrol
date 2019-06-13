@@ -1213,7 +1213,7 @@ function sunProtect() {
                                                         }
                                                     } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
                                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                                             }
@@ -1268,7 +1268,7 @@ function sunProtect() {
                                                         }
                                                     } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
                                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                                             }
@@ -1317,7 +1317,7 @@ function sunProtect() {
                                                 }
                                             } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                                     }
@@ -1360,7 +1360,7 @@ function sunProtect() {
                                                 });
                                             } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                                     }
@@ -1393,7 +1393,7 @@ function sunProtect() {
                                                 });
                                             } else if (insideTemp < result[i].tempInside) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) < parseFloat(result[i].triggerDrive)) {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
                                                     }
