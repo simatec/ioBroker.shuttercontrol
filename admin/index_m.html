@@ -339,9 +339,9 @@
             $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit1"]').on('click', function () {
                 let id = $(this).data('index');
                 initSelectId(function (sid) {
-                    sid.selectId('show', $('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val(), function (newId) {
+                    sid.selectId('show', $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
-                            $('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val(newId).trigger('change');
+                            $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
                         }
                     });
                 });
@@ -964,7 +964,7 @@
                                         <th data-name="name" data-type="text" style="width: 30%; background: #64b5f6" class="translate">Object-ID shutter</th>
                                         <th data-buttons="edit2" style="width: 50px; background: #64b5f6" ></th>
                                         <th data-name="triggerID" data-type="text" style="width: 30%; background: #64b5f6" class="translate">Trigger ID</th>
-                                        <th data-buttons="edit2" style="width: 50px; background: #64b5f6" ></th>
+                                        <th data-buttons="edit1" style="width: 50px; background: #64b5f6" ></th>
                                         <th data-name="type" style="width: 25%; background: #64b5f6" class="translate" data-options="in- & outside temperature;only direction;in- & outside temperature and direction;outside temperature and direction;only outside temperature;only inside temperature" data-type="select">Type of control</th>
                                         <!--<th data-buttons="edit1" style="width: 50px; background: #64b5f6" ></th>-->
                                         <!-- ********************** only for temp states ********************** -->

@@ -131,6 +131,7 @@ function startAdapter(options) {
                     shutterDriveCalc();
                 }
             }
+            /*
             if (adapter.config.UseSunMode === true && id === adapter.config.actualValueTemp) {
                 actualValueStr = state['val'];
                 sunProtect();
@@ -139,6 +140,7 @@ function startAdapter(options) {
                 actualValueLightStr = state['val'];
                 sunProtect();
             }
+            */
             if (id === adapter.config.triggerAutoLiving) {
                 adapter.setState('control.autoLiving', {val: state['val'], ack: true});
                 adapter.log.debug('Auto Living is: ' + state['val']);
@@ -161,12 +163,14 @@ function startAdapter(options) {
                     sunTriggerChange();
                 }
             });
+            
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
                 if (id === resSunInsideTempID) {
                     adapter.log.debug('TriggerID Change: ' +  resSunInsideTempID);
                     sunProtect();
                 }
             });
+            
             resSunOutsideTemp.forEach(function(resSunOutsideTempID) {
                 if (id === resSunOutsideTempID) {
                     adapter.log.debug('TriggerID Change: ' +  resSunOutsideTempID);
@@ -179,6 +183,7 @@ function startAdapter(options) {
                     sunProtect();
                 }
             });
+            
             if (id === adapter.namespace + '.info.Azimut') {
                 sunProtect();
             }
@@ -1159,8 +1164,8 @@ function sunProtect() {
         const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
         
         setTimeout(function() {
-            adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
-            adapter.log.debug('current outside Lux: ' + actualValueLightStr + ' lux');
+            //adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
+            //adapter.log.debug('current outside Lux: ' + actualValueLightStr + ' lux');
             adapter.log.debug('current time: ' + currentTime);
             adapter.log.debug('current month: ' + monthIndex);
 
@@ -1525,9 +1530,11 @@ function main() {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
+    /*
     if (adapter.config.UseSunMode === true) {
         adapter.subscribeForeignStates(adapter.config.actualValueTemp);
     }
+    */
     adapter.subscribeForeignStates(adapter.config.triggerAutoLiving);
     adapter.subscribeForeignStates(adapter.config.triggerAutoSleep);
 
@@ -1564,7 +1571,7 @@ function main() {
             adapter.log.debug('trigger for sunprotect: ' + element);
         });
     }
-    /*
+    
     let resultInsideTemp = adapter.config.eventsSun;
     if (resultInsideTemp) {
         let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
@@ -1612,9 +1619,6 @@ function main() {
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
     }
-    */
-
-    
 }
 
 // If started as allInOne/compact mode => return function to create instance
