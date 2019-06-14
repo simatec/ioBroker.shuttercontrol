@@ -187,9 +187,9 @@ function startAdapter(options) {
             if (id === adapter.namespace + '.info.Azimut') {
                 sunProtect();
             }
-            if (id === adapter.namespace + '.info.Elevation') {
+            
+            if (id === adapter.namespace + '.info.Elevation' ) {
                 elevationDown();
-                sunProtect();
             }
         }
     });
@@ -541,7 +541,6 @@ function elevationDown(){
                 setTimeout(function() {
                     adapter.getForeignState(result[i].triggerID, (err, state) => {
                         if (result[i].triggerID && ('' + state['val']) == result[i].triggerState)  {
-                            adapter.log.warn('' + state['val'])
                             adapter.getForeignState(result[i].name, (err, state) => {
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
@@ -561,6 +560,11 @@ function elevationDown(){
             }
         }
     }
+    setTimeout(function() {
+        if (elevation <= adapter.config.sunProtEndElevation) {
+            sunProtect();
+        }
+    }, 120000);
 }
 function shutterGoldenHour() {
 
@@ -1194,13 +1198,11 @@ function sunProtect() {
                                             adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                 if (state) {
                                                     outsideTemp = parseFloat(state['val']);
-                                                    adapter.log.warn('OutsideTemp:' + outsideTemp);
                                                 }
 
                                                 adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                     if (state) {
                                                         sunLight = parseFloat(state['val']);
-                                                        adapter.log.warn('sunLight:' + sunLight);
                                                     }
 
                                                     if (insideTemp > result[i].tempInside) {
@@ -1249,13 +1251,11 @@ function sunProtect() {
                                             adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                 if (state) {
                                                     outsideTemp = parseFloat(state['val']);
-                                                    adapter.log.warn('OutsideTemp:' + outsideTemp);
                                                 }
 
                                                 adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                     if (state) {
                                                         sunLight = parseFloat(state['val']);
-                                                        adapter.log.warn('sunLight:' + sunLight);
                                                     }
 
                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
@@ -1298,13 +1298,11 @@ function sunProtect() {
                                     adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                         if (state) {
                                             outsideTemp = parseFloat(state['val']);
-                                            adapter.log.warn('OutsideTemp:' + outsideTemp);
                                         }
 
                                         adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                             if (state) {
                                                 sunLight = parseFloat(state['val']);
-                                                adapter.log.warn('sunLight:' + sunLight);
                                             }
 
                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
@@ -1343,13 +1341,11 @@ function sunProtect() {
                                     adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                         if (state) {
                                             outsideTemp = parseFloat(state['val']);
-                                            adapter.log.warn('OutsideTemp:' + outsideTemp);
                                         }
 
                                         adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                             if (state) {
                                                 sunLight = parseFloat(state['val']);
-                                                adapter.log.warn('sunLight:' + sunLight);
                                             }
 
                                             if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
