@@ -1181,131 +1181,173 @@ function sunProtect() {
                 // Filter enabled
                 let resEnabled = resultFull.filter(d => d.enabled === true);
                 let result = resEnabled;
-
-                // in- & outside temperature
-                for ( const i in result) {
-                    if (result[i].type == 'in- & outside temperature') {
-                        setTimeout(function() {
-                            adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                    let insideTemp;
-                                    let outsideTemp;
-                                    let sunLight;
-                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                        if (state) {
-                                            insideTemp = parseFloat(state['val']);
-
-                                            adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                if (state) {
-                                                    outsideTemp = parseFloat(state['val']);
-                                                }
-
-                                                adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                    if (state) {
-                                                        sunLight = parseFloat(state['val']);
-                                                    }
-
-                                                    if (insideTemp > result[i].tempInside) {
-                                                        if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
-                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
-                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
-                                                                }
-                                                            });
-                                                        }
-                                                    } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
-                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
-                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            });
-
-                                        }
-                                    });
-                                }
-                            });
-                        }, driveDelayUpSleep * i, i);
-                    }
-                }
-                // in- & outside temperature and direction
-                for ( const i in result) {
-                    if (result[i].type == 'in- & outside temperature and direction') {
-                        const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
-                        const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
-
-                        setTimeout(function() {
-                            adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                    let insideTemp;
-                                    let outsideTemp;
-                                    let sunLight;
-                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                        if (state) {
-                                            insideTemp = parseFloat(state['val']);
-
-                                            adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                if (state) {
-                                                    outsideTemp = parseFloat(state['val']);
-                                                }
-
-                                                adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                    if (state) {
-                                                        sunLight = parseFloat(state['val']);
-                                                    }
-
-                                                    if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
-                                                        if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
-                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
-                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
-                                                                }
-                                                            });
-                                                        }
-                                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                        adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
-                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
-                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            })
-                                        }
-                                    });
-                                }
-                            });
-                        }, driveDelayUpSleep * i, i);
-                    }
-                }
-                // outside temperature and direction
-                for ( const i in result) {
-                    if (result[i].type == 'outside temperature and direction') {
-                        const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
-                        const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
-                        setTimeout(function() {
-                            adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
-                                    let outsideTemp;
-                                    let sunLight;
-
-                                    adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                        if (state) {
-                                            outsideTemp = parseFloat(state['val']);
-                                        }
-
-                                        adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                if (elevation > adapter.config.sunProtEndElevation) {
+                    // in- & outside temperature
+                    for ( const i in result) {
+                        if (result[i].type == 'in- & outside temperature') {
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                        let insideTemp;
+                                        let outsideTemp;
+                                        let sunLight;
+                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                             if (state) {
-                                                sunLight = parseFloat(state['val']);
+                                                insideTemp = parseFloat(state['val']);
+
+                                                adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                                    if (state) {
+                                                        outsideTemp = parseFloat(state['val']);
+                                                    }
+
+                                                    adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                        if (state) {
+                                                            sunLight = parseFloat(state['val']);
+                                                        }
+
+                                                        if (insideTemp > result[i].tempInside) {
+                                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                                    }
+                                                                });
+                                                            }
+                                                        } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                                if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
+                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                });
+
+                                            }
+                                        });
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // in- & outside temperature and direction
+                    for ( const i in result) {
+                        if (result[i].type == 'in- & outside temperature and direction') {
+                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                            const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
+
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                        let insideTemp;
+                                        let outsideTemp;
+                                        let sunLight;
+                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                            if (state) {
+                                                insideTemp = parseFloat(state['val']);
+
+                                                adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                                    if (state) {
+                                                        outsideTemp = parseFloat(state['val']);
+                                                    }
+
+                                                    adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                        if (state) {
+                                                            sunLight = parseFloat(state['val']);
+                                                        }
+
+                                                        if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
+                                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                                    }
+                                                                });
+                                                            }
+                                                        } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                                if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
+                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                })
+                                            }
+                                        });
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // outside temperature and direction
+                    for ( const i in result) {
+                        if (result[i].type == 'outside temperature and direction') {
+                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                            const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                        let outsideTemp;
+                                        let sunLight;
+
+                                        adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                            if (state) {
+                                                outsideTemp = parseFloat(state['val']);
                                             }
 
-                                            if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
+                                            adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                if (state) {
+                                                    sunLight = parseFloat(state['val']);
+                                                }
+
+                                                if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
+                                                    if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                            }
+                                                        });
+                                                    }
+                                                } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
+                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
+                        }
+                    }
+                    // only outside temperature
+                    for ( const i in result) {
+                        if (result[i].type == 'only outside temperature') {
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                        let outsideTemp;
+                                        let sunLight;
+
+                                        adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                            if (state) {
+                                                outsideTemp = parseFloat(state['val']);
+                                            }
+
+                                            adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                if (state) {
+                                                    sunLight = parseFloat(state['val']);
+                                                }
+
                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
@@ -1313,94 +1355,53 @@ function sunProtect() {
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                         }
                                                     });
+                                                } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
+                                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
+                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                        }
+                                                    });
                                                 }
-                                            } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
-                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
-                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
-                                                    }
-                                                });
-                                            }
+                                            });
                                         });
-                                    });
-                                }
-                            });
-                        }, driveDelayUpSleep * i, i);
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
+                        }
                     }
-                }
-                // only outside temperature
-                for ( const i in result) {
-                    if (result[i].type == 'only outside temperature') {
-                        setTimeout(function() {
-                            adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
-                                    let outsideTemp;
-                                    let sunLight;
-
-                                    adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                        if (state) {
-                                            outsideTemp = parseFloat(state['val']);
-                                        }
-
-                                        adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                    // only inside temperature
+                    for ( const i in result) {
+                        if (result[i].type == 'only inside temperature') {
+                            setTimeout(function() {
+                                adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                        let insideTemp;
+                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                             if (state) {
-                                                sunLight = parseFloat(state['val']);
-                                            }
+                                                insideTemp = parseFloat(state['val']);
 
-                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
-                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
-                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
-                                                    }
-                                                });
-                                            } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
-                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
-                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
-                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
-                                                    }
-                                                });
+                                                if (insideTemp > result[i].tempInside) {
+                                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                                        if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
+                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
+                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                        }
+                                                    });
+                                                } else if (insideTemp < result[i].tempInside) {
+                                                    adapter.getForeignState(result[i].name, (err, state) => {
+                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
+                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
+                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
+                                                        }
+                                                    });
+                                                }
                                             }
                                         });
-                                    });
-                                }
-                            });
-                        }, driveDelayUpSleep * i, i);
-                    }
-                }
-                // only inside temperature
-                for ( const i in result) {
-                    if (result[i].type == 'only inside temperature') {
-                        setTimeout(function() {
-                            adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                    let insideTemp;
-                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                        if (state) {
-                                            insideTemp = parseFloat(state['val']);
-
-                                            if (insideTemp > result[i].tempInside) {
-                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDown)) {
-                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
-                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
-                                                    }
-                                                });
-                                            } else if (insideTemp < result[i].tempInside) {
-                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDown)) {
-                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].triggerDrive + '%')
-                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].triggerDrive), false);
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        }, driveDelayUpSleep * i, i);
+                                    }
+                                });
+                            }, driveDelayUpSleep * i, i);
+                        }
                     }
                 }
             }

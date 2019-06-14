@@ -31,6 +31,9 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.7 (14.06.2019)
+* (simatec) Beta 0.2.6
+
 ### 0.2.6 (14.06.2019)
 * (simatec) Beta 0.2.6
 

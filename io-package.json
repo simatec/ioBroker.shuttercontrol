@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.6",
+        "version": "0.2.7",
         "news": {
+            "0.2.7": {
+                "en": "Beta 0.2.7",
+                "de": "Beta 0.2.7",
+                "ru": "Бета 0.2.7",
+                "pt": "Beta 0.2.7",
+                "nl": "Beta 0.2.7",
+                "fr": "Bêta 0.2.7",
+                "it": "Beta 0.2.7",
+                "pl": "Beta 0.2.7",
+                "zh-cn": "Beta 0.2.7",
+                "es": "Beta 0.2.7"
+            },
             "0.2.6": {
                 "en": "Beta 0.2.6",
                 "de": "Beta 0.2.6",
