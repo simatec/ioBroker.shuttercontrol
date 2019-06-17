@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.8",
+        "version": "0.2.9",
         "news": {
+            "0.2.9": {
+                "en": "Bugfix Popup Menu, Fix Trigger ID ",
+                "de": "Bugfix Popup-Menü, Fix Trigger ID",
+                "ru": "Исправление всплывающего меню, исправление идентификатора триггера",
+                "pt": "Menu pop-up Bugfix, Fix Trigger ID",
+                "nl": "Bugfix-pop-upmenu, fix-trigger-ID",
+                "fr": "Menu contextuel de correction de bug, ID de déclencheur fixe",
+                "it": "Menu popup Bugfix, Fix ID trigger",
+                "es": "Menú emergente de corrección de errores, corregir la identificación del activador",
+                "pl": "Menu podręczne poprawek, popraw identyfikator wyzwalacza",
+                "zh-cn": "修正弹出菜单，修复触发器ID"
+            },
             "0.2.8": {
                 "en": "Menu completely revised, Ease of use improved, Example added, Default settings added for each roller shutter, fixed some bugs",
                 "de": "Menü komplett überarbeitet, Benutzerfreundlichkeit verbessert, Beispiel hinzugefügt, Standardeinstellungen für jeden Rollladen hinzugefügt, einige Fehler behoben",

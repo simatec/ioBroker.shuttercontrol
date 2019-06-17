@@ -337,6 +337,7 @@
                     var newTempOutside = $('#setpointValue').val();
                     var newLightSensor = $('#actualValueLight').val();
                     var newValueLight = $('#setpointValueLight').val();
+                    var newTriggerID = $('#triggerID').val();
 
                     var newTypeDown = $('#typeDown').val();
                     var newTypeUp = $('#typeUp').val();
@@ -351,7 +352,8 @@
                     $('#events .values-input[data-name="tempOutside"][data-index="' + id + '"]').val(newTempOutside).trigger('change');
                     $('#events .values-input[data-name="lightSensor"][data-index="' + id + '"]').val(newLightSensor).trigger('change');
                     $('#events .values-input[data-name="valueLight"][data-index="' + id + '"]').val(newValueLight).trigger('change');
-
+                    $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newTriggerID).trigger('change');
+                    
                     $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val(newHeightUp).trigger('change');
                     $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
                     $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
@@ -377,6 +379,7 @@
                 $('#typeUp').select();
                 $('#type').val($('#events .values-input[data-name="type"][data-index="' + id + '"]').val());
                 $('#type').select();
+                $('#triggerID').val($('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val());
                 $('#tempInside').val($('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
                 $('#heightDownSun').val($('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val());
                 $('#direction').val($('#events .values-input[data-name="direction"][data-index="' + id + '"]').val());
@@ -762,7 +765,7 @@
             </div>
         </div>
     <div class="m material-dialogs">
-        <div id="dialog-select-member" class="modal modal-fixed-footer">
+        <div id="dialog-select-member" class="modal modal-fixed-footer" style="z-index:9999 !important;">
             <div class="modal-content">
                 <div class="row">
                     <div class="col s12 title"></div>
@@ -777,7 +780,7 @@
                 <a class="modal-action modal-close waves-effect waves-green btn btn-close"><i class="large material-icons left ">close</i><span class="translate">Cancel</span></a>
             </div>
         </div>
-        <div id="dialog-shutter-edit" class="modal modal-fixed-footer">
+        <div id="dialog-shutter-edit" class="modal modal-fixed-footer" style="z-index: 9995 !important;">
             <div class="row">
                 <div class="modal-content">
                     
