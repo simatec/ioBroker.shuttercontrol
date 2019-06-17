@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.7",
+        "version": "0.2.8",
         "news": {
+            "0.2.8": {
+                "en": "Menu completely revised, Ease of use improved, Example added, Default settings added for each roller shutter, fixed some bugs",
+                "de": "Menü komplett überarbeitet, Benutzerfreundlichkeit verbessert, Beispiel hinzugefügt, Standardeinstellungen für jeden Rollladen hinzugefügt, einige Fehler behoben",
+                "ru": "Меню полностью переработано, удобство использования улучшено, добавлен пример, добавлены настройки по умолчанию для каждой рольставни, исправлены некоторые ошибки",
+                "pt": "Menu completamente revisado, Facilidade de uso melhorada, Exemplo adicionado, Configurações padrão adicionadas para cada obturador, corrigido alguns bugs",
+                "nl": "Menu volledig herzien, gebruiksgemak verbeterd, voorbeeld toegevoegd, standaardinstellingen toegevoegd voor elk rolluik, een aantal bugs opgelost",
+                "fr": "Menu entièrement révisé, facilité d'utilisation améliorée, exemple ajouté, paramètres par défaut ajoutés pour chaque volet roulant, correction de quelques bugs",
+                "it": "Menu completamente rivisto, Facilità d'uso migliorata, Esempio aggiunto, Impostazioni predefinite aggiunte per ogni tapparella, risolti alcuni bug",
+                "es": "Menú completamente revisado, Facilidad de uso mejorada, Ejemplo agregado, Configuraciones predeterminadas agregadas para cada persiana enrollable, arreglado algunos errores",
+                "pl": "Menu całkowicie zmienione, Usprawniono łatwość obsługi, Dodano przykład, Dodano ustawienia domyślne dla każdej rolety, naprawiono niektóre błędy",
+                "zh-cn": "菜单完全修改，易于使用改进，示例添加，为每个卷帘添加默认设置，修复一些错误"
+            },
             "0.2.7": {
                 "en": "Beta 0.2.7",
                 "de": "Beta 0.2.7",
@@ -230,9 +242,33 @@
         "driveHeightSun": 30,
         "sunProtEndElevation": 10,
 
-        "events": "",
-        "eventsSun": ""
-        
+        "events": [
+            {
+                "enabled":true,
+                "shutterName":"shutter example",
+                "name":"hm-rpc.0.MEQ1234567.2.LEVEL",
+                "triggerID":"",
+                "typeUp":"goldenhour End",
+                "typeDown":"elevation",
+                "type":"in- & outside temperature",
+                "heightDownSun":"50",
+                "direction":"290",
+                "directionRange":"15",
+                "tempInside":"23",
+                "tempSensor":"",
+                "outsideTempSensor":"",
+                "tempOutside":"23",
+                "lightSensor":"",
+                "valueLight":"15",
+                "currentHeight":"",
+                "heightUp":"100",
+                "heightDown":"0",
+                "triggerState":"true",
+                "triggerDrive":"100",
+                "triggerChange":"upDown",
+                "elevation":"4"
+            }
+        ]
     },
     "objects": [],
     "instanceObjects": [

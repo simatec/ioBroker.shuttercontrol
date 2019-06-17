@@ -74,17 +74,6 @@
             margin-left: 2rem !important;
             padding-top: 0 !important;
         }
-        /*
-        .m .modal.modal-fixed-footer .modal-footer {
-            right: 50px;
-        }
-        
-        
-        #dialog-sun-edit {
-        width: 95%;
-        height: calc(100% + 125px);
-        }
-        */
         #dialog-shutter-edit .title {
             width: 100% !important;
             background: #64b5f6;
@@ -110,25 +99,6 @@
         #dialog-shutter-edit .btn {
             margin-right: 1.5rem;
         }
-        /*
-        #dialog-shutter-edit{
-            width: 70%;
-            height: calc(100% + 125px);
-        }
-        */
-        
-        #dialog-shutter-edit .btn {
-            margin-right: 1.5rem;
-        }
-        /*
-        .hidden {
-            display:none;
-            width:0;
-            height:0;
-            opacity:0;
-            visibility: collapse;
-        }
-        */
         
         #events td:nth-of-type(6) {visibility: hidden; display: none;}
         #events th:nth-of-type(6) {visibility: hidden; display: none;}
@@ -171,7 +141,13 @@
         #events td:nth-of-type(25) {visibility: hidden; display: none;}
         #events th:nth-of-type(25) {visibility: hidden; display: none;}
 
-        .modal { max-height:95% !important; max-width:95% !important; width:90% !important; height:90% !important; overflow: visible !important; top: 10px !important;}
+        .modal {
+            max-height:95% !important;
+            max-width:95% !important;
+            width:90% !important; height:90% !important;
+            overflow: visible !important;
+            top: 10px !important;
+        }
     </style>
 
     <script type="text/javascript">
@@ -200,49 +176,14 @@
                 }
             });
 
-            var events = [];
+            //var events = [];
             
             events = settings.events    || [];
-
-            //var eventsSun = [];
-            
-            //eventsSun = settings.eventsSun    || [];
             
             showHideSettings();
             
             values2table('events', events, onChange, tableOnReady);
-            //values2table('eventsSun', eventsSun, onChange, tableOnReady);
-            /*
-            $('#responseSunDialog').on('click', function () {
-                var devicesSun = table2values('eventsSun');
-                var idSun = 0;
-                for (var i = 0; i < devicesSun.length; i++) {
-                    idSun = idSun +1;
-                }                
-                setTimeout(function () {
-                    $('#eventsSun .values-input[data-name="triggerState"][data-index="' + idSun + '"]').val('true').trigger('change');
-                    $('#eventsSun .values-input[data-name="type"][data-index="' + idSun + '"]').val('in- & outside temperature and direction').trigger('change');
-                    $('#eventsSun .values-input[data-name="type"][data-index="' + idSun + '"]').select();
-                    $('#eventsSun .values-input[data-name="heightDown"][data-index="' + idSun + '"]').val('30').trigger('change');
-                    $('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + idSun + '"]').val('100').trigger('change');
-                    $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + idSun + '"]').val('off').trigger('change');
-                    $('#eventsSun .values-input[data-name="direction"][data-index="' + idSun + '"]').val('120').trigger('change');
-                    $('#eventsSun .values-input[data-name="directionRange"][data-index="' + idSun + '"]').val('50').trigger('change');
-                    $('#eventsSun .values-input[data-name="tempInside"][data-index="' + idSun + '"]').val('23').trigger('change');
-                    $('#eventsSun .values-input[data-name="tempOutside"][data-index="' + idSun + '"]').val('23').trigger('change');
-                    $('#eventsSun .values-input[data-name="valueLight"][data-index="' + idSun + '"]').val('15').trigger('change');
-                    $('#eventsSun .values-input[data-name="enabled"][data-index="' + idSun + '"]').prop('checked', true);
-                }, 1000);
 
-                initSelectId(function (sid) {
-                    sid.selectId('show', $('#eventsSun .values-input[data-name="name"][data-index="' + idSun + '"]').val(), function (newId) {
-                        if (newId) {
-                            $('#eventsSun .values-input[data-name="name"][data-index="' + idSun + '"]').val(newId).trigger('change');
-                        }
-                    });
-                });
-            });
-            */
             $('#responseOIDDialog').on('click', function () {
                 var devices = table2values('events');
                 var id = 0;
@@ -361,16 +302,6 @@
             $sel.select();
         }
         function tableOnReady() {
-            $('#events .table-values-div .table-values .values-buttons[data-command="edit1"]').on('click', function () {
-                let id = $(this).data('index');
-                initSelectId(function (sid) {
-                    sid.selectId('show', $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
-                        if (newId) {
-                            $('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
-                        }
-                    });
-                });
-            });
             $('#events .table-values-div .table-values .values-buttons[data-command="edit2"]').on('click', function () {
                 let id = $(this).data('index');
                 initSelectId(function (sid) {
@@ -385,99 +316,6 @@
                     });
                 });
             });
-            /*
-            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit2"]').on('click', function () {
-                let id = $(this).data('index');
-                initSelectId(function (sid) {
-                    sid.selectId('show', $('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
-                        if (newId) {
-                            $('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val(newId).trigger('change');
-                        }
-                    });
-                });
-            });
-            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit1"]').on('click', function () {
-                let id = $(this).data('index');
-                initSelectId(function (sid) {
-                    sid.selectId('show', $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(), function (newId) {
-                        if (newId) {
-                            $('#eventsSun .values-input[data-name="triggerID"][data-index="' + id + '"]').val(newId).trigger('change');
-                        }
-                    });
-                });
-            });
-            */
-            $('#eventsSun .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
-                let id = $(this).data('index');
-                
-                initDialogSun(function (sid) {
-                    var newTemInside = $('#tempInside').val();
-                    var newTriggerDrive = $('#triggerDrive').val();
-                    var newHeightDown = $('#heightDown').val();
-                    var newDirection = $('#direction').val();
-                    var newDirectionRange = $('#directionRange').val();
-                    var newTriggerState = $('#triggerState').val();
-                    var newTriggerChange = $('#triggerChange').val();
-                    var newTempSensor = $('#actualValueTempInside').val();
-                    var newOutsideTempSensor = $('#actualValueTemp').val();
-                    var newTempOutside = $('#setpointValue').val();
-                    var newLightSensor = $('#actualValueLight').val();
-                    var newValueLight = $('#setpointValueLight').val();
-
-                    $('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
-                    $('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
-                    $('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
-                    $('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val(newDirection).trigger('change');
-                    $('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val(newDirectionRange).trigger('change');
-                    $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
-                    $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val(newTriggerChange).trigger('change');
-                    $('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val(newTempSensor).trigger('change');
-                    $('#eventsSun .values-input[data-name="outsideTempSensor"][data-index="' + id + '"]').val(newOutsideTempSensor).trigger('change');
-                    $('#eventsSun .values-input[data-name="tempOutside"][data-index="' + id + '"]').val(newTempOutside).trigger('change');
-                    $('#eventsSun .values-input[data-name="lightSensor"][data-index="' + id + '"]').val(newLightSensor).trigger('change');
-                    $('#eventsSun .values-input[data-name="valueLight"][data-index="' + id + '"]').val(newValueLight).trigger('change');
-                    /*
-                    if ($('#triggerState').prop('checked')) {
-                        $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
-                    } else {
-                        $('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', false);
-                    }
-                    if ($('#triggerChange').prop('checked')) {
-                        $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', true);
-                    } else {
-                        $('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
-                    }
-                    */
-                });
-                $('#dialogDeviceEditSun').html($('#eventsSun .values-input[data-name="name"][data-index="' + id + '"]').val());
-                $('#tempInside').val($('#eventsSun .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
-                $('#triggerDrive').val($('#eventsSun .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
-                $('#heightDown').val($('#eventsSun .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
-                $('#direction').val($('#eventsSun .values-input[data-name="direction"][data-index="' + id + '"]').val());
-                $('#directionRange').val($('#eventsSun .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
-                $('#triggerChange').val($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
-                $('#triggerChange').select()
-                $('#triggerState').val($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
-                $('#triggerState').select()
-                $('#actualValueTempInside').val($('#eventsSun .values-input[data-name="tempSensor"][data-index="' + id + '"]').val());
-                $('#actualValueTemp').val($('#eventsSun .values-input[data-name="outsideTempSensor"][data-index="' + id + '"]').val());
-                $('#setpointValue').val($('#eventsSun .values-input[data-name="tempOutside"][data-index="' + id + '"]').val());
-                $('#actualValueLight').val($('#eventsSun .values-input[data-name="lightSensor"][data-index="' + id + '"]').val());
-                $('#setpointValueLight').val($('#eventsSun .values-input[data-name="valueLight"][data-index="' + id + '"]').val());
-                /*
-                if ($('#eventsSun .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
-                    $('#triggerState').prop('checked', true);
-                } else {
-                    $('#triggerState').prop('checked', false);
-                }
-                if ($('#eventsSun .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked')) {
-                    $('#triggerChange').prop('checked', true);
-                } else {
-                    $('#triggerChange').prop('checked', false);
-                }
-                */
-            });
-            
 
             $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
                 let id = $(this).data('index');
@@ -523,18 +361,6 @@
                     $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val(newTypeDown).trigger('change');
                     $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val(newTypeUp).trigger('change');
                     $('#events .values-input[data-name="type"][data-index="' + id + '"]').val(newType).trigger('change');
-                    /*
-                    if ($('#triggerStateShutter').prop('checked')) {
-                        $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', true);
-                    } else {
-                        $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked', false);
-                    }
-                    if ($('#triggerChangeShutter').prop('checked')) {
-                        $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', true);
-                    } else {
-                        $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked', false);
-                    }
-                    */
                 });
                 $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="shutterName"][data-index="' + id + '"]').val());
                 $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
@@ -560,18 +386,6 @@
                 $('#setpointValue').val($('#events .values-input[data-name="tempOutside"][data-index="' + id + '"]').val());
                 $('#actualValueLight').val($('#events .values-input[data-name="lightSensor"][data-index="' + id + '"]').val());
                 $('#setpointValueLight').val($('#events .values-input[data-name="valueLight"][data-index="' + id + '"]').val());
-                /*
-                if ($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').prop('checked')) {
-                    $('#triggerStateShutter').prop('checked', true);
-                } else {
-                    $('#triggerStateShutter').prop('checked', false);
-                }
-                if ($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').prop('checked')) {
-                    $('#triggerChangeShutter').prop('checked', true);
-                } else {
-                    $('#triggerChangeShutter').prop('checked', false);
-                }
-                */
             });
         }
         
@@ -705,12 +519,9 @@
         <div class="row">
             <div class="col s12">
                 <ul class="tabs">
-                    <li class="tab col s6 l2"><a href="#tab-settings" class="translate active">main settings</a></li>
-                    <li class="tab col s6 l2 tab-living"><a href="#tab-living" class="translate">Living Area</a></li>
-                    <li class="tab col s6 l2 tab-sleep"><a href="#tab-sleep" class="translate">Sleep Area</a></li>
-                    <li class="tab col s6 l2 tab-astro"><a href="#tab-astro" class="translate">Astro settings</a></li>
-                    <li class="tab col s6 l2 tab-sun"><a href="#tab-sun" class="translate">sun protection settings</a></li>
-                    <li class="tab col s6 l2 tab-extra"><a href="#tab-extra" class="translate">Extras</a></li>
+                    <li class="tab col s6 l4"><a href="#tab-settings" class="translate active">main settings</a></li>
+                    <li class="tab col s6 l4 tab-time"><a href="#tab-time" class="translate">Time Settings</a></li>
+                    <li class="tab col s6 l4 tab-extra"><a href="#tab-extra" class="translate">Extra Settings</a></li>
                 </ul>
             </div>
             <div class="row">
@@ -721,9 +532,6 @@
                             <img src="shuttercontrol.png" class="logo">
                         </div>
                     </div>
-        
-                    <!-- main settings -->
-                    
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate sub-title">Shutter config</h6>
@@ -731,16 +539,16 @@
                     </div>
                     <div class="row">
                         <div class="col s12" id="events">
-                                <a  id="responseOIDDialog" class="btn table-button-add"><i class="material-icons">add_circle_outline</i></a>
+                                <a  id="responseOIDDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                             <div class="table-values-div">
                                 <table class="table-values">
                                     <thead>
                                     <tr>
-                                        <th data-name="_index" style="width: 80px; background: #64b5f6"></th>
+                                        <th data-name="_index" style="width: 80px; background: #64b5f6; text-align: center" data-style="text-align: center">Nr</th>
                                         <th data-name="enabled"  style="width: 70px; background: #64b5f6" data-style="width: 70px" data-type="checkbox" class="translate">active</th>
                                         <th data-name="shutterName" data-type="text" style="width: 40%; background: #64b5f6" class="translate">Name</th>
                                         <th data-name="name" data-type="text" style="width: 40%; background: #64b5f6" class="translate">Object-ID shutter</th>
-                                        <th data-buttons="edit2" style="width: 70px; background: #64b5f6; height: 40px" ></th>
+                                        <th data-buttons="edit2" style="width: 150px; background: #64b5f6; height: 40px" data-style="width: 150px; text-align: left" ></th>
                                         <!-- ********************** only for temp states ********************** -->
                                         <th data-name="triggerID" data-type="text" style="width: 25%; background: #64b5f6" class="translate">Trigger ID</th>
                                         <th data-name="typeUp" data-type="text" style="width: 20%; background: #64b5f6" class="translate">type up</th>
@@ -771,9 +579,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- living settings -->
-                <div id="tab-living" class="col s12 page">
-                    <div class="row"></div>
+                <!-- time settings -->
+                <div id="tab-time" class="col s12 page">
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate sub-title">Settings for Livingarea</h6>
@@ -786,52 +593,42 @@
                                 <option value="livingSunriseSunset" class="translate">automatic living area time with sunrise and sunset</option>
                                 <option value="livingGoldenHour" class="translate">automatic living area time with Golden hour</option>
                             </select>
-                            <label for="livingAutomatic" class="translate">Automatic for living area</label>
+                            <label for="livingAutomatic" class="translate"></label>
+                            <span class="translate">Automatic for living area</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterDownLiving" />
-                            <label for="WE_shutterDownLiving" class="translate">Shut down on the weekend</label>
+                            <label for="WE_shutterDownLiving" class="translate"></label>
+                            <span class="translate">Shut down on the weekend</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterUpLiving" />
-                            <label for="WE_shutterUpLiving" class="translate">Driving up on the weekend</label>
+                            <label for="WE_shutterUpLiving" class="translate"></label>
+                            <span class="translate">Driving up on the weekend</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterDownLiving" />
-                            <label for="W_shutterDownLiving" class="translate">Shut down on the week</label>
+                            <label for="W_shutterDownLiving" class="translate"></label>
+                            <span class="translate">Shut down on the week</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpLivingMax" />
-                            <label for="W_shutterUpLivingMax" class="translate">Max Time for Driving up on the week</label>
+                            <label for="W_shutterUpLivingMax" class="translate"></label>
+                            <span class="translate">Max Time for Driving up on the week</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpLivingMin" />
-                            <label for="W_shutterUpLivingMin" class="translate">Min Time for Driving up on the week</label>
+                            <label for="W_shutterUpLivingMin" class="translate"></label>
+                            <span class="translate">Min Time for Driving up on the week</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="number" class="value" id="driveDelayUpLiving" />
-                            <label for="driveDelayUpLiving" class="translate">Time delay for driving the shutters (seconds)</label>
+                            <label for="driveDelayUpLiving" class="translate"></label>
+                            <span class="translate">Time delay for driving the shutters (seconds)</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="triggerAutoLiving" />
-                            <label for="triggerAutoLiving" class="translate">Object ID of trigger for Auto Living</label>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoLivingDialog" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- sleep settings -->
-                <div id="tab-sleep" class="col s12 page">
-                    <div class="row"></div>
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate sub-title">Settings for Sleeparea</h6>
@@ -844,109 +641,76 @@
                                 <option value="sleepSunriseSunset" class="translate">automatic sleep area time with sunrise and sunset</option>
                                 <option value="sleepGoldenHour" class="translate">automatic sleep area time with Golden hour</option>
                             </select>
-                            <label for="sleepAutomatic" class="translate">Automatic for sleep area</label>
+                            <label for="sleepAutomatic" class="translate"></label>
+                            <span class="translate">Automatic for sleep area</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterUpSleep" />
-                            <label for="WE_shutterUpSleep" class="translate">Driving up on the weekend</label>
+                            <label for="WE_shutterUpSleep" class="translate"></label>
+                            <span class="translate">Driving up on the weekend</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterDownSleep" />
-                            <label for="WE_shutterDownSleep" class="translate">Shut down on the weekend</label>
+                            <label for="WE_shutterDownSleep" class="translate"></label>
+                            <span class="translate">Shut down on the weekend</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterDownSleep" />
-                            <label for="W_shutterDownSleep" class="translate">Shut down on the week</label>
+                            <label for="W_shutterDownSleep" class="translate"></label>
+                            <span class="translate">Shut down on the week</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpSleepMax" />
-                            <label for="W_shutterUpSleepMax" class="translate">Max Time for Driving up on the week</label>
+                            <label for="W_shutterUpSleepMax" class="translate"></label>
+                            <span class="translate">Max Time for Driving up on the week</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpSleepMin" />
-                            <label for="W_shutterUpSleepMin" class="translate">Min Time for Driving up on the week</label>
+                            <label for="W_shutterUpSleepMin" class="translate"></label>
+                            <span class="translate">Min Time for Driving up on the week</span>
                         </div>
-                        <div class="col s6 l4 input-field">
+                        <div class="col s6 l2 input-field">
                             <input type="number" class="value" id="driveDelayUpSleep" />
-                            <label for="driveDelayUpSleep" class="translate">Time delay for driving the shutters (seconds)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="triggerAutoSleep" />
-                            <label for="triggerAutoSleep" class="translate">Object ID of trigger for Auto Sleep</label>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoSleepDialog" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- astro settings -->
-                <div id="tab-astro" class="col s12 page">
-                    <div class="row">
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate sub-title">Astro settings</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="latitude" />
-                            <label for="latitude" class="translate">latitude</label>
-                        </div>
-                        <div class="col s6 l4 input-field">
-                            <input type="text" class="value" id="longitude" />
-                            <label for="longitude" class="translate">longitude</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="number" class="value" id="astroDelayUp" />
-                            <label for="astroDelayUp" class="translate">Time delay for Driving up (minutes)</label>
-                        </div>
-                        <div class="col s6 l4 input-field">
-                            <input type="number" class="value" id="astroDelayDown" />
-                            <label for="astroDelayDown" class="translate">Time delay for Driving down (minutes)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="number" class="value" id="driveDelayUpAstro" />
-                            <label for="driveDelayUpAstro" class="translate">Time delay for driving the shutters (seconds)</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- sun settings -->
-                <div id="tab-sun" class="col s12 page">
-                    <div class="row">
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate sub-title">sun protection settings</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l4 input-field">
-                            <input type="number" class="value" id="sunProtEndElevation" min="1" max="50" />
-                            <label for="sunProtEndElevation" class="translate">Sun Protect End with Elevation</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate sub-title">shutter for sun protection</h6>
+                            <label for="driveDelayUpSleep" class="translate"></label>
+                            <span class="translate">Time delay for driving the shutters (seconds)</span>
                         </div>
                     </div>
                 </div>
                 <!-- Tab Extra -->
                 <div id="tab-extra" class="col s12 page">
                     <div class="row">
+                        <div class="col s12">
+                            <h6 class="translate sub-title">Astro settings</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="latitude" />
+                            <label for="latitude" class="translate"></label>
+                            <span class="translate">latitude</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="longitude" />
+                            <label for="longitude" class="translate"></label>
+                            <span class="translate">longitude</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="number" class="value" id="astroDelayUp" />
+                            <label for="astroDelayUp" class="translate"></label>
+                            <span class="translate">Time delay for Driving up (minutes)</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="number" class="value" id="astroDelayDown" />
+                            <label for="astroDelayDown" class="translate"></label>
+                            <span class="translate">Time delay for Driving down (minutes)</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="number" class="value" id="driveDelayUpAstro" />
+                            <label for="driveDelayUpAstro" class="translate"></label>
+                            <span class="translate">Time delay for driving the shutters (seconds)</span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
@@ -954,13 +718,44 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6 l3 input-field">
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="triggerAutoSleep" />
+                            <label for="triggerAutoSleep" class="translate">Trigger ID</label>
+                            <span class="translate">Object ID of trigger for Auto Sleep</span>
+                        </div>
+                        <div class="col s1 m2 l2">
+                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="triggerAutoLiving" />
+                            <label for="triggerAutoLiving" class="translate">Trigger ID</label>
+                            <span class="translate">Object ID of trigger for Auto Living</span>
+                        </div>
+                        <div class="col s1 m2 l2">
+                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l2 input-field">
                             <input type="checkbox" class="value" id="publicHolidays" />
                             <span for="publicHolidays" class="translate">Use public holidays</span>
                         </div>
-                        <div class="input-field col s12 m6 l3 publicHol">
+                        <div class="input-field col s12 m6 l2 publicHol">
                             <select id="publicHolInstance" class="value"></select>
-                            <label for="publicHolInstance" class="translate">public holidays Instance</label>
+                            <label for="publicHolInstance" class="translate"></label>
+                            <span class="translate">public holidays Instance</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <h6 class="translate sub-title">sun protection settings</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l2 input-field">
+                            <input type="number" class="value" id="sunProtEndElevation" min="1" max="50" />
+                            <label for="sunProtEndElevation" class="translate"></label>
+                            <span class="translate">Sun Protect End with Elevation</span>
                         </div>
                     </div>
                 </div>
@@ -1017,10 +812,9 @@
                             <div class="input-field col s12 l4">
                                 <select class="value" id="type">
                                     <option value="off" class="translate">off</option>
-                                    <option value="in- & outside temperature" class="translate">in- & outside temperature</option>
+                                    <option value="in- & outside temperature" class="translate">in and outside temperature</option>
                                     <option value="only direction" class="translate">only direction</option>
-                                    <option value="in- & outside temperature and direction" class="translate">in- & outside temperature and direction</option>
-                                    <option value="in- & outside temperature and direction" class="translate">in- & outside temperature and direction</option>
+                                    <option value="in- & outside temperature and direction" class="translate">in and outside temperature and direction</option>
                                     <option value="outside temperature and direction" class="translate">outside temperature and direction</option>
                                     <option value="only outside temperature" class="translate">only outside temperature</option>
                                     <option value="only inside temperature" class="translate">only inside temperature</option>
@@ -1080,6 +874,7 @@
                         <div class="row">
                             <div class="input-field col s12 l3">
                                 <select class="value" id="typeDown">
+                                    <option value="off" class="translate">off</option>
                                     <option value="living" class="translate">living</option>
                                     <option value="living-auto" class="translate">living-auto</option>
                                     <option value="sleep" class="translate">sleep</option>
@@ -1093,6 +888,7 @@
                             </div>
                             <div class="input-field col s12 l3">
                                 <select class="value" id="typeUp">
+                                    <option value="off" class="translate">off</option>
                                     <option value="living" class="translate">living</option>
                                     <option value="living-auto" class="translate">living-auto</option>
                                     <option value="sleep" class="translate">sleep</option>

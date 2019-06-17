@@ -31,8 +31,15 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.8 (17.06.2019)
+* (simatec) Menu completely revised
+* (simatec) Ease of use improved
+* (simatec) Example added
+* (simatec) Default settings added for each roller shutter
+* (simatec) fixed some bugs
+
 ### 0.2.7 (14.06.2019)
-* (simatec) Beta 0.2.6
+* (simatec) Beta 0.2.7
 
 ### 0.2.6 (14.06.2019)
 * (simatec) Beta 0.2.6

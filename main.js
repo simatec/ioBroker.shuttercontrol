@@ -419,6 +419,9 @@ function shutterDriveCalc() {
             } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
                     upTimeLiving = astroTimeLivingUp;
                     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMin)) {
+                upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
             }
         }
     }
@@ -451,6 +454,9 @@ function shutterDriveCalc() {
             } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
                     upTimeSleep = astroTimeSleepUp;
                     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
+                upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
             }
         }
     }
