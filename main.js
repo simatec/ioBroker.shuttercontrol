@@ -38,10 +38,8 @@ let publicHolidayTomorowStr;
 let autoLivingStr;
 /** @type {any} */
 let autoSleepStr;
-/** @type {string | number} */
-let actualValueStr;
-/** @type {string | number} */
-let actualValueLightStr;
+//let actualValueStr;
+//let actualValueLightStr;
 /** @type {number | undefined} */
 let delayUp;
 /** @type {number | undefined} */
@@ -249,6 +247,7 @@ function checkActualStates () {
             }
         });
     }
+    /*
     if (adapter.config.UseSunMode === true) {
         adapter.getForeignState(adapter.config.actualValueTemp, (err, state) => {
             if (state) {
@@ -261,6 +260,7 @@ function checkActualStates () {
             }
         });
     }
+    */
     setTimeout(function() {
         shutterDriveCalc()
     }, 1000)
@@ -271,58 +271,57 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function() {
 });
 
 function shutterDriveCalc() {
-    if (adapter.config.UseAstro === true) {
-        // get today's sunlight times 
-        let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+    // get today's sunlight times 
+    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
 
-        // format sunset/sunrise time from the Date object
-        sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
-        sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
-        dayStr = times.sunrise.getDay();
+    // format sunset/sunrise time from the Date object
+    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
+    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+    dayStr = times.sunrise.getDay();
 
-        // format goldenhour/goldenhourend time from the Date object
-        goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
-        goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+    // format goldenhour/goldenhourend time from the Date object
+    goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
+    goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
 
-        adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
-        adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
-        adapter.log.debug('goldenHour today: ' + goldenHour);
-        adapter.setState('info.GoldenHour', { val: goldenHour, ack: true });
+    adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
+    adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
+    adapter.log.debug('goldenHour today: ' + goldenHour);
+    adapter.setState('info.GoldenHour', { val: goldenHour, ack: true });
 
-        adapter.log.debug('current day: ' + dayStr);
-        adapter.log.debug('Sunrise today: ' + sunriseStr);
-        adapter.setState('info.Sunrise', { val: sunriseStr, ack: true });
-        adapter.log.debug('Sunset today: ' + sunsetStr);
-        adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
+    adapter.log.debug('current day: ' + dayStr);
+    adapter.log.debug('Sunrise today: ' + sunriseStr);
+    adapter.setState('info.Sunrise', { val: sunriseStr, ack: true });
+    adapter.log.debug('Sunset today: ' + sunsetStr);
+    adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
 
-        addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
-        addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
-        addMinutesGoldenHour(goldenHour, adapter.config.astroDelayUp); // Add Delay for GoldenHour
-        addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayDown); // Add Delay for GoldenHourEnd
+    addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
+    addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
+    addMinutesGoldenHour(goldenHour, adapter.config.astroDelayUp); // Add Delay for GoldenHour
+    addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayDown); // Add Delay for GoldenHourEnd
 
-        adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
-        adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
-        adapter.log.debug('Starting up shutters Sunrise area: ' + sunriseStr);
-        adapter.log.debug('Shutdown shutters Sunset area: ' + sunsetStr);
+    adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
+    adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
+    adapter.log.debug('Starting up shutters Sunrise area: ' + sunriseStr);
+    adapter.log.debug('Shutdown shutters Sunset area: ' + sunsetStr);
 
-        shutterGoldenHour();
-        shutterSunriseSunset();
+    shutterGoldenHour();
+    shutterSunriseSunset();
 
-        if (adapter.config.livingAutomatic == 'livingSunriseSunset') {
-            astroTimeLivingUp = sunriseStr;
-            astroTimeLivingDown = sunsetStr;
-        } else if (adapter.config.livingAutomatic == "livingGoldenHour") {
-            astroTimeLivingUp = goldenHourEnd;
-            astroTimeLivingDown = goldenHour;
-        }
-        if (adapter.config.sleepAutomatic == "sleepSunriseSunset") {
-            astroTimeSleepUp = sunriseStr;
-            astroTimeSleepDown = sunsetStr;
-        } else if (adapter.config.livingAutomatic == "sleepGoldenHour") {
-            astroTimeSleepUp = goldenHourEnd;
-            astroTimeSleepDown = goldenHour;
-        }
+    if (adapter.config.livingAutomatic == 'livingSunriseSunset') {
+        astroTimeLivingUp = sunriseStr;
+        astroTimeLivingDown = sunsetStr;
+    } else if (adapter.config.livingAutomatic == "livingGoldenHour") {
+        astroTimeLivingUp = goldenHourEnd;
+        astroTimeLivingDown = goldenHour;
     }
+    if (adapter.config.sleepAutomatic == "sleepSunriseSunset") {
+        astroTimeSleepUp = sunriseStr;
+        astroTimeSleepDown = sunsetStr;
+    } else if (adapter.config.livingAutomatic == "sleepGoldenHour") {
+        astroTimeSleepUp = goldenHourEnd;
+        astroTimeSleepDown = goldenHour;
+    }
+
     // ******** Set Up-Time Living Area ********
     if (adapter.config.livingAutomatic == "livingTime") {
         if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
@@ -359,102 +358,72 @@ function shutterDriveCalc() {
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
-    if (adapter.config.UseAstro === false) {
-        if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-            upTimeSleep = adapter.config.WE_shutterUpSleep;
-            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else {
+    if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+        upTimeSleep = adapter.config.WE_shutterUpSleep;
+        adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+    } else {
+        if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
             upTimeSleep = adapter.config.W_shutterUpSleepMax;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        }
-    } else {
-        if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-            upTimeSleep = adapter.config.WE_shutterUpSleep;
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
+            upTimeSleep = astroTimeSleepUp;
             adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else {
-            if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
-                upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
+            upTimeSleep = adapter.config.W_shutterUpSleepMax;
+            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
                 upTimeSleep = astroTimeSleepUp;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
-                upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = astroTimeSleepUp;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
-                upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-            }
+        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
+            upTimeSleep = adapter.config.W_shutterUpSleepMax;
+            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
         }
     }
     adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep);
     shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
-    if (adapter.config.UseAstro === false) {
-        if ((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
-            downTimeLiving = adapter.config.WE_shutterDownLiving;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else {
-            downTimeLiving = adapter.config.W_shutterDownLiving;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        }
-    } else {
-        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
-            downTimeLiving = adapter.config.WE_shutterDownLiving;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
+    if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
+        downTimeLiving = adapter.config.WE_shutterDownLiving;
+        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
+        downTimeLiving = astroTimeLivingDown;
+        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
+        downTimeLiving = astroTimeLivingDown;
+        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
+        downTimeLiving = adapter.config.W_shutterDownLiving;
+        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
+        downTimeLiving = astroTimeLivingDown;
+        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
             downTimeLiving = astroTimeLivingDown;
             adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
-            downTimeLiving = astroTimeLivingDown;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
-            downTimeLiving = adapter.config.W_shutterDownLiving;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
-            downTimeLiving = astroTimeLivingDown;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
-                downTimeLiving = astroTimeLivingDown;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-        }
     }
     adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving);
     shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
-    if (adapter.config.UseAstro === false) {
-        if ((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
-            downTimeSleep = adapter.config.WE_shutterDownSleep;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else {
-            downTimeSleep = adapter.config.W_shutterDownSleep;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        }
-    } else {
-        if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
-            downTimeSleep = adapter.config.WE_shutterDownSleep;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+    if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
+        downTimeSleep = adapter.config.WE_shutterDownSleep;
+        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+        downTimeSleep = astroTimeSleepDown;
+        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
+        downTimeSleep = astroTimeSleepDown;
+        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
+        downTimeSleep = adapter.config.W_shutterDownSleep;
+        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
+        downTimeSleep = astroTimeSleepDown;
+        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
             downTimeSleep = astroTimeSleepDown;
             adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
-            downTimeSleep = astroTimeSleepDown;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
-            downTimeSleep = adapter.config.W_shutterDownSleep;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
-            downTimeSleep = astroTimeSleepDown;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
-                downTimeSleep = astroTimeSleepDown;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-        }
     }
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
     shutterDownSleep();
@@ -1096,196 +1065,152 @@ function shutterDownSleep() {
 }
 
 function sunProtect() {
+    //let date = new Date();
+    //let monthIndex = (date.getMonth() +1);
+    //let hours = date.getHours();
+    //let minutes = date.getMinutes();
+    //let currentTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
 
-    if (adapter.config.UseSunMode === true) {
-        let date = new Date();
-        let monthIndex = (date.getMonth() +1);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let currentTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
+    const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
+    
+    setTimeout(function() {
+        //adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
+        //adapter.log.debug('current outside Lux: ' + actualValueLightStr + ' lux');
+        //adapter.log.debug('current time: ' + currentTime);
+        //adapter.log.debug('current month: ' + monthIndex);
 
-        const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
-        
-        setTimeout(function() {
-            //adapter.log.debug('current outside temperature: ' + actualValueStr + ' °C');
-            //adapter.log.debug('current outside Lux: ' + actualValueLightStr + ' lux');
-            adapter.log.debug('current time: ' + currentTime);
-            adapter.log.debug('current month: ' + monthIndex);
+        // Full Result
+        let resultFull = adapter.config.events;
 
-            // Full Result
-            let resultFull = adapter.config.events;
+        if (resultFull) {
+            // Filter enabled
+            let resEnabled = resultFull.filter(d => d.enabled === true);
+            let result = resEnabled;
+            if (elevation > adapter.config.sunProtEndElevation) {
+                // in- & outside temperature
+                for ( const i in result) {
+                    if (result[i].type == 'in- & outside temperature') {
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                    let insideTemp;
+                                    let outsideTemp;
+                                    let sunLight;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
 
-            if (resultFull) {
-                // Filter enabled
-                let resEnabled = resultFull.filter(d => d.enabled === true);
-                let result = resEnabled;
-                if (elevation > adapter.config.sunProtEndElevation) {
-                    // in- & outside temperature
-                    for ( const i in result) {
-                        if (result[i].type == 'in- & outside temperature') {
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                        let insideTemp;
-                                        let outsideTemp;
-                                        let sunLight;
-                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                            if (state) {
-                                                insideTemp = parseFloat(state['val']);
-
-                                                adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                    if (state) {
-                                                        outsideTemp = parseFloat(state['val']);
-                                                    }
-
-                                                    adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                        if (state) {
-                                                            sunLight = parseFloat(state['val']);
-                                                        }
-
-                                                        if (insideTemp > result[i].tempInside) {
-                                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
-                                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
-                                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
-                                                                    }
-                                                                });
-                                                            }
-                                                        } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
-                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                                });
-
-                                            }
-                                        });
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
-                    }
-                    // in- & outside temperature and direction
-                    for ( const i in result) {
-                        if (result[i].type == 'in- & outside temperature and direction') {
-                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
-                            const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
-
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                        let insideTemp;
-                                        let outsideTemp;
-                                        let sunLight;
-                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                            if (state) {
-                                                insideTemp = parseFloat(state['val']);
-
-                                                adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                                    if (state) {
-                                                        outsideTemp = parseFloat(state['val']);
-                                                    }
-
-                                                    adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                        if (state) {
-                                                            sunLight = parseFloat(state['val']);
-                                                        }
-
-                                                        if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
-                                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                                adapter.getForeignState(result[i].name, (err, state) => {
-                                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
-                                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
-                                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
-                                                                    }
-                                                                });
-                                                            }
-                                                        } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                            adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
-                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                                })
-                                            }
-                                        });
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
-                    }
-                    // outside temperature and direction
-                    for ( const i in result) {
-                        if (result[i].type == 'outside temperature and direction') {
-                            const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
-                            const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
-                                        let outsideTemp;
-                                        let sunLight;
-
-                                        adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
-                                            if (state) {
-                                                outsideTemp = parseFloat(state['val']);
-                                            }
-
-                                            adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                            adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                 if (state) {
-                                                    sunLight = parseFloat(state['val']);
+                                                    outsideTemp = parseFloat(state['val']);
                                                 }
 
-                                                if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
-                                                    if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                    if (state) {
+                                                        sunLight = parseFloat(state['val']);
+                                                    }
+
+                                                    if (insideTemp > result[i].tempInside) {
+                                                        if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
+                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                                }
+                                                            });
+                                                        }
+                                                    } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
-                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
-                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
+                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                             }
                                                         });
                                                     }
-                                                } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
-                                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
-                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
-                                                        }
-                                                    });
-                                                }
+                                                });
                                             });
-                                        });
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
-                    }
-                    // only outside temperature
-                    for ( const i in result) {
-                        if (result[i].type == 'only outside temperature') {
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
-                                        let outsideTemp;
-                                        let sunLight;
 
-                                        adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                        }
+                                    });
+                                }
+                            });
+                        }, driveDelayUpSleep * i, i);
+                    }
+                }
+                // in- & outside temperature and direction
+                for ( const i in result) {
+                    if (result[i].type == 'in- & outside temperature and direction') {
+                        const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                        const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
+
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                    let insideTemp;
+                                    let outsideTemp;
+                                    let sunLight;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
+
+                                            adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                                if (state) {
+                                                    outsideTemp = parseFloat(state['val']);
+                                                }
+
+                                                adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                                    if (state) {
+                                                        sunLight = parseFloat(state['val']);
+                                                    }
+
+                                                    if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
+                                                        if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                            adapter.getForeignState(result[i].name, (err, state) => {
+                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
+                                                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                                }
+                                                            });
+                                                        }
+                                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                        adapter.getForeignState(result[i].name, (err, state) => {
+                                                            if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
+                                                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            })
+                                        }
+                                    });
+                                }
+                            });
+                        }, driveDelayUpSleep * i, i);
+                    }
+                }
+                // outside temperature and direction
+                for ( const i in result) {
+                    if (result[i].type == 'outside temperature and direction') {
+                        const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                        const resultDirectionRangePlus = result[i].direction + result[i].directionRange;
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                    let outsideTemp;
+                                    let sunLight;
+
+                                    adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                        if (state) {
+                                            outsideTemp = parseFloat(state['val']);
+                                        }
+
+                                        adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                             if (state) {
-                                                outsideTemp = parseFloat(state['val']);
+                                                sunLight = parseFloat(state['val']);
                                             }
 
-                                            adapter.getForeignState(result[i].lightSensor, (err, state) => {
-                                                if (state) {
-                                                    sunLight = parseFloat(state['val']);
-                                                }
-
+                                            if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
@@ -1293,87 +1218,128 @@ function sunProtect() {
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                         }
                                                     });
-                                                } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
-                                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
-                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
-                                                        }
-                                                    });
                                                 }
-                                            });
-                                        });
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
-                    }
-                    // only inside temperature
-                    for ( const i in result) {
-                        if (result[i].type == 'only inside temperature') {
-                            setTimeout(function() {
-                                adapter.getForeignState(result[i].triggerID, (err, state) => {
-                                    if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
-                                        let insideTemp;
-                                        adapter.getForeignState(result[i].tempSensor, (err, state) => {
-                                            if (state) {
-                                                insideTemp = parseFloat(state['val']);
-
-                                                if (insideTemp > result[i].tempInside) {
-                                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
-                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
-                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
-                                                        }
-                                                    });
-                                                } else if (insideTemp < result[i].tempInside) {
-                                                    adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                                            adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
-                                                            adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
-                                                        }
-                                                    });
-                                                }
+                                            } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
+                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                    }
+                                                });
                                             }
                                         });
-                                    }
-                                });
-                            }, driveDelayUpSleep * i, i);
-                        }
+                                    });
+                                }
+                            });
+                        }, driveDelayUpSleep * i, i);
                     }
                 }
-            }
-
-            let upSunProtect = adapter.config.sun_shutterUp;
-
-            if ((upSunProtect) == undefined) {
-                upSunProtect = adapter.config.sun_shutterUp;
-            }
-            let upTimeSun = upSunProtect.split(':');
-
-            // Full Result
-            resultFull = adapter.config.events;
-
-            if (resultFull) {
-                // Filter enabled
-                let resEnabled = resultFull.filter(d => d.enabled === true);
-
-                let result = resEnabled;
-                if (elevation <= adapter.config.sunProtEndElevation) {
-                    for ( const i in result) {
+                // only outside temperature
+                for ( const i in result) {
+                    if (result[i].type == 'only outside temperature') {
                         setTimeout(function() {
-                            adapter.getForeignState(result[i].name, (err, state) => {
-                                if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
-                                    adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + parseFloat(result[i].heightUp) + '%');
-                                    adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState) || (result[i].triggerID == ''))  {
+                                    let outsideTemp;
+                                    let sunLight;
+
+                                    adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
+                                        if (state) {
+                                            outsideTemp = parseFloat(state['val']);
+                                        }
+
+                                        adapter.getForeignState(result[i].lightSensor, (err, state) => {
+                                            if (state) {
+                                                sunLight = parseFloat(state['val']);
+                                            }
+
+                                            if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
+                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
+                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                    }
+                                                });
+                                            } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
+                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
+                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        }, driveDelayUpSleep * i, i);
+                    }
+                }
+                // only inside temperature
+                for ( const i in result) {
+                    if (result[i].type == 'only inside temperature') {
+                        setTimeout(function() {
+                            adapter.getForeignState(result[i].triggerID, (err, state) => {
+                                if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                    let insideTemp;
+                                    adapter.getForeignState(result[i].tempSensor, (err, state) => {
+                                        if (state) {
+                                            insideTemp = parseFloat(state['val']);
+
+                                            if (insideTemp > result[i].tempInside) {
+                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
+                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                    }
+                                                });
+                                            } else if (insideTemp < result[i].tempInside) {
+                                                adapter.getForeignState(result[i].name, (err, state) => {
+                                                    if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                                        adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
+                                                        adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
                                 }
                             });
                         }, driveDelayUpSleep * i, i);
                     }
                 }
             }
-        }, 2000);
-    }
+        }
+
+        let upSunProtect = adapter.config.sun_shutterUp;
+
+        if ((upSunProtect) == undefined) {
+            upSunProtect = adapter.config.sun_shutterUp;
+        }
+        let upTimeSun = upSunProtect.split(':');
+
+        // Full Result
+        resultFull = adapter.config.events;
+
+        if (resultFull) {
+            // Filter enabled
+            let resEnabled = resultFull.filter(d => d.enabled === true);
+
+            let result = resEnabled;
+            if (elevation <= adapter.config.sunProtEndElevation) {
+                for ( const i in result) {
+                    setTimeout(function() {
+                        adapter.getForeignState(result[i].name, (err, state) => {
+                            if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
+                                adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + parseFloat(result[i].heightUp) + '%');
+                                adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                            }
+                        });
+                    }, driveDelayUpSleep * i, i);
+                }
+            }
+        }
+    }, 2000);
 }
 function delayCalc() {
     delayUp = 0;
