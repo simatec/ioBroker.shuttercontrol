@@ -698,28 +698,15 @@
                             <label for="driveDelayUpAstro" class="translate"></label>
                             <span class="translate">Time delay for driving the shutters (seconds)</span>
                         </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="number" class="value" id="sunProtEndElevation" min="1" max="50" />
+                            <label for="sunProtEndElevation" class="translate"></label>
+                            <span class="translate">Sun Protect End with Elevation</span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate sub-title">Extra Settings</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="triggerAutoSleep" />
-                            <label for="triggerAutoSleep" class="translate">Trigger ID</label>
-                            <span class="translate">Object ID of trigger for Auto Sleep</span>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="triggerAutoLiving" />
-                            <label for="triggerAutoLiving" class="translate">Trigger ID</label>
-                            <span class="translate">Object ID of trigger for Auto Living</span>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -734,17 +721,26 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate sub-title">sun protection settings</h6>
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="triggerAutoSleep" />
+                            <label for="triggerAutoSleep" class="translate"></label>
+                            <span class="translate">Object ID of trigger for Auto Sleep</span>
+                        </div>
+                        <div class="col s1 m2 l2">
+                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="sunProtEndElevation" min="1" max="50" />
-                            <label for="sunProtEndElevation" class="translate"></label>
-                            <span class="translate">Sun Protect End with Elevation</span>
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="triggerAutoLiving" />
+                            <label for="triggerAutoLiving" class="translate"></label>
+                            <span class="translate">Object ID of trigger for Auto Living</span>
+                        </div>
+                        <div class="col s1 m2 l2">
+                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
