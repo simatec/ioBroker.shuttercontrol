@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.9",
+        "version": "0.2.10",
         "news": {
+            "0.2.10": {
+                "en": "edit extra menu, clean code, save current states on start",
+                "de": "Extra-Einstellungen überarbeitet, Code bereinigt, aktuelle Zustände beim Start speichern hinzugefügt",
+                "ru": "редактировать дополнительное меню, очищать код, сохранять текущие состояния при запуске",
+                "pt": "editar menu extra, limpar código, salvar estados atuais no início",
+                "nl": "bewerk extra menu, maak code schoon, bewaar huidige staten bij het starten",
+                "fr": "éditer le menu supplémentaire, nettoyer le code, enregistrer les états actuels au démarrage",
+                "it": "modifica menu extra, pulisci codice, salva stati attuali all'avvio",
+                "es": "Editar menú extra, limpiar código, guardar estados actuales al inicio",
+                "pl": "edytuj dodatkowe menu, wyczyść kod, zapisz bieżące stany na początku",
+                "zh-cn": "编辑额外菜单，清理代码，在开始时保存当前状态"
+            },
             "0.2.9": {
                 "en": "Bugfix Popup Menu, Fix Trigger ID ",
                 "de": "Bugfix Popup-Menü, Fix Trigger ID",

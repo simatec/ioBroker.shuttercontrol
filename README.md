@@ -31,6 +31,11 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.10 (18.06.2019)
+* (simatec) edit extra menu
+* (simatec) clean code
+* (simatec) save current states on start
+
 ### 0.2.9 (17.06.2019)
 * (simatec) Bugfix PopUp
 * (simatec) Fix TriggerID 
