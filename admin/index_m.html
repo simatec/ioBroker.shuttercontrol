@@ -141,10 +141,11 @@
         #events td:nth-of-type(25) {visibility: hidden; display: none;}
         #events th:nth-of-type(25) {visibility: hidden; display: none;}
 
-        .modal {
+        #dialog-shutter-edit {
             max-height:95% !important;
-            max-width:95% !important;
-            width:90% !important; height:90% !important;
+            max-width:85% !important;
+            width:80% !important; 
+            height:90% !important;
             overflow: visible !important;
             top: 10px !important;
         }
@@ -456,6 +457,7 @@
                 callback(selectId);
             });
         }
+        
         function getName(obj) {
             if (obj && obj.common && obj.common.name) {
                 var name = obj.common.name;
@@ -476,24 +478,6 @@
             }
         }
 
-        function initDialogSun(callback) {
-            var $editDialog = $('#dialog-sun-edit');
-            if (!$editDialog.data('inited')) {
-                $editDialog.data('inited', true);
-                $editDialog.modal({
-                    dismissible: false
-                });
-                
-                $editDialog.find('.btn-set').on('click', function () {
-                    var $editDialog = $('#dialog-sun-edit');
-                    var callback = $editDialog.data('callback');
-                    if (typeof callback === 'function') callback();
-                    $editDialog.data('callback', null);
-                });
-            }
-            $editDialog.data('callback', callback);
-            $editDialog.modal('open');
-        }
         function initDialogShutter(callback) {
             var $editDialog = $('#dialog-shutter-edit');
             if (!$editDialog.data('inited')) {
@@ -602,6 +586,11 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="W_shutterDownLiving" />
+                            <label for="W_shutterDownLiving" class="translate"></label>
+                            <span class="translate">Shut down on the week</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterDownLiving" />
                             <label for="WE_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
@@ -612,19 +601,14 @@
                             <span class="translate">Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterDownLiving" />
-                            <label for="W_shutterDownLiving" class="translate"></label>
-                            <span class="translate">Shut down on the week</span>
+                            <input type="text" class="value" id="W_shutterUpLivingMin" />
+                            <label for="W_shutterUpLivingMin" class="translate"></label>
+                            <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpLivingMax" />
                             <label for="W_shutterUpLivingMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterUpLivingMin" />
-                            <label for="W_shutterUpLivingMin" class="translate"></label>
-                            <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
                             <input type="number" class="value" id="driveDelayUpLiving" />
@@ -650,9 +634,9 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="WE_shutterUpSleep" />
-                            <label for="WE_shutterUpSleep" class="translate"></label>
-                            <span class="translate">Driving up on the weekend</span>
+                            <input type="text" class="value" id="W_shutterDownSleep" />
+                            <label for="W_shutterDownSleep" class="translate"></label>
+                            <span class="translate">Shut down on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="WE_shutterDownSleep" />
@@ -660,19 +644,19 @@
                             <span class="translate">Shut down on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterDownSleep" />
-                            <label for="W_shutterDownSleep" class="translate"></label>
-                            <span class="translate">Shut down on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterUpSleepMax" />
-                            <label for="W_shutterUpSleepMax" class="translate"></label>
-                            <span class="translate">Max Time for Driving up on the week</span>
+                            <input type="text" class="value" id="WE_shutterUpSleep" />
+                            <label for="WE_shutterUpSleep" class="translate"></label>
+                            <span class="translate">Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="W_shutterUpSleepMin" />
                             <label for="W_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="W_shutterUpSleepMax" />
+                            <label for="W_shutterUpSleepMax" class="translate"></label>
+                            <span class="translate">Max Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
                             <input type="number" class="value" id="driveDelayUpSleep" />

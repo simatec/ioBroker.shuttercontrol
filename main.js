@@ -91,20 +91,6 @@ function startAdapter(options) {
         }
     });
 
-    // is called if a subscribed object changes
-    /*
-    adapter.on('objectChange', (id, obj) => {
-        if (obj) {
-            // The object was changed
-            adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-            //shutterDriveCalc();
-        } else {
-            // The object was deleted
-            adapter.log.info(`object ${id} deleted`);
-        }
-    });
-    */
-
     // is called if a subscribed state changes
     adapter.on('stateChange', (id, state) => {
         if (state) {
@@ -131,16 +117,7 @@ function startAdapter(options) {
                     shutterDriveCalc();
                 }
             }
-            /*
-            if (adapter.config.UseSunMode === true && id === adapter.config.actualValueTemp) {
-                actualValueStr = state['val'];
-                sunProtect();
-            }
-            if (adapter.config.UseSunMode === true && id === adapter.config.actualValueLight) {
-                actualValueLightStr = state['val'];
-                sunProtect();
-            }
-            */
+            
             if (id === adapter.config.triggerAutoLiving) {
                 adapter.setState('control.autoLiving', {val: state['val'], ack: true});
                 adapter.log.debug('Auto Living is: ' + state['val']);
@@ -156,15 +133,7 @@ function startAdapter(options) {
                     triggerChange();
                 }
             });
-            /*
-            resSunTrigger.forEach(function(resSunTriggerID) {
-                if (id === resSunTriggerID) {
-                    resSunTriggerChange = resSunTriggerID;
-                    adapter.log.debug('TriggerID Change: ' +  resSunTriggerID);
-                    sunTriggerChange();
-                }
-            });
-            */
+            
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
                 if (id === resSunInsideTempID) {
                     adapter.log.debug('TriggerID Change: ' +  resSunInsideTempID);
@@ -195,46 +164,7 @@ function startAdapter(options) {
         }
     });
 }
-/*
-function sunTriggerChange() {
-    
-    const resultID = adapter.config.eventsSun;
-    // Filter changed Trigger
-    const arrayChangeTrigger = resultID.filter(d => d.triggerID == resSunTriggerChange);
-    
-    for ( const i in arrayChangeTrigger) {
-        setTimeout(function() {
-            if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
-                adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) != arrayChangeTrigger[i].triggerState)  {
-                        adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            arrayChangeTrigger[i].currentHeight = (state['val']);
-                            adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                            if (('' + state['val']) != arrayChangeTrigger[i].triggerDrive)  {
-                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
-                                adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
-                            }
-                        });
-                    }
-                });
-            }
-            if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
-                adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && ('' + state['val']) == arrayChangeTrigger[i].triggerState) {
-                        adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if (('' + state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
-                                adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
-                                adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
-                            }
-                        });
-                    }
-                });
-            }
-        }, 1000 * i, i);
-    }
-}
-*/
+
 function triggerChange() {
     
     const resultID = adapter.config.events;
@@ -1551,11 +1481,6 @@ function main() {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
-    /*
-    if (adapter.config.UseSunMode === true) {
-        adapter.subscribeForeignStates(adapter.config.actualValueTemp);
-    }
-    */
     adapter.subscribeForeignStates(adapter.config.triggerAutoLiving);
     adapter.subscribeForeignStates(adapter.config.triggerAutoSleep);
 
@@ -1575,25 +1500,7 @@ function main() {
             adapter.log.debug('trigger for shuttercontrol: ' + element);
         });
     }
-    /*
-    let resultSun = adapter.config.eventsSun;
-    if (resultSun) {
-        let resSun = resultSun.map(({ triggerID }) => ({ triggerID }));
-        let resTriggerActiveSun = resSun.filter(d => d.triggerID != '');
-        
-        
-        
-        for ( const i in resTriggerActiveSun) {
-            if (resSunTrigger.indexOf(resTriggerActiveSun[i].triggerID) === -1) {
-                resSunTrigger.push(resTriggerActiveSun[i].triggerID)
-            }
-        }
-        resSunTrigger.forEach(function(element) {
-            adapter.subscribeForeignStates(element);
-            adapter.log.debug('trigger for sunprotect: ' + element);
-        });
-    }
-    */
+    
     let resultInsideTemp = adapter.config.events;
     if (resultInsideTemp) {
         let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
@@ -1640,6 +1547,19 @@ function main() {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
+    }
+    // set current states
+    const resultStates = adapter.config.events;
+
+    if (resultStates) {
+        for ( const i in resultStates) {
+            adapter.getForeignState(resultStates[i].name, (err, state) => {
+                if (state) {
+                    resultStates[i].currentHeight = (state['val']);
+                    adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
+                }
+            });
+        }
     }
 }
 
