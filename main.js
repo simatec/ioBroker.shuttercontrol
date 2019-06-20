@@ -189,7 +189,7 @@ function triggerChange() {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                     if (arrayChangeTrigger[i].triggerID && ('' + state['val']) == arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if (('' + state['val']) != arrayChangeTrigger[i].currentHeight)  { // Todo currentHeight
+                            if (('' + state['val']) != arrayChangeTrigger[i].currentHeight)  {
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
@@ -452,6 +452,7 @@ function elevationDown(){
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                    result[i].currentHeight = result[i].heightDown;
                                 }
                             });
                         } else if (!result[i].triggerID) {
@@ -459,6 +460,7 @@ function elevationDown(){
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                    result[i].currentHeight = result[i].heightDown;
                                 }
                             });
                         }
@@ -503,6 +505,7 @@ function shutterGoldenHour() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -510,6 +513,7 @@ function shutterGoldenHour() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             }
@@ -546,6 +550,7 @@ function shutterGoldenHour() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -553,6 +558,7 @@ function shutterGoldenHour() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             }
@@ -594,6 +600,7 @@ function shutterSunriseSunset() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -601,6 +608,7 @@ function shutterSunriseSunset() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             }
@@ -637,6 +645,7 @@ function shutterSunriseSunset() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -644,6 +653,7 @@ function shutterSunriseSunset() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             }
@@ -727,6 +737,7 @@ function shutterUpLiving() {
                                 if ((state['val']) != result[i].heightUp)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                    result[i].currentHeight = result[i].heightUp;
                                 }
                             });
                         } else if (!result[i].triggerID) {
@@ -734,6 +745,7 @@ function shutterUpLiving() {
                                 if ((state['val']) != result[i].heightUp)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                    result[i].currentHeight = result[i].heightUp;
                                 }
                             });
                         }
@@ -759,6 +771,7 @@ function shutterUpLiving() {
                                         if ((state['val']) != result[i].heightUp)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                            result[i].currentHeight = result[i].heightUp;
                                         }
                                     });
                                 } else if (!result[i].triggerID) {
@@ -766,6 +779,7 @@ function shutterUpLiving() {
                                         if ((state['val']) != result[i].heightUp)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                            result[i].currentHeight = result[i].heightUp;
                                         }
                                     });
                                 }
@@ -817,6 +831,7 @@ function shutterDownLiving() {
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                    result[i].currentHeight = result[i].heightDown;
                                 }
                             });
                         } else if (!result[i].triggerID) {
@@ -824,6 +839,7 @@ function shutterDownLiving() {
                                 if ((state['val']) != result[i].heightDown)  {
                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                    result[i].currentHeight = result[i].heightDown;
                                 }
                             });
                         }
@@ -849,6 +865,7 @@ function shutterDownLiving() {
                                         if ((state['val']) != result[i].heightDown)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                            result[i].currentHeight = result[i].heightDown;
                                         }
                                     });
                                 } else if (!result[i].triggerID) {
@@ -856,6 +873,7 @@ function shutterDownLiving() {
                                         if ((state['val']) != result[i].heightDown)  {
                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                            result[i].currentHeight = result[i].heightDown;
                                         }
                                     });
                                 }
@@ -911,6 +929,7 @@ function shutterUpSleep() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -918,6 +937,7 @@ function shutterUpSleep() {
                                     if ((state['val']) != result[i].heightUp)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                        result[i].currentHeight = result[i].heightUp;
                                     }
                                 });
                             }
@@ -945,6 +965,7 @@ function shutterUpSleep() {
                                             if ((state['val']) != result[i].heightUp)  {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                result[i].currentHeight = result[i].heightUp;
                                             }
                                         });
                                     } else if (!result[i].triggerID) {
@@ -952,6 +973,7 @@ function shutterUpSleep() {
                                             if ((state['val']) != result[i].heightUp)  {
                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                result[i].currentHeight = result[i].heightUp;
                                             }
                                         });
                                     }
@@ -1008,6 +1030,7 @@ function shutterDownSleep() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             } else if (!result[i].triggerID) {
@@ -1015,6 +1038,7 @@ function shutterDownSleep() {
                                     if ((state['val']) != result[i].heightDown)  {
                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                        result[i].currentHeight = result[i].heightDown;
                                     }
                                 });
                             }
@@ -1043,6 +1067,7 @@ function shutterDownSleep() {
                                                 if ((state['val']) != result[i].heightDown)  {
                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                    result[i].currentHeight = result[i].heightDown;
                                                 }
                                             });
                                         } else if (!result[i].triggerID) {
@@ -1050,6 +1075,7 @@ function shutterDownSleep() {
                                                 if ((state['val']) != result[i].heightDown)  {
                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDown + '%')
                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
+                                                    result[i].currentHeight = result[i].heightDown;
                                                 }
                                             });
                                         }
@@ -1113,9 +1139,10 @@ function sunProtect() {
                                                     if (insideTemp > result[i].tempInside) {
                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun) && parseFloat(state['val']) == parseFloat(result[i].currentHeight)) {
                                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                                    result[i].currentHeight = result[i].heightDownSun;
                                                                 }
                                                             });
                                                         }
@@ -1124,6 +1151,7 @@ function sunProtect() {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                                result[i].currentHeight = result[i].heightUp;
                                                             }
                                                         });
                                                     }
@@ -1166,9 +1194,10 @@ function sunProtect() {
                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
-                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                                if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun) && parseFloat(state['val']) == parseFloat(result[i].currentHeight)) {
                                                                     adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                                    result[i].currentHeight = result[i].heightDownSun;
                                                                 }
                                                             });
                                                         }
@@ -1177,6 +1206,7 @@ function sunProtect() {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                                result[i].currentHeight = result[i].heightUp;
                                                             }
                                                         });
                                                     }
@@ -1213,9 +1243,10 @@ function sunProtect() {
                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                        if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun) && parseFloat(state['val']) == parseFloat(result[i].currentHeight)) {
                                                             adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                            result[i].currentHeight = result[i].heightDownSun;
                                                         }
                                                     });
                                                 }
@@ -1224,6 +1255,7 @@ function sunProtect() {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                        result[i].currentHeight = result[i].heightUp;
                                                     }
                                                 });
                                             }
@@ -1255,9 +1287,10 @@ function sunProtect() {
 
                                             if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun) && parseFloat(state['val']) == parseFloat(result[i].currentHeight)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                        result[i].currentHeight = result[i].heightDownSun;
                                                     }
                                                 });
                                             } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
@@ -1265,6 +1298,7 @@ function sunProtect() {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                        result[i].currentHeight = result[i].heightUp;
                                                     }
                                                 });
                                             }
@@ -1288,9 +1322,10 @@ function sunProtect() {
 
                                             if (insideTemp > result[i].tempInside) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun)) {
+                                                    if (parseFloat(state['val']) > parseFloat(result[i].heightDownSun) && parseFloat(state['val']) == parseFloat(result[i].currentHeight)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightDownSun + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
+                                                        result[i].currentHeight = result[i].heightDownSun;
                                                     }
                                                 });
                                             } else if (insideTemp < result[i].tempInside) {
@@ -1298,6 +1333,7 @@ function sunProtect() {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + result[i].heightUp + '%')
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                                        result[i].currentHeight = result[i].heightUp;
                                                     }
                                                 });
                                             }
@@ -1333,6 +1369,7 @@ function sunProtect() {
                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                 adapter.log.debug('Set ID: ' + result[i].name + ' value: ' + parseFloat(result[i].heightUp) + '%');
                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
+                                result[i].currentHeight = result[i].heightUp;
                             }
                         });
                     }, driveDelayUpSleep * i, i);
@@ -1443,12 +1480,18 @@ function main() {
     adapter.subscribeStates('info.Elevation');
     adapter.subscribeStates('info.Azimut');
 
-    if (adapter.config.publicHolidays === true) {
+    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.heute.*')) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
+    }
+    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.morgen.*')) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
-    adapter.subscribeForeignStates(adapter.config.triggerAutoLiving);
-    adapter.subscribeForeignStates(adapter.config.triggerAutoSleep);
+    if (adapter.config.triggerAutoLiving != '') {
+        adapter.subscribeForeignStates(adapter.config.triggerAutoLiving);
+    }
+    if (adapter.config.triggerAutoSleep != '') {
+        adapter.subscribeForeignStates(adapter.config.triggerAutoSleep);
+    }
 
     // Change State from Trigger ID's
     let result = adapter.config.events;

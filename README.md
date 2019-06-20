@@ -31,6 +31,11 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.11 (20.06.2019)
+* (simatec) Fix debug log
+* (simatec) temporary storage of the state
+* (simatec) automatic stop of sun protection with manual state change
+
 ### 0.2.10 (18.06.2019)
 * (simatec) edit extra menu
 * (simatec) clean code

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.10",
+        "version": "0.2.11",
         "news": {
+            "0.2.11": {
+                "en": "Fix debug log, temporary storage of the state, automatic stop of sun protection by manual state change",
+                "de": "Fix debug Ausgaben, temporäre Speicherung des Zustands, automatisches Stoppen des Sonnenschutzes bei manueller Zustandsänderung",
+                "ru": "Исправление журнала отладки, временное сохранение состояния, автоматическая остановка защиты от солнца с ручным изменением состояния",
+                "pt": "Corrigir log de depuração, armazenamento temporário do estado, parada automática da proteção solar com mudança de estado manual",
+                "nl": "Foutopsporingslogboek repareren, tijdelijke opslag van de status, automatische stop van zonwering met handmatige statuswijziging",
+                "fr": "Journal de débogage corrigé, stockage temporaire de l'état, arrêt automatique de la protection solaire avec changement d'état manuel",
+                "it": "Correggere il registro di debug, memorizzazione temporanea dello stato, arresto automatico della protezione solare con cambio di stato manuale",
+                "es": "Arregle el registro de depuración, el almacenamiento temporal del estado, la detención automática de la protección solar con cambio de estado manual",
+                "pl": "Napraw dziennik debugowania, tymczasowe przechowywanie stanu, automatyczne zatrzymywanie ochrony przed słońcem z ręczną zmianą stanu",
+                "zh-cn": "修复调试日志，临时存储状态，通过手动状态更改自动停止防晒"
+            },
             "0.2.10": {
                 "en": "edit extra menu, clean code, save current states on start",
                 "de": "Extra-Einstellungen überarbeitet, Code bereinigt, aktuelle Zustände beim Start speichern hinzugefügt",
