@@ -1192,8 +1192,11 @@ function sunProtect() {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                 if ((result[i].triggerID && ('' + state['val']) == result[i].triggerState && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != ''))  {
+                                    /** @type {number} */
                                     let insideTemp;
+                                    /** @type {number} */
                                     let outsideTemp;
+                                    /** @type {number} */
                                     let sunLight;
                                     adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                         if (state) {
@@ -1220,7 +1223,7 @@ function sunProtect() {
                                                                 }
                                                             });
                                                         }
-                                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || parseFloat(result[i].tempOutside) > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
