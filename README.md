@@ -31,6 +31,9 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.13 (21.06.2019)
+* (simatec) small Bugfix
+
 ### 0.2.12 (21.06.2019)
 * (simatec) Changed Time-Settings
 * (simatec) Bugfix Trigger for up and down

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.12",
+        "version": "0.2.13",
         "news": {
+            "0.2.13": {
+                "en": "small bugfix",
+                "de": "kleiner Bugfix",
+                "ru": "небольшое исправление",
+                "pt": "pequeno bugfix",
+                "nl": "kleine bugfix",
+                "fr": "petit bugfix",
+                "it": "piccolo bugfix",
+                "es": "pequeña corrección de errores",
+                "pl": "mała poprawka",
+                "zh-cn": "小错误"
+            },
             "0.2.12": {
                 "en": "Changed Time-Settings, Bugfix Trigger for up and down, Bugfix sunprotect with azimut, Added sunprotect not running on state down, Added debug log for any shutter states",
                 "de": "Geänderte Zeit-Einstellungen, Bugfix-Trigger für hoch- und runterfahren, Bugfix-Sonnenschutz mit Azimut, Sonnenschutz läuft nicht Zustand heruntergefahren, Debug-Log für alle Rollladenzustände hinzugefügt",
