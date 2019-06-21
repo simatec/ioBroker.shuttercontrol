@@ -1163,7 +1163,8 @@ function sunProtect() {
                                                                 }
                                                             });
                                                         }
-                                                    } else if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                    }
+                                                    if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1223,7 +1224,8 @@ function sunProtect() {
                                                                 }
                                                             });
                                                         }
-                                                    } else if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || parseFloat(result[i].tempOutside) > outsideTemp || result[i].valueLight > sunLight) {
+                                                    }
+                                                    if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1274,7 +1276,8 @@ function sunProtect() {
                                                         }
                                                     });
                                                 }
-                                            } else if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                            }
+                                            if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1309,7 +1312,8 @@ function sunProtect() {
                                                 adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                             }
                                         });
-                                    } else if ((resultDirectionRangePlus) < azimuth) {
+                                    }
+                                    if ((resultDirectionRangePlus) < azimuth) {
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1353,7 +1357,8 @@ function sunProtect() {
                                                         adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     }
                                                 });
-                                            } else if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
+                                            }
+                                            if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1390,7 +1395,8 @@ function sunProtect() {
                                                         adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     }
                                                 });
-                                            } else if (insideTemp < result[i].tempInside) {
+                                            }
+                                            if (insideTemp < result[i].tempInside) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
