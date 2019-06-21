@@ -31,6 +31,13 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.2.12 (21.06.2019)
+* (simatec) Changed Time-Settings
+* (simatec) Bugfix Trigger for up and down
+* (simatec) Bugfix sunprotect with azimut
+* (simatec) Added sunprotect not running on state down
+* (simatec) Added debug log for any shutter states
+
 ### 0.2.11 (20.06.2019)
 * (simatec) Fix debug log
 * (simatec) temporary storage of the state

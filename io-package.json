@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.11",
+        "version": "0.2.12",
         "news": {
+            "0.2.12": {
+                "en": "Changed Time-Settings, Bugfix Trigger for up and down, Bugfix sunprotect with azimut, Added sunprotect not running on state down, Added debug log for any shutter states",
+                "de": "Geänderte Zeit-Einstellungen, Bugfix-Trigger für hoch- und runterfahren, Bugfix-Sonnenschutz mit Azimut, Sonnenschutz läuft nicht Zustand heruntergefahren, Debug-Log für alle Rollladenzustände hinzugefügt",
+                "ru": "Изменены настройки времени, исправление ошибки запуска вверх и вниз, исправлена защита от солнца с азимутом, добавлена защита от солнца, не работающая при выключенном состоянии, добавлен журнал отладки для любых состояний затвора",
+                "pt": "Mudou Time-Settings, Bugfix Trigger para cima e para baixo, Bugfix sunprotect com azimut, Adicionado sunprotect não executando em estado baixo, Adicionado log de depuração para todos os estados do obturador",
+                "nl": "Gewijzigde tijdinstellingen, Bugfix-trigger voor op en neer, Bugfix sunprotect met azimut, Toegevoegd sunprotect werkt niet op status omlaag, Foutopsporingslog toegevoegd voor sluitertoestanden",
+                "fr": "Réglages horaires modifiés, déclencheur de correction de bogues pour monter et descendre, protection solaire de correction de bogues avec azimut, protection de soleil ajoutée ne fonctionnant pas à l'état arrêté, journal de débogage ajouté pour tous les états d'obturateur",
+                "it": "Impostazioni temporali modificate, Trigger di Bugfix per su e giù, Bugfix sunprotect con azimut, Aggiunto sunprotect non in esecuzione su stato giù, Aggiunto registro di debug per tutti gli stati dell'otturatore",
+                "es": "Configuración de hora modificada, Disparo de corrección de errores para arriba y abajo, Protección solar de corrección de errores con azimut, Protección solar agregada que no se ejecuta en estado inactivo, Registro de depuración agregado para cualquier estado del obturador",
+                "pl": "Zmieniono ustawienia czasu, Bugfix Trigger w górę iw dół, Bugfix sunprotect z azimut, Dodano sunprotect nie działa w stanie down, Dodano dziennik debugowania dla wszystkich stanów migawki",
+                "zh-cn": "更改时间设置，上下错误修正触发器，带有azimut的Bugfix sunprotect，添加的sunprotect未在状态下运行时添加，为任何快门状态添加了调试日志"
+            },
             "0.2.11": {
                 "en": "Fix debug log, temporary storage of the state, automatic stop of sun protection by manual state change",
                 "de": "Fix debug Ausgaben, temporäre Speicherung des Zustands, automatisches Stoppen des Sonnenschutzes bei manueller Zustandsänderung",
