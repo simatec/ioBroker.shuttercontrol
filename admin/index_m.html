@@ -365,31 +365,33 @@
                     $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val(newTypeUp).trigger('change');
                     $('#events .values-input[data-name="type"][data-index="' + id + '"]').val(newType).trigger('change');
                 });
-                $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="shutterName"][data-index="' + id + '"]').val());
-                $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
-                $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
-                $('#triggerDriveShutter').val($('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
-                $('#elevationShutter').val($('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val());
-                $('#triggerChangeShutter').val($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
-                $('#triggerChangeShutter').select();
-                $('#triggerStateShutter').val($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
-                $('#triggerStateShutter').select();
-                $('#typeDown').val($('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val());
-                $('#typeDown').select();
-                $('#typeUp').val($('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val());
-                $('#typeUp').select();
-                $('#type').val($('#events .values-input[data-name="type"][data-index="' + id + '"]').val());
-                $('#type').select();
-                $('#triggerID').val($('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val());
-                $('#tempInside').val($('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
-                $('#heightDownSun').val($('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val());
-                $('#direction').val($('#events .values-input[data-name="direction"][data-index="' + id + '"]').val());
-                $('#directionRange').val($('#events .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
-                $('#actualValueTempInside').val($('#events .values-input[data-name="tempSensor"][data-index="' + id + '"]').val());
-                $('#actualValueTemp').val($('#events .values-input[data-name="outsideTempSensor"][data-index="' + id + '"]').val());
-                $('#setpointValue').val($('#events .values-input[data-name="tempOutside"][data-index="' + id + '"]').val());
-                $('#actualValueLight').val($('#events .values-input[data-name="lightSensor"][data-index="' + id + '"]').val());
-                $('#setpointValueLight').val($('#events .values-input[data-name="valueLight"][data-index="' + id + '"]').val());
+                setTimeout(function () {
+                    $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="shutterName"][data-index="' + id + '"]').val());
+                    $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
+                    $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
+                    $('#triggerDriveShutter').val($('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
+                    $('#elevationShutter').val(parseFloat($('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val()));
+                    $('#triggerChangeShutter').val($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
+                    $('#triggerChangeShutter').select();
+                    $('#triggerStateShutter').val($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
+                    $('#triggerStateShutter').select();
+                    $('#typeDown').val($('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val());
+                    $('#typeDown').select();
+                    $('#typeUp').val($('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val());
+                    $('#typeUp').select();
+                    $('#type').val($('#events .values-input[data-name="type"][data-index="' + id + '"]').val());
+                    $('#type').select();
+                    $('#triggerID').val($('#events .values-input[data-name="triggerID"][data-index="' + id + '"]').val());
+                    $('#tempInside').val($('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val());
+                    $('#heightDownSun').val($('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val());
+                    $('#direction').val($('#events .values-input[data-name="direction"][data-index="' + id + '"]').val());
+                    $('#directionRange').val($('#events .values-input[data-name="directionRange"][data-index="' + id + '"]').val());
+                    $('#actualValueTempInside').val($('#events .values-input[data-name="tempSensor"][data-index="' + id + '"]').val());
+                    $('#actualValueTemp').val($('#events .values-input[data-name="outsideTempSensor"][data-index="' + id + '"]').val());
+                    $('#setpointValue').val($('#events .values-input[data-name="tempOutside"][data-index="' + id + '"]').val());
+                    $('#actualValueLight').val($('#events .values-input[data-name="lightSensor"][data-index="' + id + '"]').val());
+                    $('#setpointValueLight').val($('#events .values-input[data-name="valueLight"][data-index="' + id + '"]').val());
+                }, 30)
             });
         }
         
@@ -699,7 +701,7 @@
                             <span class="translate">Time delay for driving the shutters (seconds)</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="sunProtEndElevation" min="1" max="50" />
+                            <input type="number" id="sunProtEndElevation" class="value" min="-50.0" max="100.0" step="0.1" />
                             <label for="sunProtEndElevation" class="translate"></label>
                             <span class="translate">Sun Protect End with Elevation</span>
                         </div>
@@ -808,7 +810,7 @@
                         </div>
                         <div class="row">
                             <div class="col s6 l2 input-field">
-                                <input type="number" class="value" id="setpointValue" min=1 max=40 />
+                                <input type="number" id="setpointValue" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
                                 <label for="setpointValue" class="translate"></label>
                                 <span class="translate">setpoint of the sun protection temperature</span>
                             </div>
@@ -824,7 +826,7 @@
                         </div>
                         <div class="row">
                             <div class="col s6 l2 input-field">
-                                <input type="number" class="value" id="setpointValueLight" min=1 max=40 />
+                                <input type="number" id="setpointValueLight" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
                                 <label for="setpointValueLight" class="translate"></label>
                                 <span class="translate">setpoint of the sun protection Lightsensor</span>
                             </div>
@@ -839,7 +841,7 @@
                         </div> 
                         <div class="row">
                             <div class="col s6 l2 input-field">
-                                <input type="number" class="value" id="tempInside" min=0 max=40 />
+                                <input type="number" id="tempInside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1"/>
                                 <label for="tempInside" class="translate"></label>
                                 <span class="translate">Temp Inside</span>
                             </div>
@@ -923,7 +925,7 @@
                                 <span class="translate">height up</span>
                             </div>
                             <div class="col s6 l2 input-field">
-                                <input type="number" class="value" id="elevationShutter" min=0 max=100 />
+                                <input type="number" id="elevationShutter" class="form-control" min="-50.0" max="100.0" placeholder="-100.0-100.0" step="0.1"/>
                                 <label for="elevationShutter" class="translate"></label>
                                 <span class="translate">Elevation</span>
                             </div>

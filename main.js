@@ -1164,7 +1164,7 @@ function sunProtect() {
                                                             });
                                                         }
                                                     }
-                                                    if (insideTemp < result[i].tempInside || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                    if (insideTemp < result[i].tempInside || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1225,7 +1225,7 @@ function sunProtect() {
                                                             });
                                                         }
                                                     }
-                                                    if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                                    if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1277,7 +1277,7 @@ function sunProtect() {
                                                     });
                                                 }
                                             }
-                                            if ((resultDirectionRangePlus) < azimuth || result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight) {
+                                            if ((resultDirectionRangePlus) < azimuth || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1358,7 +1358,7 @@ function sunProtect() {
                                                     }
                                                 });
                                             }
-                                            if (result[i].tempOutside > outsideTemp || result[i].valueLight > sunLight){
+                                            if ((result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (parseFloat(state['val']) == parseFloat(result[i].heightDownSun)) {
                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')

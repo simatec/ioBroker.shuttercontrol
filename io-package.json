@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.13",
+        "version": "0.2.14",
         "news": {
+            "0.2.14": {
+                "en": "Bugfix shutter up for Sunprotect, Bugfix input for elevation, Bugfix input for Inside temperature, Bugfix input for Outside temperature, Bugfix input for Lightsensor",
+                "de": "Bugfix Rollladen hochfahren bei Sonnenschutz, Bugfix Input für Elevation, Bugfix Input für Innentemperatur, Bugfix Input für Außentemperatur, Bugfix Input für Lichtsensor",
+                "ru": "Затвор исправления для Sunprotect, вход Bugfix для повышения, вход Bugfix для внутренней температуры, вход Bugfix для наружной температуры, вход Bugfix для Lightsensor",
+                "pt": "Bugfix obturador para Sunprotect, Bugfix para elevação, Bugfix para temperatura interna, Bugfix para temperatura externa, Bugfix para Lightsensor",
+                "nl": "Bugfix sluitertijd voor Sunprotect, Bugfix-invoer voor elevatie, Bugfix-invoer voor binnentemperatuur, Bugfix-invoer voor buitentemperatuur, Bugfix-invoer voor lichtsensor",
+                "fr": "Correction de bug pour Sunprotect, entrée de correction de bug pour l'altitude, entrée de correction de bug pour la température intérieure, entrée de correction de bug pour la température extérieure, entrée de correction de bug pour Lightsensor",
+                "it": "Bugfix per Sunprotect, ingresso Bugfix per elevazione, ingresso Bugfix per temperatura interna, ingresso Bugfix per temperatura esterna, ingresso Bugfix per Lightsensor",
+                "es": "Persiana de corrección de errores para Sunprotect, Entrada de corrección de errores para la elevación, Entrada de corrección de errores para la temperatura interior, Entrada de corrección de errores para la temperatura exterior, Entrada de corrección de errores para Lightsensor",
+                "pl": "Bugfix miga dla Sunprotect, wejście Bugfix dla podniesienia, wejście Bugfix dla temperatury wewnątrz, wejście Bugfix dla temperatury zewnętrznej, wejście Bugfix dla Lightsensor",
+                "zh-cn": "用于Sunprotect的Bugfix快门，用于高程的Bugfix输入，用于内部温度的Bugfix输入，用于外部温度的Bugfix输入，用于Lightsensor的Bugfix输入"
+                        },
             "0.2.13": {
                 "en": "small bugfix",
                 "de": "kleiner Bugfix",
