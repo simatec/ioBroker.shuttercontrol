@@ -173,11 +173,11 @@ function triggerChange() {
         setTimeout(function() {
             if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    if (arrayChangeTrigger[i].triggerID && state['val'] != arrayChangeTrigger[i].triggerState && state['val'] < arrayChangeTrigger[i].triggerState) {
+                    if (arrayChangeTrigger[i].triggerID && state['val'] != arrayChangeTrigger[i].triggerState) {
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             arrayChangeTrigger[i].currentHeight = (state['val']);
                             adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                            if (state['val']!= arrayChangeTrigger[i].triggerDrive)  {
+                            if (state['val']!= arrayChangeTrigger[i].triggerDrive && state['val'] < arrayChangeTrigger[i].triggerDrive) {
                                 adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
