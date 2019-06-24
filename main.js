@@ -64,6 +64,9 @@ let resSunTriggerChange;
 
 let azimuth;
 let elevation;
+let ObjautoUp = [];
+let ObjautoDown = [];
+let ObjautoSun = [];
 
 /**
  * Starts the adapter instance
@@ -247,8 +250,30 @@ function checkActualStates () {
             }
         });
     }
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoUp.*", 'state', function (err, list) {
+        if (err) {
+            adapter.log.error(err);
+        } else {
+            ObjautoUp = list;
+        }
+    });
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoDown.*", 'state', function (err, list) {
+        if (err) {
+            adapter.log.error(err);
+        } else {
+            ObjautoDown = list;
+        }
+    });
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoSun.*", 'state', function (err, list) {
+        if (err) {
+            adapter.log.error(err);
+        } else {
+            ObjautoSun = list;
+        }
+    });
     setTimeout(function() {
-        shutterDriveCalc()
+        shutterDriveCalc();
+        createShutter();
     }, 1000)
 }
 
@@ -1544,7 +1569,139 @@ function sunPos() {
     adapter.log.debug('Sun Elevation: ' + elevation + '°');
     adapter.setState('info.Elevation', { val: elevation, ack: true });
 }
+function createShutter() {
+    let result = adapter.config.events;
+    if (result) {
+        for ( const i in result) {
+            const objectName = result[i].shutterName.replace(/ /g, '_');
+            
+            // Create Object for auto up
+            adapter.setObjectNotExists('shutters.autoUp.' + objectName, {
+                "type": "state",
+                "common": {
+                    "role":  "switch",
+                    "name":  result[i].shutterName,
+                    "type":  "boolean",
+                    "read":  true,
+                    "write": true,
+                    "def":   false
+                },
+                "native": {},
+            });
+            adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
+                if (state === null || state.val === null) {
+                    adapter.setState('shutters.autoUp.' + objectName, {val: true, ack: true});
+                    adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
+                }
+            });
+            // Create Object for auto down
+            adapter.setObjectNotExists('shutters.autoDown.' + objectName, {
+                "type": "state",
+                "common": {
+                    "role":  "switch",
+                    "name":  result[i].shutterName,
+                    "type":  "boolean",
+                    "read":  true,
+                    "write": true,
+                    "def":   false
+                },
+                "native": {},
+            });
+            adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
+                if (state === null || state.val === null) {
+                    adapter.setState('shutters.autoDown.' + objectName, {val: true, ack: true});
+                    adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
+                }
+            });
+            // Create Object for auto sun
+            adapter.setObjectNotExists('shutters.autoSun.' + objectName, {
+                "type": "state",
+                "common": {
+                    "role":  "switch",
+                    "name":  result[i].shutterName,
+                    "type":  "boolean",
+                    "read":  true,
+                    "write": true,
+                    "def":   false
+                },
+                "native": {},
+            });
+            adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
+                if (state === null || state.val === null) {
+                    adapter.setState('shutters.autoSun.' + objectName, {val: true, ack: true});
+                    adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
+                }
+            });
+            
+        }
+    }
+    // delete old shutter auto up
+    for ( const i in ObjautoUp) {
 
+        const resID = ObjautoUp[i]._id;
+        const objectID = resID.split('.');
+        const resultID = objectID[4].replace(/_/g, ' ');
+
+        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        let fullRes = []
+
+        for ( const i in resultName) {
+            fullRes.push(resultName[i].shutterName)
+        }
+        if (fullRes.indexOf(resultID) === -1) {
+            adapter.log.warn('DELETE: ' + resID)
+            adapter.delObject(resID, function (err) {
+                if (err) {
+                    adapter.log.warn(err);
+                }
+            });
+        }
+    }
+    // delete old shutter auto down
+    for ( const i in ObjautoDown) {
+        
+        const resID = ObjautoDown[i]._id;
+        const objectID = resID.split('.');
+        const resultID = objectID[4].replace(/_/g, ' ');
+
+        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        let fullRes = [];
+
+        for ( const i in resultName) {
+            fullRes.push(resultName[i].shutterName);
+        }
+        if (fullRes.indexOf(resultID) === -1) {
+            adapter.log.warn('DELETE: ' + resID);
+            adapter.delObject(resID, function (err) {
+                if (err) {
+                    adapter.log.warn(err);
+                }
+            });
+        }
+    }
+    // delete old shutter auto Sun
+    for ( const i in ObjautoSun) {
+        
+        const resID = ObjautoSun[i]._id;
+        const objectID = resID.split('.');
+        const resultID = objectID[4].replace(/_/g, ' ');
+
+        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        let fullRes = [];
+
+        for ( const i in resultName) {
+            fullRes.push(resultName[i].shutterName);
+        }
+        if (fullRes.indexOf(resultID) === -1) {
+            adapter.log.warn('DELETE: ' + resID);
+            adapter.delObject(resID, function (err) {
+                if (err) {
+                    adapter.log.warn(err);
+                }
+            });
+        }
+    }
+}
 function main() {
     adapter.log.debug(JSON.stringify(adapter.config.events))
     

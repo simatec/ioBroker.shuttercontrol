@@ -345,6 +345,38 @@
     "objects": [],
     "instanceObjects": [
         {
+            "_id":  "shutters",
+            "type": "channel",
+            "common": {
+                "name": "Control shutters"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoUp",
+            "type": "channel",
+            "common": {
+                "name": "Control schutter automatic up"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoDown",
+            "type": "channel",
+            "common": {
+                "name": "Control schutter automatic down"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoSun",
+            "type": "channel",
+            "common": {
+                "name": "Control schutter automatic sunprotect"
+            },
+            "native": {}
+        },
+        {
             "_id":  "info",
             "type": "channel",
             "common": {
