@@ -1271,7 +1271,6 @@ function sunProtect() {
                 // in- & outside temperature and direction
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
-                    adapter.log.warn(nameDevice)
                     //shuttercontrol.0.shutters.autoSun.Rollladen_Schlafzimmer_Level
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
                         if (state === true || state.val === true) {
