@@ -457,7 +457,7 @@ function elevationDown(){
         for ( const i in result) {
             let nameDevice = result[i].shutterName.replace(/ /g, '_');
             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                if (state === true || state.val === true) {
+                if (state && state === true || state && state.val === true) {
                     if (elevation <= result[i].elevation) {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
@@ -518,7 +518,7 @@ function shutterGoldenHour() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -570,7 +570,7 @@ function shutterGoldenHour() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -627,7 +627,7 @@ function shutterSunriseSunset() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -679,7 +679,7 @@ function shutterSunriseSunset() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -778,7 +778,7 @@ function shutterUpLiving() {
             for ( const i in result) {
                 let nameDevice = result[i].shutterName.replace(/ /g, '_');
                 adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                    if (state === true || state.val === true) {
+                    if (state && state === true || state && state.val === true) {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                 if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -819,7 +819,7 @@ function shutterUpLiving() {
                     for ( const i in result) {
                         let nameDevice = result[i].shutterName.replace(/ /g, '_');
                         adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                            if (state === true || state.val === true) {
+                            if (state && state === true || state && state.val === true) {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
                                         if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -886,7 +886,7 @@ function shutterDownLiving() {
             for ( const i in result) {
                 let nameDevice = result[i].shutterName.replace(/ /g, '_');
                 adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                    if (state === true || state.val === true) {
+                    if (state && state === true || state && state.val === true) {
                         setTimeout(function() {
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                 if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -927,7 +927,7 @@ function shutterDownLiving() {
                     for ( const i in result) {
                         let nameDevice = result[i].shutterName.replace(/ /g, '_');
                         adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                            if (state === true || state.val === true) {
+                            if (state && state === true || state && state.val === true) {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
                                         if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -998,7 +998,7 @@ function shutterUpSleep() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -1041,7 +1041,7 @@ function shutterUpSleep() {
                         for ( const i in result) {
                             let nameDevice = result[i].shutterName.replace(/ /g, '_');
                             adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
-                                if (state === true || state.val === true) {
+                                if (state && state === true || state && state.val === true) {
                                     setTimeout(function() {
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown')) {
@@ -1113,7 +1113,7 @@ function shutterDownSleep() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -1157,7 +1157,7 @@ function shutterDownSleep() {
                         for ( const i in result) {
                             let nameDevice = result[i].shutterName.replace(/ /g, '_');
                             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
-                                if (state === true || state.val === true) {
+                                if (state && state === true || state && state.val === true) {
                                     setTimeout(function() {
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyDown' || 'upDown')) {
@@ -1208,7 +1208,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'in- & outside temperature') {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
@@ -1273,7 +1273,7 @@ function sunProtect() {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     //shuttercontrol.0.shutters.autoSun.Rollladen_Schlafzimmer_Level
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'in- & outside temperature and direction') {
                                 const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                 const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
@@ -1341,7 +1341,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'outside temperature and direction') {
                                 const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                 const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
@@ -1400,7 +1400,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'only direction') {
                                 const resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                 const resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
@@ -1443,7 +1443,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'only outside temperature') {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
@@ -1497,7 +1497,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             if (result[i].type == 'only inside temperature') {
                                 setTimeout(function() {
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
@@ -1562,7 +1562,7 @@ function sunProtect() {
                 for ( const i in result) {
                     let nameDevice = result[i].shutterName.replace(/ /g, '_');
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
-                        if (state === true || state.val === true) {
+                        if (state && state === true || state && state.val === true) {
                             setTimeout(function() {
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     if ((result[i].triggerID && state['val'] == result[i].triggerState) || (result[i].triggerID && state['val'] != result[i].triggerState && result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
