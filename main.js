@@ -127,7 +127,7 @@ function startAdapter(options) {
             }
             
             resTrigger.forEach(function(resultTriggerID) {
-                if (id === resultTriggerID && state['ts'] === state['lc']) {
+                if (id === resultTriggerID && state.ts === state.lc) {
                     adapter.log.warn('all Trigger state check IDs: ' + resTrigger);
                     adapter.log.warn('current state by check: ' + state['val'] + ' ####### ' + state.val);
                     resTriggerChange = resultTriggerID;
@@ -137,20 +137,20 @@ function startAdapter(options) {
             });
             
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
-                if (id === resSunInsideTempID  && state['ts'] === state['lc']) {
+                if (id === resSunInsideTempID  && state.ts === state.lc) {
                     adapter.log.debug('TriggerID Change: ' +  resSunInsideTempID);
                     sunProtect();
                 }
             });
             
             resSunOutsideTemp.forEach(function(resSunOutsideTempID) {
-                if (id === resSunOutsideTempID  && state['ts'] === state['lc']) {
+                if (id === resSunOutsideTempID  && state.ts === state.lc) {
                     adapter.log.debug('TriggerID Change: ' +  resSunOutsideTempID);
                     sunProtect();
                 }
             });
             resSunLight.forEach(function(resSunLightID) {
-                if (id === resSunLightID  && state['ts'] === state['lc']) {
+                if (id === resSunLightID  && state.ts === state.lc) {
                     adapter.log.debug('TriggerID Change: ' + resSunLightID);
                     sunProtect();
                 }
@@ -176,32 +176,39 @@ function triggerChange() {
     
     for ( const i in arrayChangeTrigger) {
         setTimeout(function() {
-            if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
+            if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange == 'upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    adapter.log.warn('current Trigger State for down: ' + state['val'] + ' ####### ' + state.val);
-                    if (arrayChangeTrigger[i].triggerID && state['val'] != arrayChangeTrigger[i].triggerState) {
+                    let currentValue = ('' + state.val);
+                    let mustValue = ('' + arrayChangeTrigger[i].triggerState);
+                    adapter.log.warn('current Trigger State for up: ' + state.val);
+                    if (currentValue !== mustValue) {
+                    //if (('' + state.val) != arrayChangeTrigger[i].triggerState || state.val != arrayChangeTrigger[i].triggerState) {
                         adapter.log.warn('Trigger for up');
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            arrayChangeTrigger[i].currentHeight = (state['val']);
-                            adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                            if (state['val']!= arrayChangeTrigger[i].triggerDrive && state['val'] < arrayChangeTrigger[i].triggerDrive) {
-                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
+                            if (state.val != arrayChangeTrigger[i].triggerDrive && state.val < arrayChangeTrigger[i].triggerDrive) {
+                                arrayChangeTrigger[i].currentHeight = (state.val);
+                                adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
+                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].shutterName + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                             }
                         });
                     }
                 });
             }
-            if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
+            if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange == 'upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
-                    adapter.log.warn('current Trigger State for up: ' + state['val'] + ' ####### ' + state.val);
-                    if (arrayChangeTrigger[i].triggerID && state['val'] == arrayChangeTrigger[i].triggerState) {
+                    let currentValue = ('' + state.val);
+                    let mustValue = ('' + arrayChangeTrigger[i].triggerState);
+                    adapter.log.warn('current Trigger State for down: ' + state.val);
+                    if (currentValue === mustValue) {
+                    //if (('' + state.val) == arrayChangeTrigger[i].triggerState || state.val == arrayChangeTrigger[i].triggerState) {
                         adapter.log.warn('Trigger for down');
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                            if (state['val'] != arrayChangeTrigger[i].currentHeight)  {
+                            if (state.val != arrayChangeTrigger[i].currentHeight && state.val == arrayChangeTrigger[i].triggerDrive)  {
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
-                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].name + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
+                                adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].shutterName + ' value: ' + arrayChangeTrigger[i].currentHeight + '%')
                                 adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].currentHeight), false);
+                                arrayChangeTrigger[i].currentHeight = arrayChangeTrigger[i].currentHeight;
                             }
                         });
                     }
