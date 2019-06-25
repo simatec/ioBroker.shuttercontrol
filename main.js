@@ -127,8 +127,9 @@ function startAdapter(options) {
                 adapter.log.debug('Auto Sleep is: ' + state['val']);
             }
             resTrigger.forEach(function(resultTriggerID) {
-                adapter.log.warn('all Trigger state check IDs: ' + resTrigger);
+                
                 if (id === resultTriggerID) {
+                    adapter.log.warn('all Trigger state check IDs: ' + resTrigger);
                     adapter.log.warn('current state by check: ' + state['val'] + ' ####### ' + state.val);
                     resTriggerChange = resultTriggerID;
                     adapter.log.debug('TriggerID Change: ' +  resultTriggerID);
