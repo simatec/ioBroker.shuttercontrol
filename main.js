@@ -52,7 +52,6 @@ let astroTimeLivingDown;
 let astroTimeSleepUp;
 /** @type {string} */
 let astroTimeSleepDown;
-/** @type {any[] | never[]} */
 let resTrigger = [];
 let resSunTrigger = [];
 let resSunInsideTemp = [];
@@ -128,7 +127,9 @@ function startAdapter(options) {
                 adapter.log.debug('Auto Sleep is: ' + state['val']);
             }
             resTrigger.forEach(function(resultTriggerID) {
+                adapter.log.warn('all Trigger state check IDs: ' + resTrigger);
                 if (id === resultTriggerID) {
+                    adapter.log.warn('current state by check: ' + state['val'] + ' ####### ' + state.val);
                     resTriggerChange = resultTriggerID;
                     adapter.log.debug('TriggerID Change: ' +  resultTriggerID);
                     triggerChange();
@@ -171,12 +172,15 @@ function triggerChange() {
     const resultID = adapter.config.events;
     // Filter changed Trigger
     const arrayChangeTrigger = resultID.filter(d => d.triggerID == resTriggerChange);
+    adapter.log.warn('TriggerID with Change: ' + JSON.stringify(arrayChangeTrigger));
     
     for ( const i in arrayChangeTrigger) {
         setTimeout(function() {
             if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
+                    adapter.log.warn('current Trigger State for down: ' + state['val'] + ' ####### ' + state.val);
                     if (arrayChangeTrigger[i].triggerID && state['val'] != arrayChangeTrigger[i].triggerState) {
+                        adapter.log.warn('Trigger for down');
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             arrayChangeTrigger[i].currentHeight = (state['val']);
                             adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
@@ -190,7 +194,9 @@ function triggerChange() {
             }
             if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange =='upDown') {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
+                    adapter.log.warn('current Trigger State for up: ' + state['val'] + ' ####### ' + state.val);
                     if (arrayChangeTrigger[i].triggerID && state['val'] == arrayChangeTrigger[i].triggerState) {
+                        adapter.log.warn('Trigger for down');
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             if (state['val'] != arrayChangeTrigger[i].currentHeight)  {
                                 adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].currentHeight + '%')
@@ -1846,6 +1852,7 @@ function main() {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for shuttercontrol: ' + element);
         });
+        adapter.log.warn('all Trigger subscribe IDs: ' + resTrigger);
     }
     
     let resultInsideTemp = adapter.config.events;
