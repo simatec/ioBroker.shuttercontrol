@@ -90,7 +90,6 @@ function startAdapter(options) {
             callback();
         }
     });
-
     // is called if a subscribed state changes
     adapter.on('stateChange', (id, state) => {
         if (state) {
@@ -126,9 +125,9 @@ function startAdapter(options) {
                 adapter.setState('control.autoSleep', {val: state['val'], ack: true});
                 adapter.log.debug('Auto Sleep is: ' + state['val']);
             }
+            
             resTrigger.forEach(function(resultTriggerID) {
-                
-                if (id === resultTriggerID) {
+                if (id === resultTriggerID && state['ts'] === state['lc']) {
                     adapter.log.warn('all Trigger state check IDs: ' + resTrigger);
                     adapter.log.warn('current state by check: ' + state['val'] + ' ####### ' + state.val);
                     resTriggerChange = resultTriggerID;
@@ -138,20 +137,20 @@ function startAdapter(options) {
             });
             
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
-                if (id === resSunInsideTempID) {
+                if (id === resSunInsideTempID  && state['ts'] === state['lc']) {
                     adapter.log.debug('TriggerID Change: ' +  resSunInsideTempID);
                     sunProtect();
                 }
             });
             
             resSunOutsideTemp.forEach(function(resSunOutsideTempID) {
-                if (id === resSunOutsideTempID) {
+                if (id === resSunOutsideTempID  && state['ts'] === state['lc']) {
                     adapter.log.debug('TriggerID Change: ' +  resSunOutsideTempID);
                     sunProtect();
                 }
             });
             resSunLight.forEach(function(resSunLightID) {
-                if (id === resSunLightID) {
+                if (id === resSunLightID  && state['ts'] === state['lc']) {
                     adapter.log.debug('TriggerID Change: ' + resSunLightID);
                     sunProtect();
                 }
@@ -163,7 +162,7 @@ function startAdapter(options) {
             
             if (id === adapter.namespace + '.info.Elevation' ) {
                 elevationDown();
-            }
+            }   
         }
     });
 }
@@ -181,7 +180,7 @@ function triggerChange() {
                 adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                     adapter.log.warn('current Trigger State for down: ' + state['val'] + ' ####### ' + state.val);
                     if (arrayChangeTrigger[i].triggerID && state['val'] != arrayChangeTrigger[i].triggerState) {
-                        adapter.log.warn('Trigger for down');
+                        adapter.log.warn('Trigger for up');
                         adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                             arrayChangeTrigger[i].currentHeight = (state['val']);
                             adapter.log.debug('save current height: ' + arrayChangeTrigger[i].currentHeight + '%')
