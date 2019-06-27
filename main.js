@@ -2055,8 +2055,6 @@ function main() {
             });
         }
     }
-    const test = ((7 * 112) / 100)
-    adapter.log.warn(test)
 }
 
 // If started as allInOne/compact mode => return function to create instance
