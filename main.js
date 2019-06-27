@@ -1334,7 +1334,11 @@ function sunProtect() {
                                                                 }
                                                             } 
                                                             if ((result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
-                                                                if (insideTemp < result[i].tempInside || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
+                                                                let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
+                                                                let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
+                                                                let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+
+                                                                if (insideTemp < parseFloat(hysteresisInside) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                                         if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
                                                                             adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1408,7 +1412,11 @@ function sunProtect() {
                                                                 }
                                                             }
                                                             if ((result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
-                                                                if (insideTemp < result[i].tempInside || (resultDirectionRangePlus) < azimuth || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
+                                                                let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
+                                                                let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
+                                                                let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+
+                                                                if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                                         if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
                                                                             adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1473,7 +1481,10 @@ function sunProtect() {
                                                         }
                                                     }
                                                     if ((result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
-                                                        if ((resultDirectionRangePlus) < azimuth || (result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
+                                                        let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
+                                                        let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+
+                                                        if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                 if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
                                                                     adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1581,7 +1592,11 @@ function sunProtect() {
                                                         }
                                                     }
                                                     if ((result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
-                                                        if ((result[i].tempOutside > outsideTemp && result[i].lightSensor != '' && result[i].valueLight > sunLight) || (result[i].tempOutside > outsideTemp && result[i].lightSensor == '')) {
+
+                                                        let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
+                                                        let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+
+                                                        if ((parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                 if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
                                                                     adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1633,7 +1648,9 @@ function sunProtect() {
                                                         }
                                                     }
                                                     if ((result[i].autoDrive == 'onlyUp' || 'upDown') || (result[i].triggerID == '')) {
-                                                        if (insideTemp < result[i].tempInside) {
+                                                        let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
+
+                                                        if (insideTemp < parseFloat(hysteresisInside)) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                 if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
                                                                     adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -2038,6 +2055,8 @@ function main() {
             });
         }
     }
+    const test = ((7 * 112) / 100)
+    adapter.log.warn(test)
 }
 
 // If started as allInOne/compact mode => return function to create instance

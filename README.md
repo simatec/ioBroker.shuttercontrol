@@ -31,12 +31,17 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.2.14 (22.06.2019)
+### 0.2.14 (27.06.2019)
 * (simatec) Fix shutter up for Sunprotect
 * (simatec) Fix input for elevation
 * (simatec) Fix input for Inside temperature
 * (simatec) Fix input for Outside temperature
 * (simatec) Fix input for Lightsensor
+* (simatec) Added Object to shutter
+* (simatec) Added hysteresis for Lightsensor
+* (simatec) Added hysteresis for Inside temperature
+* (simatec) Added hysteresis for Outside temperature
+
 
 ### 0.2.13 (21.06.2019)
 * (simatec) small Bugfix
