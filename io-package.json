@@ -356,7 +356,7 @@
             "_id":  "shutters.autoUp",
             "type": "channel",
             "common": {
-                "name": "Control schutter automatic up"
+                "name": "Control shutter automatic up"
             },
             "native": {}
         },
@@ -364,7 +364,7 @@
             "_id":  "shutters.autoDown",
             "type": "channel",
             "common": {
-                "name": "Control schutter automatic down"
+                "name": "Control shutter automatic down"
             },
             "native": {}
         },
@@ -372,7 +372,7 @@
             "_id":  "shutters.autoSun",
             "type": "channel",
             "common": {
-                "name": "Control schutter automatic sunprotect"
+                "name": "Control shutter automatic sunprotect"
             },
             "native": {}
         },
