@@ -1354,7 +1354,7 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
+                                        if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
                                             let insideTemp;
                                             let outsideTemp;
                                             let sunLight;
@@ -1372,7 +1372,7 @@ function sunProtect() {
                                                                 sunLight = parseFloat(state.val);
                                                             }
 
-                                                            if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                 if (insideTemp > result[i].tempInside) {
                                                                     if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
@@ -1387,7 +1387,7 @@ function sunProtect() {
                                                                     }
                                                                 }
                                                             } 
-                                                            if ((result[i].autoDrive == 'onlyUp' ||  result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                                 let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                                 let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                 let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
@@ -1431,7 +1431,7 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].autoDrive != 'onlyUp' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
+                                        if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
                                             /** @type {number} */
                                             let insideTemp;
                                             /** @type {number} */
@@ -1451,7 +1451,7 @@ function sunProtect() {
                                                             if (state) {
                                                                 sunLight = parseFloat(state.val);
                                                             }
-                                                            if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                 if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
                                                                     if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
@@ -1466,7 +1466,7 @@ function sunProtect() {
                                                                     }
                                                                 }
                                                             }
-                                                            if ((result[i].autoDrive == 'onlyUp' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                                 let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                                 let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                 let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
@@ -1509,7 +1509,7 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
+                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
                                             let outsideTemp;
                                             let sunLight;
 
@@ -1522,7 +1522,7 @@ function sunProtect() {
                                                     if (state) {
                                                         sunLight = parseFloat(state.val);
                                                     }
-                                                    if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                         if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                             if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
@@ -1537,7 +1537,7 @@ function sunProtect() {
                                                             }
                                                         }
                                                     }
-                                                    if ((result[i].autoDrive == 'onlyUp' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                         let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                         let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
@@ -1578,8 +1578,8 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
-                                            if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
+                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                 if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
@@ -1592,7 +1592,7 @@ function sunProtect() {
                                                     });
                                                 }
                                             }
-                                            if ((result[i].autoDrive == 'onlyUp' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                            if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                 if ((resultDirectionRangePlus) < azimuth) {
                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                         if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
@@ -1626,7 +1626,7 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
+                                        if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
                                             let outsideTemp;
                                             let sunLight;
 
@@ -1639,7 +1639,7 @@ function sunProtect() {
                                                     if (state) {
                                                         sunLight = parseFloat(state.val);
                                                     }
-                                                    if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                 if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
@@ -1652,7 +1652,7 @@ function sunProtect() {
                                                             });
                                                         }
                                                     }
-                                                    if ((result[i].autoDrive == 'onlyUp' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
 
                                                         let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                         let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
@@ -1691,13 +1691,13 @@ function sunProtect() {
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
-                                        if (currentValue === mustValue  && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].autoDrive != 'onlyUp'  && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
+                                        if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
                                             let insideTemp;
                                             adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                                 if (state) {
                                                     insideTemp = parseFloat(state.val);
 
-                                                    if ((result[i].autoDrive == 'onlyDown' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                         if (insideTemp > result[i].tempInside) {
                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                 if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
@@ -1710,7 +1710,7 @@ function sunProtect() {
                                                             });
                                                         }
                                                     }
-                                                    if ((result[i].autoDrive == 'onlyUp' || result[i].autoDrive == 'upDown') || (result[i].triggerID == '')) {
+                                                    if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                         let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
 
                                                         if (insideTemp < parseFloat(hysteresisInside)) {
