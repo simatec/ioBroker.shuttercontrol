@@ -269,6 +269,7 @@
         "publicHolidays": true,
         "publicHolInstance": "",
         "UseSunMode": true,
+        "currentShutterState": false,
         
         "W_shutterDownLiving": "22:00",
         "W_shutterUpLivingMin": "05:00",

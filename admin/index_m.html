@@ -751,6 +751,10 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
+                            <input type="checkbox" class="value" id="currentShutterState" />
+                            <span for="currentShutterState" class="translate">check current Shutter State</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
                             <input type="checkbox" class="value" id="publicHolidays" />
                             <span for="publicHolidays" class="translate">Use public holidays</span>
                         </div>
@@ -853,9 +857,9 @@
                                 <span class="translate">setpoint of the sun protection temperature</span>
                             </div>
                             <div class="col s6 l2 input-field">
-                                <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
+                                <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="50.0" placeholder="0.0-40.0" step="0.1" />
                                 <label for="hysteresisOutside" class="translate"></label>
-                                <span class="translate">hysteresis Outside</span>
+                                <span class="translate">hysteresis Outsidetemperature (percent)</span>
                             </div>
                             <div class="col s6 l4 input-field">
                                 <input type="text" class="value" id="actualValueTemp" />
@@ -874,9 +878,9 @@
                                 <span class="translate">setpoint of the sun protection Lightsensor</span>
                             </div>
                             <div class="col s6 l2 input-field">
-                                <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
+                                <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="50.0" placeholder="0.0-40.0" step="0.1" />
                                 <label for="hysteresisLight" class="translate"></label>
-                                <span class="translate">hysteresis Light</span>
+                                <span class="translate">hysteresis Lightsensor (percent)</span>
                             </div>
                             <div class="col s6 l4 input-field">
                                 <input type="text" class="value" id="actualValueLight" />
@@ -896,7 +900,7 @@
                             <div class="col s6 l2 input-field">
                                 <input type="number" id="hysteresisInside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
                                 <label for="hysteresisInside" class="translate"></label>
-                                <span class="translate">hysteresis Inside</span>
+                                <span class="translate">hysteresis Insidetemperature (percent)</span>
                             </div>
                             <div class="col s6 l4 input-field">
                                 <input type="text" class="value" id="actualValueTempInside" />
