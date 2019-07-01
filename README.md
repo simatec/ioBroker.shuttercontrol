@@ -46,7 +46,7 @@ automatic control for shutters
 * (simatec) Added check shutter up for sunprotect
 * (simatec) Added Translations
 * (simatec) sunprotect changed to switch
-* (simatec) Added German Docu
+* (Homoran/simatec) Added German Docu
 * (simatec) Added English Docu
 
 ### 0.2.13 (21.06.2019)
