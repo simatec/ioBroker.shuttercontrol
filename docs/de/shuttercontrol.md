@@ -107,13 +107,19 @@ Die Felder im Einzelnen:
 
 **Sollwert Außentemperatur:** Schwellwert zum starten der Beschattung. Dieser Wert ist natürlich abhängig von dem im nächsten Feld ausgewählten Sensor.
 
+**Hysterese Außentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
+
 **Objekt-ID für die Außentemperatur:** Der hier ausgewählte Sensor muss nicht zwingend die Außentemperatur messen. Er kann irgendeinen Wert, der zur Beschattungsauslösung hinzugezogen werden kann, liefern. Dies kann auch ein Hitzesensor (Temperaturdifferenzsensor) sein.
 
 **Sollwert des Lichtsensors:** Analog zum Außentemperatursensor
 
+**Hysterese Lichtsensor (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
+
 **Objekt-Id des Lichtsensors:** Analog zum Außentemperatursensor; wenn nicht benutzt leer lassen
 
 **Sollwert Innentemperatursensor:** Hier kann eine Temperatur eines zu dem Rolladen zugeordneten Innentemperatursensors eingegeben werden unter der keine Beschattung stattfinden soll, um z.B. die Wärmeeinstrahlung im Winter zur Heizungsunterstützung zu nutzen.
+
+**Hysterese Innentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
 
 **Objekt-ID des Innensensors:** über das (+) den Temperaturensor (State) auswählen der eine Rollladenfahrt verhindern soll.
 
@@ -136,9 +142,9 @@ In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Woh
 
 **am Wochenende hochfahren:** Übliche Zeit für das Ende der Verdunklung am Wochenende und an Feiertagen
 
-** Min. Zeit für das Hochfahren in der Woche:** Zeit die bei zusätzlichen Astroeinstellungen mindestens überschritten sein muss, bevor der Rollladen morgens hochfährt
+**Min. Zeit für das Hochfahren in der Woche:** Zeit die bei zusätzlichen Astroeinstellungen mindestens überschritten sein muss, bevor der Rollladen morgens hochfährt
 
-** Max. Zeit für das Hochfahren in der Woche:** Zeit die bei zusätzlichen Astroeinstellungen höchsten überschritten sein muss, bevor der Rollladen morgens hochfährt. Soll der Rolladen niemals hochfahren, wenn die Sonne noch nicht einen bestimmten Stand überschritten hat, muss diese Zeit auf den spätesten Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
+**Max. Zeit für das Hochfahren in der Woche:** Zeit die bei zusätzlichen Astroeinstellungen höchsten überschritten sein muss, bevor der Rollladen morgens hochfährt. Soll der Rolladen niemals hochfahren, wenn die Sonne noch nicht einen bestimmten Stand überschritten hat, muss diese Zeit auf den spätesten Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
 **Zeitverzögerung der Rollläden:** Abstand des Starts der Rollladenfahrt der einzelnen Rolläden dieser Gruppe um Funkstörungen zu vermeiden, oder den Anschein zu erwecken, sie würden manuell gefahren.
 
@@ -169,6 +175,9 @@ Diese Einstellungen sind eigentlich selbsterklärend: Breiten- und Längengrad d
 **Ende Sonnenschutz mit Sonnenhöhe:** In einer Bebauung oder in der Nähe von hohen Bäumen, muss die Beschattung nicht zwangsläufig bis zum Erreichen des eingestellten Azimuts dauern. Sobald die Sonne die hier eingestellte Höhe (und damit die Nachbarbebauung) unterschreitet, endet die Beschattung
 
 ## Extra-Einstellungen
-Sollen die Rollläden an Feiertagen so wie an Wochenenden fahren wird die Checkbox aktiviert und eine Instanz des Feiertage-Adapters ausgewählt.
+
+**Überprüfen des aktuellen Rollladenstatus:** Bei einigen User (unter anderen shelly User) tritt das Problem auf, dass sich das Level noch einmal etwas verändert. Ausdiesem Grund gibt es hier eine Checkbox. Sollte die Checkbox aktiv sein, prüft shuttercontroll 1 Minute nach der letzten Fahrt des Rollladens das aktuelle Level und speichert es temporär.
+
+**Verwenden der gesetzlichen Feiertage:** Sollen die Rollläden an Feiertagen so wie an Wochenenden fahren wird die Checkbox aktiviert und eine Instanz des Feiertage-Adapters ausgewählt.
 Man kann so ggf. zwei Instanzen des Feiertage-Adapters anlegen; einen zum anzeigen aller möglicher Feiertage und einen mit arbeitszeitrelevanten Feiertagen, auf die dann shuttercontrol zugreift.
 
