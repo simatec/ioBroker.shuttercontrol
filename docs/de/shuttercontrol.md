@@ -10,7 +10,6 @@ Der Adapter befindet sich bereits im latest Repository. Um ihn installieren zu k
 Spätestens nach Refresh der Adapterliste steht der Adapter **Shuttercontrol** zur Verfügung.
 
 Nach anklicken des (+) wird eine Instanz angelegt und die notwendigen Daten des Adapters vom Repository geladen:
-![Instanz_erzeugen.png](/assets/uploads/files/1561042598088-instanz_erzeugen.png) 
 
 # Konfiguration - Haupteinstellungen
 Sollte in dem Installationsfenster die Checkbox "***schließen wenn fertig***" nicht angehakt sein muss man dieses natürlich noch schließen.
@@ -22,7 +21,7 @@ Das Konfigurationsfenster besteht aus drei Reitern:
 
 Das Konfigurationsfenster öffnet sich automatisch mit den Haupteinstellungen
 
-![Konfig_Start.png](/assets/uploads/files/1561042720532-konfig_start.png) 
+![main.png](docs/de/img/main.png)
 
 Auf dieser Seite ist eine Beispiel-ID abgelegt.
 Diese bitte löschen und anschließend die eigenen IDs durch anklicken des (+) links oben an der Tabelle die eigenen Rollladenaktoren hinzufügen
@@ -31,7 +30,7 @@ Dabei bitte die Datenpunkte mit LEVEL (o.ä.) auswählen. NICHT das Gerät als s
 
 Nach Abschluß der ID-Auswahl ist der Adapter bereits betriebsbereit, aber noch nicht an die eigenen Wünsche angepasst.
 
-![Konfig_ID_kpl.png](/assets/uploads/files/1561042875446-konfig_id_kpl.png) 
+![idSelect.png](docs/de/img/idSelect.png)
 
 
 ### Aufbau der Tabelle
@@ -49,13 +48,14 @@ Mülleimer: Löschen der ID mit allen Konfigurierten Daten!
 Auch diese Konfigurationsebene besteht aus zwei Reitern: Haupteinstellungen und Sonnenschutz einstellungen
 
 ### Haupteinstellungen
-![Haupteinstellungen.png](/assets/uploads/files/1561043784051-haupteinstellungen.png) 
+
+![mainShutter.png](docs/de/img/mainShutter.png)
 
 Im oberen Bereich werden die Zeitpunkte für das Hoch und Runterfahren zur nächtlichen Verdunklung festgelegt.
 Diese Zeiten können unter ***Zeit-Einstellungen*** konfiguriert und hier im pulldown ausgewählt werden.
 
 Folgende Möglichkeiten stehen zur Auswahl:
-![Zeitmenu_total.png](/assets/uploads/files/1561056739707-zeitmenu_total.png) 
+
 Erklärungen dazu weiter unten.
 
 **Sollwert des Auslösers:** Um einen Aussperrschutz zu ermöglichen kann man in der untersten Zeile einen Auslöser auswählen, der das Herunterfahren des Rollladens verhindern soll. Hier wird jetzt der Wert des Sensors angegeben, bei der der Rolladen fahren darf.
@@ -94,7 +94,7 @@ Erklärungen dazu weiter unten.
 ### Sonnenschutz-Einstellungen
 Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung und deren Ende ausgewählt werden.
 
-![Sonnenschutz.png](/assets/uploads/files/1561044706658-sonnenschutz.png) 
+![sunShutter.png](docs/de/img/sunShutter.png)
 
 Die Felder im Einzelnen:
 **Rollladenhöhe beim runterfahren:** Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll.
@@ -131,6 +131,8 @@ Wird ein Rolladen manuell verstellt und entspricht die Position nicht der automa
 # Konfiguration - Zeit-Einstellungen
 In diesem Abschnitt können einige Zeit- bzw. Astro einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen ausgewählt werden können.
 
+![timeSettings.png](docs/de/img/timeSettings.png)
+
 ## Wohnbereich
 In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Wohnbereich eingegeben.
 
@@ -163,7 +165,7 @@ Natürlich muss diese Kategorisierung nicht zwingend für Wohn- und Schlafbereic
 
 In den Extra-Einstellungen werden verschiedene Einstellungen ausgeführt, die in den verschiedenen Kofigurationen eingesetzt werden.
 
-![Extraeinstellungen.png](/assets/uploads/files/1561046551580-extraeinstellungen.png) 
+![extraSettings.png](docs/de/img/extraSettings.png)
 
 ## Astro-Einstellungen
 Diese Einstellungen sind eigentlich selbsterklärend: Breiten- und Längengrad des Wohnorts um den Sonnenstand korrekt berechnen zu können.
