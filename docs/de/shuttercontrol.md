@@ -94,7 +94,7 @@ Erklärungen dazu weiter unten.
 ### Sonnenschutz-Einstellungen
 Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung und deren Ende ausgewählt werden.
 
-![sunShutter.jpg](img/sunShutter.jpg)
+![sunProtect.jpg](img/sunProtect.jpg)
 
 Die Felder im Einzelnen:
 **Rollladenhöhe beim runterfahren:** Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll.

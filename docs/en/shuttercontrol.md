@@ -10,7 +10,6 @@ The adapter is already in the latest repository. In order to install it you have
 At the latest after refreshing the adapter list the adapter **Shuttercontrol** is available.
 
 After clicking the (+) an instance is created and the necessary data of the adapter is loaded from the repository:
-! [Instanz_erzeugen.png] (/ assets / uploads / files / 1561042598088-instanz_erzeugen.png)
 
 # Configuration - Main Settings
 If in the installation window the checkbox "***close when finished***" does not have to be ticked you have to close this course.
@@ -22,7 +21,7 @@ The configuration window consists of three tabs:
 
 The configuration window opens automatically with the main settings
 
-! [Konfig_Start.png] (/ assets / uploads / files / 1561042720532-konfig_start.png)
+![main.jpg](img/main.jpg)
 
 An example ID is stored on this page.
 Please delete these and then add your own IDs by clicking on the (+) on the top left of the table your own shutter actuators
@@ -31,7 +30,7 @@ Please select the data points with LEVEL (or similar). NOT the device as such.
 
 After completion of the ID selection, the adapter is already ready for use, but not yet adapted to your own wishes.
 
-! [Konfig_ID_kpl.png] (/ assets / uploads / files / 1561042875446-konfig_id_kpl.png)
+![idSelect.jpg](img/idSelect.jpg)
 
 ### Structure of the table
 No: consecutive number of the listed shutters
@@ -48,13 +47,14 @@ Trash can: delete ID with all configured data!
 This configuration level also consists of two tabs: main settings and sunshade settings
 
 ### Main Settings
-! [Haupteinstellungen.png] (/ assets / uploads / files / 1561043784051-haupteinstellungen.png)
+
+![mainShutter.jpg](img/mainShutter.jpg)
 
 In the upper area, the times are set for the up and down driving to the night darkness.
 These times can be configured under ***Time Settings*** and selected here in pulldown.
 
 The following options are available:
-! [Zeitmenu_total.png] (/ assets / uploads / files / 1561056739707-zeitmenu_total.png)
+
 Explanations below.
 
 **Trigger setpoint:** To enable lock-out protection, a trigger can be selected in the bottom line to prevent shutters from shutting down. Here, the value of the sensor is given, at which the roller shutter may drive.
@@ -93,7 +93,7 @@ Explanations below.
 ### sun protection settings
 The sunscreen can be controlled by various mechanisms. In this case, an outside temperature, an internal temperature, the brightness and the sun or the like. be selected as a trigger for the shading and its end.
 
-! [Sonnenschutz.png] (/ assets / uploads / files / 1561044706658-sonnenschutz.png)
+![sunShutter.jpg](img/sunShutter.jpg)
 
 The fields in detail:
 **Roller shutter height when driving down:** The value of how far the roller shutter should be closed during shading.
@@ -130,6 +130,8 @@ If a shutter is adjusted manually and the position does not correspond to the au
 # Configuration - time settings
 In this section, you can set some time or astro settings that can be selected in the individual roller shutter configurations.
 
+![timeSettings.jpg](img/timeSettings.jpg)
+
 ## living area
 In the upper section, the desired parameters for the shutters in the living area are entered.
 
@@ -162,7 +164,7 @@ Of course, this categorization does not necessarily have to be used for living a
 
 In the Extra settings, various settings are applied that are used in the various configurations.
 
-! [Extraeinstellungen.png] (/ assets / uploads / files / 1561046551580-extraeinstellungen.png)
+![extraSettings.jpg](img/extraSettings.jpg)
 
 ## Astro settings
 These settings are actually self-explanatory: latitude and longitude of the place of residence to calculate the position of the sun correctly.
