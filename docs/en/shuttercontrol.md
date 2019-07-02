@@ -93,7 +93,7 @@ Explanations below.
 ### sun protection settings
 The sunscreen can be controlled by various mechanisms. In this case, an outside temperature, an internal temperature, the brightness and the sun or the like. be selected as a trigger for the shading and its end.
 
-![sunShutter.jpg](img/sunShutter.jpg)
+![sunProtect.jpg](img/sunProtect.jpg)
 
 The fields in detail:
 **Roller shutter height when driving down:** The value of how far the roller shutter should be closed during shading.
