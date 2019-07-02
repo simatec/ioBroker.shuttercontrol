@@ -21,7 +21,7 @@ Das Konfigurationsfenster besteht aus drei Reitern:
 
 Das Konfigurationsfenster öffnet sich automatisch mit den Haupteinstellungen
 
-![main.png](docs/de/img/main.png)
+![main.png](img/main.png)
 
 Auf dieser Seite ist eine Beispiel-ID abgelegt.
 Diese bitte löschen und anschließend die eigenen IDs durch anklicken des (+) links oben an der Tabelle die eigenen Rollladenaktoren hinzufügen
@@ -30,7 +30,7 @@ Dabei bitte die Datenpunkte mit LEVEL (o.ä.) auswählen. NICHT das Gerät als s
 
 Nach Abschluß der ID-Auswahl ist der Adapter bereits betriebsbereit, aber noch nicht an die eigenen Wünsche angepasst.
 
-![idSelect.png](docs/de/img/idSelect.png)
+![idSelect.png](img/idSelect.png)
 
 
 ### Aufbau der Tabelle
@@ -49,7 +49,7 @@ Auch diese Konfigurationsebene besteht aus zwei Reitern: Haupteinstellungen und 
 
 ### Haupteinstellungen
 
-![mainShutter.png](docs/de/img/mainShutter.png)
+![mainShutter.png](img/mainShutter.png)
 
 Im oberen Bereich werden die Zeitpunkte für das Hoch und Runterfahren zur nächtlichen Verdunklung festgelegt.
 Diese Zeiten können unter ***Zeit-Einstellungen*** konfiguriert und hier im pulldown ausgewählt werden.
@@ -94,7 +94,7 @@ Erklärungen dazu weiter unten.
 ### Sonnenschutz-Einstellungen
 Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung und deren Ende ausgewählt werden.
 
-![sunShutter.png](docs/de/img/sunShutter.png)
+![sunShutter.png](img/sunShutter.png)
 
 Die Felder im Einzelnen:
 **Rollladenhöhe beim runterfahren:** Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll.
@@ -131,7 +131,7 @@ Wird ein Rolladen manuell verstellt und entspricht die Position nicht der automa
 # Konfiguration - Zeit-Einstellungen
 In diesem Abschnitt können einige Zeit- bzw. Astro einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen ausgewählt werden können.
 
-![timeSettings.png](docs/de/img/timeSettings.png)
+![timeSettings.png](img/timeSettings.png)
 
 ## Wohnbereich
 In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Wohnbereich eingegeben.
@@ -165,7 +165,7 @@ Natürlich muss diese Kategorisierung nicht zwingend für Wohn- und Schlafbereic
 
 In den Extra-Einstellungen werden verschiedene Einstellungen ausgeführt, die in den verschiedenen Kofigurationen eingesetzt werden.
 
-![extraSettings.png](docs/de/img/extraSettings.png)
+![extraSettings.png](img/extraSettings.png)
 
 ## Astro-Einstellungen
 Diese Einstellungen sind eigentlich selbsterklärend: Breiten- und Längengrad des Wohnorts um den Sonnenstand korrekt berechnen zu können.
