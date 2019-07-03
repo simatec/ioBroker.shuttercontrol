@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "news": {
+            "0.3.1": {
+                "en": "Bugfix sunprotect for shelly user",
+                "de": "Bugfix Sonnenschutz für Shelly User",
+                "ru": "Bugfix Sunprotect для пользователя Shelly",
+                "pt": "Sunprotect Bugfix para o usuário shelly",
+                "nl": "Bugfix sunprotect voor shelly-gebruiker",
+                "fr": "Bugfix sunprotect pour les utilisateurs shelly",
+                "it": "Bugfix sunprotect per utente burrascoso",
+                "es": "Bugfix sunprotect para shelly user",
+                "pl": "Bugfix sunprotect dla użytkownika shelly",
+                "zh-cn": "用于shelly用户的修正sunprotect"
+            },
             "0.3.0": {
                 "en": "Fix shutter up for Sunprotect, Fix input for elevation, Fix input for Inside temperature, Fix input for Outside temperature, Fix input for Lightsensor, Added Object to shutter, Added hysteresis for Lightsensor, Added hysteresis for Inside temperature, Added hysteresis for Outside temperature, Added State check after running, Fix autodrive, Added check shutter up for sunprotect, Added Translations, sunprotect changed to switch, Added German Docu, Added English Docu",
                 "de": "Hochfahren des Rollladens für Sunschutz gefixt, Eingabe für Höhe gefixt, Eingabe für Innentemperatur gefixt, Eingabe für Außentemperatur gefixt, Eingabe für Lichtsensor gefixt, Objekt für jeden Rollladen hinzugefügt, Hysterese für Lichtsensor hinzugefügt, Hysterese für Innentemperatur hinzugefügt, Hysterese für Außentemperatur hinzugefügt, Zustandsüberprüfung nach dem Start hinzugefügt, Bugfix Autodrive, Rollladen auf Sonnenschutz prüfen hinzugefügt, Übersetzungen hinzugefügt, Sonnenschutz auf switch umgestellt, Deutsche Doku hinzugefügt, Englische Doku hinzugefügt",

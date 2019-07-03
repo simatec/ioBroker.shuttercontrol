@@ -235,7 +235,7 @@ function triggerChange() {
                             let mustValue = ('' + arrayChangeTrigger[i].triggerState);
                             if (currentValue === mustValue) {
                                 adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                                    if (state.val != arrayChangeTrigger[i].triggerHeight && state.val == arrayChangeTrigger[i].triggerDrive) {
+                                    if (state.val != arrayChangeTrigger[i].triggerHeight && (state.val == arrayChangeTrigger[i].triggerDrive || state.val == arrayChangeTrigger[i].currentHeight)) {
                                         adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].triggerHeight + '%')
                                         adapter.log.debug('Set ID: ' + arrayChangeTrigger[i].shutterName + ' value: ' + arrayChangeTrigger[i].triggerHeight + '%')
                                         adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerHeight), false);
@@ -1484,7 +1484,7 @@ function sunProtect() {
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                         
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                                 result[i].currentAction = '';
                                                                                 adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1561,7 +1561,7 @@ function sunProtect() {
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                         
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                                 result[i].currentAction = '';
                                                                                 adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1629,7 +1629,7 @@ function sunProtect() {
                                                             if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                 
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                         result[i].currentAction = '';
                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1678,7 +1678,7 @@ function sunProtect() {
                                                     if ((resultDirectionRangePlus) < azimuth) {
                                                         
                                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                 result[i].currentAction = '';
                                                                 adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1739,7 +1739,7 @@ function sunProtect() {
                                                             if ((parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                 
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                         result[i].currentAction = '';
                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1793,7 +1793,7 @@ function sunProtect() {
                                                             if (insideTemp < parseFloat(hysteresisInside)) {
                                                                 
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                                                    if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                                         result[i].currentAction = '';
                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                         adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
@@ -1851,7 +1851,7 @@ function sunProtect() {
                                     if (currentValue === mustValue  && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
                                         
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun)) {
+                                            if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight)) {
                                                 result[i].currentAction = '';
                                                 adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is completed');
                                                 adapter.log.debug('Set ID: ' + result[i].shutterName + ' value: ' + parseFloat(result[i].heightUp) + '%');

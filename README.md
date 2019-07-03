@@ -1,7 +1,7 @@
 ![Logo](admin/shuttercontrol.png)
 # ioBroker.shuttercontrol
 
-*************************************************************************************************************************************
+
 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
@@ -14,6 +14,7 @@
 
 [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shuttercontrol?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shuttercontrol/)
+
 
 ## shuttercontrol adapter for ioBroker
 
@@ -30,6 +31,9 @@ automatic control for shutters
 
 
 ## Changelog
+
+### 0.3.1 (02.07.2019)
+* (simatec) Fix sunprotect for shelly user
 
 ### 0.3.0 (01.07.2019)
 * (simatec) Fix shutter up for Sunprotect
