@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.3.1",
+        "version": "0.3.2",
         "news": {
+            "0.3.2": {
+                "en": "added state check for all shutters",
+                "de": "Zustandsüberprüfung für alle Rollläden hinzugefügt",
+                "ru": "добавлена проверка состояния всех жалюзи",
+                "pt": "verificação de estado adicionada para todos os obturadores",
+                "nl": "statuscontrole voor alle luiken toegevoegd",
+                "fr": "vérification d'état ajoutée pour tous les volets",
+                "it": "aggiunto il controllo dello stato per tutte le persiane",
+                "es": "Comprobación del estado añadido para todas las persianas",
+                "pl": "dodana kontrola stanu wszystkich okiennic",
+                "zh-cn": "为所有百叶窗增加状态检查"
+            },
             "0.3.1": {
                 "en": "Bugfix sunprotect for shelly user",
                 "de": "Bugfix Sonnenschutz für Shelly User",
