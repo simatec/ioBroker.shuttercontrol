@@ -1,7 +1,23 @@
 ## Shuttercontrol ist ein Adapter zur automatischen Steuerung von Rollläden und Markisen.
 
 # Grundlegendes
-Ab der Version 0.2.11 sind alle Konfigurationsdatenpunkte bereits mit Beispielen voreingestellt, so dass der Adapter nach Installation und Eingabe von den IDs der Rollladenaktoren betriebsbereit ist.
+Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung für Rollläden und Jalousien.
+Diese Steuerung umfasst sowohl automatische Beschattung als auch die nächtliche Verdunklung.
+
+Für diese Steuerung stehen sehr viele einstellbare Parameter zur Verfügung, darunter zwei verschiedene globale Timer 
+(z.B. unterschiedlich für Schlaf- und Wohnräume), diverse sonnenstandsabhängige Parameter die individuell je Rolladen 
+eingestellt werden können, sowie Trigger für Tür-/Fenstersensoren die einem Aussperrschutz dienen oder ein automatisches 
+Öffnen zu einem individuellen Level bei Öffnen der Tür / des Fensters dienen.
+
+Auch für die Beschattung gibt es verschiedene einstellbare Parameter. So kann die automatische Beschattung abhängig gemacht 
+werden von Innentemperatur, Außentemperatur, Helligkeit, Hitzesensor u.v.m.
+
+Auch der Sonnenstand kann mit einbezogen werden, so dass nur Räume verdunkelt werden, die tatsächlich beschienen werden.
+
+---
+
+Ab der Version 0.2.11 sind alle Konfigurationsdatenpunkte bereits mit Beispielen voreingestellt, so dass der Adapter nach 
+Installation und Eingabe von den IDs der Rollladenaktoren betriebsbereit ist.
 Die weitere Konfiguration dient dann der Anpassung an persönliche Wünsche.
 
 ## Installation
