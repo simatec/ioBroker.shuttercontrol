@@ -1,19 +1,43 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.2.14",
+        "version": "0.3.2",
         "news": {
-            "0.2.14": {
-                "en": "Bugfix shutter up for Sunprotect, Bugfix input for elevation, Bugfix input for Inside temperature, Bugfix input for Outside temperature, Bugfix input for Lightsensor",
-                "de": "Bugfix Rollladen hochfahren bei Sonnenschutz, Bugfix Input für Elevation, Bugfix Input für Innentemperatur, Bugfix Input für Außentemperatur, Bugfix Input für Lichtsensor",
-                "ru": "Затвор исправления для Sunprotect, вход Bugfix для повышения, вход Bugfix для внутренней температуры, вход Bugfix для наружной температуры, вход Bugfix для Lightsensor",
-                "pt": "Bugfix obturador para Sunprotect, Bugfix para elevação, Bugfix para temperatura interna, Bugfix para temperatura externa, Bugfix para Lightsensor",
-                "nl": "Bugfix sluitertijd voor Sunprotect, Bugfix-invoer voor elevatie, Bugfix-invoer voor binnentemperatuur, Bugfix-invoer voor buitentemperatuur, Bugfix-invoer voor lichtsensor",
-                "fr": "Correction de bug pour Sunprotect, entrée de correction de bug pour l'altitude, entrée de correction de bug pour la température intérieure, entrée de correction de bug pour la température extérieure, entrée de correction de bug pour Lightsensor",
-                "it": "Bugfix per Sunprotect, ingresso Bugfix per elevazione, ingresso Bugfix per temperatura interna, ingresso Bugfix per temperatura esterna, ingresso Bugfix per Lightsensor",
-                "es": "Persiana de corrección de errores para Sunprotect, Entrada de corrección de errores para la elevación, Entrada de corrección de errores para la temperatura interior, Entrada de corrección de errores para la temperatura exterior, Entrada de corrección de errores para Lightsensor",
-                "pl": "Bugfix miga dla Sunprotect, wejście Bugfix dla podniesienia, wejście Bugfix dla temperatury wewnątrz, wejście Bugfix dla temperatury zewnętrznej, wejście Bugfix dla Lightsensor",
-                "zh-cn": "用于Sunprotect的Bugfix快门，用于高程的Bugfix输入，用于内部温度的Bugfix输入，用于外部温度的Bugfix输入，用于Lightsensor的Bugfix输入"
+            "0.3.2": {
+                "en": "added state check for all shutters",
+                "de": "Zustandsüberprüfung für alle Rollläden hinzugefügt",
+                "ru": "добавлена проверка состояния всех жалюзи",
+                "pt": "verificação de estado adicionada para todos os obturadores",
+                "nl": "statuscontrole voor alle luiken toegevoegd",
+                "fr": "vérification d'état ajoutée pour tous les volets",
+                "it": "aggiunto il controllo dello stato per tutte le persiane",
+                "es": "Comprobación del estado añadido para todas las persianas",
+                "pl": "dodana kontrola stanu wszystkich okiennic",
+                "zh-cn": "为所有百叶窗增加状态检查"
+            },
+            "0.3.1": {
+                "en": "Bugfix sunprotect for shelly user",
+                "de": "Bugfix Sonnenschutz für Shelly User",
+                "ru": "Bugfix Sunprotect для пользователя Shelly",
+                "pt": "Sunprotect Bugfix para o usuário shelly",
+                "nl": "Bugfix sunprotect voor shelly-gebruiker",
+                "fr": "Bugfix sunprotect pour les utilisateurs shelly",
+                "it": "Bugfix sunprotect per utente burrascoso",
+                "es": "Bugfix sunprotect para shelly user",
+                "pl": "Bugfix sunprotect dla użytkownika shelly",
+                "zh-cn": "用于shelly用户的修正sunprotect"
+            },
+            "0.3.0": {
+                "en": "Fix shutter up for Sunprotect, Fix input for elevation, Fix input for Inside temperature, Fix input for Outside temperature, Fix input for Lightsensor, Added Object to shutter, Added hysteresis for Lightsensor, Added hysteresis for Inside temperature, Added hysteresis for Outside temperature, Added State check after running, Fix autodrive, Added check shutter up for sunprotect, Added Translations, sunprotect changed to switch, Added German Docu, Added English Docu",
+                "de": "Hochfahren des Rollladens für Sunschutz gefixt, Eingabe für Höhe gefixt, Eingabe für Innentemperatur gefixt, Eingabe für Außentemperatur gefixt, Eingabe für Lichtsensor gefixt, Objekt für jeden Rollladen hinzugefügt, Hysterese für Lichtsensor hinzugefügt, Hysterese für Innentemperatur hinzugefügt, Hysterese für Außentemperatur hinzugefügt, Zustandsüberprüfung nach dem Start hinzugefügt, Bugfix Autodrive, Rollladen auf Sonnenschutz prüfen hinzugefügt, Übersetzungen hinzugefügt, Sonnenschutz auf switch umgestellt, Deutsche Doku hinzugefügt, Englische Doku hinzugefügt",
+                "ru": "Фиксация затвора для Sunprotect, Фиксированный вход для повышения, Фиксированный вход для Внутренней температуры, Фиксированный вход для Внешней температуры, Фиксированный вход для Светочувствительного элемента, Добавленный объект для затвора, Добавленный гистерезис для Светочувствительного элемента, Добавленный гистерезис для Внутренней температуры, Добавленный гистерезис для Внешней температуры, Добавлена проверка состояния после запуска, исправлено автоматическое управление, добавлена проверка затвора для защиты от солнца, добавлены переводы, изменен переход на защиту солнца, добавлен немецкий документ, добавлен английский документ",
+                "pt": "Corrigir o obturador para SunProtect, Corrigir entrada para elevação, Corrigir entrada para Temperatura interna, Corrigir entrada para Temperatura externa, Corrigir entrada para o Lightsensor, Objeto adicionado ao obturador, Histerese adicionada para o Lightsensor, Histerese adicionada para temperatura interna, Histerese adicionada para temperatura externa, Adicionado verificação de estado após a execução, Corrigir Autodrive, Adicionado check shutter up para sunprotect, Adicionado Translations, sunprotect mudou para mudar, Adicionado alemão Docu, Adicionado Inglês Docu",
+                "nl": "Fix shutter up voor Sunprotect, fix input voor elevatie, fix input voor binnentemperatuur, fix input voor buitentemperatuur, fix input voor lightsensor, toegevoegd object voor shutter, toegevoegde hysteresis voor lightsensor, toegevoegde hysteresis voor binnentemperatuur, hysteresis toegevoegd voor buitentemperatuur, Statuscontrole toegevoegd na het uitvoeren, Autodrive repareren, Check shutter-up toegevoegd voor sunprotect, Toegevoegd vertalingen, sunprotect gewijzigd om te schakelen, Toegevoegd Duits Docu, Toegevoegd Engels Docu",
+                "fr": "Obturateur fixe pour Sunprotect, entrée fixe pour l'altitude, entrée fixe pour la température intérieure, entrée fixe pour la température extérieure, entrée fixe pour le capteur de lumière, objet ajouté au volet, hystérésis ajoutée pour le capteur de lumière, hystérésis ajoutée pour la température intérieure, hystérésis ajoutée pour la température extérieure, Ajout de la vérification d'état après exécution, correction de la conduite automatique, ajout du contrôle de l'obturation pour sunprotect, ajout des traductions, sunprotect a été remplacé par un commutateur, Docu allemand ajouté, Docu anglais ajouté",
+                "it": "Risolve l'otturatore per Sunprotect, Corretto l'input per l'elevazione, Corretto l'input per la temperatura interna, Ingresso fisso per Temperatura esterna, Ingresso fisso per Lightsensor, Oggetto aggiunto all'otturatore, Isteresi aggiunta per Lightsensor, Isteresi aggiunta per Temperatura interna, Isteresi aggiunta per Temperatura esterna, Aggiunto controllo dello stato dopo l'esecuzione, autodrive fisso, controllo di riserva aggiunto per sunprotect, traduzioni aggiunte, sunprotect modificato per passare, aggiunto documento tedesco, aggiunto docu inglese",
+                "es": "Fije el obturador para Sunprotect, Fije la entrada para la elevación, Fije la entrada para la temperatura interior, Fije la entrada para la temperatura exterior, Fije la entrada para el sensor de luz, Objeto agregado al obturador, Histéresis agregada para el sensor de luz, Histéresis agregada para la temperatura interior, Histéresis agregada para la temperatura exterior Se agregó la comprobación de estado después de la ejecución, Corrección automática, Se ha agregado el obturador de comprobación para sunprotect, Se han agregado Traducciones, Se ha cambiado el sunprotect para cambiar, Se ha agregado el Docu alemán, Se ha agregado el Docu en inglés",
+                "pl": "Napraw migawkę dla Sunprotect, Fix input dla elewacji, Fix input dla temperatury wewnętrznej, Fix input dla temperatury zewnętrznej, Fix input dla Lightsensor, Dodano Object to shutter, Dodano histerezę dla Lightsensor, Dodano histerezę dla temperatury wewnętrznej, Dodano histerezę dla temperatury zewnętrznej, Dodano kontrolę stanu po uruchomieniu, naprawiono automatyczne przesyłanie, dodano migawkę sprawdzającą dla sunprotect, dodano tłumaczenia, zmieniono sunprotect na przełącznik, dodano niemiecki Docu, dodano angielski Docu",
+                "zh-cn": "修正Sunprotect的快门，修正高度输入，修复内部温度输入，修复外部温度输入，修复Lightsensor输入，增加快门对象，增加Lightsnsor滞后，增加内部温度滞后，增加外部温度滞后，运行后添加状态检查，修复自动驱动器，为sunprotect添加检查快门，添加翻译，sunprotect更改为切换，添加德语文档，添加英语文档"
                         },
             "0.2.13": {
                 "en": "small bugfix",
@@ -269,6 +293,7 @@
         "publicHolidays": true,
         "publicHolInstance": "",
         "UseSunMode": true,
+        "currentShutterState": false,
         
         "W_shutterDownLiving": "22:00",
         "W_shutterUpLivingMin": "05:00",
@@ -344,6 +369,38 @@
     },
     "objects": [],
     "instanceObjects": [
+        {
+            "_id":  "shutters",
+            "type": "channel",
+            "common": {
+                "name": "Control shutters"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoUp",
+            "type": "channel",
+            "common": {
+                "name": "Control shutter automatic up"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoDown",
+            "type": "channel",
+            "common": {
+                "name": "Control shutter automatic down"
+            },
+            "native": {}
+        },
+        {
+            "_id":  "shutters.autoSun",
+            "type": "channel",
+            "common": {
+                "name": "Control shutter automatic sunprotect"
+            },
+            "native": {}
+        },
         {
             "_id":  "info",
             "type": "channel",
