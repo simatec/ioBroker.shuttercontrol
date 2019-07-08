@@ -4,16 +4,16 @@
         "version": "0.3.2",
         "news": {
             "0.3.2": {
-                "en": "added state check for all shutters",
-                "de": "Zustandsüberprüfung für alle Rollläden hinzugefügt",
-                "ru": "добавлена проверка состояния всех жалюзи",
-                "pt": "verificação de estado adicionada para todos os obturadores",
-                "nl": "statuscontrole voor alle luiken toegevoegd",
-                "fr": "vérification d'état ajoutée pour tous les volets",
-                "it": "aggiunto il controllo dello stato per tutte le persiane",
-                "es": "Comprobación del estado añadido para todas las persianas",
-                "pl": "dodana kontrola stanu wszystkich okiennic",
-                "zh-cn": "为所有百叶窗增加状态检查"
+                "en": "added state check for all shutter; Bugfix sunprotect; Bugfix trigger",
+                "de": "Zustandsüberprüfung für alle Rollläden hinzugefügt; Bugfix Sonnenschutz; Bugfix-Auslöser",
+                "ru": "добавлена проверка состояния всех затворов; Ошибка защиты от солнца; Исправление ошибки",
+                "pt": "verificação de estado adicionada para todos os obturadores; SunProtect Bugfix; Acionador Bugfix",
+                "nl": "statuscontrole toegevoegd voor alle sluiter; Bugfix sunprotect; Bugfix-trigger",
+                "fr": "ajout d'une vérification d'état pour tous les volets; Bugfix sunprotect; Déclencheur de bug",
+                "it": "aggiunto il controllo dello stato per tutto il tempo di scatto; Bugfix sunprotect; Trigger di Bugfix",
+                "es": "añadido estado de verificación para todos los obturadores; Bugfix sunprotect; Disparador de corrección de errores",
+                "pl": "dodatkowa kontrola stanu wszystkich migawek; Bugfix sunprotect; Wyzwalacz błędu",
+                "zh-cn": "添加状态检查所有快门;修正sunprotect;修正错误"
             },
             "0.3.1": {
                 "en": "Bugfix sunprotect for shelly user",
