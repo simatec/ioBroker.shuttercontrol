@@ -62,7 +62,7 @@ Im oberen Bereich werden die Zeitpunkte für das Hoch und Runterfahren zur näch
 Diese Zeiten können im Reiter ***Zeit-Einstellungen*** konfiguriert und hier aus dem Pulldown-Menü ausgewählt werden.
 
 ---
-### Zeitvorgaben
+#### Zeitvorgaben
 **Aus:** keine Vorlagen verwenden
 
 **Wohnbereich:** Die Rollläden werden wie in dem Menüpunkt Zeiteinstellungen/Wohnbereich konfiguriert gefahren.
@@ -87,7 +87,7 @@ weil dort die Farben einen goldenen Schimmer haben.
 
 ---
 
-### Zusatzeinstellungen
+#### Zusatzeinstellungen
 
 Folgende Möglichkeiten stehen zur Auswahl:
 
@@ -107,7 +107,8 @@ im nächsten Punkt eingegebene Höhe.
  (z.B. bei Fenstern 25% zum Lüften, oder 100% bei Türen um durchgehen zu können)
 
 **Automatikbetrieb bei Triggerabweichung** Das klingt jetzt etwas kompliziert, entspricht einem ***Aussperrschutz***. 
-Ist zum Zeitpunkt der automatischen Verdunklung/Beschattung der Sensor nicht in dem im ersten Feld der Zeile eingegebenen Sollwert wird das hier angegeben ausgeführt:
+Ist zum Zeitpunkt der automatischen Verdunklung/Beschattung der Sensor nicht in dem im ersten Feld der Zeile eingegebenen Sollwert wird 
+das hier angegeben ausgeführt:
 
 * Aus: kein Aussperrschutz, die Rollläden bewegen sich automatisch, egal wie der Sensor steht.
 * nur auf: Bei Verdunklungs- / Beschattungsende fährt der Rollladen hoch
@@ -127,7 +128,8 @@ Ist zum Zeitpunkt der automatischen Verdunklung/Beschattung der Sensor nicht in 
 
 
 ### Sonnenschutz-Einstellungen
-Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung und deren Ende ausgewählt werden.
+Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, 
+die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung und deren Ende ausgewählt werden.
 
 ![sunProtect.jpg](img/sunProtect.jpg)
 
@@ -136,27 +138,42 @@ Die Felder im Einzelnen:
 
 **Himmelsrichtung:** Ausrichtung des Fensters auf der Windrose (0° = Nord; 180° = Süd)
 
-**+/- Bereich der Himmelsrichtung:** Bereich in dem die Sonne (um den Mittelpunkt) störend in das Fenster einstrahlen würde. Außerhalb dieses Bereichs findet keine Beschattung statt.
+**+/- Bereich der Himmelsrichtung:** Bereich in dem die Sonne (um den Mittelpunkt) störend in das Fenster einstrahlen würde. 
+Außerhalb dieses Bereichs findet keine Beschattung statt.
 
 **Art der Sonnenschutzsteuerung:** Pulldown zur Auswahl verschiedener Parameterkombinationen zur Beschattungssteuerung.
 
-**Sollwert Außentemperatur:** Schwellwert zum starten der Beschattung. Dieser Wert ist natürlich abhängig von dem im nächsten Feld ausgewählten Sensor.
+**Sollwert Außentemperatur:** Schwellwert zum Starten der Beschattung. Dieser Wert ist natürlich abhängig von dem im 
+übernächsten Feld ausgewählten Sensor.
 
-**Hysterese Außentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
+**Hysterese Außentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei 
+Schwankungen nicht ständig hoch und runter fährt.
+Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem die Beschattung beginnen soll, und dem 
+unteren Temperaturwert, bei dem die Beschattung wieder endet.
 
-**Objekt-ID für die Außentemperatur:** Der hier ausgewählte Sensor muss nicht zwingend die Außentemperatur messen. Er kann irgendeinen Wert, der zur Beschattungsauslösung hinzugezogen werden kann, liefern. Dies kann auch ein Hitzesensor (Temperaturdifferenzsensor) sein.
+**Objekt-ID für die Außentemperatur:** Der hier ausgewählte Sensor muss nicht zwingend die Außentemperatur messen. Er kann irgendeinen 
+Wert, der zur Beschattungsauslösung hinzugezogen werden kann, liefern. Dies kann auch ein Hitzesensor (Temperaturdifferenzsensor) sein.
+Wird kein Außensensor eingesetzt, dieses Feld leer lassen.
 
 **Sollwert des Lichtsensors:** Analog zum Außentemperatursensor
 
-**Hysterese Lichtsensor (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
+**Hysterese Lichtsensor (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht 
+ständig hoch und runter fährt.
+Die Hysterese ist der Unterschied zwischen dem oberen Helligkeitswert, bei dem die Beschattung beginnen soll, und dem 
+unteren Helligkeitswert, bei dem die Beschattung wieder endet.
 
 **Objekt-Id des Lichtsensors:** Analog zum Außentemperatursensor; wenn nicht benutzt leer lassen
 
-**Sollwert Innentemperatursensor:** Hier kann eine Temperatur eines zu dem Rolladen zugeordneten Innentemperatursensors eingegeben werden unter der keine Beschattung stattfinden soll, um z.B. die Wärmeeinstrahlung im Winter zur Heizungsunterstützung zu nutzen.
+**Sollwert Innentemperatursensor:** Hier kann eine Temperatur eines zu dem Rolladen zugeordneten Innentemperatursensors eingegeben 
+werden unter der keine Beschattung stattfinden soll, um z.B. die Wärmeeinstrahlung im Winter zur Heizungsunterstützung zu nutzen.
 
-**Hysterese Innentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen nicht ständig hoch und runter fährt
+**Hysterese Innentemperatur (Prozent):** Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei Schwankungen
+ nicht ständig hoch und runter fährt
+Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem die Beschattung beginnen soll, und dem 
+unteren Temperaturwert, bei dem die Beschattung wieder endet.
 
 **Objekt-ID des Innensensors:** über das (+) den Temperaturensor (State) auswählen der eine Rollladenfahrt verhindern soll.
+Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
 ### Tipps:
 Wird ein Rolladen manuell verstellt und entspricht die Position nicht der automatisch angefahrenen, setzt die Automatik aus!
@@ -164,7 +181,8 @@ Wird ein Rolladen manuell verstellt und entspricht die Position nicht der automa
 ---
 
 # Konfiguration - Zeit-Einstellungen
-In diesem Abschnitt können einige Zeit- bzw. Astro einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen ausgewählt werden können.
+In diesem Abschnitt können einige Zeit- bzw. Astro einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen 
+ausgewählt werden können.
 
 ![timeSettings.jpg](img/timeSettings.jpg)
 
@@ -173,7 +191,12 @@ In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Woh
 
 **Das Pulldown** enthält verschiedene grundlegende Varianten
 
+* **Nur die Zeit Wohnbereich**: Die Rolläden werden reinweg zeitgesteuert gefahren
+* **Zeit Wohnbereich mit Sonnenauf- & Sonnenuntergang**: Die Rolläden werden nach Sonnenauf- und untergang gesteuert, jedoch nicht 
+vor der eingegebenen Zeit hoch und nicht nach der eingegebenen Zeit heruntergefahren
+* **Zeit Wohnbereich mit GoldenHour**: Analog zu dem Sonnenauf- und Untergang, jedoch mit dem Beginn  und Ende der "Golden Hour" als Referenz
 
+---
 
 **in der Woche runterfahren:** Übliche Zeit für die Verdunklung während der Woche
 
@@ -187,6 +210,7 @@ In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Woh
 
 **Zeitverzögerung der Rollläden:** Abstand des Starts der Rollladenfahrt der einzelnen Rolläden dieser Gruppe um Funkstörungen zu vermeiden, oder den Anschein zu erwecken, sie würden manuell gefahren.
 
+---
 
 ## Schlafbereich
 
