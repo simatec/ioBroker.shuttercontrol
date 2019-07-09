@@ -403,107 +403,149 @@ function shutterDriveCalc() {
     */
 
     // ******** Set Up-Time Living Area ********
-    if (adapter.config.livingAutomatic == "livingTime") {
-        if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-            upTimeLiving = adapter.config.WE_shutterUpLiving;
-            adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        } else {
-            upTimeLiving = adapter.config.W_shutterUpLivingMax;
-            adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        }
-    } else {
-        if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-            upTimeLiving = adapter.config.WE_shutterUpLiving;
-            adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-        } else {
-            if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMax)) {
+    switch(adapter.config.livingAutomatic) {
+        case 'livingTime' :
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                upTimeLiving = adapter.config.WE_shutterUpLiving;
+                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+            } else {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMin) && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMax)) {
-                upTimeLiving = astroTimeLivingUp;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
-                upTimeLiving = adapter.config.W_shutterUpLivingMax;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = astroTimeLivingUp;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-            } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMin)) {
-                upTimeLiving = adapter.config.W_shutterUpLivingMin;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
             }
-        }
+        break;
+        default:
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                upTimeLiving = adapter.config.WE_shutterUpLiving;
+                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+            } else {
+                if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMax)) {
+                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMin) && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMax)) {
+                    upTimeLiving = astroTimeLivingUp;
+                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
+                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
+                        upTimeLiving = astroTimeLivingUp;
+                        adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMin)) {
+                    upTimeLiving = adapter.config.W_shutterUpLivingMin;
+                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                }
+            }
+        break;
     }
     adapter.log.debug('Starting up shutters living area: ' + upTimeLiving);
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
-    if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-        upTimeSleep = adapter.config.WE_shutterUpSleep;
-        adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-    } else {
-        if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
-            upTimeSleep = adapter.config.W_shutterUpSleepMax;
-            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
-            upTimeSleep = astroTimeSleepUp;
-            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
-            upTimeSleep = adapter.config.W_shutterUpSleepMax;
-            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
-                upTimeSleep = astroTimeSleepUp;
+    switch(adapter.config.sleepAutomatic) {
+        case 'sleepTime' :
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                upTimeSleep = adapter.config.WE_shutterUpSleep;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
-            upTimeSleep = adapter.config.W_shutterUpSleepMin;
-            adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-        }
+            } else {
+                upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+            }
+        break;
+        default:
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                upTimeSleep = adapter.config.WE_shutterUpSleep;
+                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+            } else {
+                if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
+                    upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
+                    upTimeSleep = astroTimeSleepUp;
+                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
+                    upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
+                        upTimeSleep = astroTimeSleepUp;
+                        adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
+                    upTimeSleep = adapter.config.W_shutterUpSleepMin;
+                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                }
+            }
+        break;
     }
     adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep);
     shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
-    if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
-        downTimeLiving = adapter.config.WE_shutterDownLiving;
-        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
-        downTimeLiving = astroTimeLivingDown;
-        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
-        downTimeLiving = astroTimeLivingDown;
-        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
-        downTimeLiving = adapter.config.W_shutterDownLiving;
-        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
-        downTimeLiving = astroTimeLivingDown;
-        adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
-            downTimeLiving = astroTimeLivingDown;
-            adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    switch(adapter.config.livingAutomatic) {
+        case 'livingTime' :
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                downTimeLiving = adapter.config.WE_shutterDownLiving;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else {
+                downTimeLiving = adapter.config.W_shutterDownLiving;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            }
+        break;
+        default:
+            if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
+                downTimeLiving = adapter.config.WE_shutterDownLiving;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
+                downTimeLiving = astroTimeLivingDown;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
+                downTimeLiving = astroTimeLivingDown;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
+                downTimeLiving = adapter.config.W_shutterDownLiving;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
+                downTimeLiving = astroTimeLivingDown;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
+                    downTimeLiving = astroTimeLivingDown;
+                    adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+            }
+        break;
     }
     adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving);
     shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
-    if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
-        downTimeSleep = adapter.config.WE_shutterDownSleep;
-        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
-        downTimeSleep = astroTimeSleepDown;
-        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
-        downTimeSleep = astroTimeSleepDown;
-        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
-        downTimeSleep = adapter.config.W_shutterDownSleep;
-        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
-        downTimeSleep = astroTimeSleepDown;
-        adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
-            downTimeSleep = astroTimeSleepDown;
-            adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    switch(adapter.config.sleepAutomatic) {
+        case 'sleepTime' :
+            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                downTimeSleep = adapter.config.WE_shutterDownSleep;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else {
+                downTimeSleep = adapter.config.W_shutterDownSleep;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            }
+        break;
+        default:
+            if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
+                downTimeSleep = adapter.config.WE_shutterDownSleep;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+                downTimeSleep = astroTimeSleepDown;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
+                downTimeSleep = astroTimeSleepDown;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
+                downTimeSleep = adapter.config.W_shutterDownSleep;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
+                downTimeSleep = astroTimeSleepDown;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
+                    downTimeSleep = astroTimeSleepDown;
+                    adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+            }
+        break;
     }
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
     shutterDownSleep();

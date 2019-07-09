@@ -32,10 +32,12 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.3.2 (06.07.2019)
-* (simatec) added state check for all shutter
+### 0.3.2 (09.07.2019)
+* (simatec) Added state check for all shutter
 * (simatec) Bugfix sunprotect
 * (simatec) Bugfix trigger
+* (simatec) Bugfix time settings
+* (Homoran) Added German Docu
 
 ### 0.3.1 (02.07.2019)
 * (simatec) Fix sunprotect for shelly user

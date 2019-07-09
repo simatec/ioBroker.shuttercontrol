@@ -4,16 +4,16 @@
         "version": "0.3.2",
         "news": {
             "0.3.2": {
-                "en": "added state check for all shutter; Bugfix sunprotect; Bugfix trigger",
-                "de": "Zustandsüberprüfung für alle Rollläden hinzugefügt; Bugfix Sonnenschutz; Bugfix-Auslöser",
-                "ru": "добавлена проверка состояния всех затворов; Ошибка защиты от солнца; Исправление ошибки",
-                "pt": "verificação de estado adicionada para todos os obturadores; SunProtect Bugfix; Acionador Bugfix",
-                "nl": "statuscontrole toegevoegd voor alle sluiter; Bugfix sunprotect; Bugfix-trigger",
-                "fr": "ajout d'une vérification d'état pour tous les volets; Bugfix sunprotect; Déclencheur de bug",
-                "it": "aggiunto il controllo dello stato per tutto il tempo di scatto; Bugfix sunprotect; Trigger di Bugfix",
-                "es": "añadido estado de verificación para todos los obturadores; Bugfix sunprotect; Disparador de corrección de errores",
-                "pl": "dodatkowa kontrola stanu wszystkich migawek; Bugfix sunprotect; Wyzwalacz błędu",
-                "zh-cn": "添加状态检查所有快门;修正sunprotect;修正错误"
+                "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
+                "de": "Zustandsüberprüfung für alle Auslöser hinzugefügt; Bugfix Sonnenschutz; Bugfix-Trigger; Bugfix Zeiteinstellungen; Deutsches Docu hinzugefügt",
+                "ru": "Добавлена проверка состояния всех затворов; Ошибка защиты от солнца; Исправление ошибки; Настройки времени исправления ошибок; Добавлена немецкая документация",
+                "pt": "Adicionada verificação de estado para todos os obturadores; SunProtect Bugfix; Gatilho Bugfix; Configurações de tempo de correção; Adicionado Docu alemão",
+                "nl": "Staatstest toegevoegd voor alle sluiter; Bugfix sunprotect; Bugfix-trigger; Bugfix-tijdinstellingen; Duitse Docu toegevoegd",
+                "fr": "Vérification de l'état ajoutée pour tout l'obturateur; Bugfix sunprotect; Déclenchement de correction de bug; Paramètres de temps de correction; Docu allemand ajouté",
+                "it": "Aggiunto il controllo dello stato per tutti gli otturatori; Bugfix sunprotect; Innesco di Bugfix; Impostazioni di tempo di Bugfix; Aggiunto il tedesco Docu",
+                "es": "Comprobación del estado añadido para todos los obturadores; Bugfix sunprotect; Disparador de corrección de errores; Ajustes de tiempo de corrección de errores; Docu alemán añadido",
+                "pl": "Dodano kontrolę stanu wszystkich migawek; Bugfix sunprotect; Wyzwalacz błędu; Ustawienia czasu poprawek; Dodano niemiecki Docu",
+                "zh-cn": "添加了所有快门的状态检查;修正sunprotect;修正错误;修正时间设置;添加了德语文档"
             },
             "0.3.1": {
                 "en": "Bugfix sunprotect for shelly user",
