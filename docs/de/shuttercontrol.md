@@ -2,9 +2,10 @@
 
 # Grundlegendes
 
-Ab der Version 0.2.11 sind alle Konfigurationsdatenpunkte bereits mit Beispielen voreingestellt, so dass der Adapter nach Installation 
-und Eingabe von den IDs der Rollladenaktoren betriebsbereit ist.
+Ab der Version 0.2.11 sind alle Konfigurationsdatenpunkte bereits mit Beispielen voreingestellt, so dass der Adapter nach Installation und Eingabe von den IDs der Rollladenaktoren betriebsbereit ist.
+
 =======
+
 Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung für Rollläden und Jalousien.
 Diese Steuerung umfasst sowohl automatische Beschattung als auch die nächtliche Verdunklung.
 
@@ -272,6 +273,5 @@ Man kann so ggf. zwei Instanzen des Feiertage-Adapters anlegen; einen zum anzeig
 Feiertagen, auf die dann shuttercontrol zugreift.
 
 ### Tipp
-Unter den Objekten wird ein Datenpunkt angelegt: "shuttercontrol.0.control.Holiday". In diesen wird morgens automatisch auf true gesetzt, 
-wenn es sich um einen Feiertag handelt. Dann werden die Wochenend-Einstellungen benutzt.
-Hat man eigene Skripte, die den Urlaub, freie Tage o.ä. berechnen oder darstellen, können diese ebenfalls diesen Datenpunkt auf true setzen.
+Unter den Objekten wird ein Datenpunkt angelegt: "shuttercontrol.0.control.Holiday". 
+Hat man eigene Skripte, die den Urlaub, freie Tage o.ä. berechnen oder darstellen, können diese ebenfalls diesen Datenpunkt auf true setzen, dann werden die Wochenend-Einstellungen benutzt.
