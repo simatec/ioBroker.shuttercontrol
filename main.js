@@ -570,7 +570,7 @@ function elevationDown(){
             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                 if (state && state === true || state && state.val === true) {
                     let elevationEnd = (result[i].elevation - 1);
-                    if (elevation <= result[i].elevation && elevation >= elevationEnd && result[i].currentAction != 'down') {
+                    if (elevation <= result[i].elevation && elevation >= elevationEnd && result[i].currentAction != 'down' && azimuth > 180) {
                         setTimeout(function() {
                             let currentValue = '';
                             adapter.getForeignState(result[i].triggerID, (err, state) => {

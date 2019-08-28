@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.3.2",
+        "version": "0.4.0",
         "news": {
+            "0.4.0": {
+                "en": "Fix shutdown for Elevation"
+            },
             "0.3.2": {
                 "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
                 "de": "Zustandsüberprüfung für alle Auslöser hinzugefügt; Bugfix Sonnenschutz; Bugfix-Trigger; Bugfix Zeiteinstellungen; Deutsches Docu hinzugefügt",
