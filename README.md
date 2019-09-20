@@ -15,6 +15,10 @@
 [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/simatec/ioBroker.shuttercontrol?branch=master&svg=true)](https://ci.appveyor.com/project/simatec/ioBroker-shuttercontrol/)
 
+**If you like it, please consider a donation:**
+  
+[![paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q4EEXQ6U96ZTQ&source=url)
+
 
 ## shuttercontrol adapter for ioBroker
 
