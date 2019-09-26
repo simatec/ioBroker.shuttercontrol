@@ -171,7 +171,7 @@ These settings are actually self-explanatory: latitude and longitude of the plac
 
 **Time delay:** Here an offset can be entered by which the roller shutter movements for up or down of the later selected astro events should evolve.
 
-**Time delay for driving the shutters:**
+**Time delay for driving the shutters:** So that not all shutters drive at the same time, a time in seconds for a delay can be set here.
 
 **End sun protection with sun height:** In a building or near tall trees, the shading does not necessarily have to last until reaching the set azimuth. As soon as the sun falls below the altitude set here (and thus the neighboring buildings), the shading ends
 
@@ -181,3 +181,7 @@ These settings are actually self-explanatory: latitude and longitude of the plac
 
 **Use of public holidays:** If the roller shutters are to be used on public holidays as well as on weekends, the checkbox is activated and an instance of the public holiday adapter is selected.
 You can create two instances of the holiday adapter if necessary; a to display all possible holidays and a working time relevant holidays, which then access shuttercontrol.
+
+**Object ID of the trigger for the sleeping area (auto):** With this trigger, the automatic mode of the sleeping area can be activated.
+
+**Object ID of the trigger for the living area (auto):** With this trigger, the automatic mode of the living area can be activated.
