@@ -246,31 +246,29 @@ vollkommen frei umgesetzt werden.
 
 # Konfiguration - Extra-Einstellungen
 
-In den Extra-Einstellungen werden verschiedene Einstellungen ausgeführt, die in den verschiedenen Kofigurationen eingesetzt werden.
+In den Extra-Einstellungen werden verschiedene Einstellungen ausgeführt, die in den verschiedenen Konfigurationen eingesetzt werden.
 
 ![extraSettings.jpg](img/extraSettings.jpg)
 
 ## Astro-Einstellungen
 Diese Einstellungen sind eigentlich selbsterklärend: Breiten- und Längengrad des Wohnorts um den Sonnenstand korrekt berechnen zu können.
 
-**Zeitverzögerung:** Hier kann ein Offset eingegeben werden um den sich die Rollladenfahrten für hoch bzw. runter von den später ausgewählten 
-Astro-Events evrschieben soll.
+**Zeitverzögerung:** Hier kann ein Offset eingegeben werden um den sich die Rollladenfahrten für hoch bzw. runter von den später ausgewählten Astro-Events verschieben soll.
 
-**Zeitverzögerung für das Fahren der Fensterläden:**
+**Zeitverzögerung für das Fahren der Rollläden:** Damit nicht alle Rollläden gleichzeitig fahren, kann hier eine Zeit in Sekunden für eine Verzögerung eingestellt werden.
 
-**Ende Sonnenschutz mit Sonnenhöhe:** In einer Bebauung oder in der Nähe von hohen Bäumen, muss die Beschattung nicht zwangsläufig bis 
-zum Erreichen des eingestellten Azimuts dauern. Sobald die Sonne die hier eingestellte Höhe (und damit die Nachbarbebauung) unterschreitet, endet die Beschattung
+**Ende Sonnenschutz mit Sonnenhöhe:** In einer Bebauung oder in der Nähe von hohen Bäumen, muss die Beschattung nicht zwangsläufig bis zum Erreichen des eingestellten Azimuts dauern. Sobald die Sonne die hier eingestellte Höhe (und damit die Nachbarbebauung) unterschreitet, endet die Beschattung
 
 ## Extra-Einstellungen
 
-**Überprüfen des aktuellen Rollladenstatus:** Bei einigen User (unter anderen shelly User) tritt das Problem auf, dass sich das Level noch einmal 
-etwas verändert. Ausdiesem Grund gibt es hier eine Checkbox. Sollte die Checkbox aktiv sein, prüft shuttercontroll 1 Minute nach der letzten Fahrt 
-des Rollladens das aktuelle Level und speichert es temporär.
+**Überprüfen des aktuellen Rollladenstatus:** Bei einigen User (unter anderen shelly User) tritt das Problem auf, dass sich das Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox. Sollte die Checkbox aktiv sein, prüft shuttercontrol 1 Minute nach der letzten Fahrt des Rollladens das aktuelle Level und speichert es temporär.
 
-**Verwenden der gesetzlichen Feiertage:** Sollen die Rollläden an Feiertagen so wie an Wochenenden fahren wird die Checkbox aktiviert und 
-eine Instanz des Feiertage-Adapters ausgewählt.
-Man kann so ggf. zwei Instanzen des Feiertage-Adapters anlegen; einen zum anzeigen aller möglicher Feiertage und einen mit arbeitszeitrelevanten 
-Feiertagen, auf die dann shuttercontrol zugreift.
+**Verwenden der gesetzlichen Feiertage:** Sollen die Rollläden an Feiertagen so wie an Wochenenden fahren wird die Checkbox aktiviert und eine Instanz des Feiertage-Adapters ausgewählt.
+Man kann so ggf. zwei Instanzen des Feiertage-Adapters anlegen; einen zum Anzeigen aller möglicher Feiertage und einen mit arbeitszeitrelevanten Feiertagen, auf die dann shuttercontrol zugreift.
+
+**Objekt ID des Auslösers für den Schlafbereich (Auto):** Mit diesem Auslöser kann der Automodus des Schlafbereichs aktiviert werden.
+
+**Objekt ID des Triggers für den Wohnbereich (Auto):** Mit diesem Auslöser kann der Automodus des Wohnbereichs aktiviert werden.
 
 ### Tipp
 Unter den Objekten wird ein Datenpunkt angelegt: "shuttercontrol.0.control.Holiday". 
