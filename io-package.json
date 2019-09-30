@@ -4,7 +4,7 @@
         "version": "0.4.0",
         "news": {
             "0.4.0": {
-                "en": "Fix shutdown for Elevation; Fix triggerHeight"
+                "en": "Fix shutdown for Elevation; Fix triggerHeight; Fix Travis"
             },
             "0.3.2": {
                 "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
