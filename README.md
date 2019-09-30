@@ -38,6 +38,7 @@ automatic control for shutters
 
 ### 0.4.0 (28.08.2019)
 * (simatec) Fix shutdown for Elevation
+* (simatec) Fix triggerHeight
 
 ### 0.3.2 (09.07.2019)
 * (simatec) Added state check for all shutter

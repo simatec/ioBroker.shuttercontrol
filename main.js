@@ -219,6 +219,9 @@ function triggerChange() {
                                         adapter.setForeignState(arrayChangeTrigger[i].name, parseFloat(arrayChangeTrigger[i].triggerDrive), false);
                                         arrayChangeTrigger[i].currentHeight = arrayChangeTrigger[i].triggerDrive;
                                         shutterState(arrayChangeTrigger[i].name);
+                                    } else {
+                                        arrayChangeTrigger[i].triggerHeight = (state.val);
+                                        adapter.log.debug('save trigger height: ' + arrayChangeTrigger[i].triggerHeight + '%');
                                     }
                                 });
                             }
