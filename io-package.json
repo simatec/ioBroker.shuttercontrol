@@ -1,10 +1,31 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.4.0",
+        "version": "0.4.1",
         "news": {
+            "0.4.1": {
+                "en": "Fix update process; Fix appveyor",
+                "de": "Fix Update-Prozess; Fix appveyor",
+                "ru": "Исправить процесс обновления; Fix appveyor",
+                "pt": "Corrigir processo de atualização; Fix appveyor",
+                "nl": "Update-proces repareren; Fix appveyor",
+                "fr": "Corriger le processus de mise à jour; Fixer le appveyor",
+                "it": "Correggi processo di aggiornamento; Fix appveyor",
+                "es": "Arreglar el proceso de actualización; Fix appveyor",
+                "pl": "Napraw proces aktualizacji; Napraw appveyor",
+                "zh-cn": "修复更新过程；固定传送带"
+            },
             "0.4.0": {
-                "en": "Fix shutdown for Elevation; Fix triggerHeight; Fix Travis"
+                "en": "Fix shutdown for Elevation; Fix triggerHeight; Fix Travis",
+                "de": "Fix Herunterfahren für Elevation; Fix triggerHeight; Fix Travis",
+                "ru": "Фикс выключения для Elevation; Исправить triggerHeight; Исправить Трэвис",
+                "pt": "Corrigir desligamento para elevação; Corrigir triggerHeight; Fix Travis",
+                "nl": "Stop de uitschakeling voor Elevation; Trigger triggerHeight repareren; Travis repareren",
+                "fr": "Correction d'arrêt pour l'altitude; Correction de triggerHeight; Fix Travis",
+                "it": "Correzione dell'arresto per Elevation; Fix triggerHeight; Correggi Travis",
+                "es": "Se corrigió el apagado por elevación; Fix triggerHeight; Fix Travis",
+                "pl": "Naprawiono wyłączenie dla elewacji; Fix triggerHeight; Napraw Travis",
+                "zh-cn": "修复海拔关闭功能；修复triggerHeight;修复特拉维斯"
             },
             "0.3.2": {
                 "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
@@ -283,6 +304,7 @@
         "type": "climate-control",
         "compact": true,
         "materialize": true,
+        "stopBeforeUpdate": true,
         
         "dependencies": [
             {
