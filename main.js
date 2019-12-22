@@ -2042,7 +2042,7 @@ function createShutter() {
                     "type":  "boolean",
                     "read":  true,
                     "write": true,
-                    "def":   false
+                    "def":   true
                 },
                 "native": {},
             });
@@ -2061,7 +2061,7 @@ function createShutter() {
                     "type":  "boolean",
                     "read":  true,
                     "write": true,
-                    "def":   false
+                    "def":   true
                 },
                 "native": {},
             });
@@ -2080,7 +2080,7 @@ function createShutter() {
                     "type":  "boolean",
                     "read":  true,
                     "write": true,
-                    "def":   false
+                    "def":   true
                 },
                 "native": {},
             });

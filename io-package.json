@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "news": {
+            "0.4.2": {
+                "en": "Fix Trigger added objects",
+                "de": "Fix Auslöser hinzugefügter Objekte",
+                "ru": "Исправить запуск добавленных объектов",
+                "pt": "Corrigir disparar objetos adicionados",
+                "nl": "Fix Trigger toegevoegde objecten",
+                "fr": "Correction des objets ajoutés au déclencheur",
+                "it": "Correggi il trigger di oggetti aggiunti",
+                "es": "Arreglar objetos agregados disparadores",
+                "pl": "Napraw obiekty dodane przez wyzwalacz",
+                "zh-cn": "修复触发器添加的对象"
+            },
             "0.4.1": {
                 "en": "Fix update process; Fix appveyor",
                 "de": "Fix Update-Prozess; Fix appveyor",
