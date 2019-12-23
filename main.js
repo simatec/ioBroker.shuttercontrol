@@ -97,6 +97,11 @@ function startAdapter(options) {
     adapter.on('stateChange', (id, state) => {
         if (state) {
 
+            if (id.includes(adapter.config.HolidayDP)) {
+                adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
+                adapter.setState('.control.Holiday', { val: state.val, ack: true });
+            }
+
             if (id === adapter.namespace + '.control.Holiday') {
                 HolidayStr = state.val;
                 shutterDriveCalc();
@@ -300,6 +305,21 @@ function checkActualStates () {
             }
         });
     }
+
+    if (typeof adapter.config.HolidayDP !== 'undefined' && adapter.config.HolidayDP.length > 0) {
+        adapter.log.debug('checking HolidayDP');
+        adapter.getForeignState(adapter.config.HolidayDP, (err, state) => {
+            if (err) {
+                adapter.log.error('error check HolidayDP' + err);
+            }
+            else if (state) {
+                adapter.log.debug('got HolidayDP ' + JSON.stringify(state.val));
+                adapter.setState('.control.Holiday', { val: state.val, ack: true });
+            }
+        });
+    }
+
+
     adapter.getForeignObjects(adapter.namespace + ".shutters.autoUp.*", 'state', function (err, list) {
         if (err) {
             adapter.log.error(err);
@@ -2191,6 +2211,12 @@ function main() {
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.morgen.*')) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
+
+    if (typeof adapter.config.HolidayDP !== 'undefined' &&  adapter.config.HolidayDP.length > 0) {
+        adapter.subscribeForeignStates(adapter.config.HolidayDP);
+        adapter.log.info('subscribe ' + adapter.config.HolidayDP);
+    }
+
     if (adapter.config.triggerAutoLiving != '') {
         adapter.subscribeForeignStates(adapter.config.triggerAutoLiving);
     }
