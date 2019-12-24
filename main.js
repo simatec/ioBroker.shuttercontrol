@@ -99,7 +99,7 @@ function startAdapter(options) {
 
             if (id.includes(adapter.config.HolidayDP)) {
                 adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
-                adapter.setState('.control.Holiday', { val: state.val, ack: true });
+                adapter.setState('control.Holiday', { val: state.val, ack: true });
             }
 
             if (id === adapter.namespace + '.control.Holiday') {
