@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.4.2",
+        "version": "0.4.3",
         "news": {
+            "0.4.3": {
+                "en": "Bugfix update process",
+                "de": "Bugfix Update Prozess",
+                "ru": "Исправление процесса обновления",
+                "pt": "Processo de atualização de bugfix",
+                "nl": "Bugfix-updateproces",
+                "fr": "Processus de mise à jour des correctifs",
+                "it": "Processo di aggiornamento bugfix",
+                "es": "Proceso de actualización de corrección de errores",
+                "pl": "Proces aktualizacji błędu",
+                "zh-cn": "Bugfix更新过程"
+            },
             "0.4.2": {
                 "en": "Fix Trigger added objects",
                 "de": "Fix Auslöser hinzugefügter Objekte",
@@ -129,8 +141,7 @@
         
         "dependencies": [
             {
-                "admin": ">=3.0.0",
-                "feiertage": ">=1.0.11"
+                "admin": ">=3.0.0"
             }
         ]
     },
