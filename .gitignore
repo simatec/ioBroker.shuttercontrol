@@ -15,3 +15,5 @@ package-lock.json
 /package-lock.json
 .vscode
 .DS_Store
+/shuttercontrol.njsproj
+/todo.txt

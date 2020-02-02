@@ -34,6 +34,9 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.5.0 (2020-02-xx)
+* (René) just my bug fix version
+
 ### 0.4.2 (22.12.2019)
 * (simatec) Fix Trigger added objects
 
