@@ -129,7 +129,7 @@
         
         "dependencies": [
             {
-                "admin": ">=3.0.0",
+                
                 "feiertage": ">=1.0.11"
             }
         ]
