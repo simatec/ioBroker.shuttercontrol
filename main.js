@@ -1358,19 +1358,23 @@ function shutterDownLate() {
 
             const downTimeLate = adapter.config.LateAllDownTime.split(':');
 
+            adapter.log.debug('late down at ' + adapter.config.LateAllDownTime);
+
             schedule.cancelJob('shutterDownLate');
 
             const downLate = schedule.scheduleJob('shutterDownLate', downTimeLate[1] + ' ' + downTimeLate[0] + ' * * *', function () {
                 delayDown = delayDown * driveDelayDownLiving;
                 setTimeout(function () {
+
+                    adapter.log.debug('now all down late');
+
                     // Full Result
                     const resultFull = adapter.config.events;
 
                     if (resultFull) {
-                        // Filter Area sleep
-                        const resSleep = resultFull.filter(d => d.typeDown == 'sleep');
+                        
                         // Filter enabled
-                        const resEnabled = resSleep.filter(d => d.enabled === true);
+                        const resEnabled = resultFull.filter(d => d.enabled === true);
 
                         for (const i in resEnabled) {
                             adapter.log.debug('Set ID: ' + resEnabled[i].shutterName + ' value: ' + resEnabled[i].heightDown + '%');
