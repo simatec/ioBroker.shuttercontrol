@@ -188,6 +188,8 @@
     "sunProtecEnum": "",
     "driveHeightSun": 30,
     "sunProtEndElevation": 10,
+    "LateAllDown": true,
+    "LateAllDownTime":  "22:15",
 
     "events": [
       {

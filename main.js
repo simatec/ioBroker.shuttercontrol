@@ -574,6 +574,11 @@ function shutterDriveCalc() {
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
     shutterDownSleep();
 
+
+    shutterDownLate();
+
+
+
     delayCalc();
 }
 function elevationDown(){
@@ -1338,6 +1343,54 @@ function shutterUpSleep() {
             }
         }, delayUp);
     });
+}
+
+//=======================================================================================================
+//
+//
+//
+function shutterDownLate() {
+
+    try {
+        if (adapter.config.LateAllDown) {
+
+            const driveDelayDownLiving = adapter.config.driveDelayDownLiving * 1000;
+
+            const downTimeLate = adapter.config.LateAllDownTime.split(':');
+
+            schedule.cancelJob('shutterDownLate');
+
+            const downLate = schedule.scheduleJob('shutterDownLate', downTimeLate[1] + ' ' + downTimeLate[0] + ' * * *', function () {
+                delayDown = delayDown * driveDelayDownLiving;
+                setTimeout(function () {
+                    // Full Result
+                    const resultFull = adapter.config.events;
+
+                    if (resultFull) {
+                        // Filter Area sleep
+                        const resSleep = resultFull.filter(d => d.typeDown == 'sleep');
+                        // Filter enabled
+                        const resEnabled = resSleep.filter(d => d.enabled === true);
+
+                        for (const i in resEnabled) {
+                            adapter.log.debug('Set ID: ' + resEnabled[i].shutterName + ' value: ' + resEnabled[i].heightDown + '%');
+                            adapter.setForeignState(resEnabled[i].name, parseFloat(resEnabled[i].heightDown), false);
+                            resEnabled[i].currentHeight = resEnabled[i].heightDown;
+                            resEnabled[i].currentAction = 'down';
+                            adapter.log.debug('save current height: ' + resEnabled[i].currentHeight + '%' + ' from ' + resEnabled[i].shutterName);
+                            shutterState(resEnabled[i].name);
+
+                        }
+
+                    }
+
+                }, delayDown);
+            });
+        }
+    }
+    catch (e) {
+        adapter.log.error('exception catch shutterDownLate [' + e + ']');
+    }
 }
 
 function shutterDownSleep() {
