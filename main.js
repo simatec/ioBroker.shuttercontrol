@@ -137,8 +137,6 @@ function startAdapter(options) {
                 }
             });
             
-			
-			//Anpassung AP
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
                 if (id === resSunInsideTempID  && state.ts === state.lc) {
                     adapter.log.debug('insidetemperature changed: ' +  resSunInsideTempID + ' Value: ' + state.val);
