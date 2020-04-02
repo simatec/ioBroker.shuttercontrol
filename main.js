@@ -137,6 +137,7 @@ function startAdapter(options) {
                 }
             });
             
+			
 			//Anpassung AP
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
                 if (id === resSunInsideTempID  && state.ts === state.lc) {
