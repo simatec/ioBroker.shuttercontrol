@@ -137,22 +137,23 @@ function startAdapter(options) {
                 }
             });
             
+			//Anpassung AP
             resSunInsideTemp.forEach(function(resSunInsideTempID) {
                 if (id === resSunInsideTempID  && state.ts === state.lc) {
-                    adapter.log.debug('insidetemperature changed: ' +  resSunInsideTempID);
+                    adapter.log.debug('insidetemperature changed: ' +  resSunInsideTempID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
             
             resSunOutsideTemp.forEach(function(resSunOutsideTempID) {
                 if (id === resSunOutsideTempID  && state.ts === state.lc) {
-                    adapter.log.debug('outsidetemperature changed: ' +  resSunOutsideTempID);
+                    adapter.log.debug('outsidetemperature changed: ' +  resSunOutsideTempID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
             resSunLight.forEach(function(resSunLightID) {
                 if (id === resSunLightID  && state.ts === state.lc) {
-                    adapter.log.debug('Lightsensor changed: ' + resSunLightID);
+                    adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
