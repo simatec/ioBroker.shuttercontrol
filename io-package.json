@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.4.3",
+        "version": "0.5.0",
         "news": {
+            "0.5.0": {
+                "en": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour with living area, Added aut fill for Position, many small Bugfixes, Bugfix Translations, Added debug log with more Informations, Bugfix compactmode",
+                "de": "Bugfix Goldenhour, Bugfix-Verzögerung für Sonnenschutz, Bugfix Goldhour mit Wohnbereich, Autofüllung für Position hinzugefügt, viele kleine Bugfixes, Bugfix-Übersetzungen, Debug-Protokoll mit mehr Informationen hinzugefügt, Bugfix-Kompaktmodus",
+                "ru": "Bugfix Goldenhour, задержка Bugfix для защиты от солнца, Bugfix Goldhour с жилой площадью, добавлено автоматическое заполнение позиции, множество мелких исправлений, переводы Bugfix, добавлен журнал отладки с дополнительной информацией, Bugfix compactmode",
+                "pt": "Bugfix Goldenhour, atraso de bugfix para sunprotect, Bugfix Goldhour com área útil, preenchimento automático adicionado para posição, muitas pequenas correções de bugs, traduções de correções, registro de depuração adicionado com mais informações, modo compacto de bugfix",
+                "nl": "Bugfix Goldenhour, Bugfix-vertraging voor zonwering, Bugfix Goldhour met woonruimte, Autofill toegevoegd voor positie, veel kleine Bugfixes, Bugfix-vertalingen, Debug-log toegevoegd met meer informatie, Bugfix compactmode",
+                "fr": "Bugfix Goldenhour, retard Bugfix pour sunprotect, Bugfix Goldhour avec espace de vie, remplissage automatique ajouté pour la position, de nombreux petits bugfixes, traductions Bugfix, journal de débogage ajouté avec plus d'informations, mode compact Bugfix",
+                "it": "Bugfix Goldenhour, ritardo Bugfix per protezione solare, Bugfix Goldhour con area soggiorno, riempimento automatico aggiunto per posizione, molti piccoli bugfix, traduzioni di bugfix, registro di debug aggiunto con ulteriori informazioni, modalità compatta Bugfix",
+                "es": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour con sala de estar, Relleno automático agregado para la posición, muchas correcciones de errores pequeñas, Traducciones de Bugfix, Registro de depuración agregado con más información, Bugfix compactmode",
+                "pl": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour with living area, Dodano aut fill dla pozycji, wiele małych Bugfixes, Bugfix Translations, Dodano dziennik debugowania z większą ilością informacji, Bugfix compactmode",
+                "zh-cn": "Bugfix Goldenhour，针对防晒的Bugfix延迟，带有起居区的Bugfix Goldhour，增加了位置自动填充，许多小的Bugfix，Bugfix翻译，添加了具有更多信息的调试日志，Bugfix compactmode"
+            },
             "0.4.3": {
                 "en": "Bugfix update process",
                 "de": "Bugfix Update Prozess",
@@ -176,8 +188,8 @@
         "sleepAutomatic": "sleepSunriseSunset",
 
         "astroDelayUp": 30,
-        "longitude": "13.404954",
-        "latitude": "52.520007",
+        "longitude": "",
+        "latitude": "",
         "astroDelayDown": 30,
         "driveHeightUpAstro": 100,
         "driveHeightDownAstro": 0,
