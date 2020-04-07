@@ -34,11 +34,14 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.5.1 (07.04.2020)
+* (simatec) Bugfix for Adapter checker
+
 ### 0.5.0 (06.04.2020)
 * (simatec) Bugfix Goldenhour
 * (simatec) Bugfix delay for sunprotect
 * (simatec) Bugfix Goldhour with living area
-* (simatec) Added aut fill for Position
+* (simatec) Added auto fill for Position
 * (simatec) many small Bugfixes
 * (simatec) Bugfix Translations
 * (simatec) Bugfix compactmode
