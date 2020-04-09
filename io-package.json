@@ -4,16 +4,16 @@
         "version": "0.5.1",
         "news": {
             "0.5.1": {
-                "en": "Bugfix for Adapter checker",
-                "de": "Bugfix für Adapterprüfer",
-                "ru": "Исправлена ошибка проверки адаптера",
-                "pt": "Bugfix for Adapter checker",
-                "nl": "Bugfix voor adaptercontrole",
-                "fr": "Bugfix for Adapter checker",
-                "it": "Bugfix per adattatore Checker",
-                "es": "Corrección de errores para el verificador del adaptador",
-                "pl": "Bugfix for Checker Adapter",
-                "zh-cn": "适配器检查器的错误修正"
+                "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
+                "de": "Bugfix für Adaptercheck, Weitere Debug-Logs hinzugefügt, Unterstützung für Node 14 hinzugefügt",
+                "ru": "Исправлена ошибка проверки адаптера, добавлено больше журналов отладки, добавлена поддержка узла 14",
+                "pt": "Correção de bug do verificador do adaptador, adicionado mais logs de depuração, adicionado suporte ao nó 14",
+                "nl": "Bugfix voor adaptercontrole, meer logboeken voor foutopsporing toegevoegd, ondersteuning voor knooppunt 14 toegevoegd",
+                "fr": "Correction de bugs pour le vérificateur d'adaptateurs, ajout de plus de journaux de débogage, ajout du support du noeud 14",
+                "it": "Bugfix for Adapter checker, Aggiunti altri log di debug, Aggiunto il nodo 14 Supporto",
+                "es": "Corrección de errores para el verificador del adaptador, se agregaron más registros de depuración, se agregó soporte para el nodo 14",
+                "pl": "Bugfix for Checker Adapter, Dodano więcej dzienników debugowania, Dodano obsługę węzła 14",
+                "zh-cn": "适配器检查器的错误修正，添加了更多的调试日志，添加了节点14支持"
             },
             "0.5.0": {
                 "en": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour with living area, Added aut fill for Position, many small Bugfixes, Bugfix Translations, Added debug log with more Informations, Bugfix compactmode",
