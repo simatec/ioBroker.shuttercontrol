@@ -182,19 +182,12 @@ function startAdapter(options) {
                     const result = resultID.filter(d => d.name == resShutterID);
                     for ( const i in result) {
                         adapter.getForeignState(result[i].name, (err, state) => {
-                            //if (state && result[i].currentHeight != state.val) {
-                               //adapter.log.debug('old Position value: ' + result[i].currentHeight);
-                            //}
                             adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
                         });
-                        //shutterState(resShutterID);
-                        //setTimeout(function() {
-                        //shutterState(resShutterID);
-                        //},1000)
-                        //Shutter closed -> opened manually to 100% before it has been opened automatically -> enable possibility to activate sunprotect height if required
+                        //Shutter is closed -> opened manually to 100% before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
                         if (result[i].oldHeight == result[i].heightDown && state.val == 100 && result[i].currentAction != 'up') {
                             result[i].currentHeight = state.val;
-                            result[i].currentAction = ''; //reset mode. e.g. mode could be sunProtect if shutter was still closed
+                            result[i].currentAction = ''; //reset mode. e.g. mode could be sunProtect if shutter has still been closed
                             adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
                         setTimeout(function() {
@@ -2129,8 +2122,7 @@ function sunProtect() {
                                                                     let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                     let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
-                                                                    if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
-
+                                                                    if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp || result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                         /**
                                                                          * @param {any} err
                                                                          * @param {{ val: string; }} state
