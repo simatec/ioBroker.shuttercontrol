@@ -175,21 +175,23 @@ function startAdapter(options) {
                     sunProtect();
                 }
             });
-            resShutterState.forEach(function(resShutterID) {
-                if (id === resShutterID  && state.ts === state.lc) {
+            resShutterState.forEach(function (resShutterID) {
+                if (id === resShutterID && state.ts === state.lc) {
                     resShutterChange = resShutterID;
                     const resultID = adapter.config.events;
                     const result = resultID.filter(d => d.name == resShutterID);
                     for ( const i in result) {
                         adapter.getForeignState(result[i].name, (err, state) => {
                             adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
+                            //shutterState();
                         });
                         //Shutter is closed -> opened manually to 100% before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
                         if (result[i].oldHeight == result[i].heightDown && state.val == 100 && result[i].currentAction != 'up') {
                             result[i].currentHeight = state.val;
-                            result[i].currentAction = ''; //reset mode. e.g. mode could be sunProtect if shutter has still been closed
+                            result[i].currentAction = ''; //reset mode. e.g. mode can be set to sunProtect later.
                             adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
+                        //save old height
                         setTimeout(function() {
                             result[i].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
                         },60000)
@@ -449,7 +451,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
         for ( const i in resultStates) {
             adapter.getForeignState(resultStates[i].name, (err, state) => {
                 if (state) {
-                    resultStates[i].currentAction = '';     //Case: Auto-down in the evening. Sun sill shining. currentAction=sunprotect would be set. But not if currentAction=down. So this is check in sunProtect(). Reset here to enable possibility to set sunProtect in the morning
+                    resultStates[i].currentAction = '';     //Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning
                 }
             });
         }
@@ -2082,7 +2084,8 @@ function sunProtect() {
                                                                 }
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
-                                                                        if (result[i].tempOutside < outsideTemp && result[i].valueLight < sunLight && result[i].currentAction != 'sunProtect') {
+                                                                        //Change: outTemperature AND sunLight
+                                                                        if (result[i].tempOutside < outsideTemp && ( result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '' ) && result[i].currentAction != 'sunProtect') {
 
                                                                             /**
                                                                              * @param {any} err
@@ -2090,24 +2093,24 @@ function sunProtect() {
                                                                              */
                                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                                 if (state) {
-                                                                                    //adapter.log.debug(result[i].shutterName + ': Check basis for sunprotect. Height:' + state.val + ' > HeightDownSun: ' + result[i].heightDownSun + ' AND Height:' + state.val + ' == currentHeight:' + result[i].currentHeight + ' AND currentHeight:' + result[i].currentHeight + ' == heightUp:' + result[i].heightUp);
+                                                                                    adapter.log.debug(result[i].shutterName + ': Check basis for sunprotect. Height:' + state.val + ' > HeightDownSun: ' + result[i].heightDownSun + ' AND Height:' + state.val + ' == currentHeight:' + result[i].currentHeight + ' AND currentHeight:' + result[i].currentHeight + ' == heightUp:' + result[i].heightUp);
                                                                                     if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
-                                                                                        adapter.log.debug('Temperature inside: ' + insideTemp + ' > ' + result[i].tempInside + ' AND ( Temperatur outside: ' + outsideTemp + ' > ' + result[i].tempOutside  + ' AND Light: ' + sunLight + ' > ' + result[i].valueLight + ' )');
+                                                                                        adapter.log.debug('Temperature inside: ' + insideTemp + ' > ' + result[i].tempInside + ' AND ( Temperatur outside: ' + outsideTemp + ' > ' + result[i].tempOutside + ' AND Light: ' + sunLight + ' > ' + result[i].valueLight + ' )');
                                                                                         adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
                                                                                         adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                                         shutterState(result[i].name);
                                                                                         result[i].currentHeight = result[i].heightDownSun;
-                                                                                        //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                                                        adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                                     }
                                                                                     //Shutter closed. Set currentAction = sunProtect when sunProtect would start => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down') {
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down') { //check currentAction !=down here. If shutter is already closed sunProtect must not be set
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
-                                                                                    //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect
+                                                                                    //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
                                                                                     else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
                                                                                         adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                                         result[i].currentAction = 'sunProtect';
@@ -2122,6 +2125,7 @@ function sunProtect() {
                                                                     let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                     let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
+                                                                    //Change: end sunProtect if outTemperature OR!! sunlight changes
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp || result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                         /**
                                                                          * @param {any} err
