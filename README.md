@@ -34,8 +34,12 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.5.0 (2020-02-xx)
-* (René) just my bug fix version
+### 0.5.1 (2020-04-xx)
+* (René) late all down added
+* (René) late all down configurable per shutter
+* (René) in summer time not to move down (configurable)
+
+
 
 ### 0.4.2 (22.12.2019)
 * (simatec) Fix Trigger added objects
