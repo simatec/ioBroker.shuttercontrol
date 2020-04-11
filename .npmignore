@@ -12,6 +12,7 @@ travis/
 appveyor.yml
 .travis.yaml
 appveyor.yaml
+tsconfig.json
 
 tslint.json
 .eslintrc.json
@@ -27,6 +28,7 @@ admin/i18n
 maintenance/**
 gulpfile.js
 admin/i18n
+admin/tsconfig.json
 tasks
 node_modules
 /node_modules

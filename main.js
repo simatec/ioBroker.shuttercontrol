@@ -1,7 +1,7 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const schedule  = require('node-schedule');
+const schedule = require('node-schedule');
 const SunCalc = require('suncalc2');
 
 /**
@@ -52,23 +52,33 @@ let astroTimeLivingDown;
 let astroTimeSleepUp;
 /** @type {string} */
 let astroTimeSleepDown;
+/** @type {any[]} */
 let resTrigger = [];
 let resSunTrigger = [];
+/** @type {any[]} */
 let resSunInsideTemp = [];
+/** @type {any[]} */
 let resSunOutsideTemp = [];
+/** @type {any[]} */
 let resSunLight = [];
 /** @type {any} */
 let resTriggerChange;
 let resShutterChange;
 let resSunTriggerChange;
 
+/** @type {string | number} */
 let azimuth;
 /** @type {number} */
 let elevation;
+/** @type {never[]} */
 let ObjautoUp = [];
+/** @type {never[]} */
 let ObjautoDown = [];
+/** @type {never[]} */
 let ObjautoSun = [];
+/** @type {any[]} */
 let resShutterState = [];
+let timer;
 
 /**
  * Starts the adapter instance
@@ -77,23 +87,32 @@ let resShutterState = [];
 function startAdapter(options) {
 
     options = options || {};
-    Object.assign(options, {name: adapterName});
+    Object.assign(options, { name: adapterName });
 
     adapter = new utils.Adapter(options);
- 
+
     // start here!
-    adapter.on('ready', main); // Main method defined below for readability
+    adapter.on('ready', () => main(adapter));
+    //adapter.on('ready', main); // Main method defined below for readability
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
+    /**
+     * @param {() => void} callback
+     */
     adapter.on('unload', (callback) => {
         try {
             adapter.log.info('cleaned everything up...');
+            clearTimeout(timer);
             callback();
         } catch (e) {
             callback();
         }
     });
     // is called if a subscribed state changes
+    /**
+     * @param {string} id
+     * @param {{ val: string; ts: any; lc: any; }} state
+     */
     adapter.on('stateChange', (id, state) => {
         if (state) {
 
@@ -124,68 +143,78 @@ function startAdapter(options) {
                     shutterDriveCalc();
                 }
             }
-            
+
             if (id === adapter.config.triggerAutoLiving) {
-                adapter.setState('control.autoLiving', {val: state.val, ack: true});
+                adapter.setState('control.autoLiving', { val: state.val, ack: true });
                 adapter.log.debug('Auto Living is: ' + state.val);
             }
             if (id === adapter.config.triggerAutoSleep) {
-                adapter.setState('control.autoSleep', {val: state.val, ack: true});
+                adapter.setState('control.autoSleep', { val: state.val, ack: true });
                 adapter.log.debug('Auto Sleep is: ' + state.val);
             }
-            
-            resTrigger.forEach(function(resultTriggerID) {
+
+            resTrigger.forEach(function (resultTriggerID) {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     resTriggerChange = resultTriggerID;
-                    adapter.log.debug('TriggerID changed: ' + resultTriggerID + ' ' + JSON.stringify(state));
+                    adapter.log.debug('TriggerID changed: ' + resultTriggerID + ' Value: ' + state.val);
                     triggerChange();
                 }
             });
-            
-            resSunInsideTemp.forEach(function(resSunInsideTempID) {
-                if (id === resSunInsideTempID  && state.ts === state.lc) {
-                    adapter.log.debug('insidetemperature changed: ' + resSunInsideTempID + ' ' + JSON.stringify(state));
+
+            resSunInsideTemp.forEach(function (resSunInsideTempID) {
+                if (id === resSunInsideTempID && state.ts === state.lc) {
+                    adapter.log.debug('insidetemperature changed: ' + resSunInsideTempID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
-            
-            resSunOutsideTemp.forEach(function(resSunOutsideTempID) {
-                if (id === resSunOutsideTempID  && state.ts === state.lc) {
-                    adapter.log.debug('outsidetemperature changed: ' + resSunOutsideTempID + ' ' + JSON.stringify(state));
+
+            resSunOutsideTemp.forEach(function (resSunOutsideTempID) {
+                if (id === resSunOutsideTempID && state.ts === state.lc) {
+                    adapter.log.debug('outsidetemperature changed: ' + resSunOutsideTempID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
-            resSunLight.forEach(function(resSunLightID) {
-                if (id === resSunLightID  && state.ts === state.lc) {
-                    adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' ' + JSON.stringify(state));
+            resSunLight.forEach(function (resSunLightID) {
+                if (id === resSunLightID && state.ts === state.lc) {
+                    adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
                     sunProtect();
                 }
             });
-            resShutterState.forEach(function(resShutterID) {
-                if (id === resShutterID  && state.ts === state.lc) {
+            resShutterState.forEach(function (resShutterID) {
+                if (id === resShutterID && state.ts === state.lc) {
                     resShutterChange = resShutterID;
-                    adapter.log.debug('shutter state changed: ' + resShutterID + ' ' + JSON.stringify(state));
+                    adapter.log.debug('shutter state changed: ' + resShutterID + ' Value: ' + state.val);
                     //shutterState();
                 }
             });
-            
+
             if (id === adapter.namespace + '.info.Azimut') {
                 sunProtect();
             }
-            
-            if (id === adapter.namespace + '.info.Elevation' ) {
+
+            if (id === adapter.namespace + '.info.Elevation') {
                 elevationDown();
-            }   
+            }
         }
     });
 }
+/**
+ * @param {any} shutterID
+ */
 function shutterState(shutterID) {
     if (adapter.config.currentShutterState == true) {
         const resultID = adapter.config.events;
         // Filter changed Name
-        const result = resultID.filter(d => d.name == shutterID);
+        const /**
+             * @param {{ name: any; }} d
+             */
+            result = resultID.filter(d => d.name == shutterID);
         setTimeout(function () {
             for (const i in result) {
+                /**
+                 * @param {any} err
+                 * @param {{ val: any; }} state
+                 */
                 adapter.getForeignState(result[i].name, (err, state) => {
                     if (state && result[i].currentHeight != state.val) {
                         result[i].currentHeight = state.val;
@@ -193,29 +222,44 @@ function shutterState(shutterID) {
                     }
                 });
             }
-        }, 60000);
+        }, 60000)
     }
 }
 
 function triggerChange() {
-    
+
     const resultID = adapter.config.events;
     // Filter changed Trigger
-    const arrayChangeTrigger = resultID.filter(d => d.triggerID == resTriggerChange);
-    
-    for ( const i in arrayChangeTrigger) {
-        setTimeout(function() {
+    const /**
+         * @param {{ triggerID: any; }} d
+         */
+        arrayChangeTrigger = resultID.filter(d => d.triggerID == resTriggerChange);
+
+    for (const i in arrayChangeTrigger) {
+        setTimeout(function () {
             if (arrayChangeTrigger[i].triggerChange == 'onlyUp' || arrayChangeTrigger[i].triggerChange == 'upDown') {
                 let nameDevice = arrayChangeTrigger[i].shutterName.replace(/[.;, ]/g, '_');
+                /**
+                 * @param {any} err
+                 * @param {boolean} state
+                 */
                 adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                     if (state && state === true || state && state.val === true) {
                         let currentValue = '';
+                        /**
+                         * @param {any} err
+                         * @param {{ val: string; }} state
+                         */
                         adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                             let mustValue = ('' + arrayChangeTrigger[i].triggerState);
                             if (state) {
                                 currentValue = ('' + state.val);
                             }
                             if (currentValue != mustValue) {
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: number; }} state
+                                 */
                                 adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                                     if (state.val != arrayChangeTrigger[i].triggerDrive && state.val < arrayChangeTrigger[i].triggerDrive) {
                                         arrayChangeTrigger[i].triggerHeight = (state.val);
@@ -236,12 +280,24 @@ function triggerChange() {
             }
             if (arrayChangeTrigger[i].triggerChange == 'onlyDown' || arrayChangeTrigger[i].triggerChange == 'upDown') {
                 let nameDevice = arrayChangeTrigger[i].shutterName.replace(/[.;, ]/g, '_');
+                /**
+                 * @param {any} err
+                 * @param {boolean} state
+                 */
                 adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                     if (state && state === true || state && state.val === true) {
+                        /**
+                         * @param {any} err
+                         * @param {{ val: string; }} state
+                         */
                         adapter.getForeignState(arrayChangeTrigger[i].triggerID, (err, state) => {
                             let currentValue = ('' + state.val);
                             let mustValue = ('' + arrayChangeTrigger[i].triggerState);
                             if (currentValue === mustValue) {
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: any; }} state
+                                 */
                                 adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
                                     if (state.val != arrayChangeTrigger[i].triggerHeight && state.val == arrayChangeTrigger[i].triggerDrive && arrayChangeTrigger[i].currentHeight == arrayChangeTrigger[i].triggerDrive) {
                                         adapter.log.debug('change to last height: ' + arrayChangeTrigger[i].triggerHeight + '%');
@@ -261,48 +317,77 @@ function triggerChange() {
 }
 
 function checkStates() {
+    /**
+     * @param {any} err
+     * @param {{ val: null; } | null} state
+     */
     adapter.getState('control.Holiday', (err, state) => {
         if (state === null || state.val === null) {
-            adapter.setState('control.Holiday', {val: false, ack: true});
+            adapter.setState('control.Holiday', { val: false, ack: true });
         }
     });
+    /**
+     * @param {any} err
+     * @param {{ val: null; } | null} state
+     */
     adapter.getState('control.autoLiving', (err, state) => {
         if (state === null || state.val === null) {
-            adapter.setState('control.autoLiving', {val: false, ack: true});
+            adapter.setState('control.autoLiving', { val: false, ack: true });
         }
     });
+    /**
+     * @param {any} err
+     * @param {{ val: null; } | null} state
+     */
     adapter.getState('control.autoSleep', (err, state) => {
         if (state === null || state.val === null) {
-            adapter.setState('control.autoSleep', {val: false, ack: true});
+            adapter.setState('control.autoSleep', { val: false, ack: true });
         }
     });
 }
 
 function checkActualStates() {
-
-    adapter.log.debug('checkActualStates');
-
+    /**
+     * @param {any} err
+     * @param {{ val: any; }} state
+     */
     adapter.getState('control.Holiday', (err, state) => {
         if (state) {
             HolidayStr = state.val;
         }
     });
+    /**
+     * @param {any} err
+     * @param {{ val: any; }} state
+     */
     adapter.getState('control.autoLiving', (err, state) => {
         if (state) {
             autoLivingStr = state.val;
         }
     });
+    /**
+     * @param {any} err
+     * @param {{ val: any; }} state
+     */
     adapter.getState('control.autoSleep', (err, state) => {
         if (state) {
             autoSleepStr = state.val;
         }
     });
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance != 'none' || adapter.config.publicHolInstance != '')) {
+        /**
+         * @param {any} err
+         * @param {{ val: any; }} state
+         */
         adapter.getForeignState(adapter.config.publicHolInstance + '.heute.boolean', (err, state) => {
             if (state) {
                 publicHolidayStr = state.val;
             }
         });
+        /**
+         * @param {any} err
+         * @param {{ val: any; }} state
+         */
         adapter.getForeignState(adapter.config.publicHolInstance + '.morgen.boolean', (err, state) => {
             if (state) {
                 publicHolidayTomorowStr = state.val;
@@ -324,27 +409,39 @@ function checkActualStates() {
     }
 
 
-    adapter.getForeignObjects(adapter.namespace + ".shutters.autoUp.*", 'state', function (err, list) {
-        if (err) {
-            adapter.log.error(err);
-        } else {
-            ObjautoUp = list;
-        }
-    });
-    adapter.getForeignObjects(adapter.namespace + ".shutters.autoDown.*", 'state', function (err, list) {
-        if (err) {
-            adapter.log.error(err);
-        } else {
-            ObjautoDown = list;
-        }
-    });
-    adapter.getForeignObjects(adapter.namespace + ".shutters.autoSun.*", 'state', function (err, list) {
-        if (err) {
-            adapter.log.error(err);
-        } else {
-            ObjautoSun = list;
-        }
-    });
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoUp.*", 'state', /**
+         * @param {any} err
+         * @param {any[]} list
+         */
+        function (err, list) {
+            if (err) {
+                adapter.log.error(err);
+            } else {
+                ObjautoUp = list;
+            }
+        });
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoDown.*", 'state', /**
+         * @param {any} err
+         * @param {any[]} list
+         */
+        function (err, list) {
+            if (err) {
+                adapter.log.error(err);
+            } else {
+                ObjautoDown = list;
+            }
+        });
+    adapter.getForeignObjects(adapter.namespace + ".shutters.autoSun.*", 'state', /**
+         * @param {any} err
+         * @param {any[]} list
+         */
+        function (err, list) {
+            if (err) {
+                adapter.log.error(err);
+            } else {
+                ObjautoSun = list;
+            }
+        });
     setTimeout(function () {
         adapter.log.debug('222');
         shutterDriveCalc();
@@ -352,7 +449,7 @@ function checkActualStates() {
     }, 1000);
 }
 
-const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function() {
+const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
     shutterDriveCalc();
 });
 
@@ -385,8 +482,8 @@ function shutterDriveCalc() {
 
     addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
     addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
-    addMinutesGoldenHour(goldenHour, adapter.config.astroDelayUp); // Add Delay for GoldenHour
-    addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayDown); // Add Delay for GoldenHourEnd
+    addMinutesGoldenHour(goldenHour, adapter.config.astroDelayDown); // Add Delay for GoldenHour
+    addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayUp); // Add Delay for GoldenHourEnd
 
     adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
     adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
@@ -396,46 +493,30 @@ function shutterDriveCalc() {
     shutterGoldenHour();
     shutterSunriseSunset();
 
-    switch(adapter.config.livingAutomatic) {
-        case 'livingSunriseSunset' :
+    switch (adapter.config.livingAutomatic) {
+        case 'livingSunriseSunset':
             astroTimeLivingUp = sunriseStr;
             astroTimeLivingDown = sunsetStr;
             break;
-        case 'livingGoldenHour' :
+        case 'livingGoldenHour':
             astroTimeLivingUp = goldenHourEnd;
             astroTimeLivingDown = goldenHour;
             break;
     }
-    switch(adapter.config.sleepAutomatic) {
-        case 'sleepSunriseSunset' :
+    switch (adapter.config.sleepAutomatic) {
+        case 'sleepSunriseSunset':
             astroTimeSleepUp = sunriseStr;
             astroTimeSleepDown = sunsetStr;
             break;
-        case 'sleepGoldenHour' :
+        case 'sleepGoldenHour':
             astroTimeSleepUp = goldenHourEnd;
             astroTimeSleepDown = goldenHour;
             break;
     }
-    /*
-    if (adapter.config.livingAutomatic == 'livingSunriseSunset') {
-        astroTimeLivingUp = sunriseStr;
-        astroTimeLivingDown = sunsetStr;
-    } else if (adapter.config.livingAutomatic == "livingGoldenHour") {
-        astroTimeLivingUp = goldenHourEnd;
-        astroTimeLivingDown = goldenHour;
-    }
-    if (adapter.config.sleepAutomatic == "sleepSunriseSunset") {
-        astroTimeSleepUp = sunriseStr;
-        astroTimeSleepDown = sunsetStr;
-    } else if (adapter.config.livingAutomatic == "sleepGoldenHour") {
-        astroTimeSleepUp = goldenHourEnd;
-        astroTimeSleepDown = goldenHour;
-    }
-    */
 
     // ******** Set Up-Time Living Area ********
-    switch(adapter.config.livingAutomatic) {
-        case 'livingTime' :
+    switch (adapter.config.livingAutomatic) {
+        case 'livingTime':
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeLiving = adapter.config.WE_shutterUpLiving;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
@@ -443,7 +524,7 @@ function shutterDriveCalc() {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
                 adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
             }
-        break;
+            break;
         default:
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeLiving = adapter.config.WE_shutterUpLiving;
@@ -459,21 +540,21 @@ function shutterDriveCalc() {
                     upTimeLiving = adapter.config.W_shutterUpLivingMax;
                     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
                 } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
-                        upTimeLiving = astroTimeLivingUp;
-                        adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                    upTimeLiving = astroTimeLivingUp;
+                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
                 } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMin)) {
                     upTimeLiving = adapter.config.W_shutterUpLivingMin;
                     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
                 }
             }
-        break;
+            break;
     }
     adapter.log.debug('Starting up shutters living area: ' + upTimeLiving);
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
-    switch(adapter.config.sleepAutomatic) {
-        case 'sleepTime' :
+    switch (adapter.config.sleepAutomatic) {
+        case 'sleepTime':
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeSleep = adapter.config.WE_shutterUpSleep;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
@@ -481,7 +562,7 @@ function shutterDriveCalc() {
                 upTimeSleep = adapter.config.W_shutterUpSleepMax;
                 adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
             }
-        break;
+            break;
         default:
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeSleep = adapter.config.WE_shutterUpSleep;
@@ -497,21 +578,21 @@ function shutterDriveCalc() {
                     upTimeSleep = adapter.config.W_shutterUpSleepMax;
                     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
                 } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
-                        upTimeSleep = astroTimeSleepUp;
-                        adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                    upTimeSleep = astroTimeSleepUp;
+                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
                 } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
                     upTimeSleep = adapter.config.W_shutterUpSleepMin;
                     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
                 }
             }
-        break;
+            break;
     }
     adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep);
     shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
-    switch(adapter.config.livingAutomatic) {
-        case 'livingTime' :
+    switch (adapter.config.livingAutomatic) {
+        case 'livingTime':
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
@@ -519,7 +600,7 @@ function shutterDriveCalc() {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
             }
-        break;
+            break;
         default:
             if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
@@ -537,17 +618,17 @@ function shutterDriveCalc() {
                 downTimeLiving = astroTimeLivingDown;
                 adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
             } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
-                    downTimeLiving = astroTimeLivingDown;
-                    adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+                downTimeLiving = astroTimeLivingDown;
+                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
             }
-        break;
+            break;
     }
     adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving);
     shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
-    switch(adapter.config.sleepAutomatic) {
-        case 'sleepTime' :
+    switch (adapter.config.sleepAutomatic) {
+        case 'sleepTime':
             if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
@@ -555,7 +636,7 @@ function shutterDriveCalc() {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
             }
-        break;
+            break;
         default:
             if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
@@ -573,10 +654,10 @@ function shutterDriveCalc() {
                 downTimeSleep = astroTimeSleepDown;
                 adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
             } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
-                    downTimeSleep = astroTimeSleepDown;
-                    adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+                downTimeSleep = astroTimeSleepDown;
+                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
             }
-        break;
+            break;
     }
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
     shutterDownSleep();
@@ -588,35 +669,53 @@ function shutterDriveCalc() {
 
     delayCalc();
 }
-function elevationDown(){
+function elevationDown() {
     // Full Result
     const resultFull = adapter.config.events;
 
     if (resultFull) {
         const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
         // Filter Area Living
-        const resLiving = resultFull.filter(d => d.typeDown == 'elevation');
+        const /**
+             * @param {{ typeDown: string; }} d
+             */
+            resLiving = resultFull.filter(d => d.typeDown == 'elevation');
         // Filter enabled
-        let resEnabled = resLiving.filter(d => d.enabled === true);
+        let /**
+             * @param {{ enabled: boolean; }} d
+             */
+            resEnabled = resLiving.filter(d => d.enabled === true);
 
         let result = resEnabled;
 
-        for ( const i in result) {
+        for (const i in result) {
             let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+            /**
+             * @param {any} err
+             * @param {boolean} state
+             */
             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                 if (state && state === true || state && state.val === true) {
                     let elevationEnd = (result[i].elevation - 1);
                     if (elevation <= result[i].elevation && elevation >= elevationEnd && result[i].currentAction != 'down' && azimuth > 180) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             let currentValue = '';
+                            /**
+                             * @param {any} err
+                             * @param {{ val: string; }} state
+                             */
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                 let mustValue = ('' + result[i].triggerState);
                                 if (state) {
                                     currentValue = ('' + state.val);
                                 }
                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: any; }} state
+                                     */
                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != result[i].heightDown)  {
+                                        if (state && state.val != result[i].heightDown) {
                                             adapter.log.debug('#3 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                             result[i].currentHeight = result[i].heightDown;
@@ -626,8 +725,12 @@ function elevationDown(){
                                         }
                                     });
                                 } else if (result[i].triggerID == '') {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: any; }} state
+                                     */
                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != result[i].heightDown)  {
+                                        if (state && state.val != result[i].heightDown) {
                                             adapter.log.debug('#4 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                             result[i].currentHeight = result[i].heightDown;
@@ -644,7 +747,7 @@ function elevationDown(){
             });
         }
     }
-    setTimeout(function() {
+    setTimeout(function () {
         if (elevation <= adapter.config.sunProtEndElevation) {
             sunProtect();
         }
@@ -653,30 +756,40 @@ function elevationDown(){
 function shutterGoldenHour() {
 
     const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
-    
+
     if (goldenHourEnd) {
 
         let upTime = goldenHourEnd.split(':');
 
         schedule.cancelJob('shutterUpGoldenHourEnd');
-        
-        const upGoldenHour = schedule.scheduleJob('shutterUpGoldenHourEnd', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+
+        const upGoldenHour = schedule.scheduleJob('shutterUpGoldenHourEnd', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
             // Full Result
             const resultFull = adapter.config.events;
 
             if (resultFull) {
                 // Filter Area Living
-                const resLiving = resultFull.filter(d => d.typeUp == 'goldenhour End');
+                const /**
+                     * @param {{ typeUp: string; }} d
+                     */
+                    resLiving = resultFull.filter(d => d.typeUp == 'goldenhour End');
                 // Filter enabled
-                let resEnabled = resLiving.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resLiving.filter(d => d.enabled === true);
 
                 let result = resEnabled;
 
-                for ( const i in result) {
+                for (const i in result) {
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 let shutterHeight = 0;
                                 if (result[i].currentAction == 'sunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
@@ -685,14 +798,22 @@ function shutterGoldenHour() {
                                     result[i].currentAction = 'up';
                                 }
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != shutterHeight)  {
+                                            if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#5 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                 adapter.setForeignState(result[i].name, shutterHeight, false);
                                                 result[i].currentHeight = shutterHeight;
@@ -701,8 +822,12 @@ function shutterGoldenHour() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != shutterHeight)  {
+                                            if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#6 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                 adapter.setForeignState(result[i].name, shutterHeight, false);
                                                 result[i].currentHeight = shutterHeight;
@@ -725,33 +850,51 @@ function shutterGoldenHour() {
         let upTime = goldenHour.split(':');
 
         schedule.cancelJob('shutterDownGoldenHour');
-        
-        const downGoldenHour = schedule.scheduleJob('shutterDownGoldenHour', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+
+        const downGoldenHour = schedule.scheduleJob('shutterDownGoldenHour', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
             // Full Result
             const resultFull = adapter.config.events;
 
             if (resultFull) {
                 // Filter Area Living
-                const resLiving = resultFull.filter(d => d.typeDown == 'goldenhour');
+                const /**
+                     * @param {{ typeDown: string; }} d
+                     */
+                    resLiving = resultFull.filter(d => d.typeDown == 'goldenhour');
                 // Filter enabled
-                let resEnabled = resLiving.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resLiving.filter(d => d.enabled === true);
 
                 let result = resEnabled;
 
-                for ( const i in result) {
+                for (const i in result) {
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != result[i].heightDown)  {
+                                            if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#7 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
@@ -761,8 +904,12 @@ function shutterGoldenHour() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != result[i].heightDown)  {
+                                            if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#8 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
@@ -785,30 +932,40 @@ function shutterGoldenHour() {
 function shutterSunriseSunset() {
 
     const driveDelayUpAstro = adapter.config.driveDelayUpAstro * 1000;
-    
+
     if (sunriseStr) {
 
         let upTime = sunriseStr.split(':');
 
         schedule.cancelJob('shutterUpSunrise');
-        
-        const upSunrise = schedule.scheduleJob('shutterUpSunrise', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+
+        const upSunrise = schedule.scheduleJob('shutterUpSunrise', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
             // Full Result
             const resultFull = adapter.config.events;
 
             if (resultFull) {
                 // Filter Area Living
-                const resLiving = resultFull.filter(d => d.typeUp == 'sunrise');
+                const /**
+                     * @param {{ typeUp: string; }} d
+                     */
+                    resLiving = resultFull.filter(d => d.typeUp == 'sunrise');
                 // Filter enabled
-                let resEnabled = resLiving.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resLiving.filter(d => d.enabled === true);
 
                 let result = resEnabled;
 
-                for ( const i in result) {
+                for (const i in result) {
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 let shutterHeight = 0;
                                 if (result[i].currentAction == 'sunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
@@ -817,14 +974,22 @@ function shutterSunriseSunset() {
                                     result[i].currentAction = 'up';
                                 }
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != shutterHeight)  {
+                                            if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#9 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                 adapter.setForeignState(result[i].name, shutterHeight, false);
                                                 result[i].currentHeight = shutterHeight;
@@ -833,8 +998,12 @@ function shutterSunriseSunset() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != shutterHeight)  {
+                                            if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#10 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                 adapter.setForeignState(result[i].name, shutterHeight, false);
                                                 result[i].currentHeight = shutterHeight;
@@ -857,31 +1026,49 @@ function shutterSunriseSunset() {
         const upTime = sunsetStr.split(':');
 
         schedule.cancelJob('shutterDownSunset');
-        
-        const downSunset = schedule.scheduleJob('shutterDownSunset', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+
+        const downSunset = schedule.scheduleJob('shutterDownSunset', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
             // Full Result
             const resultFull = adapter.config.events;
 
             if (resultFull) {
                 // Filter Area Living
-                const resLiving = resultFull.filter(d => d.typeDown == 'sunset');
+                const /**
+                     * @param {{ typeDown: string; }} d
+                     */
+                    resLiving = resultFull.filter(d => d.typeDown == 'sunset');
                 // Filter enabled
-                const resEnabled = resLiving.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resLiving.filter(d => d.enabled === true);
 
                 const result = resEnabled;
 
-                for (let i = 0; i < result.length; i++ ) {
+                for (const i in result) {
                     const nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     const mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#11 Set ID: ' + result[i].name + ' ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
@@ -893,6 +1080,10 @@ function shutterSunriseSunset() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#12 Set ID: ' + result[i].name + ' ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
@@ -915,74 +1106,113 @@ function shutterSunriseSunset() {
 }
 
 // Add delay Time for Sunrise
+/**
+ * @param {string} time
+ * @param {string | number} minsToAdd
+ */
 function addMinutesSunrise(time, minsToAdd) {
-    function D(J){ return (J<10? '0':'') + J;}
+    /**
+     * @param {number} J
+     */
+    function D(J) { return (J < 10 ? '0' : '') + J; };
     const piece = time.split(':');
-    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
-    sunriseStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
-    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
+    sunriseStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
+    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
 }
 // Add delay Time for Sunset
+/**
+ * @param {string} time
+ * @param {string | number} minsToAdd
+ */
 function addMinutesSunset(time, minsToAdd) {
-    function D(J){ return (J<10? '0':'') + J;}
+    /**
+     * @param {number} J
+     */
+    function D(J) { return (J < 10 ? '0' : '') + J; };
     const piece = time.split(':');
-    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
-    sunsetStr = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
-    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
+    sunsetStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
+    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
 }
 // Add delay Time for GoldenHour
+/**
+ * @param {string} time
+ * @param {string | number} minsToAdd
+ */
 function addMinutesGoldenHour(time, minsToAdd) {
-    function D(J){ return (J<10? '0':'') + J;}
+    /**
+     * @param {number} J
+     */
+    function D(J) { return (J < 10 ? '0' : '') + J; };
     const piece = time.split(':');
-    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
-    goldenHour = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
-    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
+    goldenHour = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
+    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
 }
 // Add delay Time for GoldenHour
+/**
+ * @param {string} time
+ * @param {string | number} minsToAdd
+ */
 function addMinutesGoldenHourEnd(time, minsToAdd) {
-    function D(J){ return (J<10? '0':'') + J;}
+    /**
+     * @param {number} J
+     */
+    function D(J) { return (J < 10 ? '0' : '') + J; };
     const piece = time.split(':');
-    const mins = piece[0]*60 + +piece[1] + +minsToAdd;
-    goldenHourEnd = (D(mins%(24*60)/60 | 0) + ':' + D(mins%60));
-    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
+    goldenHourEnd = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
+    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
 }
 
 function shutterUpLiving() {
-    
+
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
-    
+
     if ((upTimeLiving) == undefined) {
         upTimeLiving = adapter.config.W_shutterUpLivingMax;
     }
     let upTime = upTimeLiving.split(':');
+    /** @type {number | undefined} */
     let timeoutLivingAuto;
 
     schedule.cancelJob('shutterUpLiving');
-    
-    const upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+
+    const upLiving = schedule.scheduleJob('shutterUpLiving', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
         // Full Result
         const resultFull = adapter.config.events;
 
         if (resultFull) {
             // Filter Area Living
-            const resLiving = resultFull.filter(d => d.typeUp == 'living');
+            const /**
+                 * @param {{ typeUp: string; }} d
+                 */
+                resLiving = resultFull.filter(d => d.typeUp == 'living');
             // Filter enabled
-            let resEnabled = resLiving.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
             let number = 0;
 
-            for ( const i in result) {
-                    number++;
+            for (const i in result) {
+                number++;
             }
 
             timeoutLivingAuto = number * driveDelayUpLiving;
 
-            for ( const i in result) {
+            for (const i in result) {
                 let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                /**
+                 * @param {any} err
+                 * @param {boolean} state
+                 */
                 adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                     if (state && state === true || state && state.val === true) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             let shutterHeight = 0;
                             if (result[i].currentAction == 'sunProtect') {
                                 shutterHeight = parseFloat(result[i].heightDownSun);
@@ -991,14 +1221,22 @@ function shutterUpLiving() {
                                 result[i].currentAction = 'up';
                             }
                             let currentValue = '';
+                            /**
+                             * @param {any} err
+                             * @param {{ val: string; }} state
+                             */
                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                 let mustValue = ('' + result[i].triggerState);
                                 if (state) {
                                     currentValue = ('' + state.val);
                                 }
                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: number; }} state
+                                     */
                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != shutterHeight)  {
+                                        if (state && state.val != shutterHeight) {
                                             adapter.log.debug('#13 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                             adapter.setForeignState(result[i].name, shutterHeight, false);
                                             result[i].currentHeight = shutterHeight;
@@ -1007,8 +1245,12 @@ function shutterUpLiving() {
                                         }
                                     });
                                 } else if (result[i].triggerID == '') {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: number; }} state
+                                     */
                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != shutterHeight)  {
+                                        if (state && state.val != shutterHeight) {
                                             adapter.log.debug('#14 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                             adapter.setForeignState(result[i].name, shutterHeight, false);
                                             result[i].currentHeight = shutterHeight;
@@ -1027,14 +1269,24 @@ function shutterUpLiving() {
             setTimeout(function () {
                 // Filter Area Living Auto
                 if (resultFull) {
-                    const resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
+                    const /**
+                         * @param {{ typeUp: string; }} d
+                         */
+                        resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
                     // Filter enabled
-                    let resEnabled = resLivingAuto.filter(d => d.enabled === true);
+                    let /**
+                         * @param {{ enabled: boolean; }} d
+                         */
+                        resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
                     let result = resEnabled;
 
                     for (const i in result) {
                         let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                        /**
+                         * @param {any} err
+                         * @param {boolean} state
+                         */
                         adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                             if (state && state === true || state && state.val === true) {
                                 setTimeout(function () {
@@ -1046,12 +1298,20 @@ function shutterUpLiving() {
                                         result[i].currentAction = 'up';
                                     }
                                     let currentValue = '';
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: string; }} state
+                                     */
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
                                         let mustValue = ('' + result[i].triggerState);
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                            /**
+                                             * @param {any} err
+                                             * @param {{ val: number; }} state
+                                             */
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if (state && state.val != shutterHeight) {
                                                     adapter.log.debug('#15 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1062,6 +1322,10 @@ function shutterUpLiving() {
                                                 }
                                             });
                                         } else if (result[i].triggerID == '') {
+                                            /**
+                                             * @param {any} err
+                                             * @param {{ val: number; }} state
+                                             */
                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                 if (state && state.val != shutterHeight) {
                                                     adapter.log.debug('#16 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1093,24 +1357,31 @@ function shutterDownLiving() {
         downTimeLiving = adapter.config.W_shutterDownLiving;
     }
     let downTime = downTimeLiving.split(':');
+    /** @type {number | undefined} */
     let timeoutLivingAuto;
 
     schedule.cancelJob('shutterDownLiving');
-    
-    const downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
+
+    const downLiving = schedule.scheduleJob('shutterDownLiving', downTime[1] + ' ' + downTime[0] + ' * * *', function () {
         // Full Result
         const resultFull = adapter.config.events;
 
         if (resultFull) {
             // Filter Area Living
-            const resLiving = resultFull.filter(d => d.typeDown == 'living');
+            const /**
+                 * @param {{ typeDown: string; }} d
+                 */
+                resLiving = resultFull.filter(d => d.typeDown == 'living');
             // Filter enabled
-            let resEnabled = resLiving.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
             let number = 0;
 
-            for ( const i in result) {
+            for (const i in result) {
                 number++;
             }
 
@@ -1134,18 +1405,30 @@ function shutterDownLiving() {
                 if (!inSummerNotDown) {
 
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                /**
+                 * @param {any} err
+                 * @param {boolean} state
+                 */
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                            setTimeout(function () {
+                        setTimeout(function () {
                                 let currentValue = '';
+                            /**
+                             * @param {any} err
+                             * @param {{ val: string; }} state
+                             */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: any; }} state
+                                     */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != result[i].heightDown) {
+                                        if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#17 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
@@ -1155,8 +1438,12 @@ function shutterDownLiving() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: any; }} state
+                                     */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                            if (state && state.val != result[i].heightDown) {
+                                        if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#18 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
@@ -1177,9 +1464,15 @@ function shutterDownLiving() {
             setTimeout(function () {
                 if (resultFull) {
                     // Filter Area Living Auto
-                    const resLivingAuto = resultFull.filter(d => d.typeDown == 'living-auto');
+                    const /**
+                         * @param {{ typeDown: string; }} d
+                         */
+                        resLivingAuto = resultFull.filter(d => d.typeDown == 'living-auto');
                     // Filter enabled
-                    let resEnabled = resLivingAuto.filter(d => d.enabled === true);
+                    let /**
+                         * @param {{ enabled: boolean; }} d
+                         */
+                        resEnabled = resLivingAuto.filter(d => d.enabled === true);
 
                     let result = resEnabled;
 
@@ -1200,18 +1493,30 @@ function shutterDownLiving() {
                         if (!inSummerNotDown) {
 
                             let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                        /**
+                         * @param {any} err
+                         * @param {boolean} state
+                         */
                             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                                 if (state && state === true || state && state.val === true) {
-                                    setTimeout(function () {
+                                setTimeout(function () {
                                         let currentValue = '';
+                                    /**
+                                     * @param {any} err
+                                     * @param {{ val: string; }} state
+                                     */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                            /**
+                                             * @param {any} err
+                                             * @param {{ val: any; }} state
+                                             */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (state && state.val != result[i].heightDown) {
+                                                if (state && state.val != result[i].heightDown) {
                                                         adapter.log.debug('#19 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                         result[i].currentHeight = result[i].heightDown;
@@ -1221,8 +1526,12 @@ function shutterDownLiving() {
                                                     }
                                                 });
                                             } else if (result[i].triggerID == '') {
+                                            /**
+                                             * @param {any} err
+                                             * @param {{ val: any; }} state
+                                             */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (state && state.val != result[i].heightDown) {
+                                                if (state && state.val != result[i].heightDown) {
                                                         adapter.log.debug('#20 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                         result[i].currentHeight = result[i].heightDown;
@@ -1245,7 +1554,7 @@ function shutterDownLiving() {
 }
 
 function shutterUpSleep() {
-    
+
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
 
@@ -1253,11 +1562,12 @@ function shutterUpSleep() {
         upTimeSleep = adapter.config.W_shutterUpSleepMax;
     }
     let upTime = upTimeSleep.split(':');
+    /** @type {number | undefined} */
     let timeoutSleepAuto;
-    
+
     schedule.cancelJob('shutterUpSleep');
 
-    const upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function() {
+    const upSleep = schedule.scheduleJob('shutterUpSleep', upTime[1] + ' ' + upTime[0] + ' * * *', function () {
 
         delayUp = delayUp * driveDelayUpLiving;
         setTimeout(function () {
@@ -1266,9 +1576,15 @@ function shutterUpSleep() {
 
             if (resultFull) {
                 // Filter Area sleep
-                const resSleep = resultFull.filter(d => d.typeUp == 'sleep');
+                const /**
+                     * @param {{ typeUp: string; }} d
+                     */
+                    resSleep = resultFull.filter(d => d.typeUp == 'sleep');
                 // Filter enabled
-                let resEnabled = resSleep.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resSleep.filter(d => d.enabled === true);
 
                 let result = resEnabled;
                 let number = 0;
@@ -1281,6 +1597,10 @@ function shutterUpSleep() {
 
                 for (const i in result) {
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
@@ -1292,12 +1612,20 @@ function shutterUpSleep() {
                                     result[i].currentAction = 'up';
                                 }
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#21 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1308,6 +1636,10 @@ function shutterUpSleep() {
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: number; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (state && state.val != shutterHeight) {
                                                 adapter.log.debug('#22 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1330,14 +1662,24 @@ function shutterUpSleep() {
                     const resultFull = adapter.config.events;
                     // Filter Area sleep
                     if (resultFull) {
-                        const resSleep = resultFull.filter(d => d.typeUp == 'sleep-auto');
+                        const /**
+                             * @param {{ typeUp: string; }} d
+                             */
+                            resSleep = resultFull.filter(d => d.typeUp == 'sleep-auto');
                         // Filter enabled
-                        let resEnabled = resSleep.filter(d => d.enabled === true);
+                        let /**
+                             * @param {{ enabled: boolean; }} d
+                             */
+                            resEnabled = resSleep.filter(d => d.enabled === true);
 
                         let result = resEnabled;
 
                         for (const i in result) {
                             let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                            /**
+                             * @param {any} err
+                             * @param {boolean} state
+                             */
                             adapter.getState('shutters.autoUp.' + nameDevice, (err, state) => {
                                 if (state && state === true || state && state.val === true) {
                                     setTimeout(function () {
@@ -1349,12 +1691,20 @@ function shutterUpSleep() {
                                             result[i].currentAction = 'up';
                                         }
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off')) {
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: number; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (state && state.val != shutterHeight) {
                                                         adapter.log.debug('#23 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1365,6 +1715,10 @@ function shutterUpSleep() {
                                                     }
                                                 });
                                             } else if (result[i].triggerID == '') {
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: number; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                     if (state && state.val != shutterHeight) {
                                                         adapter.log.debug('#24 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
@@ -1497,7 +1851,7 @@ function IsSummerTime() {
 }
 
 function shutterDownSleep() {
-    
+
     const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
     const driveDelayUpLiving = adapter.config.driveDelayUpLiving * 1000;
 
@@ -1510,7 +1864,7 @@ function shutterDownSleep() {
 
     schedule.cancelJob('shutterDownSleep');
 
-    const downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function() {
+    const downSleep = schedule.scheduleJob('shutterDownSleep', downTime[1] + ' ' + downTime[0] + ' * * *', function () {
         delayDown = delayDown * driveDelayUpLiving;
         setTimeout(function () {
             // Full Result
@@ -1518,9 +1872,15 @@ function shutterDownSleep() {
 
             if (resultFull) {
                 // Filter Area sleep
-                const resSleep = resultFull.filter(d => d.typeDown == 'sleep');
+                const /**
+                     * @param {{ typeDown: string; }} d
+                     */
+                    resSleep = resultFull.filter(d => d.typeDown == 'sleep');
                 // Filter enabled
-                let resEnabled = resSleep.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled = resSleep.filter(d => d.enabled === true);
 
                 let result = resEnabled;
                 let number = 0;
@@ -1533,10 +1893,10 @@ function shutterDownSleep() {
 
                 for (const i in result) {
 
-                    let inSummerNotDown = false;
-                    if (IsSummerTime()) {
-                        inSummerNotDown = result[i].inSummerNotDown;
-
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                         if (inSummerNotDown) {
                             adapter.log.debug(result[i].shutterName + ' in summer time not down');
                         }
@@ -1550,16 +1910,24 @@ function shutterDownSleep() {
                         const nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
                         adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                             if (state && state === true || state && state.val === true) {
-                                setTimeout(function () {
+                            setTimeout(function () {
                                     let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                     adapter.getForeignState(result[i].triggerID, (err, state) => {
                                         const mustValue = ('' + result[i].triggerState);
                                         if (state) {
                                             currentValue = ('' + state.val);
                                         }
                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                             adapter.getForeignState(result[i].name, (err, state) => {
-                                                if (state && state.val != result[i].heightDown) {
+                                            if (state && state.val != result[i].heightDown) {
                                                     adapter.log.debug('#26 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                     result[i].currentHeight = result[i].heightDown;
@@ -1569,8 +1937,12 @@ function shutterDownSleep() {
                                                 }
                                             });
                                         } else if (result[i].triggerID == '') {
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                             adapter.getForeignState(result[i].name, (err, state) => {
-                                                if (state && state.val != result[i].heightDown) {
+                                            if (state && state.val != result[i].heightDown) {
                                                     adapter.log.debug('#27 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                     result[i].currentHeight = result[i].heightDown;
@@ -1594,9 +1966,15 @@ function shutterDownSleep() {
 
                     if (resultFull) {
                         // Filter Area sleep
-                        const resSleep = resultFull.filter(d => d.typeDown == 'sleep-auto');
+                        const /**
+                             * @param {{ typeDown: string; }} d
+                             */
+                            resSleep = resultFull.filter(d => d.typeDown == 'sleep-auto');
                         // Filter enabled
-                        let resEnabled = resSleep.filter(d => d.enabled === true);
+                        let /**
+                             * @param {{ enabled: boolean; }} d
+                             */
+                            resEnabled = resSleep.filter(d => d.enabled === true);
 
                         let result = resEnabled;
 
@@ -1617,18 +1995,30 @@ function shutterDownSleep() {
                             if (!inSummerNotDown) {
 
                                 let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                            /**
+                             * @param {any} err
+                             * @param {boolean} state
+                             */
                                 adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                                     if (state && state === true || state && state.val === true) {
-                                        setTimeout(function () {
+                                    setTimeout(function () {
                                             let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                                 let mustValue = ('' + result[i].triggerState);
                                                 if (state) {
                                                     currentValue = ('' + state.val);
                                                 }
                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: any; }} state
+                                                 */
                                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (state && state.val != result[i].heightDown) {
+                                                    if (state && state.val != result[i].heightDown) {
                                                             adapter.log.debug('#28 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                             result[i].currentHeight = result[i].heightDown;
@@ -1638,8 +2028,12 @@ function shutterDownSleep() {
                                                         }
                                                     });
                                                 } else if (result[i].triggerID == '') {
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: any; }} state
+                                                 */
                                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                                        if (state && state.val != result[i].heightDown) {
+                                                    if (state && state.val != result[i].heightDown) {
                                                             adapter.log.debug('#29 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                             result[i].currentHeight = result[i].heightDown;
@@ -1664,49 +2058,75 @@ function shutterDownSleep() {
 
 function sunProtect() {
 
-    const driveDelayUpSleep = adapter.config.driveDelayUpSleep * 1000;
-    
-    setTimeout(function() {
+    const driveDelayUpSleep = adapter.config.driveDelayUpAstro * 1000;
+
+    setTimeout(function () {
         // Full Result
         let resultFull = adapter.config.events;
 
         if (resultFull) {
             // Filter enabled
-            let resEnabled = resultFull.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resultFull.filter(d => d.enabled === true);
             let result = resEnabled;
 
             if (elevation > adapter.config.sunProtEndElevation) {
-                for ( const i in result) {
+                for (const i in result) {
                     let resultDirectionRangeMinus = 0;
                     let resultDirectionRangePlus = 0;
 
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
 
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
 
                             switch (result[i].type) {
-                                case 'in- & outside temperature' : // in- & outside temperature
-                                    setTimeout(function() {
+                                case 'in- & outside temperature': // in- & outside temperature
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
+                                                /** @type {number} */
                                                 let insideTemp;
+                                                /** @type {number} */
                                                 let outsideTemp;
+                                                /** @type {number} */
                                                 let sunLight;
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: string; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                                     if (state) {
                                                         insideTemp = parseFloat(state.val);
 
+                                                        /**
+                                                         * @param {any} err
+                                                         * @param {{ val: string; }} state
+                                                         */
                                                         adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                             if (state) {
                                                                 outsideTemp = parseFloat(state.val);
                                                             }
 
+                                                            /**
+                                                             * @param {any} err
+                                                             * @param {{ val: string; }} state
+                                                             */
                                                             adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                                 if (state) {
                                                                     sunLight = parseFloat(state.val);
@@ -1715,13 +2135,18 @@ function sunProtect() {
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                     if (insideTemp > result[i].tempInside) {
                                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                                            
+
+                                                                            /**
+                                                                             * @param {any} err
+                                                                             * @param {{ val: string; }} state
+                                                                             */
                                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                                 if (state) {
                                                                                     if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                                         adapter.log.debug('#30 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
+                                                                                        adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                                         result[i].currentHeight = result[i].heightDownSun;
                                                                                         adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1731,20 +2156,25 @@ function sunProtect() {
                                                                             });
                                                                         }
                                                                     }
-                                                                } 
+                                                                }
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                                     let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                                     let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                     let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
-                                                                        
+
+                                                                        /**
+                                                                         * @param {any} err
+                                                                         * @param {{ val: string; }} state
+                                                                         */
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                                             if (state) {
                                                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                                     result[i].currentAction = '';
                                                                                     adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                                     adapter.log.debug('#31 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
+                                                                                    adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                                     result[i].currentHeight = result[i].heightUp;
                                                                                     adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1762,12 +2192,16 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
-                                case 'in- & outside temperature and direction' : // in- & outside temperature and direction
+                                    break;
+                                case 'in- & outside temperature and direction': // in- & outside temperature and direction
                                     resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
@@ -1780,15 +2214,27 @@ function sunProtect() {
                                                 let outsideTemp;
                                                 /** @type {number} */
                                                 let sunLight;
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: string; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                                     if (state) {
                                                         insideTemp = parseFloat(state.val);
 
+                                                        /**
+                                                         * @param {any} err
+                                                         * @param {{ val: string; }} state
+                                                         */
                                                         adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                             if (state) {
                                                                 outsideTemp = parseFloat(state.val);
                                                             }
 
+                                                            /**
+                                                             * @param {any} err
+                                                             * @param {{ val: string; }} state
+                                                             */
                                                             adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                                 if (state) {
                                                                     sunLight = parseFloat(state.val);
@@ -1797,12 +2243,17 @@ function sunProtect() {
                                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
                                                                         if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
 
+                                                                            /**
+                                                                             * @param {any} err
+                                                                             * @param {{ val: string; }} state
+                                                                             */
                                                                             adapter.getForeignState(result[i].name, (err, state) => {
                                                                                 if (state) {
                                                                                     if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                         adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                                         adapter.log.debug('#32 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
+                                                                                        adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                                         result[i].currentHeight = result[i].heightDownSun;
                                                                                         adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1820,12 +2271,17 @@ function sunProtect() {
 
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
 
+                                                                        /**
+                                                                         * @param {any} err
+                                                                         * @param {{ val: string; }} state
+                                                                         */
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                                             if (state) {
                                                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                                     result[i].currentAction = '';
                                                                                     adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                                     adapter.log.debug('#33 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
+                                                                                    adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                                     result[i].currentHeight = result[i].heightUp;
                                                                                     adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1842,26 +2298,40 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
-                                case 'outside temperature and direction' : //outside temperature and direction
+                                    break;
+                                case 'outside temperature and direction': //outside temperature and direction
                                     resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
+                                                /** @type {number} */
                                                 let outsideTemp;
+                                                /** @type {number} */
                                                 let sunLight;
 
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: string; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                     if (state) {
                                                         outsideTemp = parseFloat(state.val);
                                                     }
 
+                                                    /**
+                                                     * @param {any} err
+                                                     * @param {{ val: string; }} state
+                                                     */
                                                     adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                         if (state) {
                                                             sunLight = parseFloat(state.val);
@@ -1869,13 +2339,18 @@ function sunProtect() {
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                                    
+
+                                                                    /**
+                                                                     * @param {any} err
+                                                                     * @param {{ val: string; }} state
+                                                                     */
                                                                     adapter.getForeignState(result[i].name, (err, state) => {
                                                                         if (state) {
                                                                             if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                                 result[i].currentAction = 'sunProtect';
                                                                                 adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                                 adapter.log.debug('#34 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
+                                                                                adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                                 result[i].currentHeight = result[i].heightDownSun;
                                                                                 adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1891,13 +2366,18 @@ function sunProtect() {
                                                             let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
                                                             if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
-                                                                
+
+                                                                /**
+                                                                 * @param {any} err
+                                                                 * @param {{ val: string; }} state
+                                                                 */
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                                     if (state) {
                                                                         if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                             result[i].currentAction = '';
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                             adapter.log.debug('#35 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
+                                                                            adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                             result[i].currentHeight = result[i].heightUp;
                                                                             adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -1912,12 +2392,16 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
-                                case 'only direction' : //only direction
+                                    break;
+                                case 'only direction': //only direction
                                     resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
@@ -1926,7 +2410,11 @@ function sunProtect() {
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
-                                                        
+
+                                                        /**
+                                                         * @param {any} err
+                                                         * @param {{ val: string; }} state
+                                                         */
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (state) {
                                                                 if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
@@ -1944,7 +2432,11 @@ function sunProtect() {
                                                 }
                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
                                                     if ((resultDirectionRangePlus) < azimuth) {
-                                                        
+
+                                                        /**
+                                                         * @param {any} err
+                                                         * @param {{ val: string; }} state
+                                                         */
                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                             if (state) {
                                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
@@ -1963,37 +2455,56 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
-                                case 'only outside temperature' : //only outside temperature
-                                    setTimeout(function() {
+                                    break;
+                                case 'only outside temperature': //only outside temperature
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
+                                                /** @type {number} */
                                                 let outsideTemp;
+                                                /** @type {number} */
                                                 let sunLight;
 
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: string; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].outsideTempSensor, (err, state) => {
                                                     if (state) {
                                                         outsideTemp = parseFloat(state.val);
                                                     }
 
+                                                    /**
+                                                     * @param {any} err
+                                                     * @param {{ val: string; }} state
+                                                     */
                                                     adapter.getForeignState(result[i].lightSensor, (err, state) => {
                                                         if (state) {
                                                             sunLight = parseFloat(state.val);
                                                         }
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                             if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
-                                                                
+
+                                                                /**
+                                                                 * @param {any} err
+                                                                 * @param {{ val: string; }} state
+                                                                 */
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                                     if (state) {
                                                                         if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                             result[i].currentAction = 'sunProtect';
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                             adapter.log.debug('#38 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
+                                                                            adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                             result[i].currentHeight = result[i].heightDownSun;
                                                                             adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -2009,13 +2520,18 @@ function sunProtect() {
                                                             let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
                                                             if ((parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
-                                                                
+
+                                                                /**
+                                                                 * @param {any} err
+                                                                 * @param {{ val: string; }} state
+                                                                 */
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                                     if (state) {
                                                                         if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                             result[i].currentAction = '';
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                             adapter.log.debug('#39 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
+                                                                            adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                             result[i].currentHeight = result[i].heightUp;
                                                                             adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -2030,10 +2546,14 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
-                                case 'only inside temperature' : //only inside temperature
-                                    setTimeout(function() {
+                                    break;
+                                case 'only inside temperature': //only inside temperature
+                                    setTimeout(function () {
                                         let currentValue = '';
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
@@ -2041,19 +2561,28 @@ function sunProtect() {
                                             }
                                             if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
                                                 let insideTemp;
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: string; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].tempSensor, (err, state) => {
                                                     if (state) {
                                                         insideTemp = parseFloat(state.val);
 
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                             if (insideTemp > result[i].tempInside) {
-                                                                
+
+                                                                /**
+                                                                 * @param {any} err
+                                                                 * @param {{ val: string; }} state
+                                                                 */
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                                     if (state) {
                                                                         if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                             result[i].currentAction = 'sunProtect';
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                             adapter.log.debug('#40 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
+                                                                            adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                             result[i].currentHeight = result[i].heightDownSun;
                                                                             adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -2067,13 +2596,18 @@ function sunProtect() {
                                                             let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
 
                                                             if (insideTemp < parseFloat(hysteresisInside)) {
-                                                                
+
+                                                                /**
+                                                                 * @param {any} err
+                                                                 * @param {{ val: string; }} state
+                                                                 */
                                                                 adapter.getForeignState(result[i].name, (err, state) => {
                                                                     if (state) {
                                                                         if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                             result[i].currentAction = '';
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                             adapter.log.debug('#41 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
+                                                                            adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                             result[i].currentHeight = result[i].heightUp;
                                                                             adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
@@ -2088,7 +2622,7 @@ function sunProtect() {
                                             }
                                         });
                                     }, driveDelayUpSleep * i, i);
-                                break;
+                                    break;
                             }
                         }
                     });
@@ -2108,26 +2642,41 @@ function sunProtect() {
 
         if (resultFull) {
             // Filter enabled
-            let resEnabled = resultFull.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resultFull.filter(d => d.enabled === true);
 
             let result = resEnabled;
             const sunProtEndStart = parseInt(adapter.config.sunProtEndElevation);
             const sunProtEndStop = (adapter.config.sunProtEndElevation - 1);
 
-            for ( const i in result) {
+            for (const i in result) {
                 if (elevation <= sunProtEndStart && elevation >= sunProtEndStop && result[i].currentAction == 'sunProtect') {
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoSun.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 let currentValue = '';
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
-                                    if (currentValue === mustValue  && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
-                                        
+                                    if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'onlyDown' && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
+
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
                                             if (state) {
                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
@@ -2158,67 +2707,91 @@ function delayCalc() {
     let resultFull = adapter.config.events;
     if (resultFull) {
         if ((upTimeLiving) === (upTimeSleep)) {
-            
+
             // Filter Area Living
-            let resLiving = resultFull.filter(d => d.typeUp == 'living');
+            let /**
+                 * @param {{ typeUp: string; }} d
+                 */
+                resLiving = resultFull.filter(d => d.typeUp == 'living');
             // Filter enabled
-            let resEnabled = resLiving.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resLiving.filter(d => d.enabled === true);
 
             let result = resEnabled;
 
-            for ( const i in result) {
+            for (const i in result) {
                 delayUp++;
             }
             if ((autoLivingStr) === true) {
-            
+
                 // Filter Area Living
-                let resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
+                let /**
+                     * @param {{ typeUp: string; }} d
+                     */
+                    resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto');
                 // Filter enabled
-                let resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
 
                 let result2 = resEnabled2;
 
-                    for ( const i in result2) {
-                        delayUp++;
-                    }
+                for (const i in result2) {
+                    delayUp++;
+                }
             }
         }
         if ((downTimeLiving) === (downTimeSleep)) {
-            
+
             // Filter Area Living
-            let resLiving2 = resultFull.filter(d => d.typeDown == 'living');
+            let /**
+                 * @param {{ typeDown: string; }} d
+                 */
+                resLiving2 = resultFull.filter(d => d.typeDown == 'living');
             // Filter enabled
-            let resEnabled3 = resLiving2.filter(d => d.enabled === true);
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled3 = resLiving2.filter(d => d.enabled === true);
 
             let result3 = resEnabled3;
 
-            for ( const i in result3) {
+            for (const i in result3) {
                 delayDown++;
             }
             if ((autoLivingStr) === true) {
-                
+
                 // Filter Area Living
-                let resLivingAuto2 = resultFull.filter(d => d.typeDown == 'living-auto');
+                let /**
+                     * @param {{ typeDown: string; }} d
+                     */
+                    resLivingAuto2 = resultFull.filter(d => d.typeDown == 'living-auto');
                 // Filter enabled
-                let resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
 
                 let result4 = resEnabled4;
 
-                for ( const i in result4) {
+                for (const i in result4) {
                     delayDown++;
                 }
             }
         }
     }
-    
+
 }
-const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function() {
+const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
     sunPos();
 });
 
 function sunPos() {
     let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
- 
+
     // get sunrise azimuth in degrees
     let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
 
@@ -2239,25 +2812,29 @@ function sunPos() {
 function createShutter() {
     let result = adapter.config.events;
     if (result) {
-        for ( const i in result) {
+        for (const i in result) {
             let objectName = result[i].shutterName.replace(/[.;, ]/g, '_');
-            
+
             // Create Object for auto up
             adapter.setObjectNotExists('shutters.autoUp.' + objectName, {
                 "type": "state",
                 "common": {
-                    "role":  "switch",
-                    "name":  result[i].shutterName,
-                    "type":  "boolean",
-                    "read":  true,
+                    "role": "switch",
+                    "name": result[i].shutterName,
+                    "type": "boolean",
+                    "read": true,
                     "write": true,
-                    "def":   true
+                    "def": true
                 },
                 "native": {},
             });
+            /**
+             * @param {any} err
+             * @param {{ val: null; } | null} state
+             */
             adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
                 if (state === null || state.val === null) {
-                    adapter.setState('shutters.autoUp.' + objectName, {val: true, ack: true});
+                    adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
                 }
             });
@@ -2265,18 +2842,22 @@ function createShutter() {
             adapter.setObjectNotExists('shutters.autoDown.' + objectName, {
                 "type": "state",
                 "common": {
-                    "role":  "switch",
-                    "name":  result[i].shutterName,
-                    "type":  "boolean",
-                    "read":  true,
+                    "role": "switch",
+                    "name": result[i].shutterName,
+                    "type": "boolean",
+                    "read": true,
                     "write": true,
-                    "def":   true
+                    "def": true
                 },
                 "native": {},
             });
+            /**
+             * @param {any} err
+             * @param {{ val: null; } | null} state
+             */
             adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
                 if (state === null || state.val === null) {
-                    adapter.setState('shutters.autoDown.' + objectName, {val: true, ack: true});
+                    adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
                 }
             });
@@ -2284,107 +2865,126 @@ function createShutter() {
             adapter.setObjectNotExists('shutters.autoSun.' + objectName, {
                 "type": "state",
                 "common": {
-                    "role":  "switch",
-                    "name":  result[i].shutterName,
-                    "type":  "boolean",
-                    "read":  true,
+                    "role": "switch",
+                    "name": result[i].shutterName,
+                    "type": "boolean",
+                    "read": true,
                     "write": true,
-                    "def":   true
+                    "def": true
                 },
                 "native": {},
             });
+            /**
+             * @param {any} err
+             * @param {{ val: null; } | null} state
+             */
             adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
                 if (state === null || state.val === null) {
-                    adapter.setState('shutters.autoSun.' + objectName, {val: true, ack: true});
+                    adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
                 }
             });
-            
+
         }
     }
     // delete old shutter auto up
-    for ( const i in ObjautoUp) {
+    for (const i in ObjautoUp) {
 
         const resID = ObjautoUp[i]._id;
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
         let resultName = result.map(({ shutterName }) => ({ shutterName }));
-        let fullRes = [];
+        /** @type {any[]} */
 
-        for ( const i in resultName) {
+        for (const i in resultName) {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, function (err) {
-                    if (err) {
-                        adapter.log.warn(err);
-                    }
-                });
+                adapter.delObject(resID, /**
+                     * @param {any} err
+                     */
+                    function (err) {
+                        if (err) {
+                            adapter.log.warn(err);
+                        }
+                    });
             }
         }, 1500);
     }
     // delete old shutter auto down
-    for ( const i in ObjautoDown) {
+    for (const i in ObjautoDown) {
 
         const resID = ObjautoDown[i]._id;
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
         let resultName = result.map(({ shutterName }) => ({ shutterName }));
-        let fullRes = [];
+        /** @type {any[]} */
+        let fullRes = []
 
-        for ( const i in resultName) {
+        for (const i in resultName) {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, function (err) {
-                    if (err) {
-                        adapter.log.warn(err);
-                    }
-                });
+                adapter.delObject(resID, /**
+                     * @param {any} err
+                     */
+                    function (err) {
+                        if (err) {
+                            adapter.log.warn(err);
+                        }
+                    });
             }
         }, 1500);
     }
     // delete old shutter auto sun
-    for ( const i in ObjautoSun) {
+    for (const i in ObjautoSun) {
 
         const resID = ObjautoSun[i]._id;
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
         let resultName = result.map(({ shutterName }) => ({ shutterName }));
-        let fullRes = [];
+        /** @type {any[]} */
+        let fullRes = []
 
-        for ( const i in resultName) {
+        for (const i in resultName) {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, function (err) {
-                    if (err) {
-                        adapter.log.warn(err);
-                    }
-                });
+                adapter.delObject(resID, /**
+                     * @param {any} err
+                     */
+                    function (err) {
+                        if (err) {
+                            adapter.log.warn(err);
+                        }
+                    });
             }
         }, 1500);
     }
 }
-function main() {
-    adapter.log.debug(JSON.stringify(adapter.config.events));
-    
+function main(adapter) {
+    //adapter.log.debug(JSON.stringify(adapter.config.events))
+
+    /**
+     * @param {any} err
+     * @param {any} obj
+     */
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });
-    setTimeout(function () {
+    timer = setTimeout(function () {
         adapter.log.debug('1111');
         checkActualStates();
         sunPos();
@@ -2456,30 +3056,36 @@ function main() {
 
     if (result) {
         let res = result.map(({ triggerID }) => ({ triggerID }));
-        let resTriggerActive = res.filter(d => d.triggerID != '');
-        
-        for ( const i in resTriggerActive) {
+        let /**
+             * @param {{ triggerID: string; }} d
+             */
+            resTriggerActive = res.filter(d => d.triggerID != '');
+
+        for (const i in resTriggerActive) {
             if (resTrigger.indexOf(resTriggerActive[i].triggerID) === -1) {
                 resTrigger.push(resTriggerActive[i].triggerID);
             }
         }
-        resTrigger.forEach(function(element) {
+        resTrigger.forEach(function (element) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for shuttercontrol: ' + element);
         });
     }
-    
+
     let resultInsideTemp = adapter.config.events;
     if (resultInsideTemp) {
         let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
-        let rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
-        
-        for ( const i in rescurrentInsideTemp) {
+        let /**
+             * @param {{ tempSensor: string; }} d
+             */
+            rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
+
+        for (const i in rescurrentInsideTemp) {
             if (resSunInsideTemp.indexOf(rescurrentInsideTemp[i].tempSensor) === -1) {
                 resSunInsideTemp.push(rescurrentInsideTemp[i].tempSensor);
             }
         }
-        resSunInsideTemp.forEach(function(element) {
+        resSunInsideTemp.forEach(function (element) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for inside temperature: ' + element);
         });
@@ -2488,30 +3094,36 @@ function main() {
     let resultOutsideTemp = adapter.config.events;
     if (resultOutsideTemp) {
         let resOutsideTemp = resultOutsideTemp.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
-        let rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
-        
-        for ( const i in rescurrentOutsideTemp) {
+        let /**
+             * @param {{ outsideTempSensor: string; }} d
+             */
+            rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
+
+        for (const i in rescurrentOutsideTemp) {
             if (resSunOutsideTemp.indexOf(rescurrentOutsideTemp[i].outsideTempSensor) === -1) {
                 resSunOutsideTemp.push(rescurrentOutsideTemp[i].outsideTempSensor);
             }
         }
-        resSunOutsideTemp.forEach(function(element) {
+        resSunOutsideTemp.forEach(function (element) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for outside temperature: ' + element);
         });
     }
-    
+
     let resultLight = adapter.config.events;
     if (resultLight) {
         let resLight = resultLight.map(({ lightSensor }) => ({ lightSensor }));
-        let rescurrentLight = resLight.filter(d => d.lightSensor != '');
-        
-        for ( const i in rescurrentLight) {
+        let /**
+             * @param {{ lightSensor: string; }} d
+             */
+            rescurrentLight = resLight.filter(d => d.lightSensor != '');
+
+        for (const i in rescurrentLight) {
             if (resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
                 resSunLight.push(rescurrentLight[i].lightSensor);
             }
         }
-        resSunLight.forEach(function(element) {
+        resSunLight.forEach(function (element) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
@@ -2520,14 +3132,17 @@ function main() {
     let resultShutter = adapter.config.events;
     if (resultShutter) {
         let resShutter = resultShutter.map(({ name }) => ({ name }));
-        let rescurrentShutter = resultShutter.filter(d => d.name != '');
-        
-        for ( const i in rescurrentShutter) {
+        let /**
+             * @param {{ name: string; }} d
+             */
+            rescurrentShutter = resultShutter.filter(d => d.name != '');
+
+        for (const i in rescurrentShutter) {
             if (resShutterState.indexOf(rescurrentShutter[i].name) === -1) {
                 resShutterState.push(rescurrentShutter[i].name);
             }
         }
-        resShutterState.forEach(function(element) {
+        resShutterState.forEach(function (element) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('Shutter State: ' + element);
         });
@@ -2536,7 +3151,11 @@ function main() {
     const resultStates = adapter.config.events;
 
     if (resultStates) {
-        for ( const i in resultStates) {
+        for (const i in resultStates) {
+            /**
+             * @param {any} err
+             * @param {{ val: any; }} state
+             */
             adapter.getForeignState(resultStates[i].name, (err, state) => {
                 if (state) {
                     resultStates[i].currentHeight = (state.val);

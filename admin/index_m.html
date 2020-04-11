@@ -575,6 +575,18 @@
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
+            fillPosition();
+
+        }
+        function fillPosition() {
+            socket.emit('getObject', 'system.config', function (err, obj) {
+                if ($('#longitude').val() === '') {
+                    $('#longitude').val(obj.common.longitude).trigger('change');
+                }
+                if ($('#latitude').val() === '') {
+                    $('#latitude').val(obj.common.latitude).trigger('change');
+                }
+            });
         }
         function fillInstances(id, arr, val) {
             var $sel = $('#' + id);
@@ -1189,7 +1201,7 @@
                                     <span class="translate">setpoint of the sun protection temperature</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="50.0" placeholder="0.0-40.0" step="0.1" />
+                                <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
                                     <label for="hysteresisOutside" class="translate"></label>
                                     <span class="translate">hysteresis Outsidetemperature (percent)</span>
                                 </div>
@@ -1205,12 +1217,12 @@
                             </div>
                             <div class="row">
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="setpointValueLight" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
+                                <input type="number" id="setpointValueLight" class="form-control" min="0.0" max="5000.0" placeholder="0.0-5000.0" step="0.1" />
                                     <label for="setpointValueLight" class="translate"></label>
                                     <span class="translate">setpoint of the sun protection Lightsensor</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="50.0" placeholder="0.0-40.0" step="0.1" />
+                                <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
                                     <label for="hysteresisLight" class="translate"></label>
                                     <span class="translate">hysteresis Lightsensor (percent)</span>
                                 </div>
@@ -1230,7 +1242,7 @@
                                     <span class="translate">Temp Inside</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisInside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
+                                <input type="number" id="hysteresisInside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
                                     <label for="hysteresisInside" class="translate"></label>
                                     <span class="translate">hysteresis Insidetemperature (percent)</span>
                                 </div>

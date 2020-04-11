@@ -34,12 +34,27 @@ automatic control for shutters
 
 ## Changelog
 
-### 0.5.1 (2020-04-xx)
+### 0.5.1 (09.04.2020)
+* (simatec) Bugfix for Adapter checker
+* (simatec) Added more debug logs
+* (simatec) Added node 14 Support
 * (René) late all down added
 * (René) late all down configurable per shutter
 * (René) in summer time not to move down (configurable)
 
+### 0.5.0 (06.04.2020)
+* (simatec) Bugfix Goldenhour
+* (simatec) Bugfix delay for sunprotect
+* (simatec) Bugfix Goldhour with living area
+* (simatec) Added auto fill for Position
+* (simatec) many small Bugfixes
+* (simatec) Bugfix Translations
+* (simatec) Bugfix compactmode
+* (5G7K) Added debug log with more Informations
 
+
+### 0.4.3 (29.12.2019)
+* (simatec) Bugfix update process
 
 ### 0.4.2 (22.12.2019)
 * (simatec) Fix Trigger added objects
@@ -158,7 +173,7 @@ automatic control for shutters
 ## License
 MIT License
 
-Copyright (c) 2019 simatec
+Copyright (c) 2019 - 2020 simatec
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
