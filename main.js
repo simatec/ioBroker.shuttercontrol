@@ -2101,12 +2101,12 @@ function sunProtect() {
                                                                                         adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
                                                                                         adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
                                                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
-                                                                                        shutterState(result[i].name);
                                                                                         result[i].currentHeight = result[i].heightDownSun;
                                                                                         adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                                                        shutterState(result[i].name);
                                                                                     }
-                                                                                    //Shutter closed. Set currentAction = sunProtect when sunProtect would start => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down') { //check currentAction !=down here. If shutter is already closed sunProtect must not be set
+                                                                                    //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down') { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
