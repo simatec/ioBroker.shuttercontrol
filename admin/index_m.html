@@ -3,8 +3,8 @@
 <head>
 
     <!-- Load ioBroker scripts and styles-->
-    <link rel="stylesheet" type="text/css" href="../../lib/css/fancytree/ui.fancytree.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/fancytree/ui.fancytree.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
 
     <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
@@ -17,8 +17,9 @@
     <script type="text/javascript" src="../../js/translate.js"></script>
     <script type="text/javascript" src="../../lib/js/selectID.js"></script>
     <script type="text/javascript" src="../../js/adapter-settings.js"></script>
-    <script type="text/javascript" src="actions.js"></script>
-
+    <!---
+     <script type="text/javascript" src="actions.js"></script>
+        -->
     <!-- Load our own files -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="words.js"></script>
@@ -27,142 +28,367 @@
         .m .col .select-wrapper + label {
             top: -26px;
         }
+
         .m span {
             font-size: 0.9em;
         }
+
         .m .tabs {
             height: 48px;
         }
+
         .m .page {
             height: calc(100% - 118px);
         }
+
         #dialog-command {
             width: calc(100% - 100px);
         }
-        #dialog-command .title {
-            background: #64b5f6;
-            color: #FFF;
-            padding: 0.5rem;
-        }
-        #dialog-command .textarea {
-            margin-bottom: 0;
-        }
-        #dialog-command textarea {
-            background: #e9e9e9;
-            font-family: courier, monospace;
-            font-size: 11px;
-            resize: none;
-            width: 100%;
-            height: calc(100% - 125px);
-            margin-bottom: 0;
-        }
-        #dialog-command .progress-dont-close {
-            float: left;
-            padding-left: 1rem;
-            padding-top: 1rem;
-        }
-        #dialog-command .command {
-            font-style: italic;
-        }
-        #dialog-command .btn {
-            margin-right: 1.5rem;
-        }
+
+            #dialog-command .title {
+                background: #64b5f6;
+                color: #FFF;
+                padding: 0.5rem;
+            }
+
+            #dialog-command .textarea {
+                margin-bottom: 0;
+            }
+
+            #dialog-command textarea {
+                background: #e9e9e9;
+                font-family: courier, monospace;
+                font-size: 11px;
+                resize: none;
+                width: 100%;
+                height: calc(100% - 125px);
+                margin-bottom: 0;
+            }
+
+            #dialog-command .progress-dont-close {
+                float: left;
+                padding-left: 1rem;
+                padding-top: 1rem;
+            }
+
+            #dialog-command .command {
+                font-style: italic;
+            }
+
+            #dialog-command .btn {
+                margin-right: 1.5rem;
+            }
+
         .do-restore {
             cursor: pointer;
         }
+
         .collapsible-body {
             margin-left: 2rem !important;
             padding-top: 0 !important;
         }
+
         #dialog-shutter-edit .title {
             width: 100% !important;
             background: #64b5f6;
             color: #FFF;
             padding: 0.3rem;
         }
+
         .modal .page {
-            width: calc(100% - 20px)!important;
+            width: calc(100% - 20px) !important;
         }
+
         #dialog-shutter-edit .modal-content {
             width: 100% !important;
             height: calc(100% - 10px) !important;
-            
         }
+
         #dialog-shutter-edit .tabs {
             width: calc(100% - 20px) !important;
         }
+
         #dialog-shutter-edit .page {
             width: calc(100% - 10px) !important;
-            
         }
+
         #dialog-shutter-edit .btn {
             margin-right: 1.5rem;
         }
+
         #dialog-select-member {
             z-index: 9999 !important;
         }
+
         #dialog-shutter-edit {
             z-index: 9900 !important;
         }
-        
-        #events td:nth-of-type(6) {visibility: hidden; display: none;}
-        #events th:nth-of-type(6) {visibility: hidden; display: none;}
-        #events td:nth-of-type(7) {visibility: hidden; display: none;}
-        #events th:nth-of-type(7) {visibility: hidden; display: none;}
-        #events td:nth-of-type(8) {visibility: hidden; display: none;}
-        #events th:nth-of-type(8) {visibility: hidden; display: none;}
-        #events td:nth-of-type(9) {visibility: hidden; display: none;}
-        #events th:nth-of-type(9) {visibility: hidden; display: none;}
-        #events td:nth-of-type(10) {visibility: hidden; display: none;}
-        #events th:nth-of-type(10) {visibility: hidden; display: none;}
-        #events td:nth-of-type(11) {visibility: hidden; display: none;}
-        #events th:nth-of-type(11) {visibility: hidden; display: none;}
-        #events td:nth-of-type(12) {visibility: hidden; display: none;}
-        #events th:nth-of-type(12) {visibility: hidden; display: none;}
-        #events td:nth-of-type(13) {visibility: hidden; display: none;}
-        #events th:nth-of-type(13) {visibility: hidden; display: none;}
-        #events td:nth-of-type(14) {visibility: hidden; display: none;}
-        #events th:nth-of-type(14) {visibility: hidden; display: none;}
-        #events td:nth-of-type(15) {visibility: hidden; display: none;}
-        #events th:nth-of-type(15) {visibility: hidden; display: none;}
-        #events td:nth-of-type(16) {visibility: hidden; display: none;}
-        #events th:nth-of-type(16) {visibility: hidden; display: none;}
-        #events td:nth-of-type(17) {visibility: hidden; display: none;}
-        #events th:nth-of-type(17) {visibility: hidden; display: none;}
-        #events td:nth-of-type(18) {visibility: hidden; display: none;}
-        #events th:nth-of-type(18) {visibility: hidden; display: none;}
-        #events td:nth-of-type(19) {visibility: hidden; display: none;}
-        #events th:nth-of-type(19) {visibility: hidden; display: none;}
-        #events td:nth-of-type(20) {visibility: hidden; display: none;}
-        #events th:nth-of-type(20) {visibility: hidden; display: none;}
-        #events td:nth-of-type(21) {visibility: hidden; display: none;}
-        #events th:nth-of-type(21) {visibility: hidden; display: none;}
-        #events td:nth-of-type(22) {visibility: hidden; display: none;}
-        #events th:nth-of-type(22) {visibility: hidden; display: none;}
-        #events td:nth-of-type(23) {visibility: hidden; display: none;}
-        #events th:nth-of-type(23) {visibility: hidden; display: none;}
-        #events td:nth-of-type(24) {visibility: hidden; display: none;}
-        #events th:nth-of-type(24) {visibility: hidden; display: none;}
-        #events td:nth-of-type(25) {visibility: hidden; display: none;}
-        #events th:nth-of-type(25) {visibility: hidden; display: none;}
-        #events td:nth-of-type(26) {visibility: hidden; display: none;}
-        #events th:nth-of-type(26) {visibility: hidden; display: none;}
-        #events td:nth-of-type(27) {visibility: hidden; display: none;}
-        #events th:nth-of-type(27) {visibility: hidden; display: none;}
-        #events td:nth-of-type(28) {visibility: hidden; display: none;}
-        #events th:nth-of-type(28) {visibility: hidden; display: none;}
-        #events td:nth-of-type(29) {visibility: hidden; display: none;}
-        #events th:nth-of-type(29) {visibility: hidden; display: none;}
-        #events td:nth-of-type(30) {visibility: hidden; display: none;}
-        #events th:nth-of-type(30) {visibility: hidden; display: none;}
-        #events td:nth-of-type(31) {visibility: hidden; display: none;}
-        #events th:nth-of-type(31) {visibility: hidden; display: none;}
+
+        #events td:nth-of-type(6) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(6) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(7) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(7) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(8) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(8) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(9) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(9) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(10) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(10) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(11) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(11) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(12) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(12) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(13) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(13) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(14) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(14) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(15) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(15) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(16) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(16) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(17) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(17) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(18) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(18) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(19) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(19) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(20) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(20) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(21) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(21) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(22) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(22) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(23) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(23) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(24) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(24) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(25) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(25) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(26) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(26) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(27) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(27) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(28) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(28) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(29) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(29) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(30) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(30) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(31) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(31) {
+            visibility: hidden;
+            display: none;
+        }
 
         #dialog-shutter-edit {
-            max-height:95% !important;
-            max-width:85% !important;
-            width:80% !important; 
-            height:90% !important;
+            max-height: 95% !important;
+            max-width: 85% !important;
+            width: 80% !important;
+            height: 90% !important;
             overflow: visible !important;
             top: 10px !important;
         }
@@ -170,7 +396,39 @@
 
     <script type="text/javascript">
 
-    
+        function show_hide_column(table_name, col_name, col_no, do_show) {
+
+            //this is only for header
+            var element = document.getElementById(col_name);
+
+            if (do_show) {
+                element.classList.remove("hide");
+            }
+            else {
+                element.classList.add("hide");
+            }
+
+            //here we have all other rows
+            var tbl = document.getElementById(table_name);
+            var rows = tbl.getElementsByTagName('tr');
+
+            for (var row = 0; row < rows.length; row++) {
+                var cols = rows[row].children;
+                if (col_no >= 0 && col_no < cols.length) {
+                    var cell = cols[col_no];
+                    if (cell.tagName == 'TD' || cell.tagName == 'TH') {
+                        if (do_show) {
+                            cell.classList.remove("hide");
+                        }
+                        else {
+                            cell.classList.add("hide");
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
@@ -195,18 +453,18 @@
             });
 
             //var events = [];
-            
-            events = settings.events    || [];
-            
-            showHideSettings();
-            
+
+            events = settings.events || [];
+
             values2table('events', events, onChange, tableOnReady);
+
+            showHideSettings();
 
             $('#responseOIDDialog').on('click', function () {
                 var devices = table2values('events');
                 var id = 0;
                 for (var i = 0; i < devices.length; i++) {
-                id = id +1;
+                    id = id + 1;
                 }
                 setTimeout(function () {
                     $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('true').trigger('change');
@@ -232,8 +490,12 @@
                     $('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val('5').trigger('change');
                     $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val('5').trigger('change');
                     $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val('5').trigger('change');
+
+                    //console.log("112");
+                    $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
                 }, 1000);
-                
+
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#events .values-input[data-name="name"][data-index="' + id + '"]').val(), function (newId) {
                         if (newId) {
@@ -246,7 +508,7 @@
                     });
                 });
             });
-            
+
             $('#actualValueTempDialogPopUp').on('click', function () {
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#actualValueTemp').val(), function (newId) {
@@ -256,7 +518,7 @@
                     });
                 });
             });
-            
+
             $('#actualValueLightDialogPopUp').on('click', function () {
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#actualValueLight').val(), function (newId) {
@@ -275,7 +537,7 @@
                     });
                 });
             });
-            
+
             $('#triggerAutoSleepDialog').on('click', function () {
                 initSelectId(function (sid) {
                     sid.selectId('show', $('#triggerAutoSleep').val(), function (newId) {
@@ -304,12 +566,12 @@
                     });
                 });
             });
-            
+
             onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
-            
+
             if (M) M.updateTextFields();
-            
+
             getAdapterInstances('feiertage', function (instances) {
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
@@ -341,7 +603,7 @@
 
             $('#events .table-values-div .table-values .values-buttons[data-command="edit"]').on('click', function () {
                 let id = $(this).data('index');
-                
+
                 $('#dialogDeviceEditShutter').html($('#events .values-input[data-name="shutterName"][data-index="' + id + '"]').val());
                 $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
                 $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
@@ -372,7 +634,22 @@
                 $('#hysteresisOutside').val($('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val());
                 $('#hysteresisInside').val($('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val());
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
-                
+
+
+                //console.log("222");
+
+                var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val();
+                var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val();
+
+                if (test1 === "on" || test1 == "true") { test1 = true; } else { test1 = false; }
+                if (test2 === "on" || test2 == "true") { test2 = true; } else { test2 = false; }
+
+                $('#LateDown').prop('checked', test1);
+                $('#inSummerNotDown').prop('checked', test2);
+
+                //$('#LateDown').val($('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val());
+                //$('#inSummerNotDown').val($('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val());
+
                 setTimeout(function () {
                     initDialogShutter(function (sid) {
                         var newHeightUp = $('#heightUpShutter').val();
@@ -399,6 +676,11 @@
                         var hysteresisLight = $('#hysteresisLight').val();
                         var autoDrive = $('#autoDriveShutter').val();
 
+                        //console.log("333");
+                        var newLateDown = $('#LateDown').prop('checked');
+                        var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
+
+
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
                         $('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val(newHeightDownSun).trigger('change');
                         $('#events .values-input[data-name="direction"][data-index="' + id + '"]').val(newDirection).trigger('change');
@@ -422,11 +704,15 @@
                         $('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val(hysteresisOutside).trigger('change');
                         $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val(hysteresisInside).trigger('change');
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
+
+                        //console.log("444");
+                        $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked',newLateDown).trigger('change');
+                        $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked',newinSummerNotDown).trigger('change');
                     });
                 }, 20)
             });
         }
-        
+
         // This will be called by the admin adapter when the user presses the save button
         function save(callback) {
             // example: select elements with class=value and build settings object
@@ -439,20 +725,25 @@
                     obj[$this.attr('id')] = $this.val();
                 }
             });
-            
+
             // Get edited table
-            obj.events    = table2values('events');
+            obj.events = table2values('events');
 
 
             callback(obj);
         }
         function showHideSettings() {
-            
+
             if ($('#publicHolidays').prop('checked')) {
                 $('.publicHol').show();
             } else {
                 $('.publicHol').hide();
             }
+
+
+            //always disable those col's
+            show_hide_column("events", "events_col_31", 31, false);
+            show_hide_column("events", "events_col_32", 32, false);
         }
 
         var selectId;
@@ -461,29 +752,29 @@
                 return callback(selectId);
             }
             socket.emit('getObjects', function (err, objs) {
-                selectId = $('#dialog-select-member').selectId('init',  {
+                selectId = $('#dialog-select-member').selectId('init', {
                     noMultiselect: true,
                     objects: objs,
-                    imgPath:       '../../lib/css/fancytree/',
-                    filter:        {type: 'state'},
-                    name:          'scenes-select-state',
+                    imgPath: '../../lib/css/fancytree/',
+                    filter: { type: 'state' },
+                    name: 'scenes-select-state',
                     texts: {
-                        select:          _('Select'),
-                        cancel:          _('Cancel'),
-                        all:             _('All'),
-                        id:              _('ID'),
-                        name:            _('Name'),
-                        role:            _('Role'),
-                        room:            _('Room'),
-                        value:           _('Value'),
-                        selectid:        _('Select ID'),
-                        from:            _('From'),
-                        lc:              _('Last changed'),
-                        ts:              _('Time stamp'),
-                        wait:            _('Processing...'),
-                        ack:             _('Acknowledged'),
-                        selectAll:       _('Select all'),
-                        unselectAll:     _('Deselect all'),
+                        select: _('Select'),
+                        cancel: _('Cancel'),
+                        all: _('All'),
+                        id: _('ID'),
+                        name: _('Name'),
+                        role: _('Role'),
+                        room: _('Room'),
+                        value: _('Value'),
+                        selectid: _('Select ID'),
+                        from: _('From'),
+                        lc: _('Last changed'),
+                        ts: _('Time stamp'),
+                        wait: _('Processing...'),
+                        ack: _('Acknowledged'),
+                        selectAll: _('Select all'),
+                        unselectAll: _('Deselect all'),
                         invertSelection: _('Invert selection')
                     },
                     columns: ['image', 'name', 'role', 'room']
@@ -491,7 +782,7 @@
                 callback(selectId);
             });
         }
-        
+
         function getName(obj) {
             if (obj && obj.common && obj.common.name) {
                 var name = obj.common.name;
@@ -519,7 +810,7 @@
                 $editDialog.modal({
                     dismissible: false
                 });
-                
+
                 $editDialog.find('.btn-set').on('click', function () {
                     var $editDialog = $('#dialog-shutter-edit');
                     var callback = $editDialog.data('callback');
@@ -601,6 +892,10 @@
                                             <th data-name="currentAction" style="width: 0px" data-style="width: 0px" data-type="text" class="translate">current Action</th>
                                             <th data-name="currentHeight" data-type="number" style="width: 0px" class="translate"></th>
                                             <th data-name="triggerHeight" data-type="number" style="width: 0px" class="translate"></th>
+
+                                            <th data-name="LateDown" id="events_col_31" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">LateDown</th>
+                                            <th data-name="inSummerNotDown" id="events_col_32" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">inSummerNotDown</th>
+
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #64b5f6"></th>
                                         </tr>

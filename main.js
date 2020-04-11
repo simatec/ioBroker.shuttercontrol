@@ -2416,6 +2416,44 @@ function main() {
 
     // Change State from Trigger ID's
     let result = adapter.config.events;
+
+    adapter.log.debug('all shutters ' + JSON.stringify(result));
+
+    /*
+    all shutters[{
+        "enabled": true,
+        "shutterName": "shutter example",
+        "name": "hm-rpc.0.MEQ1234567.2.LEVEL",
+        "triggerID": "",
+        "typeUp": "living-auto",
+        "typeDown": "living-auto",
+        "type": "in- & outside temperature",
+        "heightDownSun": "50",
+        "direction": "290",
+        "directionRange": "15",
+        "tempInside": "23",
+        "tempSensor": "",
+        "outsideTempSensor": "",
+        "tempOutside": "23",
+        "lightSensor": "",
+        "valueLight": "15",
+        "heightUp": "100",
+        "heightDown": "0",
+        "triggerState": "true",
+        "triggerDrive": "100",
+        "triggerChange": "upDown",
+        "elevation": "4",
+        "autoDrive": "onlyUp",
+        "hysteresisOutside": "",
+        "hysteresisInside": "",
+        "hysteresisLight": "",
+        "currentAction": "",
+        "currentHeight": "",
+        "triggerHeight": ""
+    }]
+    */
+
+
     if (result) {
         let res = result.map(({ triggerID }) => ({ triggerID }));
         let resTriggerActive = res.filter(d => d.triggerID != '');
