@@ -491,7 +491,7 @@
                     $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val('5').trigger('change');
                     $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val('5').trigger('change');
 
-                    //console.log("112");
+                    console.log("112");
                     $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
                 }, 1000);
@@ -648,14 +648,17 @@
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
 
 
-                //console.log("222");
-
+                console.log("222");
+                /*
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val();
                 var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val();
-
                 if (test1 === "on" || test1 == "true") { test1 = true; } else { test1 = false; }
                 if (test2 === "on" || test2 == "true") { test2 = true; } else { test2 = false; }
+                */
 
+                var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
+                var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
+               
                 $('#LateDown').prop('checked', test1);
                 $('#inSummerNotDown').prop('checked', test2);
 
@@ -688,7 +691,7 @@
                         var hysteresisLight = $('#hysteresisLight').val();
                         var autoDrive = $('#autoDriveShutter').val();
 
-                        //console.log("333");
+                        console.log("333");
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
 
@@ -717,7 +720,7 @@
                         $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val(hysteresisInside).trigger('change');
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
 
-                        //console.log("444");
+                        console.log("444");
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked',newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked',newinSummerNotDown).trigger('change');
                     });

@@ -189,6 +189,32 @@ systemDictionary = {
         "es": "nivel de persianas en Navidad",
         "pl": "poziom żaluzji w czasie świąt Bożego Narodzenia",
         "zh-cn": "圣诞节期间的百叶窗水平"
+    },
+    "Move down all shutters late": {
+        "en": "all blinds close late night",
+        "de": "Alle Jalousien schließen spät in der Nacht",
+        "ru": "все жалюзи закрываются поздно ночью",
+        "pt": "todas as cortinas fecham tarde da noite",
+        "nl": "alle jaloezieën sluiten 's avonds laat",
+        "fr": "tous les stores ferment tard dans la nuit",
+        "it": "tutti i bui chiudono a tarda notte",
+        "es": "todas las persianas cierran tarde en la noche",
+        "pl": "wszystkie rolety zamykają się późno w nocy",
+        "zh-cn": "所有的百叶窗关闭深夜"
+    },
+    "Time to move down all shutters late night": {
+        "en": "time when all blinds close at late night",
+        "de": "Zeit, in der alle Jalousien spät in der Nacht schließen",
+        "ru": "время, когда все жалюзи закрываются поздно ночью",
+        "pt": "hora em que todas as cortinas fecham tarde da noite",
+        "nl": "tijdstip waarop alle jaloezieën 's avonds laat sluiten",
+        "fr": "moment où tous les stores se ferment tard dans la nuit",
+        "it": "momento in cui tutti i bui chiudono a tarda notte",
+        "es": "momento en que todas las persianas cierran a altas horas de la noche",
+        "pl": "czas, kiedy wszystkie rolety zamykają się późną nocą",
+        "zh-cn": "深夜所有百叶窗关闭的时间"
     }
 
+
+    
 };
