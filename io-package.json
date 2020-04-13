@@ -148,6 +148,8 @@
     "LateAllDownTime": "22:15",
     "SummerStart": "01.03.",
     "SummerEnd": "30.09.",
+    "XMasStart": "01.12.",
+    "XMasEnd": "06.01.",
 
     "events": [
       {
@@ -175,7 +177,8 @@
         "triggerState": "true",
         "triggerDrive": "100",
         "triggerChange": "upDown",
-        "elevation": "4"
+        "elevation": "4",
+        "XmasLevel": 0
       }
     ]
   },
