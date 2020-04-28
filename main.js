@@ -186,10 +186,15 @@ function startAdapter(options) {
                             //shutterState();
                         });
                         //Shutter is closed -> opened manually to 100% before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
-                        if (result[i].oldHeight == result[i].heightDown && state.val == 100 && result[i].currentAction != 'up') {
+                        // if (result[i].oldHeight == result[i].heightDown && state.val == 100 && result[i].currentAction != 'up') {
+                        if (result[i].firstCompleteUp == true && state.val == 100 && result[i].currentAction != 'up') {
                             result[i].currentHeight = state.val;
                             result[i].currentAction = ''; //reset mode. e.g. mode can be set to sunProtect later.
+                            result[i].firstCompleteUp = false;
                             adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                        }
+                        if (result[i].firstCompleteUp == true && state.val == 100) {
+                            result[i].firstCompleteUp = false;
                         }
                         //save old height
                         setTimeout(function() {
@@ -452,6 +457,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
             adapter.getForeignState(resultStates[i].name, (err, state) => {
                 if (state) {
                     resultStates[i].currentAction = '';     //Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning
+                    resultStates[i].firstCompleteUp = true;
                 }
             });
         }
@@ -2134,7 +2140,7 @@ function sunProtect() {
                                                                         adapter.getForeignState(result[i].name, (err, state) => {
                                                                             if (state) {
                                                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
-                                                                                    result[i].currentAction = '';
+                                                                                    result[i].currentAction = 'up';
                                                                                     adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                                     adapter.log.debug('Range: ' + resultDirectionRangePlus + ' < ' + azimuth + ' OR Temperature inside: ' + insideTemp + ' < ' + hysteresisInside + ' OR ( Temperature outside: ' + outsideTemp + ' < ' + hysteresisOutside  + ' OR Light: ' + sunLight + ' < ' + hysteresisLight + ')');
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
