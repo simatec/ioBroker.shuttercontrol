@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.5.1",
+        "version": "0.6.0",
         "news": {
+            "0.6.0": {
+                "en": "added sentry.io; Added node Support; node 8 support removed; added new feature for sunprotect; Added more debug logs",
+                "de": "sentry.io hinzugefügt; node 12 hinzugefügt; Unterstützung für node 8 entfernt; neue Funktion für Sonnenschutz hinzugefügt; Weitere Debug-Logs hinzugefügt",
+                "ru": "добавлено sentry.io; Добавлена поддержка узлов; опора узла 8 удалена; добавлена новая функция для защиты от солнца; Добавлены дополнительные журналы отладки",
+                "pt": "adicionado sentry.io; Adicionado suporte ao nó; suporte do nó 8 removido; adicionado novo recurso para o sunprotect; Adicionado mais logs de depuração",
+                "nl": "sentry.io toegevoegd; Knooppuntondersteuning toegevoegd; ondersteuning voor knooppunt 8 verwijderd; nieuwe functie toegevoegd voor zonbescherming; Meer logboeken voor foutopsporing toegevoegd",
+                "fr": "ajouté sentry.io; Ajout de la prise en charge des nœuds; le support du nœud 8 a été supprimé; ajout d'une nouvelle fonctionnalité pour sunprotect; Ajout de plus de journaux de débogage",
+                "it": "aggiunto sentry.io; Supporto nodo aggiunto; supporto nodo 8 rimosso; aggiunta nuova funzionalità per sunprotect; Aggiunti altri registri di debug",
+                "es": "agregado sentry.io; Soporte de nodo agregado; soporte del nodo 8 eliminado; nueva característica agregada para protegerse del sol; Se agregaron más registros de depuración",
+                "pl": "dodano sentry.io; Dodano obsługę węzłów; usunięto obsługę węzła 8; dodano nową funkcję Sunprotect; Dodano więcej dzienników debugowania",
+                "zh-cn": "添加了sendry.io;增加了节点支持；删除了节点8的支持；新增了防晒功能；添加了更多调试日志"
+            },
             "0.5.1": {
                 "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
                 "de": "Bugfix für Adaptercheck, Weitere Debug-Logs hinzugefügt, Unterstützung für Node 14 hinzugefügt",
@@ -111,7 +123,6 @@
                 "pl": "Napraw migawkę dla Sunprotect, Fix input dla elewacji, Fix input dla temperatury wewnętrznej, Fix input dla temperatury zewnętrznej, Fix input dla Lightsensor, Dodano Object to shutter, Dodano histerezę dla Lightsensor, Dodano histerezę dla temperatury wewnętrznej, Dodano histerezę dla temperatury zewnętrznej, Dodano kontrolę stanu po uruchomieniu, naprawiono automatyczne przesyłanie, dodano migawkę sprawdzającą dla sunprotect, dodano tłumaczenia, zmieniono sunprotect na przełącznik, dodano niemiecki Docu, dodano angielski Docu",
                 "zh-cn": "修正Sunprotect的快门，修正高度输入，修复内部温度输入，修复外部温度输入，修复Lightsensor输入，增加快门对象，增加Lightsnsor滞后，增加内部温度滞后，增加外部温度滞后，运行后添加状态检查，修复自动驱动器，为sunprotect添加检查快门，添加翻译，sunprotect更改为切换，添加德语文档，添加英语文档"
             }
-
         },
         "title": "shuttercontrol",
         "titleLang": {
@@ -162,7 +173,11 @@
         "compact": true,
         "materialize": true,
         "stopBeforeUpdate": true,
-        
+        "plugins": {
+            "sentry": {
+                "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
+            }
+        },
         "dependencies": [
             {
                 "admin": ">=3.0.0"
@@ -175,7 +190,6 @@
         "publicHolInstance": "",
         "UseSunMode": true,
         "currentShutterState": false,
-        
         "W_shutterDownLiving": "22:00",
         "W_shutterUpLivingMin": "05:00",
         "W_shutterUpLivingMax": "06:00",
@@ -186,8 +200,6 @@
         "driveHeightDownLiving": 0,
         "triggerAutoLiving": "hm-rpc.0.MEQ1234567.2.STATE",
         "livingAutomatic": "livingSunriseSunset",
-        
-
         "W_shutterUpSleepMax": "06:30",
         "W_shutterUpSleepMin": "06:00",
         "W_shutterDownSleep": "20:00",
@@ -198,7 +210,6 @@
         "driveHeightDownSleep": 0,
         "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
         "sleepAutomatic": "sleepSunriseSunset",
-
         "astroDelayUp": 30,
         "longitude": "",
         "latitude": "",
@@ -206,12 +217,10 @@
         "driveHeightUpAstro": 100,
         "driveHeightDownAstro": 0,
         "driveDelayUpAstro": 10,
-
         "sleepEnum": "",
         "livingEnum": "",
         "livingEnumAuto": "",
         "sleepEnumAuto": "",
-
         "sunMonthStart": 5,
         "sunMonthEnd": 9,
         "sun_shutterUp": "19:00",
@@ -219,39 +228,38 @@
         "sunProtecEnum": "",
         "driveHeightSun": 30,
         "sunProtEndElevation": 10,
-
         "events": [
             {
-                "enabled":true,
-                "shutterName":"shutter example",
-                "name":"hm-rpc.0.MEQ1234567.2.LEVEL",
-                "triggerID":"",
-                "typeUp":"goldenhour End",
-                "typeDown":"elevation",
-                "type":"in- & outside temperature",
-                "heightDownSun":"50",
-                "direction":"290",
-                "directionRange":"15",
-                "tempInside":"23",
-                "tempSensor":"",
-                "outsideTempSensor":"",
-                "tempOutside":"23",
-                "lightSensor":"",
-                "valueLight":"15",
-                "currentHeight":"",
-                "heightUp":"100",
-                "heightDown":"0",
-                "triggerState":"true",
-                "triggerDrive":"100",
-                "triggerChange":"upDown",
-                "elevation":"4"
+                "enabled": true,
+                "shutterName": "shutter example",
+                "name": "hm-rpc.0.MEQ1234567.2.LEVEL",
+                "triggerID": "",
+                "typeUp": "goldenhour End",
+                "typeDown": "elevation",
+                "type": "in- & outside temperature",
+                "heightDownSun": "50",
+                "direction": "290",
+                "directionRange": "15",
+                "tempInside": "23",
+                "tempSensor": "",
+                "outsideTempSensor": "",
+                "tempOutside": "23",
+                "lightSensor": "",
+                "valueLight": "15",
+                "currentHeight": "",
+                "heightUp": "100",
+                "heightDown": "0",
+                "triggerState": "true",
+                "triggerDrive": "100",
+                "triggerChange": "upDown",
+                "elevation": "4"
             }
         ]
     },
     "objects": [],
     "instanceObjects": [
         {
-            "_id":  "shutters",
+            "_id": "shutters",
             "type": "channel",
             "common": {
                 "name": "Control shutters"
@@ -259,7 +267,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoUp",
+            "_id": "shutters.autoUp",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic up"
@@ -267,7 +275,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoDown",
+            "_id": "shutters.autoDown",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic down"
@@ -275,7 +283,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoSun",
+            "_id": "shutters.autoSun",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic sunprotect"
@@ -283,7 +291,7 @@
             "native": {}
         },
         {
-            "_id":  "info",
+            "_id": "info",
             "type": "channel",
             "common": {
                 "name": "Info Logs"
@@ -291,7 +299,7 @@
             "native": {}
         },
         {
-            "_id":  "control",
+            "_id": "control",
             "type": "channel",
             "common": {
                 "name": "Control Buttons"
@@ -299,171 +307,171 @@
             "native": {}
         },
         {
-            "_id":  "control.Holiday",
+            "_id": "control.Holiday",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Holiday",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Holiday",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "control.autoLiving",
+            "_id": "control.autoLiving",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Auto / Manu Living Area",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Auto / Manu Living Area",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "control.autoSleep",
+            "_id": "control.autoSleep",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Auto / Manu Sleep Area",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Auto / Manu Sleep Area",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "info.upTimeSleep",
+            "_id": "info.upTimeSleep",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Up Time Sleep Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Up Time Sleep Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.upTimeLiving",
+            "_id": "info.upTimeLiving",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Up Time Living Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Up Time Living Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.downTimeSleep",
+            "_id": "info.downTimeSleep",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "down Time Sleep Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "down Time Sleep Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.downTimeLiving",
+            "_id": "info.downTimeLiving",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "down Time Living Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "down Time Living Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Sunrise",
+            "_id": "info.Sunrise",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Sunrise Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Sunrise Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Sunset",
+            "_id": "info.Sunset",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Sunset Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Sunset Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.GoldenHour",
+            "_id": "info.GoldenHour",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Goldenhour Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Goldenhour Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.GoldenHourEnd",
+            "_id": "info.GoldenHourEnd",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Goldenhour end Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Goldenhour end Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Elevation",
+            "_id": "info.Elevation",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "current Elevation",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "current Elevation",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Azimut",
+            "_id": "info.Azimut",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "current Azimut",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "current Azimut",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         }
