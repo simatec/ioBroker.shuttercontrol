@@ -4,16 +4,16 @@
         "version": "0.6.0",
         "news": {
             "0.6.0": {
-                "en": "added sentry.io; Added node Support; node 8 support removed; added new feature for sunprotect; Added more debug logs",
-                "de": "sentry.io hinzugefügt; node 12 hinzugefügt; Unterstützung für node 8 entfernt; neue Funktion für Sonnenschutz hinzugefügt; Weitere Debug-Logs hinzugefügt",
-                "ru": "добавлено sentry.io; Добавлена поддержка узлов; опора узла 8 удалена; добавлена новая функция для защиты от солнца; Добавлены дополнительные журналы отладки",
-                "pt": "adicionado sentry.io; Adicionado suporte ao nó; suporte do nó 8 removido; adicionado novo recurso para o sunprotect; Adicionado mais logs de depuração",
-                "nl": "sentry.io toegevoegd; Knooppuntondersteuning toegevoegd; ondersteuning voor knooppunt 8 verwijderd; nieuwe functie toegevoegd voor zonbescherming; Meer logboeken voor foutopsporing toegevoegd",
-                "fr": "ajouté sentry.io; Ajout de la prise en charge des nœuds; le support du nœud 8 a été supprimé; ajout d'une nouvelle fonctionnalité pour sunprotect; Ajout de plus de journaux de débogage",
-                "it": "aggiunto sentry.io; Supporto nodo aggiunto; supporto nodo 8 rimosso; aggiunta nuova funzionalità per sunprotect; Aggiunti altri registri di debug",
-                "es": "agregado sentry.io; Soporte de nodo agregado; soporte del nodo 8 eliminado; nueva característica agregada para protegerse del sol; Se agregaron más registros de depuración",
-                "pl": "dodano sentry.io; Dodano obsługę węzłów; usunięto obsługę węzła 8; dodano nową funkcję Sunprotect; Dodano więcej dzienników debugowania",
-                "zh-cn": "添加了sendry.io;增加了节点支持；删除了节点8的支持；新增了防晒功能；添加了更多调试日志"
+                "en": "added sentry.io, added node Support, many small Bugfixes, node 8 support removed, added new feature for sunprotect, added more debug logs",
+                "de": "sentry.io hinzugefügt, node 14 hinzugefügt, viele kleine Bugfixes, Unterstützung für node 8 entfernt, neue Funktion für Sonnenschutz hinzugefügt, weitere Debug-Logs hinzugefügt",
+                "ru": "добавлен sentry.io, добавлена поддержка узлов, исправлено множество мелких ошибок, удалена поддержка узлов 8, добавлена новая функция для sunprotect, добавлено больше журналов отладки",
+                "pt": "adicionado sentry.io, adicionado suporte ao nó, muitas pequenas correções de bugs, suporte ao nó 8 removido, adicionado novo recurso para sunprotect, adicionado mais logs de depuração",
+                "nl": "sentry.io toegevoegd, ondersteuning voor node toegevoegd, veel kleine bugfixes, ondersteuning voor node 8 verwijderd, nieuwe functie voor sunprotect toegevoegd, meer logboeken voor foutopsporing toegevoegd",
+                "fr": "sentry.io ajouté, prise en charge des nœuds ajoutée, de nombreux petits bogues corrigés, prise en charge du nœud 8 supprimée, nouvelle fonctionnalité ajoutée pour sunprotect, ajout de journaux de débogage",
+                "it": "aggiunto sentry.io, aggiunto supporto nodo, molte piccole correzioni, supporto nodo 8 rimosso, aggiunta nuova funzionalità per sunprotect, aggiunti altri registri di debug",
+                "es": "Sentry.io agregado, soporte de nodo agregado, muchas correcciones de errores pequeñas, soporte de nodo 8 eliminado, nueva característica para protección solar, más registros de depuración",
+                "pl": "dodano sentry.io, dodano obsługę węzłów, wiele małych poprawek błędów, usunięto obsługę węzłów 8, dodano nową funkcję Sunprotect, dodano więcej dzienników debugowania",
+                "zh-cn": "添加了sendry.io，添加了节点支持，许多小错误修正，删除了节点8支持，添加了sunprotect新功能，添加了更多调试日志"
             },
             "0.5.1": {
                 "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
