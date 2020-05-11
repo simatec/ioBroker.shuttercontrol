@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.6.0",
+        "version": "0.6.1",
         "news": {
+            "0.6.1": {
+                "en": "bugfix index_m.html",
+                "de": "Bugfix index_m.html",
+                "ru": "исправление index_m.html",
+                "pt": "bugfix index_m.html",
+                "nl": "bugfix index_m.html",
+                "fr": "correction de bogue index_m.html",
+                "it": "bugfix index_m.html",
+                "es": "bugfix index_m.html",
+                "pl": "Bugfix index_m.html",
+                "zh-cn": "错误修正index_m.html"
+            },
             "0.6.0": {
                 "en": "added sentry.io, added node Support, many small Bugfixes, node 8 support removed, added new feature for sunprotect, added more debug logs",
                 "de": "sentry.io hinzugefügt, node 14 hinzugefügt, viele kleine Bugfixes, Unterstützung für node 8 entfernt, neue Funktion für Sonnenschutz hinzugefügt, weitere Debug-Logs hinzugefügt",
