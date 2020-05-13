@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.6.1",
+        "version": "0.6.2",
         "news": {
+            "0.6.2": {
+                "en": "errorhandling for sentry.io",
+                "de": "Fehlerbehandlung für sentry.io",
+                "ru": "обработка ошибок для sentry.io",
+                "pt": "manipulação de erro para sentry.io",
+                "nl": "foutafhandeling voor sentry.io",
+                "fr": "gestion des erreurs pour sentry.io",
+                "it": "gestione degli errori per sentry.io",
+                "es": "manejo de errores para sentry.io",
+                "pl": "obsługa błędów dla sentry.io",
+                "zh-cn": "sentry.io的错误处理"
+            },
             "0.6.1": {
                 "en": "bugfix index_m.html",
                 "de": "Bugfix index_m.html",
@@ -98,42 +110,6 @@
                 "es": "Se corrigió el apagado por elevación; Fix triggerHeight; Fix Travis",
                 "pl": "Naprawiono wyłączenie dla elewacji; Fix triggerHeight; Napraw Travis",
                 "zh-cn": "修复海拔关闭功能；修复triggerHeight;修复特拉维斯"
-            },
-            "0.3.2": {
-                "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
-                "de": "Zustandsüberprüfung für alle Auslöser hinzugefügt; Bugfix Sonnenschutz; Bugfix-Trigger; Bugfix Zeiteinstellungen; Deutsches Docu hinzugefügt",
-                "ru": "Добавлена проверка состояния всех затворов; Ошибка защиты от солнца; Исправление ошибки; Настройки времени исправления ошибок; Добавлена немецкая документация",
-                "pt": "Adicionada verificação de estado para todos os obturadores; SunProtect Bugfix; Gatilho Bugfix; Configurações de tempo de correção; Adicionado Docu alemão",
-                "nl": "Staatstest toegevoegd voor alle sluiter; Bugfix sunprotect; Bugfix-trigger; Bugfix-tijdinstellingen; Duitse Docu toegevoegd",
-                "fr": "Vérification de l'état ajoutée pour tout l'obturateur; Bugfix sunprotect; Déclenchement de correction de bug; Paramètres de temps de correction; Docu allemand ajouté",
-                "it": "Aggiunto il controllo dello stato per tutti gli otturatori; Bugfix sunprotect; Innesco di Bugfix; Impostazioni di tempo di Bugfix; Aggiunto il tedesco Docu",
-                "es": "Comprobación del estado añadido para todos los obturadores; Bugfix sunprotect; Disparador de corrección de errores; Ajustes de tiempo de corrección de errores; Docu alemán añadido",
-                "pl": "Dodano kontrolę stanu wszystkich migawek; Bugfix sunprotect; Wyzwalacz błędu; Ustawienia czasu poprawek; Dodano niemiecki Docu",
-                "zh-cn": "添加了所有快门的状态检查;修正sunprotect;修正错误;修正时间设置;添加了德语文档"
-            },
-            "0.3.1": {
-                "en": "Bugfix sunprotect for shelly user",
-                "de": "Bugfix Sonnenschutz für Shelly User",
-                "ru": "Bugfix Sunprotect для пользователя Shelly",
-                "pt": "Sunprotect Bugfix para o usuário shelly",
-                "nl": "Bugfix sunprotect voor shelly-gebruiker",
-                "fr": "Bugfix sunprotect pour les utilisateurs shelly",
-                "it": "Bugfix sunprotect per utente burrascoso",
-                "es": "Bugfix sunprotect para shelly user",
-                "pl": "Bugfix sunprotect dla użytkownika shelly",
-                "zh-cn": "用于shelly用户的修正sunprotect"
-            },
-            "0.3.0": {
-                "en": "Fix shutter up for Sunprotect, Fix input for elevation, Fix input for Inside temperature, Fix input for Outside temperature, Fix input for Lightsensor, Added Object to shutter, Added hysteresis for Lightsensor, Added hysteresis for Inside temperature, Added hysteresis for Outside temperature, Added State check after running, Fix autodrive, Added check shutter up for sunprotect, Added Translations, sunprotect changed to switch, Added German Docu, Added English Docu",
-                "de": "Hochfahren des Rollladens für Sunschutz gefixt, Eingabe für Höhe gefixt, Eingabe für Innentemperatur gefixt, Eingabe für Außentemperatur gefixt, Eingabe für Lichtsensor gefixt, Objekt für jeden Rollladen hinzugefügt, Hysterese für Lichtsensor hinzugefügt, Hysterese für Innentemperatur hinzugefügt, Hysterese für Außentemperatur hinzugefügt, Zustandsüberprüfung nach dem Start hinzugefügt, Bugfix Autodrive, Rollladen auf Sonnenschutz prüfen hinzugefügt, Übersetzungen hinzugefügt, Sonnenschutz auf switch umgestellt, Deutsche Doku hinzugefügt, Englische Doku hinzugefügt",
-                "ru": "Фиксация затвора для Sunprotect, Фиксированный вход для повышения, Фиксированный вход для Внутренней температуры, Фиксированный вход для Внешней температуры, Фиксированный вход для Светочувствительного элемента, Добавленный объект для затвора, Добавленный гистерезис для Светочувствительного элемента, Добавленный гистерезис для Внутренней температуры, Добавленный гистерезис для Внешней температуры, Добавлена проверка состояния после запуска, исправлено автоматическое управление, добавлена проверка затвора для защиты от солнца, добавлены переводы, изменен переход на защиту солнца, добавлен немецкий документ, добавлен английский документ",
-                "pt": "Corrigir o obturador para SunProtect, Corrigir entrada para elevação, Corrigir entrada para Temperatura interna, Corrigir entrada para Temperatura externa, Corrigir entrada para o Lightsensor, Objeto adicionado ao obturador, Histerese adicionada para o Lightsensor, Histerese adicionada para temperatura interna, Histerese adicionada para temperatura externa, Adicionado verificação de estado após a execução, Corrigir Autodrive, Adicionado check shutter up para sunprotect, Adicionado Translations, sunprotect mudou para mudar, Adicionado alemão Docu, Adicionado Inglês Docu",
-                "nl": "Fix shutter up voor Sunprotect, fix input voor elevatie, fix input voor binnentemperatuur, fix input voor buitentemperatuur, fix input voor lightsensor, toegevoegd object voor shutter, toegevoegde hysteresis voor lightsensor, toegevoegde hysteresis voor binnentemperatuur, hysteresis toegevoegd voor buitentemperatuur, Statuscontrole toegevoegd na het uitvoeren, Autodrive repareren, Check shutter-up toegevoegd voor sunprotect, Toegevoegd vertalingen, sunprotect gewijzigd om te schakelen, Toegevoegd Duits Docu, Toegevoegd Engels Docu",
-                "fr": "Obturateur fixe pour Sunprotect, entrée fixe pour l'altitude, entrée fixe pour la température intérieure, entrée fixe pour la température extérieure, entrée fixe pour le capteur de lumière, objet ajouté au volet, hystérésis ajoutée pour le capteur de lumière, hystérésis ajoutée pour la température intérieure, hystérésis ajoutée pour la température extérieure, Ajout de la vérification d'état après exécution, correction de la conduite automatique, ajout du contrôle de l'obturation pour sunprotect, ajout des traductions, sunprotect a été remplacé par un commutateur, Docu allemand ajouté, Docu anglais ajouté",
-                "it": "Risolve l'otturatore per Sunprotect, Corretto l'input per l'elevazione, Corretto l'input per la temperatura interna, Ingresso fisso per Temperatura esterna, Ingresso fisso per Lightsensor, Oggetto aggiunto all'otturatore, Isteresi aggiunta per Lightsensor, Isteresi aggiunta per Temperatura interna, Isteresi aggiunta per Temperatura esterna, Aggiunto controllo dello stato dopo l'esecuzione, autodrive fisso, controllo di riserva aggiunto per sunprotect, traduzioni aggiunte, sunprotect modificato per passare, aggiunto documento tedesco, aggiunto docu inglese",
-                "es": "Fije el obturador para Sunprotect, Fije la entrada para la elevación, Fije la entrada para la temperatura interior, Fije la entrada para la temperatura exterior, Fije la entrada para el sensor de luz, Objeto agregado al obturador, Histéresis agregada para el sensor de luz, Histéresis agregada para la temperatura interior, Histéresis agregada para la temperatura exterior Se agregó la comprobación de estado después de la ejecución, Corrección automática, Se ha agregado el obturador de comprobación para sunprotect, Se han agregado Traducciones, Se ha cambiado el sunprotect para cambiar, Se ha agregado el Docu alemán, Se ha agregado el Docu en inglés",
-                "pl": "Napraw migawkę dla Sunprotect, Fix input dla elewacji, Fix input dla temperatury wewnętrznej, Fix input dla temperatury zewnętrznej, Fix input dla Lightsensor, Dodano Object to shutter, Dodano histerezę dla Lightsensor, Dodano histerezę dla temperatury wewnętrznej, Dodano histerezę dla temperatury zewnętrznej, Dodano kontrolę stanu po uruchomieniu, naprawiono automatyczne przesyłanie, dodano migawkę sprawdzającą dla sunprotect, dodano tłumaczenia, zmieniono sunprotect na przełącznik, dodano niemiecki Docu, dodano angielski Docu",
-                "zh-cn": "修正Sunprotect的快门，修正高度输入，修复内部温度输入，修复外部温度输入，修复Lightsensor输入，增加快门对象，增加Lightsnsor滞后，增加内部温度滞后，增加外部温度滞后，运行后添加状态检查，修复自动驱动器，为sunprotect添加检查快门，添加翻译，sunprotect更改为切换，添加德语文档，添加英语文档"
             }
         },
         "title": "shuttercontrol",

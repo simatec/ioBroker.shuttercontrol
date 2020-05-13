@@ -470,16 +470,22 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
 
 function shutterDriveCalc() {
     // get today's sunlight times 
-    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+    let times;
+    try {
+        times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+        adapter.log.debug('calculate astrodata ...');
 
-    // format sunset/sunrise time from the Date object
-    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
-    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
-    dayStr = times.sunrise.getDay();
+        // format sunset/sunrise time from the Date object
+        sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
+        sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+        dayStr = times.sunrise.getDay();
 
-    // format goldenhour/goldenhourend time from the Date object
-    goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
-    goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+        // format goldenhour/goldenhourend time from the Date object
+        goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
+        goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+    } catch (e) {
+        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!')
+    }
 
     adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
     adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
@@ -2656,8 +2662,13 @@ const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () 
 });
 
 function sunPos() {
-    let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
-
+    let currentPos;
+    try {
+        currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
+        adapter.log.debug('calculate astrodata ...');
+    } catch (e) {
+        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!')
+    }
     // get sunrise azimuth in degrees
     let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
 
