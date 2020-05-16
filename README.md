@@ -34,6 +34,10 @@ automatic control for shutters
 
 ## Changelog
 
+### 0.7.0 (2020-05-16)
+* (René) better (userfriendly) check for adjustable times
+* (René) longitude and latidude from system instead local variable
+
 ### 0.5.1 (09.04.2020)
 * (simatec) Bugfix for Adapter checker
 * (simatec) Added more debug logs

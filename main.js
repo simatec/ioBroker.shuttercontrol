@@ -54,7 +54,7 @@ let astroTimeSleepUp;
 let astroTimeSleepDown;
 /** @type {any[]} */
 let resTrigger = [];
-let resSunTrigger = [];
+//let resSunTrigger = [];
 /** @type {any[]} */
 let resSunInsideTemp = [];
 /** @type {any[]} */
@@ -64,7 +64,7 @@ let resSunLight = [];
 /** @type {any} */
 let resTriggerChange;
 let resShutterChange;
-let resSunTriggerChange;
+//let resSunTriggerChange;
 
 /** @type {string | number} */
 let azimuth;
@@ -79,6 +79,9 @@ let ObjautoSun = [];
 /** @type {any[]} */
 let resShutterState = [];
 let timer;
+
+let longitude;
+let latitude;
 
 /**
  * Starts the adapter instance
@@ -453,12 +456,23 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
     shutterDriveCalc();
 });
 
+
+async function GetSystemData() {
+    const ret = await adapter.getForeignObjectAsync("system.config");
+
+    //dateformat = ret.common.dateFormat;
+    longitude = ret.common.longitude;
+    latitude = ret.common.latitude;
+    adapter.log.debug("system  longitude " + longitude + " latitude " + latitude);
+}
+
+
 function shutterDriveCalc() {
 
     adapter.log.debug('shutterDriveCalc');
 
     // get today's sunlight times 
-    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+    const times = SunCalc.getTimes(new Date(), latitude, longitude);
 
     // format sunset/sunrise time from the Date object
     sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
@@ -513,153 +527,182 @@ function shutterDriveCalc() {
             astroTimeSleepDown = goldenHour;
             break;
     }
-
+    let debugCnt = 0;
     // ******** Set Up-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeLiving = adapter.config.WE_shutterUpLiving;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                debugCnt = 1;
             } else {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                debugCnt = 2;
             }
             break;
         default:
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeLiving = adapter.config.WE_shutterUpLiving;
-                adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                debugCnt = 3;
+
+                //warum nicht am Wochenende auch nach Sonnaufgang?
+
             } else {
-                if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) > (adapter.config.W_shutterUpLivingMin) && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = astroTimeLivingUp;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpLivingMin) == (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) == (adapter.config.W_shutterUpLivingMax)) {
-                    upTimeLiving = astroTimeLivingUp;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeLivingUp) < (adapter.config.W_shutterUpLivingMin)) {
-                    upTimeLiving = adapter.config.W_shutterUpLivingMin;
-                    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+                if (dayStr < 6 && dayStr > 0) {
+                    if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
+                        upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                        debugCnt = 4;
+                    } else if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp,adapter.config.W_shutterUpLivingMax)) {
+                        upTimeLiving = astroTimeLivingUp;
+                        debugCnt = 5;
+                    } else if (IsEqual(adapter.config.W_shutterUpLivingMin, adapter.config.W_shutterUpLivingMax)) {
+                        upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                        debugCnt = 6;
+                    } else if (IsEqual(astroTimeLivingUp ,adapter.config.W_shutterUpLivingMax)) {
+                        upTimeLiving = astroTimeLivingUp;
+                        debugCnt = 7;
+                    } else if (IsEarlier(astroTimeLivingUp ,adapter.config.W_shutterUpLivingMin)) {
+                        upTimeLiving = adapter.config.W_shutterUpLivingMin;
+                        debugCnt = 8;
+                    }
                 }
             }
             break;
     }
-    adapter.log.debug('Starting up shutters living area: ' + upTimeLiving);
+    adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
+    adapter.log.debug('Starting up shutters living area: ' + upTimeLiving + " debug " + debugCnt);
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
+    
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeSleep = adapter.config.WE_shutterUpSleep;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                debugCnt = 1;
             } else {
                 upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                debugCnt = 2;
             }
             break;
         default:
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 upTimeSleep = adapter.config.WE_shutterUpSleep;
-                adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+                debugCnt = 3;
+
+                //warum nicht am Wochenende auch nach Sonnaufgang?
+
             } else {
-                if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) > (adapter.config.W_shutterUpSleepMin) && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = astroTimeSleepUp;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (adapter.config.W_shutterUpSleepMin) == (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = adapter.config.W_shutterUpSleepMax;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) == (adapter.config.W_shutterUpSleepMax)) {
-                    upTimeSleep = astroTimeSleepUp;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-                } else if ((dayStr) < 6 && (dayStr) > 0 && (astroTimeSleepUp) < (adapter.config.W_shutterUpSleepMin)) {
-                    upTimeSleep = adapter.config.W_shutterUpSleepMin;
-                    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+
+                if (dayStr < 6 && dayStr > 0) {
+
+                    if (IsLater(astroTimeSleepUp ,adapter.config.W_shutterUpSleepMax)) {
+                        upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                        debugCnt = 4;
+                    } else if (IsLater(astroTimeSleepUp , adapter.config.W_shutterUpSleepMin) && IsEarlier(astroTimeSleepUp , adapter.config.W_shutterUpSleepMax)) {
+                        upTimeSleep = astroTimeSleepUp;
+                        debugCnt = 5;
+                    } else if (IsEqual(adapter.config.W_shutterUpSleepMin , adapter.config.W_shutterUpSleepMax)) {
+                        upTimeSleep = adapter.config.W_shutterUpSleepMax;
+                        debugCnt = 6;
+                    } else if (IsEqual(astroTimeSleepUp , adapter.config.W_shutterUpSleepMax)) {
+                        upTimeSleep = astroTimeSleepUp;
+                        debugCnt = 7;
+                    } else if (IsEarlier(astroTimeSleepUp < adapter.config.W_shutterUpSleepMin)) {
+                        upTimeSleep = adapter.config.W_shutterUpSleepMin;
+                        debugCnt = 8;
+                    }
                 }
             }
+
             break;
     }
-    adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep);
+    adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
+    adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep + " debug " + debugCnt);
     shutterUpSleep();
 
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+                debugCnt = 1;
             } else {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+                debugCnt = 2;
             }
             break;
         default:
-            if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) < (astroTimeLivingDown)) {
+
+            //Freitag / Samstagg
+
+            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEarlier(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) > (astroTimeLivingDown)) {
+                debugCnt = 3;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsLater(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownLiving) == (astroTimeLivingDown)) {
+                debugCnt = 4;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEqual(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) > (adapter.config.W_shutterDownLiving)) {
+                debugCnt = 5;
+
+                //< 5 ist doch auch 0??
+            } else if (dayStr < 5  && IsLater(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) < (adapter.config.W_shutterDownLiving)) {
+                debugCnt = 6;
+            } else if (dayStr < 5  && IsEarlier(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeLivingDown) == (adapter.config.W_shutterDownLiving)) {
+                debugCnt = 7;
+            } else if (dayStr < 5  && IsEqual(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
-                adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+                debugCnt = 8;
             }
             break;
     }
-    adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving);
+
+    adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
+    adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving + " debug " + debugCnt);
     shutterDownLiving();
 
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if ((dayStr) == 6 || (dayStr) == 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+                debugCnt = 1;
             } else {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+                debugCnt = 2;
             }
             break;
         default:
-            if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
+
+            //Freitag und Samstag
+
+            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+                debugCnt = 3;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
                 downTimeSleep = astroTimeSleepDown;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-            } else if (((dayStr) == 5 || (dayStr) == 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
+                debugCnt = 4;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownSleep) == (astroTimeSleepDown)) {
                 downTimeSleep = astroTimeSleepDown;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
+                debugCnt = 5;
+
+                 //< 5 ist doch auch 0??
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
+                debugCnt = 6;
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
                 downTimeSleep = astroTimeSleepDown;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-            } else if (((dayStr) < 5 || (dayStr) == 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
+                debugCnt = 7;
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) == (adapter.config.W_shutterDownSleep)) {
                 downTimeSleep = astroTimeSleepDown;
-                adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+                debugCnt = 8;
             }
             break;
     }
-    adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep);
+    adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
+    adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep + " debug " + debugCnt);
     shutterDownSleep();
 
 
@@ -1114,7 +1157,7 @@ function addMinutesSunrise(time, minsToAdd) {
     /**
      * @param {number} J
      */
-    function D(J) { return (J < 10 ? '0' : '') + J; };
+    function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
     sunriseStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
@@ -1129,7 +1172,7 @@ function addMinutesSunset(time, minsToAdd) {
     /**
      * @param {number} J
      */
-    function D(J) { return (J < 10 ? '0' : '') + J; };
+    function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
     sunsetStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
@@ -1144,7 +1187,7 @@ function addMinutesGoldenHour(time, minsToAdd) {
     /**
      * @param {number} J
      */
-    function D(J) { return (J < 10 ? '0' : '') + J; };
+    function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
     goldenHour = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
@@ -1159,7 +1202,7 @@ function addMinutesGoldenHourEnd(time, minsToAdd) {
     /**
      * @param {number} J
      */
-    function D(J) { return (J < 10 ? '0' : '') + J; };
+    function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
     goldenHourEnd = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
@@ -2793,7 +2836,7 @@ const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () 
 });
 
 function sunPos() {
-    let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
+    let currentPos = SunCalc.getPosition(new Date(), latitude, longitude);
 
     // get sunrise azimuth in degrees
     let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
@@ -2994,6 +3037,10 @@ function main(adapter) {
         sunPos();
     }, 2000);
 
+
+    GetSystemData();
+
+
     // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');
     adapter.subscribeStates('info.Elevation');
@@ -3169,6 +3216,115 @@ function main(adapter) {
             });
         }
     }
+}
+
+
+
+/**
+ * @param {string} timeVal
+ * @param {string} timeLimit
+ */
+function IsLater(timeVal, timeLimit) {
+
+    let ret = false;
+    try {
+        adapter.log.debug('check IsLater : ' + timeVal + " " + timeLimit);
+
+        if (typeof timeVal === "string" && typeof timeLimit === "string") {
+            const valIn = timeVal.split(":");
+            const valLimits = timeLimit.split(":");
+
+            if (valIn.length > 1 && valLimits.length > 1) {
+
+                if (parseInt(valIn[0]) > parseInt(valLimits[0])
+                    || (parseInt(valIn[0]) == parseInt(valLimits[0]) && parseInt(valIn[1]) > parseInt(valLimits[1]))) {
+                    ret = true;
+                    adapter.log.debug('yes, IsLater : ' + timeVal + " " + timeLimit);
+                }
+            }
+            else {
+                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+            }
+        }
+        else {
+            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+        }
+    }
+    catch (e) {
+        adapter.log.error("exception in IsLater [" + e + "]");
+    }
+    return ret;
+}
+
+/**
+ * @param {string } timeVal
+ * @param {string } [timeLimit]
+ */
+function IsEarlier(timeVal, timeLimit) {
+
+    let ret = false;
+    try {
+        adapter.log.debug('check IsEarlier : ' + timeVal + " " + timeLimit);
+
+        if (typeof timeVal === "string" && typeof timeLimit === "string") {
+            const valIn = timeVal.split(":");
+            const valLimits = timeLimit.split(":");
+
+            if (valIn.length > 1 && valLimits.length > 1) {
+
+                if (parseInt(valIn[0]) < parseInt(valLimits[0])
+                    || (parseInt(valIn[0]) == parseInt(valLimits[0]) && parseInt(valIn[1]) < parseInt(valLimits[1]))) {
+                    ret = true;
+                    adapter.log.debug('yes, IsEarlier : ' + timeVal + " " + timeLimit);
+                }
+            }
+            else {
+                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+            }
+        }
+        else {
+            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+        }
+    }
+    catch (e) {
+        adapter.log.error("exception in IsEarlier [" + e + "]");
+    }
+    return ret;
+}
+
+/**
+ * @param {string} timeVal
+ * @param {string} timeLimit
+ */
+function IsEqual(timeVal, timeLimit) {
+
+    let ret = false;
+    try {
+        adapter.log.debug('check IsEqual : ' + timeVal + " " + timeLimit);
+
+        if (typeof timeVal === "string" && typeof timeLimit === "string") {
+            const valIn = timeVal.split(":");
+            const valLimits = timeLimit.split(":");
+
+            if (valIn.length > 1 && valLimits.length > 1) {
+
+                if (parseInt(valIn[0]) === parseInt(valLimits[0]) && parseInt(valIn[1]) === parseInt(valLimits[1])) {
+                    ret = true;
+                    adapter.log.debug('yes, IsEqual : ' + timeVal + " " + timeLimit);
+                }
+            }
+            else {
+                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+            }
+        }
+        else {
+            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+        }
+    }
+    catch (e) {
+        adapter.log.error("exception in IsEqual [" + e + "]");
+    }
+    return ret;
 }
 
 // If started as allInOne/compact mode => return function to create instance

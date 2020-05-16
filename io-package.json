@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.5.1",
+    "version": "0.7.0",
     "news": {
       "0.5.1": {
         "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
@@ -68,6 +68,9 @@
     "authors": [
       "simatec <nais@gmx.net>"
     ],
+    "contributors": [
+      "Rene G. <info@rg-engineering.eu>"
+    ],
     "keywords": [
       "ioBroker",
       "Smart Home",
@@ -125,8 +128,6 @@
     "sleepAutomatic": "sleepSunriseSunset",
 
     "astroDelayUp": 30,
-    "longitude": "",
-    "latitude": "",
     "astroDelayDown": 30,
     "driveHeightUpAstro": 100,
     "driveHeightDownAstro": 0,
