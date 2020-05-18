@@ -4,16 +4,16 @@
         "version": "0.6.2",
         "news": {
             "0.6.2": {
-                "en": "errorhandling for sentry.io",
-                "de": "Fehlerbehandlung für sentry.io",
-                "ru": "обработка ошибок для sentry.io",
-                "pt": "manipulação de erro para sentry.io",
-                "nl": "foutafhandeling voor sentry.io",
-                "fr": "gestion des erreurs pour sentry.io",
-                "it": "gestione degli errori per sentry.io",
-                "es": "manejo de errores para sentry.io",
-                "pl": "obsługa błędów dla sentry.io",
-                "zh-cn": "sentry.io的错误处理"
+                "en": "errorhandling for sentry.io; Bugfix getState",
+                "de": "Fehlerbehandlung für sentry.io; Bugfix getState",
+                "ru": "обработка ошибок для sentry.io; Исправление getState",
+                "pt": "tratamento de erros para sentry.io; Bugfix getState",
+                "nl": "foutafhandeling voor sentry.io; Bugfix getState",
+                "fr": "gestion des erreurs pour sentry.io; Bugfix getState",
+                "it": "gestione degli errori per sentry.io; Bugfix getState",
+                "es": "manejo de errores para sentry.io; Bugfix getState",
+                "pl": "obsługa błędów dla sentry.io; Bugfix getState",
+                "zh-cn": "sentry.io的错误处理；修正getState"
             },
             "0.6.1": {
                 "en": "bugfix index_m.html",

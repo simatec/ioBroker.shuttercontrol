@@ -342,7 +342,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.Holiday', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.Holiday', { val: false, ack: true });
         }
     });
@@ -351,7 +351,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.autoLiving', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.autoLiving', { val: false, ack: true });
         }
     });
@@ -360,7 +360,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.autoSleep', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.autoSleep', { val: false, ack: true });
         }
     });
@@ -2707,7 +2707,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
                 }
@@ -2730,7 +2730,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
                 }
@@ -2753,7 +2753,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
                 }
