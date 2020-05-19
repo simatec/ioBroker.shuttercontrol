@@ -607,7 +607,7 @@ function shutterDriveCalc() {
                     } else if (IsEqual(astroTimeSleepUp , adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = astroTimeSleepUp;
                         debugCnt = 7;
-                    } else if (IsEarlier(astroTimeSleepUp < adapter.config.W_shutterUpSleepMin)) {
+                    } else if (IsEarlier(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMin;
                         debugCnt = 8;
                     }
