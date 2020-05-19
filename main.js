@@ -541,10 +541,27 @@ function shutterDriveCalc() {
             break;
         default:
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-                upTimeLiving = adapter.config.WE_shutterUpLiving;
-                debugCnt = 3;
+                //upTimeLiving = adapter.config.WE_shutterUpLiving;
+                //debugCnt = 3;
 
                 //warum nicht am Wochenende auch nach Sonnaufgang?
+
+                if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
+                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                    debugCnt = 10;
+                } else if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
+                    upTimeLiving = astroTimeLivingUp;
+                    debugCnt = 11;
+                } else if (IsEqual(adapter.config.WW_shutterUpLivingMin, adapter.config.WE_shutterUpLivingMax)) {
+                    upTimeLiving = adapter.config.WE_shutterUpLivingMax;
+                    debugCnt = 12;
+                } else if (IsEqual(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
+                    upTimeLiving = astroTimeLivingUp;
+                    debugCnt = 13;
+                } else if (IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin)) {
+                    upTimeLiving = adapter.config.WE_shutterUpLivingMin;
+                    debugCnt = 14;
+                }
 
             } else {
                 if (dayStr < 6 && dayStr > 0) {
@@ -586,10 +603,28 @@ function shutterDriveCalc() {
             break;
         default:
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-                upTimeSleep = adapter.config.WE_shutterUpSleep;
-                debugCnt = 3;
+                //upTimeSleep = adapter.config.WE_shutterUpSleep;
+                //debugCnt = 3;
 
                 //warum nicht am Wochenende auch nach Sonnaufgang?
+
+                if (IsLater(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMax)) {
+                    upTimeSleep = adapter.config.WE_shutterUpSleepMax;
+                    debugCnt = 10;
+                } else if (IsLater(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin) && IsEarlier(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMax)) {
+                    upTimeSleep = astroTimeSleepUp;
+                    debugCnt = 11;
+                } else if (IsEqual(adapter.config.WE_shutterUpSleepMin, adapter.config.WE_shutterUpSleepMax)) {
+                    upTimeSleep = adapter.config.WE_shutterUpSleepMax;
+                    debugCnt = 12;
+                } else if (IsEqual(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMax)) {
+                    upTimeSleep = astroTimeSleepUp;
+                    debugCnt = 13;
+                } else if (IsEarlier(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin)) {
+                    upTimeSleep = adapter.config.WE_shutterUpSleepMin;
+                    debugCnt = 14;
+                }
+
 
             } else {
 
@@ -688,7 +723,7 @@ function shutterDriveCalc() {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 5;
 
-                 //< 5 ist doch auch 0??
+                //< 5 ist doch auch 0??
             } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 debugCnt = 6;
