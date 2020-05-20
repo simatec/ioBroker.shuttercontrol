@@ -127,12 +127,7 @@
     "type": "climate-control",
     "compact": true,
     "materialize": true,
-    "stopBeforeUpdate": true,
-    "plugins": {
-    //  "sentry": {
-    //    "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
-    //  }
-    }
+    "stopBeforeUpdate": true
   },
   "native": {
     "UseAstro": true,
@@ -145,7 +140,6 @@
     "W_shutterUpLivingMin": "05:00",
     "W_shutterUpLivingMax": "06:00",
     "WE_shutterDownLiving": "22:00",
-    //"WE_shutterUpLiving": "08:00",
     "WE_shutterUpLivingMin": "05:00",
     "WE_shutterUpLivingMax": "06:00",
     "driveDelayUpLiving": 10,
@@ -156,7 +150,6 @@
     "W_shutterUpSleepMax": "06:30",
     "W_shutterUpSleepMin": "06:00",
     "W_shutterDownSleep": "20:00",
-    //"WE_shutterUpSleep": "10:30",
     "WE_shutterUpSleepMax": "06:30",
     "WE_shutterUpSleepMin": "06:00",
     "WE_shutterDownSleep": "21:00",
@@ -189,30 +182,30 @@
     "XMasEnd": "06.01.",
     "events": [
       {
-                "enabled": true,
-                "shutterName": "shutter example",
-                "name": "hm-rpc.0.MEQ1234567.2.LEVEL",
-                "triggerID": "",
+        "enabled": true,
+        "shutterName": "shutter example",
+        "name": "hm-rpc.0.MEQ1234567.2.LEVEL",
+        "triggerID": "",
         "LateDown": true,
         "inSummerNotDown": false,
-                "typeUp": "goldenhour End",
-                "typeDown": "elevation",
-                "type": "in- & outside temperature",
-                "heightDownSun": "50",
-                "direction": "290",
-                "directionRange": "15",
-                "tempInside": "23",
-                "tempSensor": "",
-                "outsideTempSensor": "",
-                "tempOutside": "23",
-                "lightSensor": "",
-                "valueLight": "15",
-                "currentHeight": "",
-                "heightUp": "100",
-                "heightDown": "0",
-                "triggerState": "true",
-                "triggerDrive": "100",
-                "triggerChange": "upDown",
+        "typeUp": "goldenhour End",
+        "typeDown": "elevation",
+        "type": "in- & outside temperature",
+        "heightDownSun": "50",
+        "direction": "290",
+        "directionRange": "15",
+        "tempInside": "23",
+        "tempSensor": "",
+        "outsideTempSensor": "",
+        "tempOutside": "23",
+        "lightSensor": "",
+        "valueLight": "15",
+        "currentHeight": "",
+        "heightUp": "100",
+        "heightDown": "0",
+        "triggerState": "true",
+        "triggerDrive": "100",
+        "triggerChange": "upDown",
         "elevation": "4",
         "XmasLevel": 0
       }
@@ -221,7 +214,7 @@
   "objects": [],
   "instanceObjects": [
     {
-            "_id": "shutters",
+      "_id": "shutters",
       "type": "channel",
       "common": {
         "name": "Control shutters"
@@ -229,7 +222,7 @@
       "native": {}
     },
     {
-            "_id": "shutters.autoUp",
+      "_id": "shutters.autoUp",
       "type": "channel",
       "common": {
         "name": "Control shutter automatic up"
@@ -237,7 +230,7 @@
       "native": {}
     },
     {
-            "_id": "shutters.autoDown",
+      "_id": "shutters.autoDown",
       "type": "channel",
       "common": {
         "name": "Control shutter automatic down"
@@ -245,7 +238,7 @@
       "native": {}
     },
     {
-            "_id": "shutters.autoSun",
+      "_id": "shutters.autoSun",
       "type": "channel",
       "common": {
         "name": "Control shutter automatic sunprotect"
@@ -253,7 +246,7 @@
       "native": {}
     },
     {
-            "_id": "info",
+      "_id": "info",
       "type": "channel",
       "common": {
         "name": "Info Logs"
@@ -261,7 +254,7 @@
       "native": {}
     },
     {
-            "_id": "control",
+      "_id": "control",
       "type": "channel",
       "common": {
         "name": "Control Buttons"
@@ -269,171 +262,171 @@
       "native": {}
     },
     {
-            "_id": "control.Holiday",
+      "_id": "control.Holiday",
       "type": "state",
       "common": {
-                "role": "switch",
-                "name": "Holiday",
-                "type": "boolean",
-                "read": true,
+        "role": "switch",
+        "name": "Holiday",
+        "type": "boolean",
+        "read": true,
         "write": true,
-                "def": false
+        "def": false
       },
       "native": {}
     },
     {
-            "_id": "control.autoLiving",
+      "_id": "control.autoLiving",
       "type": "state",
       "common": {
-                "role": "switch",
-                "name": "Auto / Manu Living Area",
-                "type": "boolean",
-                "read": true,
+        "role": "switch",
+        "name": "Auto / Manu Living Area",
+        "type": "boolean",
+        "read": true,
         "write": true,
-                "def": false
+        "def": false
       },
       "native": {}
     },
     {
-            "_id": "control.autoSleep",
+      "_id": "control.autoSleep",
       "type": "state",
       "common": {
-                "role": "switch",
-                "name": "Auto / Manu Sleep Area",
-                "type": "boolean",
-                "read": true,
+        "role": "switch",
+        "name": "Auto / Manu Sleep Area",
+        "type": "boolean",
+        "read": true,
         "write": true,
-                "def": false
+        "def": false
       },
       "native": {}
     },
     {
-            "_id": "info.upTimeSleep",
+      "_id": "info.upTimeSleep",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Up Time Sleep Area",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Up Time Sleep Area",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.upTimeLiving",
+      "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Up Time Living Area",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Up Time Living Area",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.downTimeSleep",
+      "_id": "info.downTimeSleep",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "down Time Sleep Area",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "down Time Sleep Area",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.downTimeLiving",
+      "_id": "info.downTimeLiving",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "down Time Living Area",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "down Time Living Area",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.Sunrise",
+      "_id": "info.Sunrise",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Sunrise Time",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Sunrise Time",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.Sunset",
+      "_id": "info.Sunset",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Sunset Time",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Sunset Time",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.GoldenHour",
+      "_id": "info.GoldenHour",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Goldenhour Time",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Goldenhour Time",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.GoldenHourEnd",
+      "_id": "info.GoldenHourEnd",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "Goldenhour end Time",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "Goldenhour end Time",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.Elevation",
+      "_id": "info.Elevation",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "current Elevation",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "current Elevation",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     },
     {
-            "_id": "info.Azimut",
+      "_id": "info.Azimut",
       "type": "state",
       "common": {
-                "role": "indicator",
-                "name": "current Azimut",
-                "type": "string",
-                "read": true,
+        "role": "indicator",
+        "name": "current Azimut",
+        "type": "string",
+        "read": true,
         "write": false,
-                "def": ""
+        "def": ""
       },
       "native": {}
     }
