@@ -575,7 +575,7 @@ function shutterDriveCalc() {
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-                upTimeLiving = adapter.config.WE_shutterUpLiving;
+                upTimeLiving = adapter.config.WE_shutterUpLivingMax;
                 debugCnt = 1;
             } else {
                 upTimeLiving = adapter.config.W_shutterUpLivingMax;
@@ -637,7 +637,7 @@ function shutterDriveCalc() {
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
-                upTimeSleep = adapter.config.WE_shutterUpSleep;
+                upTimeSleep = adapter.config.WE_shutterUpSleepMax;
                 debugCnt = 1;
             } else {
                 upTimeSleep = adapter.config.W_shutterUpSleepMax;

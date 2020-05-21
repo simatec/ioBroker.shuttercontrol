@@ -176,23 +176,28 @@
         function load(settings, onChange) {
             // example: select elements with id=key and class=value and insert value
             if (!settings) return;
-            $('.value').each(function () {
-                var $key = $(this);
-                var id = $key.attr('id');
-                if ($key.attr('type') === 'checkbox') {
-                    // do not call onChange direct, because onChange could expect some arguments
-                    $key.prop('checked', settings[id]).on('change', function () {
+            console.log('##on change');
+
+            // example: select elements with id=key and class=value and insert value
+            for (var key in settings) {
+                if (!settings.hasOwnProperty(key)) continue;
+                var $value = $('#' + key + '.value');
+                if ($value.attr('type') === 'checkbox') {
+
+                    $value.prop('checked', settings[key]).on('change', function () {
                         showHideSettings();
                         onChange();
                     });
                 } else {
-                    // do not call onChange direct, because onChange could expect some arguments
-                    $key.val(settings[id])
-                        .on('change', () => onChange())
-                        .on('keyup', () => onChange())
-                        ;
+                    $value.val(settings[key]).on('change', function () {
+                        console.log('on change');
+                        showHideSettings();
+                        onChange();
+                    }).on('keyup', function () {
+                        $(this).trigger('change');
+                    });
                 }
-            });
+            }
 
             //var events = [];
 
@@ -487,6 +492,23 @@
                 $('.publicHol').hide();
             }
 
+            console.log('livingAutomatic' + $('#livingAutomatic')[0].value );
+
+            if ($('#livingAutomatic')[0].value == "livingTime") {
+                $('.col-W_shutterUpLivingMin').hide();
+                $('.col-WE_shutterUpLivingMin').hide();
+            } else {
+                $('.col-W_shutterUpLivingMin').show();
+                $('.col-WE_shutterUpLivingMin').show();
+            }
+
+            if ($('#sleepAutomatic')[0].value == "sleepTime") {
+                $('.col-W_shutterUpSleepMin').hide();
+                $('.col-WE_shutterUpSleepMin').hide();
+            } else {
+                $('.col-W_shutterUpSleepMin').show();
+                $('.col-WE_shutterUpSleepMin').show();
+            }
 
             //always disable those col's
             show_hide_column("events", "events_col_5", 5, false);
@@ -706,7 +728,7 @@
                             <label for="W_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
-                        <div class="col s6 l2 input-field">
+                        <div class="col s6 l2 input-field col-W_shutterUpLivingMin">
                             <input type="text" class="value" id="W_shutterUpLivingMin" />
                             <label for="W_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
@@ -729,7 +751,7 @@
                             <label for="WE_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
-                        <div class="col s6 l2 input-field">
+                        <div class="col s6 l2 input-field col-WE_shutterUpLivingMin">
                             <input type="text" class="value" id="WE_shutterUpLivingMin" />
                             <label for="WE_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
@@ -764,7 +786,7 @@
                             <label for="W_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
-                        <div class="col s6 l2 input-field">
+                        <div class="col s6 l2 input-field col-W_shutterUpSleepMin">
                             <input type="text" class="value" id="W_shutterUpSleepMin" />
                             <label for="W_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
@@ -787,7 +809,7 @@
                             <label for="WE_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
-                        <div class="col s6 l2 input-field">
+                        <div class="col s6 l2 input-field col-WE_shutterUpSleepMin">
                             <input type="text" class="value" id="WE_shutterUpSleepMin" />
                             <label for="WE_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
