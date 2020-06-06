@@ -1,3 +1,6 @@
+/* jshint -W097 */
+/* jshint strict: false */
+/*jslint node: true */
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
@@ -70,14 +73,15 @@ let resSunTriggerChange;
 let azimuth;
 /** @type {number} */
 let elevation;
-/** @type {never[]} */
+/** @type {any[]} */
 let ObjautoUp = [];
-/** @type {never[]} */
+/** @type {any[]} */
 let ObjautoDown = [];
-/** @type {never[]} */
+/** @type {any[]} */
 let ObjautoSun = [];
 /** @type {any[]} */
 let resShutterState = [];
+/** @type {number | undefined} */
 let timer;
 
 /**
@@ -180,7 +184,7 @@ function startAdapter(options) {
                     resShutterChange = resShutterID;
                     const resultID = adapter.config.events;
                     const result = resultID.filter(d => d.name == resShutterID);
-                    for ( const i in result) {
+                    for (const i in result) {
                         adapter.getForeignState(result[i].name, (err, state) => {
                             adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
                             //shutterState();
@@ -197,9 +201,9 @@ function startAdapter(options) {
                             result[i].firstCompleteUp = false;
                         }
                         //save old height
-                        setTimeout(function() {
+                        setTimeout(function () {
                             result[i].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
-                        },60000)
+                        }, 60000)
                     }
                 }
             });
@@ -338,7 +342,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.Holiday', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.Holiday', { val: false, ack: true });
         }
     });
@@ -347,7 +351,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.autoLiving', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.autoLiving', { val: false, ack: true });
         }
     });
@@ -356,7 +360,7 @@ function checkStates() {
      * @param {{ val: null; } | null} state
      */
     adapter.getState('control.autoSleep', (err, state) => {
-        if (state === null || state.val === null) {
+        if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.autoSleep', { val: false, ack: true });
         }
     });
@@ -453,7 +457,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
     //Reset currentAction in the night
     const resultStates = adapter.config.events;
     if (resultStates) {
-        for ( const i in resultStates) {
+        for (const i in resultStates) {
             adapter.getForeignState(resultStates[i].name, (err, state) => {
                 if (state) {
                     resultStates[i].currentAction = '';     //Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning
@@ -461,21 +465,27 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
                 }
             });
         }
-    }     
+    }
 });
 
 function shutterDriveCalc() {
     // get today's sunlight times 
-    let times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+    let times;
+    try {
+        times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
+        adapter.log.debug('calculate astrodata ...');
 
-    // format sunset/sunrise time from the Date object
-    sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
-    sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
-    dayStr = times.sunrise.getDay();
+        // format sunset/sunrise time from the Date object
+        sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
+        sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+        dayStr = times.sunrise.getDay();
 
-    // format goldenhour/goldenhourend time from the Date object
-    goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
-    goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+        // format goldenhour/goldenhourend time from the Date object
+        goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
+        goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+    } catch (e) {
+        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!')
+    }
 
     adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
     adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
@@ -2090,8 +2100,7 @@ function sunProtect() {
                                                                 }
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
-                                                                        //Change: outTemperature AND sunLight
-                                                                        if (result[i].tempOutside < outsideTemp && ( result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '' ) && result[i].currentAction != 'sunProtect') {
+                                                                        if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect') {
 
                                                                             /**
                                                                              * @param {any} err
@@ -2131,7 +2140,6 @@ function sunProtect() {
                                                                     let hysteresisInside = (((100 - result[i].hysteresisInside) / 100) * result[i].tempInside).toFixed(2);
                                                                     let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
-                                                                    //Change: end sunProtect if outTemperature OR!! sunlight changes
                                                                     if (insideTemp < parseFloat(hysteresisInside) || (resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp || result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
                                                                         /**
                                                                          * @param {any} err
@@ -2142,7 +2150,7 @@ function sunProtect() {
                                                                                 if (result[i].currentAction == 'sunProtect' && (parseFloat(state.val) == parseFloat(result[i].heightDownSun) || parseFloat(state.val) == parseFloat(result[i].currentHeight))) {
                                                                                     result[i].currentAction = 'up';
                                                                                     adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
-                                                                                    adapter.log.debug('Range: ' + resultDirectionRangePlus + ' < ' + azimuth + ' OR Temperature inside: ' + insideTemp + ' < ' + hysteresisInside + ' OR ( Temperature outside: ' + outsideTemp + ' < ' + hysteresisOutside  + ' OR Light: ' + sunLight + ' < ' + hysteresisLight + ')');
+                                                                                    adapter.log.debug('Range: ' + resultDirectionRangePlus + ' < ' + azimuth + ' OR Temperature inside: ' + insideTemp + ' < ' + hysteresisInside + ' OR ( Temperature outside: ' + outsideTemp + ' < ' + hysteresisOutside + ' OR Light: ' + sunLight + ' < ' + hysteresisLight + ')');
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
                                                                                     adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
                                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
@@ -2228,7 +2236,7 @@ function sunProtect() {
                                                             let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                             let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
-                                                            if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
+                                                            if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '') || (result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight && result[i].outsideTempSensor == '')) {
 
                                                                 /**
                                                                  * @param {any} err
@@ -2423,6 +2431,7 @@ function sunProtect() {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue && result[i].tempSensor != '' || (currentValue != mustValue && result[i].autoDrive != 'off' && result[i].tempSensor != '') || (result[i].triggerID == '' && result[i].tempSensor != '')) {
+                                                /** @type {string | number} */
                                                 let insideTemp;
                                                 /**
                                                  * @param {any} err
@@ -2653,8 +2662,13 @@ const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () 
 });
 
 function sunPos() {
-    let currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
-
+    let currentPos;
+    try {
+        currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
+        adapter.log.debug('calculate astrodata ...');
+    } catch (e) {
+        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!')
+    }
     // get sunrise azimuth in degrees
     let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
 
@@ -2663,9 +2677,6 @@ function sunPos() {
 
     azimuth = Math.round(10 * currentAzimuth) / 10
     elevation = Math.round(10 * currentAltitude) / 10
-
-    //adapter.log.debug('Sun current Altitude: ' + currentAltitude + '°');
-    //adapter.log.debug('Sun current azimuth: ' + currentAzimuth + '°');
 
     adapter.log.debug('Sun Azimut: ' + azimuth + '°');
     adapter.setState('info.Azimut', { val: azimuth, ack: true });
@@ -2696,7 +2707,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
                 }
@@ -2719,7 +2730,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
                 }
@@ -2742,7 +2753,7 @@ function createShutter() {
              * @param {{ val: null; } | null} state
              */
             adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
-                if (state === null || state.val === null) {
+                if ((state && state === null) || (state && state.val === null)) {
                     adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
                     adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
                 }

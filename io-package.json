@@ -1,8 +1,44 @@
 {
     "common": {
         "name": "shuttercontrol",
-        "version": "0.5.1",
+        "version": "0.6.2",
         "news": {
+            "0.6.2": {
+                "en": "errorhandling for sentry.io; Bugfix getState",
+                "de": "Fehlerbehandlung für sentry.io; Bugfix getState",
+                "ru": "обработка ошибок для sentry.io; Исправление getState",
+                "pt": "tratamento de erros para sentry.io; Bugfix getState",
+                "nl": "foutafhandeling voor sentry.io; Bugfix getState",
+                "fr": "gestion des erreurs pour sentry.io; Bugfix getState",
+                "it": "gestione degli errori per sentry.io; Bugfix getState",
+                "es": "manejo de errores para sentry.io; Bugfix getState",
+                "pl": "obsługa błędów dla sentry.io; Bugfix getState",
+                "zh-cn": "sentry.io的错误处理；修正getState"
+            },
+            "0.6.1": {
+                "en": "bugfix index_m.html",
+                "de": "Bugfix index_m.html",
+                "ru": "исправление index_m.html",
+                "pt": "bugfix index_m.html",
+                "nl": "bugfix index_m.html",
+                "fr": "correction de bogue index_m.html",
+                "it": "bugfix index_m.html",
+                "es": "bugfix index_m.html",
+                "pl": "Bugfix index_m.html",
+                "zh-cn": "错误修正index_m.html"
+            },
+            "0.6.0": {
+                "en": "added sentry.io, added node Support, many small Bugfixes, node 8 support removed, added new feature for sunprotect, added more debug logs",
+                "de": "sentry.io hinzugefügt, node 14 hinzugefügt, viele kleine Bugfixes, Unterstützung für node 8 entfernt, neue Funktion für Sonnenschutz hinzugefügt, weitere Debug-Logs hinzugefügt",
+                "ru": "добавлен sentry.io, добавлена поддержка узлов, исправлено множество мелких ошибок, удалена поддержка узлов 8, добавлена новая функция для sunprotect, добавлено больше журналов отладки",
+                "pt": "adicionado sentry.io, adicionado suporte ao nó, muitas pequenas correções de bugs, suporte ao nó 8 removido, adicionado novo recurso para sunprotect, adicionado mais logs de depuração",
+                "nl": "sentry.io toegevoegd, ondersteuning voor node toegevoegd, veel kleine bugfixes, ondersteuning voor node 8 verwijderd, nieuwe functie voor sunprotect toegevoegd, meer logboeken voor foutopsporing toegevoegd",
+                "fr": "sentry.io ajouté, prise en charge des nœuds ajoutée, de nombreux petits bogues corrigés, prise en charge du nœud 8 supprimée, nouvelle fonctionnalité ajoutée pour sunprotect, ajout de journaux de débogage",
+                "it": "aggiunto sentry.io, aggiunto supporto nodo, molte piccole correzioni, supporto nodo 8 rimosso, aggiunta nuova funzionalità per sunprotect, aggiunti altri registri di debug",
+                "es": "Sentry.io agregado, soporte de nodo agregado, muchas correcciones de errores pequeñas, soporte de nodo 8 eliminado, nueva característica para protección solar, más registros de depuración",
+                "pl": "dodano sentry.io, dodano obsługę węzłów, wiele małych poprawek błędów, usunięto obsługę węzłów 8, dodano nową funkcję Sunprotect, dodano więcej dzienników debugowania",
+                "zh-cn": "添加了sendry.io，添加了节点支持，许多小错误修正，删除了节点8支持，添加了sunprotect新功能，添加了更多调试日志"
+            },
             "0.5.1": {
                 "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
                 "de": "Bugfix für Adaptercheck, Weitere Debug-Logs hinzugefügt, Unterstützung für Node 14 hinzugefügt",
@@ -74,44 +110,7 @@
                 "es": "Se corrigió el apagado por elevación; Fix triggerHeight; Fix Travis",
                 "pl": "Naprawiono wyłączenie dla elewacji; Fix triggerHeight; Napraw Travis",
                 "zh-cn": "修复海拔关闭功能；修复triggerHeight;修复特拉维斯"
-            },
-            "0.3.2": {
-                "en": "Added state check for all shutter; Bugfix sunprotect; Bugfix trigger; Bugfix time settings; Added German Docu",
-                "de": "Zustandsüberprüfung für alle Auslöser hinzugefügt; Bugfix Sonnenschutz; Bugfix-Trigger; Bugfix Zeiteinstellungen; Deutsches Docu hinzugefügt",
-                "ru": "Добавлена проверка состояния всех затворов; Ошибка защиты от солнца; Исправление ошибки; Настройки времени исправления ошибок; Добавлена немецкая документация",
-                "pt": "Adicionada verificação de estado para todos os obturadores; SunProtect Bugfix; Gatilho Bugfix; Configurações de tempo de correção; Adicionado Docu alemão",
-                "nl": "Staatstest toegevoegd voor alle sluiter; Bugfix sunprotect; Bugfix-trigger; Bugfix-tijdinstellingen; Duitse Docu toegevoegd",
-                "fr": "Vérification de l'état ajoutée pour tout l'obturateur; Bugfix sunprotect; Déclenchement de correction de bug; Paramètres de temps de correction; Docu allemand ajouté",
-                "it": "Aggiunto il controllo dello stato per tutti gli otturatori; Bugfix sunprotect; Innesco di Bugfix; Impostazioni di tempo di Bugfix; Aggiunto il tedesco Docu",
-                "es": "Comprobación del estado añadido para todos los obturadores; Bugfix sunprotect; Disparador de corrección de errores; Ajustes de tiempo de corrección de errores; Docu alemán añadido",
-                "pl": "Dodano kontrolę stanu wszystkich migawek; Bugfix sunprotect; Wyzwalacz błędu; Ustawienia czasu poprawek; Dodano niemiecki Docu",
-                "zh-cn": "添加了所有快门的状态检查;修正sunprotect;修正错误;修正时间设置;添加了德语文档"
-            },
-            "0.3.1": {
-                "en": "Bugfix sunprotect for shelly user",
-                "de": "Bugfix Sonnenschutz für Shelly User",
-                "ru": "Bugfix Sunprotect для пользователя Shelly",
-                "pt": "Sunprotect Bugfix para o usuário shelly",
-                "nl": "Bugfix sunprotect voor shelly-gebruiker",
-                "fr": "Bugfix sunprotect pour les utilisateurs shelly",
-                "it": "Bugfix sunprotect per utente burrascoso",
-                "es": "Bugfix sunprotect para shelly user",
-                "pl": "Bugfix sunprotect dla użytkownika shelly",
-                "zh-cn": "用于shelly用户的修正sunprotect"
-            },
-            "0.3.0": {
-                "en": "Fix shutter up for Sunprotect, Fix input for elevation, Fix input for Inside temperature, Fix input for Outside temperature, Fix input for Lightsensor, Added Object to shutter, Added hysteresis for Lightsensor, Added hysteresis for Inside temperature, Added hysteresis for Outside temperature, Added State check after running, Fix autodrive, Added check shutter up for sunprotect, Added Translations, sunprotect changed to switch, Added German Docu, Added English Docu",
-                "de": "Hochfahren des Rollladens für Sunschutz gefixt, Eingabe für Höhe gefixt, Eingabe für Innentemperatur gefixt, Eingabe für Außentemperatur gefixt, Eingabe für Lichtsensor gefixt, Objekt für jeden Rollladen hinzugefügt, Hysterese für Lichtsensor hinzugefügt, Hysterese für Innentemperatur hinzugefügt, Hysterese für Außentemperatur hinzugefügt, Zustandsüberprüfung nach dem Start hinzugefügt, Bugfix Autodrive, Rollladen auf Sonnenschutz prüfen hinzugefügt, Übersetzungen hinzugefügt, Sonnenschutz auf switch umgestellt, Deutsche Doku hinzugefügt, Englische Doku hinzugefügt",
-                "ru": "Фиксация затвора для Sunprotect, Фиксированный вход для повышения, Фиксированный вход для Внутренней температуры, Фиксированный вход для Внешней температуры, Фиксированный вход для Светочувствительного элемента, Добавленный объект для затвора, Добавленный гистерезис для Светочувствительного элемента, Добавленный гистерезис для Внутренней температуры, Добавленный гистерезис для Внешней температуры, Добавлена проверка состояния после запуска, исправлено автоматическое управление, добавлена проверка затвора для защиты от солнца, добавлены переводы, изменен переход на защиту солнца, добавлен немецкий документ, добавлен английский документ",
-                "pt": "Corrigir o obturador para SunProtect, Corrigir entrada para elevação, Corrigir entrada para Temperatura interna, Corrigir entrada para Temperatura externa, Corrigir entrada para o Lightsensor, Objeto adicionado ao obturador, Histerese adicionada para o Lightsensor, Histerese adicionada para temperatura interna, Histerese adicionada para temperatura externa, Adicionado verificação de estado após a execução, Corrigir Autodrive, Adicionado check shutter up para sunprotect, Adicionado Translations, sunprotect mudou para mudar, Adicionado alemão Docu, Adicionado Inglês Docu",
-                "nl": "Fix shutter up voor Sunprotect, fix input voor elevatie, fix input voor binnentemperatuur, fix input voor buitentemperatuur, fix input voor lightsensor, toegevoegd object voor shutter, toegevoegde hysteresis voor lightsensor, toegevoegde hysteresis voor binnentemperatuur, hysteresis toegevoegd voor buitentemperatuur, Statuscontrole toegevoegd na het uitvoeren, Autodrive repareren, Check shutter-up toegevoegd voor sunprotect, Toegevoegd vertalingen, sunprotect gewijzigd om te schakelen, Toegevoegd Duits Docu, Toegevoegd Engels Docu",
-                "fr": "Obturateur fixe pour Sunprotect, entrée fixe pour l'altitude, entrée fixe pour la température intérieure, entrée fixe pour la température extérieure, entrée fixe pour le capteur de lumière, objet ajouté au volet, hystérésis ajoutée pour le capteur de lumière, hystérésis ajoutée pour la température intérieure, hystérésis ajoutée pour la température extérieure, Ajout de la vérification d'état après exécution, correction de la conduite automatique, ajout du contrôle de l'obturation pour sunprotect, ajout des traductions, sunprotect a été remplacé par un commutateur, Docu allemand ajouté, Docu anglais ajouté",
-                "it": "Risolve l'otturatore per Sunprotect, Corretto l'input per l'elevazione, Corretto l'input per la temperatura interna, Ingresso fisso per Temperatura esterna, Ingresso fisso per Lightsensor, Oggetto aggiunto all'otturatore, Isteresi aggiunta per Lightsensor, Isteresi aggiunta per Temperatura interna, Isteresi aggiunta per Temperatura esterna, Aggiunto controllo dello stato dopo l'esecuzione, autodrive fisso, controllo di riserva aggiunto per sunprotect, traduzioni aggiunte, sunprotect modificato per passare, aggiunto documento tedesco, aggiunto docu inglese",
-                "es": "Fije el obturador para Sunprotect, Fije la entrada para la elevación, Fije la entrada para la temperatura interior, Fije la entrada para la temperatura exterior, Fije la entrada para el sensor de luz, Objeto agregado al obturador, Histéresis agregada para el sensor de luz, Histéresis agregada para la temperatura interior, Histéresis agregada para la temperatura exterior Se agregó la comprobación de estado después de la ejecución, Corrección automática, Se ha agregado el obturador de comprobación para sunprotect, Se han agregado Traducciones, Se ha cambiado el sunprotect para cambiar, Se ha agregado el Docu alemán, Se ha agregado el Docu en inglés",
-                "pl": "Napraw migawkę dla Sunprotect, Fix input dla elewacji, Fix input dla temperatury wewnętrznej, Fix input dla temperatury zewnętrznej, Fix input dla Lightsensor, Dodano Object to shutter, Dodano histerezę dla Lightsensor, Dodano histerezę dla temperatury wewnętrznej, Dodano histerezę dla temperatury zewnętrznej, Dodano kontrolę stanu po uruchomieniu, naprawiono automatyczne przesyłanie, dodano migawkę sprawdzającą dla sunprotect, dodano tłumaczenia, zmieniono sunprotect na przełącznik, dodano niemiecki Docu, dodano angielski Docu",
-                "zh-cn": "修正Sunprotect的快门，修正高度输入，修复内部温度输入，修复外部温度输入，修复Lightsensor输入，增加快门对象，增加Lightsnsor滞后，增加内部温度滞后，增加外部温度滞后，运行后添加状态检查，修复自动驱动器，为sunprotect添加检查快门，添加翻译，sunprotect更改为切换，添加德语文档，添加英语文档"
             }
-
         },
         "title": "shuttercontrol",
         "titleLang": {
@@ -162,7 +161,11 @@
         "compact": true,
         "materialize": true,
         "stopBeforeUpdate": true,
-        
+        "plugins": {
+            "sentry": {
+                "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
+            }
+        },
         "dependencies": [
             {
                 "admin": ">=3.0.0"
@@ -175,7 +178,6 @@
         "publicHolInstance": "",
         "UseSunMode": true,
         "currentShutterState": false,
-        
         "W_shutterDownLiving": "22:00",
         "W_shutterUpLivingMin": "05:00",
         "W_shutterUpLivingMax": "06:00",
@@ -186,8 +188,6 @@
         "driveHeightDownLiving": 0,
         "triggerAutoLiving": "hm-rpc.0.MEQ1234567.2.STATE",
         "livingAutomatic": "livingSunriseSunset",
-        
-
         "W_shutterUpSleepMax": "06:30",
         "W_shutterUpSleepMin": "06:00",
         "W_shutterDownSleep": "20:00",
@@ -198,7 +198,6 @@
         "driveHeightDownSleep": 0,
         "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
         "sleepAutomatic": "sleepSunriseSunset",
-
         "astroDelayUp": 30,
         "longitude": "",
         "latitude": "",
@@ -206,12 +205,10 @@
         "driveHeightUpAstro": 100,
         "driveHeightDownAstro": 0,
         "driveDelayUpAstro": 10,
-
         "sleepEnum": "",
         "livingEnum": "",
         "livingEnumAuto": "",
         "sleepEnumAuto": "",
-
         "sunMonthStart": 5,
         "sunMonthEnd": 9,
         "sun_shutterUp": "19:00",
@@ -219,39 +216,38 @@
         "sunProtecEnum": "",
         "driveHeightSun": 30,
         "sunProtEndElevation": 10,
-
         "events": [
             {
-                "enabled":true,
-                "shutterName":"shutter example",
-                "name":"hm-rpc.0.MEQ1234567.2.LEVEL",
-                "triggerID":"",
-                "typeUp":"goldenhour End",
-                "typeDown":"elevation",
-                "type":"in- & outside temperature",
-                "heightDownSun":"50",
-                "direction":"290",
-                "directionRange":"15",
-                "tempInside":"23",
-                "tempSensor":"",
-                "outsideTempSensor":"",
-                "tempOutside":"23",
-                "lightSensor":"",
-                "valueLight":"15",
-                "currentHeight":"",
-                "heightUp":"100",
-                "heightDown":"0",
-                "triggerState":"true",
-                "triggerDrive":"100",
-                "triggerChange":"upDown",
-                "elevation":"4"
+                "enabled": true,
+                "shutterName": "shutter example",
+                "name": "hm-rpc.0.MEQ1234567.2.LEVEL",
+                "triggerID": "",
+                "typeUp": "goldenhour End",
+                "typeDown": "elevation",
+                "type": "in- & outside temperature",
+                "heightDownSun": "50",
+                "direction": "290",
+                "directionRange": "15",
+                "tempInside": "23",
+                "tempSensor": "",
+                "outsideTempSensor": "",
+                "tempOutside": "23",
+                "lightSensor": "",
+                "valueLight": "15",
+                "currentHeight": "",
+                "heightUp": "100",
+                "heightDown": "0",
+                "triggerState": "true",
+                "triggerDrive": "100",
+                "triggerChange": "upDown",
+                "elevation": "4"
             }
         ]
     },
     "objects": [],
     "instanceObjects": [
         {
-            "_id":  "shutters",
+            "_id": "shutters",
             "type": "channel",
             "common": {
                 "name": "Control shutters"
@@ -259,7 +255,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoUp",
+            "_id": "shutters.autoUp",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic up"
@@ -267,7 +263,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoDown",
+            "_id": "shutters.autoDown",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic down"
@@ -275,7 +271,7 @@
             "native": {}
         },
         {
-            "_id":  "shutters.autoSun",
+            "_id": "shutters.autoSun",
             "type": "channel",
             "common": {
                 "name": "Control shutter automatic sunprotect"
@@ -283,7 +279,7 @@
             "native": {}
         },
         {
-            "_id":  "info",
+            "_id": "info",
             "type": "channel",
             "common": {
                 "name": "Info Logs"
@@ -291,7 +287,7 @@
             "native": {}
         },
         {
-            "_id":  "control",
+            "_id": "control",
             "type": "channel",
             "common": {
                 "name": "Control Buttons"
@@ -299,171 +295,171 @@
             "native": {}
         },
         {
-            "_id":  "control.Holiday",
+            "_id": "control.Holiday",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Holiday",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Holiday",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "control.autoLiving",
+            "_id": "control.autoLiving",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Auto / Manu Living Area",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Auto / Manu Living Area",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "control.autoSleep",
+            "_id": "control.autoSleep",
             "type": "state",
             "common": {
-                "role":  "switch",
-                "name":  "Auto / Manu Sleep Area",
-                "type":  "boolean",
-                "read":  true,
+                "role": "switch",
+                "name": "Auto / Manu Sleep Area",
+                "type": "boolean",
+                "read": true,
                 "write": true,
-                "def":   false
+                "def": false
             },
             "native": {}
         },
         {
-            "_id":  "info.upTimeSleep",
+            "_id": "info.upTimeSleep",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Up Time Sleep Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Up Time Sleep Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.upTimeLiving",
+            "_id": "info.upTimeLiving",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Up Time Living Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Up Time Living Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.downTimeSleep",
+            "_id": "info.downTimeSleep",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "down Time Sleep Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "down Time Sleep Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.downTimeLiving",
+            "_id": "info.downTimeLiving",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "down Time Living Area",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "down Time Living Area",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Sunrise",
+            "_id": "info.Sunrise",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Sunrise Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Sunrise Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Sunset",
+            "_id": "info.Sunset",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Sunset Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Sunset Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.GoldenHour",
+            "_id": "info.GoldenHour",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Goldenhour Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Goldenhour Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.GoldenHourEnd",
+            "_id": "info.GoldenHourEnd",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "Goldenhour end Time",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "Goldenhour end Time",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Elevation",
+            "_id": "info.Elevation",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "current Elevation",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "current Elevation",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         },
         {
-            "_id":  "info.Azimut",
+            "_id": "info.Azimut",
             "type": "state",
             "common": {
-                "role":  "indicator",
-                "name":  "current Azimut",
-                "type":  "string",
-                "read":  true,
+                "role": "indicator",
+                "name": "current Azimut",
+                "type": "string",
+                "read": true,
                 "write": false,
-                "def":   ""
+                "def": ""
             },
             "native": {}
         }
