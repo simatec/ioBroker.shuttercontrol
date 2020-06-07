@@ -124,6 +124,8 @@ The fields in detail:
 
 ### tips:
 If a shutter is adjusted manually and the position does not correspond to the automatically approached, the automatic switches off!
+Exception: Sunprotect works also if the shutter is opened manually to 100% for the first time per day. In this case, the roller shutter moves into the sun protection height shortly after being opened manually, if required.
+If the roller shutter is opened automatically and the conditions for sun protection are met, it moves directly to the height of the sun protection.
 
 ---
 
