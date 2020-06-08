@@ -196,7 +196,7 @@ function startAdapter(options) {
                             result[i].firstCompleteUp = false;
                             adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
-                        if (result[i].firstCompleteUp == true && ( state.val == 100 || state.val == result[i].heightUp || state.val == result[i].heightDownSun ) {
+                        if (result[i].firstCompleteUp == true && ( state.val == 100 || state.val == result[i].heightUp || state.val == result[i].heightDownSun )) {
                             result[i].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
                         }
                         //save old height
