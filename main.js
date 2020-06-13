@@ -123,11 +123,13 @@ function startAdapter(options) {
     adapter.on('stateChange', (id, state) => {
         if (state) {
 
-            if (id.includes(adapter.config.HolidayDP)) {
-                adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
-                adapter.setState('control.Holiday', { val: state.val, ack: true });
+            
+            if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+                if (id.includes(adapter.config.HolidayDP)) {
+                    adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
+                    adapter.setState('control.Holiday', { val: state.val, ack: true });
+                }
             }
-
             if (id === adapter.namespace + '.control.Holiday') {
                 HolidayStr = state.val;
                 shutterDriveCalc();
@@ -423,7 +425,7 @@ function checkActualStates() {
         });
     }
 
-    if (typeof adapter.config.HolidayDP !== 'undefined' && adapter.config.HolidayDP.length > 0) {
+    if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
         adapter.log.debug('checking HolidayDP');
         adapter.getForeignState(adapter.config.HolidayDP, (err, state) => {
             if (err) {
@@ -3167,9 +3169,11 @@ function main(adapter) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
 
-    if (typeof adapter.config.HolidayDP !== 'undefined' &&  adapter.config.HolidayDP.length > 0) {
+    if (typeof adapter.config.HolidayDP !== undefined &&  adapter.config.HolidayDP.length > 0) {
         adapter.subscribeForeignStates(adapter.config.HolidayDP);
         adapter.log.info('subscribe ' + adapter.config.HolidayDP);
+
+       
     }
 
     if (adapter.config.triggerAutoLiving != '') {
