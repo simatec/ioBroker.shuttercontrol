@@ -312,6 +312,18 @@
                     });
                 });
             });
+            $('#HolidayDPPopUp').on('click', function () {
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#HolidayDP').val(), function (newId) {
+                        if (newId) {
+                            $('#HolidayDP').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
+
+            
+
 
             onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
@@ -910,11 +922,18 @@
                             <span class="translate">public holidays Instance</span>
                         </div>
                     </div>
+
+                   
                     <div class="row">
-                        <div class="input-field col s12 m6 l2 holiday">
-                            <input type="text" class="value" id="HolidayDP">
+
+
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="HolidayDP" />
                             <label for="HolidayDP" class="translate"></label>
-                            <span class="translate">holiday Datapoint</span>
+                            <span class="translate">Object ID for holiday today</span>
+                        </div>
+                        <div class="col s1 m2 l1">
+                            <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
                         </div>
                     </div>
 
