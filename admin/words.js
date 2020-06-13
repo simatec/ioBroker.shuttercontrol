@@ -157,16 +157,16 @@ systemDictionary = {
         "zh-cn": "圣诞节结束"
     },
     "late_down": {
-        "en": "late all down",
-        "de": "spät alles runter",
-        "ru": "поздно все вниз",
-        "pt": "tarde tudo para baixo",
-        "nl": "laat helemaal naar beneden",
-        "fr": "tard tout en bas",
-        "it": "in ritardo tutti giù",
-        "es": "tarde todo abajo",
-        "pl": "późno wszystko w dół",
-        "zh-cn": "迟到了"
+        "en": "close blinds late",
+        "de": "Jalousien spät schließen",
+        "ru": "закрывать жалюзи поздно",
+        "pt": "fechar as cortinas tarde",
+        "nl": "sluit de blinds laat",
+        "fr": "fermer les stores tard",
+        "it": "chiudere i bui in ritardo",
+        "es": "cerrar las persianas tarde",
+        "pl": "późno zamykaj rolety",
+        "zh-cn": "迟到百叶窗"
     },
     "inSummerNotDown": {
         "en": "Do not close blinds in summer",
