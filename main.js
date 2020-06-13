@@ -84,8 +84,7 @@ let resShutterState = [];
 /** @type {number | undefined} */
 let timer;
 
-let longitude;
-let latitude;
+
 
 /**
  * Starts the adapter instance
@@ -496,13 +495,27 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
 });
 
 
-async function GetSystemData() {
-    const ret = await adapter.getForeignObjectAsync("system.config");
+function GetSystemData() {
+    //get longitude/latitude from system if not set or not valid
+    //do not change if we have already a valid value
+    //so we could use different settings compared to system if necessary
+    if (typeof adapter.config.longitude == undefined || adapter.config.longitude == null || adapter.config.longitude.length == 0 || isNaN(adapter.config.longitude)
+        || typeof adapter.config.latitude == undefined || adapter.config.latitude == null || adapter.config.latitude.length == 0 || isNaN(adapter.config.latitude)) {
 
-    //dateformat = ret.common.dateFormat;
-    longitude = ret.common.longitude;
-    latitude = ret.common.latitude;
-    adapter.log.debug("system  longitude " + longitude + " latitude " + latitude);
+        adapter.log.debug("longitude/longitude not set, get data from system " + typeof adapter.config.longitude + " " + adapter.config.longitude + "/" + typeof adapter.config.latitude + " " + adapter.config.latitude);
+
+        adapter.getForeignObject("system.config", (err, state) => {
+
+            if (err) {
+                adapter.log.error(err);
+            } else {
+                //dateformat = ret.common.dateFormat;
+                adapter.config.longitude = state.common.longitude;
+                adapter.config.latitude = state.common.latitude;
+                adapter.log.info("system  longitude " + adapter.config.longitude + " latitude " + adapter.config.latitude);
+            }
+        });
+    }
 }
 
 
@@ -513,7 +526,7 @@ function shutterDriveCalc() {
     // get today's sunlight times 
     let times;
     try {
-        times = SunCalc.getTimes(new Date(), latitude, longitude);
+        times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
 
         // format sunset/sunrise time from the Date object
@@ -2952,7 +2965,7 @@ const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () 
 function sunPos() {
     let currentPos;
     try {
-        currentPos = SunCalc.getPosition(new Date(), latitude, longitude);
+        currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
     } catch (e) {
         adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');

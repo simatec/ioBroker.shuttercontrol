@@ -159,6 +159,8 @@
     "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
     "sleepAutomatic": "sleepSunriseSunset",
     "astroDelayUp": 30,
+    "longitude": "",
+    "latitude": "",
     "astroDelayDown": 30,
     "driveHeightUpAstro": 100,
     "driveHeightDownAstro": 0,
