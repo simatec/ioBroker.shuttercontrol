@@ -3,6 +3,18 @@
     "name": "shuttercontrol",
     "version": "0.7.0",
     "news": {
+      "0.7.0": {
+        "en": "better (userfriendly) check for adjustable times, datapoint for Holiday incl. internal check and handling, late all down added, Extended sun protection, edited User Menu for Timesettings, Bugfix Lightvalue to 20.000 Lux, added better German Translation",
+        "de": "besser (benutzerfreundlich) auf einstellbare Zeiten prüfen, Datenpunkt für Urlaub inkl. Interne Überprüfung und Handhabung, spätes Herunterfahren hinzugefügt, Erweiterter Sonnenschutz, bearbeitetes Benutzermenü für Zeiteinstellungen, Bugfix Lightvalue auf 20.000 Lux, bessere deutsche Übersetzung hinzugefügt",
+        "ru": "лучше (удобнее для пользователя) проверять регулируемое время, точка данных для отдыха вкл. внутренняя проверка и обработка, добавлены все допоздна, расширенная защита от солнца, отредактировано меню пользователя для настроек времени, исправлено световое значение до 20 000 люкс, улучшен немецкий перевод",
+        "pt": "melhor (fácil de usar) verificar horários ajustáveis, ponto de dados para feriados, incl. verificação e manuseio internos, tarde adicionado, proteção solar estendida, menu do usuário editado para horários, bugfix Lightvalue para 20.000 Lux, melhor tradução para o alemão",
+        "nl": "betere (gebruiksvriendelijke) controle op instelbare tijden, datapunt voor Vakantie incl. interne controle en bediening, laat alles naar beneden toegevoegd, Uitgebreide zonbescherming, aangepast gebruikersmenu voor tijdsinstellingen, Bugfix Lightvalue tot 20.000 Lux, betere Duitse vertaling toegevoegd",
+        "fr": "mieux (convivial) vérifier les heures réglables, point de données pour les vacances incl. contrôle interne et manipulation, tard tous ajoutés, protection solaire étendue, menu utilisateur modifié pour les horaires, Bugfix Lightvalue à 20.000 lux, meilleure traduction allemande ajoutée",
+        "it": "controllo migliore (facile da usare) per tempi regolabili, datapoint for Holiday incl. controllo e gestione interni, in ritardo tutti aggiunti in basso, protezione solare estesa, menu utente modificato per impostazioni temporali, Bugfix Lightvalue a 20.000 Lux, aggiunta migliore traduzione tedesca",
+        "es": "mejor (fácil de usar) verifique los tiempos ajustables, punto de datos para vacaciones incl. control interno y manejo, tarde todo agregado, protección solar extendida, menú de usuario editado para ajustes de tiempo, Bugfix Lightvalue a 20,000 Lux, se agregó una mejor traducción al alemán",
+        "pl": "lepsze (przyjazne dla użytkownika) sprawdzenie ustawianych czasów, punkt danych na wakacje w tym. wewnętrzna kontrola i obsługa, dodane późno, Rozszerzona ochrona przeciwsłoneczna, edytowane menu użytkownika dla ustawień czasu, Bugfix Lightvalue do 20.000 Lux, dodane lepsze tłumaczenie na niemiecki",
+        "zh-cn": "更好（用户友好）检查可调整时间，包括Holiday的数据点。内部检查和处理，添加了所有后期功能，扩展了防晒功能，编辑了用于时间设置的用户菜单，将Bugvalue修正为20.000 Lux，增加了更好的德语翻译"
+      },
       "0.6.2": {
         "en": "errorhandling for sentry.io; Bugfix getState",
         "de": "Fehlerbehandlung für sentry.io; Bugfix getState",

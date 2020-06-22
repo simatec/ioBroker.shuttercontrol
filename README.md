@@ -46,12 +46,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 0.7.0 (2020-06-29)
 * (rg-engineering) better (userfriendly) check for adjustable times
-* (rg-engineering) longitude and latidude from system instead local variable
 * (rg-engineering) datapoint for Holiday incl. internal check and handling
 * (rg-engineering) late all down added 
 * (5G7K) Extended sun protection
-* (simatec) edit User Menu for Timesettings
-* (simatec) Fix Lightvalue to 20.000 Lux
+* (simatec) edited User Menu for Timesettings
+* (simatec) Bugfix Lightvalue to 20.000 Lux
 * (simatec) added better German Translation
 
 ### 0.6.2 (18.05.2020)
