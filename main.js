@@ -121,8 +121,6 @@ function startAdapter(options) {
      */
     adapter.on('stateChange', (id, state) => {
         if (state) {
-
-            
             if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
                 if (id.includes(adapter.config.HolidayDP)) {
                     adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
@@ -205,7 +203,7 @@ function startAdapter(options) {
                             result[i].firstCompleteUp = false;
                             adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
-                        if (result[i].firstCompleteUp == true && ( state.val == 100 || state.val == result[i].heightUp || state.val == result[i].heightDownSun )) {
+                        if (result[i].firstCompleteUp == true && (state.val == 100 || state.val == result[i].heightUp || state.val == result[i].heightDownSun)) {
                             result[i].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
                         }
                         //save old height
@@ -625,16 +623,16 @@ function shutterDriveCalc() {
                     if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMax;
                         debugCnt = 4;
-                    } else if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp,adapter.config.W_shutterUpLivingMax)) {
+                    } else if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = astroTimeLivingUp;
                         debugCnt = 5;
                     } else if (IsEqual(adapter.config.W_shutterUpLivingMin, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMax;
                         debugCnt = 6;
-                    } else if (IsEqual(astroTimeLivingUp ,adapter.config.W_shutterUpLivingMax)) {
+                    } else if (IsEqual(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = astroTimeLivingUp;
                         debugCnt = 7;
-                    } else if (IsEarlier(astroTimeLivingUp ,adapter.config.W_shutterUpLivingMin)) {
+                    } else if (IsEarlier(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMin;
                         debugCnt = 8;
                     }
@@ -647,7 +645,7 @@ function shutterDriveCalc() {
     shutterUpLiving();
 
     // ******** Set Up-Time Sleep Area ********
-    
+
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
@@ -687,16 +685,16 @@ function shutterDriveCalc() {
 
                 if (dayStr < 6 && dayStr > 0) {
 
-                    if (IsLater(astroTimeSleepUp ,adapter.config.W_shutterUpSleepMax)) {
+                    if (IsLater(astroTimeSleepUp, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMax;
                         debugCnt = 4;
-                    } else if (IsLater(astroTimeSleepUp , adapter.config.W_shutterUpSleepMin) && IsEarlier(astroTimeSleepUp , adapter.config.W_shutterUpSleepMax)) {
+                    } else if (IsLater(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin) && IsEarlier(astroTimeSleepUp, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = astroTimeSleepUp;
                         debugCnt = 5;
-                    } else if (IsEqual(adapter.config.W_shutterUpSleepMin , adapter.config.W_shutterUpSleepMax)) {
+                    } else if (IsEqual(adapter.config.W_shutterUpSleepMin, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMax;
                         debugCnt = 6;
-                    } else if (IsEqual(astroTimeSleepUp , adapter.config.W_shutterUpSleepMax)) {
+                    } else if (IsEqual(astroTimeSleepUp, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = astroTimeSleepUp;
                         debugCnt = 7;
                     } else if (IsEarlier(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
@@ -727,24 +725,24 @@ function shutterDriveCalc() {
 
             //Freitag / Samstagg
 
-            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEarlier(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
+            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEarlier(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 3;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsLater(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsLater(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 4;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEqual(adapter.config.WE_shutterDownLiving,astroTimeLivingDown)) {
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 5;
 
                 //< 5 ist doch auch 0??
-            } else if (dayStr < 5  && IsLater(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
+            } else if (dayStr < 5 && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 debugCnt = 6;
-            } else if (dayStr < 5  && IsEarlier(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
+            } else if (dayStr < 5 && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 7;
-            } else if (dayStr < 5  && IsEqual(astroTimeLivingDown,adapter.config.W_shutterDownLiving)) {
+            } else if (dayStr < 5 && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 8;
             }
@@ -1548,52 +1546,52 @@ function shutterDownLiving() {
                 if (!inSummerNotDown) {
 
                     let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
-                /**
-                 * @param {any} err
-                 * @param {boolean} state
-                 */
+                    /**
+                     * @param {any} err
+                     * @param {boolean} state
+                     */
                     adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                         if (state && state === true || state && state.val === true) {
-                        setTimeout(function () {
+                            setTimeout(function () {
                                 let currentValue = '';
-                            /**
-                             * @param {any} err
-                             * @param {{ val: string; }} state
-                             */
+                                /**
+                                 * @param {any} err
+                                 * @param {{ val: string; }} state
+                                 */
                                 adapter.getForeignState(result[i].triggerID, (err, state) => {
                                     let mustValue = ('' + result[i].triggerState);
                                     if (state) {
                                         currentValue = ('' + state.val);
                                     }
                                     if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
-                                    /**
-                                     * @param {any} err
-                                     * @param {{ val: any; }} state
-                                     */
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != result[i].heightDown) {
+                                            if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#17 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
                                                 result[i].currentAction = 'down';
-                                            adapter.log.debug('shutterDownLiving #1 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownt + '%');
-                                            //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                adapter.log.debug('shutterDownLiving #1 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownt + '%');
+                                                //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                 shutterState(result[i].name);
                                             }
                                         });
                                     } else if (result[i].triggerID == '') {
-                                    /**
-                                     * @param {any} err
-                                     * @param {{ val: any; }} state
-                                     */
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: any; }} state
+                                         */
                                         adapter.getForeignState(result[i].name, (err, state) => {
-                                        if (state && state.val != result[i].heightDown) {
+                                            if (state && state.val != result[i].heightDown) {
                                                 adapter.log.debug('#18 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                 adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                 result[i].currentHeight = result[i].heightDown;
                                                 result[i].currentAction = 'down';
-                                            adapter.log.debug('shutterDownLiving #2 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                            //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                adapter.log.debug('shutterDownLiving #2 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
+                                                //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                 shutterState(result[i].name);
                                             }
                                         });
@@ -1638,52 +1636,52 @@ function shutterDownLiving() {
                         if (!inSummerNotDown) {
 
                             let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
-                        /**
-                         * @param {any} err
-                         * @param {boolean} state
-                         */
+                            /**
+                             * @param {any} err
+                             * @param {boolean} state
+                             */
                             adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                                 if (state && state === true || state && state.val === true) {
-                                setTimeout(function () {
+                                    setTimeout(function () {
                                         let currentValue = '';
-                                    /**
-                                     * @param {any} err
-                                     * @param {{ val: string; }} state
-                                     */
+                                        /**
+                                         * @param {any} err
+                                         * @param {{ val: string; }} state
+                                         */
                                         adapter.getForeignState(result[i].triggerID, (err, state) => {
                                             let mustValue = ('' + result[i].triggerState);
                                             if (state) {
                                                 currentValue = ('' + state.val);
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
-                                            /**
-                                             * @param {any} err
-                                             * @param {{ val: any; }} state
-                                             */
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: any; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                if (state && state.val != result[i].heightDown) {
+                                                    if (state && state.val != result[i].heightDown) {
                                                         adapter.log.debug('#19 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                         result[i].currentHeight = result[i].heightDown;
                                                         result[i].currentAction = 'down';
-                                                    adapter.log.debug('shutterDownLiving #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                    //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                        adapter.log.debug('shutterDownLiving #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
+                                                        //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                         shutterState(result[i].name);
                                                     }
                                                 });
                                             } else if (result[i].triggerID == '') {
-                                            /**
-                                             * @param {any} err
-                                             * @param {{ val: any; }} state
-                                             */
+                                                /**
+                                                 * @param {any} err
+                                                 * @param {{ val: any; }} state
+                                                 */
                                                 adapter.getForeignState(result[i].name, (err, state) => {
-                                                if (state && state.val != result[i].heightDown) {
+                                                    if (state && state.val != result[i].heightDown) {
                                                         adapter.log.debug('#20 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                         result[i].currentHeight = result[i].heightDown;
                                                         result[i].currentAction = 'down';
-                                                    adapter.log.debug('shutterDownLiving #4 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                    //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                        adapter.log.debug('shutterDownLiving #4 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
+                                                        //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                         shutterState(result[i].name);
                                                     }
                                                 });
@@ -1921,7 +1919,7 @@ function shutterDownLate() {
                     const resultFull = adapter.config.events;
 
                     if (resultFull) {
-                        
+
                         // Filter enabled
                         const resEnabled = resultFull.filter(d => d.enabled === true);
 
@@ -2058,7 +2056,7 @@ function shutterDownSleep() {
                         }
                     }
 
-                    
+
 
 
                     if (!inSummerNotDown) {
@@ -2089,7 +2087,7 @@ function shutterDownSleep() {
                                                     result[i].currentHeight = result[i].heightDown;
                                                     result[i].currentAction = 'down';
                                                     adapter.log.debug('shutterDownSleep #1 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                    //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     shutterState(result[i].name);
                                                 }
                                             });
@@ -2105,7 +2103,7 @@ function shutterDownSleep() {
                                                     result[i].currentHeight = result[i].heightDown;
                                                     result[i].currentAction = 'down';
                                                     adapter.log.debug('shutterDownSleep #2 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                    //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     shutterState(result[i].name);
                                                 }
                                             });
@@ -2153,52 +2151,52 @@ function shutterDownSleep() {
                             if (!inSummerNotDown) {
 
                                 let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
-                            /**
-                             * @param {any} err
-                             * @param {boolean} state
-                             */
+                                /**
+                                 * @param {any} err
+                                 * @param {boolean} state
+                                 */
                                 adapter.getState('shutters.autoDown.' + nameDevice, (err, state) => {
                                     if (state && state === true || state && state.val === true) {
-                                    setTimeout(function () {
+                                        setTimeout(function () {
                                             let currentValue = '';
-                                        /**
-                                         * @param {any} err
-                                         * @param {{ val: string; }} state
-                                         */
+                                            /**
+                                             * @param {any} err
+                                             * @param {{ val: string; }} state
+                                             */
                                             adapter.getForeignState(result[i].triggerID, (err, state) => {
                                                 let mustValue = ('' + result[i].triggerState);
                                                 if (state) {
                                                     currentValue = ('' + state.val);
                                                 }
                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp' && result[i].autoDrive != 'off')) {
-                                                /**
-                                                 * @param {any} err
-                                                 * @param {{ val: any; }} state
-                                                 */
+                                                    /**
+                                                     * @param {any} err
+                                                     * @param {{ val: any; }} state
+                                                     */
                                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (state && state.val != result[i].heightDown) {
+                                                        if (state && state.val != result[i].heightDown) {
                                                             adapter.log.debug('#28 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                             result[i].currentHeight = result[i].heightDown;
                                                             result[i].currentAction = 'down';
-                                                        adapter.log.debug('shutterDownSleep #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                        //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                            adapter.log.debug('shutterDownSleep #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
+                                                            //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                             shutterState(result[i].name);
                                                         }
                                                     });
                                                 } else if (result[i].triggerID == '') {
-                                                /**
-                                                 * @param {any} err
-                                                 * @param {{ val: any; }} state
-                                                 */
+                                                    /**
+                                                     * @param {any} err
+                                                     * @param {{ val: any; }} state
+                                                     */
                                                     adapter.getForeignState(result[i].name, (err, state) => {
-                                                    if (state && state.val != result[i].heightDown) {
+                                                        if (state && state.val != result[i].heightDown) {
                                                             adapter.log.debug('#29 Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDown + '%');
                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDown), false);
                                                             result[i].currentHeight = result[i].heightDown;
                                                             result[i].currentAction = 'down';
-                                                        adapter.log.debug('shutterDownSleep #4 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
-                                                        //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
+                                                            adapter.log.debug('shutterDownSleep #4 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDown + '%');
+                                                            //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                             shutterState(result[i].name);
                                                         }
                                                     });
@@ -2314,7 +2312,7 @@ function sunProtect() {
                                                                                         shutterState(result[i].name);
                                                                                     }
                                                                                     //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                                         result[i].currentAction = 'OpenInSunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
@@ -2431,7 +2429,7 @@ function sunProtect() {
                                                                                         adapter.log.debug('Temperature inside: ' + insideTemp + ' > ' + result[i].tempInside + ' AND ( Temperatur outside: ' + outsideTemp + ' > ' + result[i].tempOutside + ' AND Light: ' + sunLight + ' > ' + result[i].valueLight + ' )');
                                                                                         adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%');
                                                                                         adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%');
-                                                                                       
+
                                                                                         adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                                         result[i].currentHeight = result[i].heightDownSun;
                                                                                         adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
@@ -2439,7 +2437,7 @@ function sunProtect() {
                                                                                         shutterState(result[i].name);
                                                                                     }
                                                                                     //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                                         result[i].currentAction = 'OpenInSunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
@@ -2471,7 +2469,7 @@ function sunProtect() {
                                                                                     adapter.log.debug('Range: ' + resultDirectionRangePlus + ' < ' + azimuth + ' OR Temperature inside: ' + insideTemp + ' < ' + hysteresisInside + ' OR ( Temperature outside: ' + outsideTemp + ' < ' + hysteresisOutside + ' OR Light: ' + sunLight + ' < ' + hysteresisLight + ')');
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%');
                                                                                     adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%');
-                                                                        
+
                                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                                     result[i].currentHeight = result[i].heightUp;
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
@@ -2554,7 +2552,7 @@ function sunProtect() {
                                                                                 shutterState(result[i].name);
                                                                             }
                                                                             //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                                 result[i].currentAction = 'OpenInSunProtect';
                                                                                 adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                             }
@@ -2633,7 +2631,7 @@ function sunProtect() {
                                                                     adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                     adapter.log.debug('RangeMinus: ' + resultDirectionRangeMinus + ' < ' + azimuth + 'RangePlus: ' + resultDirectionRangePlus + ' > ' + azimuth);
                                                                     adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
-                                                                  
+
                                                                     adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                     result[i].currentHeight = result[i].heightDownSun;
                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
@@ -2641,7 +2639,7 @@ function sunProtect() {
                                                                     shutterState(result[i].name);
                                                                 }
                                                                 //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                     result[i].currentAction = 'OpenInSunProtect';
                                                                     adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                 }
@@ -2734,7 +2732,7 @@ function sunProtect() {
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is active');
                                                                             adapter.log.debug('Temperature outside: ' + outsideTemp + ' > ' + result[i].tempOutside + ' AND Light: ' + sunLight + ' > ' + result[i].valueLight);
                                                                             adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightDownSun + '%')
-                                                                          
+
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightDownSun), false);
                                                                             result[i].currentHeight = result[i].heightDownSun;
                                                                             adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
@@ -2742,7 +2740,7 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                             result[i].currentAction = 'OpenInSunProtect';
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
@@ -2750,7 +2748,8 @@ function sunProtect() {
                                                                         else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                             adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                             result[i].currentAction = 'sunProtect';
-                                                                        }                                                                    }
+                                                                        }
+                                                                    }
                                                                 });
                                                             }
                                                         }
@@ -2772,7 +2771,7 @@ function sunProtect() {
                                                                             adapter.log.debug('Sunprotect for ' + result[i].shutterName + ' is not active');
                                                                             adapter.log.debug('Temperature outside: ' + outsideTemp + ' < ' + hysteresisOutside + ' OR Light: ' + sunLight + ' < ' + hysteresisLight);
                                                                             adapter.log.info('Set ID: ' + result[i].shutterName + ' value: ' + result[i].heightUp + '%')
-                                                                          
+
                                                                             adapter.setForeignState(result[i].name, parseFloat(result[i].heightUp), false);
                                                                             result[i].currentHeight = result[i].heightUp;
                                                                             adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
@@ -2836,7 +2835,7 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
                                                                             result[i].currentAction = 'OpenInSunProtect';
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
@@ -3270,11 +3269,11 @@ function main(adapter) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
 
-    if (typeof adapter.config.HolidayDP !== undefined &&  adapter.config.HolidayDP.length > 0) {
+    if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
         adapter.subscribeForeignStates(adapter.config.HolidayDP);
         adapter.log.info('subscribe ' + adapter.config.HolidayDP);
 
-       
+
     }
 
     if (adapter.config.triggerAutoLiving != '') {

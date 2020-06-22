@@ -44,9 +44,14 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 0.7.0 (2020-05-16)
-* (René) better (userfriendly) check for adjustable times
-* (René) longitude and latidude from system instead local variable
+### 0.7.0 (2020-06-29)
+* (rg-engineering) better (userfriendly) check for adjustable times
+* (rg-engineering) longitude and latidude from system instead local variable
+* (rg-engineering) datapoint for Holiday incl. internal check and handling
+* (rg-engineering) late all down added 
+* (5G7K) Extended sun protection
+* (simatec) edit User Menu for Timesettings
+* (simatec) Fix Lightvalue to 20.000 Lux
 
 ### 0.6.2 (18.05.2020)
 * (simatec) errorhandling for sentry.io
@@ -68,9 +73,9 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Added more debug logs
 * (simatec) Added node Support
 * (simatec) node 8 support removed
-* (René) late all down added
-* (René) late all down configurable per shutter
-* (René) in summer time not to move down (configurable)
+* (Renï¿½) late all down added
+* (Renï¿½) late all down configurable per shutter
+* (Renï¿½) in summer time not to move down (configurable)
 
 ### 0.5.0 (06.04.2020)
 * (simatec) Bugfix Goldenhour

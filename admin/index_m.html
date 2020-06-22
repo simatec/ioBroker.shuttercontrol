@@ -438,40 +438,6 @@
 
     <script type="text/javascript">
 
-        /*
-        function show_hide_column(table_name, col_name, col_no, do_show) {
-
-            //this is only for header
-            var element = document.getElementById(col_name);
-
-            if (do_show) {
-                element.classList.remove("hide");
-            }
-            else {
-                element.classList.add("hide");
-            }
-
-            //here we have all other rows
-            var tbl = document.getElementById(table_name);
-            var rows = tbl.getElementsByTagName('tr');
-
-            for (var row = 0; row < rows.length; row++) {
-                var cols = rows[row].children;
-                if (col_no >= 0 && col_no < cols.length) {
-                    var cell = cols[col_no];
-                    if (cell.tagName == 'TD' || cell.tagName == 'TH') {
-                        if (do_show) {
-                            cell.classList.remove("hide");
-                        }
-                        else {
-                            cell.classList.add("hide");
-                        }
-                    }
-                }
-            }
-        }
-        */
-
 
         // This will be called by the admin adapter when the settings page loads
         function load(settings, onChange) {
@@ -822,40 +788,6 @@
                 $('.col-W_shutterUpSleepMin').show();
                 $('.col-WE_shutterUpSleepMin').show();
             }
-
-            /*
-            //always disable those col's
-            show_hide_column("events", "events_col_5", 5, false);
-            show_hide_column("events", "events_col_6", 6, false);
-            show_hide_column("events", "events_col_7", 7, false);
-            show_hide_column("events", "events_col_8", 8, false);
-            show_hide_column("events", "events_col_9", 9, false);
-            show_hide_column("events", "events_col_10", 10, false);
-            show_hide_column("events", "events_col_11", 11, false);
-            show_hide_column("events", "events_col_12", 12, false);
-            show_hide_column("events", "events_col_13", 13, false);
-            show_hide_column("events", "events_col_14", 14, false);
-            show_hide_column("events", "events_col_15", 15, false);
-            show_hide_column("events", "events_col_16", 16, false);
-            show_hide_column("events", "events_col_17", 17, false);
-            show_hide_column("events", "events_col_18", 18, false);
-            show_hide_column("events", "events_col_19", 19, false);
-            show_hide_column("events", "events_col_20", 20, false);
-            show_hide_column("events", "events_col_21", 21, false);
-            show_hide_column("events", "events_col_22", 22, false);
-            show_hide_column("events", "events_col_23", 23, false);
-            show_hide_column("events", "events_col_24", 24, false);
-            show_hide_column("events", "events_col_25", 25, false);
-            show_hide_column("events", "events_col_26", 26, false);
-            show_hide_column("events", "events_col_27", 27, false);
-            show_hide_column("events", "events_col_28", 28, false);
-            show_hide_column("events", "events_col_29", 29, false);
-            show_hide_column("events", "events_col_30", 30, false);
-            show_hide_column("events", "events_col_31", 31, false);
-            show_hide_column("events", "events_col_32", 32, false);
-            show_hide_column("events", "events_col_33", 33, false);
-            show_hide_column("events", "events_col_34", 34, false);
-            */
         }
 
         var selectId;
@@ -1039,17 +971,17 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterDownLiving" />
+                            <input type="time" class="value" id="W_shutterDownLiving" />
                             <label for="W_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
                         <div class="col s6 l2 input-field col-W_shutterUpLivingMin">
-                            <input type="text" class="value" id="W_shutterUpLivingMin" />
+                            <input type="time" class="value" id="W_shutterUpLivingMin" />
                             <label for="W_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterUpLivingMax" />
+                            <input type="time" class="value" id="W_shutterUpLivingMax" />
                             <label for="W_shutterUpLivingMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the week</span>
                         </div>
@@ -1062,17 +994,17 @@
 
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="WE_shutterDownLiving" />
+                            <input type="time" class="value" id="WE_shutterDownLiving" />
                             <label for="WE_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field col-WE_shutterUpLivingMin">
-                            <input type="text" class="value" id="WE_shutterUpLivingMin" />
+                            <input type="time" class="value" id="WE_shutterUpLivingMin" />
                             <label for="WE_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="WE_shutterUpLivingMax" />
+                            <input type="time" class="value" id="WE_shutterUpLivingMax" />
                             <label for="WE_shutterUpLivingMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the weekend</span>
                         </div>
@@ -1097,17 +1029,17 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterDownSleep" />
+                            <input type="time" class="value" id="W_shutterDownSleep" />
                             <label for="W_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
                         <div class="col s6 l2 input-field col-W_shutterUpSleepMin">
-                            <input type="text" class="value" id="W_shutterUpSleepMin" />
+                            <input type="time" class="value" id="W_shutterUpSleepMin" />
                             <label for="W_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="W_shutterUpSleepMax" />
+                            <input type="time" class="value" id="W_shutterUpSleepMax" />
                             <label for="W_shutterUpSleepMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the week</span>
                         </div>
@@ -1120,62 +1052,21 @@
 
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="WE_shutterDownSleep" />
+                            <input type="time" class="value" id="WE_shutterDownSleep" />
                             <label for="WE_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field col-WE_shutterUpSleepMin">
-                            <input type="text" class="value" id="WE_shutterUpSleepMin" />
+                            <input type="time" class="value" id="WE_shutterUpSleepMin" />
                             <label for="WE_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="WE_shutterUpSleepMax" />
+                            <input type="time" class="value" id="WE_shutterUpSleepMax" />
                             <label for="WE_shutterUpSleepMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the weekend</span>
                         </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="checkbox" class="value" id="LateAllDown" />
-                            <span for="LateAllDown" class="translate">Move down all shutters late</span>
-                        </div>
-
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="LateAllDownTime" />
-                            <label for="LateAllDownTime" class="translate"></label>
-                            <span class="translate">Time to move down all shutters late night</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="SummerStart" />
-                            <label for="SummerStart" class="translate"></label>
-                            <span class="translate">SummerStart</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="SummerEnd" />
-                            <label for="SummerEnd" class="translate"></label>
-                            <span class="translate">SummerEnd</span>
-                        </div>
-                    </div>
-                    <!--
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="XMasStart" />
-                            <label for="XMasStart" class="translate"></label>
-                            <span class="translate">XMasStart</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="XMasEnd" />
-                            <label for="XMasEnd" class="translate"></label>
-                            <span class="translate">XMasEnd</span>
-                        </div>
-                    </div>
-                        -->
                 </div>
                 <!-- Tab Extra -->
                 <div id="tab-extra" class="col s12 page">
@@ -1185,7 +1076,6 @@
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col s6 l2 input-field">
                             <input type="text" class="value" id="latitude" />
                             <label for="latitude" class="translate"></label>
@@ -1225,6 +1115,53 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="HolidayDP" />
+                            <label for="HolidayDP" class="translate"></label>
+                            <span class="translate">Object ID for holiday today</span>
+                        </div>
+                        <div class="col s1 m2 l1">
+                            <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="triggerAutoSleep" />
+                            <label for="triggerAutoSleep" class="translate"></label>
+                            <span class="translate">Object ID of trigger for Auto Sleep</span>
+                        </div>
+                        <div class="col s1 m2 l1">
+                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="col s6 l3 input-field">
+                            <input type="text" class="value" id="triggerAutoLiving" />
+                            <label for="triggerAutoLiving" class="translate"></label>
+                            <span class="translate">Object ID of trigger for Auto Living</span>
+                        </div>
+                        <div class="col s1 m2 l1">
+                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l2 input-field">
+                            <input type="checkbox" class="value" id="LateAllDown" />
+                            <span for="LateAllDown" class="translate">Move down all shutters late</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="time" class="value" id="LateAllDownTime" />
+                            <label for="LateAllDownTime" class="translate"></label>
+                            <span class="translate">Time to move down all shutters late night</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="SummerStart" />
+                            <label for="SummerStart" class="translate"></label>
+                            <span class="translate">SummerStart</span>
+                        </div>
+                        <div class="col s6 l2 input-field">
+                            <input type="text" class="value" id="SummerEnd" />
+                            <label for="SummerEnd" class="translate"></label>
+                            <span class="translate">SummerEnd</span>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col s6 l2 input-field">
                             <input type="checkbox" class="value" id="currentShutterState" />
                             <span for="currentShutterState" class="translate">check current Shutter State</span>
@@ -1239,42 +1176,6 @@
                             <span class="translate">public holidays Instance</span>
                         </div>
                     </div>
-
-                   
-                    <div class="row">
-
-
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="HolidayDP" />
-                            <label for="HolidayDP" class="translate"></label>
-                            <span class="translate">Object ID for holiday today</span>
-                        </div>
-                        <div class="col s1 m2 l1">
-                            <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="triggerAutoSleep" />
-                            <label for="triggerAutoSleep" class="translate"></label>
-                            <span class="translate">Object ID of trigger for Auto Sleep</span>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="triggerAutoLiving" />
-                            <label for="triggerAutoLiving" class="translate"></label>
-                            <span class="translate">Object ID of trigger for Auto Living</span>
-                        </div>
-                        <div class="col s1 m2 l2">
-                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -1342,12 +1243,12 @@
                             </div>
                             <div class="row">
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="setpointValue" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
+                                    <input type="number" id="setpointValue" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0 °C" step="0.1" />
                                     <label for="setpointValue" class="translate"></label>
                                     <span class="translate">setpoint of the sun protection temperature</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
+                                    <input type="number" id="hysteresisOutside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0 %" step="0.1" />
                                     <label for="hysteresisOutside" class="translate"></label>
                                     <span class="translate">hysteresis Outsidetemperature (percent)</span>
                                 </div>
@@ -1359,16 +1260,15 @@
                                 <div class="col s1 m2 l1">
                                     <a id="actualValueTempDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="setpointValueLight" class="form-control" min="0.0" max="5000.0" placeholder="0.0-5000.0" step="0.1" />
+                                    <input type="number" id="setpointValueLight" class="form-control" min="0" max="20000" placeholder="0-20000 Lux" step="1" />
                                     <label for="setpointValueLight" class="translate"></label>
                                     <span class="translate">setpoint of the sun protection Lightsensor</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
+                                    <input type="number" id="hysteresisLight" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0 %" step="0.1" />
                                     <label for="hysteresisLight" class="translate"></label>
                                     <span class="translate">hysteresis Lightsensor (percent)</span>
                                 </div>
@@ -1383,12 +1283,12 @@
                             </div>
                             <div class="row">
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="tempInside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0" step="0.1" />
+                                    <input type="number" id="tempInside" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0 °C" step="0.1" />
                                     <label for="tempInside" class="translate"></label>
                                     <span class="translate">Temp Inside</span>
                                 </div>
                                 <div class="col s6 l2 input-field">
-                                    <input type="number" id="hysteresisInside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0" step="0.1" />
+                                    <input type="number" id="hysteresisInside" class="form-control" min="0.0" max="100.0" placeholder="0.0-100.0 %" step="0.1" />
                                     <label for="hysteresisInside" class="translate"></label>
                                     <span class="translate">hysteresis Insidetemperature (percent)</span>
                                 </div>

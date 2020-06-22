@@ -176,7 +176,7 @@
     "sunProtecEnum": "",
     "driveHeightSun": 30,
     "sunProtEndElevation": 10,
-    "LateAllDown": true,
+    "LateAllDown": false,
     "LateAllDownTime": "22:15",
     "SummerStart": "01.03.",
     "SummerEnd": "30.09.",
