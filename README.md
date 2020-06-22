@@ -52,6 +52,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (5G7K) Extended sun protection
 * (simatec) edit User Menu for Timesettings
 * (simatec) Fix Lightvalue to 20.000 Lux
+* (simatec) added better German Translation
 
 ### 0.6.2 (18.05.2020)
 * (simatec) errorhandling for sentry.io
