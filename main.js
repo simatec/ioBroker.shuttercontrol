@@ -803,8 +803,9 @@ function shutterGoldenHour() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'sunProtect') {
+                                if (result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
+                                    result[i].currentAction = 'sunProtect';
                                 } else {
                                     shutterHeight = parseFloat(result[i].heightUp);
                                     result[i].currentAction = 'up';
@@ -979,8 +980,9 @@ function shutterSunriseSunset() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'sunProtect') {
+                                if (result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
+                                    result[i].currentAction = 'sunProtect';
                                 } else {
                                     shutterHeight = parseFloat(result[i].heightUp);
                                     result[i].currentAction = 'up';
@@ -1226,8 +1228,9 @@ function shutterUpLiving() {
                     if (state && state === true || state && state.val === true) {
                         setTimeout(function () {
                             let shutterHeight = 0;
-                            if (result[i].currentAction == 'sunProtect') {
+                            if (result[i].currentAction == 'OpenInSunProtect') {
                                 shutterHeight = parseFloat(result[i].heightDownSun);
+                                result[i].currentAction = 'sunProtect';
                             } else {
                                 shutterHeight = parseFloat(result[i].heightUp);
                                 result[i].currentAction = 'up';
@@ -1305,8 +1308,9 @@ function shutterUpLiving() {
                             if (state && state === true || state && state.val === true) {
                                 setTimeout(function () {
                                     let shutterHeight = 0;
-                                    if (result[i].currentAction == 'sunProtect') {
+                                    if (result[i].currentAction == 'OpenInSunProtect') {
                                         shutterHeight = parseFloat(result[i].heightDownSun);
+                                        result[i].currentAction = 'sunProtect';
                                     } else {
                                         shutterHeight = parseFloat(result[i].heightUp);
                                         result[i].currentAction = 'up';
@@ -1590,7 +1594,7 @@ function shutterUpSleep() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'sunProtect') {
+                                if (result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
                                 } else {
                                     shutterHeight = parseFloat(result[i].heightUp);
@@ -1671,8 +1675,9 @@ function shutterUpSleep() {
                                 if (state && state === true || state && state.val === true) {
                                     setTimeout(function () {
                                         let shutterHeight = 0;
-                                        if (result[i].currentAction == 'sunProtect') {
+                                        if (result[i].currentAction == 'OpenInSunProtect') {
                                             shutterHeight = parseFloat(result[i].heightDownSun);
+                                            result[i].currentAction = 'sunProtect';
                                         } else {
                                             shutterHeight = parseFloat(result[i].heightUp);
                                             result[i].currentAction = 'up';
@@ -1990,7 +1995,7 @@ function sunProtect() {
 
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                     if (insideTemp > result[i].tempInside) {
-                                                                        if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect') {
+                                                                        if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
                                                                             /**
                                                                              * @param {any} err
                                                                              * @param {{ val: string; }} state
@@ -2010,8 +2015,8 @@ function sunProtect() {
                                                                                         shutterState(result[i].name);
                                                                                     }
                                                                                     //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].currentAction != 'sunProtect' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                                        result[i].currentAction = 'sunProtect';
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                                        result[i].currentAction = 'OpenInSunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
                                                                                     //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2047,6 +2052,9 @@ function sunProtect() {
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightDownSun + '%')
                                                                                     //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                                     shutterState(result[i].name);
+                                                                                }
+                                                                                else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                                    result[i].currentAction = '';
                                                                                 }
                                                                             }
                                                                         });
@@ -2109,7 +2117,7 @@ function sunProtect() {
                                                                 }
                                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                                     if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && insideTemp > result[i].tempInside) {
-                                                                        if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect') {
+                                                                        if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
 
                                                                             /**
                                                                              * @param {any} err
@@ -2130,8 +2138,8 @@ function sunProtect() {
                                                                                         shutterState(result[i].name);
                                                                                     }
                                                                                     //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].currentAction != 'sunProtect' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                                        result[i].currentAction = 'sunProtect';
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                                        result[i].currentAction = 'OpenInSunProtect';
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
                                                                                     //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2166,6 +2174,9 @@ function sunProtect() {
                                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
                                                                                     //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                                     shutterState(result[i].name);
+                                                                                }
+                                                                                else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                                    result[i].currentAction = '';
                                                                                 }
                                                                             }
                                                                         });
@@ -2218,7 +2229,7 @@ function sunProtect() {
                                                         }
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
                                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
-                                                                if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect') {
+                                                                if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
 
                                                                     /**
                                                                      * @param {any} err
@@ -2239,8 +2250,8 @@ function sunProtect() {
                                                                                 shutterState(result[i].name);
                                                                             }
                                                                             //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].currentAction != 'sunProtect' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                                result[i].currentAction = 'sunProtect';
+                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                                result[i].currentAction = 'OpenInSunProtect';
                                                                                 adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                             }
                                                                             //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2275,6 +2286,9 @@ function sunProtect() {
                                                                             //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                             shutterState(result[i].name);
                                                                         }
+                                                                        else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            result[i].currentAction = '';
+                                                                        }
                                                                     }
                                                                 });
                                                             }
@@ -2301,7 +2315,7 @@ function sunProtect() {
                                             }
                                             if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'off') || (result[i].triggerID == '')) {
                                                 if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
-                                                    if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
+                                                    if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
 
                                                         /**
                                                          * @param {any} err
@@ -2322,8 +2336,8 @@ function sunProtect() {
                                                                     shutterState(result[i].name);
                                                                 }
                                                                 //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].currentAction != 'sunProtect' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                    result[i].currentAction = 'sunProtect';
+                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                    result[i].currentAction = 'OpenInSunProtect';
                                                                     adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                 }
                                                                 //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2354,6 +2368,9 @@ function sunProtect() {
                                                                     adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
                                                                     //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                     shutterState(result[i].name);
+                                                                }
+                                                                else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                    result[i].currentAction = '';
                                                                 }
                                                             }
                                                         });
@@ -2399,7 +2416,7 @@ function sunProtect() {
                                                             sunLight = parseFloat(state.val);
                                                         }
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
-                                                            if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect') {
+                                                            if (result[i].tempOutside < outsideTemp && (result[i].lightSensor != '' && result[i].valueLight < sunLight || result[i].lightSensor == '') && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
                                                                 /**
                                                                  * @param {any} err
                                                                  * @param {{ val: string; }} state
@@ -2420,7 +2437,7 @@ function sunProtect() {
                                                                         }
                                                                         //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
                                                                         else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                            result[i].currentAction = 'sunProtect';
+                                                                            result[i].currentAction = 'OpenInSunProtect';
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
                                                                         //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2454,6 +2471,9 @@ function sunProtect() {
                                                                             adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
                                                                             //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                             shutterState(result[i].name);
+                                                                        }
+                                                                        else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            result[i].currentAction = '';
                                                                         }
                                                                     }
                                                                 });
@@ -2489,7 +2509,7 @@ function sunProtect() {
                                                         insideTemp = parseFloat(state.val);
 
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyUp') || (result[i].triggerID == '')) {
-                                                            if (insideTemp > result[i].tempInside) {
+                                                            if (insideTemp > result[i].tempInside && result[i].currentAction != 'sunProtect' && result[i].currentAction != 'OpenInSunProtect') {
 
                                                                 /**
                                                                  * @param {any} err
@@ -2509,8 +2529,8 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         //Shutter closed. Set currentAction = sunProtect when sunProtect starts => If shutter is opened automatically it can be opened in height heightDownSun directly
-                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].currentAction != 'sunProtect' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
-                                                                            result[i].currentAction = 'sunProtect';
+                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDown) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction != 'down' && result[i].firstCompleteUp == true ) { //check currentAction!=down here. If shutter is already closed sunProtect must not be set. Otherwise shutter will be opened again when sunProtect ends!
+                                                                            result[i].currentAction = 'OpenInSunProtect';
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
                                                                         //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
@@ -2543,6 +2563,9 @@ function sunProtect() {
                                                                             adapter.log.debug('Sunprotect ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + result[i].heightUp + '%')
                                                                             //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                                             shutterState(result[i].name);
+                                                                        }
+                                                                        else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            result[i].currentAction = '';
                                                                         }
                                                                     }
                                                                 });
