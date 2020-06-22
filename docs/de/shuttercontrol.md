@@ -135,7 +135,7 @@ das hier angegeben ausgeführt:
 
 **Rollladenhöhe beim Runterfahren:** gewünschte Rollladenposition bei Verdunklung
 
-**Rollladenhöhe beim hochfahren:** gewünschte Rollladenposition am Morgen
+**Rollladenhöhe beim Hochfahren:** gewünschte Rollladenposition am Morgen
 
 **Sonnenhöhe:** Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser Wert hier eingegeben; sonst leer lassen.
 
@@ -150,7 +150,7 @@ die Helligkeit sowie der Sonnenstand o.ä. als Auslöser für die Beschattung un
 ![sunProtect.jpg](img/sunProtect.jpg)
 
 Die Felder im Einzelnen:
-**Rollladenhöhe beim runterfahren:** Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll.
+**Rollladenhöhe beim Runterfahren:** Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll.
 
 **Himmelsrichtung:** Ausrichtung des Fensters auf der Windrose (0° = Nord; 180° = Süd)
 
@@ -193,11 +193,13 @@ Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
 ### Tipps:
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der automatisch angefahrenen, setzt die Automatik aus!
+Ausnahme: Wenn der Rollladen das erste Mal am Tag manuell auf 100% geöffnet wird, wird ebenso der Sonnenschutz ermöglicht. Hierbei fährt der Rollladen bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
+Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 ---
 
 # Konfiguration - Zeit-Einstellungen
-In diesem Abschnitt können einige Zeit- bzw. Astro einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen 
+In diesem Abschnitt können einige Zeit- bzw. Astro Einstellungen vorgenommen werden, die in den individuellen Rollladenkonfigurationen 
 ausgewählt werden können.
 
 ![timeSettings.jpg](img/timeSettings.jpg)
@@ -208,7 +210,7 @@ In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im Woh
 **Das Pulldown** enthält verschiedene grundlegende Varianten
 
 * **Nur die Zeit Wohnbereich**: Die Rollläden werden reinweg zeitgesteuert gefahren
-* **Zeit Wohnbereich mit Sonnenauf- & Sonnenuntergang**: Die Rollläden werden nach Sonnenauf- und untergang gesteuert, jedoch nicht 
+* **Zeit Wohnbereich mit Sonnenauf- & Sonnenuntergang**: Die Rollläden werden nach Sonnenauf- und -untergang gesteuert, jedoch nicht 
 vor der eingegebenen Zeit hoch und nicht nach der eingegebenen Zeit heruntergefahren
 * **Zeit Wohnbereich mit GoldenHour**: Analog zu dem Sonnenauf- und Untergang, jedoch mit dem Beginn  und Ende der "Golden Hour" als Referenz
 
