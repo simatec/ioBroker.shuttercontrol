@@ -127,7 +127,12 @@
     "type": "climate-control",
     "compact": true,
     "materialize": true,
-    "stopBeforeUpdate": true
+    "stopBeforeUpdate": true,
+    "plugins": {
+      "sentry": {
+        "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
+      }
+    }
   },
   "native": {
     "UseAstro": true,
