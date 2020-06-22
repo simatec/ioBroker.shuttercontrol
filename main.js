@@ -1596,6 +1596,7 @@ function shutterUpSleep() {
                                 let shutterHeight = 0;
                                 if (result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
+                                    result[i].currentAction = 'sunProtect';
                                 } else {
                                     shutterHeight = parseFloat(result[i].heightUp);
                                     result[i].currentAction = 'up';
