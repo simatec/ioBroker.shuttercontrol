@@ -2020,7 +2020,7 @@ function sunProtect() {
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
                                                                                     //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                                         adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                     }
@@ -2143,7 +2143,7 @@ function sunProtect() {
                                                                                         adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                                     }
                                                                                     //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                                    else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                                         adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                                         result[i].currentAction = 'sunProtect';
                                                                                     }
@@ -2255,7 +2255,7 @@ function sunProtect() {
                                                                                 adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                             }
                                                                             //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                            else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                                 adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                                 result[i].currentAction = 'sunProtect';
                                                                             }
@@ -2341,7 +2341,7 @@ function sunProtect() {
                                                                     adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                 }
                                                                 //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                     adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                     result[i].currentAction = 'sunProtect';
                                                                 }
@@ -2441,7 +2441,7 @@ function sunProtect() {
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
                                                                         //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                             adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                             result[i].currentAction = 'sunProtect';
                                                                         }                                                                    }
@@ -2534,7 +2534,7 @@ function sunProtect() {
                                                                             adapter.log.debug('Set sunprotect mode for ' + result[i].shutterName + '. Currently closed. Set to sunprotect if shutter will be opened automatically');
                                                                         }
                                                                         //Shutter is in position = sunProtect. Maybe restart of adapter. sunProtect not set -> set sunProtect again
-                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentAction == '') {
+                                                                        else if (parseFloat(state.val) == parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight != result[i].heightUp && result[i].currentHeight != result[i].heightDown && result[i].currentAction == '') {
                                                                             adapter.log.debug(result[i].shutterName + ': Shutter is in position sunProtect. Reset mode sunProtect to cancel sunProtect automatically. Height:' + state.val + ' HeightDownSun:' + result[i].heightDownSun);
                                                                             result[i].currentAction = 'sunProtect';
                                                                         }
