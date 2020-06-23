@@ -2352,7 +2352,7 @@ function sunProtect() {
                                     }, driveDelayUpSleep * i, i);
                                     break;
                                 case 'in- & outside temperature and direction': // in- & outside temperature and direction
-                                    resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                                    resultDirectionRangeMinus = parseInt(result[i].direction) - parseInt(result[i].directionRange);
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
                                     setTimeout(function () {
                                         let currentValue = '';
@@ -2472,8 +2472,10 @@ function sunProtect() {
                                     }, driveDelayUpSleep * i, i);
                                     break;
                                 case 'outside temperature and direction': //outside temperature and direction
-                                    resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                                    resultDirectionRangeMinus = parseInt(result[i].direction) - parseInt(result[i].directionRange);
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
+
+                                    adapter.log.debug("resultDirectionRangeMinus " + resultDirectionRangeMinus + " " + " resultDirectionRangePlus " + resultDirectionRangePlus);
                                     setTimeout(function () {
                                         let currentValue = '';
                                         /**
@@ -2512,11 +2514,15 @@ function sunProtect() {
                                                             if ((resultDirectionRangeMinus) < azimuth && (resultDirectionRangePlus) > azimuth) {
                                                                 if (result[i].tempOutside < outsideTemp || result[i].valueLight < sunLight) {
 
+                                                                    adapter.log.debug("should sunprotect for " + result[i].shutterName);
                                                                     /**
                                                                      * @param {any} err
                                                                      * @param {{ val: string; }} state
                                                                      */
                                                                     adapter.getForeignState(result[i].name, (err, state) => {
+
+                                                                        adapter.log.debug(result[i].shutterName + ": " + state.val + " " + result[i].heightDownSun + " " + result[i].currentHeight + " " +  result[i].heightUp);
+
                                                                         if (state) {
                                                                             if (parseFloat(state.val) > parseFloat(result[i].heightDownSun) && parseFloat(state.val) == parseFloat(result[i].currentHeight) && result[i].currentHeight == result[i].heightUp) {
                                                                                 result[i].currentAction = 'sunProtect';
@@ -2531,13 +2537,27 @@ function sunProtect() {
                                                                         }
                                                                     });
                                                                 }
+                                                                else {
+                                                                    adapter.log.debug(" temp " + result[i].tempOutside + " <  " + outsideTemp + " light " + result[i].valueLight + " < " + sunLight);
+                                                                }
+                                                            }
+                                                            else {
+                                                                adapter.log.debug(" azimuth " + azimuth);
                                                             }
                                                         }
+                                                        else {
+                                                            adapter.log.debug("  currentValue === mustValue)" + currentValue + " " + mustValue);
+                                                        }
                                                         if (currentValue === mustValue || (currentValue != mustValue && result[i].autoDrive != 'onlyDown') || (result[i].triggerID == '')) {
-                                                            let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
-                                                            let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+                                                            const hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
+                                                            const hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
+
+                                                            adapter.log.debug("check end sun protection for " + result[i].shutterName + " hysterese temp " + hysteresisOutside + " > " + outsideTemp + " hysterese light " + hysteresisLight + " > " + sunLight);
+
 
                                                             if ((resultDirectionRangePlus) < azimuth || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '') || (result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight && result[i].outsideTempSensor == '')) {
+
+                                                                adapter.log.debug("should end sun protection " + result[i].currentAction + " for " + result[i].shutterName);
 
                                                                 /**
                                                                  * @param {any} err
@@ -2566,7 +2586,7 @@ function sunProtect() {
                                     }, driveDelayUpSleep * i, i);
                                     break;
                                 case 'only direction': //only direction
-                                    resultDirectionRangeMinus = result[i].direction - result[i].directionRange;
+                                    resultDirectionRangeMinus = parseInt(result[i].direction) - parseInt(result[i].directionRange);
                                     resultDirectionRangePlus = parseInt(result[i].direction) + parseInt(result[i].directionRange);
                                     setTimeout(function () {
                                         let currentValue = '';
@@ -2868,6 +2888,9 @@ function sunProtect() {
                             }, driveDelayUpSleep * i, i);
                         }
                     });
+                }
+                else {
+                    adapter.log.debug(" nothing to do to end sunprotect " + elevation + " " + sunProtEndStart + " " + sunProtEndStop + " " + result[i].currentAction + " " + result[i].shutterName);
                 }
             }
         }
