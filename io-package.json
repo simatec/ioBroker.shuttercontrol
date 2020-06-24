@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "news": {
+      "0.7.1": {
+        "en": "errorhandling for sentry.io, small bugfixes",
+        "de": "Fehlerbehandlung für sentry.io, kleine Bugfixes",
+        "ru": "обработка ошибок для sentry.io, небольшие исправления",
+        "pt": "manipulação de erros para sentry.io, pequenas correções",
+        "nl": "foutafhandeling voor sentry.io, kleine bugfixes",
+        "fr": "gestion des erreurs pour sentry.io, petites corrections de bugs",
+        "it": "gestione degli errori per sentry.io, piccole correzioni di bug",
+        "es": "manejo de errores para sentry.io, pequeñas correcciones de errores",
+        "pl": "obsługa błędów dla sentry.io, małe poprawki błędów",
+        "zh-cn": "sentry.io的错误处理，小错误修正"
+      },
       "0.7.0": {
         "en": "better (userfriendly) check for adjustable times, datapoint for Holiday incl. internal check and handling, late all down added, Extended sun protection, edited User Menu for Timesettings, Bugfix Lightvalue to 20.000 Lux, added better German Translation",
         "de": "besser (benutzerfreundlich) auf einstellbare Zeiten prüfen, Datenpunkt für Urlaub inkl. Interne Überprüfung und Handhabung, spätes Herunterfahren hinzugefügt, Erweiterter Sonnenschutz, bearbeitetes Benutzermenü für Zeiteinstellungen, Bugfix Lightvalue auf 20.000 Lux, bessere deutsche Übersetzung hinzugefügt",

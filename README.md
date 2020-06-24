@@ -44,7 +44,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 0.7.0 (2020-06-29)
+### 0.7.1 (2020-06-24)
+* (simatec) small bugfixes
+* (simatec) errorhandling for sentry.io
+
+### 0.7.0 (2020-06-23)
 * (rg-engineering) better (userfriendly) check for adjustable times
 * (rg-engineering) datapoint for Holiday incl. internal check and handling
 * (rg-engineering) late all down added 
