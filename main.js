@@ -607,7 +607,7 @@ function shutterDriveCalc() {
                 } else if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
                     upTimeLiving = astroTimeLivingUp;
                     debugCnt = 11;
-                } else if (IsEqual(adapter.config.WW_shutterUpLivingMin, adapter.config.WE_shutterUpLivingMax)) {
+                } else if (IsEqual(adapter.config.WE_shutterUpLivingMin, adapter.config.WE_shutterUpLivingMax)) {
                     upTimeLiving = adapter.config.WE_shutterUpLivingMax;
                     debugCnt = 12;
                 } else if (IsEqual(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
