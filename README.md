@@ -44,6 +44,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.7.2 (2020-xx-xx)
+* (simatec) better translation for all languages
+* (simatec) better overview in the user interface
+
 ### 0.7.1 (2020-06-24)
 * (simatec) small bugfixes
 * (simatec) errorhandling for sentry.io

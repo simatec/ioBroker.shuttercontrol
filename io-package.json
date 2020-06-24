@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "news": {
       "0.7.1": {
         "en": "errorhandling for sentry.io, small bugfixes",
