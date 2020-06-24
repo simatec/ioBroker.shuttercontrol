@@ -121,7 +121,8 @@ function startAdapter(options) {
      */
     adapter.on('stateChange', (id, state) => {
         if (state) {
-            if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+            //if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+            if (adapter.config.HolidayDP !== '') {
                 if (id.includes(adapter.config.HolidayDP)) {
                     adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
                     adapter.setState('control.Holiday', { val: state.val, ack: true });
@@ -287,7 +288,7 @@ function triggerChange() {
                                  * @param {{ val: number; }} state
                                  */
                                 adapter.getForeignState(arrayChangeTrigger[i].name, (err, state) => {
-                                    if (state.val != arrayChangeTrigger[i].triggerDrive && state.val < arrayChangeTrigger[i].triggerDrive) {
+                                    if (state && state.val != arrayChangeTrigger[i].triggerDrive && state.val < arrayChangeTrigger[i].triggerDrive) {
                                         arrayChangeTrigger[i].triggerHeight = (state.val);
                                         adapter.log.debug('save trigger height: ' + arrayChangeTrigger[i].triggerHeight + '%');
                                         adapter.log.debug('#1 Set ID: ' + arrayChangeTrigger[i].shutterName + ' value: ' + arrayChangeTrigger[i].triggerDrive + '%');
@@ -3078,7 +3079,7 @@ function sunPos() {
         currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
     } catch (e) {
-        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
     }
     // get sunrise azimuth in degrees
     let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
@@ -3292,11 +3293,10 @@ function main(adapter) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
 
-    if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+    //if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+    if (adapter.config.HolidayDP !== '') {
         adapter.subscribeForeignStates(adapter.config.HolidayDP);
         adapter.log.info('subscribe ' + adapter.config.HolidayDP);
-
-
     }
 
     if (adapter.config.triggerAutoLiving != '') {
