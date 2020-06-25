@@ -1456,11 +1456,15 @@ function shutterUpLiving() {
                                                 if (state && state.val != shutterHeight) {
                                                     adapter.log.debug('#15 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                     adapter.setForeignState(result[i].name, shutterHeight, false);
-                                                    result[i].currentHeight = shutterHeight;
+                                                    
                                                     adapter.log.debug('shutterUpLiving #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + shutterHeight + '%');
                                                     //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     shutterState(result[i].name);
                                                 }
+												
+												adapter.log.debug('#15a save current height: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
+												//this is necessary if we end sunprotect manually by moving up manually and shutter does not close during summer or at all
+												result[i].currentHeight = shutterHeight;
                                             });
                                         } else if (result[i].triggerID == '') {
                                             /**
