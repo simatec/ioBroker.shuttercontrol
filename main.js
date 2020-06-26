@@ -483,9 +483,17 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
     if (resultStates) {
         for (const i in resultStates) {
             adapter.getForeignState(resultStates[i].name, (err, state) => {
-                if (state) {
+                if (typeof state != undefined && state != null) {
                     resultStates[i].currentAction = '';     //Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning
                     resultStates[i].firstCompleteUp = true;
+					
+					adapter.log.debug(resultStates[i].shutterName + " set currentHeight to" + state.val);
+					//26.06.2020 and store current height to make a sunprotect possible after manuell abort of sunprotect and no further movements
+					if (typeof state.val != undefined && state.val != null) {
+						resultStates[i].currentHeight = state.val;
+					}
+					
+					
                 }
             });
         }
@@ -1456,7 +1464,7 @@ function shutterUpLiving() {
                                                 if (state && state.val != shutterHeight) {
                                                     adapter.log.debug('#15 Set ID: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
                                                     adapter.setForeignState(result[i].name, shutterHeight, false);
-                                                    
+                                                    result[i].currentHeight = shutterHeight;
                                                     adapter.log.debug('shutterUpLiving #3 ' + result[i].shutterName + ' old height: ' + result[i].oldHeight + '% new height: ' + shutterHeight + '%');
                                                     //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                     shutterState(result[i].name);
@@ -1464,6 +1472,8 @@ function shutterUpLiving() {
 												
 												adapter.log.debug('#15a save current height: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
 												//this is necessary if we end sunprotect manually by moving up manually and shutter does not close during summer or at all
+												
+												//does not work?? 26.06.20
 												result[i].currentHeight = shutterHeight;
                                             });
                                         } else if (result[i].triggerID == '') {
@@ -1786,6 +1796,13 @@ function shutterUpSleep() {
                                                 //adapter.log.debug('save current height: ' + result[i].currentHeight + '%' + ' from ' + result[i].shutterName);
                                                 shutterState(result[i].name);
                                             }
+											
+												adapter.log.debug('#21a save current height: ' + result[i].shutterName + ' value: ' + shutterHeight + '%');
+												//this is necessary if we end sunprotect manually by moving up manually and shutter does not close during summer or at all
+												
+												//does not work?? 26.06.20
+												result[i].currentHeight = shutterHeight;
+
                                         });
                                     } else if (result[i].triggerID == '') {
                                         /**
