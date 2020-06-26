@@ -2800,7 +2800,7 @@ function sunProtect() {
                                                             let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                             let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
-                                                            if ((parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
+                                                            if ((parseFloat(hysteresisOutside) > outsideTemp) || (result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight)) {
 
                                                                 /**
                                                                  * @param {any} err

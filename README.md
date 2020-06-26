@@ -44,7 +44,8 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 0.7.2 (2020-xx-xx)
+### 0.7.2 (2020-06-26)
+* (simatec) Bugfix sunprotect for outsidetemp
 * (simatec) better translation for all languages
 * (simatec) better overview in the user interface
 
