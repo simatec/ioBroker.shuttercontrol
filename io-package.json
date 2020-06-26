@@ -3,6 +3,18 @@
     "name": "shuttercontrol",
     "version": "0.7.2",
     "news": {
+      "0.7.2": {
+        "en": "Bugfix sunprotect for outside temperature, better translation for all languages, better overview in the user interface",
+        "de": "Bugfix Sonnenschutz für Außentemperatur, bessere Übersetzung für alle Sprachen, bessere Übersicht in der Benutzeroberfläche",
+        "ru": "Исправлена ошибка защиты от солнца для наружной температуры, улучшен перевод для всех языков, улучшен обзор в пользовательском интерфейсе.",
+        "pt": "Bugfix sunprotect para temperatura externa, melhor tradução para todos os idiomas, melhor visão geral na interface do usuário",
+        "nl": "Bugfix sunprotect voor buitentemperatuur, betere vertaling voor alle talen, beter overzicht in de gebruikersinterface",
+        "fr": "Bugfix sunprotect pour la température extérieure, meilleure traduction pour toutes les langues, meilleure vue d'ensemble dans l'interface utilisateur",
+        "it": "Bugfix sunprotect per temperatura esterna, migliore traduzione per tutte le lingue, migliore panoramica nell'interfaccia utente",
+        "es": "Bugfix sunprotect para temperatura exterior, mejor traducción para todos los idiomas, mejor visión general en la interfaz de usuario",
+        "pl": "Bugfix sunprotect dla temperatury zewnętrznej, lepsze tłumaczenie dla wszystkich języków, lepszy przegląd w interfejsie użytkownika",
+        "zh-cn": "Bugfix sunprotect用于外部温度，更好地翻译所有语言，在用户界面中提供更好的概览"
+      },
       "0.7.1": {
         "en": "errorhandling for sentry.io, small bugfixes",
         "de": "Fehlerbehandlung für sentry.io, kleine Bugfixes",
