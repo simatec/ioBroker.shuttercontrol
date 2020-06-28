@@ -925,7 +925,7 @@ function shutterGoldenHour() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'OpenInSunProtect') {
+                                if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
                                     result[i].currentAction = 'sunProtect';
                                 } else {
@@ -1102,7 +1102,7 @@ function shutterSunriseSunset() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'OpenInSunProtect') {
+                                if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
                                     result[i].currentAction = 'sunProtect';
                                 } else {
@@ -1350,7 +1350,7 @@ function shutterUpLiving() {
                     if (state && state === true || state && state.val === true) {
                         setTimeout(function () {
                             let shutterHeight = 0;
-                            if (result[i].currentAction == 'OpenInSunProtect') {
+                            if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                 shutterHeight = parseFloat(result[i].heightDownSun);
                                 result[i].currentAction = 'sunProtect';
                             } else {
@@ -1430,7 +1430,7 @@ function shutterUpLiving() {
                             if (state && state === true || state && state.val === true) {
                                 setTimeout(function () {
                                     let shutterHeight = 0;
-                                    if (result[i].currentAction == 'OpenInSunProtect') {
+                                    if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                         shutterHeight = parseFloat(result[i].heightDownSun);
                                         result[i].currentAction = 'sunProtect';
                                     } else {
@@ -1751,7 +1751,7 @@ function shutterUpSleep() {
                         if (state && state === true || state && state.val === true) {
                             setTimeout(function () {
                                 let shutterHeight = 0;
-                                if (result[i].currentAction == 'OpenInSunProtect') {
+                                if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                     shutterHeight = parseFloat(result[i].heightDownSun);
                                     result[i].currentAction = 'sunProtect';
                                 } else {
@@ -1833,7 +1833,7 @@ function shutterUpSleep() {
                                 if (state && state === true || state && state.val === true) {
                                     setTimeout(function () {
                                         let shutterHeight = 0;
-                                        if (result[i].currentAction == 'OpenInSunProtect') {
+                                        if (result[i].currentAction == 'sunProtect' || result[i].currentAction == 'OpenInSunProtect') {
                                             shutterHeight = parseFloat(result[i].heightDownSun);
                                             result[i].currentAction = 'sunProtect';
                                         } else {
@@ -2352,6 +2352,7 @@ function sunProtect() {
                                                                                     shutterState(result[i].name);
                                                                                 }
                                                                                 else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                                    adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                                     result[i].currentAction = '';
                                                                                 }
                                                                             }
@@ -2478,6 +2479,7 @@ function sunProtect() {
                                                                                     shutterState(result[i].name);
                                                                                 }
                                                                                 else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                                    adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                                     result[i].currentAction = '';
                                                                                 }
                                                                             }
@@ -2590,6 +2592,7 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                             result[i].currentAction = '';
                                                                         }
                                                                     }
@@ -2674,6 +2677,7 @@ function sunProtect() {
                                                                     shutterState(result[i].name);
                                                                 }
                                                                 else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                    adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                     result[i].currentAction = '';
                                                                 }
                                                             }
@@ -2780,6 +2784,7 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                             result[i].currentAction = '';
                                                                         }
                                                                     }
@@ -2872,6 +2877,7 @@ function sunProtect() {
                                                                             shutterState(result[i].name);
                                                                         }
                                                                         else if (result[i].currentAction == 'OpenInSunProtect') {
+                                                                            adapter.log.debug('OpenInSunProtect for ' + result[i].shutterName + ' is no longer active');
                                                                             result[i].currentAction = '';
                                                                         }
                                                                     }
