@@ -141,7 +141,9 @@ das hier angegeben ausgeführt:
 
 **Auslöser-ID:** über das (+) den Sensor (State) auswählen der eine Rollladenfahrt verhindern soll (z.B. Türkontakt).
 
+**Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
 
+**Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
 
 ### Sonnenschutz-Einstellungen
 Der Sonnenschutz kann über verschiedene Mechanismen gesteuert werden. Dabei kann eine Außentemperatur, eine Innentemperatur, 
@@ -268,9 +270,23 @@ Diese Einstellungen sind eigentlich selbsterklärend: Breiten- und Längengrad d
 **Verwenden der gesetzlichen Feiertage:** Sollen die Rollläden an Feiertagen so wie an Wochenenden fahren wird die Checkbox aktiviert und eine Instanz des Feiertage-Adapters ausgewählt.
 Man kann so ggf. zwei Instanzen des Feiertage-Adapters anlegen; einen zum Anzeigen aller möglicher Feiertage und einen mit arbeitszeitrelevanten Feiertagen, auf die dann shuttercontrol zugreift.
 
+**Objekt-ID für das setzen des Urlaubs** Diese Objekt-ID setzt den internen Zustand "Holiday". Man könnte hier z.Bsp. einen Datenpunkt aus dem iCal-Adapter verwenden
+
 **Objekt ID des Auslösers für den Schlafbereich (Auto):** Mit diesem Auslöser kann der Automodus des Schlafbereichs aktiviert werden.
 
 **Objekt ID des Triggers für den Wohnbereich (Auto):** Mit diesem Auslöser kann der Automodus des Wohnbereichs aktiviert werden.
+
+**Alle Rollläden schliessen spät in der Nacht** Mit dieser Option können alle Rollladen spät abends nochmal runtergefahren werden. Das deckt das Szenario ab, wenn zur normalen
+Zeit für das Herunterfahren das Fenster oder Tür noch offen war, oder wenn man nach dem Herunterfahren z.Bsp. die Terassentür nochmal öffnet. Man kann diese Option in den
+jeweiligen Rollladen-Einstellungen separat deaktivieren
+
+**Zeit, in der alle Rollläden spät in der Nacht schließen** Zeit, wenn alle Rollläden abends nochmal heruntergafhren werden sollen (z.Bsp. 22:30Uhr)
+
+** Beginn des Sommers ** Beginn des Zeitraums, in dem Rollläden im Sommer nicht heruntergefahren werden.
+
+** Ende des Sommers ** Ende des Zeitraums, in dem Rollläden im Sommer nicht heruntergefahren werden. 
+Welche Rollläden im Sommer nicht heruntergefahren werden, kann in den jeweiligen Rollladen-Einstellungen festgelegt werden
+
 
 ### Tipp
 Unter den Objekten wird ein Datenpunkt angelegt: "shuttercontrol.0.control.Holiday". 

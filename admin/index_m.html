@@ -595,6 +595,10 @@
             onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
 
+            $('.timepicker').timepicker({
+                "twelveHour": false
+            });
+
             if (M) M.updateTextFields();
 
             getAdapterInstances('feiertage', function (instances) {
@@ -971,17 +975,17 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="W_shutterDownLiving" />
+                            <input type="time" class="timepicker value" id="W_shutterDownLiving" />
                             <label for="W_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
                         <div class="col s6 l2 input-field col-W_shutterUpLivingMin">
-                            <input type="time" class="value" id="W_shutterUpLivingMin" />
+                            <input type="time" class="timepicker value" id="W_shutterUpLivingMin" />
                             <label for="W_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="W_shutterUpLivingMax" />
+                            <input type="time" class="timepicker value" id="W_shutterUpLivingMax" />
                             <label for="W_shutterUpLivingMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the week</span>
                         </div>
@@ -994,17 +998,17 @@
 
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="WE_shutterDownLiving" />
+                            <input type="time" class="timepicker value" id="WE_shutterDownLiving" />
                             <label for="WE_shutterDownLiving" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field col-WE_shutterUpLivingMin">
-                            <input type="time" class="value" id="WE_shutterUpLivingMin" />
+                            <input type="time" class="timepicker value" id="WE_shutterUpLivingMin" />
                             <label for="WE_shutterUpLivingMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="WE_shutterUpLivingMax" />
+                            <input type="time" class="timepicker value" id="WE_shutterUpLivingMax" />
                             <label for="WE_shutterUpLivingMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the weekend</span>
                         </div>
@@ -1029,17 +1033,17 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="W_shutterDownSleep" />
+                            <input type="time" class="timepicker value" id="W_shutterDownSleep" />
                             <label for="W_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the week</span>
                         </div>
                         <div class="col s6 l2 input-field col-W_shutterUpSleepMin">
-                            <input type="time" class="value" id="W_shutterUpSleepMin" />
+                            <input type="time" class="timepicker value" id="W_shutterUpSleepMin" />
                             <label for="W_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the week</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="W_shutterUpSleepMax" />
+                            <input type="time" class="timepicker value" id="W_shutterUpSleepMax" />
                             <label for="W_shutterUpSleepMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the week</span>
                         </div>
@@ -1052,17 +1056,17 @@
 
                     <div class="row">
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="WE_shutterDownSleep" />
+                            <input type="time" class="timepicker value" id="WE_shutterDownSleep" />
                             <label for="WE_shutterDownSleep" class="translate"></label>
                             <span class="translate">Shut down on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field col-WE_shutterUpSleepMin">
-                            <input type="time" class="value" id="WE_shutterUpSleepMin" />
+                            <input type="time" class="timepicker value" id="WE_shutterUpSleepMin" />
                             <label for="WE_shutterUpSleepMin" class="translate"></label>
                             <span class="translate">Min Time for Driving up on the weekend</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="WE_shutterUpSleepMax" />
+                            <input type="time" class="timepicker value" id="WE_shutterUpSleepMax" />
                             <label for="WE_shutterUpSleepMax" class="translate"></label>
                             <span class="translate">Max Time for Driving up on the weekend</span>
                         </div>
@@ -1146,7 +1150,7 @@
                             <span for="LateAllDown" class="translate">Move down all shutters late</span>
                         </div>
                         <div class="col s6 l2 input-field">
-                            <input type="time" class="value" id="LateAllDownTime" />
+                            <input type="time" class="timepicker value" id="LateAllDownTime" />
                             <label for="LateAllDownTime" class="translate"></label>
                             <span class="translate">Time to move down all shutters late night</span>
                         </div>
