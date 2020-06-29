@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.7.2",
+    "version": "0.7.3",
     "news": {
+      "0.7.3": {
+        "en": "errorhandling for sentry.io, bugfix, cancel all schedule by unload, bug fix and documentation",
+        "de": "Fehlerbehandlung für sentry.io, Bugfix, Abbrechen aller Zeitpläne durch Entladen, Bugfix und Dokumentation",
+        "ru": "обработка ошибок для sentry.io, исправление ошибок, отмена всего расписания путем выгрузки, исправления ошибок и документации",
+        "pt": "manipulação de erros para sentry.io, correção de bugs, cancele toda a programação por descarregamento, correção de bugs e documentação",
+        "nl": "foutafhandeling voor sentry.io, bugfix, annuleer alle planning door te lossen, bugfix en documentatie",
+        "fr": "gestion des erreurs pour sentry.io, correction de bugs, annulation de tout le planning par déchargement, correction de bugs et documentation",
+        "it": "gestione degli errori per sentry.io, bugfix, annullamento di tutti i programmi mediante scaricamento, correzione dei bug e documentazione",
+        "es": "manejo de errores para sentry.io, corrección de errores, cancelar toda la programación por descarga, corrección de errores y documentación",
+        "pl": "obsługa błędów dla sentry.io, naprawa błędów, anulowanie całego harmonogramu poprzez rozładowanie, poprawkę błędu i dokumentację",
+        "zh-cn": "sentry.io的错误处理，错误修正，通过卸载取消所有计划，错误修正和文档"
+      },
       "0.7.2": {
         "en": "Bugfix sunprotect for outside temperature, better translation for all languages, better overview in the user interface",
         "de": "Bugfix Sonnenschutz für Außentemperatur, bessere Übersetzung für alle Sprachen, bessere Übersicht in der Benutzeroberfläche",

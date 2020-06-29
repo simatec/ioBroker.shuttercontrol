@@ -122,6 +122,10 @@ The fields in detail:
 
 **Object ID of the indoor sensor:** via the (+) select the temperature sensor (state) which should prevent a roller shutter travel.
 
+**close roler shútters late:** With this option, the roller shutter is additionally shut down at a defined time (adjustable in the extra settings)
+
+**do not close close shutters in summer:** some shutters should not be closed in summer. The period for this is specified in the extra settings.
+
 ### tips:
 If a shutter is adjusted manually and the position does not correspond to the automatically approached, the automatic switches off!
 Exception: Sunprotect works also if the shutter is opened manually to 100% for the first time per day. In this case, the roller shutter moves into the sun protection height shortly after being opened manually, if required.
@@ -184,6 +188,16 @@ These settings are actually self-explanatory: latitude and longitude of the plac
 **Use of public holidays:** If the roller shutters are to be used on public holidays as well as on weekends, the checkbox is activated and an instance of the public holiday adapter is selected.
 You can create two instances of the holiday adapter if necessary; a to display all possible holidays and a working time relevant holidays, which then access shuttercontrol.
 
+**Object ID for setting the vacation** this Object-ID sets internal state "Holiday". You could use a datapoint from iCal-Adapter
+
 **Object ID of the trigger for the sleeping area (auto):** With this trigger, the automatic mode of the sleeping area can be activated.
 
 **Object ID of the trigger for the living area (auto):** With this trigger, the automatic mode of the living area can be activated.
+
+**All shutters close late at night** With this option, all roller shutters can be lowered again late in the evening. This covers the scenario if the window or door was still open at the normal time for the shutdown, or if the terrace door was opened again after the shutdown. You can deactivate this option separately in the respective shutter settings
+
+**Time when all shutters close late at night** Time when all roller shutters should be shut down again in the evening (e.g. 10:30 p.m.)
+
+** Beginning of summer ** Start of the period when shutters are not shut down in summer.
+** end of the summer ** End of the period in which roller shutters are not shut down in summer.
+Which roller shutters are not shut down in summer can be specified in the respective roller shutter settings.
