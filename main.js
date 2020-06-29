@@ -121,7 +121,6 @@ function startAdapter(options) {
      */
     adapter.on('stateChange', (id, state) => {
         if (state) {
-            //if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
             if (adapter.config.HolidayDP !== '') {
                 if (id.includes(adapter.config.HolidayDP)) {
                     adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
@@ -422,7 +421,7 @@ function checkActualStates() {
         });
     }
 
-    if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
+    if (adapter.config.HolidayDP !== '') {
         adapter.log.debug('checking HolidayDP');
         adapter.getForeignState(adapter.config.HolidayDP, (err, state) => {
             if (err) {
@@ -2759,7 +2758,7 @@ function sunProtect() {
                                                             let hysteresisOutside = (((100 - result[i].hysteresisOutside) / 100) * result[i].tempOutside).toFixed(2);
                                                             let hysteresisLight = (((100 - result[i].hysteresisLight) / 100) * result[i].valueLight).toFixed(2);
 
-                                                            if ((parseFloat(hysteresisOutside) > outsideTemp) || (result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight)) {
+                                                            if ((parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor != '' && parseFloat(hysteresisLight) > sunLight) || (parseFloat(hysteresisOutside) > outsideTemp && result[i].lightSensor == '')) {
 
                                                                 /**
                                                                  * @param {any} err
@@ -3270,7 +3269,6 @@ function main(adapter) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
     }
 
-    //if (typeof adapter.config.HolidayDP !== undefined && adapter.config.HolidayDP.length > 0) {
     if (adapter.config.HolidayDP !== '') {
         adapter.subscribeForeignStates(adapter.config.HolidayDP);
         adapter.log.info('subscribe ' + adapter.config.HolidayDP);

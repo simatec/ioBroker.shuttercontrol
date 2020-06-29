@@ -44,6 +44,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.7.3 (2020-06-29)
+* (simatec) errorhandling for sentry.io
+
 ### 0.7.2 (2020-06-26)
 * (simatec) Bugfix sunprotect for outsidetemp
 * (simatec) better translation for all languages
