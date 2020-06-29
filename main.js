@@ -99,7 +99,6 @@ function startAdapter(options) {
 
     // start here!
     adapter.on('ready', () => main(adapter));
-    //adapter.on('ready', main); // Main method defined below for readability
 
     // is called when adapter shuts down - callback has to be called under any circumstances!
     /**
@@ -109,9 +108,20 @@ function startAdapter(options) {
         try {
             adapter.log.info('cleaned everything up...');
             clearTimeout(timer);
+            schedule.cancelJob('shutterUpGoldenHourEnd');
+            schedule.cancelJob('calcTimer');
+            schedule.cancelJob('shutterDownGoldenHour');
+            schedule.cancelJob('shutterUpSunrise');
+            schedule.cancelJob('shutterDownSunset');
+            schedule.cancelJob('shutterUpLiving');
+            schedule.cancelJob('shutterDownLiving');
+            schedule.cancelJob('shutterUpSleep');
+            schedule.cancelJob('shutterDownLate');
+            schedule.cancelJob('shutterDownSleep');
+            schedule.cancelJob('calcPosTimer');
             callback();
         } catch (e) {
-            callback();
+            callback(e);
         }
     });
     // is called if a subscribed state changes
@@ -3095,9 +3105,11 @@ function delayCalc() {
     }
 
 }
-const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
-    sunPos();
-});
+
+//const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
+//    sunPos();
+//});
+
 
 function sunPos() {
     let currentPos;
@@ -3300,7 +3312,10 @@ function main(adapter) {
     timer = setTimeout(function () {
         adapter.log.debug('1111');
         checkActualStates();
-        sunPos();
+        //sunPos();
+        const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
+            sunPos();
+        });
     }, 2000);
 
 

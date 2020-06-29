@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 0.7.3 (2020-06-29)
 * (simatec) errorhandling for sentry.io
+* (simatec) bugfixes
+* (simatec) cancel all schedule by unload
+* (rg-engineering) bug fix and documentation
 
 ### 0.7.2 (2020-06-26)
 * (simatec) Bugfix sunprotect for outsidetemp
