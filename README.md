@@ -44,6 +44,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.7.4 (2020-06-xx)
+* (simatec) added state for current shutter Action
+* (simatec) added state for current shutter Level
+
 ### 0.7.3 (2020-06-29)
 * (simatec) errorhandling for sentry.io
 * (simatec) bugfixes
