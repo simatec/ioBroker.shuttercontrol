@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.7.4",
+    "version": "0.8.0",
     "news": {
+      "0.8.0": {
+        "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code",
+        "de": "Status für aktuellen Verschluss hinzugefügt Aktion, Status für aktuellen Verschlusspegel hinzugefügt, Anzeige für manuellen Betrieb in den Status hinzugefügt, Codebereinigung, vollständige neue Struktur des Codes",
+        "ru": "добавлено состояние для текущего действия затвора, добавлено состояние для текущего уровня затвора, добавлен индикатор для ручного управления состояниями, очистки кода, завершена новая структура кода",
+        "pt": "estado adicionado para obturador atual Ação, estado adicionado para obturador atual Nível, indicador adicionado para operação manual nos estados, limpeza de código, completa nova estrutura do código",
+        "nl": "toegevoegde status voor huidige sluiter Actie, toegevoegde status voor huidige sluiter Niveau, toegevoegde indicator voor handmatige bediening in de staten, opschonen van code, complete nieuwe structuur van de code",
+        "fr": "état ajouté pour l'action actuelle de l'obturateur, état ajouté pour le niveau actuel de l'obturateur, indicateur ajouté pour le fonctionnement manuel dans les états, nettoyage du code, nouvelle structure complète du code",
+        "it": "stato aggiunto per azione dell'otturatore corrente, stato aggiunto per livello dell'otturatore corrente, indicatore aggiunto per il funzionamento manuale negli stati, pulizia del codice, nuova struttura completa del codice",
+        "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para operación manual en los estados, limpieza de código, completa nueva estructura del código",
+        "pl": "stan dodany dla aktualnej migawki Działanie, stan dodany dla aktualnego poziomu migawki, dodano Wskaźnik do ręcznej obsługi stanów, czyszczenie kodu, kompletna nowa struktura kodu",
+        "zh-cn": "为当前快门添加了操作状态，为当前快门水平添加了状态，为状态中的手动操作添加了指示器，代码清除，完成了代码的新结构"
+      },
       "0.7.3": {
         "en": "errorhandling for sentry.io, bugfix, cancel all schedule by unload, bug fix and documentation",
         "de": "Fehlerbehandlung für sentry.io, Bugfix, Abbrechen aller Zeitpläne durch Entladen, Bugfix und Dokumentation",
