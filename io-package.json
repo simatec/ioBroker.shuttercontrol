@@ -14,7 +14,6 @@
         "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para la operación manual en los estados, limpieza del código, completar la nueva estructura del código, botones para la operación de apertura y cierre manual agregados, visualización en los estados si el obturador fue movido manualmente",
         "pl": "dodany stan dla bieżącej migawki Działanie, dodany stan dla aktualnego poziomu migawki, dodany Wskaźnik ręcznej obsługi stanów, czyszczenie kodu, pełna nowa struktura kodu, Dodano przyciski ręcznej operacji otwierania i zamykania, Wyświetlanie stanów, jeśli migawka była przeniesione ręcznie",
         "zh-cn": "增加了当前快门的状态动作，增加了当前快门的状态，增加了状态中手动操作的指示器，代码清除，完成了代码的新结构，增加了手动打开和关闭操作的按钮，如果快门处于手动移动"
-  }
       },
       "0.7.3": {
         "en": "errorhandling for sentry.io, bugfix, cancel all schedule by unload, bug fix and documentation",
