@@ -4,16 +4,17 @@
     "version": "0.8.0",
     "news": {
       "0.8.0": {
-        "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code",
-        "de": "Status für aktuellen Verschluss hinzugefügt Aktion, Status für aktuellen Verschlusspegel hinzugefügt, Anzeige für manuellen Betrieb in den Status hinzugefügt, Codebereinigung, vollständige neue Struktur des Codes",
-        "ru": "добавлено состояние для текущего действия затвора, добавлено состояние для текущего уровня затвора, добавлен индикатор для ручного управления состояниями, очистки кода, завершена новая структура кода",
-        "pt": "estado adicionado para obturador atual Ação, estado adicionado para obturador atual Nível, indicador adicionado para operação manual nos estados, limpeza de código, completa nova estrutura do código",
-        "nl": "toegevoegde status voor huidige sluiter Actie, toegevoegde status voor huidige sluiter Niveau, toegevoegde indicator voor handmatige bediening in de staten, opschonen van code, complete nieuwe structuur van de code",
-        "fr": "état ajouté pour l'action actuelle de l'obturateur, état ajouté pour le niveau actuel de l'obturateur, indicateur ajouté pour le fonctionnement manuel dans les états, nettoyage du code, nouvelle structure complète du code",
-        "it": "stato aggiunto per azione dell'otturatore corrente, stato aggiunto per livello dell'otturatore corrente, indicatore aggiunto per il funzionamento manuale negli stati, pulizia del codice, nuova struttura completa del codice",
-        "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para operación manual en los estados, limpieza de código, completa nueva estructura del código",
-        "pl": "stan dodany dla aktualnej migawki Działanie, stan dodany dla aktualnego poziomu migawki, dodano Wskaźnik do ręcznej obsługi stanów, czyszczenie kodu, kompletna nowa struktura kodu",
-        "zh-cn": "为当前快门添加了操作状态，为当前快门水平添加了状态，为状态中的手动操作添加了指示器，代码清除，完成了代码的新结构"
+        "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code, Buttons for manual opening and closing operation added, Display in the States if the shutter was moved manually",
+        "de": "Status für aktuellen Verschluss hinzugefügt Aktion, Status für aktuellen Verschlusspegel hinzugefügt, Anzeige für manuellen Betrieb in den Status hinzugefügt, Codebereinigung, vollständige neue Struktur des Codes, Schaltflächen für manuellen Öffnungs- und Schließvorgang hinzugefügt, Anzeige in den Status, wenn der Verschluss war manuell bewegt",
+        "ru": "добавлено состояние для текущего действия затвора, добавлено состояние для текущего уровня затвора, добавлен индикатор для ручного управления в состояниях, очистка кода, полная новая структура кода, добавлены кнопки для ручного открытия и закрытия, отображение в состояниях, если затвор был переехал вручную",
+        "pt": "estado adicionado para obturador atual Ação, estado adicionado para obturador atual Nível, indicador adicionado para operação manual nos estados, limpeza de código, estrutura nova completa do código, botões para operação manual de abertura e fechamento adicionados, exibição nos estados se o obturador foi movido manualmente",
+        "nl": "toegevoegde status voor huidige sluiter Actie, toegevoegde status voor huidige sluiter Niveau, toegevoegd Indicator voor handmatige bediening in de staten, opschonen van code, compleet nieuwe structuur van de code, Knoppen voor handmatige opening en sluiting toegevoegd, Weergave in de staten als de sluiter was handmatig verplaatst",
+        "fr": "état ajouté pour l'action actuelle de l'obturateur, état ajouté pour le niveau actuel de l'obturateur, indicateur ajouté pour le fonctionnement manuel dans les états, nettoyage du code, nouvelle structure complète du code, boutons pour l'ouverture et la fermeture manuelles ajoutés, affichage aux États si l'obturateur était déplacé manuellement",
+        "it": "stato aggiunto per azione dell'otturatore corrente, stato aggiunto per livello dell'otturatore corrente, indicatore aggiunto per funzionamento manuale negli stati, pulizia del codice, nuova struttura completa del codice, pulsanti per l'operazione di apertura e chiusura manuale aggiunti, visualizzazione negli Stati se l'otturatore era spostato manualmente",
+        "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para la operación manual en los estados, limpieza del código, completar la nueva estructura del código, botones para la operación de apertura y cierre manual agregados, visualización en los estados si el obturador fue movido manualmente",
+        "pl": "dodany stan dla bieżącej migawki Działanie, dodany stan dla aktualnego poziomu migawki, dodany Wskaźnik ręcznej obsługi stanów, czyszczenie kodu, pełna nowa struktura kodu, Dodano przyciski ręcznej operacji otwierania i zamykania, Wyświetlanie stanów, jeśli migawka była przeniesione ręcznie",
+        "zh-cn": "增加了当前快门的状态动作，增加了当前快门的状态，增加了状态中手动操作的指示器，代码清除，完成了代码的新结构，增加了手动打开和关闭操作的按钮，如果快门处于手动移动"
+  }
       },
       "0.7.3": {
         "en": "errorhandling for sentry.io, bugfix, cancel all schedule by unload, bug fix and documentation",
@@ -366,6 +367,138 @@
         "def": false
       },
       "native": {}
+    },
+    {
+      "_id": "control.closeAll",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close all Shutter",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.openAll",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "open all Shutter",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.closeLiving",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Shutter from Living area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.openLiving",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "open Shutter from Living area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.closeSleep",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Shutter from Sleep area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.openSleep",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "open Shutter from Sleep area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
     },
     {
       "_id": "info.upTimeSleep",

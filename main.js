@@ -17,6 +17,7 @@ const shutterDownLiving = require('./lib/shutterDownLiving.js');        // shutt
 const shutterUpSleep = require('./lib/shutterUpSleep.js');              // shutterUpSleep
 const shutterDownLate = require('./lib/shutterDownLate.js');            // shutterDownLate
 const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
+const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
 
 /**
  * The adapter instance
@@ -186,6 +187,10 @@ function startAdapter(options) {
                             if (typeof state != undefined && state != null) {
                                 adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
                             }
+                            if (typeof state != undefined && state != null && state.val != result[i].currentHeight) {
+                                adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
+                                adapter.log.debug(result[i].shutterName + ' drived manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                            }
                         });
                         //Shutter is closed -> opened manually to 100% before it has been opened automatically -> 
                         // enable possibility to activate sunprotect height if required --> 
@@ -213,6 +218,30 @@ function startAdapter(options) {
             }
             if (id === adapter.namespace + '.info.Elevation') {
                 elevationDown(adapter, elevation, azimuth);
+            }
+            if (id === adapter.namespace + '.control.closeAll') {
+                let buttonState = 'closeAll';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.openAll') {
+                let buttonState = 'openAll';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.closeLiving') {
+                let buttonState = 'closeLiving';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.openLiving') {
+                let buttonState = 'openLiving';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.closeSleep') {
+                let buttonState = 'closeSleep';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.openSleep') {
+                let buttonState = 'openSleep';
+                buttonAction(adapter, buttonState);
             }
         }
     });
@@ -428,7 +457,6 @@ function GetSystemData() {
             if (err) {
                 adapter.log.error(err);
             } else {
-                //dateformat = ret.common.dateFormat;
                 adapter.config.longitude = state.common.longitude;
                 adapter.config.latitude = state.common.latitude;
                 adapter.log.info("system  longitude " + adapter.config.longitude + " latitude " + adapter.config.latitude);
