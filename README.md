@@ -52,6 +52,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) complete new structure of the code
 * (simatec) Buttons for manual opening and closing operation added
 * (simatec) Display in the States if the shutter was moved manually
+* (5G7K) Bug fix sunprotect
 
 ### 0.7.3 (2020-06-29)
 * (simatec) errorhandling for sentry.io
