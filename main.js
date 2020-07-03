@@ -190,6 +190,9 @@ function startAdapter(options) {
                             if (typeof state != undefined && state != null && state.val != result[i].currentHeight) {
                                 adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
                                 adapter.log.debug(result[i].shutterName + ' drived manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                            } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
+                                adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
+                                adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
                             }
                         });
                         //Shutter is closed -> opened manually to 100% before it has been opened automatically -> 

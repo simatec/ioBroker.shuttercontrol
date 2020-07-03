@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "news": {
+      "0.8.1": {
+        "en": "Bugfix shutterstates",
+        "de": "Bugfix Shutterstates",
+        "ru": "Bugfix жалюзи",
+        "pt": "Bugfix shutterstates",
+        "nl": "Bugfix sluitertijden",
+        "fr": "Bugfix shutterstates",
+        "it": "Otturatore bugfix",
+        "es": "Shutterstates de corrección de errores",
+        "pl": "Bugstix migawki",
+        "zh-cn": "错误修正快门状态"
+      },
       "0.8.0": {
         "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code, Buttons for manual opening and closing operation added, Display in the States if the shutter was moved manually",
         "de": "Status für aktuellen Verschluss hinzugefügt Aktion, Status für aktuellen Verschlusspegel hinzugefügt, Anzeige für manuellen Betrieb in den Status hinzugefügt, Codebereinigung, vollständige neue Struktur des Codes, Schaltflächen für manuellen Öffnungs- und Schließvorgang hinzugefügt, Anzeige in den Status, wenn der Verschluss war manuell bewegt",
