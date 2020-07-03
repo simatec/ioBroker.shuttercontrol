@@ -4,16 +4,16 @@
     "version": "0.8.1",
     "news": {
       "0.8.1": {
-        "en": "Bugfix shutterstates",
-        "de": "Bugfix Shutterstates",
-        "ru": "Bugfix жалюзи",
-        "pt": "Bugfix shutterstates",
-        "nl": "Bugfix sluitertijden",
-        "fr": "Bugfix shutterstates",
-        "it": "Otturatore bugfix",
-        "es": "Shutterstates de corrección de errores",
-        "pl": "Bugstix migawki",
-        "zh-cn": "错误修正快门状态"
+        "en": "Bugfix shutterstates, support for KNX",
+        "de": "Bugfix Shutterstates, Unterstützung für KNX",
+        "ru": "Bugfix shutterstates, поддержка KNX",
+        "pt": "Shutterstates, suporte para KNX",
+        "nl": "Bugfix shutterstates, ondersteuning voor KNX",
+        "fr": "Bugfix shutterstates, support pour KNX",
+        "it": "Bugfix otturatori, supporto per KNX",
+        "es": "Shutterstates de corrección de errores, soporte para KNX",
+        "pl": "Bugstix migawki, obsługa KNX",
+        "zh-cn": "错误修正快门状态，支持KNX"
       },
       "0.8.0": {
         "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code, Buttons for manual opening and closing operation added, Display in the States if the shutter was moved manually",
@@ -110,42 +110,6 @@
         "es": "Sentry.io agregado, soporte de nodo agregado, muchas correcciones de errores pequeñas, soporte de nodo 8 eliminado, nueva característica para protección solar, más registros de depuración",
         "pl": "dodano sentry.io, dodano obsługę węzłów, wiele małych poprawek błędów, usunięto obsługę węzłów 8, dodano nową funkcję Sunprotect, dodano więcej dzienników debugowania",
         "zh-cn": "添加了sendry.io，添加了节点支持，许多小错误修正，删除了节点8支持，添加了sunprotect新功能，添加了更多调试日志"
-      },
-      "0.5.1": {
-        "en": "Bugfix for Adapter checker, Added more debug logs, Added node 14 Support",
-        "de": "Bugfix für Adaptercheck, Weitere Debug-Logs hinzugefügt, Unterstützung für Node 14 hinzugefügt",
-        "ru": "Исправлена ошибка проверки адаптера, добавлено больше журналов отладки, добавлена поддержка узла 14",
-        "pt": "Correção de bug do verificador do adaptador, adicionado mais logs de depuração, adicionado suporte ao nó 14",
-        "nl": "Bugfix voor adaptercontrole, meer logboeken voor foutopsporing toegevoegd, ondersteuning voor knooppunt 14 toegevoegd",
-        "fr": "Correction de bugs pour le vérificateur d'adaptateurs, ajout de plus de journaux de débogage, ajout du support du noeud 14",
-        "it": "Bugfix for Adapter checker, Aggiunti altri log di debug, Aggiunto il nodo 14 Supporto",
-        "es": "Corrección de errores para el verificador del adaptador, se agregaron más registros de depuración, se agregó soporte para el nodo 14",
-        "pl": "Bugfix for Checker Adapter, Dodano więcej dzienników debugowania, Dodano obsługę węzła 14",
-        "zh-cn": "适配器检查器的错误修正，添加了更多的调试日志，添加了节点14支持"
-      },
-      "0.5.0": {
-        "en": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour with living area, Added aut fill for Position, many small Bugfixes, Bugfix Translations, Added debug log with more Informations, Bugfix compactmode",
-        "de": "Bugfix Goldenhour, Bugfix-Verzögerung für Sonnenschutz, Bugfix Goldhour mit Wohnbereich, Autofüllung für Position hinzugefügt, viele kleine Bugfixes, Bugfix-Übersetzungen, Debug-Protokoll mit mehr Informationen hinzugefügt, Bugfix-Kompaktmodus",
-        "ru": "Bugfix Goldenhour, задержка Bugfix для защиты от солнца, Bugfix Goldhour с жилой площадью, добавлено автоматическое заполнение позиции, множество мелких исправлений, переводы Bugfix, добавлен журнал отладки с дополнительной информацией, Bugfix compactmode",
-        "pt": "Bugfix Goldenhour, atraso de bugfix para sunprotect, Bugfix Goldhour com área útil, preenchimento automático adicionado para posição, muitas pequenas correções de bugs, traduções de correções, registro de depuração adicionado com mais informações, modo compacto de bugfix",
-        "nl": "Bugfix Goldenhour, Bugfix-vertraging voor zonwering, Bugfix Goldhour met woonruimte, Autofill toegevoegd voor positie, veel kleine Bugfixes, Bugfix-vertalingen, Debug-log toegevoegd met meer informatie, Bugfix compactmode",
-        "fr": "Bugfix Goldenhour, retard Bugfix pour sunprotect, Bugfix Goldhour avec espace de vie, remplissage automatique ajouté pour la position, de nombreux petits bugfixes, traductions Bugfix, journal de débogage ajouté avec plus d'informations, mode compact Bugfix",
-        "it": "Bugfix Goldenhour, ritardo Bugfix per protezione solare, Bugfix Goldhour con area soggiorno, riempimento automatico aggiunto per posizione, molti piccoli bugfix, traduzioni di bugfix, registro di debug aggiunto con ulteriori informazioni, modalità compatta Bugfix",
-        "es": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour con sala de estar, Relleno automático agregado para la posición, muchas correcciones de errores pequeñas, Traducciones de Bugfix, Registro de depuración agregado con más información, Bugfix compactmode",
-        "pl": "Bugfix Goldenhour, Bugfix delay for sunprotect, Bugfix Goldhour with living area, Dodano aut fill dla pozycji, wiele małych Bugfixes, Bugfix Translations, Dodano dziennik debugowania z większą ilością informacji, Bugfix compactmode",
-        "zh-cn": "Bugfix Goldenhour，针对防晒的Bugfix延迟，带有起居区的Bugfix Goldhour，增加了位置自动填充，许多小的Bugfix，Bugfix翻译，添加了具有更多信息的调试日志，Bugfix compactmode"
-      },
-      "0.4.3": {
-        "en": "Bugfix update process",
-        "de": "Bugfix Update Prozess",
-        "ru": "Исправление процесса обновления",
-        "pt": "Processo de atualização de bugfix",
-        "nl": "Bugfix-updateproces",
-        "fr": "Processus de mise à jour des correctifs",
-        "it": "Processo di aggiornamento bugfix",
-        "es": "Proceso de actualización de corrección de errores",
-        "pl": "Proces aktualizacji błędu",
-        "zh-cn": "Bugfix更新过程"
       }
     },
     "title": "shuttercontrol",

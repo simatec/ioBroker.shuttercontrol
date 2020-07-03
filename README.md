@@ -46,6 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 0.8.1 (2020-07-03)
 * (simatec) Bugfix shutterstates
+* (simatec) support for KNX
 
 ### 0.8.0 (2020-07-02)
 * (simatec) added state for current shutter Action
