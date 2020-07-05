@@ -44,6 +44,26 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.8.1 (2020-07-03)
+* (simatec) Bugfix shutterstates
+* (simatec) support for KNX
+
+### 0.8.0 (2020-07-02)
+* (simatec) added state for current shutter Action
+* (simatec) added state for current shutter Level
+* (simatec) added Indicator for manual operation in the states
+* (simatec) code cleanup
+* (simatec) complete new structure of the code
+* (simatec) Buttons for manual opening and closing operation added
+* (simatec) Display in the States if the shutter was moved manually
+* (5G7K) Bug fix sunprotect
+
+### 0.7.3 (2020-06-29)
+* (simatec) errorhandling for sentry.io
+* (simatec) bugfixes
+* (simatec) cancel all schedule by unload
+* (rg-engineering) bug fix and documentation
+
 ### 0.7.2 (2020-06-26)
 * (simatec) Bugfix sunprotect for outsidetemp
 * (simatec) better translation for all languages
