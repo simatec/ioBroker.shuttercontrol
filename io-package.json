@@ -1,8 +1,11 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.2",
+    "version": "0.8.3",
     "news": {
+      "0.8.3": {
+        "en": "Bugfixs IsSummerTime"
+      },
       "0.8.2": {
         "en": "small Bugfixs, Buttons for sunprotect operation added",
         "de": "kleine Bugfixs, Buttons für den Sonnenschutzbetrieb hinzugefügt",
