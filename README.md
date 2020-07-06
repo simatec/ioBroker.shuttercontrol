@@ -44,6 +44,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+## 0.8.2 (2020-07-06)
+* (simatec) small Bugfixs
+* (simatec) Buttons for sunprotect operation added
+
 ### 0.8.1 (2020-07-03)
 * (simatec) Bugfix shutterstates
 * (simatec) support for KNX

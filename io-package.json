@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.1",
+    "version": "0.8.2",
     "news": {
+      "0.8.2": {
+        "en": "small Bugfixs, Buttons for sunprotect operation added",
+        "de": "kleine Bugfixs, Buttons für den Sonnenschutzbetrieb hinzugefügt",
+        "ru": "исправлены мелкие ошибки, добавлены кнопки для работы с солнцезащитными средствами",
+        "pt": "pequenas correções de bugs, botões para operação de proteção solar adicionados",
+        "nl": "kleine bugfixes, knoppen voor bescherming tegen de zon toegevoegd",
+        "fr": "petites corrections de bugs, boutons pour l'opération de protection solaire ajoutés",
+        "it": "piccoli bug risolti, pulsanti aggiunti per il funzionamento sunprotect",
+        "es": "Pequeñas correcciones de errores, botones para la operación de protección solar añadidos",
+        "pl": "dodano małe poprawki, dodano przyciski do ochrony przeciwsłonecznej",
+        "zh-cn": "小错误修正，增加了用于防晒操作的按钮"
+      },
       "0.8.1": {
         "en": "Bugfix shutterstates, support for KNX",
         "de": "Bugfix Shutterstates, Unterstützung für KNX",
@@ -459,6 +471,28 @@
       "common": {
         "role": "button",
         "name": "open Shutter from Sleep area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.sunProtect",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Shutter for sun protect",
         "type": "boolean",
         "read": true,
         "write": true,

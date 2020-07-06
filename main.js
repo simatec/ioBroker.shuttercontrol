@@ -27,9 +27,9 @@ let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
 
 
-/** @type {any} */
+/** @type {boolean} */
 let autoLivingStr;
-/** @type {any} */
+/** @type {boolean} */
 let autoSleepStr;
 /** @type {number | undefined} */
 let delayUp;
@@ -244,6 +244,10 @@ function startAdapter(options) {
             }
             if (id === adapter.namespace + '.control.openSleep') {
                 let buttonState = 'openSleep';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.sunProtect') {
+                let buttonState = 'sunProtect';
                 buttonAction(adapter, buttonState);
             }
         }
