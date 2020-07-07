@@ -238,6 +238,7 @@
     "SummerEnd": "30.09.",
     "XMasStart": "01.12.",
     "XMasEnd": "06.01.",
+    "noGoTime": 0,
     "events": [
       {
         "enabled": true,
