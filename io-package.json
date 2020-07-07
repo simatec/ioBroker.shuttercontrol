@@ -4,7 +4,16 @@
     "version": "0.8.3",
     "news": {
       "0.8.3": {
-        "en": "Bugfixs IsSummerTime"
+        "en": "Bugfix IsSummerTime, Bugfix shutter convert",
+        "de": "Bugfix IsSummerTime, Bugfix Rollladen konvertieren",
+        "ru": "Bugfix IsSummerTime, Bugfix конвертировать затвор",
+        "pt": "Bugfix IsSummerTime, Bugfix obturador converter",
+        "nl": "Bugfix IsSummerTime, Bugfix-sluiterconversie",
+        "fr": "Bugfix IsSummerTime, conversion d'obturateur Bugfix",
+        "it": "Bugfix IsSummerTime, conversione dell'otturatore Bugfix",
+        "es": "Bugfix IsSummerTime, conversión de obturador Bugfix",
+        "pl": "Bugfix IsSummerTime, konwersja migawki Bugfix",
+        "zh-cn": "错误修正IsSummerTime，错误修正快门转换"
       },
       "0.8.2": {
         "en": "small Bugfixs, Buttons for sunprotect operation added",
