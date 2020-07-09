@@ -27,9 +27,9 @@ let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
 
 
-/** @type {any} */
+/** @type {boolean} */
 let autoLivingStr;
-/** @type {any} */
+/** @type {boolean} */
 let autoSleepStr;
 /** @type {number | undefined} */
 let delayUp;
@@ -190,6 +190,9 @@ function startAdapter(options) {
                             if (typeof state != undefined && state != null && state.val != result[i].currentHeight) {
                                 adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
                                 adapter.log.debug(result[i].shutterName + ' drived manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                            } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
+                                adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
+                                adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
                             }
                         });
                         //Shutter is closed -> opened manually to 100% before it has been opened automatically -> 
@@ -241,6 +244,10 @@ function startAdapter(options) {
             }
             if (id === adapter.namespace + '.control.openSleep') {
                 let buttonState = 'openSleep';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.sunProtect') {
+                let buttonState = 'sunProtect';
                 buttonAction(adapter, buttonState);
             }
         }
