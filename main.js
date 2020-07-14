@@ -433,13 +433,16 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
                     adapter.setState('shutters.autoState.' + nameDevice, { val: resultStates[i].currentAction, ack: true });
                     resultStates[i].firstCompleteUp = true;
 
-                    adapter.log.debug(resultStates[i].shutterName + " set currentHeight to" + state.val);
+                    adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + state.val);
+                    if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
+                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
+                    } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
+                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                    }
                     if (typeof state.val != undefined && state.val != null) {
                         resultStates[i].currentHeight = state.val;
                         adapter.setState('shutters.autoLevel.' + nameDevice, { val: resultStates[i].currentHeight, ack: true });
                     }
-
-
                 }
             });
         }
