@@ -406,7 +406,6 @@ function checkActualStates() {
             }
         });
     setTimeout(function () {
-        adapter.log.debug('222');
         shutterDriveCalc();
         createShutter();
     }, 1000);
@@ -437,6 +436,12 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
                     if (typeof state.val != undefined && state.val != null) {
                         resultStates[i].currentHeight = state.val;
                         adapter.setState('shutters.autoLevel.' + nameDevice, { val: resultStates[i].currentHeight, ack: true });
+                    
+                        if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
+                            adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
+                        } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
+                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                        }
                     }
 
 
@@ -1362,7 +1367,6 @@ function main(adapter) {
         checkStates();
     });
     timer = setTimeout(function () {
-        adapter.log.debug('1111');
         checkActualStates();
         const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
             sunPos();
@@ -1508,6 +1512,12 @@ function main(adapter) {
                     resultStates[i].oldHeight = (state.val);
                     resultStates[i].triggerHeight = (state.val);
                     adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
+                
+                    if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
+                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
+                    } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
+                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                    }
                 }
             });
         }
