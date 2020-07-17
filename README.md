@@ -44,6 +44,12 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.8.4 (2020-07-17)
+* (simatec) small Bugfixes
+* (5G7K) debug log changed
+* (simatec) Dependencies updated
+* (MeisterTR) Time left to detect second sleep
+
 ### 0.8.3 (2020-07-07)
 * (simatec) Bugfix IsSummerTime
 * (simatec) Bugfix shutter convert
