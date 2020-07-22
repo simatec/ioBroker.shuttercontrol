@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.3",
+    "version": "0.8.4",
     "news": {
+      "0.8.4": {
+        "en": "small Bugfixes, debug log changed, Dependencies updated, Time left to detect second sleep",
+        "de": "kleine Bugfixes, Debug-Protokoll geändert, Abhängigkeiten aktualisiert, verbleibende Zeit, um den zweiten Schlaf zu erkennen",
+        "ru": "небольшие исправления, изменен журнал отладки, обновлены зависимости, осталось время для обнаружения второго сна",
+        "pt": "pequenas correções de bugs, log de depuração alterado, dependências atualizadas, tempo restante para detectar o segundo sono",
+        "nl": "kleine bugfixes, logboek voor foutopsporing gewijzigd, afhankelijkheden bijgewerkt, resterende tijd om tweede slaap te detecteren",
+        "fr": "petites corrections de bugs, journal de débogage modifié, dépendances mises à jour, temps restant pour détecter le deuxième sommeil",
+        "it": "piccole correzioni, registro di debug modificato, dipendenze aggiornate, tempo rimanente per rilevare il secondo sonno",
+        "es": "Pequeñas correcciones de errores, registro de depuración cambiado, dependencias actualizadas, tiempo restante para detectar la segunda suspensión",
+        "pl": "drobne poprawki błędów, zmieniony dziennik debugowania, zaktualizowane zależności, pozostały czas na wykrycie drugiego snu",
+        "zh-cn": "小错误修正，调试日志已更改，依赖项已更新，剩余时间可检测到第二次睡眠"
+      },
       "0.8.3": {
         "en": "Bugfix IsSummerTime, Bugfix shutter convert",
         "de": "Bugfix IsSummerTime, Bugfix Rollladen konvertieren",
@@ -247,6 +259,7 @@
     "SummerEnd": "30.09.",
     "XMasStart": "01.12.",
     "XMasEnd": "06.01.",
+    "noGoTime": 0,
     "events": [
       {
         "enabled": true,
