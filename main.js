@@ -189,24 +189,24 @@ function startAdapter(options) {
                             }
                             if (typeof state != undefined && state != null && state.val != result[i].currentHeight) {
                                 adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
-                                adapter.log.debug(result[i].shutterName + ' drived manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                                adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '.');
                             } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
                                 adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
                             }
                         });
-                        //Shutter is closed -> opened manually to 100% before it has been opened automatically -> 
+                        //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
                         // enable possibility to activate sunprotect height if required --> 
                         // if sunprotect is required: shutter is set to sunProtect height
-                        if (result[i].firstCompleteUp == true && state.val == 100 && result[i].currentAction != 'up') {
+                        if (result[i].firstCompleteUp == true && state.val == result[i].heightUp && result[i].currentAction != 'up') {
                             result[i].currentHeight = state.val;
                             result[i].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later.
                             adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                             adapter.setState('shutters.autoLevel.' + nameDevice, { val: result[i].currentHeight, ack: true });
                             result[i].firstCompleteUp = false;
-                            adapter.log.debug(result[i].shutterName + ' opened manually to 100%. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                            adapter.log.debug(result[i].shutterName + ' opened manually to ' + result[i].heightUp + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
-                        if (result[i].firstCompleteUp == true && (state.val == 100 || state.val == result[i].heightUp || state.val == result[i].heightDownSun)) {
+                        if (result[i].firstCompleteUp == true && (state.val == result[i].heightUp || state.val == result[i].heightDownSun)) {
                             result[i].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
                         }
                         //save old height
