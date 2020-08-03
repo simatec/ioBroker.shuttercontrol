@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.4",
+    "version": "0.8.5",
     "news": {
+      "0.8.5": {
+        "en": "small Bugfixes, bugfixes trigger, new german doku",
+        "de": "kleine Bugfixes, Bugfixes Trigger, neue deutsche Doku",
+        "ru": "небольшие исправления, триггеры исправлений, новый немецкий доку",
+        "pt": "pequenas correções, disparador de correções, novo doku alemão",
+        "nl": "kleine bugfixes, bugfixes trigger, nieuwe Duitse doku",
+        "fr": "petites corrections de bugs, déclencheurs de corrections de bugs, nouveau doku allemand",
+        "it": "piccole correzioni, attivazione correzioni, nuovo doku tedesco",
+        "es": "Pequeñas correcciones de errores, activador de correcciones de errores, nuevo doku alemán",
+        "pl": "małe poprawki błędów, wyzwalacz poprawek błędów, nowe niemieckie doku",
+        "zh-cn": "小错误修正，错误修正触发，新的德国doku"
+      },
       "0.8.4": {
         "en": "small Bugfixes, debug log changed, Dependencies updated, Time left to detect second sleep",
         "de": "kleine Bugfixes, Debug-Protokoll geändert, Abhängigkeiten aktualisiert, verbleibende Zeit, um den zweiten Schlaf zu erkennen",
