@@ -447,7 +447,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 ---
 ### shuttercontrol.0.control
 
-![datapointscontrol](img/datapointscontrol.png)
+![datapointscontrol](img/datapointscontrol.PNG)
 
 Datenpunkte zur Steuerung verschiedener Funktionen wie:
 * Holiday  
