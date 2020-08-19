@@ -249,6 +249,14 @@ function startAdapter(options) {
             if (id === adapter.namespace + '.control.sunProtect') {
                 let buttonState = 'sunProtect';
                 buttonAction(adapter, buttonState);
+			}	
+			if (id === adapter.namespace + '.control.sunProtectSleep') {
+                let buttonState = 'sunProtectSleep';
+                buttonAction(adapter, buttonState);
+			}	
+			if (id === adapter.namespace + '.control.sunProtectLiving') {
+                let buttonState = 'sunProtectLiving';
+                buttonAction(adapter, buttonState);
             }
         }
     });

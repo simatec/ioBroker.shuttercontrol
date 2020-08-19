@@ -416,6 +416,16 @@
             display: none;
         }
 
+		#events td:nth-of-type(36) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(36) {
+            visibility: hidden;
+            display: none;
+        }
+		
         #dialog-select-member {
             z-index: 9999 !important;
         }
@@ -507,6 +517,7 @@
 
                     $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
+					$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -680,9 +691,11 @@
                
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
                 var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
+				var test3 = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
 
                 $('#LateDown').prop('checked', test1);
                 $('#inSummerNotDown').prop('checked', test2);
+				$('#KeepSunProtect').prop('checked', test3);
 
                 
                 setTimeout(function () {
@@ -714,6 +727,7 @@
                         
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
+						var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
 
 
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -743,6 +757,7 @@
                        
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
+						$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
                     });
                 }, 20)
             });
@@ -945,6 +960,7 @@
 
                                             <th data-name="LateDown" id="events_col_33" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">LateDown</th>
                                             <th data-name="inSummerNotDown" id="events_col_34" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">inSummerNotDown</th>
+											<th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #174475"></th>
@@ -1310,6 +1326,12 @@
                                     <a id="actualValueTempInsideDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
                                 </div>
                             </div>
+							<div class="row">
+								<div class="col s6 l2 input-field">
+                                    <input type="checkbox" id="KeepSunProtect" class="value" />
+                                    <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
+                                </div>
+                            </div>
                         </div>
                         <div id="tab-settingsPopUp" class="col s12 page">
                             <div class="row">
@@ -1411,11 +1433,10 @@
                                     <input type="checkbox" id="LateDown" class="value" />
                                     <label for="LateDown" class="translate">late_down</label>
                                 </div>
-                            
                                 <div class="col s6 l2 input-field">
                                     <input type="checkbox" id="inSummerNotDown" class="value" />
                                     <label for="inSummerNotDown" class="translate">inSummerNotDown</label>
-                                </div>
+								</div>
                             </div>
                             <!--
                             <div class="row">
