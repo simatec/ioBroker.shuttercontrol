@@ -1519,6 +1519,7 @@ function main(adapter) {
                     resultStates[i].currentHeight = (state.val);
                     resultStates[i].oldHeight = (state.val);
                     resultStates[i].triggerHeight = (state.val);
+					resultStates[i].triggerAction = (state.val);
                     adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
                 
                     if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
