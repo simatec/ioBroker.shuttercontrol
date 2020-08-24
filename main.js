@@ -18,6 +18,7 @@ const shutterUpSleep = require('./lib/shutterUpSleep.js');              // shutt
 const shutterDownLate = require('./lib/shutterDownLate.js');            // shutterDownLate
 const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
+const shutterState = require('./lib/shutterState.js');        			// shutterState
 
 /**
  * The adapter instance
@@ -188,11 +189,15 @@ function startAdapter(options) {
                                 adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
                             }
                             if (typeof state != undefined && state != null && state.val != result[i].currentHeight && state.val != result[i].oldHeight) {
-                                adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
+                                result[i].currentAction = 'Manu_Mode';
+								adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val);
+								shutterState(result[i].name, adapter);
                             } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
-                                adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
+                            //  result[i].currentAction = 'Manu_Mode';
+							//	adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
+								shutterState(result[i].name, adapter);
                             }
                         });
                         //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
