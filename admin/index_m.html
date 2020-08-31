@@ -435,7 +435,16 @@
             visibility: hidden;
             display: none;
         }
+		
+		#events td:nth-of-type(38) {
+            visibility: hidden;
+            display: none;
+        }
 
+        #events th:nth-of-type(38) {
+            visibility: hidden;
+            display: none;
+        }
 		
         #dialog-select-member {
             z-index: 9999 !important;
@@ -529,6 +538,7 @@
                     $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
 					$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
+					$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -703,10 +713,12 @@
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
                 var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
 				var test3 = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
+				var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
 
                 $('#LateDown').prop('checked', test1);
                 $('#inSummerNotDown').prop('checked', test2);
 				$('#KeepSunProtect').prop('checked', test3);
+				$('#driveAfterClose').prop('checked', test4);
 
                 
                 setTimeout(function () {
@@ -739,6 +751,7 @@
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
 						var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
+						var newdriveAfterClose = $('#driveAfterClose').prop('checked');
 
 
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -769,6 +782,7 @@
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
 						$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
+						$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', driveAfterClose).trigger('change');
                     });
                 }, 20)
             });
@@ -973,6 +987,7 @@
                                             <th data-name="inSummerNotDown" id="events_col_34" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">inSummerNotDown</th>
 											<th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
 											<th data-name="triggerAction" id="events_col_36" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
+											<th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #174475"></th>
@@ -1341,7 +1356,8 @@
 							<div class="row">
 								<div class="col s6 l2 input-field">
                                     <input type="checkbox" id="KeepSunProtect" class="value" />
-                                    <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
+                                    <label for="KeepSunProtect" class="translate"></label>
+									<span class="translate">KeepSunProtect</span>
                                 </div>
                             </div>
                         </div>
@@ -1357,6 +1373,7 @@
                                         <option value="sunset" class="translate">sunset</option>
                                         <option value="elevation" class="translate">elevation</option>
                                         <option value="goldenhour" class="translate">goldenhour</option>
+										<option value="manual-only" class="translate">manual-only</option>
                                     </select>
                                     <label for="typedown" class="translate"></label>
                                     <span class="translate">type down</span>
@@ -1370,6 +1387,7 @@
                                         <option value="sleep-auto" class="translate">sleep-auto</option>
                                         <option value="sunrise" class="translate">sunrise</option>
                                         <option value="goldenhour End" class="translate">goldenhour End</option>
+										<option value="manual-only" class="translate">manual-only</option>
                                     </select>
                                     <label for="typeUp" class="translate"></label>
                                     <span class="translate">type up</span>
@@ -1412,6 +1430,11 @@
                                     <label for="autoDriveShutter" class="translate"></label>
                                     <span class="translate">Automatic operation when trigger deviation</span>
                                 </div>
+								<div class="col s6 l2 input-field">
+                                    <input type="checkbox" id="driveAfterClose" class="value" />
+                                    <label for="driveAfterClose" class="translate"></label>
+									<span class="translate">DriveAfterClose</span>
+								</div>
                             </div>
                             <div class="row">
                                 <div class="col s6 l2 input-field">
