@@ -44,6 +44,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 0.8.7 (2020-08-21)
+* (René) use weekend down time already on Friday and not on sunday
+
 ### 0.8.6 (2020-08-21)
 * (simatec) small Bugfixes trigger
 

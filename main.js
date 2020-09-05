@@ -693,7 +693,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -733,7 +733,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
