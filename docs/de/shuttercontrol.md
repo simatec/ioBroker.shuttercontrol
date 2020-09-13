@@ -404,7 +404,7 @@ wieder endet.
 
 > Beispiel:
 > Sollwert des Sonnenschutzlichtsensors ist auf 30.000, Hysterese auf 40 eingestellt:
-> Der Sonnenschutz ist aktiv ab 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt.
+> Der Sonnenschutz ist aktiv ab > 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt.
 
 **Objekt-Id des Sonnenschutzlichtsensors:**  
 Analog zum Außentemperatursensor; wenn nicht benutzt leer lassen

@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.5",
+    "version": "0.8.6",
     "news": {
+      "0.8.6": {
+        "en": "small Bugfixes trigger",
+        "de": "kleine Bugfixes Auslöser",
+        "ru": "небольшой триггер исправлений",
+        "pt": "gatilho de pequenas correções de bugs",
+        "nl": "kleine bugfixes trigger",
+        "fr": "petit déclencheur de corrections de bugs",
+        "it": "piccolo trigger di correzioni di bug",
+        "es": "pequeño disparador de corrección de errores",
+        "pl": "mały wyzwalacz Bugfixes",
+        "zh-cn": "小错误修正触发器"
+      },
       "0.8.5": {
         "en": "small Bugfixes, bugfixes trigger, new german doku",
         "de": "kleine Bugfixes, Bugfixes Trigger, neue deutsche Doku",
