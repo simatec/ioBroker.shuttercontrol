@@ -192,9 +192,10 @@ function startAdapter(options) {
                                 result[i].currentAction = 'Manu_Mode';
 								adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val);
-								shutterState(result[i].name, adapter);
+                                result[i].triggerAction = 'Manu_Mode';
+                                adapter.log.debug(result[i].shutterName + ' Updated trigger action to ' + result[i].triggerAction + ' to prevent moving after window close ');
+                                shutterState(result[i].name, adapter);
                             } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
-                            //  result[i].currentAction = 'Manu_Mode';
 							//	adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
 								shutterState(result[i].name, adapter);
