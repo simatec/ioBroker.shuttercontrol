@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.6",
+    "version": "0.8.7",
     "news": {
+      "0.8.7": {
+        "en": "small Bugfix for weekend",
+        "de": "kleiner Bugfix für das Wochenende",
+        "ru": "небольшое исправление для выходных",
+        "pt": "pequeno bugfix para fim de semana",
+        "nl": "kleine bugfix voor weekend",
+        "fr": "petit bugfix pour le week-end",
+        "it": "piccolo Bugfix per il fine settimana",
+        "es": "pequeña corrección de errores para el fin de semana",
+        "pl": "mały Bugfix na weekend",
+        "zh-cn": "周末的小错误修正"
+      },
       "0.8.6": {
         "en": "small Bugfixes trigger",
         "de": "kleine Bugfixes Auslöser",
