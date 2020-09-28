@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* jshint -W097 */
 /* jshint strict: false */
 /*jslint node: true */
@@ -18,6 +19,7 @@ const shutterUpSleep = require('./lib/shutterUpSleep.js');              // shutt
 const shutterDownLate = require('./lib/shutterDownLate.js');            // shutterDownLate
 const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
+const shutterState = require('./lib/shutterState.js');        			// shutterState
 
 /**
  * The adapter instance
@@ -188,11 +190,16 @@ function startAdapter(options) {
                                 adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
                             }
                             if (typeof state != undefined && state != null && state.val != result[i].currentHeight && state.val != result[i].oldHeight) {
-                                adapter.setState('shutters.autoState.' + nameDevice, { val: 'Manu_Mode', ack: true });
-                                adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val);
-                            } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
+                                result[i].currentAction = 'Manu_Mode';
                                 adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
+                                adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val);
+                                result[i].triggerAction = 'Manu_Mode';
+                                adapter.log.debug(result[i].shutterName + ' Updated trigger action to ' + result[i].triggerAction + ' to prevent moving after window close ');
+                                shutterState(result[i].name, adapter);
+                            } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
+                                //	adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
                                 adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
+                                shutterState(result[i].name, adapter);
                             }
                         });
                         //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
@@ -248,6 +255,14 @@ function startAdapter(options) {
             }
             if (id === adapter.namespace + '.control.sunProtect') {
                 let buttonState = 'sunProtect';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.sunProtectSleep') {
+                let buttonState = 'sunProtectSleep';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.sunProtectLiving') {
+                let buttonState = 'sunProtectLiving';
                 buttonAction(adapter, buttonState);
             }
         }
@@ -436,11 +451,11 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
                     if (typeof state.val != undefined && state.val != null) {
                         resultStates[i].currentHeight = state.val;
                         adapter.setState('shutters.autoLevel.' + nameDevice, { val: resultStates[i].currentHeight, ack: true });
-                    
+
                         if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
                             adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
                         } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                            adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
                         }
                     }
 
@@ -588,7 +603,7 @@ function shutterDriveCalc() {
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
 
                 if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
-                    upTimeLiving = adapter.config.W_shutterUpLivingMax;
+                    upTimeLiving = adapter.config.WE_shutterUpLivingMax;
                     debugCnt = 10;
                 } else if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin) && IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
                     upTimeLiving = astroTimeLivingUp;
@@ -693,7 +708,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -733,7 +748,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
@@ -1511,8 +1526,9 @@ function main(adapter) {
                     resultStates[i].currentHeight = (state.val);
                     resultStates[i].oldHeight = (state.val);
                     resultStates[i].triggerHeight = (state.val);
+                    resultStates[i].triggerAction = (state.val);
                     adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
-                
+
                     if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
                         adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
                     } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
