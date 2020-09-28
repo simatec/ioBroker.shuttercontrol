@@ -304,6 +304,7 @@
         "triggerID": "",
         "LateDown": true,
         "inSummerNotDown": false,
+		"KeepSunProtect": true,
         "typeUp": "goldenhour End",
         "typeDown": "elevation",
         "type": "in- & outside temperature",
@@ -554,6 +555,50 @@
       "common": {
         "role": "button",
         "name": "close Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+	{
+      "_id": "control.sunProtectSleep",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Sleep Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+	{
+      "_id": "control.sunProtectLiving",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Living Shutter for sun protect",
         "type": "boolean",
         "read": true,
         "write": true,
