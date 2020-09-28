@@ -138,9 +138,9 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Added more debug logs
 * (simatec) Added node Support
 * (simatec) node 8 support removed
-* (Ren�) late all down added
-* (Ren�) late all down configurable per shutter
-* (Ren�) in summer time not to move down (configurable)
+* (Rene) late all down added
+* (Rene) late all down configurable per shutter
+* (Rene) in summer time not to move down (configurable)
 
 ### 0.5.0 (06.04.2020)
 * (simatec) Bugfix Goldenhour
