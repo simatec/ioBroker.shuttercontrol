@@ -258,6 +258,11 @@ separat per Pulldown-Menü ausgewählt.
 Auswahlmöglichkeiten:
 * **Aus:**  
 keine Zeitvorgaben verwenden
+Buttons für openAll/closeAll steuern diese Rollläden
+
+* **nur manueller Betrieb:** 
+Der Rollladen wird nur manuell in die konfigurierte Richtung bewegt. Auch die Buttons haben keine Steuereffekte. 
+Kann hilfreich bei Markisen sein, welche nicht mit anderen Rolläden zusammen geöffnet werden sollen.
 
 * **Wohnbereich:**  
 Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Wohnbereich* konfiguriert.
@@ -342,6 +347,10 @@ definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich herunterge
 **Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
 nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
 
+**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen des Fensters/Türe auf die zuletzt 
+angeforderte Position gefahren. Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht!
+Beispiel einer typischen Konfiguration für eine Türe: Trigger: "öffnen/schliessen" ; Aussperrschutz: "öffnen" ; Fahren, nachdem Fenster geschlossen wurde: "EIN"
+
 ---
 
 ### Sonnenschutz-Einstellungen
@@ -424,6 +433,13 @@ beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung wieder en
 über das (+) den Temperatursensor (State) auswählen der eine Rollladenfahrt verhindert.
 Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
+**Halte Rollladen in Sonnenschutz:**  
+wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn keine Sonnenschutz-
+Anforderung mehr besteht. Der Rollladen verbleibt so lange im Sonnenschutz, bis das "Schliessen" 
+Signal am Abend kommt. Damit wird verhindert, dass der Rollladen mehrfach pro Taghoch un runter fährt.
+Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt), und lediglich 
+die Lamellen auf und zu fahren.
+
 > Hinweis:  
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
 automatisch angefahrenen, setzt die Automatik aus!
@@ -484,6 +500,12 @@ Button um **alle** Rollläden  im Schlafbereich zu öffnen
 
 * sunProtect  
 Button um die Rollläden in die Sonnenschutzpostion zu fahren.
+
+* sunProtectLiving  
+Button um die Rollläden im Wohnbereich in die Sonnenschtzposition zu fahren
+
+* sunProtectSleep  
+Button um die Rollläden im Schlafbereich in die Sonnenschtzposition zu fahren
 
 ---
 ### shuttercontrol.0.info

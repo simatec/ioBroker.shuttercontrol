@@ -48,7 +48,7 @@ This configuration level also consists of two tabs: main settings and sunshade s
 
 ### Main Settings
 
-![mainShutter.jpg](img/mainShutter.jpg)
+![mainShutter.jpg](img/mainShutter.png)
 
 In the upper area, the times are set for the up and down driving to the night darkness.
 These times can be configured under ***Time Settings*** and selected here in pulldown.
@@ -73,7 +73,9 @@ Explanations below.
 
 ---
 ### Timing
-**Off:** do not use originals
+**Off:** do not use originals. Buttons for openAll/closeAll are still working
+
+**only manual drive** the shutter is driven manually only in the configured direction. Buttons have no effect on shutters configured with this option. May helpful for awning, which shall not be moved togehter with the rest of the shutters.
 
 **Living area:** The shutters are driven as configured in the menu item Time settings / Living area.
 
@@ -89,11 +91,17 @@ Explanations below.
 
 **Golden Hour:** This value is an astronomical term and lies before sunset. The term comes from photography, because the colors have a golden shimmer.
 
+**close roler shutters late:** With this option, the roller shutter is additionally shut down at a defined time (adjustable in the extra settings)
+
+**do not close close shutters in summer:** some shutters should not be closed in summer. The period for this is specified in the extra settings.
+
+**Drive to position after window has been closed:** This option has an effect only if the option "Driving on change" is not set to "off" It allows to move the shutter to the last called position after the window/door has been closed. A typical door configuration could be: Trigger: "open/close" ; Drive on change: "open" ; Drive to position after window has been closed: "enabled"
+
 
 ### sun protection settings
 The sunscreen can be controlled by various mechanisms. In this case, an outside temperature, an internal temperature, the brightness and the sun or the like. be selected as a trigger for the shading and its end.
 
-![sunProtect.jpg](img/sunProtect.jpg)
+![sunProtect.jpg](img/sunProtect.png)
 
 The fields in detail:
 **Roller shutter height when driving down:** The value of how far the roller shutter should be closed during shading.
@@ -122,9 +130,7 @@ The fields in detail:
 
 **Object ID of the indoor sensor:** via the (+) select the temperature sensor (state) which should prevent a roller shutter travel.
 
-**close roler shútters late:** With this option, the roller shutter is additionally shut down at a defined time (adjustable in the extra settings)
-
-**do not close close shutters in summer:** some shutters should not be closed in summer. The period for this is specified in the extra settings.
+**keep in sunprotect:** keeps the shutter in sunprotect mode until the shutter will be closed in the evening. This option can be helpful to prevent from moving up and down many times a day. If you use blinds, you may hold the hight with this option and just let open/close the blinds by controlling the angle.
 
 ### tips:
 If a shutter is adjusted manually and the position does not correspond to the automatically approached, the automatic switches off!
