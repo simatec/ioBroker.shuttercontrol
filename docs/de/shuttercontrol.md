@@ -436,7 +436,7 @@ Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 **Halte Rollladen in Sonnenschutz:**  
 wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn keine Sonnenschutz-
 Anforderung mehr besteht. Der Rollladen verbleibt so lange im Sonnenschutz, bis das "Schliessen" 
-Signal am Abend kommt. Damit wird verhindert, dass der Rollladen mehrfach pro Taghoch un runter fährt.
+Signal am Abend kommt. Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt.
 Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt), und lediglich 
 die Lamellen auf und zu fahren.
 
