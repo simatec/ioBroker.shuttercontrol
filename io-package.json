@@ -1,8 +1,32 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "0.8.7",
+    "version": "1.0.0",
     "news": {
+      "1.0.0": {
+        "en": "some Bugfixes, code cleaning, Added buttons for Sunprotect Living and Sunprotect Sleep, Included Living-Auto and Sleep-Auto in Buttons for Open/Close Sleep and Living, KeepSunprotect added, Drive after close added, Extend status handling",
+        "de": "Einige Bugfixes, Codebereinigung, Schaltflächen für Sunprotect Living und Sunprotect Sleep hinzugefügt, Living-Auto und Sleep-Auto in den Schaltflächen für Open / Close Sleep und Living, KeepSunprotect hinzugefügt, Drive after close hinzugefügt, Statusbehandlung erweitern",
+        "ru": "некоторые исправления, очистка кода, добавлены кнопки для Sunprotect Living и Sunprotect Sleep, включены Living-Auto и Sleep-Auto в кнопки для открытия / закрытия сна и Living, KeepSunprotect добавлен, Drive после закрытия добавлен, расширена обработка статуса",
+        "pt": "algumas correções de bugs, limpeza de código, botões adicionados para Sunprotect Living e Sunprotect Sleep, Living-Auto e Sleep-Auto incluídos em botões para abrir / fechar sono e estar, KeepSunprotect adicionado, Drive após fechamento adicionado, Estender tratamento de status",
+        "nl": "enkele bugfixes, code opschonen, knoppen toegevoegd voor Sunprotect Living en Sunprotect Sleep, Inclusief Living-Auto en Sleep-Auto in knoppen voor openen / sluiten Sleep en Living, KeepSunprotect toegevoegd, Drive after close toegevoegd, Statusafhandeling uitbreiden",
+        "fr": "quelques corrections de bogues, nettoyage de code, boutons ajoutés pour Sunprotect Living et Sunprotect Sleep, boutons Living-Auto et Sleep-Auto inclus pour ouvrir / fermer Sleep and Living, KeepSunprotect ajouté, Drive après fermeture ajouté, étendre la gestion de l'état",
+        "it": "alcune correzioni di bug, pulizia del codice, pulsanti aggiunti per Sunprotect Living e Sunprotect Sleep, Living-Auto e Sleep-Auto inclusi nei pulsanti per Apri / Chiudi Sleep and Living, KeepSunprotect aggiunto, Guida dopo la chiusura aggiunta, Estendi la gestione dello stato",
+        "es": "algunas correcciones de errores, limpieza de códigos, botones agregados para Sunprotect Living y Sunprotect Sleep, botones Living-Auto y Sleep-Auto incluidos para abrir / cerrar Sleep y Living, KeepSunprotect agregado, Drive after close agregado, Extender el manejo del estado",
+        "pl": "kilka poprawek błędów, czyszczenie kodu, Dodano przyciski Sunprotect Living i Sunprotect Sleep, Dołączone przyciski Living-Auto i Sleep-Auto w przyciskach otwierania / zamykania trybu uśpienia i życia, Dodano KeepSunprotect, Dodano napęd po zamknięciu, Rozszerz obsługę statusu",
+        "zh-cn": "一些错误修复，代码清除，添加了用于Sunprotect Living和Sunprotect Sleep的按钮，用于打开/关闭Sleep and Living的按钮中包含的Living-Auto和Sleep-Auto，添加了KeepSunprotect，添加了关闭后驱动，扩展状态处理"
+      },
+      "0.8.7": {
+        "en": "small Bugfix for weekend",
+        "de": "kleiner Bugfix für das Wochenende",
+        "ru": "небольшое исправление для выходных",
+        "pt": "pequeno bugfix para fim de semana",
+        "nl": "kleine bugfix voor weekend",
+        "fr": "petit bugfix pour le week-end",
+        "it": "piccolo Bugfix per il fine settimana",
+        "es": "pequeña corrección de errores para el fin de semana",
+        "pl": "mały Bugfix na weekend",
+        "zh-cn": "周末的小错误修正"
+      },
       "0.8.6": {
         "en": "small Bugfixes trigger",
         "de": "kleine Bugfixes Auslöser",
@@ -86,90 +110,6 @@
         "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para la operación manual en los estados, limpieza del código, completar la nueva estructura del código, botones para la operación de apertura y cierre manual agregados, visualización en los estados si el obturador fue movido manualmente",
         "pl": "dodany stan dla bieżącej migawki Działanie, dodany stan dla aktualnego poziomu migawki, dodany Wskaźnik ręcznej obsługi stanów, czyszczenie kodu, pełna nowa struktura kodu, Dodano przyciski ręcznej operacji otwierania i zamykania, Wyświetlanie stanów, jeśli migawka była przeniesione ręcznie",
         "zh-cn": "增加了当前快门的状态动作，增加了当前快门的状态，增加了状态中手动操作的指示器，代码清除，完成了代码的新结构，增加了手动打开和关闭操作的按钮，如果快门处于手动移动"
-      },
-      "0.7.3": {
-        "en": "errorhandling for sentry.io, bugfix, cancel all schedule by unload, bug fix and documentation",
-        "de": "Fehlerbehandlung für sentry.io, Bugfix, Abbrechen aller Zeitpläne durch Entladen, Bugfix und Dokumentation",
-        "ru": "обработка ошибок для sentry.io, исправление ошибок, отмена всего расписания путем выгрузки, исправления ошибок и документации",
-        "pt": "manipulação de erros para sentry.io, correção de bugs, cancele toda a programação por descarregamento, correção de bugs e documentação",
-        "nl": "foutafhandeling voor sentry.io, bugfix, annuleer alle planning door te lossen, bugfix en documentatie",
-        "fr": "gestion des erreurs pour sentry.io, correction de bugs, annulation de tout le planning par déchargement, correction de bugs et documentation",
-        "it": "gestione degli errori per sentry.io, bugfix, annullamento di tutti i programmi mediante scaricamento, correzione dei bug e documentazione",
-        "es": "manejo de errores para sentry.io, corrección de errores, cancelar toda la programación por descarga, corrección de errores y documentación",
-        "pl": "obsługa błędów dla sentry.io, naprawa błędów, anulowanie całego harmonogramu poprzez rozładowanie, poprawkę błędu i dokumentację",
-        "zh-cn": "sentry.io的错误处理，错误修正，通过卸载取消所有计划，错误修正和文档"
-      },
-      "0.7.2": {
-        "en": "Bugfix sunprotect for outside temperature, better translation for all languages, better overview in the user interface",
-        "de": "Bugfix Sonnenschutz für Außentemperatur, bessere Übersetzung für alle Sprachen, bessere Übersicht in der Benutzeroberfläche",
-        "ru": "Исправлена ошибка защиты от солнца для наружной температуры, улучшен перевод для всех языков, улучшен обзор в пользовательском интерфейсе.",
-        "pt": "Bugfix sunprotect para temperatura externa, melhor tradução para todos os idiomas, melhor visão geral na interface do usuário",
-        "nl": "Bugfix sunprotect voor buitentemperatuur, betere vertaling voor alle talen, beter overzicht in de gebruikersinterface",
-        "fr": "Bugfix sunprotect pour la température extérieure, meilleure traduction pour toutes les langues, meilleure vue d'ensemble dans l'interface utilisateur",
-        "it": "Bugfix sunprotect per temperatura esterna, migliore traduzione per tutte le lingue, migliore panoramica nell'interfaccia utente",
-        "es": "Bugfix sunprotect para temperatura exterior, mejor traducción para todos los idiomas, mejor visión general en la interfaz de usuario",
-        "pl": "Bugfix sunprotect dla temperatury zewnętrznej, lepsze tłumaczenie dla wszystkich języków, lepszy przegląd w interfejsie użytkownika",
-        "zh-cn": "Bugfix sunprotect用于外部温度，更好地翻译所有语言，在用户界面中提供更好的概览"
-      },
-      "0.7.1": {
-        "en": "errorhandling for sentry.io, small bugfixes",
-        "de": "Fehlerbehandlung für sentry.io, kleine Bugfixes",
-        "ru": "обработка ошибок для sentry.io, небольшие исправления",
-        "pt": "manipulação de erros para sentry.io, pequenas correções",
-        "nl": "foutafhandeling voor sentry.io, kleine bugfixes",
-        "fr": "gestion des erreurs pour sentry.io, petites corrections de bugs",
-        "it": "gestione degli errori per sentry.io, piccole correzioni di bug",
-        "es": "manejo de errores para sentry.io, pequeñas correcciones de errores",
-        "pl": "obsługa błędów dla sentry.io, małe poprawki błędów",
-        "zh-cn": "sentry.io的错误处理，小错误修正"
-      },
-      "0.7.0": {
-        "en": "better (userfriendly) check for adjustable times, datapoint for Holiday incl. internal check and handling, late all down added, Extended sun protection, edited User Menu for Timesettings, Bugfix Lightvalue to 20.000 Lux, added better German Translation",
-        "de": "besser (benutzerfreundlich) auf einstellbare Zeiten prüfen, Datenpunkt für Urlaub inkl. Interne Überprüfung und Handhabung, spätes Herunterfahren hinzugefügt, Erweiterter Sonnenschutz, bearbeitetes Benutzermenü für Zeiteinstellungen, Bugfix Lightvalue auf 20.000 Lux, bessere deutsche Übersetzung hinzugefügt",
-        "ru": "лучше (удобнее для пользователя) проверять регулируемое время, точка данных для отдыха вкл. внутренняя проверка и обработка, добавлены все допоздна, расширенная защита от солнца, отредактировано меню пользователя для настроек времени, исправлено световое значение до 20 000 люкс, улучшен немецкий перевод",
-        "pt": "melhor (fácil de usar) verificar horários ajustáveis, ponto de dados para feriados, incl. verificação e manuseio internos, tarde adicionado, proteção solar estendida, menu do usuário editado para horários, bugfix Lightvalue para 20.000 Lux, melhor tradução para o alemão",
-        "nl": "betere (gebruiksvriendelijke) controle op instelbare tijden, datapunt voor Vakantie incl. interne controle en bediening, laat alles naar beneden toegevoegd, Uitgebreide zonbescherming, aangepast gebruikersmenu voor tijdsinstellingen, Bugfix Lightvalue tot 20.000 Lux, betere Duitse vertaling toegevoegd",
-        "fr": "mieux (convivial) vérifier les heures réglables, point de données pour les vacances incl. contrôle interne et manipulation, tard tous ajoutés, protection solaire étendue, menu utilisateur modifié pour les horaires, Bugfix Lightvalue à 20.000 lux, meilleure traduction allemande ajoutée",
-        "it": "controllo migliore (facile da usare) per tempi regolabili, datapoint for Holiday incl. controllo e gestione interni, in ritardo tutti aggiunti in basso, protezione solare estesa, menu utente modificato per impostazioni temporali, Bugfix Lightvalue a 20.000 Lux, aggiunta migliore traduzione tedesca",
-        "es": "mejor (fácil de usar) verifique los tiempos ajustables, punto de datos para vacaciones incl. control interno y manejo, tarde todo agregado, protección solar extendida, menú de usuario editado para ajustes de tiempo, Bugfix Lightvalue a 20,000 Lux, se agregó una mejor traducción al alemán",
-        "pl": "lepsze (przyjazne dla użytkownika) sprawdzenie ustawianych czasów, punkt danych na wakacje w tym. wewnętrzna kontrola i obsługa, dodane późno, Rozszerzona ochrona przeciwsłoneczna, edytowane menu użytkownika dla ustawień czasu, Bugfix Lightvalue do 20.000 Lux, dodane lepsze tłumaczenie na niemiecki",
-        "zh-cn": "更好（用户友好）检查可调整时间，包括Holiday的数据点。内部检查和处理，添加了所有后期功能，扩展了防晒功能，编辑了用于时间设置的用户菜单，将Bugvalue修正为20.000 Lux，增加了更好的德语翻译"
-      },
-      "0.6.2": {
-        "en": "errorhandling for sentry.io; Bugfix getState",
-        "de": "Fehlerbehandlung für sentry.io; Bugfix getState",
-        "ru": "обработка ошибок для sentry.io; Исправление getState",
-        "pt": "tratamento de erros para sentry.io; Bugfix getState",
-        "nl": "foutafhandeling voor sentry.io; Bugfix getState",
-        "fr": "gestion des erreurs pour sentry.io; Bugfix getState",
-        "it": "gestione degli errori per sentry.io; Bugfix getState",
-        "es": "manejo de errores para sentry.io; Bugfix getState",
-        "pl": "obsługa błędów dla sentry.io; Bugfix getState",
-        "zh-cn": "sentry.io的错误处理；修正getState"
-      },
-      "0.6.1": {
-        "en": "bugfix index_m.html",
-        "de": "Bugfix index_m.html",
-        "ru": "исправление index_m.html",
-        "pt": "bugfix index_m.html",
-        "nl": "bugfix index_m.html",
-        "fr": "correction de bogue index_m.html",
-        "it": "bugfix index_m.html",
-        "es": "bugfix index_m.html",
-        "pl": "Bugfix index_m.html",
-        "zh-cn": "错误修正index_m.html"
-      },
-      "0.6.0": {
-        "en": "added sentry.io, added node Support, many small Bugfixes, node 8 support removed, added new feature for sunprotect, added more debug logs",
-        "de": "sentry.io hinzugefügt, node 14 hinzugefügt, viele kleine Bugfixes, Unterstützung für node 8 entfernt, neue Funktion für Sonnenschutz hinzugefügt, weitere Debug-Logs hinzugefügt",
-        "ru": "добавлен sentry.io, добавлена поддержка узлов, исправлено множество мелких ошибок, удалена поддержка узлов 8, добавлена новая функция для sunprotect, добавлено больше журналов отладки",
-        "pt": "adicionado sentry.io, adicionado suporte ao nó, muitas pequenas correções de bugs, suporte ao nó 8 removido, adicionado novo recurso para sunprotect, adicionado mais logs de depuração",
-        "nl": "sentry.io toegevoegd, ondersteuning voor node toegevoegd, veel kleine bugfixes, ondersteuning voor node 8 verwijderd, nieuwe functie voor sunprotect toegevoegd, meer logboeken voor foutopsporing toegevoegd",
-        "fr": "sentry.io ajouté, prise en charge des nœuds ajoutée, de nombreux petits bogues corrigés, prise en charge du nœud 8 supprimée, nouvelle fonctionnalité ajoutée pour sunprotect, ajout de journaux de débogage",
-        "it": "aggiunto sentry.io, aggiunto supporto nodo, molte piccole correzioni, supporto nodo 8 rimosso, aggiunta nuova funzionalità per sunprotect, aggiunti altri registri di debug",
-        "es": "Sentry.io agregado, soporte de nodo agregado, muchas correcciones de errores pequeñas, soporte de nodo 8 eliminado, nueva característica para protección solar, más registros de depuración",
-        "pl": "dodano sentry.io, dodano obsługę węzłów, wiele małych poprawek błędów, usunięto obsługę węzłów 8, dodano nową funkcję Sunprotect, dodano więcej dzienników debugowania",
-        "zh-cn": "添加了sendry.io，添加了节点支持，许多小错误修正，删除了节点8支持，添加了sunprotect新功能，添加了更多调试日志"
       }
     },
     "title": "shuttercontrol",
@@ -292,6 +232,7 @@
         "triggerID": "",
         "LateDown": true,
         "inSummerNotDown": false,
+        "KeepSunProtect": true,
         "typeUp": "goldenhour End",
         "typeDown": "elevation",
         "type": "in- & outside temperature",
@@ -542,6 +483,50 @@
       "common": {
         "role": "button",
         "name": "close Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.sunProtectSleep",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Sleep Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.sunProtectLiving",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Living Shutter for sun protect",
         "type": "boolean",
         "read": true,
         "write": true,
