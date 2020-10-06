@@ -44,6 +44,13 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.0.1 (2020-10-06)
+* (simatec) Adjustment of the configuration menu
+* (simatec) time settings for the children's area added
+* (simatec) button for closing the children's area added
+* (simatec) button for opening the children's area added
+* (simatec) button for sun protection of the children's area added
+
 ### 1.0.0 (2020-09-28)
 * (simatec) some Bugfixes
 * (simatec) code cleaning
