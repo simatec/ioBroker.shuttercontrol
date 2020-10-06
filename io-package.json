@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "Adjustment of the configuration menu, time settings added for the children's area, button for closing the children's area added, button for opening the children's area added, button for sun protection of the children's area added",
+        "de": "Anpassung des Konfigurationsmenüs, Zeiteinstellungen für den Kinderbereich hinzugefügt, Button zum Schließen des Kinderbereichs hinzugefügt, Button zum Öffnen des Kinderbereichs hinzugefügt, Button zum Sonnenschutz des Kinderbereichs hinzugefügt",
+        "ru": "Настройка меню конфигурации, добавлены настройки времени для детской зоны, добавлена кнопка закрытия детской зоны, добавлена кнопка открытия детской зоны, добавлена кнопка защиты от солнца детской зоны",
+        "pt": "Ajuste do menu de configuração, adição de horários para área infantil, adição de botão para fechamento de área infantil, adição de botão para abertura de área infantil, adição de botão para proteção solar de área infantil",
+        "nl": "Aanpassing van het configuratiemenu, tijdinstellingen toegevoegd voor het kindergedeelte, knop voor het sluiten van het kindergedeelte toegevoegd, knop voor het openen van het kindergedeelte toegevoegd, knop voor zonwering van het kindergedeelte toegevoegd",
+        "fr": "Réglage du menu de configuration, ajout des réglages de l'heure pour l'espace enfants, bouton de fermeture de l'espace enfants ajouté, bouton d'ouverture de l'espace enfants ajouté, bouton de protection solaire de l'espace enfants ajouté",
+        "it": "Aggiunta regolazione menu di configurazione, aggiunta impostazioni orario per area bimbi, aggiunta pulsante chiusura area bimbi, aggiunta pulsante apertura area bimbi, aggiunta pulsante protezione sole area bimbi",
+        "es": "Ajuste del menú de configuración, ajustes de tiempo agregados para el área de niños, botón para cerrar el área de niños agregado, botón para abrir el área de niños agregado, botón para protección solar del área de niños agregado",
+        "pl": "Dostosowanie menu konfiguracyjnego, dodano ustawienia czasu dla obszaru dziecięcego, dodano przycisk do zamykania obszaru dziecięcego, dodano przycisk do otwierania obszaru dziecięcego, dodano przycisk do ochrony przed słońcem obszaru dziecięcego",
+        "zh-cn": "调整配置菜单，添加了儿童区域的时间设置，添加了用于关闭儿童区域的按钮，添加了用于打开儿童区域的按钮，添加了用于儿童区域的防晒的按钮"
+      },
       "1.0.0": {
         "en": "some Bugfixes, code cleaning, Added buttons for Sunprotect Living and Sunprotect Sleep, Included Living-Auto and Sleep-Auto in Buttons for Open/Close Sleep and Living, KeepSunprotect added, Drive after close added, Extend status handling",
         "de": "Einige Bugfixes, Codebereinigung, Schaltflächen für Sunprotect Living und Sunprotect Sleep hinzugefügt, Living-Auto und Sleep-Auto in den Schaltflächen für Open / Close Sleep und Living, KeepSunprotect hinzugefügt, Drive after close hinzugefügt, Statusbehandlung erweitern",
@@ -199,6 +211,17 @@
     "driveHeightDownSleep": 0,
     "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
     "sleepAutomatic": "sleepSunriseSunset",
+    "W_shutterUpChildrenMax": "06:30",
+    "W_shutterUpChildrenMin": "06:00",
+    "W_shutterDownChildren": "20:00",
+    "WE_shutterUpChildrenMax": "06:30",
+    "WE_shutterUpChildrenMin": "06:00",
+    "WE_shutterDownChildren": "21:00",
+    "driveDelayUpChildren": 10,
+    "driveHeightUpChildren": 100,
+    "driveHeightDownChildren": 0,
+    "triggerAutoChildren": "hm-rpc.0.MEQ1234567.2.STATE",
+    "childrenAutomatic": "childrenSunriseSunset",
     "astroDelayUp": 30,
     "longitude": "",
     "latitude": "",
@@ -346,6 +369,19 @@
       "native": {}
     },
     {
+      "_id": "control.autoChildren",
+      "type": "state",
+      "common": {
+        "role": "switch",
+        "name": "Auto / Manu Children Area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {}
+    },
+    {
       "_id": "control.closeAll",
       "type": "state",
       "common": {
@@ -478,6 +514,50 @@
       }
     },
     {
+      "_id": "control.closeChildren",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Shutter from Children area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.openChildren",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "open Shutter from Children area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
       "_id": "control.sunProtect",
       "type": "state",
       "common": {
@@ -557,6 +637,19 @@
       "native": {}
     },
     {
+      "_id": "info.upTimeChildren",
+      "type": "state",
+      "common": {
+        "role": "indicator",
+        "name": "Up Time Children Area",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": ""
+      },
+      "native": {}
+    },
+    {
       "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
@@ -575,6 +668,19 @@
       "common": {
         "role": "indicator",
         "name": "down Time Sleep Area",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": ""
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.downTimeChildren",
+      "type": "state",
+      "common": {
+        "role": "indicator",
+        "name": "down Time Children Area",
         "type": "string",
         "read": true,
         "write": false,
