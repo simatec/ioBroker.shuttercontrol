@@ -1,8 +1,11 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "new features"
+      },
       "1.0.0": {
         "en": "some Bugfixes, code cleaning, Added buttons for Sunprotect Living and Sunprotect Sleep, Included Living-Auto and Sleep-Auto in Buttons for Open/Close Sleep and Living, KeepSunprotect added, Drive after close added, Extend status handling",
         "de": "Einige Bugfixes, Codebereinigung, Schaltflächen für Sunprotect Living und Sunprotect Sleep hinzugefügt, Living-Auto und Sleep-Auto in den Schaltflächen für Open / Close Sleep und Living, KeepSunprotect hinzugefügt, Drive after close hinzugefügt, Statusbehandlung erweitern",
@@ -199,6 +202,17 @@
     "driveHeightDownSleep": 0,
     "triggerAutoSleep": "hm-rpc.0.MEQ1234567.2.STATE",
     "sleepAutomatic": "sleepSunriseSunset",
+    "W_shutterUpChildrenMax": "06:30",
+    "W_shutterUpChildrenMin": "06:00",
+    "W_shutterDownChildren": "20:00",
+    "WE_shutterUpChildrenMax": "06:30",
+    "WE_shutterUpChildrenMin": "06:00",
+    "WE_shutterDownChildren": "21:00",
+    "driveDelayUpChildren": 10,
+    "driveHeightUpChildren": 100,
+    "driveHeightDownChildren": 0,
+    "triggerAutoChildren": "hm-rpc.0.MEQ1234567.2.STATE",
+    "childrenAutomatic": "childrenSunriseSunset",
     "astroDelayUp": 30,
     "longitude": "",
     "latitude": "",
@@ -346,6 +360,19 @@
       "native": {}
     },
     {
+      "_id": "control.autoChildren",
+      "type": "state",
+      "common": {
+        "role": "switch",
+        "name": "Auto / Manu Children Area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {}
+    },
+    {
       "_id": "control.closeAll",
       "type": "state",
       "common": {
@@ -478,6 +505,50 @@
       }
     },
     {
+      "_id": "control.closeChildren",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Shutter from Children area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.openChildren",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "open Shutter from Children area",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
       "_id": "control.sunProtect",
       "type": "state",
       "common": {
@@ -557,6 +628,19 @@
       "native": {}
     },
     {
+      "_id": "info.upTimeChildren",
+      "type": "state",
+      "common": {
+        "role": "indicator",
+        "name": "Up Time Children Area",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": ""
+      },
+      "native": {}
+    },
+    {
       "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
@@ -575,6 +659,19 @@
       "common": {
         "role": "indicator",
         "name": "down Time Sleep Area",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": ""
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.downTimeChildren",
+      "type": "state",
+      "common": {
+        "role": "indicator",
+        "name": "down Time Children Area",
         "type": "string",
         "read": true,
         "write": false,
