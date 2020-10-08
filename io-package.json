@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "news": {
+      "1.0.2": {
+        "en": "fix uptime for childrenarea",
+        "de": "Fix Uptime für Kinderbereich",
+        "ru": "исправить время работы для детей",
+        "pt": "consertar tempo de atividade para área infantil",
+        "nl": "uptime voor kinderen repareren",
+        "fr": "corriger la disponibilité pour les enfants",
+        "it": "fissare il tempo di attività per l'area bambini",
+        "es": "arreglar el tiempo de actividad para el área infantil",
+        "pl": "napraw uptime dla childrenarea",
+        "zh-cn": "修复儿童区的正常运行时间"
+      },
       "1.0.1": {
         "en": "Adjustment of the configuration menu, time settings added for the children's area, button for closing the children's area added, button for opening the children's area added, button for sun protection of the children's area added",
         "de": "Anpassung des Konfigurationsmenüs, Zeiteinstellungen für den Kinderbereich hinzugefügt, Button zum Schließen des Kinderbereichs hinzugefügt, Button zum Öffnen des Kinderbereichs hinzugefügt, Button zum Sonnenschutz des Kinderbereichs hinzugefügt",
