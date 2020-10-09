@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "news": {
       "1.0.0": {
         "en": "some Bugfixes, code cleaning, Added buttons for Sunprotect Living and Sunprotect Sleep, Included Living-Auto and Sleep-Auto in Buttons for Open/Close Sleep and Living, KeepSunprotect added, Drive after close added, Extend status handling",
