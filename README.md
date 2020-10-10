@@ -13,8 +13,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
 
-**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** 
-For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
+This adapter uses the service Sentry.io to automatically report exceptions and code errors and new device schemas to me as the developer. More details see below!
 
 
 **If you like it, please consider a donation:**
@@ -45,10 +44,20 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 1.0.2 (2020-10-09)
+### 1.0.3 (2020-10-09)
 * (René) bug fix: calculation IsSummerTime
 * (René) bug fix: use weekend down time already on friday instead of sunday
 
+
+### 1.0.2 (2020-10-08)
+* (simatec) fix uptime for childrenarea
+
+### 1.0.1 (2020-10-06)
+* (simatec) Adjustment of the configuration menu
+* (simatec) time settings for the children's area added
+* (simatec) button for closing the children's area added
+* (simatec) button for opening the children's area added
+* (simatec) button for sun protection of the children's area added
 
 ### 1.0.0 (2020-09-28)
 * (simatec) some Bugfixes
@@ -144,9 +153,9 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Added more debug logs
 * (simatec) Added node Support
 * (simatec) node 8 support removed
-* (Ren�) late all down added
-* (Ren�) late all down configurable per shutter
-* (Ren�) in summer time not to move down (configurable)
+* (Rene) late all down added
+* (Rene) late all down configurable per shutter
+* (Rene) in summer time not to move down (configurable)
 
 ### 0.5.0 (06.04.2020)
 * (simatec) Bugfix Goldenhour
