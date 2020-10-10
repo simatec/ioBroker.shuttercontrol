@@ -351,6 +351,11 @@ nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen fe
 angeforderte Position gefahren. Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht!
 Beispiel einer typischen Konfiguration für eine Türe: Trigger: "öffnen/schliessen" ; Aussperrschutz: "öffnen" ; Fahren, nachdem Fenster geschlossen wurde: "EIN"
 
+**Nutze Level in Weinachtszeit und Weihnachtszeitlevel:** Falls der Rollläden in der Weihnachtszeit nur teilweise 
+geschlossen werden soll (z.Bsp. um den beleuchteten Schwibbogen von außen sichtbar zu haben) Mit der Option "Rollladen spät 
+schliessen" kann der Rollladen dann später geschlossen werden. Der Zeitraum für Weihnachten wird in den Extra-Einstellungen festgelegt
+
+
 ---
 
 ### Sonnenschutz-Einstellungen

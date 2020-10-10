@@ -97,6 +97,7 @@ Explanations below.
 
 **Drive to position after window has been closed:** This option has an effect only if the option "Driving on change" is not set to "off" It allows to move the shutter to the last called position after the window/door has been closed. A typical door configuration could be: Trigger: "open/close" ; Drive on change: "open" ; Drive to position after window has been closed: "enabled"
 
+**Use Xmas level and Xmas level:** If you want to close a shutter only partially during Xmas time (probably to show your lighted Schwibbogen). You can use "close roler shutters late" to close it later at night. The period for Xmas is specified in the extra settings.
 
 ### sun protection settings
 The sunscreen can be controlled by various mechanisms. In this case, an outside temperature, an internal temperature, the brightness and the sun or the like. be selected as a trigger for the shading and its end.
