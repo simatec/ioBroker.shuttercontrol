@@ -23,6 +23,7 @@ const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutt
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
 const shutterState = require('./lib/shutterState.js');        			// shutterState
 
+
 /**
  * The adapter instance
  * @type {ioBroker.Adapter}
@@ -1642,6 +1643,9 @@ function main(adapter) {
     }, 2000);
 
     GetSystemData();
+
+
+
 
     // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');

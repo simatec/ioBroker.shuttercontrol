@@ -188,6 +188,6 @@ systemDictionary = {
     "children-auto": {                               "en": "Children's area (automatic)",                     "de": "Kinderbereich (Automatik)",                       "ru": "Детская зона (автомат)",                          "pt": "Área infantil (automático)",                      "nl": "Kindergedeelte (automatisch)",                    "fr": "Espace enfants (automatique)",                    "it": "Area bambini (automatica)",                       "es": "Área infantil (automática)",                      "pl": "Obszar dziecięcy (automatyczny)",                 "zh-cn": "儿童区（自动）"},
     "children": {                                    "en": "Children's area",                                 "de": "Kinderbereich",                                   "ru": "Детский уголок",                                  "pt": "Área infantil",                                   "nl": "Ruimte voor kinderen",                            "fr": "Espace enfants",                                  "it": "Area bambini",                                    "es": "Zona infantil",                                   "pl": "Strefa dla dzieci",                               "zh-cn": "儿童区"},
 
-    "
+    
 
 };
