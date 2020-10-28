@@ -1,19 +1,19 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.0",
+    "version": "1.0.3",
     "news": {
-      "1.1.0": {
-        "en": "handling of shutters in xmas time added",
-        "de": "Handhabung von Fensterläden in der Weihnachtszeit hinzugefügt",
-        "ru": "добавлена обработка жалюзи в рождественское время",
-        "pt": "manuseio de persianas no natal adicionado",
-        "nl": "behandeling van luiken in kersttijd toegevoegd",
-        "fr": "ajout de la manipulation des volets en temps de Noël",
-        "it": "gestione delle persiane nel periodo natalizio aggiunto",
-        "es": "Manejo de persianas en época navideña agregado",
-        "pl": "Dodano obsługę rolet w okresie świątecznym",
-        "zh-cn": "在圣诞节增加了百叶窗的处理"
+      "1.0.3": {
+        "en": "bug fix: calculation IsSummerTime, bug fix: use weekend down time already on friday instead of sunday, handling of shutters in xmas time added, documentation updated, words.js updated, some Bugfixes",
+        "de": "Fehlerbehebung: Berechnung IsSummerTime, Fehlerbehebung: Verwenden Sie die Ausfallzeit am Wochenende bereits am Freitag anstelle von Sonntag, Behandlung von Rollläden in der Weihnachtszeit hinzugefügt, Dokumentation aktualisiert, words.js aktualisiert, einige Bugfixes",
+        "ru": "исправление ошибки: расчет IsSummerTime, исправление ошибки: использовать время простоя на выходных уже в пятницу вместо воскресенья, добавлена обработка жалюзи в рождественское время, обновлена документация, обновлен файл words.js, исправлены некоторые ошибки",
+        "pt": "correção de bug: cálculo IsSummerTime, correção de bug: use o tempo de inatividade do fim de semana já na sexta-feira em vez de no domingo, manipulação de venezianas no natal adicionado, documentação atualizada, words.js atualizado, algumas correções de bugs",
+        "nl": "bugfix: berekening IsSummerTime, bugfix: gebruik weekend-downtime al op vrijdag in plaats van zondag, behandeling van rolluiken in kersttijd toegevoegd, documentatie bijgewerkt, words.js bijgewerkt, enkele bugfixes",
+        "fr": "correction de bogue: calcul IsSummerTime, correction de bogue: utiliser le temps d'arrêt du week-end déjà le vendredi au lieu du dimanche, gestion des volets à Noël ajoutée, documentation mise à jour, words.js mis à jour, quelques corrections de bugs",
+        "it": "correzione bug: calcolo IsSummerTime, correzione bug: usa il tempo di inattività del fine settimana già di venerdì invece che di domenica, aggiunta la gestione delle tapparelle nel periodo natalizio, documentazione aggiornata, words.js aggiornato, alcuni bugfix",
+        "es": "corrección de errores: cálculo IsSummerTime, corrección de errores: use el tiempo de inactividad del fin de semana ya el viernes en lugar del domingo, se agregó el manejo de las persianas en el tiempo de Navidad, se actualizó la documentación, se actualizó words.js, algunas correcciones de errores",
+        "pl": "poprawka błędu: obliczenie IsSummerTime, poprawka błędu: skorzystaj z przestoju weekendowego już w piątek zamiast w niedzielę, dodano obsługę okiennic w okresie świątecznym, zaktualizowano dokumentację, zaktualizowano words.js, kilka poprawek błędów",
+        "zh-cn": "错误修复：计算IsSummerTime，错误修复：在星期五（而不是星期日）使用周末休息时间，增加了圣诞节期间的百叶窗处理，更新了文档，更新了word.js，一些错误修复"
       },
       "1.0.2": {
         "en": "fix uptime for childrenarea",
