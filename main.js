@@ -23,6 +23,7 @@ const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutt
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
 const shutterState = require('./lib/shutterState.js');        			// shutterState
 
+
 /**
  * The adapter instance
  * @type {ioBroker.Adapter}
@@ -837,7 +838,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -916,7 +917,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
@@ -1642,6 +1643,9 @@ function main(adapter) {
     }, 2000);
 
     GetSystemData();
+
+
+
 
     // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');

@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "news": {
+      "1.1.0": {
+        "en": "handling of shutters in xmas time added",
+        "de": "Handhabung von Fensterläden in der Weihnachtszeit hinzugefügt",
+        "ru": "добавлена обработка жалюзи в рождественское время",
+        "pt": "manuseio de persianas no natal adicionado",
+        "nl": "behandeling van luiken in kersttijd toegevoegd",
+        "fr": "ajout de la manipulation des volets en temps de Noël",
+        "it": "gestione delle persiane nel periodo natalizio aggiunto",
+        "es": "Manejo de persianas en época navideña agregado",
+        "pl": "Dodano obsługę rolet w okresie świątecznym",
+        "zh-cn": "在圣诞节增加了百叶窗的处理"
+      },
       "1.0.2": {
         "en": "fix uptime for childrenarea",
         "de": "Fix Uptime für Kinderbereich",
@@ -287,7 +299,8 @@
         "triggerDrive": "100",
         "triggerChange": "upDown",
         "elevation": "4",
-        "XmasLevel": 0
+        "XmasLevel": 0,
+        "useXmasLevel": false
       }
     ]
   },
