@@ -445,7 +445,27 @@
             visibility: hidden;
             display: none;
         }
-		
+
+        #events td:nth-of-type(39) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(39) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(40) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(40) {
+            visibility: hidden;
+            display: none;
+        }
+
         #dialog-select-member {
             z-index: 9999 !important;
         }
@@ -538,7 +558,9 @@
                     $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
 					$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
-					$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -735,18 +757,21 @@
                 $('#hysteresisOutside').val($('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val());
                 $('#hysteresisInside').val($('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val());
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
-
+                $('#XmasLevel').val($('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val());
 
                
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
                 var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
 				var test3 = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
-				var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
+                var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
+                var test5 = $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked');
+
 
                 $('#LateDown').prop('checked', test1);
                 $('#inSummerNotDown').prop('checked', test2);
 				$('#KeepSunProtect').prop('checked', test3);
-				$('#driveAfterClose').prop('checked', test4);
+                $('#driveAfterClose').prop('checked', test4);
+                $('#useXmasLevel').prop('checked', test5);
 
                 
                 setTimeout(function () {
@@ -774,12 +799,14 @@
                         var hysteresisInside = $('#hysteresisInside').val();
                         var hysteresisLight = $('#hysteresisLight').val();
                         var autoDrive = $('#autoDriveShutter').val();
+                        var xmaslevel = $('#XmasLevel').val();
 
                         
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
 						var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
-						var newdriveAfterClose = $('#driveAfterClose').prop('checked');
+                        var newdriveAfterClose = $('#driveAfterClose').prop('checked');
+                        var newuseXmasLevel = $('#useXmasLevel').prop('checked');
 
 
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -805,12 +832,14 @@
                         $('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val(hysteresisOutside).trigger('change');
                         $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val(hysteresisInside).trigger('change');
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
+                        $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val(xmaslevel).trigger('change');
 
                        
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
 						$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
-						$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
+                        $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
+                        $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked', newuseXmasLevel).trigger('change');
                     });
                 }, 20)
             });
@@ -1013,9 +1042,11 @@
 
                                             <th data-name="LateDown" id="events_col_33" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">LateDown</th>
                                             <th data-name="inSummerNotDown" id="events_col_34" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">inSummerNotDown</th>
-											<th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
-											<th data-name="triggerAction" id="events_col_36" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
-											<th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
+                                            <th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
+                                            <th data-name="triggerAction" id="events_col_36" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
+                                            <th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
+                                            <th data-name="useXmasLevel" id="events_col_38" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">useXmasLevel</th>
+                                            <th data-name="XmasLevel" id="events_col_39" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">XmasLevel</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #174475"></th>
@@ -1294,6 +1325,28 @@
                                 </div>
                             </div>
                         </li>
+
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">xmas settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="XMasStart" />
+                                        <label for="XMasStart" class="translate"></label>
+                                        <span class="translate">XMasStart</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="XMasEnd" />
+                                        <label for="XMasEnd" class="translate"></label>
+                                        <span class="translate">XMasEnd</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
                         <li>
                             <div class="collapsible-header">
                                 <i class="material-icons">expand_more</i><h6 class="translate">holiday settings</h6>
@@ -1616,7 +1669,17 @@
                                 <div class="col s6 l3 input-field">
                                     <input type="checkbox" id="driveAfterClose" class="value" />
                                     <label for="driveAfterClose" class="translate">DriveAfterClose</label>
-								</div>
+                                </div>
+                                <div class="col s6 l2 input-field">
+                                    <input type="checkbox" id="useXmasLevel" class="value" />
+                                    <label for="useXmasLevel" class="translate">useXmasLevel</label>
+                                </div>
+                                <div class="col s6 l2 input-field">
+                                    <input type="number" class="value" id="XmasLevel" min=0 max=100 />
+                                    <label for="XmasLevel" class="translate"></label>
+                                    <span class="translate">XmasLevel</span>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -384,6 +384,11 @@ des Fensters/Türe auf die zuletzt angeforderte Position gefahren.
 > Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
 > Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
+**Nutze Level in Weinachtszeit und Weihnachtszeitlevel:** Falls der Rollläden in der Weihnachtszeit nur teilweise 
+geschlossen werden soll (z.Bsp. um den beleuchteten Schwibbogen von außen sichtbar zu haben) Mit der Option "Rollladen spät 
+schliessen" kann der Rollladen dann später geschlossen werden. Der Zeitraum für Weihnachten wird in den Extra-Einstellungen festgelegt
+
+
 ---
 
 ### Sonnenschutz-Einstellungen

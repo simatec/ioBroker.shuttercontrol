@@ -67,10 +67,67 @@ systemDictionary = {
     "Use astronomical time": {                       "en": "Use the Astro time",                              "de": "Verwenden der Astro Zeit",                        "ru": "Используйте время Astro",                         "pt": "Use o tempo Astro",                               "nl": "Gebruik de Astro-tijd",                           "fr": "Utilisez le temps Astro",                         "it": "Usa il tempo Astro",                              "es": "Usa el tiempo Astro",                             "pl": "Wykorzystaj czas Astro",                          "zh-cn": "使用Astro時間"},
     "Use public holidays": {                         "en": "Use public holidays",                             "de": "Verwenden der gesetzliche Feiertage",             "ru": "Используйте праздничные дни",                     "pt": "Usar feriados",                                   "nl": "Gebruik feestdagen",                              "fr": "Utilisez les jours fériés",                       "it": "Usa i giorni festivi",                            "es": "Use días festivos",                               "pl": "Wykorzystaj święta państwowe",                    "zh-cn": "使用公共假期"},
     "Use sun protection": {                          "en": "Use sun protection",                              "de": "Sonnenschutz verwenden",                          "ru": "Используйте защиту от солнца",                    "pt": "Use proteção solar",                              "nl": "Gebruik zonbescherming",                          "fr": "Utilisez une protection solaire",                 "it": "Usa la protezione solare",                        "es": "Usa protección solar",                            "pl": "Używaj ochrony przeciwsłonecznej",                "zh-cn": "使用防曬"},
-    "XMasEnd": {                                     "en": "End of Christmas",                                "de": "Ende von Weihnachten",                            "ru": "Конец Рождества",                                 "pt": "Fim do Natal",                                    "nl": "Einde van Kerstmis",                              "fr": "Fin de Noël",                                     "it": "Fine di natale",                                  "es": "Fin de navidad",                                  "pl": "Koniec świąt Bożego Narodzenia",                  "zh-cn": "聖誕節結束"},
-    "XMasStart": {                                   "en": "Beginning of Christmas",                          "de": "Beginn von Weihnachten",                          "ru": "Начало Рождества",                                "pt": "Início do Natal",                                 "nl": "Begin van Kerstmis",                              "fr": "Début de Noël",                                   "it": "Inizio di natale",                                "es": "Comienzo de navidad",                             "pl": "Początek świąt Bożego Narodzenia",                "zh-cn": "聖誕節開始"},
-    "XmasLevel": {                                   "en": "Roller shutter level at Christmas time",          "de": "Rollladenniveau in der Weihnachtszeit",           "ru": "Уровень роллет на Рождество",                     "pt": "Nível do obturador do rolo na época do Natal",    "nl": "Rolluik niveau met Kerstmis",                     "fr": "Niveau de volet roulant au moment de Noël",       "it": "Livello tapparella a Natale",                     "es": "Nivel de persiana en Navidad",                    "pl": "Poziom rolety w czasie świąt Bożego Narodzenia",  "zh-cn": "聖誕節時的捲簾門水平"},
-    "active": {                                      "en": "active",                                          "de": "Aktiv",                                           "ru": "активный",                                        "pt": "ativo",                                           "nl": "actief",                                          "fr": "actif",                                           "it": "attivo",                                          "es": "activo",                                          "pl": "aktywny",                                         "zh-cn": "活性"},
+    "XmasLevel": {
+        "en": "Roller shutter level at Christmas time",
+        "de": "Rollladenpegel zur Weihnachtszeit",
+        "ru": "Уровень рольставни на Рождество",
+        "pt": "Nível do obturador de rolo na época do Natal",
+        "nl": "Rolluikniveau in de kersttijd",
+        "fr": "Niveau du volet roulant au moment de Noël",
+        "it": "Livello della tapparella nel periodo natalizio",
+        "es": "Nivel de la persiana enrollable en Navidad",
+        "pl": "Poziom rolet w okresie świątecznym",
+        "zh-cn": "圣诞节时的卷帘门水平"
+    },
+    "useXmasLevel": {
+        "en": "Roller shutter level at Christmas time is used",
+        "de": "Der Rollladenpegel zur Weihnachtszeit wird verwendet",
+        "ru": "Уровень рольставни на Рождество используется",
+        "pt": "O nível do obturador de rolo na época do Natal é usado",
+        "nl": "Het rolluikniveau in de kersttijd wordt gebruikt",
+        "fr": "Le niveau du volet roulant au moment de Noël est utilisé",
+        "it": "Viene utilizzato il livello della tapparella nel periodo natalizio",
+        "es": "Se utiliza el nivel de la persiana enrollable en Navidad",
+        "pl": "Używany jest poziom rolet w okresie świątecznym",
+        "zh-cn": "使用圣诞节时的卷帘门水平"
+    },
+    "xmas settings": {
+        "en": "Xmas settings",
+        "de": "Weihnachtseinstellungen",
+        "ru": "Рождественские настройки",
+        "pt": "Configurações de natal",
+        "nl": "Xmas instellingen",
+        "fr": "Paramètres de Noël",
+        "it": "Impostazioni di Natale",
+        "es": "Configuración de Navidad",
+        "pl": "Ustawienia świąteczne",
+        "zh-cn": "圣诞设置"
+    },
+    "XMasStart": {
+        "en": "begin of Xmas time",
+        "de": "Beginn der Weihnachtszeit",
+        "ru": "начало рождественского времени",
+        "pt": "início da época do natal",
+        "nl": "begin van de kersttijd",
+        "fr": "début de Noël",
+        "it": "inizio del tempo di Natale",
+        "es": "comienzo de la época navideña",
+        "pl": "początek czasu Bożego Narodzenia",
+        "zh-cn": "圣诞开始"
+    },
+    "XMasEnd": {
+        "en": "end of Xmas time",
+        "de": "Ende der Weihnachtszeit",
+        "ru": "конец рождественского времени",
+        "pt": "fim do natal",
+        "nl": "einde van de kersttijd",
+        "fr": "fin du temps de Noël",
+        "it": "fine del tempo di Natale",
+        "es": "fin de la época navideña",
+        "pl": "koniec czasu Bożego Narodzenia",
+        "zh-cn": "圣诞时间结束"
+    },
+    "active": { "en": "active", "de": "Aktiv", "ru": "активный", "pt": "ativo", "nl": "actief", "fr": "actif", "it": "attivo", "es": "activo", "pl": "aktywny", "zh-cn": "活性" },
     "automatic living area time with Golden hour": { "en": "Time living area with golden hour",               "de": "Zeit Wohnbereich mit Golden Hour",                "ru": "Время жилая площадь с золотым часом",             "pt": "Tempo sala de estar com hora de ouro",            "nl": "Tijdsruimte met gouden uur",                      "fr": "Espace de vie avec heure d'or",                   "it": "Tempo zona giorno con ora d'oro",                 "es": "Tiempo de sala de estar con hora dorada",         "pl": "Czas życia strefy ze złotą godziną",              "zh-cn": "黃金時段的時間居住區域"},
     "automatic living area time with sunrise and sunset": {"en": "Time living area with sunrise & sunset",          "de": "Zeit Wohnbereich mit Sonnenauf- & Sonnenuntergang", "ru": "Время жилая площадь с восходом и заходом солнца", "pt": "Tempo sala de estar com nascer e pôr do sol",     "nl": "Tijdsruimte met zonsopgang en zonsondergang",     "fr": "Espace de vie avec lever et coucher de soleil",   "it": "Tempo zona giorno con alba e tramonto",           "es": "Tiempo de sala de estar con amanecer y atardecer", "pl": "Strefa czasowa z wschodem i zachodem słońca",     "zh-cn": "帶日出和日落時間的生活區"},
     "automatic sleep area time with Golden hour": {  "en": "Time sleeping area with golden hour",             "de": "Zeit Schlafbereich mit Golden Hour",              "ru": "Время спальной зоны с золотым часом",             "pt": "Tempo área de dormir com hora de ouro",           "nl": "Tijd slaapgedeelte met gouden uur",               "fr": "Espace nuit avec heure dorée",                    "it": "Tempo zona notte con ora d'oro",                  "es": "Hora de dormir con hora dorada",                  "pl": "Czas na miejsce do spania ze złotą godziną",      "zh-cn": "黃金時段的時間睡眠區"},
@@ -130,4 +187,7 @@ systemDictionary = {
     "Object ID of trigger for Auto Children": {      "en": "Object ID to activate / deactivate the child's car area (e.g. presence detection)", "de": "Objekt-ID zum aktivieren/deaktivieren des Auto-Kinderbereichs (z.B. Anwesenheitserkennung)", "ru": "ID объекта для активации / деактивации зоны детского автомобиля (например, обнаружение присутствия)", "pt": "ID do objeto para ativar / desativar a área do carro da criança (por exemplo, detecção de presença)", "nl": "Object-ID voor het activeren / deactiveren van het kinderwagengebied (bijv. Aanwezigheidsdetectie)", "fr": "ID d'objet pour activer / désactiver la zone de voiture de l'enfant (par ex. Détection de présence)", "it": "ID oggetto per attivare / disattivare l'area auto del bambino (es. Rilevamento presenza)", "es": "ID de objeto para activar / desactivar el área del automóvil del niño (por ejemplo, detección de presencia)", "pl": "Identyfikator obiektu do aktywacji / dezaktywacji obszaru samochodu dziecięcego (np. Wykrywanie obecności)", "zh-cn": "用于激活/停用儿童汽车区域的对象ID（例如，存在检测）"},
     "children-auto": {                               "en": "Children's area (automatic)",                     "de": "Kinderbereich (Automatik)",                       "ru": "Детская зона (автомат)",                          "pt": "Área infantil (automático)",                      "nl": "Kindergedeelte (automatisch)",                    "fr": "Espace enfants (automatique)",                    "it": "Area bambini (automatica)",                       "es": "Área infantil (automática)",                      "pl": "Obszar dziecięcy (automatyczny)",                 "zh-cn": "儿童区（自动）"},
     "children": {                                    "en": "Children's area",                                 "de": "Kinderbereich",                                   "ru": "Детский уголок",                                  "pt": "Área infantil",                                   "nl": "Ruimte voor kinderen",                            "fr": "Espace enfants",                                  "it": "Area bambini",                                    "es": "Zona infantil",                                   "pl": "Strefa dla dzieci",                               "zh-cn": "儿童区"},
+
+    
+
 };

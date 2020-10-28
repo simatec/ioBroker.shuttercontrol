@@ -44,6 +44,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.1.0 (2020-10-09)
+* (René) bug fix: calculation IsSummerTime
+* (René) bug fix: use weekend down time already on friday instead of sunday
+* (René) handling of shutters in xmas time added
+
 ### 1.0.2 (2020-10-08)
 * (simatec) fix uptime for childrenarea
 
