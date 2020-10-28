@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "news": {
+      "1.0.4": {
+        "en": "fix summertime for childrenarea",
+        "de": "Fix Sommerzeit für Kinderbereich",
+        "ru": "исправить летнее время для детей",
+        "pt": "fixar horário de verão para área infantil",
+        "nl": "fix zomertijd voor kindergebied",
+        "fr": "fixer l'heure d'été pour les enfants",
+        "it": "fissare l'estate per l'area bambini",
+        "es": "arreglar el horario de verano para los niños",
+        "pl": "ustalenie czasu letniego dla Childrenarea",
+        "zh-cn": "修正夏季儿童游乐区"
+      },
       "1.0.3": {
         "en": "bug fix: calculation IsSummerTime, bug fix: use weekend down time already on friday instead of sunday, handling of shutters in xmas time added, documentation updated, words.js updated, some Bugfixes",
         "de": "Fehlerbehebung: Berechnung IsSummerTime, Fehlerbehebung: Verwenden Sie die Ausfallzeit am Wochenende bereits am Freitag anstelle von Sonntag, Behandlung von Rollläden in der Weihnachtszeit hinzugefügt, Dokumentation aktualisiert, words.js aktualisiert, einige Bugfixes",
