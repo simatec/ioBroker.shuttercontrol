@@ -1,4 +1,4 @@
-![Logo](media/shuttercontrol.png)
+![Logo](img/shuttercontrol.png)
 # Shuttercontrol - Adapter zur automatischen Rollladensteuerung
 
 # Inhalt
@@ -57,14 +57,14 @@ Eine Instanz des Shuttercontrol-Adapters wird über die ioBroker Admin-Oberfläc
 mit klicken auf das + Zeichen installiert. Je nach eingestellten aktiven Verwahrungsort
 im Admin Adapter wird die stable(default) oder latest Version  installiert.
 
-![installation.jpg](media/installation.png)
+![installation.png](img/installation.png)
 
 Nach der Erstellung der Instanz öffnet sich automatisch das Konfigurationsfenster
 mit den Haupteinstellungen:
 
 ## Adapterkonfiguration - HAUPTEINSTELLUNGEN
 
-![main](media/main.png)
+![main](img/main.png)
 
 
 * **1:** hinzufügen eines Rollladenaktors
@@ -96,7 +96,7 @@ und anschließend durch anklicken des mit 1 markierten (+) die eigenen Rollladen
 hinzufügen.
 
 
-![ID_Selector_DP_Levelg](media/ID_Selector_DP_Level.png)
+![ID_Selector_DP_Levelg](img/ID_Selector_DP_Level.png)
 
 Nach Abschluss der ID-Auswahl ist der Adapter bereits betriebsbereit und wird nun
 weiter an die eigenen Wünsche angepasst.
@@ -116,7 +116,7 @@ Das Schließen von Rollläden am Freitag erfolgt zur eingestellten Wochenendzeit
 und am Sonntag zur eingestellten Arbeitswochenzeit!
 
 
-![timeSettings](media/timeSettings.png)
+![timeSettings](img/timeSettings.png)
 
 ### Einstellungen für den Wohnbereich, Schlafbereich und Kinderbereich
 Über Dropdown werden die einzelnen Einstellungen geöffnet.
@@ -170,7 +170,7 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 
 In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
 
-![extraSettingsAstro](media/ExtraSettingsAstro.png)
+![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
 ### Astro-Einstellungen
 **Breiten- und Längengrad:**  
@@ -193,7 +193,7 @@ in Sekunden eingestellt werden.
 
 ### Sommer-Einstellungen
 
-![extraSettingsSummer](media/ExtraSettingsSummer.png)
+![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
 **Alle Rollläden schliessen spät in der Nacht**  
 Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
@@ -216,7 +216,7 @@ schließt.
 
 ### Urlaubs- und Feiertagseinstellungen
 
-![extraSettingsHolidays](media/ExtraSettingsHolidays.png)
+![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
 **Verwenden der gesetzlichen Feiertage:**  
 Sollen die Rollläden an Feiertagen wie an Wochenenden fahren, wird diese Checkbox
@@ -232,7 +232,7 @@ Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 
 ### Extra-Einstellungen
 
-![extraSettingsExtra](media/ExtraSettingsExtra.png)
+![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
 **Überprüfen des aktuellen Rollladenstatus:**  
 Bei einigen Usern (unter anderen shelly User) tritt das Problem auf, dass sich das
@@ -261,13 +261,13 @@ Nach dem Anlegen der Rollläden unter [Adapterkonfiguration - HAUPTEINSTELLUNGEN
 durch das betätigen des Bleistifts (3) beim entsprechenden Rollladen mit den Reitern
 [Haupteinstellungen](#haupteinstellungen) und [Sonnenschutz-Einstellungen](#sonnenschutz-einstellungen) jeder Rollladen einzeln weiter konfiguriert.
 
-![main1](media/main1.png)
+![main1](img/main1.png)
 
 ---
 
 ### Haupteinstellungen
 
-![mainShutter.jpg](media/mainShutter.png)
+![mainShutter.png](img/mainShutter.png)
 
 Im oberen Bereich werden die Zeitpunkte für das Öffnen bzw. Schließen des Rollladens
 separat per Pulldown-Menü ausgewählt.
@@ -396,7 +396,7 @@ Der Sonnenschutz kann über Auslöser wie Himmelsrichtung, Außentemperatur, Inn
 und Lichtsensor für die Beschattung und deren Ende gesteuert werden und wird über
 **Art der Sonnenschutzsteuerung** eingestellt.
 
-![sunProtect](media/sunProtect.png)
+![sunProtect](img/sunProtect.png)
 
 
 **Rollladenhöhe beim Runterfahren:**  
@@ -502,7 +502,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 ---
 ### shuttercontrol.0.control
 
-![datapointscontrol](media/datapointscontrol.png)
+![datapointscontrol](img/datapointscontrol.png)
 
 Datenpunkte zur Steuerung verschiedener Funktionen wie:
 * Holiday  
@@ -562,11 +562,11 @@ Button um die Rollläden im Schlafbereich in die Sonnenschutzposition zu fahren
 Datenpunkte zur Anzeige berechneter Werte und zur Überprüfung von konfigurierten
 Zeiten:
 
-![datapointsinfo](media/datapointsinfo.png)
+![datapointsinfo](img/datapointsinfo.png)
 
 ---
 ### shuttercontrol.0.shutters
-![datapointsshutters](media/datapointsshutters.png)
+![datapointsshutters](img/datapointsshutters.png)
 
 * autoDown  
 Für jeden Rollladen kann hier das automatische Schließen mit ```false```deaktiviert 
