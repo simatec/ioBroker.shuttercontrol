@@ -17,9 +17,12 @@ const shutterSunriseSunset = require('./lib/shutterSunriseSunset.js');  // shutt
 const shutterDownLiving = require('./lib/shutterDownLiving.js');        // shutterDownLiving
 const shutterUpSleep = require('./lib/shutterUpSleep.js');              // shutterUpSleep
 const shutterDownLate = require('./lib/shutterDownLate.js');            // shutterDownLate
+const shutterDownChildren = require('./lib/shutterDownChildren.js');    // shutterDownChildren
+const shutterUpChildren = require('./lib/shutterUpChildren.js');        // shutterUpChildren
 const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
 const shutterState = require('./lib/shutterState.js');        			// shutterState
+
 
 /**
  * The adapter instance
@@ -33,10 +36,16 @@ const adapterName = require('./package.json').name.split('.').pop();
 let autoLivingStr;
 /** @type {boolean} */
 let autoSleepStr;
+/** @type {boolean} */
+let autoChildrenStr;
 /** @type {number | undefined} */
 let delayUp;
 /** @type {number | undefined} */
+let delayUpChildren;
+/** @type {number | undefined} */
 let delayDown;
+/** @type {number | undefined} */
+let delayDownChildren;
 /** @type {string} */
 let astroTimeLivingUp;
 /** @type {string} */
@@ -45,6 +54,10 @@ let astroTimeLivingDown;
 let astroTimeSleepUp;
 /** @type {string} */
 let astroTimeSleepDown;
+/** @type {string} */
+let astroTimeChildrenUp;
+/** @type {string} */
+let astroTimeChildrenDown;
 /** @type {any[]} */
 let resTrigger = [];
 /** @type {any[]} */
@@ -105,6 +118,8 @@ function startAdapter(options) {
             schedule.cancelJob('shutterDownLate');
             schedule.cancelJob('shutterDownSleep');
             schedule.cancelJob('calcPosTimer');
+            schedule.cancelJob('shutterUpChildren');
+            schedule.cancelJob('shutterDownChildren');
             callback();
         } catch (e) {
             callback(e);
@@ -135,6 +150,10 @@ function startAdapter(options) {
                 autoSleepStr = state.val;
                 shutterDriveCalc();
             }
+            if (id === adapter.namespace + '.control.autoChildren') {
+                autoChildrenStr = state.val;
+                shutterDriveCalc();
+            }
             if (adapter.config.publicHolidays === true) {
                 if (id === adapter.config.publicHolInstance + '.heute.boolean') {
                     publicHolidayStr = state.val;
@@ -152,6 +171,10 @@ function startAdapter(options) {
             if (id === adapter.config.triggerAutoSleep) {
                 adapter.setState('control.autoSleep', { val: state.val, ack: true });
                 adapter.log.debug('Auto Sleep is: ' + state.val);
+            }
+            if (id === adapter.config.triggerAutoChildren) {
+                adapter.setState('control.autoChildren', { val: state.val, ack: true });
+                adapter.log.debug('Auto Children is: ' + state.val);
             }
             resTrigger.forEach(function (resultTriggerID) {
                 if (id === resultTriggerID && state.ts === state.lc) {
@@ -253,12 +276,24 @@ function startAdapter(options) {
                 let buttonState = 'openSleep';
                 buttonAction(adapter, buttonState);
             }
+            if (id === adapter.namespace + '.control.closeChildren') {
+                let buttonState = 'closeChildren';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.openChildren') {
+                let buttonState = 'openChildren';
+                buttonAction(adapter, buttonState);
+            }
             if (id === adapter.namespace + '.control.sunProtect') {
                 let buttonState = 'sunProtect';
                 buttonAction(adapter, buttonState);
             }
             if (id === adapter.namespace + '.control.sunProtectSleep') {
                 let buttonState = 'sunProtectSleep';
+                buttonAction(adapter, buttonState);
+            }
+            if (id === adapter.namespace + '.control.sunProtectChildren') {
+                let buttonState = 'sunProtectChildren';
                 buttonAction(adapter, buttonState);
             }
             if (id === adapter.namespace + '.control.sunProtectLiving') {
@@ -299,6 +334,15 @@ function checkStates() {
             adapter.setState('control.autoSleep', { val: false, ack: true });
         }
     });
+    /**
+     * @param {any} err
+     * @param {{ val: null; } | null} state
+     */
+    adapter.getState('control.autoChildren', (err, state) => {
+        if ((state && state === null) || (state && state.val === null)) {
+            adapter.setState('control.autoChildren', { val: false, ack: true });
+        }
+    });
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -333,6 +377,17 @@ function checkActualStates() {
             autoSleepStr = state.val;
         }
     });
+
+    /**
+     * @param {any} err
+     * @param {{ val: any; }} state
+     */
+    adapter.getState('control.autoChildren', (err, state) => {
+        if (state) {
+            autoChildrenStr = state.val;
+        }
+    });
+
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance != 'none' || adapter.config.publicHolInstance != '')) {
         /**
          * @param {any} err
@@ -507,9 +562,13 @@ let goldenHourEnd;
 /** @type {string} */
 let upTimeSleep;
 /** @type {string} */
+let upTimeChildren;
+/** @type {string} */
 let upTimeLiving;
 /** @type {string} */
 let downTimeSleep;
+/** @type {string} */
+let downTimeChildren;
 /** @type {string} */
 let downTimeLiving;
 /** @type {string | number} */
@@ -585,6 +644,16 @@ function shutterDriveCalc() {
         case 'sleepGoldenHour':
             astroTimeSleepUp = goldenHourEnd;
             astroTimeSleepDown = goldenHour;
+            break;
+    }
+    switch (adapter.config.childrenAutomatic) {
+        case 'childrenSunriseSunset':
+            astroTimeChildrenUp = sunriseStr;
+            astroTimeChildrenDown = sunsetStr;
+            break;
+        case 'childrenGoldenHour':
+            astroTimeChildrenUp = goldenHourEnd;
+            astroTimeChildrenDown = goldenHour;
             break;
     }
     let debugCnt = 0;
@@ -705,10 +774,71 @@ function shutterDriveCalc() {
     adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep + " debug " + debugCnt);
     shutterUpSleep(adapter, upTimeSleep, delayUp, autoSleepStr)
 
+    // ******** Set Up-Time Children Area ********
+
+    switch (adapter.config.childrenAutomatic) {
+        case 'childrenTime':
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+                upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
+                debugCnt = 1;
+            } else {
+                upTimeChildren = adapter.config.W_shutterUpChildrenMax;
+                debugCnt = 2;
+            }
+            break;
+        default:
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayStr) === true) {
+
+                if (IsLater(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMax)) {
+                    upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
+                    debugCnt = 10;
+                } else if (IsLater(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin) && IsEarlier(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMax)) {
+                    upTimeChildren = astroTimeChildrenUp;
+                    debugCnt = 11;
+                } else if (IsEqual(adapter.config.WE_shutterUpChildrenMin, adapter.config.WE_shutterUpChildrenMax)) {
+                    upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
+                    debugCnt = 12;
+                } else if (IsEqual(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMax)) {
+                    upTimeChildren = astroTimeChildrenUp;
+                    debugCnt = 13;
+                } else if (IsEarlier(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin)) {
+                    upTimeChildren = adapter.config.WE_shutterUpChildrenMin;
+                    debugCnt = 14;
+                }
+
+
+            } else {
+                if (dayStr < 6 && dayStr > 0) {
+
+                    if (IsLater(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMax)) {
+                        upTimeChildren = adapter.config.W_shutterUpChildrenMax;
+                        debugCnt = 4;
+                    } else if (IsLater(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin) && IsEarlier(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMax)) {
+                        upTimeChildren = astroTimeChildrenUp;
+                        debugCnt = 5;
+                    } else if (IsEqual(adapter.config.W_shutterUpChildrenMin, adapter.config.W_shutterUpChildrenMax)) {
+                        upTimeChildren = adapter.config.W_shutterUpChildrenMax;
+                        debugCnt = 6;
+                    } else if (IsEqual(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMax)) {
+                        upTimeChildren = astroTimeChildrenUp;
+                        debugCnt = 7;
+                    } else if (IsEarlier(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin)) {
+                        upTimeChildren = adapter.config.W_shutterUpChildrenMin;
+                        debugCnt = 8;
+                    }
+                }
+            }
+
+            break;
+    }
+    adapter.setState('info.upTimeChildren', { val: upTimeChildren, ack: true });
+    adapter.log.debug('Starting up shutters children area: ' + upTimeChildren + " debug " + debugCnt);
+    shutterUpChildren(adapter, upTimeChildren, delayUpChildren, autoChildrenStr)
+
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -745,10 +875,49 @@ function shutterDriveCalc() {
     adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving + " debug " + debugCnt);
     shutterDownLiving(adapter, downTimeLiving, autoLivingStr);
 
+    // ******** Set Down-Time Children Area ******** 
+    switch (adapter.config.childrenAutomatic) {
+        case 'childrenTime':
+            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
+                downTimeChildren = adapter.config.WE_shutterDownChildren;
+                debugCnt = 1;
+            } else {
+                downTimeChildren = adapter.config.W_shutterDownChildren;
+                debugCnt = 2;
+            }
+            break;
+        default:
+            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownChildren) < (astroTimeChildrenDown)) {
+                downTimeChildren = adapter.config.WE_shutterDownChildren;
+                debugCnt = 3;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownChildren) > (astroTimeChildrenDown)) {
+                downTimeChildren = astroTimeChildrenDown;
+                debugCnt = 4;
+            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) && (adapter.config.WE_shutterDownChildren) == (astroTimeChildrenDown)) {
+                downTimeChildren = astroTimeChildrenDown;
+                debugCnt = 5;
+
+                //< 5 ist doch auch 0??
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) > (adapter.config.W_shutterDownChildren)) {
+                downTimeChildren = adapter.config.W_shutterDownChildren;
+                debugCnt = 6;
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) < (adapter.config.W_shutterDownChildren)) {
+                downTimeChildren = astroTimeChildrenDown;
+                debugCnt = 7;
+            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) == (adapter.config.W_shutterDownChildren)) {
+                downTimeChildren = astroTimeChildrenDown;
+                debugCnt = 8;
+            }
+            break;
+    }
+    adapter.setState('info.downTimeChildren', { val: downTimeChildren, ack: true });
+    adapter.log.debug('Shutdown shutters children area: ' + downTimeChildren + " debug " + debugCnt);
+    shutterDownChildren(adapter, downTimeChildren, delayDownChildren, autoChildrenStr);
+
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
+            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (publicHolidayTomorowStr) === true) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
@@ -785,6 +954,8 @@ function shutterDriveCalc() {
     shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr);
     shutterDownLate(adapter, delayDown);
     delayCalc();
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -897,6 +1068,8 @@ function addMinutesGoldenHourEnd(time, minsToAdd) {
 function delayCalc() {
     delayUp = 0;
     delayDown = 0;
+    delayUpChildren = 0;
+    delayDownChildren = 0;
     // Full Result
     let resultFull = adapter.config.events;
     if (resultFull) {
@@ -938,6 +1111,47 @@ function delayCalc() {
                 }
             }
         }
+
+        if ((upTimeSleep) === (upTimeChildren)) {
+
+            delayUpChildren = delayUp;
+
+            // Filter Area Sleep
+            let /**
+                 * @param {{ typeUp: string; }} d
+                 */
+                resLiving = resultFull.filter(d => d.typeUp == 'sleep');
+            // Filter enabled
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled = resLiving.filter(d => d.enabled === true);
+
+            let result = resEnabled;
+
+            for (const i in result) {
+                delayUpChildren++;
+            }
+            if ((autoSleepStr) === true) {
+
+                // Filter Area Sleep
+                let /**
+                     * @param {{ typeUp: string; }} d
+                     */
+                    resLivingAuto = resultFull.filter(d => d.typeUp == 'sleep-auto');
+                // Filter enabled
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled2 = resLivingAuto.filter(d => d.enabled === true);
+
+                let result2 = resEnabled2;
+
+                for (const i in result2) {
+                    delayUpChildren++;
+                }
+            }
+        }
         if ((downTimeLiving) === (downTimeSleep)) {
             // Filter Area Living
             let /**
@@ -971,6 +1185,46 @@ function delayCalc() {
 
                 for (const i in result4) {
                     delayDown++;
+                }
+            }
+        }
+
+        if ((downTimeSleep) === (downTimeChildren)) {
+
+            delayDownChildren = delayDown;
+
+            // Filter Area Sleep
+            let /**
+                 * @param {{ typeDown: string; }} d
+                 */
+                resLiving2 = resultFull.filter(d => d.typeDown == 'sleep');
+            // Filter enabled
+            let /**
+                 * @param {{ enabled: boolean; }} d
+                 */
+                resEnabled3 = resLiving2.filter(d => d.enabled === true);
+
+            let result3 = resEnabled3;
+
+            for (const i in result3) {
+                delayDownChildren++;
+            }
+            if ((autoSleepStr) === true) {
+                // Filter Area Sleep
+                let /**
+                     * @param {{ typeDown: string; }} d
+                     */
+                    resLivingAuto2 = resultFull.filter(d => d.typeDown == 'sleep-auto');
+                // Filter enabled
+                let /**
+                     * @param {{ enabled: boolean; }} d
+                     */
+                    resEnabled4 = resLivingAuto2.filter(d => d.enabled === true);
+
+                let result4 = resEnabled4;
+
+                for (const i in result4) {
+                    delayDownChildren++;
                 }
             }
         }
@@ -1390,6 +1644,9 @@ function main(adapter) {
 
     GetSystemData();
 
+
+
+
     // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');
     adapter.subscribeStates('info.Elevation');
@@ -1413,7 +1670,10 @@ function main(adapter) {
     if (adapter.config.triggerAutoSleep != '') {
         adapter.subscribeForeignStates(adapter.config.triggerAutoSleep);
     }
-
+    if (adapter.config.triggerAutoChildren != '') {
+        adapter.subscribeForeignStates(adapter.config.triggerAutoChildren);
+    }
+    
     // Change State from Trigger ID's
     let result = adapter.config.events;
 

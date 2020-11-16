@@ -8,6 +8,8 @@
 * [Adapterkonfiguration - ZEIT-EINSTELLUNGEN](#adapterkonfiguration---zeit-einstellungen)
 * [Adapterkonfiguration - EXTRA-EINSTELLUNGEN](#adapterkonfiguration---extra-einstellungen)
 	* [Astro-Einstellungen](#astro-einstellungen)
+	* [Sommer-Einstellungen](#sommer-einstellungen)
+	* [Urlaubs- und Feiertagseinstellungen](#urlaubs--und-feiertagseinstellungen)
 	* [Extra-Einstellungen](#extra-einstellungen)
 * [Individuelle Rollladeneinstellungen](#individuelle-rollladeneinstellungen)
 	* [Haupteinstellungen](#haupteinstellungen)
@@ -19,7 +21,7 @@
 
 ## Grundlegendes
 
-> Die Anleitung ist gültig für Versionen ab 0.7.0
+> Die Anleitung ist gültig für Version 1.0.2
 
 Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung von Rollläden,
 Jalousien oder Markisen und umfasst sowohl die automatische Beschattung als auch
@@ -55,14 +57,14 @@ Eine Instanz des Shuttercontrol-Adapters wird über die ioBroker Admin-Oberfläc
 mit klicken auf das + Zeichen installiert. Je nach eingestellten aktiven Verwahrungsort
 im Admin Adapter wird die stable(default) oder latest Version  installiert.
 
-![installation.jpg](img/installation.png)
+![installation.png](img/installation.png)
 
 Nach der Erstellung der Instanz öffnet sich automatisch das Konfigurationsfenster
 mit den Haupteinstellungen:
 
 ## Adapterkonfiguration - HAUPTEINSTELLUNGEN
 
-![main.jpg](img/main.png)
+![main](img/main.png)
 
 
 * **1:** hinzufügen eines Rollladenaktors
@@ -94,7 +96,7 @@ und anschließend durch anklicken des mit 1 markierten (+) die eigenen Rollladen
 hinzufügen.
 
 
-![ID_Selector_DP_Level.png](img/ID_Selector_DP_Level.png)
+![ID_Selector_DP_Levelg](img/ID_Selector_DP_Level.png)
 
 Nach Abschluss der ID-Auswahl ist der Adapter bereits betriebsbereit und wird nun
 weiter an die eigenen Wünsche angepasst.
@@ -114,27 +116,27 @@ Das Schließen von Rollläden am Freitag erfolgt zur eingestellten Wochenendzeit
 und am Sonntag zur eingestellten Arbeitswochenzeit!
 
 
-![timeSettings.jpg](img/timeSettings.png)
+![timeSettings](img/timeSettings.png)
 
-### Einstellungen für den Wohnbereich und Schlafbereich
-In oberen Abschnitt werden die gewünschten Parameter für die Rollläden im
-Wohnbereich und im unteren Abschnitt für den Schlafbereich eingegeben.
+### Einstellungen für den Wohnbereich, Schlafbereich und Kinderbereich
+Über Dropdown werden die einzelnen Einstellungen geöffnet.
+Die Beschreibung ist exemplarisch für den Wohnbereich beschrieben und gilt analog
+für alle Bereiche.
 
 > Hinweis:  
-Natürlich muss diese Kategorisierung nicht zwingend für einen Wohn- oder
-Schlafbereich genutzt werden, sondern ermöglicht zwei Bereiche im Gebäude
+Natürlich muss diese Kategorisierung nicht zwingend für einen Wohn-, Schlaf- oder
+Kinderbereich genutzt werden, sondern ermöglicht drei Bereiche im Gebäude
 mit unterschiedlichen Fahrzeiten der Rollläden zu definieren.
 
-**Art der Automatiksteuerung für den Wohnbereich (Schlafbereich)**, über Pulldown wird gewählt zwischen:
+**Art der Automatiksteuerung für den Wohnbereich**, über Pulldown wird gewählt zwischen:
 
-* **Nur die Zeit Wohnbereich (Schlafbereich):**  
+* **Nur die Zeit Wohnbereich:**  
 Die Rollläden werden ausschließlich zeitgesteuert gefahren
-* **Zeit Wohnbereich (Schlafbereich) mit Sonnenauf- & Sonnenuntergang:**  
+* **Zeit Wohnbereich mit Sonnenauf- & Sonnenuntergang:**  
 Die Rollläden werden nach Sonnenauf- und Sonnenuntergang gesteuert, jedoch fahren nicht
 vor der frühesten Zeit hoch und nicht nach der spätesten Zeit herunter.
-* **Zeit Wohnbereich (Schlafbereich) mit GoldenHour:**  
+* **Zeit Wohnbereich mit GoldenHour:**  
 Analog zu dem Sonnenauf- und Sonnenuntergang, jedoch mit dem Beginn und Ende der "Golden Hour" als Referenz
-
 
 **Schließen der Rollläden in der Arbeitswoche:**  
 Übliche Zeit für die Verdunklung während der Woche
@@ -168,12 +170,18 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 
 In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
 
-![extraSettings.jpg](img/extraSettings.png)
+![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
 ### Astro-Einstellungen
 **Breiten- und Längengrad:**  
 Breiten- und Längengrad übernimmt Shuttercontrol aus den ioBroker Systemeinstellungen.
 Shuttercontrol berechnet anhand dieser Werte den Sonnenstand.
+
+**Beenden der Sonnenschutzfunktion mit Sonnenhöhe (Elevation):**  
+Sobald die Sonne die hier eingestellte Höhe *unterschreitet*, endet die Beschattung
+durch Shuttercontrol.
+> Evtl. vorhandene vorzeitige Beschattung durch Bebauung oder hohe Bäume kann
+> hiermit berücksichtigt werden und die Beschattungsautomatik früher beenden.
 
 **Zeitverzögerung beim Hochfahren bzw. für das Herunterfahren (Minuten):**  
 Hier kann ein +/- Offset eingegeben werden, um den sich die Rollladenfahrten von dem
@@ -183,25 +191,9 @@ in der [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen
 Damit nicht alle Rollläden gleichzeitig fahren, kann hier eine globale Zeitverzögerung
 in Sekunden eingestellt werden.
 
-**Beenden der Sonnenschutzfunktion mit Sonnenhöhe (Elevation):**  
-Sobald die Sonne die hier eingestellte Höhe *unterschreitet*, endet die Beschattung
-durch Shuttercontrol.
-> Evtl. vorhandene vorzeitige Beschattung durch Bebauung oder hohe Bäume kann
-> hiermit berücksichtigt werden und die Beschattungsautomatik früher beenden.
+### Sommer-Einstellungen
 
-### Extra-Einstellungen
-
-**Objekt-ID für das setzen des Urlaubs:**  
-Diese Objekt-ID setzt den internen Zustand "Holiday". Hier kann z.Bsp. ein
-Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
-```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
-
-**Objekt ID des Auslösers für den Schlafbereich (Auto):**  
-Mit diesem Auslöser wird der Automodus des Schlafbereichs aktiviert.
-
-**Objekt ID des Triggers für den Wohnbereich (Auto):**  
-Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
-
+![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
 **Alle Rollläden schliessen spät in der Nacht**  
 Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
@@ -222,12 +214,9 @@ In der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladenei
 bei ```Rollladen im Sommer nicht schließen``` verhindert das dieser Rollladen im Sommer
 schließt. 
 
+### Urlaubs- und Feiertagseinstellungen
 
-**Überprüfen des aktuellen Rollladenstatus:**  
-Bei einigen User (unter anderen shelly User) tritt das Problem auf, dass sich das
-Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox.
-Bei aktivierter Checkbox, prüft shuttercontrol 1 Minute nach der letzten Fahrt des
-Rollladens das aktuelle Level und speichert es temporär.
+![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
 **Verwenden der gesetzlichen Feiertage:**  
 Sollen die Rollläden an Feiertagen wie an Wochenenden fahren, wird diese Checkbox
@@ -236,6 +225,35 @@ aktiviert und nebenan die entsprechende Instanz des Feiertage-Adapters ausgewäh
 >  eine zum Anzeigen aller möglichen Feiertage und eine mit arbeitszeitrelevanten
 >  Feiertagen, auf die dann shuttercontrol zugreift.
 
+**Objekt-ID für das setzen des Urlaubs:**  
+Diese Objekt-ID setzt den internen Zustand "Holiday". Hier kann z.Bsp. ein
+Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
+```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
+
+### Extra-Einstellungen
+
+![extraSettingsExtra](img/ExtraSettingsExtra.png)
+
+**Überprüfen des aktuellen Rollladenstatus:**  
+Bei einigen Usern (unter anderen shelly User) tritt das Problem auf, dass sich das
+Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox.
+Bei aktivierter Checkbox, prüft shuttercontrol 1 Minute nach der letzten Fahrt des
+Rollladens das aktuelle Level und speichert es temporär.
+
+**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
+Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
+abgelaufen ist.
+
+**Objekt ID des Auslösers für den Schlafbereich (Auto):**  
+Mit diesem Auslöser wird der Automodus des Schlafbereichs aktiviert.
+
+**Objekt ID des Triggers für den Wohnbereich (Auto):**  
+Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
+
+**Objekt ID des Triggers für den Kinderbereich (Auto):**  
+Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
+
+
 
 ## Individuelle Rollladeneinstellungen
 
@@ -243,13 +261,13 @@ Nach dem Anlegen der Rollläden unter [Adapterkonfiguration - HAUPTEINSTELLUNGEN
 durch das betätigen des Bleistifts (3) beim entsprechenden Rollladen mit den Reitern
 [Haupteinstellungen](#haupteinstellungen) und [Sonnenschutz-Einstellungen](#sonnenschutz-einstellungen) jeder Rollladen einzeln weiter konfiguriert.
 
-![main1.jpg](img/main1.png)
+![main1](img/main1.png)
 
 ---
 
 ### Haupteinstellungen
 
-![mainShutter.jpg](img/mainShutter.png)
+![mainShutter.png](img/mainShutter.png)
 
 Im oberen Bereich werden die Zeitpunkte für das Öffnen bzw. Schließen des Rollladens
 separat per Pulldown-Menü ausgewählt.
@@ -258,14 +276,10 @@ separat per Pulldown-Menü ausgewählt.
 Auswahlmöglichkeiten:
 * **Aus:**  
 keine Zeitvorgaben verwenden
-Buttons für openAll/closeAll steuern diese Rollläden
-
-* **nur manueller Betrieb:** 
-Der Rollladen wird nur manuell in die konfigurierte Richtung bewegt. Auch die Buttons haben keine Steuereffekte. 
-Kann hilfreich bei Markisen sein, welche nicht mit anderen Rolläden zusammen geöffnet werden sollen.
 
 * **Wohnbereich:**  
 Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Wohnbereich* konfiguriert.
+
 * **Wohnbereich (Automatik):**  
 Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Wohnbereich* konfiguriert
 **und** zusätzlich wird auf den unter Extra-Einstellungen festgelegten Trigger
@@ -274,17 +288,27 @@ dieser auf false wird der Rollladen **nicht** automatisch gefahren.
 
 * **Schlafbereich:**  
 Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Schlafbereich* konfiguriert.
+
 * **Schlafbereich (Automatik):**  
 Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Schlafbereich* konfiguriert
 **und** zusätzlich wird auf den unter Extra-Einstellungen festgelegten Trigger
 ```Objekt-ID zum aktivieren/deaktivieren des Auto-Schlafbereichs``` geachtet.
 Steht dieser auf false wird der Rollladen **nicht** automatisch gefahren.
 
+* **Kinderbereich:**  
+Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Kinderbereich* konfiguriert.
+
+* **Kinderbereich (Automatik):**  
+Der Rollladen fährt zu den Zeiten wie in *Einstellungen für den Kinderbereich* konfiguriert
+**und** zusätzlich wird auf den unter Extra-Einstellungen festgelegten Trigger
+```Objekt-ID zum aktivieren/deaktivieren des Auto-Kinderbereichs``` geachtet.
+Steht dieser auf false wird der Rollladen **nicht** automatisch gefahren.
+
 * **Sonnenuntergang/Sonnenaufgang:**  
 Der Rollladen fährt bei Sonnenuntergang bzw. bei Sonnenaufgang.
 
 * **Sonnenhöhe (Elevation):**  
-Unterschreitet die Elevation den in der [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) eingestellten
+Unterschreitet die Elevation den in der [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen)  eingestellten
 Wert wird der Rollläden gefahren.
 
 * **Golden Hour:**  
@@ -292,15 +316,19 @@ Der Rollläden fährt zur Golden Hour, die je nach Breitengrad und Jahreszeit ca
 vor Sonnenuntergang bzw. nach Sonnenaufgang ist. Der Begriff stammt aus der Fotografie,
 weil dort die Farben einen goldenen Schimmer haben.
 
-
+* **nur manueller Betrieb:**  
+Der Rollladen kann nur manuell in die ausgewählte Richtung bewegt werden. Über die
+die Buttons unter ```shuttercontrol.0.control``` ist keine Bewegung möglich. 
+Dies kann z.B. bei Markisen hilfreich sein, welche nicht mit anderen Rolläden
+zusammen geöffnet werden sollen.
 
 **Wert des Fenster/Tür Sensors im geschlossenen Zustand:**  
 Hier wird der Wert festgelegt den der Auslöser unter **Objekt-ID des Fenster/Tür Kontaktes**
 (z.B. Fenster- oder Drehgriffkontakt) hat, bei der die Rollladenautomatik unbegrenzt fahren darf.
 > Es können Werte wie true, false, 0, 1 oder 2 ausgewählt werden.
 
-Ist der Rollladen nicht in der obersten Position und wird der Sensor aus der angegebenen
-Position bewegt, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
+Ist der Rollladen nicht in der obersten Position und ändert sich der hier angegebene
+Sensorstatus, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
 
 **Rollladen fahren bei Änderung des Fenster/Tür Zustandes:**  
 Pulldown zur Auswahl der Funktion, die bei Bewegung des Fenster/Tür Sensors
@@ -333,7 +361,7 @@ __nicht__ dem dort eingegebenen Wert (Fenster/Tür offen) wird folgendes ausgef�
 **Rollladenhöhe beim Hochfahren:** gewünschte Rollladenposition am Morgen
 
 > Entsprechend der verwendeten Aktoren muss die Rollladenhöhe eingegeben werden:
-> 0 = geschlossen und 100 = offen bzw. 0= offen und 100 = gechlossen
+> 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = gechlossen
 
 **Sonnenhöhe (Elevation):**
 Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser Wert hier eingegeben; sonst leer lassen.
@@ -347,9 +375,19 @@ definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich herunterge
 **Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
 nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
 
-**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen des Fensters/Türe auf die zuletzt 
-angeforderte Position gefahren. Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht!
-Beispiel einer typischen Konfiguration für eine Türe: Trigger: "öffnen/schliessen" ; Aussperrschutz: "öffnen" ; Fahren, nachdem Fenster geschlossen wurde: "EIN"
+**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen
+des Fensters/Türe auf die zuletzt angeforderte Position gefahren. 
+
+> Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
+
+> Beispiel einer typischen Konfiguration für eine Türe: 
+> Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
+> Fahren, nachdem Fenster geschlossen wurde auf *EIN*
+
+**Nutze Level in Weinachtszeit und Weihnachtszeitlevel:** Falls der Rollläden in der Weihnachtszeit nur teilweise 
+geschlossen werden soll (z.Bsp. um den beleuchteten Schwibbogen von außen sichtbar zu haben) Mit der Option "Rollladen spät 
+schliessen" kann der Rollladen dann später geschlossen werden. Der Zeitraum für Weihnachten wird in den Extra-Einstellungen festgelegt
+
 
 ---
 
@@ -358,7 +396,7 @@ Der Sonnenschutz kann über Auslöser wie Himmelsrichtung, Außentemperatur, Inn
 und Lichtsensor für die Beschattung und deren Ende gesteuert werden und wird über
 **Art der Sonnenschutzsteuerung** eingestellt.
 
-![sunProtect.jpg](img/sunProtect.png)
+![sunProtect](img/sunProtect.png)
 
 
 **Rollladenhöhe beim Runterfahren:**  
@@ -413,7 +451,7 @@ wieder endet.
 
 > Beispiel:
 > Sollwert des Sonnenschutzlichtsensors ist auf 30.000, Hysterese auf 40 eingestellt:
-> Der Sonnenschutz ist aktiv ab > 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt.
+> Der Sonnenschutz ist aktiv ab 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt.
 
 **Objekt-Id des Sonnenschutzlichtsensors:**  
 Analog zum Außentemperatursensor; wenn nicht benutzt leer lassen
@@ -433,17 +471,18 @@ beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung wieder en
 über das (+) den Temperatursensor (State) auswählen der eine Rollladenfahrt verhindert.
 Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
-**Halte Rollladen in Sonnenschutz:**  
-wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn keine Sonnenschutz-
-Anforderung mehr besteht. Der Rollladen verbleibt so lange im Sonnenschutz, bis das "Schliessen" 
-Signal am Abend kommt. Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt.
-Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt), und lediglich 
-die Lamellen auf und zu fahren.
+**Halte Rollladen in Sonnenschutz:**
+wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
+keine Sonnenschutz- Anforderung mehr besteht und verbleibt so lange im Sonnenschutz,
+bis das "Schliessen" Signal am Abend kommt. 
+Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt. 
+Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt),
+und lediglich die Lamellen auf und zu fahren.
 
 > Hinweis:  
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
-automatisch angefahrenen, setzt die Automatik aus!
-Ausnahme:  
+automatisch angefahrenen, setzt die Automatik aus!  
+> Ausnahme:  
 Wenn der Rollladen das erste Mal am Tag manuell auf 100% geöffnet
 wird, wird ebenso der Sonnenschutz ermöglicht. Hierbei fährt der Rollladen
 bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
@@ -472,6 +511,10 @@ Bei ```true```fahren die Rollläden zu den eingestellen Zeiten Wochenende und be
 > Kann von eigenen Skripten, die den Urlaub, freie Tage o.ä. berechnen oder darstellen, 
 auf true gesetzt werden um die Wochenend-Einstellungen zu aktivieren.
 
+* autoChildren  
+Bei Steuerung der Rollläden mit **Kinderbereich (Automatik)** wird hier die Automatik 
+mit ```true``` ein- und mit ```false```ausgeschaltet.
+
 * autoLiving  
 Bei Steuerung der Rollläden mit **Wohnbereich (Automatik)** wird hier die Automatik 
 mit ```true``` ein- und mit ```false```ausgeschaltet.
@@ -483,6 +526,9 @@ mit ```true``` ein- und mit ```false```ausgeschaltet.
 * closeAll  
 Button um **alle** Rollläden in **allen Bereichen** zu schließen
 
+* closeChildren  
+Button um **alle** Rollläden im Kinderbereich zu schließen
+
 * closeLiving  
 Button um **alle** Rollläden im Wohnbereich zu schließen
 
@@ -491,6 +537,9 @@ Button um **alle** Rollläden im Schlafbereich zu schließen
 
 * openAll  
 Button um **alle** Rollläden in **allen Bereichen** zu öffnen
+
+* openChildren  
+Button um **alle** Rollläden im Kinderbereich zu öffnen
 
 * openLiving  
 Button um **alle** Rollläden im Wohnbereich zu öffnen
@@ -502,10 +551,11 @@ Button um **alle** Rollläden  im Schlafbereich zu öffnen
 Button um die Rollläden in die Sonnenschutzpostion zu fahren.
 
 * sunProtectLiving  
-Button um die Rollläden im Wohnbereich in die Sonnenschtzposition zu fahren
+Button um die Rollläden im Wohnbereich in die Sonnenschutzposition zu fahren
 
 * sunProtectSleep  
-Button um die Rollläden im Schlafbereich in die Sonnenschtzposition zu fahren
+Button um die Rollläden im Schlafbereich in die Sonnenschutzposition zu fahren
+
 
 ---
 ### shuttercontrol.0.info
