@@ -445,7 +445,27 @@
             visibility: hidden;
             display: none;
         }
-		
+
+        #events td:nth-of-type(39) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(39) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(40) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(40) {
+            visibility: hidden;
+            display: none;
+        }
+
         #dialog-select-member {
             z-index: 9999 !important;
         }
@@ -538,7 +558,9 @@
                     $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
 					$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
-					$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -592,6 +614,15 @@
                     });
                 });
             });
+            $('#triggerAutoChildrenDialog').on('click', function () {
+                initSelectId(function (sid) {
+                    sid.selectId('show', $('#triggerAutoChildren').val(), function (newId) {
+                        if (newId) {
+                            $('#triggerAutoChildren').val(newId).trigger('change');
+                        }
+                    });
+                });
+            });
 
             $('#triggerAutoLivingDialog').on('click', function () {
                 initSelectId(function (sid) {
@@ -637,6 +668,25 @@
                 fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
             });
             fillPosition();
+
+            //++++++++++ TABS ++++++++++
+            //Enhance Tabs with onShow-Function
+            $('ul.tabs li a').on('click', function(){ onTabShow($(this).attr('href'));});
+            function onTabShow(tabId){
+                switch(tabId){
+                    case "#tab-time":
+                    loadOptions();
+                    break;
+                    case "#tab-extra":
+                    loadOptions();
+                    break;
+                }
+            }
+            //++++++++++ OPTIONS ++++++++++
+            //Load Options
+            function loadOptions(){
+                $('.collapsible').collapsible();
+            }
 
         }
         function fillPosition() {
@@ -707,18 +757,21 @@
                 $('#hysteresisOutside').val($('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val());
                 $('#hysteresisInside').val($('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val());
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
-
+                $('#XmasLevel').val($('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val());
 
                
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
                 var test2 = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
 				var test3 = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
-				var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
+                var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
+                var test5 = $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked');
+
 
                 $('#LateDown').prop('checked', test1);
                 $('#inSummerNotDown').prop('checked', test2);
 				$('#KeepSunProtect').prop('checked', test3);
-				$('#driveAfterClose').prop('checked', test4);
+                $('#driveAfterClose').prop('checked', test4);
+                $('#useXmasLevel').prop('checked', test5);
 
                 
                 setTimeout(function () {
@@ -746,12 +799,14 @@
                         var hysteresisInside = $('#hysteresisInside').val();
                         var hysteresisLight = $('#hysteresisLight').val();
                         var autoDrive = $('#autoDriveShutter').val();
+                        var xmaslevel = $('#XmasLevel').val();
 
                         
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
 						var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
-						var newdriveAfterClose = $('#driveAfterClose').prop('checked');
+                        var newdriveAfterClose = $('#driveAfterClose').prop('checked');
+                        var newuseXmasLevel = $('#useXmasLevel').prop('checked');
 
 
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -777,12 +832,14 @@
                         $('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val(hysteresisOutside).trigger('change');
                         $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val(hysteresisInside).trigger('change');
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
+                        $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val(xmaslevel).trigger('change');
 
                        
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
 						$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
-						$('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
+                        $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
+                        $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked', newuseXmasLevel).trigger('change');
                     });
                 }, 20)
             });
@@ -985,9 +1042,11 @@
 
                                             <th data-name="LateDown" id="events_col_33" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">LateDown</th>
                                             <th data-name="inSummerNotDown" id="events_col_34" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">inSummerNotDown</th>
-											<th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
-											<th data-name="triggerAction" id="events_col_36" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
-											<th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
+                                            <th data-name="KeepSunProtect" id="events_col_35" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">KeepSunProtect</th>
+                                            <th data-name="triggerAction" id="events_col_36" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
+                                            <th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
+                                            <th data-name="useXmasLevel" id="events_col_38" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">useXmasLevel</th>
+                                            <th data-name="XmasLevel" id="events_col_39" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">XmasLevel</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #174475"></th>
@@ -1002,232 +1061,369 @@
                 <div id="tab-time" class="col s12 page">
                     <div class="row">
                         <div class="col s12">
-                            <h6 class="translate title" style="background-color:#174475;">Settings for Livingarea</h6>
+                            <h6 class="translate title" style="background-color:#174475;">Time Settings</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12 m4">
-                            <select class="value" id="livingAutomatic">
-                                <option value="livingTime" class="translate">only living area time</option>
-                                <option value="livingSunriseSunset" class="translate">automatic living area time with sunrise and sunset</option>
-                                <option value="livingGoldenHour" class="translate">automatic living area time with Golden hour</option>
-                            </select>
-                            <label for="livingAutomatic" class="translate"></label>
-                            <span class="translate">Automatic for living area</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="W_shutterDownLiving" />
-                            <label for="W_shutterDownLiving" class="translate"></label>
-                            <span class="translate">Shut down on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field col-W_shutterUpLivingMin">
-                            <input type="time" class="timepicker value" id="W_shutterUpLivingMin" />
-                            <label for="W_shutterUpLivingMin" class="translate"></label>
-                            <span class="translate">Min Time for Driving up on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="W_shutterUpLivingMax" />
-                            <label for="W_shutterUpLivingMax" class="translate"></label>
-                            <span class="translate">Max Time for Driving up on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="driveDelayUpLiving" />
-                            <label for="driveDelayUpLiving" class="translate"></label>
-                            <span class="translate">Time delay for driving the shutters (seconds)</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="WE_shutterDownLiving" />
-                            <label for="WE_shutterDownLiving" class="translate"></label>
-                            <span class="translate">Shut down on the weekend</span>
-                        </div>
-                        <div class="col s6 l2 input-field col-WE_shutterUpLivingMin">
-                            <input type="time" class="timepicker value" id="WE_shutterUpLivingMin" />
-                            <label for="WE_shutterUpLivingMin" class="translate"></label>
-                            <span class="translate">Min Time for Driving up on the weekend</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="WE_shutterUpLivingMax" />
-                            <label for="WE_shutterUpLivingMax" class="translate"></label>
-                            <span class="translate">Max Time for Driving up on the weekend</span>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate title" style="background-color:#174475;">Settings for Sleeparea</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m4">
-                            <select class="value" id="sleepAutomatic">
-                                <option value="sleepTime" class="translate">only sleep area time</option>
-                                <option value="sleepSunriseSunset" class="translate">automatic sleep area time with sunrise and sunset</option>
-                                <option value="sleepGoldenHour" class="translate">automatic sleep area time with Golden hour</option>
-                            </select>
-                            <label for="sleepAutomatic" class="translate"></label>
-                            <span class="translate">Automatic for sleep area</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="W_shutterDownSleep" />
-                            <label for="W_shutterDownSleep" class="translate"></label>
-                            <span class="translate">Shut down on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field col-W_shutterUpSleepMin">
-                            <input type="time" class="timepicker value" id="W_shutterUpSleepMin" />
-                            <label for="W_shutterUpSleepMin" class="translate"></label>
-                            <span class="translate">Min Time for Driving up on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="W_shutterUpSleepMax" />
-                            <label for="W_shutterUpSleepMax" class="translate"></label>
-                            <span class="translate">Max Time for Driving up on the week</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="driveDelayUpSleep" />
-                            <label for="driveDelayUpSleep" class="translate"></label>
-                            <span class="translate">Time delay for driving the shutters (seconds)</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="WE_shutterDownSleep" />
-                            <label for="WE_shutterDownSleep" class="translate"></label>
-                            <span class="translate">Shut down on the weekend</span>
-                        </div>
-                        <div class="col s6 l2 input-field col-WE_shutterUpSleepMin">
-                            <input type="time" class="timepicker value" id="WE_shutterUpSleepMin" />
-                            <label for="WE_shutterUpSleepMin" class="translate"></label>
-                            <span class="translate">Min Time for Driving up on the weekend</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="WE_shutterUpSleepMax" />
-                            <label for="WE_shutterUpSleepMax" class="translate"></label>
-                            <span class="translate">Max Time for Driving up on the weekend</span>
-                        </div>
-                    </div>
+                    <ul class="collapsible">
+                        <!-- Settings for Livingarea -->
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Settings for Livingarea</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="input-field col s12 m4">
+                                        <select class="value" id="livingAutomatic">
+                                            <option value="livingTime" class="translate">only living area time</option>
+                                            <option value="livingSunriseSunset" class="translate">automatic living area time with sunrise and sunset</option>
+                                            <option value="livingGoldenHour" class="translate">automatic living area time with Golden hour</option>
+                                        </select>
+                                        <label for="livingAutomatic" class="translate"></label>
+                                        <span class="translate">Automatic for living area</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterDownLiving" />
+                                        <label for="W_shutterDownLiving" class="translate"></label>
+                                        <span class="translate">Shut down on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-W_shutterUpLivingMin">
+                                        <input type="time" class="timepicker value" id="W_shutterUpLivingMin" />
+                                        <label for="W_shutterUpLivingMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterUpLivingMax" />
+                                        <label for="W_shutterUpLivingMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="driveDelayUpLiving" />
+                                        <label for="driveDelayUpLiving" class="translate"></label>
+                                        <span class="translate">Time delay for driving the shutters (seconds)</span>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterDownLiving" />
+                                        <label for="WE_shutterDownLiving" class="translate"></label>
+                                        <span class="translate">Shut down on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-WE_shutterUpLivingMin">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpLivingMin" />
+                                        <label for="WE_shutterUpLivingMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpLivingMax" />
+                                        <label for="WE_shutterUpLivingMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the weekend</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Settings for Sleeparea -->
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Settings for Sleeparea</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="input-field col s12 m4">
+                                        <select class="value" id="sleepAutomatic">
+                                            <option value="sleepTime" class="translate">only sleep area time</option>
+                                            <option value="sleepSunriseSunset" class="translate">automatic sleep area time with sunrise and sunset</option>
+                                            <option value="sleepGoldenHour" class="translate">automatic sleep area time with Golden hour</option>
+                                        </select>
+                                        <label for="sleepAutomatic" class="translate"></label>
+                                        <span class="translate">Automatic for sleep area</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterDownSleep" />
+                                        <label for="W_shutterDownSleep" class="translate"></label>
+                                        <span class="translate">Shut down on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-W_shutterUpSleepMin">
+                                        <input type="time" class="timepicker value" id="W_shutterUpSleepMin" />
+                                        <label for="W_shutterUpSleepMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterUpSleepMax" />
+                                        <label for="W_shutterUpSleepMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="driveDelayUpSleep" />
+                                        <label for="driveDelayUpSleep" class="translate"></label>
+                                        <span class="translate">Time delay for driving the shutters (seconds)</span>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterDownSleep" />
+                                        <label for="WE_shutterDownSleep" class="translate"></label>
+                                        <span class="translate">Shut down on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-WE_shutterUpSleepMin">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpSleepMin" />
+                                        <label for="WE_shutterUpSleepMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpSleepMax" />
+                                        <label for="WE_shutterUpSleepMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the weekend</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Settings for Childrenarea -->
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Settings for Childrenarea</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="input-field col s12 m4">
+                                        <select class="value" id="childrenAutomatic">
+                                            <option value="childrenTime" class="translate">only children area time</option>
+                                            <option value="childrenSunriseSunset" class="translate">automatic children area time with sunrise and sunset</option>
+                                            <option value="childrenGoldenHour" class="translate">automatic children area time with Golden hour</option>
+                                        </select>
+                                        <label for="childrenAutomatic" class="translate"></label>
+                                        <span class="translate">Automatic for children area</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterDownChildren" />
+                                        <label for="W_shutterDownChildren" class="translate"></label>
+                                        <span class="translate">Shut down on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-W_shutterUpChildrenMin">
+                                        <input type="time" class="timepicker value" id="W_shutterUpChildrenMin" />
+                                        <label for="W_shutterUpChildrenMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="W_shutterUpChildrenMax" />
+                                        <label for="W_shutterUpChildrenMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the week</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="driveDelayUpChildren" />
+                                        <label for="driveDelayUpChildren" class="translate"></label>
+                                        <span class="translate">Time delay for driving the shutters (seconds)</span>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterDownChildren" />
+                                        <label for="WE_shutterDownChildren" class="translate"></label>
+                                        <span class="translate">Shut down on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field col-WE_shutterUpChildrenMin">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpChildrenMin" />
+                                        <label for="WE_shutterUpChildrenMin" class="translate"></label>
+                                        <span class="translate">Min Time for Driving up on the weekend</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="WE_shutterUpChildrenMax" />
+                                        <label for="WE_shutterUpChildrenMax" class="translate"></label>
+                                        <span class="translate">Max Time for Driving up on the weekend</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
+
                 <!-- Tab Extra -->
                 <div id="tab-extra" class="col s12 page">
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 class="translate title" style="background-color:#174475;">Astro settings</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="latitude" />
-                            <label for="latitude" class="translate"></label>
-                            <span class="translate">latitude</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="longitude" />
-                            <label for="longitude" class="translate"></label>
-                            <span class="translate">longitude</span>
-                        </div>
-
-
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="astroDelayUp" />
-                            <label for="astroDelayUp" class="translate"></label>
-                            <span class="translate">Time delay for Driving up (minutes)</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="astroDelayDown" />
-                            <label for="astroDelayDown" class="translate"></label>
-                            <span class="translate">Time delay for Driving down (minutes)</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="driveDelayUpAstro" />
-                            <label for="driveDelayUpAstro" class="translate"></label>
-                            <span class="translate">Time delay for driving the shutters (seconds)</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" id="sunProtEndElevation" class="value" min="-50.0" max="100.0" step="0.1" />
-                            <label for="sunProtEndElevation" class="translate"></label>
-                            <span class="translate">Sun Protect End with Elevation</span>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate title" style="background-color:#174475;">Extra Settings</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="HolidayDP" />
-                            <label for="HolidayDP" class="translate"></label>
-                            <span class="translate">Object ID for holiday today</span>
-                        </div>
-                        <div class="col s1 m2 l1">
-                            <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="triggerAutoSleep" />
-                            <label for="triggerAutoSleep" class="translate"></label>
-                            <span class="translate">Object ID of trigger for Auto Sleep</span>
-                        </div>
-                        <div class="col s1 m2 l1">
-                            <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                        <div class="col s6 l3 input-field">
-                            <input type="text" class="value" id="triggerAutoLiving" />
-                            <label for="triggerAutoLiving" class="translate"></label>
-                            <span class="translate">Object ID of trigger for Auto Living</span>
-                        </div>
-                        <div class="col s1 m2 l1">
-                            <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="checkbox" class="value" id="LateAllDown" />
-                            <span for="LateAllDown" class="translate">Move down all shutters late</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="time" class="timepicker value" id="LateAllDownTime" />
-                            <label for="LateAllDownTime" class="translate"></label>
-                            <span class="translate">Time to move down all shutters late night</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="SummerStart" />
-                            <label for="SummerStart" class="translate"></label>
-                            <span class="translate">SummerStart</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="text" class="value" id="SummerEnd" />
-                            <label for="SummerEnd" class="translate"></label>
-                            <span class="translate">SummerEnd</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 l2 input-field">
-                            <input type="checkbox" class="value" id="currentShutterState" />
-                            <span for="currentShutterState" class="translate">check current Shutter State</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="checkbox" class="value" id="publicHolidays" />
-                            <span for="publicHolidays" class="translate">Use public holidays</span>
-                        </div>
-                        <div class="input-field col s12 m6 l2 publicHol">
-                            <select id="publicHolInstance" class="value"></select>
-                            <label for="publicHolInstance" class="translate"></label>
-                            <span class="translate">public holidays Instance</span>
-                        </div>
-                        <div class="col s6 l2 input-field">
-                            <input type="number" class="value" id="noGoTime" />
-                            <label for="noGoTime" class="translate"></label>
-                            <span class="translate">Time left to detect second sleep (minutes)</span>
-                        </div>
-                    </div>
+                    <ul class="collapsible">
+                        <!-- Settings for Astro -->
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Astro settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="latitude" />
+                                        <label for="latitude" class="translate"></label>
+                                        <span class="translate">latitude</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="longitude" />
+                                        <label for="longitude" class="translate"></label>
+                                        <span class="translate">longitude</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" id="sunProtEndElevation" class="value" min="-50.0" max="100.0" step="0.1" />
+                                        <label for="sunProtEndElevation" class="translate"></label>
+                                        <span class="translate">Sun Protect End with Elevation</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="astroDelayUp" />
+                                        <label for="astroDelayUp" class="translate"></label>
+                                        <span class="translate">Time delay for Driving up (minutes)</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="astroDelayDown" />
+                                        <label for="astroDelayDown" class="translate"></label>
+                                        <span class="translate">Time delay for Driving down (minutes)</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="driveDelayUpAstro" />
+                                        <label for="driveDelayUpAstro" class="translate"></label>
+                                        <span class="translate">Time delay for driving the shutters (seconds)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">summer settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="LateAllDown" />
+                                        <span for="LateAllDown" class="translate">Move down all shutters late</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="time" class="timepicker value" id="LateAllDownTime" />
+                                        <label for="LateAllDownTime" class="translate"></label>
+                                        <span class="translate">Time to move down all shutters late night</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="SummerStart" />
+                                        <label for="SummerStart" class="translate"></label>
+                                        <span class="translate">SummerStart</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="SummerEnd" />
+                                        <label for="SummerEnd" class="translate"></label>
+                                        <span class="translate">SummerEnd</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">xmas settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="XMasStart" />
+                                        <label for="XMasStart" class="translate"></label>
+                                        <span class="translate">XMasStart</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="text" class="value" id="XMasEnd" />
+                                        <label for="XMasEnd" class="translate"></label>
+                                        <span class="translate">XMasEnd</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">holiday settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="publicHolidays" />
+                                        <span for="publicHolidays" class="translate">Use public holidays</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12 m6 l2 publicHol">
+                                        <select id="publicHolInstance" class="value"></select>
+                                        <label for="publicHolInstance" class="translate"></label>
+                                        <span class="translate">public holidays Instance</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l3 input-field">
+                                        <input type="text" class="value" id="HolidayDP" />
+                                        <label for="HolidayDP" class="translate"></label>
+                                        <span class="translate">Object ID for holiday today</span>
+                                    </div>
+                                    <div class="col s1 m2 l1">
+                                        <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Extra Settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="currentShutterState" />
+                                        <span for="currentShutterState" class="translate">check current Shutter State</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="noGoTime" />
+                                        <label for="noGoTime" class="translate"></label>
+                                        <span class="translate">Time left to detect second sleep (minutes)</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l3 input-field">
+                                        <input type="text" class="value" id="triggerAutoSleep" />
+                                        <label for="triggerAutoSleep" class="translate"></label>
+                                        <span class="translate">Object ID of trigger for Auto Sleep</span>
+                                    </div>
+                                    <div class="col s1 m2 l1">
+                                        <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                    </div>
+                                    <div class="col s6 l3 input-field">
+                                        <input type="text" class="value" id="triggerAutoLiving" />
+                                        <label for="triggerAutoLiving" class="translate"></label>
+                                        <span class="translate">Object ID of trigger for Auto Living</span>
+                                    </div>
+                                    <div class="col s1 m2 l1">
+                                        <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                    </div>
+                                    <div class="col s6 l3 input-field">
+                                        <input type="text" class="value" id="triggerAutoChildren" />
+                                        <label for="triggerAutoChildren" class="translate"></label>
+                                        <span class="translate">Object ID of trigger for Auto Children</span>
+                                    </div>
+                                    <div class="col s1 m2 l1">
+                                        <a id="triggerAutoChildrenDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>          
                 </div>
             </div>
         </div>
@@ -1369,6 +1565,8 @@
                                         <option value="living-auto" class="translate">living-auto</option>
                                         <option value="sleep" class="translate">sleep</option>
                                         <option value="sleep-auto" class="translate">sleep-auto</option>
+                                        <option value="children" class="translate">children</option>
+                                        <option value="children-auto" class="translate">children-auto</option>
                                         <option value="sunset" class="translate">sunset</option>
                                         <option value="elevation" class="translate">elevation</option>
                                         <option value="goldenhour" class="translate">goldenhour</option>
@@ -1384,6 +1582,8 @@
                                         <option value="living-auto" class="translate">living-auto</option>
                                         <option value="sleep" class="translate">sleep</option>
                                         <option value="sleep-auto" class="translate">sleep-auto</option>
+                                        <option value="children" class="translate">children</option>
+                                        <option value="children-auto" class="translate">children-auto</option>
                                         <option value="sunrise" class="translate">sunrise</option>
                                         <option value="goldenhour End" class="translate">goldenhour End</option>
 										<option value="manual-only" class="translate">manual-only</option>
@@ -1469,7 +1669,17 @@
                                 <div class="col s6 l3 input-field">
                                     <input type="checkbox" id="driveAfterClose" class="value" />
                                     <label for="driveAfterClose" class="translate">DriveAfterClose</label>
-								</div>
+                                </div>
+                                <div class="col s6 l2 input-field">
+                                    <input type="checkbox" id="useXmasLevel" class="value" />
+                                    <label for="useXmasLevel" class="translate">useXmasLevel</label>
+                                </div>
+                                <div class="col s6 l2 input-field">
+                                    <input type="number" class="value" id="XmasLevel" min=0 max=100 />
+                                    <label for="XmasLevel" class="translate"></label>
+                                    <span class="translate">XmasLevel</span>
+                                </div>
+
                             </div>
                         </div>
                     </div>
