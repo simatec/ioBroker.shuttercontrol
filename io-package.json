@@ -312,7 +312,9 @@
         "triggerChange": "upDown",
         "elevation": "4",
         "XmasLevel": 0,
-        "useXmasLevel": false
+        "useXmasLevel": false,
+        "trigDelyUp": 1,
+        "trigDelyDown": 1
       }
     ]
   },
