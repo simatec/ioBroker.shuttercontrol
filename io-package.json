@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "news": {
+      "1.0.5": {
+        "en": "fix xMas Time",
+        "de": "Fix xMas Time",
+        "ru": "исправить xMas Time",
+        "pt": "fix xMas Time",
+        "nl": "xMas Time repareren",
+        "fr": "fixer l'heure xMas",
+        "it": "correggere xMas Time",
+        "es": "arreglar xMas Time",
+        "pl": "naprawić czas xMas",
+        "zh-cn": "修复xMas时间"
+      },
       "1.0.4": {
         "en": "fix summertime for childrenarea",
         "de": "Fix Sommerzeit für Kinderbereich",
