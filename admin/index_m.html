@@ -38,7 +38,7 @@
         }
 
         .m .page {
-            height: calc(100% - 118px);
+            height: calc(100% - 160px);
         }
 
         #dialog-command {
@@ -973,9 +973,19 @@
 <body>
 
     <div class="m adapter-container">
+        <div id="header-area" class="row" >
+            <div id="header-logo-title" class="col s6" >
+                <img class="logo" src="shuttercontrol.png" >
+                <p>
+                    <span class="translate h-title">Shuttercontrol</span><br />
+                    <span class="translate h-sub-title">Controlling your Shutter…</span>
+                </p>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col s12">
-                <ul class="tabs">
+            <div class="col s12" id="tab-area">
+                <ul class="tabs blue lighten-4">
                     <li class="tab col s6 l4"><a href="#tab-settings" class="translate active">main settings</a></li>
                     <li class="tab col s6 l4 tab-time"><a href="#tab-time" class="translate">Time Settings</a></li>
                     <li class="tab col s6 l4 tab-extra"><a href="#tab-extra" class="translate">Extra Settings</a></li>
@@ -984,11 +994,13 @@
             <div class="row">
                 <!-- main settings -->
                 <div id="tab-settings" class="col s12 page">
+                    <!--
                     <div class="row">
                         <div class="col s12 m4 l2">
                             <img src="shuttercontrol.png" class="logo">
                         </div>
                     </div>
+                -->
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate title" style="background-color:#174475;">Shutter config</h6>
