@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.0.5",
+    "version": "1.1.0",
     "news": {
+      "1.1.0": {
+        "en": "GUI redesign, Intermediate position added for closing",
+        "de": "Neugestaltung der Benutzeroberfläche, Zwischenposition zum Schließen hinzugefügt",
+        "ru": "Редизайн графического интерфейса, добавлена промежуточная позиция для закрытия",
+        "pt": "Redesenho da GUI, posição intermediária adicionada para fechamento",
+        "nl": "GUI herontwerp, tussenliggende positie toegevoegd voor sluiten",
+        "fr": "Refonte de l'interface graphique, ajout de la position intermédiaire pour la fermeture",
+        "it": "Riprogettazione GUI, aggiunta posizione intermedia per la chiusura",
+        "es": "Rediseño de GUI, posición intermedia agregada para cerrar",
+        "pl": "Przeprojektowanie GUI, dodano pozycję pośrednią do zamknięcia",
+        "zh-cn": "GUI重新设计，增加了中间位置以进行关闭"
+      },
       "1.0.5": {
         "en": "fix xMas Time",
         "de": "Fix xMas Time",
@@ -74,102 +86,6 @@
         "es": "algunas correcciones de errores, limpieza de códigos, botones agregados para Sunprotect Living y Sunprotect Sleep, botones Living-Auto y Sleep-Auto incluidos para abrir / cerrar Sleep y Living, KeepSunprotect agregado, Drive after close agregado, Extender el manejo del estado",
         "pl": "kilka poprawek błędów, czyszczenie kodu, Dodano przyciski Sunprotect Living i Sunprotect Sleep, Dołączone przyciski Living-Auto i Sleep-Auto w przyciskach otwierania / zamykania trybu uśpienia i życia, Dodano KeepSunprotect, Dodano napęd po zamknięciu, Rozszerz obsługę statusu",
         "zh-cn": "一些错误修复，代码清除，添加了用于Sunprotect Living和Sunprotect Sleep的按钮，用于打开/关闭Sleep and Living的按钮中包含的Living-Auto和Sleep-Auto，添加了KeepSunprotect，添加了关闭后驱动，扩展状态处理"
-      },
-      "0.8.7": {
-        "en": "small Bugfix for weekend",
-        "de": "kleiner Bugfix für das Wochenende",
-        "ru": "небольшое исправление для выходных",
-        "pt": "pequeno bugfix para fim de semana",
-        "nl": "kleine bugfix voor weekend",
-        "fr": "petit bugfix pour le week-end",
-        "it": "piccolo Bugfix per il fine settimana",
-        "es": "pequeña corrección de errores para el fin de semana",
-        "pl": "mały Bugfix na weekend",
-        "zh-cn": "周末的小错误修正"
-      },
-      "0.8.6": {
-        "en": "small Bugfixes trigger",
-        "de": "kleine Bugfixes Auslöser",
-        "ru": "небольшой триггер исправлений",
-        "pt": "gatilho de pequenas correções de bugs",
-        "nl": "kleine bugfixes trigger",
-        "fr": "petit déclencheur de corrections de bugs",
-        "it": "piccolo trigger di correzioni di bug",
-        "es": "pequeño disparador de corrección de errores",
-        "pl": "mały wyzwalacz Bugfixes",
-        "zh-cn": "小错误修正触发器"
-      },
-      "0.8.5": {
-        "en": "small Bugfixes, bugfixes trigger, new german doku",
-        "de": "kleine Bugfixes, Bugfixes Trigger, neue deutsche Doku",
-        "ru": "небольшие исправления, триггеры исправлений, новый немецкий доку",
-        "pt": "pequenas correções, disparador de correções, novo doku alemão",
-        "nl": "kleine bugfixes, bugfixes trigger, nieuwe Duitse doku",
-        "fr": "petites corrections de bugs, déclencheurs de corrections de bugs, nouveau doku allemand",
-        "it": "piccole correzioni, attivazione correzioni, nuovo doku tedesco",
-        "es": "Pequeñas correcciones de errores, activador de correcciones de errores, nuevo doku alemán",
-        "pl": "małe poprawki błędów, wyzwalacz poprawek błędów, nowe niemieckie doku",
-        "zh-cn": "小错误修正，错误修正触发，新的德国doku"
-      },
-      "0.8.4": {
-        "en": "small Bugfixes, debug log changed, Dependencies updated, Time left to detect second sleep",
-        "de": "kleine Bugfixes, Debug-Protokoll geändert, Abhängigkeiten aktualisiert, verbleibende Zeit, um den zweiten Schlaf zu erkennen",
-        "ru": "небольшие исправления, изменен журнал отладки, обновлены зависимости, осталось время для обнаружения второго сна",
-        "pt": "pequenas correções de bugs, log de depuração alterado, dependências atualizadas, tempo restante para detectar o segundo sono",
-        "nl": "kleine bugfixes, logboek voor foutopsporing gewijzigd, afhankelijkheden bijgewerkt, resterende tijd om tweede slaap te detecteren",
-        "fr": "petites corrections de bugs, journal de débogage modifié, dépendances mises à jour, temps restant pour détecter le deuxième sommeil",
-        "it": "piccole correzioni, registro di debug modificato, dipendenze aggiornate, tempo rimanente per rilevare il secondo sonno",
-        "es": "Pequeñas correcciones de errores, registro de depuración cambiado, dependencias actualizadas, tiempo restante para detectar la segunda suspensión",
-        "pl": "drobne poprawki błędów, zmieniony dziennik debugowania, zaktualizowane zależności, pozostały czas na wykrycie drugiego snu",
-        "zh-cn": "小错误修正，调试日志已更改，依赖项已更新，剩余时间可检测到第二次睡眠"
-      },
-      "0.8.3": {
-        "en": "Bugfix IsSummerTime, Bugfix shutter convert",
-        "de": "Bugfix IsSummerTime, Bugfix Rollladen konvertieren",
-        "ru": "Bugfix IsSummerTime, Bugfix конвертировать затвор",
-        "pt": "Bugfix IsSummerTime, Bugfix obturador converter",
-        "nl": "Bugfix IsSummerTime, Bugfix-sluiterconversie",
-        "fr": "Bugfix IsSummerTime, conversion d'obturateur Bugfix",
-        "it": "Bugfix IsSummerTime, conversione dell'otturatore Bugfix",
-        "es": "Bugfix IsSummerTime, conversión de obturador Bugfix",
-        "pl": "Bugfix IsSummerTime, konwersja migawki Bugfix",
-        "zh-cn": "错误修正IsSummerTime，错误修正快门转换"
-      },
-      "0.8.2": {
-        "en": "small Bugfixs, Buttons for sunprotect operation added",
-        "de": "kleine Bugfixs, Buttons für den Sonnenschutzbetrieb hinzugefügt",
-        "ru": "исправлены мелкие ошибки, добавлены кнопки для работы с солнцезащитными средствами",
-        "pt": "pequenas correções de bugs, botões para operação de proteção solar adicionados",
-        "nl": "kleine bugfixes, knoppen voor bescherming tegen de zon toegevoegd",
-        "fr": "petites corrections de bugs, boutons pour l'opération de protection solaire ajoutés",
-        "it": "piccoli bug risolti, pulsanti aggiunti per il funzionamento sunprotect",
-        "es": "Pequeñas correcciones de errores, botones para la operación de protección solar añadidos",
-        "pl": "dodano małe poprawki, dodano przyciski do ochrony przeciwsłonecznej",
-        "zh-cn": "小错误修正，增加了用于防晒操作的按钮"
-      },
-      "0.8.1": {
-        "en": "Bugfix shutterstates, support for KNX",
-        "de": "Bugfix Shutterstates, Unterstützung für KNX",
-        "ru": "Bugfix shutterstates, поддержка KNX",
-        "pt": "Shutterstates, suporte para KNX",
-        "nl": "Bugfix shutterstates, ondersteuning voor KNX",
-        "fr": "Bugfix shutterstates, support pour KNX",
-        "it": "Bugfix otturatori, supporto per KNX",
-        "es": "Shutterstates de corrección de errores, soporte para KNX",
-        "pl": "Bugstix migawki, obsługa KNX",
-        "zh-cn": "错误修正快门状态，支持KNX"
-      },
-      "0.8.0": {
-        "en": "added state for current shutter Action, added state for current shutter Level, added Indicator for manual operation in the states, code cleanup, complete new structure of the code, Buttons for manual opening and closing operation added, Display in the States if the shutter was moved manually",
-        "de": "Status für aktuellen Verschluss hinzugefügt Aktion, Status für aktuellen Verschlusspegel hinzugefügt, Anzeige für manuellen Betrieb in den Status hinzugefügt, Codebereinigung, vollständige neue Struktur des Codes, Schaltflächen für manuellen Öffnungs- und Schließvorgang hinzugefügt, Anzeige in den Status, wenn der Verschluss war manuell bewegt",
-        "ru": "добавлено состояние для текущего действия затвора, добавлено состояние для текущего уровня затвора, добавлен индикатор для ручного управления в состояниях, очистка кода, полная новая структура кода, добавлены кнопки для ручного открытия и закрытия, отображение в состояниях, если затвор был переехал вручную",
-        "pt": "estado adicionado para obturador atual Ação, estado adicionado para obturador atual Nível, indicador adicionado para operação manual nos estados, limpeza de código, estrutura nova completa do código, botões para operação manual de abertura e fechamento adicionados, exibição nos estados se o obturador foi movido manualmente",
-        "nl": "toegevoegde status voor huidige sluiter Actie, toegevoegde status voor huidige sluiter Niveau, toegevoegd Indicator voor handmatige bediening in de staten, opschonen van code, compleet nieuwe structuur van de code, Knoppen voor handmatige opening en sluiting toegevoegd, Weergave in de staten als de sluiter was handmatig verplaatst",
-        "fr": "état ajouté pour l'action actuelle de l'obturateur, état ajouté pour le niveau actuel de l'obturateur, indicateur ajouté pour le fonctionnement manuel dans les états, nettoyage du code, nouvelle structure complète du code, boutons pour l'ouverture et la fermeture manuelles ajoutés, affichage aux États si l'obturateur était déplacé manuellement",
-        "it": "stato aggiunto per azione dell'otturatore corrente, stato aggiunto per livello dell'otturatore corrente, indicatore aggiunto per funzionamento manuale negli stati, pulizia del codice, nuova struttura completa del codice, pulsanti per l'operazione di apertura e chiusura manuale aggiunti, visualizzazione negli Stati se l'otturatore era spostato manualmente",
-        "es": "estado agregado para el obturador actual Acción, estado agregado para el nivel actual del obturador, indicador agregado para la operación manual en los estados, limpieza del código, completar la nueva estructura del código, botones para la operación de apertura y cierre manual agregados, visualización en los estados si el obturador fue movido manualmente",
-        "pl": "dodany stan dla bieżącej migawki Działanie, dodany stan dla aktualnego poziomu migawki, dodany Wskaźnik ręcznej obsługi stanów, czyszczenie kodu, pełna nowa struktura kodu, Dodano przyciski ręcznej operacji otwierania i zamykania, Wyświetlanie stanów, jeśli migawka była przeniesione ręcznie",
-        "zh-cn": "增加了当前快门的状态动作，增加了当前快门的状态，增加了状态中手动操作的指示器，代码清除，完成了代码的新结构，增加了手动打开和关闭操作的按钮，如果快门处于手动移动"
       }
     },
     "title": "shuttercontrol",
@@ -294,7 +210,10 @@
     "SummerEnd": "30.09.",
     "XMasStart": "01.12.",
     "XMasEnd": "06.01.",
+    "useXmasLevel": false,
+    "betweenPosition": false,
     "noGoTime": 0,
+    "betweenPositionTime": "22:00",
     "events": [
       {
         "enabled": true,
@@ -324,7 +243,9 @@
         "triggerChange": "upDown",
         "elevation": "4",
         "XmasLevel": 0,
-        "useXmasLevel": false
+        "useXmasLevel": false,
+        "betweenPosition": false,
+        "betweenPositionLevel": "50"
       }
     ]
   },

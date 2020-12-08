@@ -22,6 +22,7 @@ const shutterUpChildren = require('./lib/shutterUpChildren.js');        // shutt
 const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
 const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
 const shutterState = require('./lib/shutterState.js');        			// shutterState
+const shutterDownComplete = require('./lib/shutterDownComplete.js');    // shutterDownComplete
 
 
 /**
@@ -116,6 +117,7 @@ function startAdapter(options) {
             schedule.cancelJob('shutterDownLiving');
             schedule.cancelJob('shutterUpSleep');
             schedule.cancelJob('shutterDownLate');
+            schedule.cancelJob('shutterDownComplete');
             schedule.cancelJob('shutterDownSleep');
             schedule.cancelJob('calcPosTimer');
             schedule.cancelJob('shutterUpChildren');
@@ -953,6 +955,7 @@ function shutterDriveCalc() {
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep + " debug " + debugCnt);
     shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr);
     shutterDownLate(adapter, delayDown);
+    shutterDownComplete(adapter, delayDown);
     delayCalc();
 
 
