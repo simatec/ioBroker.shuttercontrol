@@ -38,7 +38,7 @@
         }
 
         .m .page {
-            height: calc(100% - 118px);
+            height: calc(100% - 160px);
         }
 
         #dialog-command {
@@ -103,13 +103,23 @@
             width: 100% !important;
             height: calc(100% - 10px) !important;
         }
-
+        
         #dialog-shutter-edit .tabs {
-            width: calc(100% - 20px) !important;
+            width: calc(100% - 0px) !important;
+            margin-top: -25px;
+            height: auto !important;
         }
-
+        #dialog-shutter-edit .titlePopUp {
+            width: 100% !important;
+            background: #174475;
+            color: #FFF;
+            padding: 0.2rem;
+        }
+        
         #dialog-shutter-edit .page {
             width: calc(100% - 10px) !important;
+            padding-left:20;
+            height: calc(100% - 100px);
         }
 
         #dialog-shutter-edit .btn {
@@ -465,6 +475,24 @@
             visibility: hidden;
             display: none;
         }
+        #events td:nth-of-type(41) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(41) {
+            visibility: hidden;
+            display: none;
+        }
+        #events td:nth-of-type(42) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(42) {
+            visibility: hidden;
+            display: none;
+        }
 
         #dialog-select-member {
             z-index: 9999 !important;
@@ -560,7 +588,10 @@
 					$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
                     $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
+                    $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').val(false).trigger('change');
+                    
                     $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
+                    $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val('50').trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -758,6 +789,7 @@
                 $('#hysteresisInside').val($('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val());
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
                 $('#XmasLevel').val($('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val());
+                $('#betweenPositionLevel').val($('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val());
 
                
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
@@ -765,6 +797,18 @@
 				var test3 = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
                 var test4 = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
                 var test5 = $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked');
+                var test6 = $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked');
+
+                if (test5 == true) {
+                    $('.col-XmasLevel').show();
+                } else {
+                    $('.col-XmasLevel').hide();
+                }
+                if (test6 == true) {
+                    $('.col-betweenPosition').show();
+                } else {
+                    $('.col-betweenPosition').hide();
+                }
 
 
                 $('#LateDown').prop('checked', test1);
@@ -772,8 +816,8 @@
 				$('#KeepSunProtect').prop('checked', test3);
                 $('#driveAfterClose').prop('checked', test4);
                 $('#useXmasLevel').prop('checked', test5);
+                $('#betweenPosition').prop('checked', test6);
 
-                
                 setTimeout(function () {
                     initDialogShutter(function (sid) {
                         var newHeightUp = $('#heightUpShutter').val();
@@ -800,13 +844,14 @@
                         var hysteresisLight = $('#hysteresisLight').val();
                         var autoDrive = $('#autoDriveShutter').val();
                         var xmaslevel = $('#XmasLevel').val();
+                        var betweenPositionLevel = $('#betweenPositionLevel').val();
 
-                        
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
 						var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
                         var newdriveAfterClose = $('#driveAfterClose').prop('checked');
                         var newuseXmasLevel = $('#useXmasLevel').prop('checked');
+                        var newbetweenPosition = $('#betweenPosition').prop('checked');
 
 
                         $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -833,13 +878,14 @@
                         $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val(hysteresisInside).trigger('change');
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
                         $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val(xmaslevel).trigger('change');
-
+                        $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val(betweenPositionLevel).trigger('change');
                        
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
 						$('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
                         $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
                         $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked', newuseXmasLevel).trigger('change');
+                        $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked', newbetweenPosition).trigger('change');
                     });
                 }, 20)
             });
@@ -889,6 +935,22 @@
                 $('.col-W_shutterUpSleepMin').show();
                 $('.col-WE_shutterUpSleepMin').show();
             }
+            if ($('#useXmasLevel').prop('checked')) {
+                $('.col-XmasLevel').show();
+            } else {
+                $('.col-XmasLevel').hide();
+            }
+            if ($('#LateAllDown').prop('checked')) {
+                $('.LateAllDownTime').show();
+            } else {
+                $('.LateAllDownTime').hide();
+            }
+            if ($('#betweenPosition').prop('checked')) {
+                $('.col-betweenPosition').show();
+            } else {
+                $('.col-betweenPosition').hide();
+            }
+            
         }
 
         var selectId;
@@ -973,9 +1035,19 @@
 <body>
 
     <div class="m adapter-container">
+        <div id="header-area" class="row" >
+            <div id="header-logo-title" class="col s6" >
+                <img class="logo" src="shuttercontrol.png" >
+                <p>
+                    <span class="translate h-title">Shuttercontrol</span><br />
+                    <span class="translate h-sub-title">Controlling your Shutter…</span>
+                </p>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col s12">
-                <ul class="tabs">
+            <div class="col s12" id="tab-area">
+                <ul class="tabs blue lighten-4" width="4%">
                     <li class="tab col s6 l4"><a href="#tab-settings" class="translate active">main settings</a></li>
                     <li class="tab col s6 l4 tab-time"><a href="#tab-time" class="translate">Time Settings</a></li>
                     <li class="tab col s6 l4 tab-extra"><a href="#tab-extra" class="translate">Extra Settings</a></li>
@@ -984,11 +1056,13 @@
             <div class="row">
                 <!-- main settings -->
                 <div id="tab-settings" class="col s12 page">
+                    <!--
                     <div class="row">
                         <div class="col s12 m4 l2">
                             <img src="shuttercontrol.png" class="logo">
                         </div>
                     </div>
+                -->
                     <div class="row">
                         <div class="col s12">
                             <h6 class="translate title" style="background-color:#174475;">Shutter config</h6>
@@ -1047,6 +1121,8 @@
                                             <th data-name="driveAfterClose" id="events_col_37" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">DriveAfterClose</th>
                                             <th data-name="useXmasLevel" id="events_col_38" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">useXmasLevel</th>
                                             <th data-name="XmasLevel" id="events_col_39" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">XmasLevel</th>
+                                            <th data-name="betweenPosition" id="events_col_40" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">betweenPosition</th>
+                                            <th data-name="betweenPositionLevel" id="events_col_41" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">betweenPositionLevel</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit up down delete" style="width: 100px; background: #174475"></th>
@@ -1302,17 +1378,6 @@
                             <div class="collapsible-body">
                                 <div class="row">
                                     <div class="col s6 l2 input-field">
-                                        <input type="checkbox" class="value" id="LateAllDown" />
-                                        <span for="LateAllDown" class="translate">Move down all shutters late</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s6 l2 input-field">
-                                        <input type="time" class="timepicker value" id="LateAllDownTime" />
-                                        <label for="LateAllDownTime" class="translate"></label>
-                                        <span class="translate">Time to move down all shutters late night</span>
-                                    </div>
-                                    <div class="col s6 l2 input-field">
                                         <input type="text" class="value" id="SummerStart" />
                                         <label for="SummerStart" class="translate"></label>
                                         <span class="translate">SummerStart</span>
@@ -1379,20 +1444,43 @@
                         </li>
                         <li>
                             <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">Special times</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l4 input-field">
+                                        <input type="checkbox" class="value" id="LateAllDown" />
+                                        <span for="LateAllDown" class="translate">Move down all shutters late</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l4 input-field LateAllDownTime">
+                                        <input type="time" class="timepicker value" id="LateAllDownTime" />
+                                        <label for="LateAllDownTime" class="translate"></label>
+                                        <span class="translate">Time to move down all shutters late night</span>
+                                    </div>
+                                    <div class="col s6 l4 input-field">
+                                        <input type="time" class="timepicker value" id="betweenPositionTime" />
+                                        <label for="betweenPositionTime" class="translate"></label>
+                                        <span class="translate">Time to completely close the shutters from the intermediate position</span>
+                                    </div>
+                                    <div class="col s6 l4 input-field">
+                                        <input type="number" class="value" id="noGoTime" />
+                                        <label for="noGoTime" class="translate"></label>
+                                        <span class="translate">Time left to detect second sleep (minutes)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
                                 <i class="material-icons">expand_more</i><h6 class="translate">Extra Settings</h6>
                             </div>
                             <div class="collapsible-body">
                                 <div class="row">
-                                    <div class="col s6 l2 input-field">
+                                    <div class="col s6 l4 input-field">
                                         <input type="checkbox" class="value" id="currentShutterState" />
                                         <span for="currentShutterState" class="translate">check current Shutter State</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s6 l2 input-field">
-                                        <input type="number" class="value" id="noGoTime" />
-                                        <label for="noGoTime" class="translate"></label>
-                                        <span class="translate">Time left to detect second sleep (minutes)</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -1446,16 +1534,16 @@
             <div id="dialog-shutter-edit" class="modal modal-fixed-footer">
                 <div class="row">
                     <div class="modal-content">
-
                         <div class="row">
                             <div class="col s12">
                                 <h6 class="title" style="background-color:#174475;"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditShutter"></span></h6>
                             </div>
                         </div>
                         <div class="col s12">
-                            <ul class="tabs">
-                                <li class="tab col s12 l6"><a href="#tab-settingsPopUp" class="translate active">main settings</a></li>
-                                <li class="tab col s12 l6 tab-sunPopUp"><a href="#tab-sunPopUp" class="translate">sun protection settings</a></li>
+                            <ul class="tabs blue lighten-4">
+                                <li class="tab col s6 l4"><a href="#tab-settingsPopUp" class="translate active">main settings</a></li>
+                                <li class="tab col s6 l4 tab-sunPopUp"><a href="#tab-sunPopUp" class="translate">sun protection settings</a></li>
+                                <li class="tab col s6 l4 tab-extraPopUp"><a href="#tab-extraPopUp" class="translate">Extra Settings</a></li>
                             </ul>
                         </div>
                         <div id="tab-sunPopUp" class="col s12 page">
@@ -1547,12 +1635,6 @@
                                 </div>
                                 <div class="col s1 m2 l1">
                                     <a id="actualValueTempInsideDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
-                                </div>
-                            </div>
-							<div class="row">
-								<div class="col s6 l3 input-field">
-                                    <input type="checkbox" id="KeepSunProtect" class="value" />
-                                    <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
                                 </div>
                             </div>
                         </div>
@@ -1657,29 +1739,69 @@
                                     <a id="triggerIDPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
                                 </div>
                             </div>
+                        </div>
+                        <div id="tab-extraPopUp" class="col s12 page">
                             <div class="row">
-                                <div class="col s6 l2 input-field">
+                                <div class="col s12">
+                                    <h6 class="translate titlePopUp" style="background-color:#174475;">Shutter config</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6 l4 input-field">
                                     <input type="checkbox" id="LateDown" class="value" />
                                     <label for="LateDown" class="translate">late_down</label>
                                 </div>
-                                <div class="col s6 l2 input-field">
+                                <div class="col s6 l4 input-field">
                                     <input type="checkbox" id="inSummerNotDown" class="value" />
                                     <label for="inSummerNotDown" class="translate">inSummerNotDown</label>
                                 </div>
-                                <div class="col s6 l3 input-field">
+                                <div class="col s6 l4 input-field">
                                     <input type="checkbox" id="driveAfterClose" class="value" />
                                     <label for="driveAfterClose" class="translate">DriveAfterClose</label>
                                 </div>
-                                <div class="col s6 l2 input-field">
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6 class="translate titlePopUp" style="background-color:#174475;">xmas settings</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6 l4 input-field">
                                     <input type="checkbox" id="useXmasLevel" class="value" />
                                     <label for="useXmasLevel" class="translate">useXmasLevel</label>
                                 </div>
-                                <div class="col s6 l2 input-field">
+                                <div class="col s6 l4 input-field col-XmasLevel">
                                     <input type="number" class="value" id="XmasLevel" min=0 max=100 />
                                     <label for="XmasLevel" class="translate"></label>
                                     <span class="translate">XmasLevel</span>
                                 </div>
-
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6 class="translate titlePopUp" style="background-color:#174475;">sun protection settings</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+								<div class="col s6 l4 input-field">
+                                    <input type="checkbox" id="KeepSunProtect" class="value" />
+                                    <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6 class="translate titlePopUp" style="background-color:#174475;">Extra Settings</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+								<div class="col s6 l4 input-field">
+                                    <input type="checkbox" id="betweenPosition" class="value" />
+                                    <label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
+                                </div>
+                                <div class="col s6 l4 input-field col-betweenPosition">
+                                    <input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
+                                    <label for="betweenPositionLevel" class="translate"></label>
+                                    <span class="translate">shutter height in the intermediate position</span>
+                                </div>
                             </div>
                         </div>
                     </div>
