@@ -244,8 +244,8 @@
         "elevation": "4",
         "XmasLevel": 0,
         "useXmasLevel": false,
-        "betweenPosition": false,
-        "betweenPositionLevel": "50"
+        "trigDelyUp": 1,
+        "trigDelyDown": 1
       }
     ]
   },
