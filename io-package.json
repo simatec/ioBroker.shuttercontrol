@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "bug fix xmas time, copy function for shutter-table added",
+        "de": "Bugfix Weihnachtszeit, Kopierfunktion für Rollladen-Tabelle hinzugefügt",
+        "ru": "исправлена ошибка рождественского времени, добавлена функция копирования для шторного стола",
+        "pt": "bug corrigido natal, função de cópia para a mesa do obturador adicionada",
+        "nl": "bug fix xmas time, kopieerfunctie voor shutter-table toegevoegd",
+        "fr": "correction de bogue à l'heure de Noël, fonction de copie pour la table d'obturation ajoutée",
+        "it": "correzione di bug nel periodo natalizio, aggiunta della funzione di copia per il tavolo delle tapparelle",
+        "es": "corrección de errores en Navidad, función de copia para la mesa de obturación agregada",
+        "pl": "naprawiono błąd świątecznego czasu, dodano funkcję kopiowania stolika migawki",
+        "zh-cn": "错误修复圣诞节时间，添加了快门表复制功能"
+      },
       "1.1.0": {
         "en": "GUI redesign, Intermediate position added for closing",
         "de": "Neugestaltung der Benutzeroberfläche, Zwischenposition zum Schließen hinzugefügt",
