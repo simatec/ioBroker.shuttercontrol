@@ -384,19 +384,9 @@ des Fensters/Türe auf die zuletzt angeforderte Position gefahren.
 > Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
 > Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
-
-### Weihnachts-Einstellungen
-Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
-kann man diese Option verwenden.
-Mit dieser Option werden die Rolladen zur normalen Schliesszeit nicht vollständig sondern nur auf ein einstellbares Level gefahren.
-Dieses Level ist einstellbar in den jeweiligen Rolladen-Einstellungen unter "Rollladenpegel zur Weihnachtszeit". **Achtung:** Dieser Wert ist
-nur sichtbar, wenn der Haken für "Der Rollladenpegel zur Weihnachtszeit wird verwendet" gesetzt ist. Wenn der Haken nicht gesetzt ist,
-ist die Option deaktviert.
-Diese Option wird automatisch in einem bestimmten Zeitraum (z.Bsp. vom 01.12. bsi 10.01) aktiviert. Der Zeitraum ist einstellbar unter "Extra-Einstellungen"
-und dort "Weihnachtseinstellungen".
-Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
-verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
-
+**Nutze Level in Weinachtszeit und Weihnachtszeitlevel:** Falls der Rollläden in der Weihnachtszeit nur teilweise 
+geschlossen werden soll (z.Bsp. um den beleuchteten Schwibbogen von außen sichtbar zu haben) Mit der Option "Rollladen spät 
+schliessen" kann der Rollladen dann später geschlossen werden. Der Zeitraum für Weihnachten wird in den Extra-Einstellungen festgelegt
 
 
 ---
