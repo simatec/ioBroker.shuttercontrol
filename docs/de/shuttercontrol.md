@@ -253,7 +253,15 @@ Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
 **Objekt ID des Triggers für den Kinderbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
 
+### Trigger-Settings
 
+![extraSettingsTrigger](img/ExtraSettingsTrigger.png)
+
+**Rolladen Verzögerung bei Fenster öffnen (s)**
+Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
+
+**Rolladen Verzögerung bei Fenster schliessen (s)**
+Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
 
 ## Individuelle Rollladeneinstellungen
 
