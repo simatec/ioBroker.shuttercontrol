@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "news": {
+      "1.1.2": {
+        "en": "small fix for holiday state",
+        "de": "kleiner Fix für Urlaubszustand",
+        "ru": "небольшое исправление для праздничного состояния",
+        "pt": "pequena correção para feriado",
+        "nl": "kleine oplossing voor vakantiestaat",
+        "fr": "petite correction pour l'état de vacances",
+        "it": "piccola correzione per lo stato di vacanza",
+        "es": "pequeña solución para el estado de vacaciones",
+        "pl": "mała poprawka dla stanu wakacyjnego",
+        "zh-cn": "假期状态的小解决方案"
+      },
       "1.1.1": {
         "en": "bug fix xmas time, copy function for shutter-table added",
         "de": "Bugfix Weihnachtszeit, Kopierfunktion für Rollladen-Tabelle hinzugefügt",
