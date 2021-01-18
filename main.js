@@ -418,7 +418,7 @@ function checkActualStates() {
             }
             else if (typeof state != undefined && state != null) {
                 adapter.log.debug('got HolidayDP ' + JSON.stringify(state.val));
-                adapter.setState('.control.Holiday', { val: state.val, ack: true });
+                adapter.setState('control.Holiday', { val: state.val, ack: true });
             }
         });
     }
