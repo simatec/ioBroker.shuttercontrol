@@ -418,7 +418,7 @@ function checkActualStates() {
             }
             else if (typeof state != undefined && state != null) {
                 adapter.log.debug('got HolidayDP ' + JSON.stringify(state.val));
-                adapter.setState('.control.Holiday', { val: state.val, ack: true });
+                adapter.setState('control.Holiday', { val: state.val, ack: true });
             }
         });
     }
@@ -1243,126 +1243,140 @@ function createShutter() {
     let result = adapter.config.events;
     if (result) {
         for (const i in result) {
-            let objectName = result[i].shutterName.replace(/[.;, ]/g, '_');
+            let objectName;
 
-            // Create Object for auto up
-            adapter.setObjectNotExists('shutters.autoUp.' + objectName, {
-                "type": "state",
-                "common": {
-                    "role": "switch",
-                    "name": result[i].shutterName,
-                    "type": "boolean",
-                    "read": true,
-                    "write": true,
-                    "def": true
-                },
-                "native": {},
-            });
-            /**
-             * @param {any} err
-             * @param {{ val: null; } | null} state
-             */
-            adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
-                if ((state && state === null) || (state && state.val === null)) {
-                    adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
-                    adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
+            if (result[i].shutterName !== '') {
+                objectName = result[i].shutterName.replace(/[.;, ]/g, '_');
+            } else if (result[i].shutterName == '') {
+                objectName = result[i].name.replace(/[.;, ]/g, '_');
+            }
+
+            if (objectName && objectName !== '') {
+                try {
+                    // Create Object for auto up
+                    adapter.setObjectNotExists('shutters.autoUp.' + objectName, {
+                        "type": "state",
+                        "common": {
+                            "role": "switch",
+                            "name": result[i].shutterName,
+                            "type": "boolean",
+                            "read": true,
+                            "write": true,
+                            "def": true
+                        },
+                        "native": {},
+                    });
+                    /**
+                     * @param {any} err
+                     * @param {{ val: null; } | null} state
+                     */
+                    adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
+                        if ((state && state === null) || (state && state.val === null)) {
+                            adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
+                            adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
+                        }
+                    });
+                    // Create Object for auto down
+                    adapter.setObjectNotExists('shutters.autoDown.' + objectName, {
+                        "type": "state",
+                        "common": {
+                            "role": "switch",
+                            "name": result[i].shutterName,
+                            "type": "boolean",
+                            "read": true,
+                            "write": true,
+                            "def": true
+                        },
+                        "native": {},
+                    });
+                    /**
+                     * @param {any} err
+                     * @param {{ val: null; } | null} state
+                     */
+                    adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
+                        if ((state && state === null) || (state && state.val === null)) {
+                            adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
+                            adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
+                        }
+                    });
+                    // Create Object for auto sun
+                    adapter.setObjectNotExists('shutters.autoSun.' + objectName, {
+                        "type": "state",
+                        "common": {
+                            "role": "switch",
+                            "name": result[i].shutterName,
+                            "type": "boolean",
+                            "read": true,
+                            "write": true,
+                            "def": true
+                        },
+                        "native": {},
+                    });
+                    /**
+                     * @param {any} err
+                     * @param {{ val: null; } | null} state
+                     */
+                    adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
+                        if ((state && state === null) || (state && state.val === null)) {
+                            adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
+                            adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
+                        }
+                    });
+                    // Create Object for auto state
+                    adapter.setObjectNotExists('shutters.autoState.' + objectName, {
+                        "type": "state",
+                        "common": {
+                            "role": "indicator",
+                            "name": result[i].shutterName,
+                            "type": "string",
+                            "read": true,
+                            "write": false,
+                            "def": ""
+                        },
+                        "native": {},
+                    });
+                    /**
+                     * @param {any} err
+                     * @param {{ val: null; } | null} state
+                     */
+                    adapter.getState('shutters.autoState.' + objectName, (err, state) => {
+                        if ((state && state === null) || (state && state.val === null)) {
+                            adapter.setState('shutters.autoState.' + objectName, { val: 'none', ack: true });
+                            adapter.log.debug('Create Object: shutters.autoState.' + objectName);
+                        }
+                    });
+                    // Create Object for auto level
+                    adapter.setObjectNotExists('shutters.autoLevel.' + objectName, {
+                        "type": "state",
+                        "common": {
+                            "role": "indicator",
+                            "name": result[i].shutterName,
+                            "type": "number",
+                            "unit": "%",
+                            "read": true,
+                            "write": false,
+                            "def": ""
+                        },
+                        "native": {},
+                    });
+                    /**
+                     * @param {any} err
+                     * @param {{ val: null; } | null} state
+                     */
+                    adapter.getState('shutters.autoLevel.' + objectName, (err, state) => {
+                        if ((state && state === null) || (state && state.val === null)) {
+                            adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
+                        }
+                        if (state) {
+                            adapter.setState('shutters.autoLevel.' + objectName, { val: result[i].currentHeight, ack: true });
+                        }
+                    });
+                } catch (e) {
+                    log.warn('shutter cannot created ... Please check your shutter config: ' + e);
                 }
-            });
-            // Create Object for auto down
-            adapter.setObjectNotExists('shutters.autoDown.' + objectName, {
-                "type": "state",
-                "common": {
-                    "role": "switch",
-                    "name": result[i].shutterName,
-                    "type": "boolean",
-                    "read": true,
-                    "write": true,
-                    "def": true
-                },
-                "native": {},
-            });
-            /**
-             * @param {any} err
-             * @param {{ val: null; } | null} state
-             */
-            adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
-                if ((state && state === null) || (state && state.val === null)) {
-                    adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
-                    adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
-                }
-            });
-            // Create Object for auto sun
-            adapter.setObjectNotExists('shutters.autoSun.' + objectName, {
-                "type": "state",
-                "common": {
-                    "role": "switch",
-                    "name": result[i].shutterName,
-                    "type": "boolean",
-                    "read": true,
-                    "write": true,
-                    "def": true
-                },
-                "native": {},
-            });
-            /**
-             * @param {any} err
-             * @param {{ val: null; } | null} state
-             */
-            adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
-                if ((state && state === null) || (state && state.val === null)) {
-                    adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
-                    adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
-                }
-            });
-            // Create Object for auto state
-            adapter.setObjectNotExists('shutters.autoState.' + objectName, {
-                "type": "state",
-                "common": {
-                    "role": "indicator",
-                    "name": result[i].shutterName,
-                    "type": "string",
-                    "read": true,
-                    "write": false,
-                    "def": ""
-                },
-                "native": {},
-            });
-            /**
-             * @param {any} err
-             * @param {{ val: null; } | null} state
-             */
-            adapter.getState('shutters.autoState.' + objectName, (err, state) => {
-                if ((state && state === null) || (state && state.val === null)) {
-                    adapter.setState('shutters.autoState.' + objectName, { val: 'none', ack: true });
-                    adapter.log.debug('Create Object: shutters.autoState.' + objectName);
-                }
-            });
-            // Create Object for auto level
-            adapter.setObjectNotExists('shutters.autoLevel.' + objectName, {
-                "type": "state",
-                "common": {
-                    "role": "indicator",
-                    "name": result[i].shutterName,
-                    "type": "number",
-                    "unit": "%",
-                    "read": true,
-                    "write": false,
-                    "def": ""
-                },
-                "native": {},
-            });
-            /**
-             * @param {any} err
-             * @param {{ val: null; } | null} state
-             */
-            adapter.getState('shutters.autoLevel.' + objectName, (err, state) => {
-                if ((state && state === null) || (state && state.val === null)) {
-                    adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
-                }
-                if (state) {
-                    adapter.setState('shutters.autoLevel.' + objectName, { val: result[i].currentHeight, ack: true });
-                }
-            });
+            } else {
+                log.warn('shutter cannot created ... Please check in your config the shutter Name');
+            }
         }
     }
 
@@ -1676,7 +1690,7 @@ function main(adapter) {
     if (adapter.config.triggerAutoChildren != '') {
         adapter.subscribeForeignStates(adapter.config.triggerAutoChildren);
     }
-    
+
     // Change State from Trigger ID's
     let result = adapter.config.events;
 
