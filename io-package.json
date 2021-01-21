@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "news": {
+      "1.1.3": {
+        "en": "small fix for objects",
+        "de": "kleiner Fix für Objekte",
+        "ru": "небольшое исправление для объектов",
+        "pt": "pequena correção para objetos",
+        "nl": "kleine oplossing voor objecten",
+        "fr": "petit correctif pour les objets",
+        "it": "piccola correzione per gli oggetti",
+        "es": "pequeña solución para objetos",
+        "pl": "mała poprawka do przedmiotów",
+        "zh-cn": "小物件修复"
+      },
       "1.1.2": {
         "en": "small fix for holiday state",
         "de": "kleiner Fix für Urlaubszustand",
