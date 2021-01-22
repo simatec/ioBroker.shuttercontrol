@@ -44,6 +44,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.1.4 (2021-01-22)
+* (simatec) BugFix Log
+
 ### 1.1.3 (2021-01-21)
 * (simatec) small fix for objects
 

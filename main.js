@@ -1372,10 +1372,10 @@ function createShutter() {
                         }
                     });
                 } catch (e) {
-                    log.warn('shutter cannot created ... Please check your shutter config: ' + e);
+                    adapter.log.warn('shutter cannot created ... Please check your shutter config: ' + e);
                 }
             } else {
-                log.warn('shutter cannot created ... Please check in your config the shutter Name');
+                adapter.log.warn('shutter cannot created ... Please check in your config the shutter Name');
             }
         }
     }
