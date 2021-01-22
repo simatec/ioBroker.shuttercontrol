@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "news": {
+      "1.1.4": {
+        "en": "BugFix Log, DEPENDENCIES updated, Dev-DEPENDENCIES updated",
+        "de": "BugFix-Protokoll, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert",
+        "ru": "Журнал исправлений ошибок, Зависимости обновлены, Зависимости от разработчиков обновлены",
+        "pt": "BugFix Log, DEPENDENCIES atualizado, Dev-DEPENDENCIES atualizado",
+        "nl": "Bugfix Log, DEPENDENCIES bijgewerkt, Dev-DEPENDENCIES bijgewerkt",
+        "fr": "BugFix Log, DEPENDENCIES mis à jour, Dev-DEPENDENCIES mis à jour",
+        "it": "Registro BugFix, DEPENDENCIES aggiornato, Dev-DEPENDENCIES aggiornato",
+        "es": "BugFix Log, DEPENDENCIES actualizado, Dev-DEPENDENCIES actualizado",
+        "pl": "Dziennik poprawek błędów, zaktualizowano ZALEŻNOŚCI, zaktualizowano ZALEŻNOŚCI Dev",
+        "zh-cn": "BugFix日志，DEPENDENCIES已更新，Dev-DEPENDENCIES已更新"
+      },
       "1.1.3": {
         "en": "small fix for objects",
         "de": "kleiner Fix für Objekte",
