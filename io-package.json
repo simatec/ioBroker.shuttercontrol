@@ -1,10 +1,6 @@
 {
   "common": {
     "name": "shuttercontrol",
-<<<<<<< HEAD
-    "version": "1.1.0",
-    "news": {
-=======
     "version": "1.1.4",
     "news": {
       "1.1.4": {
@@ -55,7 +51,6 @@
         "pl": "naprawiono błąd świątecznego czasu, dodano funkcję kopiowania stolika migawki",
         "zh-cn": "错误修复圣诞节时间，添加了快门表复制功能"
       },
->>>>>>> 337c096679a044433b34393bcb3482657c544e9f
       "1.1.0": {
         "en": "GUI redesign, Intermediate position added for closing",
         "de": "Neugestaltung der Benutzeroberfläche, Zwischenposition zum Schließen hinzugefügt",
