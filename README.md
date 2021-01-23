@@ -44,6 +44,24 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+<<<<<<< HEAD
+=======
+### 1.1.4 (2021-01-22)
+* (simatec) BugFix Log
+* (simatec) DEPENDENCIES updated
+* (simatec) Dev-DEPENDENCIES updated
+
+### 1.1.3 (2021-01-21)
+* (simatec) small fix for objects
+
+### 1.1.2 (2021-01-18)
+* (simatec) small fix for holiday state
+
+### 1.1.1 (2021-01-04)
+* (René) bug fix xmas time
+* (simatec) copy function for shutter-table added
+
+>>>>>>> 337c096679a044433b34393bcb3482657c544e9f
 ### 1.1.0 (2020-12-08)
 * (simatec) GUI redesign
 * (simatec) Intermediate position added for closing
