@@ -192,7 +192,8 @@
       "sentry": {
         "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
       }
-    }
+    },
+    "installedFrom": "https://github.com/FoxRo/ioBroker.shuttercontrol/tarball/0825104d11dcffc4de33aca211e3ae47520699e9"
   },
   "native": {
     "UseAstro": true,
@@ -292,8 +293,8 @@
         "elevation": "4",
         "XmasLevel": 0,
         "useXmasLevel": false,
-        "betweenPosition": false,
-        "betweenPositionLevel": "50"
+        "trigDelyUp": 1,
+        "trigDelyDown": 1
       }
     ]
   },

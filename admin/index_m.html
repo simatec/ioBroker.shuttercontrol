@@ -494,6 +494,46 @@
             display: none;
         }
 
+        #events td:nth-of-type(41) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(41) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(42) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(42) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(43) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(43) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events td:nth-of-type(44) {
+            visibility: hidden;
+            display: none;
+        }
+
+        #events th:nth-of-type(44) {
+            visibility: hidden;
+            display: none;
+        }
+
         #dialog-select-member {
             z-index: 9999 !important;
         }
@@ -592,6 +632,8 @@
                     
                     $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
                     $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val('50').trigger('change');
+                    $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val('0').trigger('change');
+                    $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val('0').trigger('change');
                 }, 1000);
 
                 initSelectId(function (sid) {
@@ -790,6 +832,9 @@
                 $('#hysteresisLight').val($('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val());
                 $('#XmasLevel').val($('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val());
                 $('#betweenPositionLevel').val($('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val());
+                $('#trigDelyUp').val($('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val());
+                $('#trigDelyDown').val($('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val());
+
 
                
                 var test1 = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
@@ -845,6 +890,8 @@
                         var autoDrive = $('#autoDriveShutter').val();
                         var xmaslevel = $('#XmasLevel').val();
                         var betweenPositionLevel = $('#betweenPositionLevel').val();
+                        var trigDelyUp = $('#trigDelyUp').val();
+                        var trigDelyDown = $('#trigDelyDown').val();
 
                         var newLateDown = $('#LateDown').prop('checked');
                         var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
@@ -879,6 +926,8 @@
                         $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val(hysteresisLight).trigger('change');
                         $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val(xmaslevel).trigger('change');
                         $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val(betweenPositionLevel).trigger('change');
+                        $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val(trigDelyUp).trigger('change');
+                        $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val(trigDelyDown).trigger('change');
                        
                         $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                         $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
@@ -1123,6 +1172,8 @@
                                             <th data-name="XmasLevel" id="events_col_39" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">XmasLevel</th>
                                             <th data-name="betweenPosition" id="events_col_40" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">betweenPosition</th>
                                             <th data-name="betweenPositionLevel" id="events_col_41" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">betweenPositionLevel</th>
+                                            <th data-name="trigDelyUp" id="events_col_40" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">trigDelyUp</th>
+                                            <th data-name="trigDelyDown" id="events_col_41" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">trigDelyDown</th>
 
                                             <!-- ****************************************************************** -->
                                             <th data-buttons="edit copy up down delete" style="width: 120px; background: #174475"></th>
@@ -1776,31 +1827,49 @@
                                     <span class="translate">XmasLevel</span>
                                 </div>
                             </div>
+							    <div class="row">
+									<div class="col s12">
+										<h6 class="translate titlePopUp" style="background-color:#174475;">sun protection settings</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s6 l4 input-field">
+										<input type="checkbox" id="KeepSunProtect" class="value" />
+										<label for="KeepSunProtect" class="translate">KeepSunProtect</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s12">
+										<h6 class="translate titlePopUp" style="background-color:#174475;">Extra Settings</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s6 l4 input-field">
+										<input type="checkbox" id="betweenPosition" class="value" />
+										<label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
+																				 
+									</div>
+									<div class="col s6 l4 input-field col-betweenPosition">
+										<input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
+										<label for="betweenPositionLevel" class="translate"></label>
+										<span class="translate">shutter height in the intermediate position</span>
+									</div>
+								</div>
                             <div class="row">
                                 <div class="col s12">
-                                    <h6 class="translate titlePopUp" style="background-color:#174475;">sun protection settings</h6>
+                                    <h6 class="translate titlePopUp" style="background-color:#174475;">Trigger settings</h6>
                                 </div>
                             </div>
                             <div class="row">
-								<div class="col s6 l4 input-field">
-                                    <input type="checkbox" id="KeepSunProtect" class="value" />
-                                    <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
+                                <div class="col s6 l2 input-field">
+                                    <input type="number" class="value" id="trigDelyUp" min=0 max=999 />
+                                    <label for="trigDelyUp" class="translate"></label>
+                                    <span class="translate">trigDelyUp</span>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12">
-                                    <h6 class="translate titlePopUp" style="background-color:#174475;">Extra Settings</h6>
-                                </div>
-                            </div>
-                            <div class="row">
-								<div class="col s6 l4 input-field">
-                                    <input type="checkbox" id="betweenPosition" class="value" />
-                                    <label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
-                                </div>
-                                <div class="col s6 l4 input-field col-betweenPosition">
-                                    <input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
-                                    <label for="betweenPositionLevel" class="translate"></label>
-                                    <span class="translate">shutter height in the intermediate position</span>
+                                <div class="col s6 l2 input-field">
+                                    <input type="number" class="value" id="trigDelyDown" min=0 max=999 />
+                                    <label for="trigDelyDown" class="translate"></label>
+                                    <span class="translate">trigDelyDown</span>
                                 </div>
                             </div>
                         </div>
