@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "news": {
+      "1.1.5": {
+        "en": "BugFix io-package, Source code structure changed, new Feature trigger delay, Bugfix for trigger",
+        "de": "BugFix io-Paket, Quellcodestruktur geändert, neues Feature-Trigger-Verzögerung, Bugfix für Trigger",
+        "ru": "BugFix io-package, изменена структура исходного кода, новая функция задержки запуска, исправление ошибки для триггера",
+        "pt": "BugFix io-package, alteração da estrutura do código-fonte, novo atraso do acionador de recurso, Bugfix para acionador",
+        "nl": "Bugfix io-package, Broncode structuur gewijzigd, nieuwe functie triggervertraging, Bugfix voor trigger",
+        "fr": "BugFix io-package, structure du code source modifiée, nouveau délai de déclenchement de la fonctionnalité, correction de bug pour le déclenchement",
+        "it": "BugFix io-package, struttura del codice sorgente modificata, nuove funzionalità di ritardo del trigger, Bugfix per trigger",
+        "es": "BugFix io-package, estructura del código fuente cambiada, retardo de activación de nueva función, corrección de errores para disparador",
+        "pl": "BugFix io-pakiet, zmieniona struktura kodu źródłowego, nowe opóźnienie wyzwalania funkcji, poprawka błędu dla wyzwalacza",
+        "zh-cn": "BugFix io软件包，更改了源代码结构，新功能触发延迟，触发的错误修复"
+      },
       "1.1.4": {
         "en": "BugFix Log, DEPENDENCIES updated, Dev-DEPENDENCIES updated",
         "de": "BugFix-Protokoll, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert",
@@ -192,8 +204,7 @@
       "sentry": {
         "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
       }
-    },
-    "installedFrom": "https://github.com/FoxRo/ioBroker.shuttercontrol/tarball/0825104d11dcffc4de33aca211e3ae47520699e9"
+    }
   },
   "native": {
     "UseAstro": true,
@@ -293,6 +304,8 @@
         "elevation": "4",
         "XmasLevel": 0,
         "useXmasLevel": false,
+        "betweenPosition": false,
+        "betweenPositionLevel": "50",
         "trigDelyUp": 1,
         "trigDelyDown": 1
       }
