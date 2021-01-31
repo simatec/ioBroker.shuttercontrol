@@ -220,3 +220,13 @@ You can create two instances of the holiday adapter if necessary; a to display a
 ** Beginning of summer ** Start of the period when shutters are not shut down in summer.
 ** end of the summer ** End of the period in which roller shutters are not shut down in summer.
 Which roller shutters are not shut down in summer can be specified in the respective roller shutter settings.
+
+### Trigger-Settings
+
+![extraSettingsTrigger](img/ExtraSettingsTrigger.png)
+
+**Delay roller shutter up when window is opened (s)**
+Parameter to delay the roller open after the window has been opened (seconds)
+
+**Delay roller shutter down when window is closed (s)**
+Parameter to delay the roll close after the window has been closed (seconds)
