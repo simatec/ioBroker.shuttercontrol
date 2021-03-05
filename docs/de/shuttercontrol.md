@@ -417,7 +417,7 @@ Der Sonnenschutz kann über Auslöser wie Himmelsrichtung, Außentemperatur, Inn
 und Lichtsensor für die Beschattung und deren Ende gesteuert werden und wird über
 **Art der Sonnenschutzsteuerung** eingestellt.
 
-![sunProtect](img/sunProtect.png)
+![sunProtect](img/mainSunprotect.png)
 
 
 **Rollladenhöhe beim Runterfahren:**  
