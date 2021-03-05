@@ -21,7 +21,7 @@
 
 ## Grundlegendes
 
-> Die Anleitung ist gültig für Version 1.0.2
+> Die Anleitung ist gültig für Version 1.1.5
 
 Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung von Rollläden,
 Jalousien oder Markisen und umfasst sowohl die automatische Beschattung als auch
@@ -47,9 +47,9 @@ betriebsbereit ist.
 Die weitere Konfiguration dient dann der Anpassung an persönliche Wünsche.
 
 > Shuttercontrol kann Aktoren nur über die Position wie zb. LEVEL mit Werten
-von 0 bis 100 steuern!
+von 0 bis 100 respektive 0-255 steuern. Das jeweilige Rolladen- oder Jalousietiming muss vom Aktor übernommen werden. Jalousieaktoren, welche je ein Objekt für "Höhe" und "Lamellenwinkel" anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Parametrierung verwendet werden.
 
-
+> Achtung: Wenn der Shuttercontrol Adapter neu gestartet wird (Auch nach Konfigurationsänderungen) müssen die Rollläden mittels des Button "obenAll" (shuttercontrol.0.control.openAll) hochgefahren werden. Auch wenn diese schon offen sind! (Initialisierungsfahrt) Dies initialisiert alle Adapter internen Werte.
 
 
 ## Installation
@@ -355,18 +355,18 @@ bei Türen um durchgehen zu können).
 
 **Rollladenautomatik auch bei geöffneten Fenster/Tür benutzen (Aussperrschutz)**  
 Entspricht zum Zeitpunkt des automatischen Schließens der Fenster/Tür Sensor 
-__nicht__ dem dort eingegebenen Wert (Fenster/Tür offen) wird folgendes ausgeführt:
+__nicht__ dem dort eingegebenen Wert (Fenster/Tür geschlossen) wird folgendes ausgeführt:
 
-* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen nicht wenn der egal wie der Sensor steht.
-* **Öffnen**: Bei Verdunklungs- / Beschattungsende fährt der Rollladen hoch
-* **Schließen**: Bei Verdunklungs- / Beschattungsbeginn fährt der Rollladen herunter
-* **Öffnen und Schließen**: Der Rollladen darf sich egal wie der Sensor steht, in beide Richtungen bewegen
+* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen nicht bei offenem Fenster nicht.
+* **Öffnen**: Nur Hochfahren erlaubt. Bei Verdunklungs- / Beschattungsende fährt der Rollladen trotz offenem Fenster hoch. Der Rollladen wird bei offenem Fenster nicht automatisch geschlossen.
+* **Schließen**: Nur Schliessen erlaubt. Bei Verdunklungs- / Beschattungsbeginn fährt der Rollladen trotz offenem Fenster herunter. Der Rollladen wird bei offenem Fenster nicht geöffnet.
+* **Öffnen und Schließen**: Der Rollladen darf sich bei offenem Fenster in beide Richtungen bewegen
 
 
 
-**Rollladenhöhe beim Runterfahren:** gewünschte Rollladenposition bei Verdunklung
+**Rollladenhöhe beim Runterfahren:** Positionswert bei geschlossenen Rollladen
 
-**Rollladenhöhe beim Hochfahren:** gewünschte Rollladenposition am Morgen
+**Rollladenhöhe beim Hochfahren:** Positionswert bei geöffnetem Rollladen
 
 > Entsprechend der verwendeten Aktoren muss die Rollladenhöhe eingegeben werden:
 > 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = gechlossen
@@ -379,6 +379,7 @@ Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser W
 
 **Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer
 definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
+>Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
 
 **Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
 nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
@@ -432,8 +433,12 @@ Folgende Kombinationen sind über Pulldown auswählbar:
 * Außentemperatur/Lichtsensor & Himmelsrichtung
 * Außentemperatur/Lichtsensor
 * Innentemperatur
+ 
+>Der Sonnenschutz löst erst aus wenn ALLE gewählten Auslöser aktiv sind (UND Verknüpfung).
 
-> Der Sonnenschutz löst erst aus wenn ALLE gewählten Auslöser aktiv sind (UND Verknüpfung).
+>Wird eine Steuerung mit mehreren Sensoren gewünscht, muss die entsprechende Kombination in der Sonnenschutzart gewählt werden. Der Lichtsensor ist in denjenigen Auswahlen, wo dieser mit aufgeführt ist, jeweils optional. Ist der Lichtsensor konfiguriert, wird er mit den anderen Parametern UND verknüpft.
+
+>Der Sonnenschutz wird aufgehoben, sobald eine der Bedingungen (Parameter) nicht mehr erfüllt ist.
 
 **+/- Bereich der Sonnenposition für den aktiven Sonnenschutz:**  
 Bereich in dem die Sonne (um den Mittelpunkt) störend in das Fenster einstrahlen
