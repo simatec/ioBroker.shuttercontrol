@@ -174,7 +174,7 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 ## Adapterkonfiguration - EXTRA-EINSTELLUNGEN
 
 ### Astro-Einstellungen
----
+
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
 **Breiten- und Längengrad:**  
@@ -195,8 +195,9 @@ in der [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen
 Damit nicht alle Rollläden gleichzeitig fahren, kann hier eine globale Zeitverzögerung
 in Sekunden eingestellt werden.
 
-### Sommer-Einstellungen
 ---
+### Sommer-Einstellungen
+
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
 **Beginn des Sommers** und **Ende des Sommers:**  
@@ -206,8 +207,9 @@ In der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladenei
 bei ```Rollladen im Sommer nicht schließen``` verhindert das dieser Rollladen im Sommer
 schließt. 
 
-### Weihnachtseinstellungen
 ---
+### Weihnachtseinstellungen
+
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
 Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
@@ -221,8 +223,9 @@ und dort "Weihnachtseinstellungen".
 Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
 verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
 
-### Urlaubs- und Feiertagseinstellungen
 ---
+### Urlaubs- und Feiertagseinstellungen
+
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
 **Verwenden der gesetzlichen Feiertage:**  
@@ -237,8 +240,9 @@ Diese Objekt-ID setzt den internen Zustand "Holiday". Hier kann z.Bsp. ein
 Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
 
-### Sonderzeiten
 ---
+### Sonderzeiten
+
 ![extraSettingsSonder](img/ExtraSettingsSonder.png)
 
 
@@ -259,9 +263,9 @@ Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
 abgelaufen ist.
 
 
-
-### Extra-Einstellungen
 ---
+### Extra-Einstellungen
+
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
 **Überprüfen des aktuellen Rollladenstatus:**  
