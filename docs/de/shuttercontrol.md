@@ -16,7 +16,7 @@
 * [Individuelle Rollladeneinstellungen](#individuelle-rollladeneinstellungen)
 	* [Haupteinstellungen](#haupteinstellungen)
 	* [Sonnenschutz-Einstellungen](#sonnenschutz-einstellungen)
-	* [Extra-Einstellungen](#extra-einstellungen)
+	* [Extra-Einstellungen](#extra-einstellungen-rollladen)
 * [Datenpunkte](#datenpunkte)
 	* [shuttercontrol.0.control](#shuttercontrol.0.control)
 	* [shuttercontrol.0.info](#shuttercontrol.0.info)
@@ -506,7 +506,7 @@ bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
 Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
 den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
-### Extra-Einstellungen
+### Extra-Einstellungen Rollladen
 
 **Alle Rollläden schliessen spät in der Nacht**  
 Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
