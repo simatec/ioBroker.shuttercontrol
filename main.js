@@ -8,6 +8,7 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SunCalc = require('suncalc2');
 
+const shutterControlInit = require('./lib/shutterControlInit');         // ShutterControlInit
 const sunProtect = require('./lib/sunProtect.js');                      // SunProtect
 const triggerChange = require('./lib/triggerChange.js');                // triggerChange
 const elevationDown = require('./lib/elevationDown.js');                // elevationDown
@@ -1790,31 +1791,33 @@ function main(adapter) {
         });
     }
     // set current states
-    const resultStates = adapter.config.events;
+    shutterControlInit(adapter)
 
-    if (resultStates) {
-        for (const i in resultStates) {
-            /**
-             * @param {any} err
-             * @param {{ val: any; }} state
-             */
-            adapter.getForeignState(resultStates[i].name, (err, state) => {
-                if (typeof state != undefined && state != null) {
-                    resultStates[i].currentHeight = (state.val);
-                    resultStates[i].oldHeight = (state.val);
-                    resultStates[i].triggerHeight = (state.val);
-                    resultStates[i].triggerAction = (state.val);
-                    adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
+    // const resultStates = adapter.config.events;
 
-                    if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
-                    } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
-                    }
-                }
-            });
-        }
-    }
+    // if (resultStates) {
+    //    for (const i in resultStates) {
+    //        /**
+    //         * @param {any} err
+    //         * @param {{ val: any; }} state
+    //         */
+    //        adapter.getForeignState(resultStates[i].name, (err, state) => {
+    //            if (typeof state != undefined && state != null) {
+    //                resultStates[i].currentHeight = (state.val);
+    //                resultStates[i].oldHeight = (state.val);
+    //                resultStates[i].triggerHeight = (state.val);
+    //                resultStates[i].triggerAction = (state.val);
+    //                adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
+
+    //                if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
+    //                    adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
+    //                } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
+    //                    adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+    //                }
+    //            }
+    //        });
+    //    }
+    // }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
