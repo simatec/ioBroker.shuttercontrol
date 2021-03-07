@@ -212,16 +212,9 @@ schließt.
 
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
-Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
-kann man diese Option verwenden.
-Mit dieser Option werden die Rolladen zur normalen Schliesszeit nicht vollständig sondern nur auf ein einstellbares Level gefahren.
-Dieses Level ist einstellbar in den jeweiligen Rolladen-Einstellungen unter "Rollladenpegel zur Weihnachtszeit". **Achtung:** Dieser Wert ist
-nur sichtbar, wenn der Haken für "Der Rollladenpegel zur Weihnachtszeit wird verwendet" gesetzt ist. Wenn der Haken nicht gesetzt ist,
-ist die Option deaktviert.
-Diese Option wird automatisch in einem bestimmten Zeitraum (z.Bsp. vom 01.12. bsi 10.01) aktiviert. Der Zeitraum ist einstellbar unter "Extra-Einstellungen"
-und dort "Weihnachtseinstellungen".
-Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
-verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
+Einstellung der Zeiten Beginn und Ende der Weihnachtszeit.
+Unter [Extra-Einstellungen](#extra-einstellungen-rollladen) Weihnachsteinstellungen wird
+die zu dieser Zeit gewünschte Funktion eingeschaltet und die Rollladenposition festgelegt.
 
 ---
 ### Urlaubs- und Feiertagseinstellungen
@@ -492,15 +485,18 @@ Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
 ![mainExtra](img/mainExtra.png)
 
-**Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer
-definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
+**Rollladen spät schliessen** 
+Mit dieser Option wird der Rollladen zu einer definierten Zeit (einstellbar in den 
+[Sonderzeiten](#sonderzeiten)) zusätzlich heruntergefahen.
 >Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
 
-**Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
-nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
+**Rollladen im Sommer nicht schliessen** 
+Manche Rollläden sollen im Sommer nicht geschlossen werden. Der Zeitraum Sommer wird 
+in den [Sommer-Einstellungen](#sommer-einstellungen) festgelegt.
 
-**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen
-des Fensters/Türe auf die zuletzt angeforderte Position gefahren. 
+**Fahren, nachdem Fenster geschlossen wurde** 
+Der Rollladen wird nach dem Schliessen des Fensters/Türe auf die zuletzt angeforderte 
+Position gefahren. 
 
 > Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
 
@@ -508,8 +504,24 @@ des Fensters/Türe auf die zuletzt angeforderte Position gefahren.
 > Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
 > Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
-**Halte Rollladen in Sonnenschutz:**
-wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
+**Weihnachtseinstellungen**
+Wenn zur Weihnachtszeit der Rollladen nur teilweise geschlossen werden soll, weil 
+ein Schwibbögen o.ä. sichtbar bleiben soll, kann diese Option verwendet werden. Der 
+Rollladen wird dann zur normalen Schliesszeit nicht vollständig, sondern nur 
+auf einen einzustellenden Pegel gefahren. 
+> **Der Rollladenpegel zur Weihnachtszeit** ist nur dann sichtbar und einstellbar, 
+> wenn der Haken für **Der Rollladenpegel zur Weihnachtszeit wird verwendet** gesetzt ist. 
+
+Der Zeitraum wann diese Funktion aktiviert seibn soll wird unter [Weihnachtseinstellungen](#weihnachtseinstellungen) 
+eingestellt. 
+> Sollen später am Abend der Rollladen komplett geschlossen werden, kann die Option 
+> **Rollladen spät schliessen** oder **In Zwischenposition fahren und später komplett schliessen** 
+> verwendet werden.  
+
+> > Achtung: Diese beiden Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
+
+**Halte Rollladen in Sonnenschutz**
+Wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
 keine Sonnenschutz- Anforderung mehr besteht und verbleibt so lange im Sonnenschutz,
 bis das "Schliessen" Signal am Abend kommt. 
 Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt. 
@@ -531,6 +543,9 @@ Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe
 
 **Rolladen Verzögerung bei Fenster schliessen (s)**
 Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
+
+**In Zwischenposition fahren und später komplett schliessen**
+Bei Aktivierung wird **Rollladenhöhe in der Zwischenposition** sichtbar. Der Rollladen fährt dann 
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
