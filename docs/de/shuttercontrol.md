@@ -212,7 +212,16 @@ schließt.
 
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
-
+Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
+kann man diese Option verwenden.
+Mit dieser Option werden die Rolladen zur normalen Schliesszeit nicht vollständig sondern nur auf ein einstellbares Level gefahren.
+Dieses Level ist einstellbar in den jeweiligen Rolladen-Einstellungen unter "Rollladenpegel zur Weihnachtszeit". **Achtung:** Dieser Wert ist
+nur sichtbar, wenn der Haken für "Der Rollladenpegel zur Weihnachtszeit wird verwendet" gesetzt ist. Wenn der Haken nicht gesetzt ist,
+ist die Option deaktviert.
+Diese Option wird automatisch in einem bestimmten Zeitraum (z.Bsp. vom 01.12. bsi 10.01) aktiviert. Der Zeitraum ist einstellbar unter "Extra-Einstellungen"
+und dort "Weihnachtseinstellungen".
+Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
+verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
 
 ### Urlaubs- und Feiertagseinstellungen
 
@@ -239,10 +248,6 @@ Bei einigen Usern (unter anderen shelly User) tritt das Problem auf, dass sich d
 Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox.
 Bei aktivierter Checkbox, prüft shuttercontrol 1 Minute nach der letzten Fahrt des
 Rollladens das aktuelle Level und speichert es temporär.
-
-**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
-Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
-abgelaufen ist.
 
 **Objekt ID des Auslösers für den Schlafbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Schlafbereichs aktiviert.
@@ -393,21 +398,6 @@ des Fensters/Türe auf die zuletzt angeforderte Position gefahren.
 > Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
 > Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
-
-### Weihnachts-Einstellungen
-Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
-kann man diese Option verwenden.
-Mit dieser Option werden die Rolladen zur normalen Schliesszeit nicht vollständig sondern nur auf ein einstellbares Level gefahren.
-Dieses Level ist einstellbar in den jeweiligen Rolladen-Einstellungen unter "Rollladenpegel zur Weihnachtszeit". **Achtung:** Dieser Wert ist
-nur sichtbar, wenn der Haken für "Der Rollladenpegel zur Weihnachtszeit wird verwendet" gesetzt ist. Wenn der Haken nicht gesetzt ist,
-ist die Option deaktviert.
-Diese Option wird automatisch in einem bestimmten Zeitraum (z.Bsp. vom 01.12. bsi 10.01) aktiviert. Der Zeitraum ist einstellbar unter "Extra-Einstellungen"
-und dort "Weihnachtseinstellungen".
-Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
-verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
-
-
-
 ---
 
 ### Sonnenschutz-Einstellungen
@@ -514,6 +504,8 @@ den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 ### Extra-Einstellungen Rollladen
 
+![mainExtra](img/mainExtra.png)
+
 **Alle Rollläden schliessen spät in der Nacht**  
 Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
 Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
@@ -525,6 +517,11 @@ aktiviert bzw. falls nicht gewünscht deaktiviert werden.
 
 **Zeit, in der alle Rollläden spät in der Nacht schließen**  
 Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
+
+**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
+Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
+abgelaufen ist.
+
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
