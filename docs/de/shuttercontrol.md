@@ -255,8 +255,8 @@ nochmal geöffnet wird.
 > Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
 aktiviert bzw. falls nicht gewünscht deaktiviert werden.
 
-**Zeit, in der alle Rollläden spät in der Nacht schließen**  
-Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
+**Alle Rollläden in der Zwischenpostition vollständig schließen**  
+Zeit, wann alle Rollläden abends vollständig geschlossen werden (z.Bsp. 22:00Uhr)
 
 **Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
 Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
