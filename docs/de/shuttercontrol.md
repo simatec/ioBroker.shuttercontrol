@@ -239,6 +239,29 @@ Diese Objekt-ID setzt den internen Zustand "Holiday". Hier kann z.Bsp. ein
 Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
 
+### Sonderzeiten
+
+![extraSettingsSonder](img/ExtraSettingsSonder.png)
+
+
+**Alle Rollläden schliessen spät in der Nacht**  
+Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
+Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
+oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
+nochmal geöffnet wird. 
+
+> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
+aktiviert bzw. falls nicht gewünscht deaktiviert werden.
+
+**Zeit, in der alle Rollläden spät in der Nacht schließen**  
+Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
+
+**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
+Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
+abgelaufen ist.
+
+
+
 ### Extra-Einstellungen
 
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
@@ -258,15 +281,7 @@ Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
 **Objekt ID des Triggers für den Kinderbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
 
-### Trigger-Settings
 
-![extraSettingsTrigger](img/ExtraSettingsTrigger.png)
-
-**Rolladen Verzögerung bei Fenster öffnen (s)**
-Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
-
-**Rolladen Verzögerung bei Fenster schliessen (s)**
-Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
 
 ## Individuelle Rollladeneinstellungen
 
@@ -506,22 +521,13 @@ den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 ![mainExtra](img/mainExtra.png)
 
-**Alle Rollläden schliessen spät in der Nacht**  
-Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
-Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
-oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
-nochmal geöffnet wird. 
 
-> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
-aktiviert bzw. falls nicht gewünscht deaktiviert werden.
 
-**Zeit, in der alle Rollläden spät in der Nacht schließen**  
-Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
+**Rolladen Verzögerung bei Fenster öffnen (s)**
+Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
 
-**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
-Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
-abgelaufen ist.
-
+**Rolladen Verzögerung bei Fenster schliessen (s)**
+Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
