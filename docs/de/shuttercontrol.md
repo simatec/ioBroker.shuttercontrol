@@ -76,9 +76,11 @@ mit den Haupteinstellungen:
 
 * **3:** individuelle Konfiguration des jeweiligen Rollladens öffnen
 
-* **4:** Festlegung der Reihenfolge in der die Rollläden mit gleichen Einstellungen fahren.
+* **4:** Rollladen kopieren 
 
-* **5:** Löschen des Rollladenaktors mit allen konfigurierten Daten!
+* **5:** Festlegung der Reihenfolge in der die Rollläden mit gleichen Einstellungen fahren.
+
+* **6:** Löschen des Rollladenaktors mit allen konfigurierten Daten!
 
 * **Nr:**  fortlaufende Nummer der gelisteten Rollläden
 
@@ -89,9 +91,9 @@ und kann danach nach eigenen Wünschen abgeändert werden.
 
 * **Objekt-ID Rollladen:** Eindeutige ID des zu steuernden Datenpunkts in den Objekten
 
-* **6:** Aufruf der Adapter Github Seite
+* **7:** Aufruf der Adapter Github Seite
 
-* **7, 8:** Konfigurationsdatei laden bzw. speichern
+* **8, 9:** Konfigurationsdatei laden bzw. speichern
 
 
 Der Beispiel Aktor *shutter example* wird automatisch angelegt. Diesen bitte löschen
