@@ -173,8 +173,6 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 
 ## Adapterkonfiguration - EXTRA-EINSTELLUNGEN
 
-In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
-
 ### Astro-Einstellungen
 ---
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
