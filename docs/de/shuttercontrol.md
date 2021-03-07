@@ -34,7 +34,7 @@ die nächtliche Verdunklung.
 
 Für die Steuerung stehen sehr viele einstellbare Parameter zur Verfügung, z.Bsp.:
 * zwei verschiedene globale Timer (z.B. unterschiedlich für Schlaf- und Wohnräume),
-* diverse sonnenstandsabhängige Parameter die individuell je Rollladen eingestellt
+* diverse Sonnenstands abhängige Parameter die individuell je Rollladen eingestellt
 werden können,
 * Trigger für Tür-/Fenstersensoren die einem Aussperrschutz dienen oder ein automatisches
 Öffnen zu einem individuellen Level bei Öffnen der Tür oder des Fensters dienen,
@@ -44,13 +44,13 @@ Innentemperatur, Außentemperatur, Helligkeit, Hitzesensor o.ä.,
 werden.
 
 Alle Konfigurationsdatenpunkte sind bereits mit Beispielen voreingestellt, so dass
-der Adapter nach Installation und Eingabe von den IDs der Rollladenaktoren schnell
+der Adapter nach Installation und Eingabe von den IDs der Rollladen Aktoren schnell
 betriebsbereit ist.
 
 Die weitere Konfiguration dient dann der Anpassung an persönliche Wünsche.
 
-> Shuttercontrol kann Aktoren nur über die Position wie zb. LEVEL mit Werten
-von 0 bis 100 respektive 0-255 steuern. Das jeweilige Rolladen- oder Jalousietiming muss vom Aktor übernommen werden. Jalousieaktoren, welche je ein Objekt für "Höhe" und "Lamellenwinkel" anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Parametrierung verwendet werden.
+> Shuttercontrol kann Aktoren nur über die Position wie z.B. LEVEL mit Werten
+von 0 bis 100 respektive 0-255 steuern. Das jeweilige Rollladen- oder Jalousietiming muss vom Aktor übernommen werden. Jalousie Aktoren, welche je ein Objekt für "Höhe" und "Lamellenwinkel" anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Parametrierung verwendet werden.
 
 > Achtung: Wenn der Shuttercontrol Adapter neu gestartet wird (Auch nach Konfigurationsänderungen) müssen die Rollläden mittels des Button "obenAll" (shuttercontrol.0.control.openAll) hochgefahren werden. Auch wenn diese schon offen sind! (Initialisierungsfahrt) Dies initialisiert alle Adapter internen Werte.
 
@@ -70,9 +70,9 @@ mit den Haupteinstellungen:
 ![main](img/main.png)
 
 
-* **1:** hinzufügen eines Rollladenaktors
+* **1:** hinzufügen eines Rollladen Aktors
 
-* **2:** Ändern eine ausgewählten Rollladenaktors
+* **2:** Ändern eine ausgewählten Rollladen Aktors
 
 * **3:** individuelle Konfiguration des jeweiligen Rollladens öffnen
 
@@ -80,7 +80,7 @@ mit den Haupteinstellungen:
 
 * **5:** Festlegung der Reihenfolge in der die Rollläden mit gleichen Einstellungen fahren.
 
-* **6:** Löschen des Rollladenaktors mit allen konfigurierten Daten!
+* **6:** Löschen des Rollladen Aktors mit allen konfigurierten Daten!
 
 * **Nr:**  fortlaufende Nummer der gelisteten Rollläden
 
@@ -97,7 +97,7 @@ und kann danach nach eigenen Wünschen abgeändert werden.
 
 
 Der Beispiel Aktor *shutter example* wird automatisch angelegt. Diesen bitte löschen
-und anschließend durch anklicken des mit 1 markierten (+) die eigenen Rollladenaktoren
+und anschließend durch Anklicken des mit 1 markierten (+) die eigenen Rollladen Aktoren
 hinzufügen.
 
 
@@ -342,7 +342,7 @@ weil dort die Farben einen goldenen Schimmer haben.
 * **nur manueller Betrieb:**  
 Der Rollladen kann nur manuell in die ausgewählte Richtung bewegt werden. Über die
 die Buttons unter ```shuttercontrol.0.control``` ist keine Bewegung möglich. 
-Dies kann z.B. bei Markisen hilfreich sein, welche nicht mit anderen Rolläden
+Dies kann z.B. bei Markisen hilfreich sein, welche nicht mit anderen Rollläden
 zusammen geöffnet werden sollen.
 
 **Wert des Fenster/Tür Sensors im geschlossenen Zustand:**  
@@ -384,7 +384,7 @@ __nicht__ dem dort eingegebenen Wert (Fenster/Tür geschlossen) wird folgendes a
 **Rollladenhöhe beim Hochfahren:** Positionswert bei geöffnetem Rollladen
 
 > Entsprechend der verwendeten Aktoren muss die Rollladenhöhe eingegeben werden:
-> 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = gechlossen
+> 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = geschlossen
 
 **Sonnenhöhe (Elevation):**
 Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser Wert hier eingegeben; sonst leer lassen.
@@ -487,7 +487,7 @@ Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
 **Rollladen spät schliessen** 
 Mit dieser Option wird der Rollladen zu einer definierten Zeit (einstellbar in den 
-[Sonderzeiten](#sonderzeiten)) zusätzlich heruntergefahen.
+[Sonderzeiten](#sonderzeiten)) zusätzlich heruntergefahren.
 >Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
 
 **Rollladen im Sommer nicht schliessen** 
@@ -512,7 +512,7 @@ auf einen einzustellenden Pegel gefahren.
 > **Der Rollladenpegel zur Weihnachtszeit** ist nur dann sichtbar und einstellbar, 
 > wenn der Haken für **Der Rollladenpegel zur Weihnachtszeit wird verwendet** gesetzt ist. 
 
-Der Zeitraum wann diese Funktion aktiviert seibn soll wird unter [Weihnachtseinstellungen](#weihnachtseinstellungen) 
+Der Zeitraum wann diese Funktion aktiviert sein soll wird unter [Weihnachtseinstellungen](#weihnachtseinstellungen) 
 eingestellt. 
 > Sollen später am Abend der Rollladen komplett geschlossen werden, kann die Option 
 > **Rollladen spät schliessen** oder **In Zwischenposition fahren und später komplett schliessen** 
@@ -538,10 +538,10 @@ bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
 Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
 den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
-**Rolladen Verzögerung bei Fenster öffnen (s)**
+**Rollladen Verzögerung bei Fenster öffnen (s)**
 Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
 
-**Rolladen Verzögerung bei Fenster schliessen (s)**
+**Rollladen Verzögerung bei Fenster schliessen (s)**
 Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
 
 **In Zwischenposition fahren und später komplett schliessen**
@@ -562,7 +562,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 
 Datenpunkte zur Steuerung verschiedener Funktionen wie:
 * Holiday  
-Bei ```true```fahren die Rollläden zu den eingestellen Zeiten Wochenende und bei
+Bei ```true```fahren die Rollläden zu den eingestellten Zeiten Wochenende und bei
 ```false``` zu den Zeiten unter der Woche.
 > Kann von eigenen Skripten, die den Urlaub, freie Tage o.ä. berechnen oder darstellen, 
 auf true gesetzt werden um die Wochenend-Einstellungen zu aktivieren.
