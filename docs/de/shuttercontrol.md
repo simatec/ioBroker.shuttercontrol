@@ -379,7 +379,7 @@ bei Türen um durchgehen zu können).
 Entspricht zum Zeitpunkt des automatischen Schließens der Fenster/Tür Sensor 
 __nicht__ dem dort eingegebenen Wert (Fenster/Tür geschlossen) wird folgendes ausgeführt:
 
-* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen nicht bei offenem Fenster nicht.
+* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen sich bei offenem Fenster nicht.
 * **Öffnen**: Nur Hochfahren erlaubt. Bei Verdunklungs- / Beschattungsende fährt der Rollladen trotz offenem Fenster hoch. Der Rollladen wird bei offenem Fenster nicht automatisch geschlossen.
 * **Schließen**: Nur Schliessen erlaubt. Bei Verdunklungs- / Beschattungsbeginn fährt der Rollladen trotz offenem Fenster herunter. Der Rollladen wird bei offenem Fenster nicht geöffnet.
 * **Öffnen und Schließen**: Der Rollladen darf sich bei offenem Fenster in beide Richtungen bewegen
@@ -399,21 +399,6 @@ Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser W
 **Objekt-ID des Fenster/Tür Kontaktes:**
 über das (+) den Sensor (State) auswählen der eine Rollladenfahrt verhindern soll (z.B. Türkontakt).
 
-**Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer
-definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
->Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
-
-**Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
-nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
-
-**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen
-des Fensters/Türe auf die zuletzt angeforderte Position gefahren. 
-
-> Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
-
-> Beispiel einer typischen Konfiguration für eine Türe: 
-> Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
-> Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
 ---
 
@@ -523,6 +508,21 @@ den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 ![mainExtra](img/mainExtra.png)
 
+**Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer
+definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
+>Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
+
+**Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
+nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
+
+**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen
+des Fensters/Türe auf die zuletzt angeforderte Position gefahren. 
+
+> Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
+
+> Beispiel einer typischen Konfiguration für eine Türe: 
+> Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
+> Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
 
 **Rolladen Verzögerung bei Fenster öffnen (s)**
