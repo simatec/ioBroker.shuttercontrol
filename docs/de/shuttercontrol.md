@@ -284,7 +284,7 @@ Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
 Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
 
 
-
+---
 ## Individuelle Rollladeneinstellungen
 
 Nach dem Anlegen der Rollläden unter [Adapterkonfiguration - HAUPTEINSTELLUNGEN](#adapterkonfiguration---haupteinstellungen) wird
