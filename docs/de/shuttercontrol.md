@@ -486,23 +486,7 @@ beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung wieder en
 über das (+) den Temperatursensor (State) auswählen der eine Rollladenfahrt verhindert.
 Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
-**Halte Rollladen in Sonnenschutz:**
-wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
-keine Sonnenschutz- Anforderung mehr besteht und verbleibt so lange im Sonnenschutz,
-bis das "Schliessen" Signal am Abend kommt. 
-Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt. 
-Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt),
-und lediglich die Lamellen auf und zu fahren.
 
-> Hinweis:  
-Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
-automatisch angefahrenen, setzt die Automatik aus!  
-> Ausnahme:  
-Wenn der Rollladen das erste Mal am Tag manuell auf 100% geöffnet
-wird, wird ebenso der Sonnenschutz ermöglicht. Hierbei fährt der Rollladen
-bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
-Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
-den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 ### Extra-Einstellungen Rollladen
 
@@ -524,6 +508,23 @@ des Fensters/Türe auf die zuletzt angeforderte Position gefahren.
 > Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
 > Fahren, nachdem Fenster geschlossen wurde auf *EIN*
 
+**Halte Rollladen in Sonnenschutz:**
+wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
+keine Sonnenschutz- Anforderung mehr besteht und verbleibt so lange im Sonnenschutz,
+bis das "Schliessen" Signal am Abend kommt. 
+Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt. 
+Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt),
+und lediglich die Lamellen auf und zu fahren.
+
+> Hinweis:  
+Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
+automatisch angefahrenen, setzt die Automatik aus!  
+> Ausnahme:  
+Wenn der Rollladen das erste Mal am Tag manuell auf 100% geöffnet
+wird, wird ebenso der Sonnenschutz ermöglicht. Hierbei fährt der Rollladen
+bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
+Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
+den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 **Rolladen Verzögerung bei Fenster öffnen (s)**
 Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
