@@ -169,7 +169,7 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 > bestimmten Stand überschritten hat, muss diese Zeit auf den spätesten
 > Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
----
+
 
 ## Adapterkonfiguration - EXTRA-EINSTELLUNGEN
 
