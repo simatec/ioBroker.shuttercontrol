@@ -208,6 +208,12 @@ In der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladenei
 bei ```Rollladen im Sommer nicht schließen``` verhindert das dieser Rollladen im Sommer
 schließt. 
 
+### Weihnachtseinstellungen
+
+![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
+
+
+
 ### Urlaubs- und Feiertagseinstellungen
 
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
