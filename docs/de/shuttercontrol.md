@@ -175,9 +175,10 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 
 In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
 
+### Astro-Einstellungen
+
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
-### Astro-Einstellungen
 **Breiten- und Längengrad:**  
 Breiten- und Längengrad übernimmt Shuttercontrol aus den ioBroker Systemeinstellungen.
 Shuttercontrol berechnet anhand dieser Werte den Sonnenstand.
@@ -199,18 +200,6 @@ in Sekunden eingestellt werden.
 ### Sommer-Einstellungen
 
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
-
-**Alle Rollläden schliessen spät in der Nacht**  
-Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
-Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
-oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
-nochmal geöffnet wird. 
-
-> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
-aktiviert bzw. falls nicht gewünscht deaktiviert werden.
-
-**Zeit, in der alle Rollläden spät in der Nacht schließen**  
-Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
 
 **Beginn des Sommers** und **Ende des Sommers:**  
 Hier wird der gewünschte Beginn bzw. Ende des Sommers festgelegt.
@@ -517,7 +506,19 @@ bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
 Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
 den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
+### Extra-Einstellungen
 
+**Alle Rollläden schliessen spät in der Nacht**  
+Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
+Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
+oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
+nochmal geöffnet wird. 
+
+> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
+aktiviert bzw. falls nicht gewünscht deaktiviert werden.
+
+**Zeit, in der alle Rollläden spät in der Nacht schließen**  
+Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
