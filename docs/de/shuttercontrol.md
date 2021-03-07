@@ -176,7 +176,7 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
 
 ### Astro-Einstellungen
-
+---
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
 **Breiten- und Längengrad:**  
@@ -198,7 +198,7 @@ Damit nicht alle Rollläden gleichzeitig fahren, kann hier eine globale Zeitverz
 in Sekunden eingestellt werden.
 
 ### Sommer-Einstellungen
-
+---
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
 **Beginn des Sommers** und **Ende des Sommers:**  
@@ -209,7 +209,7 @@ bei ```Rollladen im Sommer nicht schließen``` verhindert das dieser Rollladen i
 schließt. 
 
 ### Weihnachtseinstellungen
-
+---
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
 Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
@@ -224,7 +224,7 @@ Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die
 verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
 
 ### Urlaubs- und Feiertagseinstellungen
-
+---
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
 **Verwenden der gesetzlichen Feiertage:**  
@@ -240,7 +240,7 @@ Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
 
 ### Sonderzeiten
-
+---
 ![extraSettingsSonder](img/ExtraSettingsSonder.png)
 
 
@@ -263,7 +263,7 @@ abgelaufen ist.
 
 
 ### Extra-Einstellungen
-
+---
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
 **Überprüfen des aktuellen Rollladenstatus:**  
