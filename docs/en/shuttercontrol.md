@@ -4,6 +4,10 @@
 As of version 0.2.11, all configuration data points are already preset with examples, so that the adapter is ready for operation after installation and entry of the IDs of the roller shutter actuators.
 The further configuration then serves to adapt to personal wishes.
 
+> Shuttercontrol is able to work with actors which can be controlled over an position object like LEVEL with values from 0 to 100% or 0-255 respectivly. The needed shutter timing must be done by the according actor. Actor for blinds with 2 separated objecs for "hight" and "lid angle" are supported and can be controled by using 2 Objects with the same configuraiton (one for "hight" one for "lid angle"
+
+> Attention: If the Shuttercontrol adaper is being restarted (Also after configuration changes) the shutters have to be initialized by moving them up with the button "openAll" (shuttercontrol.0.control.openAll), even they are already up! This will reinitialise all adapter internal values.
+
 ## installation
 The adapter is already in the latest repository. In order to install it you have to set its active repository (temporarily) to latest in the basic settings of ioBroker.
 
@@ -59,9 +63,18 @@ Explanations below.
 
 **Trigger setpoint:** To enable lock-out protection, a trigger can be selected in the bottom line to prevent shutters from shutting down. Here, the value of the sensor is given, at which the roller shutter may drive.
 
-**Driving on change:**Pulldown to select the function; only lockout protection, or even automatic reboot when opening; or just out.
+* **off**:  No movement while opening the window
+* **open**:  While opening the window, the shutter will open and will remain up after closing
+* **close**:  After closing the window, the shutter will drive down
+* **open and close:**  The shutter will open with opening the window and will drive down when the window is beeing closed
 
 **Roller shutter height when triggered:** If the roller shutter is to be moved when the sensor is triggered, the desired roller shutter position is entered here. (For example, windows 25% for ventilation, or 100% for doors to go through)
+
+**Driving on change:**Pulldown to select the lock-out protection function. It is taken into account, at the point in time, when the automatic is going to drive the shutter.
+* **off**: lock-out protection is active in both ways, the shutters will not move if the window is open.
+* **open**: drive up only. The shutter is alowed to open automatically, even the window is open, but the shutter will not be closed automatically, if the window is open.
+* **close**: drive down only. The shutter is alowed to close automatically, even the window is open, but the shutter will not open automatically, if the window is open
+* **open and close**: The shutter is allowed to drive up or down if the window is open.
 
 **Roller shutter height when moving down:** Desired roller shutter position when darkening
 
@@ -123,7 +136,20 @@ The fields in detail:
 
 **+ / - Area of ​​compass:** Area in which the sun (around the center) would radiate disturbing into the window. Outside this area there is no shading.
 
-**Type of sunshade control:** Pulldown to select different parameter combinations for shading control.
+**Type of sunshade control:** Pulldown to select different parameter combinations for shading control. 
+The following option are available:
+* Indoor & outdoor temperature / light sensor
+* Cardinal direction (sun position)
+* Indoor / outdoor temperature / light sensor & compass direction
+* Outside temperature / light sensor & compass direction
+* Outside temperature / light sensor
+* Indoor temperaturennentemperatur
+ 
+>The sunprotection is only triggered, if all of the choosen parameters are true (AND operation).
+
+>If a control with more than one parameter is needed, you need to chose the according shading control and configure the needed parameter. The light sensor is optional and will be counted if is configured..
+
+>The sunprotection is beding ended, if one of the parameter is lower than configured.
 
 **Setpoint outside temperature:** threshold for starting the shading. Of course, this value depends on the sensor selected in the next field.
 
