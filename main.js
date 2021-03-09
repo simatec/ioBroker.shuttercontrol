@@ -84,7 +84,6 @@ let ObjautoLevel = [];
 let resShutterState = [];
 /** @type {number | undefined} */
 let timer;
-let timerClean;
 
 /**
  * +++++++++++++++++++++++++++ Starts the adapter instance ++++++++++++++++++++++++++++++++
@@ -105,13 +104,11 @@ function startAdapter(options) {
     /**
      * @param {() => void} callback
      */
-    adapter.on('unload', async (callback) => {
-        await setcurrentAction();
-        
+    adapter.on('unload', (callback) => {
+
         try {
             adapter.log.info('cleaned everything up...');
             clearTimeout(timer);
-            clearTimeout(timerClean);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
             schedule.cancelJob('shutterDownGoldenHour');
@@ -311,36 +308,6 @@ function startAdapter(options) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// +++++++++++++++++ save currentAction on unload ++++++++++++++++++++++++++++
-async function setcurrentAction() {
-    return new Promise(async (resolve, reject) => {
-        adapter.getForeignObject('system.adapter.' + adapter.namespace, (err, obj) => {
-
-            if (obj && obj.native) {
-                //let result = adapter.config.events;
-                let num = 0;
-                for (const i in obj.native.events) {
-                    let nameDevice = obj.native.events[i].shutterName.replace(/[.;, ]/g, '_');
-                    adapter.getState('shutters.autoState.' + nameDevice, (err, state) => {
-                        if (state && state.val) {
-                            adapter.log.debug(`save currentAction for "${obj.native.events[i].shutterName}": ${state.val}`);
-                            obj.native.events[i].currentAction = state.val;
-                        }
-                        num++;
-                        if (num == obj.native.events.length) {
-                            timerClean = setTimeout(() => {
-                                adapter.setForeignObject(`system.adapter.${adapter.namespace}`, obj);
-                                adapter.log.debug('Set all current action to config');
-                                resolve();
-                            }, 500);
-                        }
-                    });
-
-                }
-            }
-        });
-    });
-}
 
 // +++++++++++++++++ Check States of Trigger after start ++++++++++++++++++++++++++++
 function checkStates() {
