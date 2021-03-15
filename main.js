@@ -335,64 +335,69 @@ function saveCurrentStates(onStart) {
 
     adapter.getState('shutters.currentStates', (err, state) => {
         if (state && state.val && state.val !== null) {
-            currentStates = JSON.parse(state.val);
-        }
-            let num = 0;
-
-            for (const i in shutterSettings) {
-                let timerSaveSettings = setTimeout(() => {
-                    let nameDevice = shutterSettings[i].shutterName.replace(/[.;, ]/g, '_');
-                    shutterName.push(shutterSettings[i].shutterName);
-                    num++;
-
-                    if (currentStates && currentStates[`${nameDevice}`] && !onStart) {
-                        currentStates[`${nameDevice}`].currentAction = shutterSettings[i].currentAction;
-                        currentStates[`${nameDevice}`].currentHeight = shutterSettings[i].currentHeight;
-                        currentStates[`${nameDevice}`].triggerAction = shutterSettings[i].triggerAction;
-                        currentStates[`${nameDevice}`].triggerHeight = shutterSettings[i].triggerHeight;
-                        currentStates[`${nameDevice}`].oldHeight = shutterSettings[i].oldHeight;
-                    } else if (currentStates && currentStates[`${nameDevice}`] && onStart) {
-                        adapter.log.debug(nameDevice + ': save settings');
-                        shutterSettings[i].currentAction = currentStates[`${nameDevice}`].currentAction;
-                        shutterSettings[i].currentHeight = currentStates[`${nameDevice}`].currentHeight;
-                        shutterSettings[i].triggerAction = currentStates[`${nameDevice}`].triggerAction;
-                        shutterSettings[i].triggerHeight = currentStates[`${nameDevice}`].triggerHeight;
-                        shutterSettings[i].oldHeight = currentStates[`${nameDevice}`].oldHeight;
-                    } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
-                        adapter.log.debug(nameDevice + ': settings added');
-                        currentStates[`${nameDevice}`] = null;
-
-                        let states = ({
-                            "shutterName": shutterSettings[i].shutterName,
-                            "currentAction": shutterSettings[i].currentAction,
-                            "currentHeight": shutterSettings[i].currentHeight,
-                            "triggerAction": shutterSettings[i].triggerAction,
-                            "triggerHeight": shutterSettings[i].triggerHeight,
-                            "oldHeight": shutterSettings[i].oldHeight
-                        });
-
-                        currentStates[`${nameDevice}`] = states;
-                    }
-                    if (num == shutterSettings.length && onStart) {
-                        clearTimeout(timerSaveSettings);
-                        adapter.log.debug('shutterNames: ' + shutterName);
-                        for (const i in currentStates) {
-                            if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
-                                let name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
-                                adapter.log.debug(name + ': settings deleted');
-                                delete currentStates[`${name}`];
-                            }
-                            let timerSetSettings = setTimeout(() => {
-                                adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
-                                clearTimeout(timerSetSettings);
-                            }, 2000);
-                        }
-                    } else if (num == shutterSettings.length && !onStart) {
-                        clearTimeout(timerSaveSettings);
-                        adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
-                    }
-                }, 100 * i, i);
+            try {
+                currentStates = JSON.parse(state.val);
+            } catch (err) {
+                adapter.log.debug('settings cannot be read from the state');
+                currentStates = {};
             }
+        }
+        let num = 0;
+
+        for (const i in shutterSettings) {
+            let timerSaveSettings = setTimeout(() => {
+                let nameDevice = shutterSettings[i].shutterName.replace(/[.;, ]/g, '_');
+                shutterName.push(shutterSettings[i].shutterName);
+                num++;
+
+                if (currentStates && currentStates[`${nameDevice}`] && !onStart) {
+                    currentStates[`${nameDevice}`].currentAction = shutterSettings[i].currentAction;
+                    currentStates[`${nameDevice}`].currentHeight = shutterSettings[i].currentHeight;
+                    currentStates[`${nameDevice}`].triggerAction = shutterSettings[i].triggerAction;
+                    currentStates[`${nameDevice}`].triggerHeight = shutterSettings[i].triggerHeight;
+                    currentStates[`${nameDevice}`].oldHeight = shutterSettings[i].oldHeight;
+                } else if (currentStates && currentStates[`${nameDevice}`] && onStart) {
+                    adapter.log.debug(nameDevice + ': save settings');
+                    shutterSettings[i].currentAction = currentStates[`${nameDevice}`].currentAction;
+                    shutterSettings[i].currentHeight = currentStates[`${nameDevice}`].currentHeight;
+                    shutterSettings[i].triggerAction = currentStates[`${nameDevice}`].triggerAction;
+                    shutterSettings[i].triggerHeight = currentStates[`${nameDevice}`].triggerHeight;
+                    shutterSettings[i].oldHeight = currentStates[`${nameDevice}`].oldHeight;
+                } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
+                    adapter.log.debug(nameDevice + ': settings added');
+                    currentStates[`${nameDevice}`] = null;
+
+                    let states = ({
+                        "shutterName": shutterSettings[i].shutterName,
+                        "currentAction": shutterSettings[i].currentAction,
+                        "currentHeight": shutterSettings[i].currentHeight,
+                        "triggerAction": shutterSettings[i].triggerAction,
+                        "triggerHeight": shutterSettings[i].triggerHeight,
+                        "oldHeight": shutterSettings[i].oldHeight
+                    });
+
+                    currentStates[`${nameDevice}`] = states;
+                }
+                if (num == shutterSettings.length && onStart) {
+                    clearTimeout(timerSaveSettings);
+                    adapter.log.debug('shutterNames: ' + shutterName);
+                    for (const i in currentStates) {
+                        if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
+                            let name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
+                            adapter.log.debug(name + ': settings deleted');
+                            delete currentStates[`${name}`];
+                        }
+                        let timerSetSettings = setTimeout(() => {
+                            adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+                            clearTimeout(timerSetSettings);
+                        }, 2000);
+                    }
+                } else if (num == shutterSettings.length && !onStart) {
+                    clearTimeout(timerSaveSettings);
+                    adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+                }
+            }, 100 * i, i);
+        }
     });
 }
 
