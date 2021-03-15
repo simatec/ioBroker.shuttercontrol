@@ -84,6 +84,15 @@ let ObjautoLevel = [];
 let resShutterState = [];
 /** @type {number | undefined} */
 let timer;
+let timerMain;
+let timerState1;
+let timerState2;
+let timerDelete;
+let timerDelete1;
+let timerDelete2;
+let timerDelete3;
+let timerDelete4;
+let shutterSettings;
 
 /**
  * +++++++++++++++++++++++++++ Starts the adapter instance ++++++++++++++++++++++++++++++++
@@ -109,6 +118,14 @@ function startAdapter(options) {
         try {
             adapter.log.info('cleaned everything up...');
             clearTimeout(timer);
+            clearTimeout(timerMain);
+            clearTimeout(timerState1);
+            clearTimeout(timerState2);
+            clearTimeout(timerDelete);
+            clearTimeout(timerDelete1);
+            clearTimeout(timerDelete2);
+            clearTimeout(timerDelete3);
+            clearTimeout(timerDelete4);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
             schedule.cancelJob('shutterDownGoldenHour');
@@ -183,131 +200,201 @@ function startAdapter(options) {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     resTriggerChange = resultTriggerID;
                     adapter.log.debug('TriggerID changed: ' + resultTriggerID + ' Value: ' + state.val);
-                    triggerChange(resTriggerChange, adapter);
+                    triggerChange(resTriggerChange, adapter, shutterSettings);
                 }
             });
             resSunInsideTemp.forEach(function (resSunInsideTempID) {
                 if (id === resSunInsideTempID && state.ts === state.lc) {
                     adapter.log.debug('insidetemperature changed: ' + resSunInsideTempID + ' Value: ' + state.val);
-                    sunProtect(adapter, elevation, azimuth);
+                    sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
             resSunOutsideTemp.forEach(function (resSunOutsideTempID) {
                 if (id === resSunOutsideTempID && state.ts === state.lc) {
                     adapter.log.debug('outsidetemperature changed: ' + resSunOutsideTempID + ' Value: ' + state.val);
-                    sunProtect(adapter, elevation, azimuth);
+                    sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
             resSunLight.forEach(function (resSunLightID) {
                 if (id === resSunLightID && state.ts === state.lc) {
                     adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
-                    sunProtect(adapter, elevation, azimuth);
+                    sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
             resShutterState.forEach(function (resShutterID) {
                 if (id === resShutterID && state.ts === state.lc) {
                     resShutterChange = resShutterID;
-                    const resultID = adapter.config.events;
+                    const resultID = shutterSettings;
                     const result = resultID.filter(d => d.name == resShutterID);
                     for (const i in result) {
-                        let nameDevice = result[i].shutterName.replace(/[.;, ]/g, '_');
-                        adapter.getForeignState(result[i].name, (err, state) => {
-                            if (typeof state != undefined && state != null && result[i].oldHeight != state.val) {
-                                adapter.log.debug('Shutter state changed: ' + result[i].shutterName + ' old value = ' + result[i].oldHeight + ' new value = ' + state.val);
+                        let nameDevice = shutterSettings[i].shutterName.replace(/[.;, ]/g, '_');
+                        adapter.getForeignState(shutterSettings[i].name, (err, state) => {
+                            if (typeof state != undefined && state != null && shutterSettings[i].oldHeight != state.val) {
+                                adapter.log.debug('Shutter state changed: ' + shutterSettings[i].shutterName + ' old value = ' + shutterSettings[i].oldHeight + ' new value = ' + state.val);
                             }
-                            if (typeof state != undefined && state != null && state.val != result[i].currentHeight && state.val != result[i].oldHeight) {
-                                result[i].currentAction = 'Manu_Mode';
-                                adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
-                                adapter.log.debug(result[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val);
-                                result[i].triggerAction = 'Manu_Mode';
-                                adapter.log.debug(result[i].shutterName + ' Updated trigger action to ' + result[i].triggerAction + ' to prevent moving after window close ');
-                                shutterState(result[i].name, adapter);
-                            } else if (typeof state != undefined && state != null && state.val == result[i].currentHeight) {
-                                //	adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
-                                adapter.log.debug(result[i].shutterName + ' Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
-                                shutterState(result[i].name, adapter);
+                            if (typeof state != undefined && state != null && state.val != shutterSettings[i].currentHeight && state.val != shutterSettings[i].oldHeight) {
+                                shutterSettings[i].currentAction = 'Manu_Mode';
+                                adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[i].currentAction, ack: true });
+                                adapter.log.debug(shutterSettings[i].shutterName + ' drived manually to ' + state.val + '. Old value = ' + shutterSettings[i].oldHeight + '. New value = ' + state.val);
+                                shutterSettings[i].triggerAction = 'Manu_Mode';
+                                adapter.log.debug(shutterSettings[i].shutterName + ' Updated trigger action to ' + shutterSettings[i].triggerAction + ' to prevent moving after window close ');
+                                shutterState(shutterSettings[i].name, adapter, shutterSettings);
+                            } else if (typeof state != undefined && state != null && state.val == shutterSettings[i].currentHeight) {
+                                adapter.log.debug(shutterSettings[i].shutterName + ' Old value = ' + shutterSettings[i].oldHeight + '. New value = ' + state.val + '. automatic is active');
+                                shutterState(shutterSettings[i].name, adapter, shutterSettings);
                             }
+                            timerState1 = setTimeout(() => {
+                                saveCurrentStates(false);
+                            }, 5000);
                         });
                         //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
                         // enable possibility to activate sunprotect height if required --> 
                         // if sunprotect is required: shutter is set to sunProtect height
-                        if (result[i].firstCompleteUp == true && state.val == result[i].heightUp && result[i].currentAction != 'up') {
-                            result[i].currentHeight = state.val;
-                            result[i].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later.
-                            adapter.setState('shutters.autoState.' + nameDevice, { val: result[i].currentAction, ack: true });
-                            adapter.setState('shutters.autoLevel.' + nameDevice, { val: result[i].currentHeight, ack: true });
-                            result[i].firstCompleteUp = false;
-                            adapter.log.debug(result[i].shutterName + ' opened manually to ' + result[i].heightUp + '. Old value = ' + result[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+                        if (shutterSettings[i].firstCompleteUp == true && state.val == shutterSettings[i].heightUp && shutterSettings[i].currentAction != 'up') {
+                            shutterSettings[i].currentHeight = state.val;
+                            shutterSettings[i].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later.
+                            adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[i].currentAction, ack: true });
+                            adapter.setState('shutters.autoLevel.' + nameDevice, { val: shutterSettings[i].currentHeight, ack: true });
+                            shutterSettings[i].firstCompleteUp = false;
+                            adapter.log.debug(shutterSettings[i].shutterName + ' opened manually to ' + shutterSettings[i].heightUp + '. Old value = ' + shutterSettings[i].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                         }
-                        if (result[i].firstCompleteUp == true && (state.val == result[i].heightUp || state.val == result[i].heightDownSun)) {
-                            result[i].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
+                        if (shutterSettings[i].firstCompleteUp == true && (state.val == shutterSettings[i].heightUp || state.val == shutterSettings[i].heightDownSun)) {
+                            shutterSettings[i].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
                         }
                         //save old height
-                        setTimeout(function () {
-                            result[i].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
+                        timerState2 = setTimeout(function () {
+                            shutterSettings[i].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
+                            saveCurrentStates(false);
                         }, 60000);
                     }
                 }
             });
             if (id === adapter.namespace + '.info.Azimut') {
-                sunProtect(adapter, elevation, azimuth);
+                sunProtect(adapter, elevation, azimuth, shutterSettings);
             }
             if (id === adapter.namespace + '.info.Elevation') {
-                elevationDown(adapter, elevation, azimuth);
+                elevationDown(adapter, elevation, azimuth, shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeAll') {
                 let buttonState = 'closeAll';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.openAll') {
                 let buttonState = 'openAll';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeLiving') {
                 let buttonState = 'closeLiving';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.openLiving') {
                 let buttonState = 'openLiving';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeSleep') {
                 let buttonState = 'closeSleep';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.openSleep') {
                 let buttonState = 'openSleep';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeChildren') {
                 let buttonState = 'closeChildren';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.openChildren') {
                 let buttonState = 'openChildren';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtect') {
                 let buttonState = 'sunProtect';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectSleep') {
                 let buttonState = 'sunProtectSleep';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectChildren') {
                 let buttonState = 'sunProtectChildren';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectLiving') {
                 let buttonState = 'sunProtectLiving';
-                buttonAction(adapter, buttonState);
+                buttonAction(adapter, buttonState, shutterSettings);
             }
         }
     });
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// +++++++++++++++++ save states on start and shutter change ++++++++++++++++++++++++++++
+function saveCurrentStates(onStart) {
+    let currentStates = {};
+    let shutterName = [];
+
+    adapter.getState('shutters.currentStates', (err, state) => {
+        if (state && state.val) {
+            currentStates = JSON.parse(state.val);
+        }
+            let num = 0;
+
+            for (const i in shutterSettings) {
+                let timerSaveSettings = setTimeout(() => {
+                    let nameDevice = shutterSettings[i].shutterName.replace(/[.;, ]/g, '_');
+                    shutterName.push(shutterSettings[i].shutterName);
+                    num++;
+
+                    if (currentStates && currentStates[`${nameDevice}`] && !onStart) {
+                        currentStates[`${nameDevice}`].currentAction = shutterSettings[i].currentAction;
+                        currentStates[`${nameDevice}`].currentHeight = shutterSettings[i].currentHeight;
+                        currentStates[`${nameDevice}`].triggerAction = shutterSettings[i].triggerAction;
+                        currentStates[`${nameDevice}`].triggerHeight = shutterSettings[i].triggerHeight;
+                        currentStates[`${nameDevice}`].oldHeight = shutterSettings[i].oldHeight;
+                    } else if (currentStates && currentStates[`${nameDevice}`] && onStart) {
+                        adapter.log.debug(nameDevice + ': save settings');
+                        shutterSettings[i].currentAction = currentStates[`${nameDevice}`].currentAction;
+                        shutterSettings[i].currentHeight = currentStates[`${nameDevice}`].currentHeight;
+                        shutterSettings[i].triggerAction = currentStates[`${nameDevice}`].triggerAction;
+                        shutterSettings[i].triggerHeight = currentStates[`${nameDevice}`].triggerHeight;
+                        shutterSettings[i].oldHeight = currentStates[`${nameDevice}`].oldHeight;
+                    } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
+                        adapter.log.debug(nameDevice + ': settings added');
+                        currentStates[`${nameDevice}`] = null;
+
+                        let states = ({
+                            "shutterName": shutterSettings[i].shutterName,
+                            "currentAction": shutterSettings[i].currentAction,
+                            "currentHeight": shutterSettings[i].currentHeight,
+                            "triggerAction": shutterSettings[i].triggerAction,
+                            "triggerHeight": shutterSettings[i].triggerHeight,
+                            "oldHeight": shutterSettings[i].oldHeight
+                        });
+
+                        currentStates[`${nameDevice}`] = states;
+                    }
+                    if (num == shutterSettings.length && onStart) {
+                        clearTimeout(timerSaveSettings);
+                        adapter.log.debug('shutterNames: ' + shutterName);
+                        for (const i in currentStates) {
+                            if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
+                                let name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
+                                adapter.log.debug(name + ': settings deleted');
+                                delete currentStates[`${name}`];
+                            }
+                            let timerSetSettings = setTimeout(() => {
+                                adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+                                clearTimeout(timerSetSettings);
+                            }, 2000);
+                        }
+                    } else if (num == shutterSettings.length && !onStart) {
+                        clearTimeout(timerSaveSettings);
+                        adapter.setState('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+                    }
+                }, 100 * i, i);
+            }
+    });
+}
 
 // +++++++++++++++++ Check States of Trigger after start ++++++++++++++++++++++++++++
 function checkStates() {
@@ -479,7 +566,7 @@ function checkActualStates() {
                 ObjautoLevel = list;
             }
         });
-    setTimeout(function () {
+    timerMain = setTimeout(function () {
         shutterDriveCalc();
         createShutter();
     }, 1000);
@@ -491,7 +578,7 @@ function checkActualStates() {
 const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
     shutterDriveCalc();
     //Reset currentAction in the night
-    const resultStates = adapter.config.events;
+    const resultStates = shutterSettings;
     if (resultStates) {
         for (const i in resultStates) {
             let nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
@@ -627,8 +714,8 @@ function shutterDriveCalc() {
     adapter.log.debug('Starting up shutters Sunrise area: ' + sunriseStr);
     adapter.log.debug('Shutdown shutters Sunset area: ' + sunsetStr);
 
-    shutterGoldenHour(adapter, goldenHourEnd, goldenHour);
-    shutterSunriseSunset(adapter, sunriseStr, sunsetStr);
+    shutterGoldenHour(adapter, goldenHourEnd, goldenHour, shutterSettings);
+    shutterSunriseSunset(adapter, sunriseStr, sunsetStr, shutterSettings);
 
     switch (adapter.config.livingAutomatic) {
         case 'livingSunriseSunset':
@@ -715,7 +802,7 @@ function shutterDriveCalc() {
     }
     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
     adapter.log.debug('Starting up shutters living area: ' + upTimeLiving + " debug " + debugCnt);
-    shutterUpLiving(adapter, upTimeLiving, autoLivingStr);
+    shutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings);
 
     // ******** Set Up-Time Sleep Area ********
 
@@ -776,7 +863,7 @@ function shutterDriveCalc() {
     }
     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
     adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep + " debug " + debugCnt);
-    shutterUpSleep(adapter, upTimeSleep, delayUp, autoSleepStr)
+    shutterUpSleep(adapter, upTimeSleep, delayUp, autoSleepStr, shutterSettings)
 
     // ******** Set Up-Time Children Area ********
 
@@ -837,7 +924,7 @@ function shutterDriveCalc() {
     }
     adapter.setState('info.upTimeChildren', { val: upTimeChildren, ack: true });
     adapter.log.debug('Starting up shutters children area: ' + upTimeChildren + " debug " + debugCnt);
-    shutterUpChildren(adapter, upTimeChildren, delayUpChildren, autoChildrenStr)
+    shutterUpChildren(adapter, upTimeChildren, delayUpChildren, autoChildrenStr, shutterSettings)
 
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
@@ -877,7 +964,7 @@ function shutterDriveCalc() {
 
     adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
     adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving + " debug " + debugCnt);
-    shutterDownLiving(adapter, downTimeLiving, autoLivingStr);
+    shutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings);
 
     // ******** Set Down-Time Children Area ******** 
     switch (adapter.config.childrenAutomatic) {
@@ -916,7 +1003,7 @@ function shutterDriveCalc() {
     }
     adapter.setState('info.downTimeChildren', { val: downTimeChildren, ack: true });
     adapter.log.debug('Shutdown shutters children area: ' + downTimeChildren + " debug " + debugCnt);
-    shutterDownChildren(adapter, downTimeChildren, delayDownChildren, autoChildrenStr);
+    shutterDownChildren(adapter, downTimeChildren, delayDownChildren, autoChildrenStr, shutterSettings);
 
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
@@ -955,9 +1042,9 @@ function shutterDriveCalc() {
     }
     adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep + " debug " + debugCnt);
-    shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr);
-    shutterDownLate(adapter, delayDown);
-    shutterDownComplete(adapter, delayDown);
+    shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr, shutterSettings);
+    shutterDownLate(adapter, delayDown, shutterSettings);
+    shutterDownComplete(adapter, delayDown, shutterSettings);
     delayCalc();
 
 
@@ -1076,7 +1163,7 @@ function delayCalc() {
     delayUpChildren = 0;
     delayDownChildren = 0;
     // Full Result
-    let resultFull = adapter.config.events;
+    let resultFull = shutterSettings;
     if (resultFull) {
         if ((upTimeLiving) === (upTimeSleep)) {
 
@@ -1242,7 +1329,7 @@ function delayCalc() {
 // +++++++++++++++++ create states for all new shutter in the config +++++++++++++++++++
 
 function createShutter() {
-    let result = adapter.config.events;
+    let result = shutterSettings;
     if (result) {
         for (const i in result) {
             let objectName;
@@ -1400,7 +1487,7 @@ function createShutter() {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
-        setTimeout(function () {
+        timerDelete = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
                 adapter.delObject(resID, /**
@@ -1428,7 +1515,7 @@ function createShutter() {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
-        setTimeout(function () {
+        timerDelete1 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
                 adapter.delObject(resID, /**
@@ -1456,7 +1543,7 @@ function createShutter() {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
-        setTimeout(function () {
+        timerDelete2 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
                 adapter.delObject(resID, /**
@@ -1484,7 +1571,7 @@ function createShutter() {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
-        setTimeout(function () {
+        timerDelete3 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
                 adapter.delObject(resID, /**
@@ -1512,7 +1599,7 @@ function createShutter() {
             let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
-        setTimeout(function () {
+        timerDelete4 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
                 adapter.delObject(resID, /**
@@ -1654,13 +1741,15 @@ function main(adapter) {
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });
+    // read shutter settings from config
+    shutterSettings = adapter.config.events;
+    saveCurrentStates(true);
     timer = setTimeout(function () {
         checkActualStates();
         const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
             sunPos();
         });
     }, 2000);
-
     GetSystemData();
 
 
@@ -1694,7 +1783,7 @@ function main(adapter) {
     }
 
     // Change State from Trigger ID's
-    let result = adapter.config.events;
+    let result = shutterSettings;
 
     adapter.log.debug('all shutters ' + JSON.stringify(result));
 
@@ -1716,7 +1805,7 @@ function main(adapter) {
         });
     }
 
-    let resultInsideTemp = adapter.config.events;
+    let resultInsideTemp = shutterSettings;
     if (resultInsideTemp) {
         let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
         let /**
@@ -1735,7 +1824,7 @@ function main(adapter) {
         });
     }
 
-    let resultOutsideTemp = adapter.config.events;
+    let resultOutsideTemp = shutterSettings;
     if (resultOutsideTemp) {
         let resOutsideTemp = resultOutsideTemp.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
         let /**
@@ -1754,7 +1843,7 @@ function main(adapter) {
         });
     }
 
-    let resultLight = adapter.config.events;
+    let resultLight = shutterSettings;
     if (resultLight) {
         let resLight = resultLight.map(({ lightSensor }) => ({ lightSensor }));
         let /**
@@ -1773,7 +1862,7 @@ function main(adapter) {
         });
     }
     // trigger for shutter
-    let resultShutter = adapter.config.events;
+    let resultShutter = shutterSettings;
     if (resultShutter) {
         let resShutter = resultShutter.map(({ name }) => ({ name }));
         let /**
@@ -1792,26 +1881,25 @@ function main(adapter) {
         });
     }
     // set current states
-    const resultStates = adapter.config.events;
 
-    if (resultStates) {
-        for (const i in resultStates) {
+    if (shutterSettings) {
+        for (const i in shutterSettings) {
             /**
              * @param {any} err
              * @param {{ val: any; }} state
              */
-            adapter.getForeignState(resultStates[i].name, (err, state) => {
+            adapter.getForeignState(shutterSettings[i].name, (err, state) => {
                 if (typeof state != undefined && state != null) {
-                    resultStates[i].currentHeight = (state.val);
-                    resultStates[i].oldHeight = (state.val);
-                    resultStates[i].triggerHeight = (state.val);
-                    resultStates[i].triggerAction = (state.val);
-                    adapter.log.debug('save current height: ' + resultStates[i].currentHeight + '%' + ' from ' + resultStates[i].shutterName);
+                    shutterSettings[i].currentHeight = (state.val);
+                    shutterSettings[i].oldHeight = (state.val);
+                    shutterSettings[i].triggerHeight = (state.val);
+                    //shutterSettings[i].triggerAction = (state.val);
+                    adapter.log.debug('save current height: ' + shutterSettings[i].currentHeight + '%' + ' from ' + shutterSettings[i].shutterName);
 
-                    if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
-                    } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                    if (parseFloat(shutterSettings[i].heightDown) < parseFloat(shutterSettings[i].heightUp)) {
+                        adapter.log.debug(shutterSettings[i].shutterName + ' level conversion is disabled ...');
+                    } else if (parseFloat(shutterSettings[i].heightDown) > parseFloat(shutterSettings[i].heightUp)) {
+                        adapter.log.debug(shutterSettings[i].shutterName + ' level conversion is enabled');
                     }
                 }
             });

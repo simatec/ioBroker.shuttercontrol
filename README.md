@@ -44,6 +44,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.2.0 (2021-03-xx)
+* (simatec) shutterSettings added
+
 ### 1.1.5 (2021-01-22)
 * (simatec) BugFix io-package
 * (simatec) Source code structure changed

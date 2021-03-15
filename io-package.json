@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "news": {
       "1.1.5": {
         "en": "BugFix io-package, Source code structure changed, new Feature trigger delay, Bugfix for trigger",
@@ -342,6 +342,20 @@
       "type": "channel",
       "common": {
         "name": "Control shutter automatic sunprotect"
+      },
+      "native": {}
+    },
+    {
+      "_id": "shutters.currentStates",
+      "type": "state",
+      "common": {
+        "role": "json",
+        "name": "current shutter states",
+        "type": "string",
+        "read": true,
+        "write": true,
+        "def": {},
+        "expert": true
       },
       "native": {}
     },
