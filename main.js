@@ -334,7 +334,7 @@ function saveCurrentStates(onStart) {
     let shutterName = [];
 
     adapter.getState('shutters.currentStates', (err, state) => {
-        if (state && state.val) {
+        if (state && state.val && state.val !== null) {
             currentStates = JSON.parse(state.val);
         }
             let num = 0;

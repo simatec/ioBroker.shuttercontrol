@@ -354,7 +354,6 @@
         "type": "string",
         "read": true,
         "write": true,
-        "def": {},
         "expert": true
       },
       "native": {}
