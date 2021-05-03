@@ -10,6 +10,7 @@
 [![Dependency Status](https://img.shields.io/david/simatec/iobroker.shuttercontrol.svg)](https://david-dm.org/simatec/iobroker.shuttercontrol)
 [![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol)
 [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
+![Test and Release](https://github.com/simatec/ioBroker.shuttercontrol/workflows/Test%20and%20Release/badge.svg)
 
 [![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
 
