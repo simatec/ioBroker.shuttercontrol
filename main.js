@@ -8,21 +8,22 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SunCalc = require('suncalc2');
 
-const sunProtect = require('./lib/sunProtect.js');                      // SunProtect
-const triggerChange = require('./lib/triggerChange.js');                // triggerChange
-const elevationDown = require('./lib/elevationDown.js');                // elevationDown
-const shutterGoldenHour = require('./lib/shutterGoldenHour.js');        // shutterGoldenHour
-const shutterUpLiving = require('./lib/shutterUpLiving.js');            // shutterUpLiving
-const shutterSunriseSunset = require('./lib/shutterSunriseSunset.js');  // shutterSunriseSunset
-const shutterDownLiving = require('./lib/shutterDownLiving.js');        // shutterDownLiving
-const shutterUpSleep = require('./lib/shutterUpSleep.js');              // shutterUpSleep
-const shutterDownLate = require('./lib/shutterDownLate.js');            // shutterDownLate
-const shutterDownChildren = require('./lib/shutterDownChildren.js');    // shutterDownChildren
-const shutterUpChildren = require('./lib/shutterUpChildren.js');        // shutterUpChildren
-const shutterDownSleep = require('./lib/shutterDownSleep.js');          // shutterDownSleep
-const buttonAction = require('./lib/buttonAction.js');                  // buttonAction
-const shutterState = require('./lib/shutterState.js');        			// shutterState
-const shutterDownComplete = require('./lib/shutterDownComplete.js');    // shutterDownComplete
+const sunProtect = require('./lib/sunProtect.js');                              // SunProtect
+const triggerChange = require('./lib/triggerChange.js');                        // triggerChange
+const elevationDown = require('./lib/elevationDown.js');                        // elevationDown
+const shutterGoldenHour = require('./lib/shutterGoldenHour.js');                // shutterGoldenHour
+const shutterUpLiving = require('./lib/shutterUpLiving.js');                    // shutterUpLiving
+const shutterSunriseSunset = require('./lib/shutterSunriseSunset.js');          // shutterSunriseSunset
+const shutterDownLiving = require('./lib/shutterDownLiving.js');                // shutterDownLiving
+const shutterUpSleep = require('./lib/shutterUpSleep.js');                      // shutterUpSleep
+const shutterDownLate = require('./lib/shutterDownLate.js');                    // shutterDownLate
+const shutterDownChildren = require('./lib/shutterDownChildren.js');            // shutterDownChildren
+const shutterUpChildren = require('./lib/shutterUpChildren.js');                // shutterUpChildren
+const shutterDownSleep = require('./lib/shutterDownSleep.js');                  // shutterDownSleep
+const buttonAction = require('./lib/buttonAction.js');                          // buttonAction
+const shutterState = require('./lib/shutterState.js');        			        // shutterState
+const shutterDownComplete = require('./lib/shutterDownComplete.js');            // shutterDownComplete
+const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js');    // shutterBrightnessSensor
 
 
 /**
@@ -206,6 +207,11 @@ function startAdapter(options) {
                 adapter.setState('control.autoChildren', { val: state.val, ack: true });
                 adapter.log.debug('Auto Children is: ' + state.val);
             }
+            if (id === adapter.config.lightsensorUpDown) {
+                shutterBrightnessSensor(adapter, delayDown, shutterSettings);
+                adapter.log.debug('Brightness sensor value: ' + state.val);
+            }
+            
             resTrigger.forEach(function (resultTriggerID) {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     resTriggerChange = resultTriggerID;
@@ -1830,6 +1836,9 @@ function main(adapter) {
     }
     if (adapter.config.triggerAutoChildren != '') {
         adapter.subscribeForeignStates(adapter.config.triggerAutoChildren);
+    }
+    if (adapter.config.lightsensorUpDown != '') {
+        adapter.subscribeForeignStates(adapter.config.lightsensorUpDown);
     }
 
     // Change State from Trigger ID's
