@@ -44,8 +44,14 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 1.2.0 (2021-03-xx)
-* (simatec) shutterSettings added
+### 1.2.0 (2021-05-03)
+* (simatec) new Feature shutterSettings added
+* (simatec) new Feature brightness sensor for opening added
+* (simatec) new Feature brightness sensor for closing added
+* (simatec) new Feature schoolfree adapter added
+* (simatec) new Feature middle position added
+* (simatec) new Feature Xmas position added
+* (simatec) Bugfix
 
 ### 1.1.5 (2021-01-22)
 * (simatec) BugFix io-package
@@ -325,7 +331,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ## License
 MIT License
 
-Copyright (c) 2019 - 2020 simatec
+Copyright (c) 2019 - 2021 simatec
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

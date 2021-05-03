@@ -3,6 +3,18 @@
     "name": "shuttercontrol",
     "version": "1.2.0",
     "news": {
+      "1.2.0": {
+        "en": "new Feature shutterSettings added, new Feature brightness sensor for opening added, new Feature brightness sensor for closing added, new Feature schoolfree adapter added, new Feature middle position added, new Feature Xmas position added, Bugfix",
+        "de": "neues Feature Shutter-Einstellungen hinzugefügt, neues Feature Helligkeitssensor zum Öffnen hinzugefügt, neues Feature Helligkeitssensor zum Schließen hinzugefügt, neues Feature Schoolfree-Adapter hinzugefügt, neues Feature Mittelposition hinzugefügt, neues Feature Weihnachtsposition hinzugefügt, Bugfix",
+        "ru": "Добавлена новая функция shutterSettings, добавлен новый датчик яркости для открытия, добавлен новый датчик яркости для закрытия, добавлен новый адаптер Feature schoolfree, добавлено новое среднее положение функции, добавлено новое положение Feature Xmas, исправление ошибок",
+        "pt": "novo recurso shutterSettings adicionado, novo recurso de sensor de brilho para abertura adicionado, novo recurso de sensor de brilho para fechamento adicionado, novo recurso adaptador livre da escola adicionado, novo recurso de posição intermediária adicionado, novo recurso de posição de Natal adicionado, Bugfix",
+        "nl": "nieuwe functie sluiter Instellingen toegevoegd, nieuwe functie helderheidssensor voor openen toegevoegd, nieuwe functie helderheidssensor voor sluiten toegevoegd, nieuwe functie schoolvrije adapter toegevoegd, nieuwe functie middenpositie toegevoegd, nieuwe functie kerstpositie toegevoegd, bugfix",
+        "fr": "nouvelle fonctionnalité obturateur Paramètres ajoutés, nouveau capteur de luminosité de fonctionnalité pour l'ouverture ajouté, nouveau capteur de luminosité de fonctionnalité pour la fermeture ajouté, nouvel adaptateur Feature Schoolfree ajouté, nouvelle position intermédiaire de fonctionnalité ajoutée, nouvelle position de Noël de fonctionnalité ajoutée, correction de bogue",
+        "it": "Nuova funzione otturatore Aggiunte impostazioni, nuovo sensore di luminosità delle funzioni per l'apertura aggiunto, nuovo sensore di luminosità delle caratteristiche per la chiusura aggiunto, nuovo adattatore scolastico delle funzionalità aggiunto, nuova posizione centrale della funzione aggiunta, nuova posizione di Natale della funzione aggiunta, correzione bug",
+        "es": "Se agregó una nueva característica del obturador Se agregaron configuraciones, se agregó un nuevo sensor de brillo de característica para la apertura, se agregó un nuevo sensor de brillo de característica para cerrar, se agregó un nuevo adaptador sin escuela de característica, se agregó una nueva posición intermedia de característica, se agregó una nueva posición de característica de Navidad, corrección de errores",
+        "pl": "nowa funkcja migawki Dodano ustawienia, nowy czujnik jasności funkcji do otwierania, nowy czujnik jasności funkcji do zamykania, dodano nowy adapter szkolny funkcji, dodano nową pozycję środkową funkcji, dodano nową pozycję funkcji Xmas, naprawa błędów",
+        "zh-cn": "添加了新的功能快门设置，添加了新的用于打开的功能亮度传感器，添加了新的用于关闭的功能亮度传感器，添加了新的Featureschoolfree适配器，添加了新的功能中间位置，添加了新的功能圣诞节位置，Bugfix"
+      },
       "1.1.5": {
         "en": "BugFix io-package, Source code structure changed, new Feature trigger delay, Bugfix for trigger",
         "de": "BugFix io-Paket, Quellcodestruktur geändert, neues Feature-Trigger-Verzögerung, Bugfix für Trigger",
@@ -199,7 +211,12 @@
     "type": "climate-control",
     "compact": true,
     "materialize": true,
+    "connectionType": "local",
+    "dataSource": "push",
     "stopBeforeUpdate": true,
+    "adminUI": {
+      "config": "materialize"
+    },
     "plugins": {
       "sentry": {
         "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
@@ -274,6 +291,15 @@
     "betweenPosition": false,
     "noGoTime": 0,
     "betweenPositionTime": "22:00",
+    "schoolfree": false,
+    "schoolfreeSleepArea": false,
+    "schoolfreeLivingArea": false,
+    "schoolfreeChildrenArea": true,
+    "schoolfreeInstance": "",
+    "lightsensorDown": 400,
+    "lightsensorUp": 500,
+    "lightsensorUpDown": "",
+
     "events": [
       {
         "enabled": true,
@@ -804,7 +830,7 @@
       "common": {
         "role": "indicator",
         "name": "current Elevation",
-        "type": "string",
+        "type": "number",
         "read": true,
         "write": false,
         "def": ""
@@ -817,7 +843,7 @@
       "common": {
         "role": "indicator",
         "name": "current Azimut",
-        "type": "string",
+        "type": "number",
         "read": true,
         "write": false,
         "def": ""

@@ -173,6 +173,15 @@ function load(settings, onChange) {
             });
         });
     });
+    $('#LightsensorUpDownPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#lightsensorUpDown').val(), function (newId) {
+                if (newId) {
+                    $('#lightsensorUpDown').val(newId).trigger('change');
+                }
+            });
+        });
+    });
 
     onChange(false);
     // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
@@ -185,6 +194,9 @@ function load(settings, onChange) {
 
     getAdapterInstances('feiertage', function (instances) {
         fillInstances('publicHolInstance', instances, settings['publicHolInstance']);
+    });
+    getAdapterInstances('schoolfree', function (instances) {
+        fillInstances('schoolfreeInstance', instances, settings['schoolfreeInstance']);
     });
     fillPosition();
 
@@ -412,6 +424,11 @@ function showHideSettings() {
         $('.publicHol').show();
     } else {
         $('.publicHol').hide();
+    }
+    if ($('#schoolfree').prop('checked')) {
+        $('.schoolf').show();
+    } else {
+        $('.schoolf').hide();
     }
 
     console.log('livingAutomatic' + $('#livingAutomatic')[0].value);

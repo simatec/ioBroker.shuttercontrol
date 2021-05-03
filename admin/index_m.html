@@ -399,7 +399,6 @@
                             </div>
                         </li>
 
-
                         <li>
                             <div class="collapsible-header">
                                 <i class="material-icons">expand_more</i><h6 class="translate">holiday settings</h6>
@@ -430,6 +429,70 @@
                                 </div>
                             </div>
                         </li>
+
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">lightsensor settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="lightsensorDown" />
+                                        <label for="lightsensorDown" class="translate"></label>
+                                        <span class="translate">Brightness value for down with lightsensor</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="number" class="value" id="lightsensorUp" />
+                                        <label for="lightsensorUp" class="translate"></label>
+                                        <span class="translate">Brightness value for up with lightsensor</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l3 input-field">
+                                        <input type="text" class="value" id="lightsensorUpDown" />
+                                        <label for="lightsensorUpDown" class="translate"></label>
+                                        <span class="translate">Object ID for Lightsensor</span>
+                                    </div>
+                                    <div class="col s1 m2 l1">
+                                        <a id="LightsensorUpDownPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">expand_more</i><h6 class="translate">schoolfree settings</h6>
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="schoolfree" />
+                                        <span for="schoolfree" class="translate">Use schoolfree</span>
+                                    </div>
+                                    <div class="input-field col s12 m6 l2 schoolf">
+                                        <select id="schoolfreeInstance" class="value"></select>
+                                        <label for="schoolfreeInstance" class="translate"></label>
+                                        <span class="translate">schoolfree Instance</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="schoolfreeChildrenArea" />
+                                        <span for="schoolfreeChildrenArea" class="translate">Use schoolfree for Children Area</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="schoolfreeSleepArea" />
+                                        <span for="schoolfreeSleepArea" class="translate">Use schoolfree for Sleep Area</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field">
+                                        <input type="checkbox" class="value" id="schoolfreeLivingArea" />
+                                        <span for="schoolfreeLivingArea" class="translate">Use schoolfree for Living Area</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
                         <li>
                             <div class="collapsible-header">
                                 <i class="material-icons">expand_more</i><h6 class="translate">Special times</h6>
@@ -640,6 +703,7 @@
                                         <option value="sunset" class="translate">sunset</option>
                                         <option value="elevation" class="translate">elevation</option>
                                         <option value="goldenhour" class="translate">goldenhour</option>
+                                        <option value="lightsensor" class="translate">lightsensor</option>
 										<option value="manual-only" class="translate">manual-only</option>
                                     </select>
                                     <label for="typedown" class="translate"></label>
@@ -656,6 +720,7 @@
                                         <option value="children-auto" class="translate">children-auto</option>
                                         <option value="sunrise" class="translate">sunrise</option>
                                         <option value="goldenhour End" class="translate">goldenhour End</option>
+                                        <option value="lightsensor" class="translate">lightsensor</option>
 										<option value="manual-only" class="translate">manual-only</option>
                                     </select>
                                     <label for="typeUp" class="translate"></label>
