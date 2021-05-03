@@ -53,6 +53,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) new Feature middle position added
 * (simatec) new Feature Xmas position added
 * (simatec) Bugfix
+* (simatec) DEPENDENCIES updated
+* (simatec) Dev-DEPENDENCIES updated
 
 ### 1.1.5 (2021-01-22)
 * (simatec) BugFix io-package
