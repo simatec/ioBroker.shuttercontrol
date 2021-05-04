@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "news": {
+      "1.2.0": {
+        "en": "new Feature shutterSettings added, new Feature brightness sensor for opening added, new Feature brightness sensor for closing added, new Feature schoolfree adapter added, new Feature middle position added, new Feature Xmas position added, Bugfix, DEPENDENCIES updated, Dev-DEPENDENCIES updated, timeout settings for shutterstatus added",
+        "de": "neue Feature-Shutter-Einstellungen hinzugefügt, neues Feature Helligkeitssensor zum Öffnen hinzugefügt, neues Feature Helligkeitssensor zum Schließen hinzugefügt, neues Feature Schoolfree Adapter hinzugefügt, neues Feature Mittelposition hinzugefügt, neues Feature Weihnachtsposition hinzugefügt, Bugfix, ABHÄNGIGKEITEN aktualisiert, Dev-DEPENDENCIES aktualisiert, Timeout Einstellungen für den Rollladenstatus hinzugefügt",
+        "ru": "новая функция shutterSettings добавлена, новый датчик яркости для открытия добавлен, новый датчик яркости для закрытия добавлен, новый адаптер Feature Schoolfree добавлен, новое среднее положение функции добавлено, новое положение функции Xmas добавлено, исправление ошибки, обновлены зависимости, обновлено Dev-DEPENDENCIES, тайм-аут добавлены настройки для shutterstatus",
+        "pt": "novo recurso shutterSettings adicionado, novo recurso de sensor de brilho para abertura adicionado, novo recurso de sensor de brilho para fechamento adicionado, novo recurso adaptador sem escola adicionado, novo recurso posição intermediária adicionado, novo recurso posição de Natal adicionada, Bugfix, DEPENDENCIES atualizado, Dev-DEPENDENCIES atualizado, tempo limite configurações para status do obturador adicionadas",
+        "nl": "nieuwe functie sluiter Instellingen toegevoegd, nieuwe functie helderheidssensor voor openen toegevoegd, nieuwe functie helderheidssensor voor sluiten toegevoegd, nieuwe functie schoolvrije adapter toegevoegd, nieuwe functie middenpositie toegevoegd, nieuwe functie kerstpositie toegevoegd, bugfix, AFHANKELIJKHEDEN bijgewerkt, ontwikkelafhankelijkheden bijgewerkt, time-out instellingen voor shutterstatus toegevoegd",
+        "fr": "nouvelle fonctionnalité obturateur Paramètres ajoutés, nouveau capteur de luminosité de fonctionnalité pour l'ouverture ajouté, nouveau capteur de luminosité de fonctionnalité pour la fermeture ajouté, nouvel adaptateur Feature Schoolfree ajouté, nouvelle position intermédiaire de fonctionnalité ajoutée, nouvelle position de Noël de fonctionnalité ajoutée, correction de bogue, DÉPENDANCES mis à jour, DÉPENDANCES DU DÉVELOPPEMENT mis à jour, délai d'expiration paramètres pour shutterstatus ajoutés",
+        "it": "Nuova funzione otturatore Aggiunte impostazioni, nuovo sensore luminosità funzione per apertura aggiunto, nuovo sensore luminosità funzione per chiusura aggiunto, nuovo adattatore funzionalità scolastico aggiunto, nuova posizione centrale funzione aggiunta, nuova funzione posizione natale aggiunta, correzione bug, DIPENDENZE aggiornate, DEPENDENZE sviluppatore aggiornato, timeout impostazioni per lo stato dell'otturatore aggiunte",
+        "es": "Se agregaron nuevos ajustes del obturador de características, se agregó un nuevo sensor de brillo de características para la apertura, se agregó un nuevo sensor de brillo de características para cerrar, se agregó un adaptador sin escuela de características nuevas, se agregó una posición intermedia de características nuevas, se agregó una posición de Navidad de características nuevas, corrección de errores, DEPENDENCIES actualizado, Dev-DEPENDENCIES actualizado, timeout configuración para el estado de las contraventanas agregadas",
+        "pl": "dodano nowe ustawienia migawki funkcji, dodano nowy czujnik jasności funkcji do otwierania, dodano nowy czujnik jasności funkcji do zamykania, dodano nowy adapter szkolny funkcji, dodano nową pozycję środkową funkcji, dodano nową pozycję świąteczną funkcji, poprawkę błędu, zaktualizowano ZALEŻNOŚCI, zaktualizowano ZALEŻNOŚCI od deweloperów, przekroczono limit czasu dodano ustawienia statusu shutterstatus",
+        "zh-cn": "添加了新的功能快门设置，添加了新的用于打开的功能亮度传感器，添加了新的用于关闭的功能亮度传感器，添加了新的功能免费学校适配器，添加了新的功能中间位置，添加了新的功能Xmas位置，错误修复，更新了DEPENDENCIES，Dev-DEPENDENCIES，超时添加了快门状态设置"
+      },
       "1.1.5": {
         "en": "BugFix io-package, Source code structure changed, new Feature trigger delay, Bugfix for trigger",
         "de": "BugFix io-Paket, Quellcodestruktur geändert, neues Feature-Trigger-Verzögerung, Bugfix für Trigger",
@@ -74,78 +86,6 @@
         "es": "Rediseño de GUI, posición intermedia agregada para cerrar",
         "pl": "Przeprojektowanie GUI, dodano pozycję pośrednią do zamknięcia",
         "zh-cn": "GUI重新设计，增加了中间位置以进行关闭"
-      },
-      "1.0.5": {
-        "en": "fix xMas Time",
-        "de": "Fix xMas Time",
-        "ru": "исправить xMas Time",
-        "pt": "fix xMas Time",
-        "nl": "xMas Time repareren",
-        "fr": "fixer l'heure xMas",
-        "it": "correggere xMas Time",
-        "es": "arreglar xMas Time",
-        "pl": "naprawić czas xMas",
-        "zh-cn": "修复xMas时间"
-      },
-      "1.0.4": {
-        "en": "fix summertime for childrenarea",
-        "de": "Fix Sommerzeit für Kinderbereich",
-        "ru": "исправить летнее время для детей",
-        "pt": "fixar horário de verão para área infantil",
-        "nl": "fix zomertijd voor kindergebied",
-        "fr": "fixer l'heure d'été pour les enfants",
-        "it": "fissare l'estate per l'area bambini",
-        "es": "arreglar el horario de verano para los niños",
-        "pl": "ustalenie czasu letniego dla Childrenarea",
-        "zh-cn": "修正夏季儿童游乐区"
-      },
-      "1.0.3": {
-        "en": "bug fix: calculation IsSummerTime, bug fix: use weekend down time already on friday instead of sunday, handling of shutters in xmas time added, documentation updated, words.js updated, some Bugfixes",
-        "de": "Fehlerbehebung: Berechnung IsSummerTime, Fehlerbehebung: Verwenden Sie die Ausfallzeit am Wochenende bereits am Freitag anstelle von Sonntag, Behandlung von Rollläden in der Weihnachtszeit hinzugefügt, Dokumentation aktualisiert, words.js aktualisiert, einige Bugfixes",
-        "ru": "исправление ошибки: расчет IsSummerTime, исправление ошибки: использовать время простоя на выходных уже в пятницу вместо воскресенья, добавлена обработка жалюзи в рождественское время, обновлена документация, обновлен файл words.js, исправлены некоторые ошибки",
-        "pt": "correção de bug: cálculo IsSummerTime, correção de bug: use o tempo de inatividade do fim de semana já na sexta-feira em vez de no domingo, manipulação de venezianas no natal adicionado, documentação atualizada, words.js atualizado, algumas correções de bugs",
-        "nl": "bugfix: berekening IsSummerTime, bugfix: gebruik weekend-downtime al op vrijdag in plaats van zondag, behandeling van rolluiken in kersttijd toegevoegd, documentatie bijgewerkt, words.js bijgewerkt, enkele bugfixes",
-        "fr": "correction de bogue: calcul IsSummerTime, correction de bogue: utiliser le temps d'arrêt du week-end déjà le vendredi au lieu du dimanche, gestion des volets à Noël ajoutée, documentation mise à jour, words.js mis à jour, quelques corrections de bugs",
-        "it": "correzione bug: calcolo IsSummerTime, correzione bug: usa il tempo di inattività del fine settimana già di venerdì invece che di domenica, aggiunta la gestione delle tapparelle nel periodo natalizio, documentazione aggiornata, words.js aggiornato, alcuni bugfix",
-        "es": "corrección de errores: cálculo IsSummerTime, corrección de errores: use el tiempo de inactividad del fin de semana ya el viernes en lugar del domingo, se agregó el manejo de las persianas en el tiempo de Navidad, se actualizó la documentación, se actualizó words.js, algunas correcciones de errores",
-        "pl": "poprawka błędu: obliczenie IsSummerTime, poprawka błędu: skorzystaj z przestoju weekendowego już w piątek zamiast w niedzielę, dodano obsługę okiennic w okresie świątecznym, zaktualizowano dokumentację, zaktualizowano words.js, kilka poprawek błędów",
-        "zh-cn": "错误修复：计算IsSummerTime，错误修复：在星期五（而不是星期日）使用周末休息时间，增加了圣诞节期间的百叶窗处理，更新了文档，更新了word.js，一些错误修复"
-      },
-      "1.0.2": {
-        "en": "fix uptime for childrenarea",
-        "de": "Fix Uptime für Kinderbereich",
-        "ru": "исправить время работы для детей",
-        "pt": "consertar tempo de atividade para área infantil",
-        "nl": "uptime voor kinderen repareren",
-        "fr": "corriger la disponibilité pour les enfants",
-        "it": "fissare il tempo di attività per l'area bambini",
-        "es": "arreglar el tiempo de actividad para el área infantil",
-        "pl": "napraw uptime dla childrenarea",
-        "zh-cn": "修复儿童区的正常运行时间"
-      },
-      "1.0.1": {
-        "en": "Adjustment of the configuration menu, time settings added for the children's area, button for closing the children's area added, button for opening the children's area added, button for sun protection of the children's area added",
-        "de": "Anpassung des Konfigurationsmenüs, Zeiteinstellungen für den Kinderbereich hinzugefügt, Button zum Schließen des Kinderbereichs hinzugefügt, Button zum Öffnen des Kinderbereichs hinzugefügt, Button zum Sonnenschutz des Kinderbereichs hinzugefügt",
-        "ru": "Настройка меню конфигурации, добавлены настройки времени для детской зоны, добавлена кнопка закрытия детской зоны, добавлена кнопка открытия детской зоны, добавлена кнопка защиты от солнца детской зоны",
-        "pt": "Ajuste do menu de configuração, adição de horários para área infantil, adição de botão para fechamento de área infantil, adição de botão para abertura de área infantil, adição de botão para proteção solar de área infantil",
-        "nl": "Aanpassing van het configuratiemenu, tijdinstellingen toegevoegd voor het kindergedeelte, knop voor het sluiten van het kindergedeelte toegevoegd, knop voor het openen van het kindergedeelte toegevoegd, knop voor zonwering van het kindergedeelte toegevoegd",
-        "fr": "Réglage du menu de configuration, ajout des réglages de l'heure pour l'espace enfants, bouton de fermeture de l'espace enfants ajouté, bouton d'ouverture de l'espace enfants ajouté, bouton de protection solaire de l'espace enfants ajouté",
-        "it": "Aggiunta regolazione menu di configurazione, aggiunta impostazioni orario per area bimbi, aggiunta pulsante chiusura area bimbi, aggiunta pulsante apertura area bimbi, aggiunta pulsante protezione sole area bimbi",
-        "es": "Ajuste del menú de configuración, ajustes de tiempo agregados para el área de niños, botón para cerrar el área de niños agregado, botón para abrir el área de niños agregado, botón para protección solar del área de niños agregado",
-        "pl": "Dostosowanie menu konfiguracyjnego, dodano ustawienia czasu dla obszaru dziecięcego, dodano przycisk do zamykania obszaru dziecięcego, dodano przycisk do otwierania obszaru dziecięcego, dodano przycisk do ochrony przed słońcem obszaru dziecięcego",
-        "zh-cn": "调整配置菜单，添加了儿童区域的时间设置，添加了用于关闭儿童区域的按钮，添加了用于打开儿童区域的按钮，添加了用于儿童区域的防晒的按钮"
-      },
-      "1.0.0": {
-        "en": "some Bugfixes, code cleaning, Added buttons for Sunprotect Living and Sunprotect Sleep, Included Living-Auto and Sleep-Auto in Buttons for Open/Close Sleep and Living, KeepSunprotect added, Drive after close added, Extend status handling",
-        "de": "Einige Bugfixes, Codebereinigung, Schaltflächen für Sunprotect Living und Sunprotect Sleep hinzugefügt, Living-Auto und Sleep-Auto in den Schaltflächen für Open / Close Sleep und Living, KeepSunprotect hinzugefügt, Drive after close hinzugefügt, Statusbehandlung erweitern",
-        "ru": "некоторые исправления, очистка кода, добавлены кнопки для Sunprotect Living и Sunprotect Sleep, включены Living-Auto и Sleep-Auto в кнопки для открытия / закрытия сна и Living, KeepSunprotect добавлен, Drive после закрытия добавлен, расширена обработка статуса",
-        "pt": "algumas correções de bugs, limpeza de código, botões adicionados para Sunprotect Living e Sunprotect Sleep, Living-Auto e Sleep-Auto incluídos em botões para abrir / fechar sono e estar, KeepSunprotect adicionado, Drive após fechamento adicionado, Estender tratamento de status",
-        "nl": "enkele bugfixes, code opschonen, knoppen toegevoegd voor Sunprotect Living en Sunprotect Sleep, Inclusief Living-Auto en Sleep-Auto in knoppen voor openen / sluiten Sleep en Living, KeepSunprotect toegevoegd, Drive after close toegevoegd, Statusafhandeling uitbreiden",
-        "fr": "quelques corrections de bogues, nettoyage de code, boutons ajoutés pour Sunprotect Living et Sunprotect Sleep, boutons Living-Auto et Sleep-Auto inclus pour ouvrir / fermer Sleep and Living, KeepSunprotect ajouté, Drive après fermeture ajouté, étendre la gestion de l'état",
-        "it": "alcune correzioni di bug, pulizia del codice, pulsanti aggiunti per Sunprotect Living e Sunprotect Sleep, Living-Auto e Sleep-Auto inclusi nei pulsanti per Apri / Chiudi Sleep and Living, KeepSunprotect aggiunto, Guida dopo la chiusura aggiunta, Estendi la gestione dello stato",
-        "es": "algunas correcciones de errores, limpieza de códigos, botones agregados para Sunprotect Living y Sunprotect Sleep, botones Living-Auto y Sleep-Auto incluidos para abrir / cerrar Sleep y Living, KeepSunprotect agregado, Drive after close agregado, Extender el manejo del estado",
-        "pl": "kilka poprawek błędów, czyszczenie kodu, Dodano przyciski Sunprotect Living i Sunprotect Sleep, Dołączone przyciski Living-Auto i Sleep-Auto w przyciskach otwierania / zamykania trybu uśpienia i życia, Dodano KeepSunprotect, Dodano napęd po zamknięciu, Rozszerz obsługę statusu",
-        "zh-cn": "一些错误修复，代码清除，添加了用于Sunprotect Living和Sunprotect Sleep的按钮，用于打开/关闭Sleep and Living的按钮中包含的Living-Auto和Sleep-Auto，添加了KeepSunprotect，添加了关闭后驱动，扩展状态处理"
       }
     },
     "title": "shuttercontrol",
@@ -199,7 +139,12 @@
     "type": "climate-control",
     "compact": true,
     "materialize": true,
+    "connectionType": "local",
+    "dataSource": "push",
     "stopBeforeUpdate": true,
+    "adminUI": {
+      "config": "materialize"
+    },
     "plugins": {
       "sentry": {
         "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
@@ -213,6 +158,7 @@
     "HolidayDP": "",
     "UseSunMode": true,
     "currentShutterState": false,
+    "currentShutterStateTime": 60,
     "W_shutterDownLiving": "22:00",
     "W_shutterUpLivingMin": "05:00",
     "W_shutterUpLivingMax": "06:00",
@@ -274,6 +220,15 @@
     "betweenPosition": false,
     "noGoTime": 0,
     "betweenPositionTime": "22:00",
+    "schoolfree": false,
+    "schoolfreeSleepArea": false,
+    "schoolfreeLivingArea": false,
+    "schoolfreeChildrenArea": true,
+    "schoolfreeInstance": "",
+    "lightsensorDown": 400,
+    "lightsensorUp": 500,
+    "lightsensorUpDown": "",
+
     "events": [
       {
         "enabled": true,
@@ -342,6 +297,19 @@
       "type": "channel",
       "common": {
         "name": "Control shutter automatic sunprotect"
+      },
+      "native": {}
+    },
+    {
+      "_id": "shutters.currentStates",
+      "type": "state",
+      "common": {
+        "role": "json",
+        "name": "current shutter states",
+        "type": "string",
+        "read": true,
+        "write": true,
+        "expert": true
       },
       "native": {}
     },
@@ -791,7 +759,7 @@
       "common": {
         "role": "indicator",
         "name": "current Elevation",
-        "type": "string",
+        "type": "number",
         "read": true,
         "write": false,
         "def": ""
@@ -804,7 +772,7 @@
       "common": {
         "role": "indicator",
         "name": "current Azimut",
-        "type": "string",
+        "type": "number",
         "read": true,
         "write": false,
         "def": ""

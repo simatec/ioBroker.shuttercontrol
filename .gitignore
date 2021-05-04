@@ -8,9 +8,6 @@ iobroker.*.tgz
 
 Thumbs.db
 
-package-lock.json	
-/package-lock.json
-
 # i18n intermediate files
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
@@ -20,3 +17,4 @@ admin/i18n/*/flat.txt
 /shuttercontrol.njsproj
 /todo.txt
 *.orig
+iob_npm.done

@@ -3,13 +3,14 @@
     box-sizing: border-box
 }
 .m {
-    /* Don't cut off dropdowns! */
-    overflow: initial;
+    /* Don't cut off dropdowns! 
+    overflow: initial;*/
+    overflow: hidden;
 }
 
 /* Add your styles here */
 /* Header section*/
-#header-area {margin-top: 5px; margin-bottom: 1px; background-color:#174475;}
+#header-area {margin-top: 2px; margin-bottom: 1px; background-color:#174475;}
 #header-area #header-logo-title .logo {float:left; margin-right: 10px;}
 #header-area #header-logo-title p {line-height: normal !important; margin: 0 !important; padding: 8px 0 0 8px;}
 #header-area #header-logo-title p>span.h-title {font-size: 2em !important; color:white; }
@@ -151,4 +152,7 @@
     height: 90% !important;
     overflow: visible !important;
     top: 10px !important;
+}
+.m .collapsible-header {
+    padding: 0.5rem;
 }
