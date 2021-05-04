@@ -468,7 +468,7 @@
                                 <div class="row">
                                     <div class="col s6 l2 input-field">
                                         <input type="checkbox" class="value" id="schoolfree" />
-                                        <span for="schoolfree" class="translate">Use schoolfree</span>
+                                        <span for="schoolfree" class="translate">Use the Schoolfree adapter</span>
                                     </div>
                                     <div class="input-field col s12 m6 l2 schoolf">
                                         <select id="schoolfreeInstance" class="value"></select>
@@ -529,9 +529,14 @@
                             </div>
                             <div class="collapsible-body">
                                 <div class="row">
-                                    <div class="col s6 l4 input-field">
+                                    <div class="col s6 l2 input-field">
                                         <input type="checkbox" class="value" id="currentShutterState" />
                                         <span for="currentShutterState" class="translate">check current Shutter State</span>
+                                    </div>
+                                    <div class="col s6 l2 input-field checkShutterState">
+                                        <input type="number" class="value" id="currentShutterStateTime" />
+                                        <label for="currentShutterStateTime" class="translate"></label>
+                                        <span class="translate">Waiting time for checking the shutter status (seconds)</span>
                                     </div>
                                 </div>
                                 <div class="row">

@@ -208,7 +208,7 @@ function startAdapter(options) {
                 adapter.log.debug('Auto Children is: ' + state.val);
             }
             if (id === adapter.config.lightsensorUpDown) {
-                shutterBrightnessSensor(adapter, delayDown, shutterSettings);
+                shutterBrightnessSensor(adapter, state.val, shutterSettings);
                 adapter.log.debug('Brightness sensor value: ' + state.val);
             }
             

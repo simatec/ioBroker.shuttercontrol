@@ -430,7 +430,11 @@ function showHideSettings() {
     } else {
         $('.schoolf').hide();
     }
-
+    if ($('#currentShutterState').prop('checked')) {
+        $('.checkShutterState').show();
+    } else {
+        $('.checkShutterState').hide();
+    }
     console.log('livingAutomatic' + $('#livingAutomatic')[0].value);
 
     if ($('#livingAutomatic')[0].value == "livingTime") {

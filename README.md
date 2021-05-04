@@ -45,7 +45,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 1.2.0 (2021-05-03)
+### 1.2.0 (2021-05-04)
 * (simatec) new Feature shutterSettings added
 * (simatec) new Feature brightness sensor for opening added
 * (simatec) new Feature brightness sensor for closing added
@@ -55,6 +55,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Bugfix
 * (simatec) DEPENDENCIES updated
 * (simatec) Dev-DEPENDENCIES updated
+* (simatec) timeout settings for shutterstatus added
 
 ### 1.1.5 (2021-01-22)
 * (simatec) BugFix io-package
