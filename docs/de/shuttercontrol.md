@@ -9,11 +9,14 @@
 * [Adapterkonfiguration - EXTRA-EINSTELLUNGEN](#adapterkonfiguration---extra-einstellungen)
 	* [Astro-Einstellungen](#astro-einstellungen)
 	* [Sommer-Einstellungen](#sommer-einstellungen)
+	* [Weihnachtseinstellungen](#weihnachtseinstellungen)
 	* [Urlaubs- und Feiertagseinstellungen](#urlaubs--und-feiertagseinstellungen)
+	* [Sonderzeiten](#sonderzeiten)
 	* [Extra-Einstellungen](#extra-einstellungen)
 * [Individuelle Rollladeneinstellungen](#individuelle-rollladeneinstellungen)
 	* [Haupteinstellungen](#haupteinstellungen)
 	* [Sonnenschutz-Einstellungen](#sonnenschutz-einstellungen)
+	* [Extra-Einstellungen](#extra-einstellungen-rollladen)
 * [Datenpunkte](#datenpunkte)
 	* [shuttercontrol.0.control](#shuttercontrol.0.control)
 	* [shuttercontrol.0.info](#shuttercontrol.0.info)
@@ -31,7 +34,7 @@ die nächtliche Verdunklung.
 
 Für die Steuerung stehen sehr viele einstellbare Parameter zur Verfügung, z.Bsp.:
 * zwei verschiedene globale Timer (z.B. unterschiedlich für Schlaf- und Wohnräume),
-* diverse sonnenstandsabhängige Parameter die individuell je Rollladen eingestellt
+* diverse Sonnenstands abhängige Parameter die individuell je Rollladen eingestellt
 werden können,
 * Trigger für Tür-/Fenstersensoren die einem Aussperrschutz dienen oder ein automatisches
 Öffnen zu einem individuellen Level bei Öffnen der Tür oder des Fensters dienen,
@@ -41,13 +44,13 @@ Innentemperatur, Außentemperatur, Helligkeit, Hitzesensor o.ä.,
 werden.
 
 Alle Konfigurationsdatenpunkte sind bereits mit Beispielen voreingestellt, so dass
-der Adapter nach Installation und Eingabe von den IDs der Rollladenaktoren schnell
+der Adapter nach Installation und Eingabe von den IDs der Rollladen Aktoren schnell
 betriebsbereit ist.
 
 Die weitere Konfiguration dient dann der Anpassung an persönliche Wünsche.
 
-> Shuttercontrol kann Aktoren nur über die Position wie zb. LEVEL mit Werten
-von 0 bis 100 respektive 0-255 steuern. Das jeweilige Rolladen- oder Jalousietiming muss vom Aktor übernommen werden. Jalousieaktoren, welche je ein Objekt für "Höhe" und "Lamellenwinkel" anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Parametrierung verwendet werden.
+> Shuttercontrol kann Aktoren nur über die Position wie z.B. LEVEL mit Werten
+von 0 bis 100 respektive 0-255 steuern. Das jeweilige Rollladen- oder Jalousietiming muss vom Aktor übernommen werden. Jalousie Aktoren, welche je ein Objekt für "Höhe" und "Lamellenwinkel" anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Parametrierung verwendet werden.
 
 > Achtung: Wenn der Shuttercontrol Adapter neu gestartet wird (Auch nach Konfigurationsänderungen) müssen die Rollläden mittels des Button "obenAll" (shuttercontrol.0.control.openAll) hochgefahren werden. Auch wenn diese schon offen sind! (Initialisierungsfahrt) Dies initialisiert alle Adapter internen Werte.
 
@@ -67,15 +70,17 @@ mit den Haupteinstellungen:
 ![main](img/main.png)
 
 
-* **1:** hinzufügen eines Rollladenaktors
+* **1:** hinzufügen eines Rollladen Aktors
 
-* **2:** Ändern eine ausgewählten Rollladenaktors
+* **2:** Ändern eine ausgewählten Rollladen Aktors
 
 * **3:** individuelle Konfiguration des jeweiligen Rollladens öffnen
 
-* **4:** Festlegung der Reihenfolge in der die Rollläden mit gleichen Einstellungen fahren.
+* **4:** Rollladen kopieren 
 
-* **5:** Löschen des Rollladenaktors mit allen konfigurierten Daten!
+* **5:** Festlegung der Reihenfolge in der die Rollläden mit gleichen Einstellungen fahren.
+
+* **6:** Löschen des Rollladen Aktors mit allen konfigurierten Daten!
 
 * **Nr:**  fortlaufende Nummer der gelisteten Rollläden
 
@@ -86,13 +91,13 @@ und kann danach nach eigenen Wünschen abgeändert werden.
 
 * **Objekt-ID Rollladen:** Eindeutige ID des zu steuernden Datenpunkts in den Objekten
 
-* **6:** Aufruf der Adapter Github Seite
+* **7:** Aufruf der Adapter Github Seite
 
-* **7, 8:** Konfigurationsdatei laden bzw. speichern
+* **8, 9:** Konfigurationsdatei laden bzw. speichern
 
 
 Der Beispiel Aktor *shutter example* wird automatisch angelegt. Diesen bitte löschen
-und anschließend durch anklicken des mit 1 markierten (+) die eigenen Rollladenaktoren
+und anschließend durch Anklicken des mit 1 markierten (+) die eigenen Rollladen Aktoren
 hinzufügen.
 
 
@@ -164,15 +169,14 @@ zu dieser Zeit fahren die Rollläden am Wochenende **und** an Feiertagen *späte
 > bestimmten Stand überschritten hat, muss diese Zeit auf den spätesten
 > Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
----
+
 
 ## Adapterkonfiguration - EXTRA-EINSTELLUNGEN
 
-In den Extra-Einstellungen werden weitere Einstellungen vorgenommen.
+### Astro-Einstellungen
 
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
-### Astro-Einstellungen
 **Breiten- und Längengrad:**  
 Breiten- und Längengrad übernimmt Shuttercontrol aus den ioBroker Systemeinstellungen.
 Shuttercontrol berechnet anhand dieser Werte den Sonnenstand.
@@ -191,21 +195,10 @@ in der [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen
 Damit nicht alle Rollläden gleichzeitig fahren, kann hier eine globale Zeitverzögerung
 in Sekunden eingestellt werden.
 
+---
 ### Sommer-Einstellungen
 
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
-
-**Alle Rollläden schliessen spät in der Nacht**  
-Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
-Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
-oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
-nochmal geöffnet wird. 
-
-> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
-aktiviert bzw. falls nicht gewünscht deaktiviert werden.
-
-**Zeit, in der alle Rollläden spät in der Nacht schließen**  
-Zeit, wann alle Rollläden abends nochmals heruntergefahren werden sollen (z.Bsp. 22:30Uhr)
 
 **Beginn des Sommers** und **Ende des Sommers:**  
 Hier wird der gewünschte Beginn bzw. Ende des Sommers festgelegt.
@@ -214,6 +207,16 @@ In der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladenei
 bei ```Rollladen im Sommer nicht schließen``` verhindert das dieser Rollladen im Sommer
 schließt. 
 
+---
+### Weihnachtseinstellungen
+
+![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
+
+Einstellung der Zeiten Beginn und Ende der Weihnachtszeit.
+Unter [Extra-Einstellungen](#extra-einstellungen-rollladen) Weihnachsteinstellungen wird
+die zu dieser Zeit gewünschte Funktion eingeschaltet und die Rollladenposition festgelegt.
+
+---
 ### Urlaubs- und Feiertagseinstellungen
 
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
@@ -230,6 +233,30 @@ Diese Objekt-ID setzt den internen Zustand "Holiday". Hier kann z.Bsp. ein
 Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
 
+---
+### Sonderzeiten
+
+![extraSettingsSonder](img/ExtraSettingsSonder.png)
+
+
+**Alle Rollläden schliessen spät in der Nacht**  
+Mit dieser Option können alle Rollladen spät abends nochmals runter gefahren werden.
+Das deckt das Szenario ab, wenn zur normalen Zeit für das Herunterfahren das Fenster
+oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terrassentür
+nochmal geöffnet wird. 
+
+> Diese Option muss in der jeweiligen [individuellen Rollladeneinstellung](#individuelle-rollladeneinstellungen) separat
+aktiviert bzw. falls nicht gewünscht deaktiviert werden.
+
+**Alle Rollläden in der Zwischenpostition vollständig schließen**  
+Zeit, wann alle Rollläden abends vollständig geschlossen werden (z.Bsp. 22:00Uhr)
+
+**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
+Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
+abgelaufen ist.
+
+
+---
 ### Extra-Einstellungen
 
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
@@ -240,10 +267,6 @@ Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox.
 Bei aktivierter Checkbox, prüft shuttercontrol 1 Minute nach der letzten Fahrt des
 Rollladens das aktuelle Level und speichert es temporär.
 
-**Öffne Rollladen nur wenn letzte Bewegung x Minuten her:**  
-Rollladen wird nur dann vom Adapter geöffnet, wenn die hier eingestellte Zeit
-abgelaufen ist.
-
 **Objekt ID des Auslösers für den Schlafbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Schlafbereichs aktiviert.
 
@@ -253,16 +276,8 @@ Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
 **Objekt ID des Triggers für den Kinderbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
 
-### Trigger-Settings
 
-![extraSettingsTrigger](img/ExtraSettingsTrigger.png)
-
-**Rolladen Verzögerung bei Fenster öffnen (s)**
-Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
-
-**Rolladen Verzögerung bei Fenster schliessen (s)**
-Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
-
+---
 ## Individuelle Rollladeneinstellungen
 
 Nach dem Anlegen der Rollläden unter [Adapterkonfiguration - HAUPTEINSTELLUNGEN](#adapterkonfiguration---haupteinstellungen) wird
@@ -327,7 +342,7 @@ weil dort die Farben einen goldenen Schimmer haben.
 * **nur manueller Betrieb:**  
 Der Rollladen kann nur manuell in die ausgewählte Richtung bewegt werden. Über die
 die Buttons unter ```shuttercontrol.0.control``` ist keine Bewegung möglich. 
-Dies kann z.B. bei Markisen hilfreich sein, welche nicht mit anderen Rolläden
+Dies kann z.B. bei Markisen hilfreich sein, welche nicht mit anderen Rollläden
 zusammen geöffnet werden sollen.
 
 **Wert des Fenster/Tür Sensors im geschlossenen Zustand:**  
@@ -357,7 +372,7 @@ bei Türen um durchgehen zu können).
 Entspricht zum Zeitpunkt des automatischen Schließens der Fenster/Tür Sensor 
 __nicht__ dem dort eingegebenen Wert (Fenster/Tür geschlossen) wird folgendes ausgeführt:
 
-* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen nicht bei offenem Fenster nicht.
+* **Aus**: Aussperrschutz ist in beide Richtungen aktiv, die Rollläden bewegen sich bei offenem Fenster nicht.
 * **Öffnen**: Nur Hochfahren erlaubt. Bei Verdunklungs- / Beschattungsende fährt der Rollladen trotz offenem Fenster hoch. Der Rollladen wird bei offenem Fenster nicht automatisch geschlossen.
 * **Schließen**: Nur Schliessen erlaubt. Bei Verdunklungs- / Beschattungsbeginn fährt der Rollladen trotz offenem Fenster herunter. Der Rollladen wird bei offenem Fenster nicht geöffnet.
 * **Öffnen und Schließen**: Der Rollladen darf sich bei offenem Fenster in beide Richtungen bewegen
@@ -369,43 +384,13 @@ __nicht__ dem dort eingegebenen Wert (Fenster/Tür geschlossen) wird folgendes a
 **Rollladenhöhe beim Hochfahren:** Positionswert bei geöffnetem Rollladen
 
 > Entsprechend der verwendeten Aktoren muss die Rollladenhöhe eingegeben werden:
-> 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = gechlossen
+> 0 = geschlossen und 100 = offen bzw. 0 = offen und 100 = geschlossen
 
 **Sonnenhöhe (Elevation):**
 Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser Wert hier eingegeben; sonst leer lassen.
 
 **Objekt-ID des Fenster/Tür Kontaktes:**
 über das (+) den Sensor (State) auswählen der eine Rollladenfahrt verhindern soll (z.B. Türkontakt).
-
-**Rollladen spät schliessen:** mit dieser Option wird der Rollladen zu einer
-definierten Zeit (einstellbar in den Extra-Einstellungen) zusätzlich heruntergefahen
->Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
-
-**Rollladen im Sommer nicht schliessen:** manche Rollläden sollen im Sommer
-nicht geschlossen werden. Der Zeitraum dafür wird in den Extra-Einstellungen festgelegt
-
-**Fahren, nachdem Fenster geschlossen wurde:** der Rollladen wird nach dem Schliessen
-des Fensters/Türe auf die zuletzt angeforderte Position gefahren. 
-
-> Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
-
-> Beispiel einer typischen Konfiguration für eine Türe: 
-> Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
-> Fahren, nachdem Fenster geschlossen wurde auf *EIN*
-
-
-### Weihnachts-Einstellungen
-Wenn zur Weihnachtszeit die Rolladen nur teilweise geschlossen werden sollen, weil die Schwibbögen o.ä. sichtbar bleiben sollen,
-kann man diese Option verwenden.
-Mit dieser Option werden die Rolladen zur normalen Schliesszeit nicht vollständig sondern nur auf ein einstellbares Level gefahren.
-Dieses Level ist einstellbar in den jeweiligen Rolladen-Einstellungen unter "Rollladenpegel zur Weihnachtszeit". **Achtung:** Dieser Wert ist
-nur sichtbar, wenn der Haken für "Der Rollladenpegel zur Weihnachtszeit wird verwendet" gesetzt ist. Wenn der Haken nicht gesetzt ist,
-ist die Option deaktviert.
-Diese Option wird automatisch in einem bestimmten Zeitraum (z.Bsp. vom 01.12. bsi 10.01) aktiviert. Der Zeitraum ist einstellbar unter "Extra-Einstellungen"
-und dort "Weihnachtseinstellungen".
-Wenn man später am Abend die Rolladen komplett schliessen möchte, kann man die Option "Rolladen spät schliessen" oder "In die Zwischenposition fahren und später schliessen"
-verwenden. **Achtung:** Beide Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
-
 
 
 ---
@@ -415,7 +400,7 @@ Der Sonnenschutz kann über Auslöser wie Himmelsrichtung, Außentemperatur, Inn
 und Lichtsensor für die Beschattung und deren Ende gesteuert werden und wird über
 **Art der Sonnenschutzsteuerung** eingestellt.
 
-![sunProtect](img/sunProtect.png)
+![sunProtect](img/mainSunprotect.png)
 
 
 **Rollladenhöhe beim Runterfahren:**  
@@ -494,8 +479,49 @@ beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung wieder en
 über das (+) den Temperatursensor (State) auswählen der eine Rollladenfahrt verhindert.
 Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
 
-**Halte Rollladen in Sonnenschutz:**
-wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
+
+
+### Extra-Einstellungen Rollladen
+
+![mainExtra](img/mainExtra.png)
+
+**Rollladen spät schliessen** 
+Mit dieser Option wird der Rollladen zu einer definierten Zeit (einstellbar in den 
+[Sonderzeiten](#sonderzeiten)) zusätzlich heruntergefahren.
+>Achtung: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!)
+
+**Rollladen im Sommer nicht schliessen** 
+Manche Rollläden sollen im Sommer nicht geschlossen werden. Der Zeitraum Sommer wird 
+in den [Sommer-Einstellungen](#sommer-einstellungen) festgelegt.
+
+**Fahren, nachdem Fenster geschlossen wurde** 
+Der Rollladen wird nach dem Schliessen des Fensters/Türe auf die zuletzt angeforderte 
+Position gefahren. 
+
+> Funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
+
+> Beispiel einer typischen Konfiguration für eine Türe: 
+> Rollladen fahren bei Änderung des Fenster/Tür Zustandes steht auf *öffnen/schliessen*; Aussperrschutz auf *öffnen*; 
+> Fahren, nachdem Fenster geschlossen wurde auf *EIN*
+
+**Weihnachtseinstellungen**
+Wenn zur Weihnachtszeit der Rollladen nur teilweise geschlossen werden soll, weil 
+ein Schwibbögen o.ä. sichtbar bleiben soll, kann diese Option verwendet werden. Der 
+Rollladen wird dann zur normalen Schliesszeit nicht vollständig, sondern nur 
+auf einen einzustellenden Pegel gefahren. 
+> **Der Rollladenpegel zur Weihnachtszeit** ist nur dann sichtbar und einstellbar, 
+> wenn der Haken für **Der Rollladenpegel zur Weihnachtszeit wird verwendet** gesetzt ist. 
+
+Der Zeitraum wann diese Funktion aktiviert sein soll wird unter [Weihnachtseinstellungen](#weihnachtseinstellungen) 
+eingestellt. 
+> Sollen später am Abend der Rollladen komplett geschlossen werden, kann die Option 
+> **Rollladen spät schliessen** oder **In Zwischenposition fahren und später komplett schliessen** 
+> verwendet werden.  
+
+> > Achtung: Diese beiden Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
+
+**Halte Rollladen in Sonnenschutz**
+Wird dies Option eingeschaltet, verbleibt der Rollladen im Sonnenschutz, auch wenn 
 keine Sonnenschutz- Anforderung mehr besteht und verbleibt so lange im Sonnenschutz,
 bis das "Schliessen" Signal am Abend kommt. 
 Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fährt. 
@@ -512,7 +538,14 @@ bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
 Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
 den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
+**Rollladen Verzögerung bei Fenster öffnen (s)**
+Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
 
+**Rollladen Verzögerung bei Fenster schliessen (s)**
+Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/Türe geschlossen wurde (in Sekunden)
+
+**In Zwischenposition fahren und später komplett schliessen**
+Bei Aktivierung wird **Rollladenhöhe in der Zwischenposition** sichtbar. Der Rollladen fährt dann 
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
@@ -529,7 +562,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 
 Datenpunkte zur Steuerung verschiedener Funktionen wie:
 * Holiday  
-Bei ```true```fahren die Rollläden zu den eingestellen Zeiten Wochenende und bei
+Bei ```true```fahren die Rollläden zu den eingestellten Zeiten Wochenende und bei
 ```false``` zu den Zeiten unter der Woche.
 > Kann von eigenen Skripten, die den Urlaub, freie Tage o.ä. berechnen oder darstellen, 
 auf true gesetzt werden um die Wochenend-Einstellungen zu aktivieren.
