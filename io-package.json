@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "news": {
+      "1.2.1": {
+        "en": "many small BugFix, DEPENDENCIES updated, Dev-DEPENDENCIES updated, auto-mode button added",
+        "de": "viele kleine BugFix, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert, Auto-Mode-Button hinzugefügt",
+        "ru": "много мелких исправлений ошибок, обновлено ЗАВИСИМОСТЬ, обновлено Dev-DEPENDENCIES, добавлена кнопка автоматического режима",
+        "pt": "muitos pequenos BugFix, DEPENDENCIES atualizado, Dev-DEPENDENCIES atualizado, botão de modo automático adicionado",
+        "nl": "veel kleine bugfixes, DEPENDENCIES bijgewerkt, Dev-DEPENDENCIES bijgewerkt, automatische modusknop toegevoegd",
+        "fr": "de nombreux petits BugFix, DEPENDENCIES mis à jour, Dev-DEPENDENCIES mis à jour, bouton de mode automatique ajouté",
+        "it": "molti piccoli BugFix, DIPENDENZE aggiornate, DEV-DEPENDENCIES aggiornate, pulsante modalità automatica aggiunto",
+        "es": "muchos pequeños BugFix, DEPENDENCIES actualizadas, Dev-DEPENDENCIES actualizado, botón de modo automático agregado",
+        "pl": "wiele małych poprawek błędów, zaktualizowano DEPENDENCIES, zaktualizowano DEPENDENCIES, dodano przycisk trybu automatycznego",
+        "zh-cn": "许多小错误修复，更新了依赖项，更新了开发依赖项，添加了自动模式按钮"
+      },
       "1.2.0": {
         "en": "new Feature shutterSettings added, new Feature brightness sensor for opening added, new Feature brightness sensor for closing added, new Feature schoolfree adapter added, new Feature middle position added, new Feature Xmas position added, Bugfix, DEPENDENCIES updated, Dev-DEPENDENCIES updated, timeout settings for shutterstatus added",
         "de": "neue Feature-Shutter-Einstellungen hinzugefügt, neues Feature Helligkeitssensor zum Öffnen hinzugefügt, neues Feature Helligkeitssensor zum Schließen hinzugefügt, neues Feature Schoolfree Adapter hinzugefügt, neues Feature Mittelposition hinzugefügt, neues Feature Weihnachtsposition hinzugefügt, Bugfix, ABHÄNGIGKEITEN aktualisiert, Dev-DEPENDENCIES aktualisiert, Timeout Einstellungen für den Rollladenstatus hinzugefügt",
@@ -607,6 +619,50 @@
       "common": {
         "role": "button",
         "name": "close Living Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.sunProtectChildren",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "close Children Shutter for sun protect",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {
+        "UNIT": "",
+        "TAB_ORDER": 0,
+        "OPERATIONS": 6,
+        "FLAGS": 1,
+        "TYPE": "ACTION",
+        "MIN": false,
+        "MAX": true,
+        "DEFAULT": false
+      }
+    },
+    {
+      "_id": "control.autoAll",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "set all Shutter to Auto Mode",
         "type": "boolean",
         "read": true,
         "write": true,
