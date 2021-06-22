@@ -93,6 +93,8 @@ let timerDelete1;
 let timerDelete2;
 let timerDelete3;
 let timerDelete4;
+let timerwaitTime_StateCheck;
+let waitTime4StateCheck = 0;
 let shutterSettings;
 
 /**
@@ -127,6 +129,7 @@ function startAdapter(options) {
             clearTimeout(timerDelete2);
             clearTimeout(timerDelete3);
             clearTimeout(timerDelete4);
+            clearTimeout(timerwaitTime_StateCheck);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
             schedule.cancelJob('shutterDownGoldenHour');
@@ -211,7 +214,7 @@ function startAdapter(options) {
                 shutterBrightnessSensor(adapter, state.val, shutterSettings);
                 adapter.log.debug('Brightness sensor value: ' + state.val);
             }
-            
+
             resTrigger.forEach(function (resultTriggerID) {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     resTriggerChange = resultTriggerID;
@@ -237,11 +240,19 @@ function startAdapter(options) {
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
+            
             resShutterState.forEach(function (resShutterID) {
                 if (id === resShutterID && state.ts === state.lc) {
                     resShutterChange = resShutterID;
                     const resultID = shutterSettings;
                     const result = resultID.filter(d => d.name == resShutterID);
+
+                    if (adapter.config.currentShutterState == true && adapter.config.currentShutterStateTime) {
+                        clearTimeout(timerwaitTime_StateCheck);
+                        timerwaitTime_StateCheck = null;
+                        waitTime4StateCheck = (adapter.config.currentShutterStateTime * 1000);
+                    }
+
                     for (const i in result) {
                         for (const s in shutterSettings) {
                             if (shutterSettings[s].shutterName == result[i].shutterName) {
@@ -250,7 +261,16 @@ function startAdapter(options) {
                                     if (typeof state != undefined && state != null && shutterSettings[s].oldHeight != state.val) {
                                         adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + state.val);
                                     }
-                                    if (typeof state != undefined && state != null && state.val != shutterSettings[s].currentHeight && state.val != shutterSettings[s].oldHeight) {
+                                    if (typeof state != undefined && state != null && state.val != shutterSettings[s].currentHeight && state.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState == true) {
+                                        timerwaitTime_StateCheck = setTimeout(() => {
+                                            shutterSettings[s].currentAction = 'Manu_Mode';
+                                            adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + state.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val);
+                                            shutterSettings[s].triggerAction = 'Manu_Mode';
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                            shutterState(shutterSettings[s].name, adapter, shutterSettings);
+                                        }, waitTime4StateCheck);
+                                    } else if (typeof state != undefined && state != null && state.val != shutterSettings[s].currentHeight && state.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState == false) {
                                         shutterSettings[s].currentAction = 'Manu_Mode';
                                         adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
                                         adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + state.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val);
@@ -263,7 +283,7 @@ function startAdapter(options) {
                                     }
                                     timerState1 = setTimeout(() => {
                                         saveCurrentStates(false);
-                                    }, 5000);
+                                    }, 5000 + waitTime4StateCheck);
                                 });
                                 //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
                                 // enable possibility to activate sunprotect height if required --> 
@@ -283,7 +303,7 @@ function startAdapter(options) {
                                 timerState2 = setTimeout(function () {
                                     shutterSettings[s].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
                                     saveCurrentStates(false);
-                                }, 60000);
+                                }, 60000 + waitTime4StateCheck);
                             }
                         }
                     }
@@ -296,52 +316,43 @@ function startAdapter(options) {
                 elevationDown(adapter, elevation, azimuth, shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeAll') {
-                let buttonState = 'closeAll';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'closeAll', shutterSettings);
             }
             if (id === adapter.namespace + '.control.openAll') {
-                let buttonState = 'openAll';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'openAll', shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeLiving') {
-                let buttonState = 'closeLiving';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'closeLiving', shutterSettings);
             }
             if (id === adapter.namespace + '.control.openLiving') {
-                let buttonState = 'openLiving';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'openLiving', shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeSleep') {
-                let buttonState = 'closeSleep';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'closeSleep', shutterSettings);
             }
             if (id === adapter.namespace + '.control.openSleep') {
-                let buttonState = 'openSleep';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'openSleep', shutterSettings);
             }
             if (id === adapter.namespace + '.control.closeChildren') {
-                let buttonState = 'closeChildren';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'closeChildren', shutterSettings);
             }
             if (id === adapter.namespace + '.control.openChildren') {
-                let buttonState = 'openChildren';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'openChildren', shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtect') {
-                let buttonState = 'sunProtect';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'sunProtect', shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectSleep') {
-                let buttonState = 'sunProtectSleep';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'sunProtectSleep', shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectChildren') {
-                let buttonState = 'sunProtectChildren';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'sunProtectChildren', shutterSettings);
             }
             if (id === adapter.namespace + '.control.sunProtectLiving') {
-                let buttonState = 'sunProtectLiving';
-                buttonAction(adapter, buttonState, shutterSettings);
+                buttonAction(adapter, 'sunProtectLiving', shutterSettings);
+            }
+            if (id === adapter.namespace + '.control.autoAll') {
+                buttonAction(adapter, 'autoAll', shutterSettings);
             }
         }
     });
@@ -1095,7 +1106,7 @@ function shutterDriveCalc() {
     adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
     adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep + " debug " + debugCnt);
     shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr, shutterSettings);
-    shutterDownLate(adapter, delayDown, shutterSettings);
+    shutterDownLate(adapter, shutterSettings);
     shutterDownComplete(adapter, delayDown, shutterSettings);
     delayCalc();
 
