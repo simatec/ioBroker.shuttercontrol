@@ -1,30 +1,43 @@
 {
-  "name": "iobroker.shuttercontrol",
-  "version": "1.2.1",
-  "description": "Automatic control for shutters",
+  "_from": "iobroker.shuttercontrol@1.2.1",
+  "_id": "iobroker.shuttercontrol@1.2.1",
+  "_inBundle": false,
+  "_integrity": "sha512-lciTTWKnMGjyVIbV6JgziS/9MM4YNhKR1xdBLxEowuCPow8SSQwr5phQ5ZA9lI8KpPI6xfjPTMrJ/wuI9cJHqg==",
+  "_location": "/iobroker.shuttercontrol",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "iobroker.shuttercontrol@1.2.1",
+    "name": "iobroker.shuttercontrol",
+    "escapedName": "iobroker.shuttercontrol",
+    "rawSpec": "1.2.1",
+    "saveSpec": null,
+    "fetchSpec": "1.2.1"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/iobroker.shuttercontrol/-/iobroker.shuttercontrol-1.2.1.tgz",
+  "_shasum": "58c927c44e0229173443e5c99037aa44d8005876",
+  "_spec": "iobroker.shuttercontrol@1.2.1",
+  "_where": "C:\\Program Files\\iobroker\\SmartHome",
   "author": {
     "name": "simatec",
     "email": "nais@gmx.net"
   },
-  "homepage": "https://github.com/simatec/ioBroker.shuttercontrol",
-  "license": "MIT",
-  "keywords": [
-    "ioBroker",
-    "Smart Home",
-    "home automation",
-    "Rollladen",
-    "Jalousie",
-    "Rollladensteuerung"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/simatec/ioBroker.shuttercontrol"
+  "bugs": {
+    "url": "https://github.com/simatec/ioBroker.shuttercontrol/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.0",
     "node-schedule": "^2.0.0",
     "suncalc2": "^1.8.1"
   },
+  "deprecated": false,
+  "description": "Automatic control for shutters",
   "devDependencies": {
     "@alcalzone/release-script": "^2.0.0",
     "@iobroker/testing": "^2.4.4",
@@ -47,16 +60,28 @@
     "sinon-chai": "^3.7.0",
     "tslint": "^6.1.3"
   },
+  "homepage": "https://github.com/simatec/ioBroker.shuttercontrol",
+  "keywords": [
+    "ioBroker",
+    "Smart Home",
+    "home automation",
+    "Rollladen",
+    "Jalousie",
+    "Rollladensteuerung"
+  ],
+  "license": "MIT",
   "main": "main.js",
+  "name": "iobroker.shuttercontrol",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simatec/ioBroker.shuttercontrol.git"
+  },
   "scripts": {
+    "release": "release-script",
     "test": "npm run test:package && npm run test:unit",
-    "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
-    "release": "release-script"
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit"
   },
-  "bugs": {
-    "url": "https://github.com/simatec/ioBroker.shuttercontrol/issues"
-  },
-  "readmeFilename": "README.md"
+  "version": "1.2.1"
 }
