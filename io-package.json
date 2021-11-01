@@ -161,7 +161,8 @@
       "sentry": {
         "dsn": "https://5f58df7167d846e3a90bae5414d4fc09@sentry.iobroker.net/62"
       }
-    }
+    },
+    "installedFrom": "C:\\Temp\\iobroker.shuttercontrol"
   },
   "native": {
     "UseAstro": true,
@@ -240,7 +241,11 @@
     "lightsensorDown": 400,
     "lightsensorUp": 500,
     "lightsensorUpDown": "",
-
+    "alarmWind1Level": 100,
+    "alarmWind2Level": 100,
+    "alarmRainLevel": 100,
+    "alarmFrostLevel": 80,
+    "alarmFireLevel": 100,
     "events": [
       {
         "enabled": true,
@@ -274,7 +279,13 @@
         "betweenPosition": false,
         "betweenPositionLevel": "50",
         "trigDelyUp": 1,
-        "trigDelyDown": 1
+        "trigDelyDown": 1,
+        "sunProtectEndDely": 0,
+        "enableAlarmWind1": false,
+        "enableAlarmWind2": false,
+        "enableAlarmRain": false,
+        "enableAlarmFrost": false,
+        "enableAlarmFire": false
       }
     ]
   },

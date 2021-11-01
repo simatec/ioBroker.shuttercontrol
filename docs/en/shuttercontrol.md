@@ -247,12 +247,57 @@ You can create two instances of the holiday adapter if necessary; a to display a
 ** end of the summer ** End of the period in which roller shutters are not shut down in summer.
 Which roller shutters are not shut down in summer can be specified in the respective roller shutter settings.
 
+---
+### Alarm-Settings
+![extraSettingsExtra](img/Shuttercontrol Alarm Settings.png)
+Shuttercontrol knows the following alarms. You can configure for each alarm an according logical datapoint (true/false)
+status true = Alarm is active
+Status false = Alarm is NOT activ
+Furthermore, for each alarm you can define a level, where the rollos has to drive to, once the alarm is being activated.
+To activate the defined alarm for a certain rollo, please go to the rollo specific settings in the menu extra - alarm settings.
+
+Available alarms:
+- Wind 1
+- Wind 2
+- Rain
+- Frost
+- Fire / Burglar
+
+Alarm priorities:
+Prio 1 --	Fire- / Burglaralarm: Highest priority has the Fire / Burglar alarm. If it once has been activated, the roller which has been configured
+			to listen will drive to the configured level. The roller are then blocked and will NOT move back even the Fire alarm signal is taken back
+			to state false. To get back to normal operation, the roller need to be re-initialized with the buttons "openAll" / "closeAll".
+			With this behaviour it will be ensured that in case of fire stay open in any case and emergency exits stay open or the access for fire fighters
+			is ensured.
+
+Prio 2 - 5	Rain, Wind2, Wind1, Frost: All of these alarms have the same priority when they get activatet. Means, the roller will move to the last activated alarm level.
+			However, if an Alarm is being deactivated, the following priorities are set fix, if another alarm is still pending. 
+			Prio 1 = Fire / Burglar
+			Prio 2 = Rain
+			Prio 3 = Wind 2
+			Prio 4 = Wind 1
+			Prio 5 = Frost
+
+Frost alarm is only moving directly out of the down position. (to prevent freezing down the roller)
+If the frost alarm is being activated while the roller is in up-position the roller will not move immeadetly but the roller will move to the frost position, once it's going to close.
+
 ### Trigger-Settings
 
-![extraSettingsTrigger](img/ExtraSettingsTrigger.png)
+![extraSettingsTrigger](img/mainExtra.png)
 
 **Delay roller shutter up when window is opened (s)**
 Parameter to delay the roller open after the window has been opened (seconds)
 
 **Delay roller shutter down when window is closed (s)**
 Parameter to delay the roll close after the window has been closed (seconds)
+
+**Delay until end of sunprotection**
+With this settings (in Minutes) it can be defined for how long the Roller will stay in sunprotect mode
+eventhough no sunprotection is required anymore by the light sensor (value below the defined hystresis).
+If there is a new sunprotection required during this time, the timer will be reseted and restarted once 
+the light sensor value falls again under the defined light value hystresis.
+This setting can be helpfull to prevent moving up and down while the weather is often changing (cloudy)
+
+**Alarm Settings**
+With this setting the predefined alarm (Alarm setting in Main-Extra Menü) shall be acitvated for this 
+particular Rollo. 
