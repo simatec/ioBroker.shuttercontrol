@@ -322,7 +322,7 @@ function startAdapter(options) {
                                     shutterSettings[s].currentHeight = state.val;
                                     shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
                                     adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
-                                    adapter.setState('shutters.autoLevel.' + nameDevice, { val: parseInt(shutterSettings[s].currentHeight), ack: true });
+                                    adapter.setState('shutters.autoLevel.' + nameDevice, { val: parseFloat(shutterSettings[s].currentHeight), ack: true });
                                     shutterSettings[s].firstCompleteUp = false;
                                     adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                                 }
@@ -693,7 +693,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', function () {
                     adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + state.val);
                     if (typeof state.val != undefined && state.val != null) {
                         resultStates[i].currentHeight = state.val;
-                        adapter.setState('shutters.autoLevel.' + nameDevice, { val: parseInt(resultStates[i].currentHeight), ack: true });
+                        adapter.setState('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true });
 
                         if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
                             adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
@@ -1556,7 +1556,7 @@ function createShutter() {
                             adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
                         }
                         if (state) {
-                            adapter.setState('shutters.autoLevel.' + objectName, { val: parseInt(result[i].currentHeight), ack: true });
+                            adapter.setState('shutters.autoLevel.' + objectName, { val: parseFloat(result[i].currentHeight), ack: true });
                         }
                     });
                 } catch (e) {
