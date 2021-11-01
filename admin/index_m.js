@@ -47,9 +47,9 @@ function load(settings, onChange) {
             // value
             $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('true').trigger('change');
             $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val('sunrise').trigger('change');
-            $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val('sunset').trigger('change');
-            $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val('100').trigger('change');
@@ -57,7 +57,7 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val('8').trigger('change');
             $('#events .values-input[data-name="enabled"][data-index="' + id + '"]').prop('checked', true);
             $('#events .values-input[data-name="type"][data-index="' + id + '"]').val('in- & outside temperature and direction').trigger('change');
-            $('#events .values-input[data-name="type"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="type"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val('30').trigger('change');
             $('#events .values-input[data-name="direction"][data-index="' + id + '"]').val('120').trigger('change');
             $('#events .values-input[data-name="directionRange"][data-index="' + id + '"]').val('50').trigger('change');
@@ -78,7 +78,7 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val('80').trigger('change');
             $('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val('100').trigger('change');
-            // bolean
+            // switch
             $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
@@ -496,7 +496,7 @@ function tableOnReady() {
 function save(callback) {
     // select elements with class=value and build settings object
     var obj = {};
-    $('.value').each(function () {
+    $('#mainSettings .value').each(function () {
         var $this = $(this);
         if ($this.attr('type') === 'checkbox') {
             obj[$this.attr('id')] = $this.prop('checked');

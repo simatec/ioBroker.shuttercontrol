@@ -48,7 +48,7 @@
                     <li class="tab col s6 l4 tab-extra"><a href="#tab-extra" class="translate">Extra Settings</a></li>
                 </ul>
             </div>
-            <div class="row">
+            <div class="row" id="mainSettings">
                 <!-- main settings -->
                 <div id="tab-settings" class="col s12 page">
                     <div class="row">
@@ -438,7 +438,7 @@
                                         <span class="translate">Object ID for holiday today</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="HolidayDPPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -468,7 +468,7 @@
                                         <span class="translate">Object ID for Lightsensor</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="LightsensorUpDownPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="LightsensorUpDownPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -560,7 +560,7 @@
                                         <span class="translate">Object ID of trigger for Auto Sleep</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="triggerAutoSleepDialog" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                     <div class="col s6 l3 input-field">
                                         <input type="text" class="value" id="triggerAutoLiving" />
@@ -568,7 +568,7 @@
                                         <span class="translate">Object ID of trigger for Auto Living</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="triggerAutoLivingDialog" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                     <div class="col s6 l3 input-field">
                                         <input type="text" class="value" id="triggerAutoChildren" />
@@ -576,7 +576,7 @@
                                         <span class="translate">Object ID of trigger for Auto Children</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="triggerAutoChildrenDialog" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="triggerAutoChildrenDialog" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -598,7 +598,7 @@
                                         <span class="translate">Object ID of alarm wind 1</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="alarmWind1PopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="alarmWind1PopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -613,7 +613,7 @@
                                         <span class="translate">Object ID of alarm wind 2</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="alarmWind2PopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="alarmWind2PopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -628,7 +628,7 @@
                                         <span class="translate">Object ID of alarm Rain</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="alarmRainPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="alarmRainPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -643,7 +643,7 @@
                                         <span class="translate">Object ID of alarm Frost</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="alarmFrostPopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="alarmFrostPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -658,7 +658,7 @@
                                         <span class="translate">Object ID of alarm Fire</span>
                                     </div>
                                     <div class="col s1 m2 l1">
-                                        <a id="alarmFirePopUp" class="btn-floating waves-effect waves-light blue table-button-add"><i class="material-icons">add</i></a>
+                                        <a id="alarmFirePopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -746,7 +746,7 @@
                                     <span class="translate">Object ID Actual value of the sun protection temperature</span>
                                 </div>
                                 <div class="col s1 m2 l1">
-                                    <a id="actualValueTempDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
+                                    <a id="actualValueTempDialogPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                 </div>
                             </div>
                             <div class="row">
@@ -766,7 +766,7 @@
                                     <span class="translate">Object ID of the sun protection Lightsensor</span>
                                 </div>
                                 <div class="col s1 m2 l1">
-                                    <a id="actualValueLightDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
+                                    <a id="actualValueLightDialogPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                 </div>
                             </div>
                             <div class="row">
@@ -786,7 +786,7 @@
                                     <span class="translate">Object ID of the Inside Temperature</span>
                                 </div>
                                 <div class="col s1 m2 l1">
-                                    <a id="actualValueTempInsideDialogPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
+                                    <a id="actualValueTempInsideDialogPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                 </div>
                             </div>
                         </div>
@@ -890,7 +890,7 @@
                                     <span class="translate">Trigger ID</span>
                                 </div>
                                 <div class="col s1 m2 l1">
-                                    <a id="triggerIDPopUp" class="btn"><i class="material-icons">add_circle_outline</i><span></span></a>
+                                    <a id="triggerIDPopUp" class="btn-floating waves-effect waves-light blue table-button-add trigger-add"><i class="material-icons">add</i></a>
                                 </div>
                             </div>
                         </div>

@@ -121,11 +121,11 @@
     padding-left:20;
     height: calc(100% - 100px);
 }
-
+/*
 #dialog-shutter-edit .btn {
     margin-right: 1.5rem;
 }
-
+*/
 /* hidden table column */
 #events td:nth-of-type(n+7) {
     visibility: hidden !important;
@@ -155,4 +155,11 @@
 }
 .m .collapsible-header {
     padding: 0.5rem;
+}
+.trigger-add {
+    margin-top: 1.3rem;
+    margin-left: -0.5rem;
+}
+.m .modal .modal-footer {
+    padding-right: 2rem;
 }
