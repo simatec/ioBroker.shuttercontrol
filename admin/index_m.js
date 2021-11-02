@@ -46,6 +46,7 @@ function load(settings, onChange) {
         setTimeout(function () {
             // value
             $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('true').trigger('change');
+            $('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val('none').trigger('change');
             $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val('sunrise').trigger('change');
             //$('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val('sunset').trigger('change');
@@ -267,6 +268,9 @@ function load(settings, onChange) {
             case "#tab-extra":
                 loadOptions();
                 break;
+            case "#tab-extraPopUp":
+                loadOptions();
+                break;
         }
     }
     //++++++++++ OPTIONS ++++++++++
@@ -325,6 +329,8 @@ function tableOnReady() {
         $('#triggerChangeShutter').select();
         $('#triggerStateShutter').val($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
         $('#triggerStateShutter').select();
+        $('#triggerStateTiltedShutter').val($('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val());
+        $('#triggerStateTiltedShutter').select();
         $('#typeDown').val($('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val());
         $('#typeDown').select();
         $('#typeUp').val($('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val());
@@ -400,6 +406,7 @@ function tableOnReady() {
                 var newTriggerDrive = $('#triggerDriveShutter').val();
                 var newElevation = $('#elevationShutter').val();
                 var newTriggerState = $('#triggerStateShutter').val();
+                var newTriggerStateTilted = $('#triggerStateTiltedShutter').val();
                 var newTriggerChange = $('#triggerChangeShutter').val();
                 var newTemInside = $('#tempInside').val();
                 var newHeightDownSun = $('#heightDownSun').val();
@@ -457,6 +464,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
                 $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val(newElevation).trigger('change');
                 $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                $('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val(newTriggerStateTilted).trigger('change');
                 $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val(newTriggerChange).trigger('change');
                 $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val(newTypeDown).trigger('change');
                 $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val(newTypeUp).trigger('change');

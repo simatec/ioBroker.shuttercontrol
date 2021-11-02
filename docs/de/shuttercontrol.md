@@ -387,6 +387,16 @@ Hier wird der Wert festgelegt den der Auslöser unter **Objekt-ID des Fenster/T�
 Ist der Rollladen nicht in der obersten Position und ändert sich der hier angegebene
 Sensorstatus, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
 
+**Wert des Fenster/Tür Sensors im gekippten Zustand:**  
+Hier wird der Wert festgelegt den der Auslöser unter **Objekt-ID des Fenster/Tür Kontaktes**
+(z.B. Fenster- oder Drehgriffkontakt) hat, bei der die Rollladenautomatik unbegrenzt fahren darf.
+> Es können Werte wie true, false, 0, 1 oder 2 ausgewählt werden.
+
+Ist der Rollladen nicht in der obersten Position und ändert sich der hier angegebene
+Sensorstatus, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
+
+***Wer keinen Fensterkontakt mit Kippfunktion hat, sollte diesen Werte auf "keins" stellen.***
+
 **Rollladen fahren bei Änderung des Fenster/Tür Zustandes:**  
 Pulldown zur Auswahl der Funktion, die bei Bewegung des Fenster/Tür Sensors
 durchgeführt werden soll:
