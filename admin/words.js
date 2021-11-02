@@ -169,4 +169,15 @@ systemDictionary = {
     "up and down": {                                 "en": "Open and close",                                  "de": "Öffnen und Schließen",                            "ru": "Открыть и закрыть",                               "pt": "Aberto e fechado",                                "nl": "Open en dicht",                                   "fr": "Ouvrir et fermer",                                "it": "Apri e chiudi",                                   "es": "Abrir y cerrar",                                  "pl": "Otwarte i zamknięte",                             "zh-cn": "打開和關閉"},
     "useXmasLevel": {                                "en": "Roller shutter level at Christmas time is used",  "de": "Der Rollladenpegel zur Weihnachtszeit wird verwendet", "ru": "Уровень рольставни на Рождество используется",    "pt": "O nível do obturador de rolo na época do Natal é usado", "nl": "Het rolluikniveau in de kersttijd wordt gebruikt", "fr": "Le niveau du volet roulant au moment de Noël est utilisé", "it": "Viene utilizzato il livello della tapparella nel periodo natalizio", "es": "Se utiliza el nivel de la persiana enrollable en Navidad", "pl": "Używany jest poziom rolet w okresie świątecznym", "zh-cn": "使用圣诞节时的卷帘门水平"},
     "xmas settings": {                               "en": "Xmas settings",                                   "de": "Weihnachtseinstellungen",                         "ru": "Рождественские настройки",                        "pt": "Configurações de natal",                          "nl": "Xmas instellingen",                               "fr": "Paramètres de Noël",                              "it": "Impostazioni di Natale",                          "es": "Configuración de Navidad",                        "pl": "Ustawienia świąteczne",                           "zh-cn": "圣诞设置"},
+    "height for trigger tildet": {
+        "en": "Roller shutter height when the window or door is tilted",
+        "de": "Rollladenhöhe bei gekipptem Fenster oder Tür",
+        "ru": "Высота рольставни при наклоне окна или двери",
+        "pt": "Altura da veneziana quando a janela ou porta é inclinada",
+        "nl": "Rolluikhoogte wanneer het raam of de deur gekanteld is",
+        "fr": "Hauteur du volet roulant lorsque la fenêtre ou la porte est basculée",
+        "it": "Altezza tapparella quando la finestra o la porta è inclinata",
+        "es": "Altura de la persiana enrollable cuando la ventana o puerta está inclinada",
+        "pl": "Wysokość rolety przy uchylonym oknie lub drzwiach",
+        "zh-cn": "窗户或门倾斜时的卷帘高度"},
 };
