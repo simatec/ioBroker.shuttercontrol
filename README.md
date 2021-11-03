@@ -45,7 +45,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 1.3.0 (2021-11-02)
+### 1.3.0 (2021-11-03)
 * (FoxRo) alarm function added
 * (simatec) Trigger Tilted Window / Door added
 * (FoxRo) new Feature Sunprotect end Delay added
