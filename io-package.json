@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "news": {
+      "1.3.0": {
+        "en": "many small BugFix, DEPENDENCIES updated, alarm function added, Trigger Tilted Window / Door added, new Feature Sunprotect end Delay added, Bugfix in window trigger, new Features in Docu added",
+        "de": "viele kleine BugFix, ABHÄNGIGKEITEN aktualisiert, Alarmfunktion hinzugefügt, Auslöser gekipptes Fenster / Tür hinzugefügt, neues Feature Sonnenschutz Ende Verzögerung hinzugefügt, Bugfix im Fensterauslöser, neue Features in Doku hinzugefügt",
+        "ru": "много мелких исправлений ошибок, обновлены ЗАВИСИМОСТИ, добавлена функция тревоги, добавлено окно / дверь с наклонным триггером, добавлена новая функция Sunprotect end Delay, исправление ошибки в триггере окна, добавлены новые функции в документе",
+        "pt": "muitos pequenos BugFix, DEPENDÊNCIAS atualizadas, função de alarme adicionada, janela / porta inclinada do gatilho adicionado, novo recurso Sunprotect final atraso adicionado, bugfix no gatilho da janela, novos recursos adicionados no Docu",
+        "nl": "veel kleine bugfixes, DEPENDENCIES bijgewerkt, alarmfunctie toegevoegd, Trigger Tilted Window / Door toegevoegd, nieuwe functie Sunprotect end Delay toegevoegd, Bugfix in vensteractivering, nieuwe functies in Docu toegevoegd",
+        "fr": "nombreux petits BugFix, DEPENDANCES mis à jour, fonction d'alarme ajoutée, Trigger Tilted Window / Door ajouté, nouvelle fonctionnalité Sunprotect end Delay ajouté, Bugfix dans le déclencheur de fenêtre, nouvelles fonctionnalités dans Docu ajoutées",
+        "it": "molti piccoli bugfix, DIPENDENZE aggiornate, funzione di allarme aggiunta, finestra/porta inclinata trigger aggiunta, nuova funzione Sunprotect end Delay aggiunto, bugfix nel trigger finestra, aggiunte nuove funzionalità in Docu",
+        "es": "muchas pequeñas correcciones de errores, DEPENDENCIAS actualizadas, función de alarma agregada, ventana / puerta inclinada del gatillo agregada, nueva característica Sunprotect end Delay agregada, corrección de errores en el gatillo de la ventana, nuevas características en Docu agregadas",
+        "pl": "wiele małych poprawek błędów, zaktualizowano DEPENDENCIES, dodano funkcję alarmu, dodano wyzwalanie uchylonego okna / drzwi, dodano nową funkcję Sunprotect end Delay, poprawkę błędu w wyzwalaniu okna, dodano nowe funkcje w Docu",
+        "zh-cn": "许多小错误修正，更新了依赖项，添加了警报功能，添加了触发倾斜的窗户/门，添加了新功能防晒结束延迟，窗口触发器中的错误修复，添加了Docu中的新功能"
+      },
       "1.2.1": {
         "en": "many small BugFix, DEPENDENCIES updated, Dev-DEPENDENCIES updated, auto-mode button added",
         "de": "viele kleine BugFix, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert, Auto-Mode-Button hinzugefügt",
@@ -240,7 +252,11 @@
     "lightsensorDown": 400,
     "lightsensorUp": 500,
     "lightsensorUpDown": "",
-
+    "alarmWind1Level": 100,
+    "alarmWind2Level": 100,
+    "alarmRainLevel": 100,
+    "alarmFrostLevel": 80,
+    "alarmFireLevel": 100,
     "events": [
       {
         "enabled": true,
@@ -266,6 +282,7 @@
         "heightUp": "100",
         "heightDown": "0",
         "triggerState": "true",
+        "triggerStateTilted": "none",
         "triggerDrive": "100",
         "triggerChange": "upDown",
         "elevation": "4",
@@ -274,7 +291,13 @@
         "betweenPosition": false,
         "betweenPositionLevel": "50",
         "trigDelyUp": 1,
-        "trigDelyDown": 1
+        "trigDelyDown": 1,
+        "sunProtectEndDely": 0,
+        "enableAlarmWind1": false,
+        "enableAlarmWind2": false,
+        "enableAlarmRain": false,
+        "enableAlarmFrost": false,
+        "enableAlarmFire": false
       }
     ]
   },

@@ -46,18 +46,20 @@ function load(settings, onChange) {
         setTimeout(function () {
             // value
             $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('true').trigger('change');
+            $('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val('none').trigger('change');
             $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val('sunrise').trigger('change');
-            $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val('sunset').trigger('change');
-            $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val('100').trigger('change');
+            $('#events .values-input[data-name="triggerDriveTildet"][data-index="' + id + '"]').val('50').trigger('change');
             $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val('off').trigger('change');
             $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val('8').trigger('change');
             $('#events .values-input[data-name="enabled"][data-index="' + id + '"]').prop('checked', true);
             $('#events .values-input[data-name="type"][data-index="' + id + '"]').val('in- & outside temperature and direction').trigger('change');
-            $('#events .values-input[data-name="type"][data-index="' + id + '"]').select();
+            //$('#events .values-input[data-name="type"][data-index="' + id + '"]').select();
             $('#events .values-input[data-name="heightDownSun"][data-index="' + id + '"]').val('30').trigger('change');
             $('#events .values-input[data-name="direction"][data-index="' + id + '"]').val('120').trigger('change');
             $('#events .values-input[data-name="directionRange"][data-index="' + id + '"]').val('50').trigger('change');
@@ -68,17 +70,28 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="hysteresisOutside"][data-index="' + id + '"]').val('5').trigger('change');
             $('#events .values-input[data-name="hysteresisInside"][data-index="' + id + '"]').val('5').trigger('change');
             $('#events .values-input[data-name="hysteresisLight"][data-index="' + id + '"]').val('5').trigger('change');
-            // bolean
+            $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val('50').trigger('change');
+            $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val('100').trigger('change');
+            $('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val('100').trigger('change');
+            $('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val('100').trigger('change');
+            $('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val('80').trigger('change');
+            $('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val('100').trigger('change');
+            // switch
             $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').val(false).trigger('change');
-            $('#events .values-input[data-name="XmasLevel"][data-index="' + id + '"]').val('0').trigger('change');
-            $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val('50').trigger('change');
-            $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val('0').trigger('change');
-            $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').val(false).trigger('change');
         }, 1000);
 
         initSelectId(function (sid) {
@@ -182,6 +195,51 @@ function load(settings, onChange) {
             });
         });
     });
+    $('#alarmWind1PopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#alarmWind1').val(), function (newId) {
+                if (newId) {
+                    $('#alarmWind1').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+    $('#alarmWind2PopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#alarmWind2').val(), function (newId) {
+                if (newId) {
+                    $('#alarmWind2').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+    $('#alarmRainPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#alarmRain').val(), function (newId) {
+                if (newId) {
+                    $('#alarmRain').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+    $('#alarmFrostPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#alarmFrost').val(), function (newId) {
+                if (newId) {
+                    $('#alarmFrost').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+    $('#alarmFirePopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#alarmFire').val(), function (newId) {
+                if (newId) {
+                    $('#alarmFire').val(newId).trigger('change');
+                }
+            });
+        });
+    });
 
     onChange(false);
     // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
@@ -209,6 +267,9 @@ function load(settings, onChange) {
                 loadOptions();
                 break;
             case "#tab-extra":
+                loadOptions();
+                break;
+            case "#tab-extraPopUp":
                 loadOptions();
                 break;
         }
@@ -264,11 +325,14 @@ function tableOnReady() {
         $('#heightUpShutter').val($('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val());
         $('#heightDownShutter').val($('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val());
         $('#triggerDriveShutter').val($('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val());
+        $('#triggerDriveTildetShutter').val($('#events .values-input[data-name="triggerDriveTildet"][data-index="' + id + '"]').val());
         $('#elevationShutter').val(parseFloat($('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val()));
         $('#triggerChangeShutter').val($('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val());
         $('#triggerChangeShutter').select();
         $('#triggerStateShutter').val($('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val());
         $('#triggerStateShutter').select();
+        $('#triggerStateTiltedShutter').val($('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val());
+        $('#triggerStateTiltedShutter').select();
         $('#typeDown').val($('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val());
         $('#typeDown').select();
         $('#typeUp').val($('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val());
@@ -294,6 +358,12 @@ function tableOnReady() {
         $('#betweenPositionLevel').val($('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val());
         $('#trigDelyUp').val($('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val());
         $('#trigDelyDown').val($('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val());
+        $('#sunProtectEndDely').val($('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val());
+        $('#alarmWind1Level').val($('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val());
+        $('#alarmWind2Level').val($('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val());
+        $('#alarmRainLevel').val($('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val());
+        $('#alarmFrostLevel').val($('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val());
+        $('#alarmFireLevel').val($('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val());
         // bolean
         var varLateDown = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
         var varinSummerNotDown = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
@@ -301,6 +371,11 @@ function tableOnReady() {
         var vardriveAfterClose = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
         var varuseXmasLevel = $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked');
         var varbetweenPosition = $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked');
+        var varenableAlarmWind1 = $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').prop('checked');
+        var varenableAlarmWind2 = $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').prop('checked');
+        var varenableAlarmRain = $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked');
+        var varenableAlarmFrost = $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked');
+        var varenableAlarmFire = $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked');
 
         if (varuseXmasLevel == true) {
             $('.col-XmasLevel').show();
@@ -319,6 +394,11 @@ function tableOnReady() {
         $('#driveAfterClose').prop('checked', vardriveAfterClose);
         $('#useXmasLevel').prop('checked', varuseXmasLevel);
         $('#betweenPosition').prop('checked', varbetweenPosition);
+        $('#enableAlarmWind1').prop('checked', varenableAlarmWind1);
+        $('#enableAlarmWind2').prop('checked', varenableAlarmWind2);
+        $('#enableAlarmRain').prop('checked', varenableAlarmRain);
+        $('#enableAlarmFrost').prop('checked', varenableAlarmFrost);
+        $('#enableAlarmFire').prop('checked', varenableAlarmFire);
 
         setTimeout(function () {
             initDialogShutter(function (sid) {
@@ -326,8 +406,10 @@ function tableOnReady() {
                 var newHeightUp = $('#heightUpShutter').val();
                 var newHeightDown = $('#heightDownShutter').val();
                 var newTriggerDrive = $('#triggerDriveShutter').val();
+                var newTriggerDriveTildet = $('#triggerDriveTildetShutter').val();
                 var newElevation = $('#elevationShutter').val();
                 var newTriggerState = $('#triggerStateShutter').val();
+                var newTriggerStateTilted = $('#triggerStateTiltedShutter').val();
                 var newTriggerChange = $('#triggerChangeShutter').val();
                 var newTemInside = $('#tempInside').val();
                 var newHeightDownSun = $('#heightDownSun').val();
@@ -350,6 +432,12 @@ function tableOnReady() {
                 var betweenPositionLevel = $('#betweenPositionLevel').val();
                 var trigDelyUp = $('#trigDelyUp').val();
                 var trigDelyDown = $('#trigDelyDown').val();
+                var sunProtectEndDely = $('#sunProtectEndDely').val();
+                var newalarmWind1Level = $('#alarmWind1Level').val();
+                var newalarmWind2Level = $('#alarmWind2Level').val();
+                var newalarmRainLevel = $('#alarmRainLevel').val();
+                var newalarmFrostLevel = $('#alarmFrostLevel').val();
+                var newalarmFireLevel = $('#alarmFireLevel').val();
                 // bolean
                 var newLateDown = $('#LateDown').prop('checked');
                 var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
@@ -357,6 +445,11 @@ function tableOnReady() {
                 var newdriveAfterClose = $('#driveAfterClose').prop('checked');
                 var newuseXmasLevel = $('#useXmasLevel').prop('checked');
                 var newbetweenPosition = $('#betweenPosition').prop('checked');
+                var newenableAlarmWind1 = $('#enableAlarmWind1').prop('checked');
+                var newenableAlarmWind2 = $('#enableAlarmWind2').prop('checked');
+                var newenableAlarmRain = $('#enableAlarmRain').prop('checked');
+                var newenableAlarmFrost = $('#enableAlarmFrost').prop('checked');
+                var newenableAlarmFire = $('#enableAlarmFire').prop('checked');
 
                 // value
                 $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -372,8 +465,10 @@ function tableOnReady() {
                 $('#events .values-input[data-name="heightUp"][data-index="' + id + '"]').val(newHeightUp).trigger('change');
                 $('#events .values-input[data-name="heightDown"][data-index="' + id + '"]').val(newHeightDown).trigger('change');
                 $('#events .values-input[data-name="triggerDrive"][data-index="' + id + '"]').val(newTriggerDrive).trigger('change');
+                $('#events .values-input[data-name="triggerDriveTildet"][data-index="' + id + '"]').val(newTriggerDriveTildet).trigger('change');
                 $('#events .values-input[data-name="elevation"][data-index="' + id + '"]').val(newElevation).trigger('change');
                 $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val(newTriggerState).trigger('change');
+                $('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val(newTriggerStateTilted).trigger('change');
                 $('#events .values-input[data-name="triggerChange"][data-index="' + id + '"]').val(newTriggerChange).trigger('change');
                 $('#events .values-input[data-name="typeDown"][data-index="' + id + '"]').val(newTypeDown).trigger('change');
                 $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val(newTypeUp).trigger('change');
@@ -386,6 +481,12 @@ function tableOnReady() {
                 $('#events .values-input[data-name="betweenPositionLevel"][data-index="' + id + '"]').val(betweenPositionLevel).trigger('change');
                 $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val(trigDelyUp).trigger('change');
                 $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val(trigDelyDown).trigger('change');
+                $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val(sunProtectEndDely).trigger('change');
+                $('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val(newalarmWind1Level).trigger('change');
+                $('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val(newalarmWind2Level).trigger('change');
+                $('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val(newalarmRainLevel).trigger('change');
+                $('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val(newalarmFrostLevel).trigger('change');
+                $('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val(newalarmFireLevel).trigger('change');
                 // bolean
                 $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                 $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
@@ -393,6 +494,11 @@ function tableOnReady() {
                 $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
                 $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked', newuseXmasLevel).trigger('change');
                 $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked', newbetweenPosition).trigger('change');
+                $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').prop('checked', newenableAlarmWind1).trigger('change');
+                $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').prop('checked', newenableAlarmWind2).trigger('change');
+                $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked', newenableAlarmRain).trigger('change');
+                $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked', newenableAlarmFrost).trigger('change');
+                $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked', newenableAlarmFire).trigger('change');
             });
         }, 20)
     });
@@ -402,7 +508,7 @@ function tableOnReady() {
 function save(callback) {
     // select elements with class=value and build settings object
     var obj = {};
-    $('.value').each(function () {
+    $('#mainSettings .value').each(function () {
         var $this = $(this);
         if ($this.attr('type') === 'checkbox') {
             obj[$this.attr('id')] = $this.prop('checked');

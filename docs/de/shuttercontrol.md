@@ -276,6 +276,40 @@ Mit diesem Auslöser wird der Automodus des Wohnbereichs aktiviert.
 **Objekt ID des Triggers für den Kinderbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.
 
+---
+### Alarm-Einstelljungen
+![extraSettingsExtra](img/Shuttercontrol Alarm Settings.png)
+Shuttercontrol kennt nachfolgenden Alarme. Bei jedem Alarm kann zu dessen Ansteuerung ein logischter Datenpunkt (true/false) konfiguriert werden.
+Status true = Alarm ist aktiv
+Status false = Alarm ist NICHT aktiv
+Weiter kann bei jedem Alarm festgelegt werden, auf welche Höhe im Alarm-Fall gefahren werden muss. 
+In den Rollo Extra-Einstellungen wird dann definiert, auf welche Alarme der entsprechende Rollo reagieren soll.
+verfügbare Alarme:
+- Wind 1
+- Wind 2
+- Regen
+- Frost
+- Feuer / Einbruch
+
+Prioritäten der einzelnen Alarme:
+Prio 1 -- 	Feuer- / Einbruchalarm: Höchste Priorität hat der Feuer / Einbruch Alarm. Wird dieser ausgelöst, fahren die dafür konfigurierten 
+			Rollo in jedem Fall auf die eingestellte Höhe. Die Rollos sind danach blockiert und schliessen NICHT mehr automatisch, auch nicht wenn 
+			der Feueralarm zurück gesetzt wird (false). Die Rollos müssen in diesem Fall nach der Rücknahme des Feueralarms zwingend 
+			mittels Buttons "openAll" / "closeAll" neu initialisiert werden!! 
+			Damit wird verhindert, dass im Brandfall aus irgendwelchen Gründen die Rollos automatisch wieder geschlossen werden. Weiter wird sichergestellt,
+			dass Fluchtwege offen bleiben und der Zugriff für die Feuerwehr gewährleistet wird.
+			
+Prio 2 - 5	Regen, Wind2, Wind1, Frost: Die Aktivierung dieser Alarme werden gleich priorisiert. D.h. Shuttercontrol fährt die als letztes aktiv gesetzte Alarm Höhe. 
+			Beim deaktivieren der einzelnen Alarme wird aber auf folgende Priorität geachtet:
+			Prio 1 = Feuter / Einbruch
+			Prio 2 = Regenalarm
+			Prio 3 = Wind 2
+			Prio 4 = Wind 1
+			Prio 5 = Frost
+
+Der Frost Alarm wirkt sich nur dann direkt aus, wenn die aktivierten Rollos bereits geschlossen sind (Gefahr von Festfrieren des Rollos). Wenn der Frostalarm
+bei noch offenem Rollo ausgelöst wird, fährt der Rollo beim Schliessen automatisch nur auf die für Frostalarm eingestelle Höhe. 
+
 
 ---
 ## Individuelle Rollladeneinstellungen
@@ -352,6 +386,16 @@ Hier wird der Wert festgelegt den der Auslöser unter **Objekt-ID des Fenster/T�
 
 Ist der Rollladen nicht in der obersten Position und ändert sich der hier angegebene
 Sensorstatus, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
+
+**Wert des Fenster/Tür Sensors im gekippten Zustand:**  
+Hier wird der Wert festgelegt den der Auslöser unter **Objekt-ID des Fenster/Tür Kontaktes**
+(z.B. Fenster- oder Drehgriffkontakt) hat, bei der die Rollladenautomatik unbegrenzt fahren darf.
+> Es können Werte wie true, false, 0, 1 oder 2 ausgewählt werden.
+
+Ist der Rollladen nicht in der obersten Position und ändert sich der hier angegebene
+Sensorstatus, fährt der Rollladen auf die **Rollladenhöhe bei öffnen des Fensters oder Tür**.
+
+***Wer keinen Fensterkontakt mit Kippfunktion hat, sollte diesen Werte auf "keins" stellen.***
 
 **Rollladen fahren bei Änderung des Fenster/Tür Zustandes:**  
 Pulldown zur Auswahl der Funktion, die bei Bewegung des Fenster/Tür Sensors
@@ -528,6 +572,13 @@ Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fähr
 Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt),
 und lediglich die Lamellen auf und zu fahren.
 
+**Verzögerung bis Beschattung beendet wird**
+Mit dieser Zeiteinstellung (Angabe in Minuten) wird festgelegt, wie lange der Rollo im Sonnenschutz verbleibt, 
+obwohl keine Sonnenschutzanfoderung mehr besteht. (Hysterese des Lichtsensors unterschritten). 
+Wird während der eingestellten Zeit erneut eine Sonnenschutzanforderung generiert, wird der Timer gestoppt
+und beim nächsten Unterschreiten der Lichtsensor Hysterese erneut gestartet. 
+Dieser Parameter kann verhindern, dass der Rollo bei wechselnder Bewölkung immer wieder runter und hoch fährt.
+
 > Hinweis:  
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
 automatisch angefahrenen, setzt die Automatik aus!  
@@ -546,6 +597,10 @@ Parameter um das Schliessen des Rollladens zu verzögern, nachdem das Fenster/T�
 
 **In Zwischenposition fahren und später komplett schliessen**
 Bei Aktivierung wird **Rollladenhöhe in der Zwischenposition** sichtbar. Der Rollladen fährt dann 
+
+**Alarm Einstellungen**
+Zum Aktivieren/Deaktivieren des vordefinierten Alarms (Alarm Einstellungen) für den aktuellen Rollo. Der Rollo 
+reagiert bei Aktivierung auf das entsprechende Alarm Signal und fährt bei aktivem Alarm auf die vordefinierte Höhe.
 
 ## Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
