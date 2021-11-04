@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "用于激活/停用儿童汽车区域的对象ID（例如，存在检测）",
     "Object ID of trigger for Auto Living": "用於激活/停用汽車居住區域的對象ID（例如，存在檢測）",
     "Object ID of trigger for Auto Sleep": "用於激活/停用自動睡眠區域的對象ID（例如，存在檢測）",
+    "Object ID to activate / deactivate the school holidays": "用于激活/停用学校假期的对象 ID",
     "Object-ID shutter": "對象ID捲簾門",
     "Ok": "好",
     "Select": "選擇",

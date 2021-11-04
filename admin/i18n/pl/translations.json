@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "Identyfikator obiektu do aktywacji / dezaktywacji obszaru samochodu dziecięcego (np. Wykrywanie obecności)",
     "Object ID of trigger for Auto Living": "Identyfikator obiektu do aktywacji / dezaktywacji strefy życia samochodu (np. Wykrywanie obecności)",
     "Object ID of trigger for Auto Sleep": "Identyfikator obiektu, aby włączyć / wyłączyć automatyczne miejsce do spania (np. Wykrywanie obecności)",
+    "Object ID to activate / deactivate the school holidays": "Identyfikator obiektu do aktywacji / dezaktywacji wakacji szkolnych",
     "Object-ID shutter": "Roleta obiektowa ID",
     "Ok": "dobrze",
     "Select": "Wybierać",

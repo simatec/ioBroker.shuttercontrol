@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "news": {
+      "1.3.1": {
+        "en": "Bugfix BrightnessSensor, Object-ID for school holidays added",
+        "de": "Bugfix Helligkeitssensor, Objekt-ID für Schulferien hinzugefügt",
+        "ru": "Исправление ошибки BrightnessSensor, добавлен Object-ID для школьных каникул.",
+        "pt": "Bugfix BrightnessSensor, Object-ID para férias escolares adicionado",
+        "nl": "Bugfix BrightnessSensor, Object-ID voor schoolvakanties toegevoegd",
+        "fr": "Correction de bug BrightnessSensor, Object-ID pour les vacances scolaires ajouté",
+        "it": "Bugfix BrightnessSensor, Object-ID per le vacanze scolastiche aggiunto",
+        "es": "Bugfix BrightnessSensor, Object-ID para vacaciones escolares agregado",
+        "pl": "Poprawiono błąd BrightnessSensor, dodano identyfikator obiektu dla wakacji szkolnych",
+        "zh-cn": "修正了亮度传感器，添加了学校假期的对象 ID"
+      },
       "1.3.0": {
         "en": "many small BugFix, DEPENDENCIES updated, alarm function added, Trigger Tilted Window / Door added, new Feature Sunprotect end Delay added, Bugfix in window trigger, new Features in Docu added",
         "de": "viele kleine BugFix, ABHÄNGIGKEITEN aktualisiert, Alarmfunktion hinzugefügt, Auslöser gekipptes Fenster / Tür hinzugefügt, neues Feature Sonnenschutz Ende Verzögerung hinzugefügt, Bugfix im Fensterauslöser, neue Features in Doku hinzugefügt",
@@ -98,18 +110,6 @@
         "es": "corrección de errores en Navidad, función de copia para la mesa de obturación agregada",
         "pl": "naprawiono błąd świątecznego czasu, dodano funkcję kopiowania stolika migawki",
         "zh-cn": "错误修复圣诞节时间，添加了快门表复制功能"
-      },
-      "1.1.0": {
-        "en": "GUI redesign, Intermediate position added for closing",
-        "de": "Neugestaltung der Benutzeroberfläche, Zwischenposition zum Schließen hinzugefügt",
-        "ru": "Редизайн графического интерфейса, добавлена промежуточная позиция для закрытия",
-        "pt": "Redesenho da GUI, posição intermediária adicionada para fechamento",
-        "nl": "GUI herontwerp, tussenliggende positie toegevoegd voor sluiten",
-        "fr": "Refonte de l'interface graphique, ajout de la position intermédiaire pour la fermeture",
-        "it": "Riprogettazione GUI, aggiunta posizione intermedia per la chiusura",
-        "es": "Rediseño de GUI, posición intermedia agregada para cerrar",
-        "pl": "Przeprojektowanie GUI, dodano pozycję pośrednią do zamknięcia",
-        "zh-cn": "GUI重新设计，增加了中间位置以进行关闭"
       }
     },
     "title": "shuttercontrol",
@@ -180,6 +180,7 @@
     "publicHolidays": true,
     "publicHolInstance": "",
     "HolidayDP": "",
+    "schoolfreeDP": "",
     "UseSunMode": true,
     "currentShutterState": false,
     "currentShutterStateTime": 60,
@@ -370,6 +371,19 @@
       "common": {
         "role": "switch",
         "name": "Holiday",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "control.schoolfree",
+      "type": "state",
+      "common": {
+        "role": "switch",
+        "name": "Schoolfree",
         "type": "boolean",
         "read": true,
         "write": true,

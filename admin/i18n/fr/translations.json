@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "ID d'objet pour activer / désactiver la zone de voiture de l'enfant (par ex. Détection de présence)",
     "Object ID of trigger for Auto Living": "ID d'objet pour activer / désactiver la zone d'habitation de la voiture (par exemple, détection de présence)",
     "Object ID of trigger for Auto Sleep": "ID d'objet pour activer / désactiver la zone de sommeil automatique (par exemple, détection de présence)",
+    "Object ID to activate / deactivate the school holidays": "ID d'objet pour activer/désactiver les vacances scolaires",
     "Object-ID shutter": "Volet roulant Object ID",
     "Ok": "D'accord",
     "Select": "Choisir",
