@@ -8,10 +8,7 @@ updates:
       timezone: Europe/Berlin
     # to pip against the `develop` branch
     target-branch: "dev"
-    # Labels on pull requests for version updates only
-    labels:
-      - "pip dependencies"
-      
+
   - package-ecosystem: npm
     directory: "/"
     schedule:
