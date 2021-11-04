@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "ID oggetto per attivare / disattivare l'area auto del bambino (es. Rilevamento presenza)",
     "Object ID of trigger for Auto Living": "ID oggetto per attivare / disattivare la zona abitativa dell'auto (ad es. Rilevamento di presenza)",
     "Object ID of trigger for Auto Sleep": "ID oggetto per attivare / disattivare la zona notte automatica (ad es. Rilevamento presenza)",
+    "Object ID to activate / deactivate the school holidays": "ID oggetto per attivare/disattivare le vacanze scolastiche",
     "Object-ID shutter": "Tapparella ID oggetto",
     "Ok": "ok",
     "Select": "Scegliere",

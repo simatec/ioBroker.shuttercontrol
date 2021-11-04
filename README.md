@@ -45,6 +45,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.3.1 (2021-11-04)
+* (simatec) Bugfix BrightnessSensor
+* (simatec) Object-ID for school holidays added
+
 ### 1.3.0 (2021-11-03)
 * (FoxRo) alarm function added
 * (simatec) Trigger Tilted Window / Door added

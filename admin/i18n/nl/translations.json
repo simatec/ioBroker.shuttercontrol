@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "Object-ID voor het activeren / deactiveren van het kinderwagengebied (bijv. Aanwezigheidsdetectie)",
     "Object ID of trigger for Auto Living": "Object-ID om het woongedeelte van de auto te activeren / deactiveren (bijv. Aanwezigheidsdetectie)",
     "Object ID of trigger for Auto Sleep": "Object-ID om het automatische slaapgedeelte te activeren / deactiveren (bijv. Aanwezigheidsdetectie)",
+    "Object ID to activate / deactivate the school holidays": "Object-ID om de schoolvakanties te activeren / deactiveren",
     "Object-ID shutter": "Object ID rolluik",
     "Ok": "OK",
     "Select": "Kiezen",

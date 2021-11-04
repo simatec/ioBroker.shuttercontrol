@@ -186,6 +186,17 @@ function load(settings, onChange) {
             });
         });
     });
+
+    $('#schoolfreeDPPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#schoolfreeDP').val(), function (newId) {
+                if (newId) {
+                    $('#schoolfreeDP').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+
     $('#LightsensorUpDownPopUp').on('click', function () {
         initSelectId(function (sid) {
             sid.selectId('show', $('#lightsensorUpDown').val(), function (newId) {
@@ -535,6 +546,11 @@ function showHideSettings() {
         $('.schoolf').show();
     } else {
         $('.schoolf').hide();
+    }
+    if ($('#schoolfree').prop('checked')) {
+        $('.schoolf_off').hide();
+    } else {
+        $('.schoolf_off').show();
     }
     if ($('#currentShutterState').prop('checked')) {
         $('.checkShutterState').show();

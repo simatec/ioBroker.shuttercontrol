@@ -55,6 +55,7 @@
     "Object ID of trigger for Auto Children": "Object ID to activate / deactivate the child's car area (e.g. presence detection)",
     "Object ID of trigger for Auto Living": "Object ID to activate / deactivate the car living area (e.g. presence detection)",
     "Object ID of trigger for Auto Sleep": "Object ID to activate / deactivate the auto sleeping area (e.g. presence detection)",
+    "Object ID to activate / deactivate the school holidays": "Object ID to activate / deactivate the school holidays",
     "Object-ID shutter": "Object ID roller shutter",
     "Ok": "OK",
     "Select": "Choose",
