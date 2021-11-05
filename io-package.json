@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "news": {
+      "1.3.2": {
+        "en": "Bugfix BrightnessSensor, lastAutoAction in array added, Bugfix Log for alarm",
+        "de": "Bugfix BrightnessSensor, lastAutoAction im Array hinzugefügt, Bugfix Log für Alarm",
+        "ru": "Исправление ошибок BrightnessSensor, добавлено lastAutoAction в массиве, журнал исправлений ошибок",
+        "pt": "Bugfix BrightnessSensor, lastAutoAction na matriz adicionada, Bugfix Log para alarme",
+        "nl": "Bugfix BrightnessSensor, lastAutoAction in array toegevoegd, Bugfix Log voor alarm",
+        "fr": "Bugfix BrightnessSensor, lastAutoAction dans le tableau ajouté, Bugfix Log pour alarme",
+        "it": "Bugfix BrightnessSensor, aggiunta lastAutoAction nell'array, Bugfix Log per allarme",
+        "es": "Bugfix BrightnessSensor, lastAutoAction en la matriz agregada, registro de corrección de errores para alarma",
+        "pl": "Bugfix BrightnessSensor, dodana lastAutoAction w tablicy, Bugfix Log dla alarmu",
+        "zh-cn": "修正 BrightnessSensor，添加数组中的 lastAutoAction，修正报警日志"
+      },
       "1.3.1": {
         "en": "Bugfix BrightnessSensor, Object-ID for school holidays added",
         "de": "Bugfix Helligkeitssensor, Objekt-ID für Schulferien hinzugefügt",
@@ -98,18 +110,6 @@
         "es": "pequeña solución para el estado de vacaciones",
         "pl": "mała poprawka dla stanu wakacyjnego",
         "zh-cn": "假期状态的小解决方案"
-      },
-      "1.1.1": {
-        "en": "bug fix xmas time, copy function for shutter-table added",
-        "de": "Bugfix Weihnachtszeit, Kopierfunktion für Rollladen-Tabelle hinzugefügt",
-        "ru": "исправлена ошибка рождественского времени, добавлена функция копирования для шторного стола",
-        "pt": "bug corrigido natal, função de cópia para a mesa do obturador adicionada",
-        "nl": "bug fix xmas time, kopieerfunctie voor shutter-table toegevoegd",
-        "fr": "correction de bogue à l'heure de Noël, fonction de copie pour la table d'obturation ajoutée",
-        "it": "correzione di bug nel periodo natalizio, aggiunta della funzione di copia per il tavolo delle tapparelle",
-        "es": "corrección de errores en Navidad, función de copia para la mesa de obturación agregada",
-        "pl": "naprawiono błąd świątecznego czasu, dodano funkcję kopiowania stolika migawki",
-        "zh-cn": "错误修复圣诞节时间，添加了快门表复制功能"
       }
     },
     "title": "shuttercontrol",

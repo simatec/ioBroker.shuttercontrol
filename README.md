@@ -45,6 +45,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 1.3.2 (2021-11-05)
+* (simatec) Bugfix BrightnessSensor
+* (simatec) lastAutoAction in array added
+* (simatec) Bugfix Log for alarm
+
 ### 1.3.1 (2021-11-04)
 * (simatec) Bugfix BrightnessSensor
 * (simatec) Object-ID for school holidays added
