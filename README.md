@@ -7,7 +7,6 @@
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
 [![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
-[![Dependency Status](https://img.shields.io/david/simatec/iobroker.shuttercontrol.svg)](https://david-dm.org/simatec/iobroker.shuttercontrol)
 [![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol)
 [![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
 ![Test and Release](https://github.com/simatec/ioBroker.shuttercontrol/workflows/Test%20and%20Release/badge.svg)
