@@ -3,17 +3,16 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: monthly
+      interval: weekly
       time: "04:00"
       timezone: Europe/Berlin
-    # to pip against the `develop` branch
     target-branch: "dev"
 
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: monthly
+      interval: weekly
       time: "04:00"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 10
     versioning-strategy: increase

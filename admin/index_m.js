@@ -375,6 +375,7 @@ function tableOnReady() {
         $('#alarmRainLevel').val($('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val());
         $('#alarmFrostLevel').val($('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val());
         $('#alarmFireLevel').val($('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val());
+        
         // bolean
         var varLateDown = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
         var varinSummerNotDown = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');

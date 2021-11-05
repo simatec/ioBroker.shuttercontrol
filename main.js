@@ -430,6 +430,7 @@ function saveCurrentStates(onStart) {
                     currentStates[`${nameDevice}`].firstCompleteUp = shutterSettings[s].firstCompleteUp;
                     currentStates[`${nameDevice}`].alarmTriggerAction = shutterSettings[s].alarmTriggerAction;
                     currentStates[`${nameDevice}`].alarmTriggerLevel = shutterSettings[s].alarmTriggerLevel;
+                    currentStates[`${nameDevice}`].lastAutoAction = shutterSettings[s].lastAutoAction;
                 } else if (currentStates && currentStates[`${nameDevice}`] && onStart) {
                     adapter.log.debug(nameDevice + ': save settings');
                     shutterSettings[s].currentAction = currentStates[`${nameDevice}`].currentAction;
@@ -440,6 +441,7 @@ function saveCurrentStates(onStart) {
                     shutterSettings[s].firstCompleteUp = currentStates[`${nameDevice}`].firstCompleteUp;
                     shutterSettings[s].alarmTriggerAction = currentStates[`${nameDevice}`].alarmTriggerAction;
                     shutterSettings[s].alarmTriggerLevel = currentStates[`${nameDevice}`].alarmTriggerLevel;
+                    shutterSettings[s].lastAutoAction = currentStates[`${nameDevice}`].lastAutoAction;
                 } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
                     adapter.log.debug(nameDevice + ': settings added');
                     currentStates[`${nameDevice}`] = null;
@@ -453,7 +455,8 @@ function saveCurrentStates(onStart) {
                         "oldHeight": shutterSettings[s].oldHeight,
                         "firstCompleteUp": shutterSettings[s].firstCompleteUp,
                         "alarmTriggerLevel":shutterSettings[s].alarmTriggerLevel,
-                        "alarmTriggerAction": shutterSettings[s].alarmTriggerAction
+                        "alarmTriggerAction": shutterSettings[s].alarmTriggerAction,
+                        "lastAutoAction": shutterSettings[s].lastAutoAction
                     });
 
                     currentStates[`${nameDevice}`] = states;
