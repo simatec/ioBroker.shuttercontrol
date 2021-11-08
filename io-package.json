@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.2",
+    "version": "1.3.3",
     "news": {
+      "1.3.3": {
+        "en": "Bugfix trigger Tilted",
+        "de": "Bugfix-Trigger gekippt",
+        "ru": "Триггер исправления наклонен",
+        "pt": "Gatilho de correção de bug inclinado",
+        "nl": "Bugfix-trigger Gekanteld",
+        "fr": "Déclencheur de correction de bugs",
+        "it": "Bugfix trigger Inclinato",
+        "es": "Disparador de corrección de errores inclinado",
+        "pl": "Wyzwalacz naprawczy Przechylony",
+        "zh-cn": "错误修正触发器倾斜"
+      },
       "1.3.2": {
         "en": "Bugfix BrightnessSensor, lastAutoAction in array added, Bugfix Log for alarm",
         "de": "Bugfix BrightnessSensor, lastAutoAction im Array hinzugefügt, Bugfix Log für Alarm",
@@ -98,18 +110,6 @@
         "es": "pequeña solución para objetos",
         "pl": "mała poprawka do przedmiotów",
         "zh-cn": "小物件修复"
-      },
-      "1.1.2": {
-        "en": "small fix for holiday state",
-        "de": "kleiner Fix für Urlaubszustand",
-        "ru": "небольшое исправление для праздничного состояния",
-        "pt": "pequena correção para feriado",
-        "nl": "kleine oplossing voor vakantiestaat",
-        "fr": "petite correction pour l'état de vacances",
-        "it": "piccola correzione per lo stato di vacanza",
-        "es": "pequeña solución para el estado de vacaciones",
-        "pl": "mała poprawka dla stanu wakacyjnego",
-        "zh-cn": "假期状态的小解决方案"
       }
     },
     "title": "shuttercontrol",

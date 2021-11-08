@@ -328,7 +328,7 @@ function startAdapter(options) {
                                 //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
                                 // enable possibility to activate sunprotect height if required --> 
                                 // if sunprotect is required: shutter is set to sunProtect height
-                                if (shutterSettings[s].firstCompleteUp == true && state.val == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' ) {
+                                if (shutterSettings[s].firstCompleteUp == true && state.val == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted') {
                                     shutterSettings[s].currentHeight = state.val;
                                     shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
                                     adapter.setState('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
@@ -336,7 +336,7 @@ function startAdapter(options) {
                                     shutterSettings[s].firstCompleteUp = false;
                                     adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                                 }
-                                if (shutterSettings[s].firstCompleteUp == true && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'none' && (state.val == shutterSettings[s].heightUp || state.val == shutterSettings[s].heightDownSun)) {
+                                if (shutterSettings[s].firstCompleteUp == true && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted' && shutterSettings[s].currentAction != 'none' && (state.val == shutterSettings[s].heightUp || state.val == shutterSettings[s].heightDownSun)) {
                                     shutterSettings[s].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
                                 }
                                 //save old height
