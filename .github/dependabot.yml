@@ -7,7 +7,8 @@ updates:
       time: "04:00"
       timezone: Europe/Berlin
     target-branch: "dev"
-
+    labels:
+      - "dev dependencies"
   - package-ecosystem: npm
     directory: "/"
     schedule:
