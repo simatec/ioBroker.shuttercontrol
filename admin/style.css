@@ -25,6 +25,14 @@
 .m .row .col.m1 { width: 14%;}
 #tab-area { padding-left:0;padding-right:0; margin-top: 0px; margin-bottom: 1px; background-color:#174475; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) }
 
+/* Tabs menu react-dark */
+.m.react-dark .tabs .tab a.active, .m .tabs .tab a:hover { color: #2196f3; }
+.m.react-dark .tabs { background-color: #272727 !important;}
+
+/* Tabs menu react-blue */
+.m.react-blue .tabs .tab a.active, .m .tabs .tab a:hover { color: #2196f3; }
+.m.react-blue .tabs { background-color: #272727 !important;}
+
 .m .col .select-wrapper + label {
     top: -26px;
 }
