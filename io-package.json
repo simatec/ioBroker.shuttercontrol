@@ -1,20 +1,8 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.4",
+    "version": "1.3.3",
     "news": {
-      "1.3.4": {
-        "en": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES updated\nDev-DEPENDENCIES updated",
-        "de": "Bugfix BrightnessSensor\nFix Delay mit Wert 0\nABHÄNGIGKEITEN aktualisiert\nDev-ABHÄNGIGKEITEN aktualisiert",
-        "ru": "Исправление ошибки BrightnessSensor\nИсправить задержку со значением 0\nЗависимости обновлены\nDev-DEPENDENCIES обновлены",
-        "pt": "Correção de bug BrightnessSensor\nFix Delay com valor 0\nDEPENDENCIES atualizado\nDev-DEPENDENCIES atualizado",
-        "nl": "Bugfix BrightnessSensor\nVertraging repareren met waarde 0\nDEPENDENCIES bijgewerkt\nDev-DEPENDENCIES bijgewerkt",
-        "fr": "Bugfix BrightnessSensor\nFix Delay avec la valeur 0\nDEPENDENCIES mis à jour\nDev-DEPENDENCIES mis à jour",
-        "it": "Bugfix BrightnessSensor\nFix ritardo con valore 0\nDEPENDENCIES aggiornato\nDev-DEPENDENCIES aggiornato",
-        "es": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES actualizado\nDev-DEPENDENCIES actualizado",
-        "pl": "Poprawka błędu czujnika jasności\nNapraw opóźnienie o wartości 0\nZaktualizowano DEPENDENCIES\nZaktualizowano DEPENDENCIES",
-        "zh-cn": "修正 BrightnessSensor\n修正延迟，值为 0\nDEPENDENCIES 已更新\nDev-DEPENDENCIES 已更新"
-      },
       "1.3.3": {
         "en": "Bugfix trigger Tilted",
         "de": "Bugfix-Trigger gekippt",
