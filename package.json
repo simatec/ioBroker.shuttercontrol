@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shuttercontrol",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Automatic control for shutters",
   "author": {
     "name": "simatec",
@@ -41,7 +41,7 @@
     "axios": "^0.24.0",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^8.2.0",
+    "eslint": "^8.1.0",
     "gulp": "^4.0.2",
     "mocha": "^9.1.3",
     "proxyquire": "^2.1.3",

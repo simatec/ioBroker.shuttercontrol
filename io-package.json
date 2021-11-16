@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.3",
+    "version": "1.3.4",
     "news": {
+      "1.3.4": {
+        "en": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES updated\nDev-DEPENDENCIES updated",
+        "de": "Bugfix Helligkeitssensor\nFix Delay mit Wert 0\nABHÄNGIGKEITEN aktualisiert\nEntwickler-ABHÄNGIGKEITEN aktualisiert",
+        "ru": "Исправление ошибки BrightnessSensor\nИсправить задержку со значением 0\nЗАВИСИМОСТИ обновлены\nЗАВИСИМОСТЬ от разработчиков обновлена",
+        "pt": "Bugfix BrightnessSensor\nFix Delay com valor 0\nDEPENDENCIES atualizado\nDev-DEPENDENCIES atualizado",
+        "nl": "Bugfix HelderheidSensor\nFix Vertraging met waarde 0\nAFHANKELIJKHEDEN bijgewerkt\nDev-DEPENDENCES bijgewerkt",
+        "fr": "Correction de bug BrightnessSensor\nRetard fixe avec la valeur 0\nDÉPENDANCES mis à jour\nDev-DÉPENDANCES mis à jour",
+        "it": "Bugfix Sensore di luminosità\nRitardo fisso con valore 0\nDIPENDENZE aggiornato\nDev-DIPENDENZE aggiornate",
+        "es": "Sensor de brillo de corrección de errores\nRetardo fijo con valor 0\nDEPENDENCIAS actualizadas\nDev-DEPENDENCIES actualizado",
+        "pl": "Błąd czujnika jasności\nOpóźnienie napraw z wartością 0\nZaktualizowano ZALEŻNOŚCI\nZaktualizowano ZALEŻNOŚCI DEWELOPERÓW",
+        "zh-cn": "修正亮度传感器\n使用值 0 修复延迟\n更新依赖\nDev-DEPENDENCIES 更新"
+      },
       "1.3.3": {
         "en": "Bugfix trigger Tilted",
         "de": "Bugfix-Trigger gekippt",
@@ -74,30 +86,6 @@
         "es": "Se agregaron nuevos ajustes del obturador de características, se agregó un nuevo sensor de brillo de características para la apertura, se agregó un nuevo sensor de brillo de características para cerrar, se agregó un adaptador sin escuela de características nuevas, se agregó una posición intermedia de características nuevas, se agregó una posición de Navidad de características nuevas, corrección de errores, DEPENDENCIES actualizado, Dev-DEPENDENCIES actualizado, timeout configuración para el estado de las contraventanas agregadas",
         "pl": "dodano nowe ustawienia migawki funkcji, dodano nowy czujnik jasności funkcji do otwierania, dodano nowy czujnik jasności funkcji do zamykania, dodano nowy adapter szkolny funkcji, dodano nową pozycję środkową funkcji, dodano nową pozycję świąteczną funkcji, poprawkę błędu, zaktualizowano ZALEŻNOŚCI, zaktualizowano ZALEŻNOŚCI od deweloperów, przekroczono limit czasu dodano ustawienia statusu shutterstatus",
         "zh-cn": "添加了新的功能快门设置，添加了新的用于打开的功能亮度传感器，添加了新的用于关闭的功能亮度传感器，添加了新的功能免费学校适配器，添加了新的功能中间位置，添加了新的功能Xmas位置，错误修复，更新了DEPENDENCIES，Dev-DEPENDENCIES，超时添加了快门状态设置"
-      },
-      "1.1.5": {
-        "en": "BugFix io-package, Source code structure changed, new Feature trigger delay, Bugfix for trigger",
-        "de": "BugFix io-Paket, Quellcodestruktur geändert, neues Feature-Trigger-Verzögerung, Bugfix für Trigger",
-        "ru": "BugFix io-package, изменена структура исходного кода, новая функция задержки запуска, исправление ошибки для триггера",
-        "pt": "BugFix io-package, alteração da estrutura do código-fonte, novo atraso do acionador de recurso, Bugfix para acionador",
-        "nl": "Bugfix io-package, Broncode structuur gewijzigd, nieuwe functie triggervertraging, Bugfix voor trigger",
-        "fr": "BugFix io-package, structure du code source modifiée, nouveau délai de déclenchement de la fonctionnalité, correction de bug pour le déclenchement",
-        "it": "BugFix io-package, struttura del codice sorgente modificata, nuove funzionalità di ritardo del trigger, Bugfix per trigger",
-        "es": "BugFix io-package, estructura del código fuente cambiada, retardo de activación de nueva función, corrección de errores para disparador",
-        "pl": "BugFix io-pakiet, zmieniona struktura kodu źródłowego, nowe opóźnienie wyzwalania funkcji, poprawka błędu dla wyzwalacza",
-        "zh-cn": "BugFix io软件包，更改了源代码结构，新功能触发延迟，触发的错误修复"
-      },
-      "1.1.4": {
-        "en": "BugFix Log, DEPENDENCIES updated, Dev-DEPENDENCIES updated",
-        "de": "BugFix-Protokoll, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert",
-        "ru": "Журнал исправлений ошибок, Зависимости обновлены, Зависимости от разработчиков обновлены",
-        "pt": "BugFix Log, DEPENDENCIES atualizado, Dev-DEPENDENCIES atualizado",
-        "nl": "Bugfix Log, DEPENDENCIES bijgewerkt, Dev-DEPENDENCIES bijgewerkt",
-        "fr": "BugFix Log, DEPENDENCIES mis à jour, Dev-DEPENDENCIES mis à jour",
-        "it": "Registro BugFix, DEPENDENCIES aggiornato, Dev-DEPENDENCIES aggiornato",
-        "es": "BugFix Log, DEPENDENCIES actualizado, Dev-DEPENDENCIES actualizado",
-        "pl": "Dziennik poprawek błędów, zaktualizowano ZALEŻNOŚCI, zaktualizowano ZALEŻNOŚCI Dev",
-        "zh-cn": "BugFix日志，DEPENDENCIES已更新，Dev-DEPENDENCIES已更新"
       }
     },
     "title": "shuttercontrol",
