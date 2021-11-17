@@ -44,7 +44,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.3.5 (2021-11-16)
 * (simatec) Bugfix BrightnessSensor
 * (simatec) Fix Delay with value 0
 * (simatec) DEPENDENCIES updated
