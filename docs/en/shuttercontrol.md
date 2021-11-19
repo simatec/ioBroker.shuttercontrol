@@ -1,5 +1,19 @@
 ## Shuttercontrol is an adapter for the automatic control of roller shutters and awnings.
 
+![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
+![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
+[![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
+[![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol)
+[![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
+![Test and Release](https://github.com/simatec/ioBroker.shuttercontrol/workflows/Test%20and%20Release/badge.svg)
+
+
+**If you like it, please consider a donation:**
+  
+[![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q4EEXQ6U96ZTQ&source=url)
+
+
 # Basic
 As of version 0.2.11, all configuration data points are already preset with examples, so that the adapter is ready for operation after installation and entry of the IDs of the roller shutter actuators.
 The further configuration then serves to adapt to personal wishes.

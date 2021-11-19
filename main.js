@@ -8,23 +8,24 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SunCalc = require('suncalc2');
 
-const sunProtect = require('./lib/sunProtect.js');                              // SunProtect
-const triggerChange = require('./lib/triggerChange.js');                        // triggerChange
-const elevationDown = require('./lib/elevationDown.js');                        // elevationDown
-const shutterGoldenHour = require('./lib/shutterGoldenHour.js');                // shutterGoldenHour
-const shutterUpLiving = require('./lib/shutterUpLiving.js');                    // shutterUpLiving
-const shutterSunriseSunset = require('./lib/shutterSunriseSunset.js');          // shutterSunriseSunset
-const shutterDownLiving = require('./lib/shutterDownLiving.js');                // shutterDownLiving
-const shutterUpSleep = require('./lib/shutterUpSleep.js');                      // shutterUpSleep
-const shutterDownLate = require('./lib/shutterDownLate.js');                    // shutterDownLate
-const shutterDownChildren = require('./lib/shutterDownChildren.js');            // shutterDownChildren
-const shutterUpChildren = require('./lib/shutterUpChildren.js');                // shutterUpChildren
-const shutterDownSleep = require('./lib/shutterDownSleep.js');                  // shutterDownSleep
-const buttonAction = require('./lib/buttonAction.js');                          // buttonAction
-const shutterState = require('./lib/shutterState.js');        			        // shutterState
-const shutterDownComplete = require('./lib/shutterDownComplete.js');            // shutterDownComplete
-const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js');    // shutterBrightnessSensor
-const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;             // ShutterAlarm
+const sunProtect = require('./lib/sunProtect.js');                                                      // SunProtect
+const triggerChange = require('./lib/triggerChange.js');                                                // triggerChange
+const elevationDown = require('./lib/elevationDown.js');                                                // elevationDown
+const shutterGoldenHour = require('./lib/shutterGoldenHour.js');                                        // shutterGoldenHour
+const shutterUpLiving = require('./lib/shutterUpLiving.js');                                            // shutterUpLiving
+const shutterSunriseSunset = require('./lib/shutterSunriseSunset.js');                                  // shutterSunriseSunset
+const shutterDownLiving = require('./lib/shutterDownLiving.js');                                        // shutterDownLiving
+const shutterUpSleep = require('./lib/shutterUpSleep.js');                                              // shutterUpSleep
+const shutterDownLate = require('./lib/shutterDownLate.js');                                            // shutterDownLate
+const shutterDownChildren = require('./lib/shutterDownChildren.js');                                    // shutterDownChildren
+const shutterUpChildren = require('./lib/shutterUpChildren.js');                                        // shutterUpChildren
+const shutterDownSleep = require('./lib/shutterDownSleep.js');                                          // shutterDownSleep
+const buttonAction = require('./lib/buttonAction.js');                                                  // buttonAction
+const shutterState = require('./lib/shutterState.js');        			                                // shutterState
+const shutterDownComplete = require('./lib/shutterDownComplete.js');                                    // shutterDownComplete
+const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shutterBrightnessSensor;    // shutterBrightnessSensor
+const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
+const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
 
 
 /**
@@ -107,6 +108,8 @@ let timerDelete4;
 let timerwaitTime_StateCheck;
 let waitTime4StateCheck = 0;
 let shutterSettings;
+let timerBrightnessDown;
+let brightnessDown = false;
 
 /**
  * +++++++++++++++++++++++++++ Starts the adapter instance ++++++++++++++++++++++++++++++++
@@ -141,6 +144,7 @@ function startAdapter(options) {
             clearTimeout(timerDelete3);
             clearTimeout(timerDelete4);
             clearTimeout(timerwaitTime_StateCheck);
+            clearTimeout(timerBrightnessDown);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
             schedule.cancelJob('shutterDownGoldenHour');
@@ -232,26 +236,30 @@ function startAdapter(options) {
                 adapter.log.debug('Auto Children is: ' + state.val);
             }
             if (id === adapter.config.lightsensorUpDown) {
-                shutterBrightnessSensor(adapter, state.val, shutterSettings);
+                shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
                 adapter.log.debug('Brightness sensor value: ' + state.val);
+                timerBrightnessDown = setTimeout(function () {
+                    brightnessDown = brightnessState(adapter, state.val, brightnessDown);
+                    adapter.log.debug('Brightness State Down is: ' + brightnessDown);
+                }, 10000);
             }
-            if (id === adapter.config.alarmWind1 ) {
+            if (id === adapter.config.alarmWind1) {
                 adapter.log.debug('Alarm Wind 1 changed: ' + state.val);
                 shutterAlarm(adapter, 'alarmWind1', shutterSettings);
             }
-            if (id === adapter.config.alarmWind2 ) {
+            if (id === adapter.config.alarmWind2) {
                 adapter.log.debug('Alarm Wind 2 changed: ' + state.val);
                 shutterAlarm(adapter, 'alarmWind2', shutterSettings);
             }
-            if (id === adapter.config.alarmRain ) {
+            if (id === adapter.config.alarmRain) {
                 adapter.log.debug('Alarm Rain changed: ' + state.val);
                 shutterAlarm(adapter, 'alarmRain', shutterSettings);
             }
-            if (id === adapter.config.alarmFrost ) {
+            if (id === adapter.config.alarmFrost) {
                 adapter.log.debug('Alarm Frost changed: ' + state.val);
                 shutterAlarm(adapter, 'alarmFrost', shutterSettings);
             }
-            if (id === adapter.config.alarmFire ) {
+            if (id === adapter.config.alarmFire) {
                 adapter.log.debug('Alarm Fire changed: ' + state.val);
                 shutterAlarm(adapter, 'alarmFire', shutterSettings);
             }
@@ -280,7 +288,7 @@ function startAdapter(options) {
                     adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
-            });         
+            });
             resShutterState.forEach(function (resShutterID) {
                 if (id === resShutterID && state.ts === state.lc) {
                     resShutterChange = resShutterID;
@@ -454,7 +462,7 @@ function saveCurrentStates(onStart) {
                         "triggerHeight": shutterSettings[s].triggerHeight,
                         "oldHeight": shutterSettings[s].oldHeight,
                         "firstCompleteUp": shutterSettings[s].firstCompleteUp,
-                        "alarmTriggerLevel":shutterSettings[s].alarmTriggerLevel,
+                        "alarmTriggerLevel": shutterSettings[s].alarmTriggerLevel,
                         "alarmTriggerAction": shutterSettings[s].alarmTriggerAction,
                         "lastAutoAction": shutterSettings[s].lastAutoAction
                     });
@@ -499,7 +507,7 @@ function checkStates() {
      * @param {any} err
      * @param {{ val: null; } | null} state
      */
-     adapter.getState('control.schoolfree', (err, state) => {
+    adapter.getState('control.schoolfree', (err, state) => {
         if ((state && state === null) || (state && state.val === null)) {
             adapter.setState('control.schoolfree', { val: false, ack: true });
         }
@@ -551,7 +559,7 @@ function checkActualStates() {
      * @param {any} err
      * @param {{ val: any; }} state
      */
-     adapter.getState('control.schoolfree', (err, state) => {
+    adapter.getState('control.schoolfree', (err, state) => {
         if (state) {
             SchoolfreeStr = state.val;
         }
@@ -1937,7 +1945,14 @@ function main(adapter) {
     }
     if (adapter.config.lightsensorUpDown != '') {
         adapter.subscribeForeignStates(adapter.config.lightsensorUpDown);
+        adapter.getForeignState(adapter.config.lightsensorUpDown, (err, state) => {
+            if (state && state.val && state.val !== null) {
+                brightnessDown = brightnessState(adapter, state.val, brightnessDown);
+                adapter.log.debug('Brightness State Down is: ' + brightnessDown);
+            }
+        });
     }
+
     if (adapter.config.alarmWind1 != '') {
         adapter.subscribeForeignStates(adapter.config.alarmWind1);
     }
