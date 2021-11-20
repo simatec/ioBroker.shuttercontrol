@@ -45,6 +45,10 @@ When the adapter crashes or an other Code error happens, this error message that
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
+* (simatec) Bugfix XMas-Level
+* (simatec) Bugfix Down Complete
+
+### 1.3.7 (2021-11-19)
 * (simatec) brightness down State added
 * (simatec) BrightnessSensor fix
 
