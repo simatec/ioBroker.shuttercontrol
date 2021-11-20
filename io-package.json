@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.5",
+    "version": "1.3.6",
     "news": {
+      "1.3.6": {
+        "en": "small Bugfixes",
+        "de": "kleine Bugfixes",
+        "ru": "небольшие исправления",
+        "pt": "pequenas correções de bugs",
+        "nl": "kleine bugfixes",
+        "fr": "petites corrections de bugs",
+        "it": "piccole correzioni di bug",
+        "es": "pequeñas correcciones de errores",
+        "pl": "małe poprawki",
+        "zh-cn": "小错误修正"
+      },
       "1.3.5": {
         "en": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES updated\nDev-DEPENDENCIES updated",
         "de": "Bugfix Helligkeitssensor\nFix Delay mit Wert 0\nABHÄNGIGKEITEN aktualisiert\nEntwickler-ABHÄNGIGKEITEN aktualisiert",
@@ -74,18 +86,6 @@
         "es": "muchas pequeñas correcciones de errores, DEPENDENCIAS actualizadas, función de alarma agregada, ventana / puerta inclinada del gatillo agregada, nueva característica Sunprotect end Delay agregada, corrección de errores en el gatillo de la ventana, nuevas características en Docu agregadas",
         "pl": "wiele małych poprawek błędów, zaktualizowano DEPENDENCIES, dodano funkcję alarmu, dodano wyzwalanie uchylonego okna / drzwi, dodano nową funkcję Sunprotect end Delay, poprawkę błędu w wyzwalaniu okna, dodano nowe funkcje w Docu",
         "zh-cn": "许多小错误修正，更新了依赖项，添加了警报功能，添加了触发倾斜的窗户/门，添加了新功能防晒结束延迟，窗口触发器中的错误修复，添加了Docu中的新功能"
-      },
-      "1.2.1": {
-        "en": "many small BugFix, DEPENDENCIES updated, Dev-DEPENDENCIES updated, auto-mode button added",
-        "de": "viele kleine BugFix, DEPENDENCIES aktualisiert, Dev-DEPENDENCIES aktualisiert, Auto-Mode-Button hinzugefügt",
-        "ru": "много мелких исправлений ошибок, обновлено ЗАВИСИМОСТЬ, обновлено Dev-DEPENDENCIES, добавлена кнопка автоматического режима",
-        "pt": "muitos pequenos BugFix, DEPENDENCIES atualizado, Dev-DEPENDENCIES atualizado, botão de modo automático adicionado",
-        "nl": "veel kleine bugfixes, DEPENDENCIES bijgewerkt, Dev-DEPENDENCIES bijgewerkt, automatische modusknop toegevoegd",
-        "fr": "de nombreux petits BugFix, DEPENDENCIES mis à jour, Dev-DEPENDENCIES mis à jour, bouton de mode automatique ajouté",
-        "it": "molti piccoli BugFix, DIPENDENZE aggiornate, DEV-DEPENDENCIES aggiornate, pulsante modalità automatica aggiunto",
-        "es": "muchos pequeños BugFix, DEPENDENCIES actualizadas, Dev-DEPENDENCIES actualizado, botón de modo automático agregado",
-        "pl": "wiele małych poprawek błędów, zaktualizowano DEPENDENCIES, zaktualizowano DEPENDENCIES, dodano przycisk trybu automatycznego",
-        "zh-cn": "许多小错误修复，更新了依赖项，更新了开发依赖项，添加了自动模式按钮"
       }
     },
     "title": "shuttercontrol",
