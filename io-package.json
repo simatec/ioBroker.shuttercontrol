@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.7",
+    "version": "1.3.8",
     "news": {
+      "1.3.8": {
+        "en": "Bugfix XMas-Level\nBugfix Down Complete",
+        "de": "Bugfix XMas-Level\nBugfix unten abgeschlossen",
+        "ru": "Исправление ошибки XMas-Level\nИсправление ошибки завершено",
+        "pt": "Bugfix XMas-Level\nCorreção de bug concluída",
+        "nl": "Bugfix XMas-niveau\nBugfix down voltooid",
+        "fr": "Correction de bug au niveau XMas\nCorrection de bug terminée",
+        "it": "Bugfix a livello di Natale\nBugfix down completato",
+        "es": "Corrección de errores XMas-Level\nCorrección de errores completada",
+        "pl": "Naprawa błędów na poziomie świątecznym\nUkończono usuwanie błędów",
+        "zh-cn": "错误修复 XMas 级别\n错误修正完成"
+      },
       "1.3.7": {
         "en": "brightness down State added\nBrightnessSensor fix",
         "de": "Helligkeit nach unten Status hinzugefügt\nHelligkeitssensor behoben",
@@ -74,18 +86,6 @@
         "es": "Bugfix BrightnessSensor, lastAutoAction en la matriz agregada, registro de corrección de errores para alarma",
         "pl": "Bugfix BrightnessSensor, dodana lastAutoAction w tablicy, Bugfix Log dla alarmu",
         "zh-cn": "修正 BrightnessSensor，添加数组中的 lastAutoAction，修正报警日志"
-      },
-      "1.3.1": {
-        "en": "Bugfix BrightnessSensor, Object-ID for school holidays added",
-        "de": "Bugfix Helligkeitssensor, Objekt-ID für Schulferien hinzugefügt",
-        "ru": "Исправление ошибки BrightnessSensor, добавлен Object-ID для школьных каникул.",
-        "pt": "Bugfix BrightnessSensor, Object-ID para férias escolares adicionado",
-        "nl": "Bugfix BrightnessSensor, Object-ID voor schoolvakanties toegevoegd",
-        "fr": "Correction de bug BrightnessSensor, Object-ID pour les vacances scolaires ajouté",
-        "it": "Bugfix BrightnessSensor, Object-ID per le vacanze scolastiche aggiunto",
-        "es": "Bugfix BrightnessSensor, Object-ID para vacaciones escolares agregado",
-        "pl": "Poprawiono błąd BrightnessSensor, dodano identyfikator obiektu dla wakacji szkolnych",
-        "zh-cn": "修正了亮度传感器，添加了学校假期的对象 ID"
       }
     },
     "title": "shuttercontrol",
