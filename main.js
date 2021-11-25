@@ -27,14 +27,12 @@ const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shut
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
 
-
 /**
  * The adapter instance
  * @type {ioBroker.Adapter}
  */
 let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
-
 
 /** @type {boolean} */
 let autoLivingStr;
@@ -83,16 +81,6 @@ let ObjautoSun = [];
 let ObjautoState = [];
 /** @type {any[]} */
 let ObjautoLevel = [];
-/** @type {boolean} */
-let resAlarmWind1;
-/** @type {boolean} */
-let resAlarmWind2;
-/** @type {boolean} */
-let resAlarmRain;
-/**@type {boolean} */
-let resAlarmFrost;
-/** @type {boolean} */
-let resAlarmFire;
 /** @type {any[]} */
 let resShutterState = [];
 /** @type {number | undefined} */
@@ -1894,6 +1882,7 @@ function main(adapter) {
     adapter.getForeignObject('system.config', (err, obj) => {
         checkStates();
     });
+
     // read shutter settings from config
     shutterSettings = adapter.config.events;
     saveCurrentStates(true);
@@ -1903,12 +1892,9 @@ function main(adapter) {
             sunPos();
         });
     }, 2000);
+
     GetSystemData();
 
-
-
-
-    // in this template all states changes inside are subscribed
     adapter.subscribeStates('control.*');
     adapter.subscribeStates('info.Elevation');
     adapter.subscribeStates('info.Azimut');
