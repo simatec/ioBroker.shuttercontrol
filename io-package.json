@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.8",
+    "version": "1.3.9",
     "news": {
+      "1.3.9": {
+        "en": "Bugfix between Level\nmany small Bugfixes\ndocu updated\nDependencies updated\nDev-Dependencies updated",
+        "de": "Bugfix zwischen Level\nviele kleine Bugfixes\nDoku aktualisiert\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
+        "ru": "Исправление между уровнями\nмного мелких исправлений\nдокумент обновлен\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
+        "pt": "Correção de bug entre os níveis\nmuitas pequenas correções de bugs\ndocu atualizado\nDependências atualizadas\nDev-Dependencies atualizado",
+        "nl": "Bugfix tussen niveau\nveel kleine bugfixes\ndocument bijgewerkt\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "Correction de bug entre le niveau\nde nombreuses petites corrections de bugs\ndocument mis à jour\nDépendances mises à jour\nDépendances de développement mises à jour",
+        "it": "Bugfix tra i livelli\nmolti piccoli bug risolti\ndocumento aggiornato\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "Corrección de errores entre niveles\nmuchas pequeñas correcciones de errores\ndocumento actualizado\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "Poprawka błędu między poziomem\nwiele małych poprawek\nzaktualizowano dokument\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "级别之间的错误修复\n许多小错误修正\n文档更新\n更新了依赖项\n开发依赖更新"
+      },
       "1.3.8": {
         "en": "Bugfix XMas-Level\nBugfix Down Complete",
         "de": "Bugfix XMas-Level\nBugfix unten abgeschlossen",
@@ -74,18 +86,6 @@
         "es": "Disparador de corrección de errores inclinado",
         "pl": "Wyzwalacz naprawczy Przechylony",
         "zh-cn": "错误修正触发器倾斜"
-      },
-      "1.3.2": {
-        "en": "Bugfix BrightnessSensor, lastAutoAction in array added, Bugfix Log for alarm",
-        "de": "Bugfix BrightnessSensor, lastAutoAction im Array hinzugefügt, Bugfix Log für Alarm",
-        "ru": "Исправление ошибок BrightnessSensor, добавлено lastAutoAction в массиве, журнал исправлений ошибок",
-        "pt": "Bugfix BrightnessSensor, lastAutoAction na matriz adicionada, Bugfix Log para alarme",
-        "nl": "Bugfix BrightnessSensor, lastAutoAction in array toegevoegd, Bugfix Log voor alarm",
-        "fr": "Bugfix BrightnessSensor, lastAutoAction dans le tableau ajouté, Bugfix Log pour alarme",
-        "it": "Bugfix BrightnessSensor, aggiunta lastAutoAction nell'array, Bugfix Log per allarme",
-        "es": "Bugfix BrightnessSensor, lastAutoAction en la matriz agregada, registro de corrección de errores para alarma",
-        "pl": "Bugfix BrightnessSensor, dodana lastAutoAction w tablicy, Bugfix Log dla alarmu",
-        "zh-cn": "修正 BrightnessSensor，添加数组中的 lastAutoAction，修正报警日志"
       }
     },
     "title": "shuttercontrol",
