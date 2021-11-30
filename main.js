@@ -1634,8 +1634,6 @@ function main(adapter) {
     if (adapter.config.alarmFire != '') {
         adapter.subscribeForeignStates(adapter.config.alarmFire);
     }
-
-    // Change State from Trigger ID's
     
     //adapter.log.debug('all shutters ' + JSON.stringify(result));
     if (shutterSettings) {
@@ -1651,9 +1649,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for shuttercontrol: ' + element);
         });
-    }
 
-    if (shutterSettings) {
         const resInsideTemp = shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
         const rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
 
@@ -1666,9 +1662,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for inside temperature: ' + element);
         });
-    }
-
-    if (shutterSettings) {
+    
         const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
         const rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
 
@@ -1681,9 +1675,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for outside temperature: ' + element);
         });
-    }
-
-    if (shutterSettings) {
+    
         const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
         const rescurrentLight = resLight.filter(d => d.lightSensor != '');
 
@@ -1696,10 +1688,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
-    }
 
-    // trigger for shutter
-    if (shutterSettings) {
         const resShutter = shutterSettings.map(({ name }) => ({ name }));
         const rescurrentShutter = resShutter.filter(d => d.name != '');
 
@@ -1712,10 +1701,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('Shutter State: ' + element);
         });
-    }
-
-    // set current states
-    if (shutterSettings) {
+  
         for (const s in shutterSettings) {
             /**
              * @param {any} err
