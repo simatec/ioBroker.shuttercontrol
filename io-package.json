@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.3.9",
+    "version": "1.4.0",
     "news": {
+      "1.4.0": {
+        "en": "Source code completely redesigned\nMuch of the source code was converted to async\nmany small Bugfixes\nDependencies updated\nDev-Dependencies updated",
+        "de": "Quellcode komplett überarbeitet\nEin Großteil des Quellcodes wurde in async konvertiert\nviele kleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
+        "ru": "Исходный код полностью переработан\nБольшая часть исходного кода была преобразована в асинхронный режим.\nмного мелких исправлений\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
+        "pt": "Código-fonte completamente redesenhado\nMuito do código-fonte foi convertido para assíncrono\nmuitas pequenas correções de bugs\nDependências atualizadas\nDev-Dependencies atualizado",
+        "nl": "Broncode volledig opnieuw ontworpen\nEen groot deel van de broncode is geconverteerd naar async\nveel kleine bugfixes\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "Code source entièrement repensé\nUne grande partie du code source a été converti en async\nde nombreuses petites corrections de bugs\nDépendances mises à jour\nDépendances de développement mises à jour",
+        "it": "Codice sorgente completamente ridisegnato\nGran parte del codice sorgente è stato convertito in asincrono\nmolti piccoli bug risolti\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "Código fuente completamente rediseñado\nGran parte del código fuente se convirtió a asincrónico\nmuchas pequeñas correcciones de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "Całkowicie przeprojektowany kod źródłowy\nZnaczna część kodu źródłowego została przekonwertowana na asynchroniczną\nwiele małych poprawek\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "完全重新设计的源代码\n大部分源代码已转换为异步\n许多小错误修正\n更新了依赖项\n开发依赖更新"
+      },
       "1.3.9": {
         "en": "Bugfix between Level\nmany small Bugfixes\ndocu updated\nDependencies updated\nDev-Dependencies updated",
         "de": "Bugfix zwischen Level\nviele kleine Bugfixes\nDoku aktualisiert\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "Sensor de brillo de corrección de errores\nRetardo fijo con valor 0\nDEPENDENCIAS actualizadas\nDev-DEPENDENCIES actualizado",
         "pl": "Błąd czujnika jasności\nOpóźnienie napraw z wartością 0\nZaktualizowano ZALEŻNOŚCI\nZaktualizowano ZALEŻNOŚCI DEWELOPERÓW",
         "zh-cn": "修正亮度传感器\n使用值 0 修复延迟\n更新依赖\nDev-DEPENDENCIES 更新"
-      },
-      "1.3.3": {
-        "en": "Bugfix trigger Tilted",
-        "de": "Bugfix-Trigger gekippt",
-        "ru": "Триггер исправления наклонен",
-        "pt": "Gatilho de correção de bug inclinado",
-        "nl": "Bugfix-trigger Gekanteld",
-        "fr": "Déclencheur de correction de bugs",
-        "it": "Bugfix trigger Inclinato",
-        "es": "Disparador de corrección de errores inclinado",
-        "pl": "Wyzwalacz naprawczy Przechylony",
-        "zh-cn": "错误修正触发器倾斜"
       }
     },
     "title": "shuttercontrol",
