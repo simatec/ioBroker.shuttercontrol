@@ -365,7 +365,7 @@ async function saveCurrentStates(onStart) {
             currentStates = {};
         }
     }
-    
+
     for (const s in shutterSettings) {
         let timerSaveSettings = setTimeout(async () => {
             const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
@@ -414,8 +414,7 @@ async function saveCurrentStates(onStart) {
             }
             if (num == shutterSettings.length && onStart) {
                 clearTimeout(timerSaveSettings);
-                adapter.log.debug('shutterNames: ' + shutterName);
-                
+
                 for (const i in currentStates) {
                     if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
                         const name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
@@ -1634,7 +1633,7 @@ function main(adapter) {
     if (adapter.config.alarmFire != '') {
         adapter.subscribeForeignStates(adapter.config.alarmFire);
     }
-    
+
     //adapter.log.debug('all shutters ' + JSON.stringify(result));
     if (shutterSettings) {
         const res = shutterSettings.map(({ triggerID }) => ({ triggerID }));
@@ -1662,7 +1661,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for inside temperature: ' + element);
         });
-    
+
         const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
         const rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
 
@@ -1675,7 +1674,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('trigger for outside temperature: ' + element);
         });
-    
+
         const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
         const rescurrentLight = resLight.filter(d => d.lightSensor != '');
 
@@ -1701,7 +1700,7 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug('Shutter State: ' + element);
         });
-  
+
         for (const s in shutterSettings) {
             /**
              * @param {any} err
