@@ -37,7 +37,7 @@
 
 ## Grundlegendes
 
-> Die Anleitung ist gültig für Version 1.1.5
+> Die Anleitung ist gültig für Version 1.3.x
 
 Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung von Rollläden,
 Jalousien oder Markisen und umfasst sowohl die automatische Beschattung als auch
