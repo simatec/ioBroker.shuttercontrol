@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 /* jshint -W097 */
 /* jshint strict: false */
 /*jslint node: true */
@@ -26,7 +27,6 @@ const shutterDownComplete = require('./lib/shutterDownComplete.js');            
 const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shutterBrightnessSensor;    // shutterBrightnessSensor
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
-
 
 /** @type {{ on?: any; log?: any; config: any; setState?: any; namespace?: any; getForeignState?: any; getState?: any; getForeignObjects?: any; getForeignObject?: any; setObjectNotExists?: any; delObject?: any; }} */
 let adapter;
@@ -242,7 +242,7 @@ function startAdapter(options) {
                     for (const i in result) {
                         for (const s in shutterSettings) {
                             if (shutterSettings[s].shutterName == result[i].shutterName) {
-                                let nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
+                                const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 adapter.getForeignState(shutterSettings[s].name, (err, state) => {
                                     if (typeof state != undefined && state != null && shutterSettings[s].oldHeight != state.val) {
                                         adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + state.val);
@@ -275,9 +275,7 @@ function startAdapter(options) {
                                         saveCurrentStates(false);
                                     }, 5000 + waitTime4StateCheck);
                                 });
-                                //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
-                                // enable possibility to activate sunprotect height if required --> 
-                                // if sunprotect is required: shutter is set to sunProtect height
+                                //Shutter is closed -> opened manually to heightUp (should be 100% or 0%) before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
                                 if (shutterSettings[s].firstCompleteUp == true && state.val == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted') {
                                     shutterSettings[s].currentHeight = state.val;
                                     shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
@@ -356,6 +354,7 @@ function startAdapter(options) {
 async function saveCurrentStates(onStart) {
     let currentStates = {};
     let shutterName = [];
+    let num = 0;
 
     const _currentStates = await adapter.getStateAsync('shutters.currentStates');
     if (_currentStates && _currentStates.val && _currentStates.val !== null) {
@@ -366,11 +365,10 @@ async function saveCurrentStates(onStart) {
             currentStates = {};
         }
     }
-    let num = 0;
-
+    
     for (const s in shutterSettings) {
         let timerSaveSettings = setTimeout(async () => {
-            let nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
+            const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
             shutterName.push(shutterSettings[s].shutterName);
             num++;
 
@@ -399,7 +397,7 @@ async function saveCurrentStates(onStart) {
                 adapter.log.debug(nameDevice + ': settings added');
                 currentStates[`${nameDevice}`] = null;
 
-                let states = ({
+                const states = ({
                     "shutterName": shutterSettings[s].shutterName,
                     "currentAction": shutterSettings[s].currentAction,
                     "currentHeight": shutterSettings[s].currentHeight,
@@ -417,9 +415,10 @@ async function saveCurrentStates(onStart) {
             if (num == shutterSettings.length && onStart) {
                 clearTimeout(timerSaveSettings);
                 adapter.log.debug('shutterNames: ' + shutterName);
+                
                 for (const i in currentStates) {
                     if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
-                        let name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
+                        const name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
                         adapter.log.debug(name + ': settings deleted');
                         delete currentStates[`${name}`];
                     }
@@ -579,10 +578,8 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
             const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name);
 
             if (typeof _shutterState != undefined && _shutterState != null) {
-                //Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. 
-                //The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. 
-                //currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. 
-                //So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning ->
+                // Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. 
+                // currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning ->
                 resultStates[i].currentAction = 'none';
                 resultStates[i].firstCompleteUp = true;
 
@@ -608,25 +605,25 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
 
 // +++++++++++++++++ Get longitude an latidude from system config ++++++++++++++++++++
 
-function GetSystemData() {
-    //get longitude/latitude from system if not set or not valid
-    //do not change if we have already a valid value
-    //so we could use different settings compared to system if necessary
+async function GetSystemData() {
     if (typeof adapter.config.longitude == undefined || adapter.config.longitude == null || adapter.config.longitude.length == 0 || isNaN(adapter.config.longitude)
         || typeof adapter.config.latitude == undefined || adapter.config.latitude == null || adapter.config.latitude.length == 0 || isNaN(adapter.config.latitude)) {
 
-        adapter.log.debug("longitude/longitude not set, get data from system " + typeof adapter.config.longitude + " " + adapter.config.longitude + "/" + typeof adapter.config.latitude + " " + adapter.config.latitude);
+        try {
+            const obj = await adapter.getForeignObjectAsync('system.config', 'state');
 
-        adapter.getForeignObject("system.config", (err, state) => {
+            if (obj) {
+                adapter.config.longitude = obj.common.longitude;
+                adapter.config.latitude = obj.common.latitude;
 
-            if (err) {
-                adapter.log.error(err);
+                adapter.log.debug(`longitude: ${adapter.config.longitude} | latitude: ${adapter.config.latitude}`);
+                adapter.log.debug(`System language: ${obj.common.language}`);
             } else {
-                adapter.config.longitude = state.common.longitude;
-                adapter.config.latitude = state.common.latitude;
-                adapter.log.info("system  longitude " + adapter.config.longitude + " latitude " + adapter.config.latitude);
+                adapter.log.error('system settings cannot be called up. Please check configuration!');
             }
-        });
+        } catch (err) {
+            adapter.log.warn('system settings cannot be called up. Please check configuration!');
+        }
     }
 }
 
@@ -669,10 +666,10 @@ function shutterDriveCalc() {
     adapter.log.debug('Sunset today: ' + sunsetStr);
     adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
 
-    addMinutesSunrise(sunriseStr, adapter.config.astroDelayUp); // Add Delay for Sunrise
-    addMinutesSunset(sunsetStr, adapter.config.astroDelayDown); // Add Delay for Sunset
-    addMinutesGoldenHour(goldenHour, adapter.config.astroDelayDown); // Add Delay for GoldenHour
-    addMinutesGoldenHourEnd(goldenHourEnd, adapter.config.astroDelayUp); // Add Delay for GoldenHourEnd
+    sunriseStr = addMinutes(sunriseStr, adapter.config.astroDelayUp);       // Add Delay for Sunrise
+    sunsetStr = addMinutes(sunsetStr, adapter.config.astroDelayDown);       // Add Delay for Sunset
+    goldenHour = addMinutes(goldenHour, adapter.config.astroDelayDown);     // Add Delay for GoldenHour
+    goldenHourEnd = addMinutes(goldenHourEnd, adapter.config.astroDelayUp); // Add Delay for GoldenHourEnd
 
     adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
     adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
@@ -913,7 +910,6 @@ function shutterDriveCalc() {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 5;
 
-                //< 5 ist doch auch 0??
             } else if (dayStr < 5 && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 debugCnt = 6;
@@ -953,7 +949,6 @@ function shutterDriveCalc() {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 5;
 
-                //< 5 ist doch auch 0??
             } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) > (adapter.config.W_shutterDownChildren)) {
                 downTimeChildren = adapter.config.W_shutterDownChildren;
                 debugCnt = 6;
@@ -992,7 +987,6 @@ function shutterDriveCalc() {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 5;
 
-                //< 5 ist doch auch 0??
             } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 debugCnt = 6;
@@ -1033,10 +1027,10 @@ function sunPos() {
         adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
     }
     // get sunrise azimuth in degrees
-    let currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
+    const currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
 
     // get sunrise altitude in degrees
-    let currentAltitude = currentPos.altitude * 180 / Math.PI;
+    const currentAltitude = currentPos.altitude * 180 / Math.PI;
 
     azimuth = Math.round(10 * currentAzimuth) / 10;
     elevation = Math.round(10 * currentAltitude) / 10;
@@ -1049,73 +1043,18 @@ function sunPos() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// ++++++++++++++++++++ Add delay Time for Sunrise ++++++++++++++++++++++++
+// ++++++++++++++++++++ Add delay Time ++++++++++++++++++++++++
 /**
  * @param {string} time
  * @param {string | number} minsToAdd
  */
-function addMinutesSunrise(time, minsToAdd) {
+function addMinutes(time, minsToAdd) {
     /**
      * @param {number} J
      */
     function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
-    sunriseStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
-    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// +++++++++++++++++++++ Add delay Time for Sunset ++++++++++++++++++++++++++
-/**
- * @param {string} time
- * @param {string | number} minsToAdd
- */
-function addMinutesSunset(time, minsToAdd) {
-    /**
-     * @param {number} J
-     */
-    function D(J) { return (J < 10 ? '0' : '') + J; }
-    const piece = time.split(':');
-    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
-    sunsetStr = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
-    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// +++++++++++++++++++++ Add delay Time for GoldenHour +++++++++++++++++++++++
-/**
- * @param {string} time
- * @param {string | number} minsToAdd
- */
-function addMinutesGoldenHour(time, minsToAdd) {
-    /**
-     * @param {number} J
-     */
-    function D(J) { return (J < 10 ? '0' : '') + J; }
-    const piece = time.split(':');
-    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
-    goldenHour = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
-    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ++++++++++++++++++ Add delay Time for GoldenHour +++++++++++++++++++++++++++
-/**
- * @param {string} time
- * @param {string | number} minsToAdd
- */
-function addMinutesGoldenHourEnd(time, minsToAdd) {
-    /**
-     * @param {number} J
-     */
-    function D(J) { return (J < 10 ? '0' : '') + J; }
-    const piece = time.split(':');
-    const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
-    goldenHourEnd = (D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60));
     return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
 }
 
@@ -1128,7 +1067,7 @@ function delayCalc() {
     delayUpChildren = 0;
     delayDownChildren = 0;
 
-    let resultFull = shutterSettings; // Full Result
+    const resultFull = shutterSettings; // Full Result
 
     if (resultFull) {
         if ((upTimeLiving) === (upTimeSleep)) {
@@ -1211,7 +1150,7 @@ function delayCalc() {
 // +++++++++++++++++ create states for all new shutter in the config +++++++++++++++++++
 
 function createShutter() {
-    let result = shutterSettings;
+    const result = shutterSettings;
     if (result) {
         for (const i in result) {
             let objectName;
@@ -1361,12 +1300,12 @@ function createShutter() {
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
-        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        const resultName = result.map(({ shutterName }) => ({ shutterName }));
         /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
-            let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
+            const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         timerDelete = setTimeout(function () {
@@ -1389,12 +1328,12 @@ function createShutter() {
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
-        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        const resultName = result.map(({ shutterName }) => ({ shutterName }));
         /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
-            let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
+            const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         timerDelete1 = setTimeout(function () {
@@ -1417,12 +1356,12 @@ function createShutter() {
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
-        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        const resultName = result.map(({ shutterName }) => ({ shutterName }));
         /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
-            let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
+            const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         timerDelete2 = setTimeout(function () {
@@ -1445,12 +1384,12 @@ function createShutter() {
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
-        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        const resultName = result.map(({ shutterName }) => ({ shutterName }));
         /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
-            let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
+            const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         timerDelete3 = setTimeout(function () {
@@ -1473,12 +1412,12 @@ function createShutter() {
         const objectID = resID.split('.');
         const resultID = objectID[4];
 
-        let resultName = result.map(({ shutterName }) => ({ shutterName }));
+        const resultName = result.map(({ shutterName }) => ({ shutterName }));
         /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
-            let res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
+            const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
             fullRes.push(res);
         }
         timerDelete4 = setTimeout(function () {
@@ -1697,16 +1636,11 @@ function main(adapter) {
     }
 
     // Change State from Trigger ID's
-    let result = shutterSettings;
-
-    adapter.log.debug('all shutters ' + JSON.stringify(result));
-
-    if (result) {
-        let res = result.map(({ triggerID }) => ({ triggerID }));
-        let /**
-             * @param {{ triggerID: string; }} d
-             */
-            resTriggerActive = res.filter(d => d.triggerID != '');
+    
+    //adapter.log.debug('all shutters ' + JSON.stringify(result));
+    if (shutterSettings) {
+        const res = shutterSettings.map(({ triggerID }) => ({ triggerID }));
+        const resTriggerActive = res.filter(d => d.triggerID != '');
 
         for (const i in resTriggerActive) {
             if (resTrigger.indexOf(resTriggerActive[i].triggerID) === -1) {
@@ -1719,13 +1653,9 @@ function main(adapter) {
         });
     }
 
-    let resultInsideTemp = shutterSettings;
-    if (resultInsideTemp) {
-        let resInsideTemp = resultInsideTemp.map(({ tempSensor }) => ({ tempSensor }));
-        let /**
-             * @param {{ tempSensor: string; }} d
-             */
-            rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
+    if (shutterSettings) {
+        const resInsideTemp = shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
+        const rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
 
         for (const i in rescurrentInsideTemp) {
             if (resSunInsideTemp.indexOf(rescurrentInsideTemp[i].tempSensor) === -1) {
@@ -1738,13 +1668,9 @@ function main(adapter) {
         });
     }
 
-    let resultOutsideTemp = shutterSettings;
-    if (resultOutsideTemp) {
-        let resOutsideTemp = resultOutsideTemp.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
-        let /**
-             * @param {{ outsideTempSensor: string; }} d
-             */
-            rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
+    if (shutterSettings) {
+        const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
+        const rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
 
         for (const i in rescurrentOutsideTemp) {
             if (resSunOutsideTemp.indexOf(rescurrentOutsideTemp[i].outsideTempSensor) === -1) {
@@ -1757,13 +1683,9 @@ function main(adapter) {
         });
     }
 
-    let resultLight = shutterSettings;
-    if (resultLight) {
-        let resLight = resultLight.map(({ lightSensor }) => ({ lightSensor }));
-        let /**
-             * @param {{ lightSensor: string; }} d
-             */
-            rescurrentLight = resLight.filter(d => d.lightSensor != '');
+    if (shutterSettings) {
+        const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
+        const rescurrentLight = resLight.filter(d => d.lightSensor != '');
 
         for (const i in rescurrentLight) {
             if (resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
@@ -1775,14 +1697,11 @@ function main(adapter) {
             adapter.log.debug('trigger for Light Sensor: ' + element);
         });
     }
+
     // trigger for shutter
-    let resultShutter = shutterSettings;
-    if (resultShutter) {
-        let resShutter = resultShutter.map(({ name }) => ({ name }));
-        let /**
-             * @param {{ name: string; }} d
-             */
-            rescurrentShutter = resultShutter.filter(d => d.name != '');
+    if (shutterSettings) {
+        const resShutter = shutterSettings.map(({ name }) => ({ name }));
+        const rescurrentShutter = resShutter.filter(d => d.name != '');
 
         for (const i in rescurrentShutter) {
             if (resShutterState.indexOf(rescurrentShutter[i].name) === -1) {
@@ -1794,8 +1713,8 @@ function main(adapter) {
             adapter.log.debug('Shutter State: ' + element);
         });
     }
-    // set current states
 
+    // set current states
     if (shutterSettings) {
         for (const s in shutterSettings) {
             /**
@@ -1807,7 +1726,7 @@ function main(adapter) {
                     shutterSettings[s].currentHeight = (state.val);
                     shutterSettings[s].oldHeight = (state.val);
                     shutterSettings[s].triggerHeight = (state.val);
-                    //shutterSettings[s].triggerAction = (state.val);
+
                     adapter.log.debug('save current height: ' + shutterSettings[s].currentHeight + '%' + ' from ' + shutterSettings[s].shutterName);
 
                     if (parseFloat(shutterSettings[s].heightDown) < parseFloat(shutterSettings[s].heightUp)) {
