@@ -607,7 +607,7 @@ async function GetSystemData() {
         try {
             const obj = await adapter.getForeignObjectAsync('system.config', 'state');
 
-            if (obj) {
+            if (obj && obj.common && obj.common.longitude && obj.common.latitude) {
                 adapter.config.longitude = obj.common.longitude;
                 adapter.config.latitude = obj.common.latitude;
 
