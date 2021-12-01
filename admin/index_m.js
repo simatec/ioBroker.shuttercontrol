@@ -75,11 +75,13 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val('0').trigger('change');
+            /*
             $('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val('100').trigger('change');
             $('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val('80').trigger('change');
             $('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val('100').trigger('change');
+            */
             // switch
             $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
@@ -370,13 +372,15 @@ function tableOnReady() {
         $('#trigDelyUp').val($('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val());
         $('#trigDelyDown').val($('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val());
         $('#sunProtectEndDely').val($('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val());
+        /*
         $('#alarmWind1Level').val($('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val());
         $('#alarmWind2Level').val($('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val());
         $('#alarmRainLevel').val($('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val());
         $('#alarmFrostLevel').val($('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val());
         $('#alarmFireLevel').val($('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val());
+        */
         
-        // bolean
+        // boolean
         var varLateDown = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
         var varinSummerNotDown = $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked');
         var varKeepSunProtect = $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked');
@@ -399,7 +403,7 @@ function tableOnReady() {
         } else {
             $('.col-betweenPosition').hide();
         }
-        // bolean
+        // boolean
         $('#LateDown').prop('checked', varLateDown);
         $('#inSummerNotDown').prop('checked', varinSummerNotDown);
         $('#KeepSunProtect').prop('checked', varKeepSunProtect);
@@ -445,12 +449,14 @@ function tableOnReady() {
                 var trigDelyUp = $('#trigDelyUp').val();
                 var trigDelyDown = $('#trigDelyDown').val();
                 var sunProtectEndDely = $('#sunProtectEndDely').val();
+                /*
                 var newalarmWind1Level = $('#alarmWind1Level').val();
                 var newalarmWind2Level = $('#alarmWind2Level').val();
                 var newalarmRainLevel = $('#alarmRainLevel').val();
                 var newalarmFrostLevel = $('#alarmFrostLevel').val();
                 var newalarmFireLevel = $('#alarmFireLevel').val();
-                // bolean
+                */
+                // boolean
                 var newLateDown = $('#LateDown').prop('checked');
                 var newinSummerNotDown = $('#inSummerNotDown').prop('checked');
                 var newKeepSunProtect = $('#KeepSunProtect').prop('checked');
@@ -494,12 +500,14 @@ function tableOnReady() {
                 $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val(trigDelyUp).trigger('change');
                 $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val(trigDelyDown).trigger('change');
                 $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val(sunProtectEndDely).trigger('change');
+                /*
                 $('#events .values-input[data-name="alarmWind1Level"][data-index="' + id + '"]').val(newalarmWind1Level).trigger('change');
                 $('#events .values-input[data-name="alarmWind2Level"][data-index="' + id + '"]').val(newalarmWind2Level).trigger('change');
                 $('#events .values-input[data-name="alarmRainLevel"][data-index="' + id + '"]').val(newalarmRainLevel).trigger('change');
                 $('#events .values-input[data-name="alarmFrostLevel"][data-index="' + id + '"]').val(newalarmFrostLevel).trigger('change');
                 $('#events .values-input[data-name="alarmFireLevel"][data-index="' + id + '"]').val(newalarmFireLevel).trigger('change');
-                // bolean
+                */
+                // boolean
                 $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
                 $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').prop('checked', newinSummerNotDown).trigger('change');
                 $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').prop('checked', newKeepSunProtect).trigger('change');
