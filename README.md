@@ -44,8 +44,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-
-### __WORK IN PROGRESS__
+### 1.4.1 (2021-12-01)
 * (simatec) Code cleaning
 * (simatec) Bugfix Alarm States
 * (simatec) try & catch added
