@@ -231,6 +231,11 @@
     "alarmRainLevel": 100,
     "alarmFrostLevel": 80,
     "alarmFireLevel": 100,
+    "alarmWind1": "",
+    "alarmWind2": "",
+    "alarmRain": "",
+    "alarmFrost": "",
+    "alarmFire": "",
     "events": [
       {
         "enabled": true,
