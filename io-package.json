@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "news": {
+      "1.4.1": {
+        "en": "Code cleaning\nBugfix Alarm States\ntry & catch added",
+        "de": "Code-Reinigung\nBugfix Alarmzustände\ntry & catch hinzugefügt",
+        "ru": "Очистка кода\nИсправление аварийных состояний\nпопробуй и поймай добавлено",
+        "pt": "Limpeza de código\nEstado de alarme de correção de bug\ntente e pegue adicionado",
+        "nl": "Code opschonen\nAlarmstatussen voor bugfix\nprobeer & vang toegevoegd",
+        "fr": "Nettoyage de codes\nÉtats d'alarme de correction de bugs\nessayer et attraper ajouté",
+        "it": "Pulizia del codice\nBugfix Stato di allarme\nprova e cattura aggiunto",
+        "es": "Limpieza de código\nEstados de alarma de corrección de errores\ntry & catch agregado",
+        "pl": "Czyszczenie kodu\nStany alarmowe z poprawkami błędów\nspróbuj i złap dodany",
+        "zh-cn": "代码清理\n错误修复警报状态\n尝试和捕捉添加"
+      },
       "1.4.0": {
         "en": "Source code completely redesigned\nMuch of the source code was converted to async\nmany small Bugfixes\nDependencies updated\nDev-Dependencies updated",
         "de": "Quellcode komplett überarbeitet\nEin Großteil des Quellcodes wurde in async konvertiert\nviele kleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
@@ -64,18 +76,6 @@
         "zh-cn": "小错误修正"
       },
       "1.3.5": {
-        "en": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES updated\nDev-DEPENDENCIES updated",
-        "de": "Bugfix Helligkeitssensor\nFix Delay mit Wert 0\nABHÄNGIGKEITEN aktualisiert\nEntwickler-ABHÄNGIGKEITEN aktualisiert",
-        "ru": "Исправление ошибки BrightnessSensor\nИсправить задержку со значением 0\nЗАВИСИМОСТИ обновлены\nЗАВИСИМОСТЬ от разработчиков обновлена",
-        "pt": "Bugfix BrightnessSensor\nFix Delay com valor 0\nDEPENDENCIES atualizado\nDev-DEPENDENCIES atualizado",
-        "nl": "Bugfix HelderheidSensor\nFix Vertraging met waarde 0\nAFHANKELIJKHEDEN bijgewerkt\nDev-DEPENDENCES bijgewerkt",
-        "fr": "Correction de bug BrightnessSensor\nRetard fixe avec la valeur 0\nDÉPENDANCES mis à jour\nDev-DÉPENDANCES mis à jour",
-        "it": "Bugfix Sensore di luminosità\nRitardo fisso con valore 0\nDIPENDENZE aggiornato\nDev-DIPENDENZE aggiornate",
-        "es": "Sensor de brillo de corrección de errores\nRetardo fijo con valor 0\nDEPENDENCIAS actualizadas\nDev-DEPENDENCIES actualizado",
-        "pl": "Błąd czujnika jasności\nOpóźnienie napraw z wartością 0\nZaktualizowano ZALEŻNOŚCI\nZaktualizowano ZALEŻNOŚCI DEWELOPERÓW",
-        "zh-cn": "修正亮度传感器\n使用值 0 修复延迟\n更新依赖\nDev-DEPENDENCIES 更新"
-      },
-      "1.3.4": {
         "en": "Bugfix BrightnessSensor\nFix Delay with value 0\nDEPENDENCIES updated\nDev-DEPENDENCIES updated",
         "de": "Bugfix Helligkeitssensor\nFix Delay mit Wert 0\nABHÄNGIGKEITEN aktualisiert\nEntwickler-ABHÄNGIGKEITEN aktualisiert",
         "ru": "Исправление ошибки BrightnessSensor\nИсправить задержку со значением 0\nЗАВИСИМОСТИ обновлены\nЗАВИСИМОСТЬ от разработчиков обновлена",
