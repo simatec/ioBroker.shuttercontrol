@@ -1,12 +1,13 @@
-// @ts-nocheck
-
 /* jshint -W097 */
 /* jshint strict: false */
 /*jslint node: true */
 'use strict';
 
+// @ts-ignore
 const utils = require('@iobroker/adapter-core');
+// @ts-ignore
 const schedule = require('node-schedule');
+// @ts-ignore
 const SunCalc = require('suncalc2');
 
 const sunProtect = require('./lib/sunProtect.js');                                                      // SunProtect
@@ -28,11 +29,10 @@ const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shut
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
 
-/** @type {{ on?: any; log?: any; config: any; setState?: any; namespace?: any; getForeignState?: any; getState?: any; getForeignObjects?: any; getForeignObject?: any; setObjectNotExists?: any; delObject?: any; }} */
 let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
 
-let autoLivingStr, autoSleepStr, autoChildrenStr, delayUp, delayUpChildren, delayDown, delayDownChildren, resTriggerChange, resShutterChange, shutterSettings;
+let autoLivingStr, autoSleepStr, autoChildrenStr, delayUp, delayUpChildren, delayDown, delayDownChildren, resTriggerChange, shutterSettings;
 let astroTimeLivingUp, astroTimeLivingDown, astroTimeSleepUp, astroTimeSleepDown, astroTimeChildrenUp, astroTimeChildrenDown;
 let timer, timerMain, timerState1, timerState2, timerDelete, timerDelete1, timerDelete2, timerDelete3, timerDelete4, timerwaitTime_StateCheck, timerBrightnessDown;
 
@@ -53,9 +53,6 @@ let brightnessDown = false;
 
 // +++++++++++++++++++++++++++ Starts the adapter instance ++++++++++++++++++++++++++++++++
 
-/**
- * @param {{} | undefined} [options]
- */
 function startAdapter(options) {
 
     options = options || {};
@@ -102,11 +99,9 @@ function startAdapter(options) {
             callback(e);
         }
     });
+
     // ++++++++++++++++++ is called if a subscribed state changes ++++++++++++++++++
-    /**
-     * @param {string} id
-     * @param {{ val: string; ts: any; lc: any; }} state
-     */
+
     adapter.on('stateChange', (id, state) => {
         if (state) {
             if (adapter.config.HolidayDP !== '') {
@@ -229,9 +224,7 @@ function startAdapter(options) {
             });
             resShutterState.forEach(function (resShutterID) {
                 if (id === resShutterID && state.ts === state.lc) {
-                    resShutterChange = resShutterID;
-                    const resultID = shutterSettings;
-                    const result = resultID.filter(d => d.name == resShutterID);
+                    const result = shutterSettings.filter((/** @type {{ name: any; }} */ d) => d.name == resShutterID);
 
                     if (adapter.config.currentShutterState == true && adapter.config.currentShutterStateTime) {
                         clearTimeout(timerwaitTime_StateCheck);
@@ -243,7 +236,8 @@ function startAdapter(options) {
                         for (const s in shutterSettings) {
                             if (shutterSettings[s].shutterName == result[i].shutterName) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
-                                adapter.getForeignState(shutterSettings[s].name, (err, state) => {
+
+                                adapter.getForeignState(shutterSettings[s].name, (state) => {
                                     if (typeof state != undefined && state != null && shutterSettings[s].oldHeight != state.val) {
                                         adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + state.val);
                                     }
@@ -351,6 +345,7 @@ function startAdapter(options) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // +++++++++++++++++ save states on start and shutter change ++++++++++++++++++++++++++++
+
 async function saveCurrentStates(onStart) {
     let currentStates = {};
     let shutterName = [];
@@ -430,6 +425,7 @@ async function saveCurrentStates(onStart) {
                 clearTimeout(timerSaveSettings);
                 await adapter.setStateAsync('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
             }
+            // @ts-ignore
         }, 100 * s, s);
     }
 }
@@ -569,7 +565,7 @@ async function checkActualStates() {
 
 const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
     shutterDriveCalc();
-    //Reset currentAction in the night
+
     const resultStates = shutterSettings;
     if (resultStates) {
         for (const i in resultStates) {
@@ -611,12 +607,11 @@ async function GetSystemData() {
         try {
             const obj = await adapter.getForeignObjectAsync('system.config', 'state');
 
-            if (obj) {
+            if (obj && obj.common && obj.common.longitude && obj.common.latitude) {
                 adapter.config.longitude = obj.common.longitude;
                 adapter.config.latitude = obj.common.latitude;
 
                 adapter.log.debug(`longitude: ${adapter.config.longitude} | latitude: ${adapter.config.latitude}`);
-                adapter.log.debug(`System language: ${obj.common.language}`);
             } else {
                 adapter.log.error('system settings cannot be called up. Please check configuration!');
             }
@@ -636,8 +631,8 @@ let downTimeLiving, dayStr, HolidayStr, SchoolfreeStr, publicHolidayStr, publicH
 function shutterDriveCalc() {
     adapter.log.debug('shutterDriveCalc');
 
-    // get today's sunlight times 
-    let times;
+    let times; // get today's sunlight times 
+
     try {
         times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
@@ -709,6 +704,7 @@ function shutterDriveCalc() {
             break;
     }
     let debugCnt = 0;
+
     // ******** Set Up-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
@@ -766,7 +762,6 @@ function shutterDriveCalc() {
     shutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings);
 
     // ******** Set Up-Time Sleep Area ********
-
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
             if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr) === true || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea == true)) {
@@ -1004,17 +999,13 @@ function shutterDriveCalc() {
     shutterDownLate(adapter, shutterSettings);
     shutterDownComplete(adapter, delayDown, shutterSettings);
     delayCalc();
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // ++++++++++++++++++ Calc current Sun position all 5 Min ++++++++++++++++++++++
 
-/** @type {string | number} */
 let azimuth;
-/** @type {number} */
 let elevation;
 
 function sunPos() {
@@ -1025,11 +1016,9 @@ function sunPos() {
     } catch (e) {
         adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
     }
-    // get sunrise azimuth in degrees
-    const currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180;
 
-    // get sunrise altitude in degrees
-    const currentAltitude = currentPos.altitude * 180 / Math.PI;
+    const currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180; // get sunrise azimuth in degrees
+    const currentAltitude = currentPos.altitude * 180 / Math.PI; // get sunrise altitude in degrees
 
     azimuth = Math.round(10 * currentAzimuth) / 10;
     elevation = Math.round(10 * currentAltitude) / 10;
@@ -1043,14 +1032,8 @@ function sunPos() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // ++++++++++++++++++++ Add delay Time ++++++++++++++++++++++++
-/**
- * @param {string} time
- * @param {string | number} minsToAdd
- */
+
 function addMinutes(time, minsToAdd) {
-    /**
-     * @param {number} J
-     */
     function D(J) { return (J < 10 ? '0' : '') + J; }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
@@ -1060,6 +1043,7 @@ function addMinutes(time, minsToAdd) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // +++++++++++++++++ calc the shutter delay +++++++++++++++++++
+
 function delayCalc() {
     delayUp = 0;
     delayDown = 0;
@@ -1070,15 +1054,15 @@ function delayCalc() {
 
     if (resultFull) {
         if ((upTimeLiving) === (upTimeSleep)) {
-            const resLiving = resultFull.filter(d => d.typeUp == 'living'); // Filter Area Living
-            const result = resLiving.filter(d => d.enabled === true); // Filter enabled
+            const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp == 'living'); // Filter Area Living
+            const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result) {
                 delayUp++;
             }
             if ((autoLivingStr) === true) {
-                const resLivingAuto = resultFull.filter(d => d.typeUp == 'living-auto'); // Filter Area Living
-                const result2 = resLivingAuto.filter(d => d.enabled === true); // Filter enabled
+                const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp == 'living-auto'); // Filter Area Living
+                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
                 for (const i in result2) {
                     delayUp++;
@@ -1089,15 +1073,15 @@ function delayCalc() {
         if ((upTimeSleep) === (upTimeChildren)) {
             delayUpChildren = delayUp;
 
-            const resLiving = resultFull.filter(d => d.typeUp == 'sleep'); // Filter Area Sleep
-            const result = resLiving.filter(d => d.enabled === true); // Filter enabled
+            const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp == 'sleep'); // Filter Area Sleep
+            const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result) {
                 delayUpChildren++;
             }
             if ((autoSleepStr) === true) {
-                const resLivingAuto = resultFull.filter(d => d.typeUp == 'sleep-auto'); // Filter Area Sleep
-                const result2 = resLivingAuto.filter(d => d.enabled === true); // Filter enabled
+                const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp == 'sleep-auto'); // Filter Area Sleep
+                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
                 for (const i in result2) {
                     delayUpChildren++;
@@ -1105,15 +1089,15 @@ function delayCalc() {
             }
         }
         if ((downTimeLiving) === (downTimeSleep)) {
-            const resLiving2 = resultFull.filter(d => d.typeDown == 'living'); // Filter Area Living
-            const result3 = resLiving2.filter(d => d.enabled === true); // Filter enabled
+            const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown == 'living'); // Filter Area Living
+            const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result3) {
                 delayDown++;
             }
             if ((autoLivingStr) === true) {
-                const resLivingAuto2 = resultFull.filter(d => d.typeDown == 'living-auto'); // Filter Area Living
-                const result4 = resLivingAuto2.filter(d => d.enabled === true); // Filter enabled
+                const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown == 'living-auto'); // Filter Area Living
+                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
                 for (const i in result4) {
                     delayDown++;
@@ -1124,16 +1108,16 @@ function delayCalc() {
         if ((downTimeSleep) === (downTimeChildren)) {
             delayDownChildren = delayDown;
 
-            const resLiving2 = resultFull.filter(d => d.typeDown == 'sleep'); // Filter Area Sleep
-            const result3 = resLiving2.filter(d => d.enabled === true); // Filter enabled
+            const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown == 'sleep'); // Filter Area Sleep
+            const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result3) {
                 delayDownChildren++;
             }
 
             if ((autoSleepStr) === true) {
-                const resLivingAuto2 = resultFull.filter(d => d.typeDown == 'sleep-auto'); // Filter Area Sleep
-                const result4 = resLivingAuto2.filter(d => d.enabled === true); // Filter enabled
+                const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown == 'sleep-auto'); // Filter Area Sleep
+                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
                 for (const i in result4) {
                     delayDownChildren++;
@@ -1175,11 +1159,8 @@ function createShutter() {
                         },
                         "native": {},
                     });
-                    /**
-                     * @param {any} err
-                     * @param {{ val: null; } | null} state
-                     */
-                    adapter.getState('shutters.autoUp.' + objectName, (err, state) => {
+
+                    adapter.getState('shutters.autoUp.' + objectName, (state) => {
                         if ((state && state === null) || (state && state.val === null)) {
                             adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
                             adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
@@ -1198,11 +1179,8 @@ function createShutter() {
                         },
                         "native": {},
                     });
-                    /**
-                     * @param {any} err
-                     * @param {{ val: null; } | null} state
-                     */
-                    adapter.getState('shutters.autoDown.' + objectName, (err, state) => {
+
+                    adapter.getState('shutters.autoDown.' + objectName, (state) => {
                         if ((state && state === null) || (state && state.val === null)) {
                             adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
                             adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
@@ -1221,11 +1199,8 @@ function createShutter() {
                         },
                         "native": {},
                     });
-                    /**
-                     * @param {any} err
-                     * @param {{ val: null; } | null} state
-                     */
-                    adapter.getState('shutters.autoSun.' + objectName, (err, state) => {
+
+                    adapter.getState('shutters.autoSun.' + objectName, (state) => {
                         if ((state && state === null) || (state && state.val === null)) {
                             adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
                             adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
@@ -1244,11 +1219,8 @@ function createShutter() {
                         },
                         "native": {},
                     });
-                    /**
-                     * @param {any} err
-                     * @param {{ val: null; } | null} state
-                     */
-                    adapter.getState('shutters.autoState.' + objectName, (err, state) => {
+
+                    adapter.getState('shutters.autoState.' + objectName, (state) => {
                         if ((state && state === null) || (state && state.val === null)) {
                             adapter.setState('shutters.autoState.' + objectName, { val: 'none', ack: true });
                             adapter.log.debug('Create Object: shutters.autoState.' + objectName);
@@ -1268,11 +1240,8 @@ function createShutter() {
                         },
                         "native": {},
                     });
-                    /**
-                     * @param {any} err
-                     * @param {{ val: null; } | null} state
-                     */
-                    adapter.getState('shutters.autoLevel.' + objectName, (err, state) => {
+
+                    adapter.getState('shutters.autoLevel.' + objectName, (state) => {
                         if ((state && state === null) || (state && state.val === null)) {
                             adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
                         }
@@ -1300,7 +1269,6 @@ function createShutter() {
         const resultID = objectID[4];
 
         const resultName = result.map(({ shutterName }) => ({ shutterName }));
-        /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
@@ -1310,9 +1278,7 @@ function createShutter() {
         timerDelete = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, /**
-                     * @param {any} err
-                     */
+                adapter.delObject(resID,
                     function (err) {
                         if (err) {
                             adapter.log.warn(err);
@@ -1328,7 +1294,6 @@ function createShutter() {
         const resultID = objectID[4];
 
         const resultName = result.map(({ shutterName }) => ({ shutterName }));
-        /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
@@ -1338,9 +1303,7 @@ function createShutter() {
         timerDelete1 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, /**
-                     * @param {any} err
-                     */
+                adapter.delObject(resID,
                     function (err) {
                         if (err) {
                             adapter.log.warn(err);
@@ -1356,7 +1319,6 @@ function createShutter() {
         const resultID = objectID[4];
 
         const resultName = result.map(({ shutterName }) => ({ shutterName }));
-        /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
@@ -1366,9 +1328,7 @@ function createShutter() {
         timerDelete2 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, /**
-                     * @param {any} err
-                     */
+                adapter.delObject(resID,
                     function (err) {
                         if (err) {
                             adapter.log.warn(err);
@@ -1384,7 +1344,6 @@ function createShutter() {
         const resultID = objectID[4];
 
         const resultName = result.map(({ shutterName }) => ({ shutterName }));
-        /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
@@ -1394,9 +1353,7 @@ function createShutter() {
         timerDelete3 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, /**
-                     * @param {any} err
-                     */
+                adapter.delObject(resID,
                     function (err) {
                         if (err) {
                             adapter.log.warn(err);
@@ -1412,7 +1369,6 @@ function createShutter() {
         const resultID = objectID[4];
 
         const resultName = result.map(({ shutterName }) => ({ shutterName }));
-        /** @type {any[]} */
         let fullRes = [];
 
         for (const i in resultName) {
@@ -1422,9 +1378,7 @@ function createShutter() {
         timerDelete4 = setTimeout(function () {
             if (fullRes.indexOf(resultID) === -1) {
                 adapter.log.warn('DELETE: ' + resID);
-                adapter.delObject(resID, /**
-                     * @param {any} err
-                     */
+                adapter.delObject(resID,
                     function (err) {
                         if (err) {
                             adapter.log.warn(err);
@@ -1438,6 +1392,7 @@ function createShutter() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // +++++++++++++++++++ Is Later function ++++++++++++++++++++++
+
 /**
  * @param {string} timeVal
  * @param {string} timeLimit
@@ -1554,12 +1509,11 @@ function IsEqual(timeVal, timeLimit) {
 // +++++++++++++++++++ main on start of Adapter ++++++++++++++++++++
 
 function main(adapter) {
-    /**
-     * @param {any} err
-     * @param {any} obj
-     */
-    adapter.getForeignObject('system.config', (err, obj) => {
-        checkStates();
+
+    adapter.getForeignObject('system.config', (obj) => {
+        if (obj) {
+            checkStates();
+        }
     });
 
     // read shutter settings from config
@@ -1610,7 +1564,7 @@ function main(adapter) {
     }
     if (adapter.config.lightsensorUpDown != '') {
         adapter.subscribeForeignStates(adapter.config.lightsensorUpDown);
-        adapter.getForeignState(adapter.config.lightsensorUpDown, (err, state) => {
+        adapter.getForeignState(adapter.config.lightsensorUpDown, (state) => {
             if (state && state.val && state.val !== null) {
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
                 adapter.log.debug('Brightness State Down is: ' + brightnessDown);
@@ -1637,7 +1591,7 @@ function main(adapter) {
     //adapter.log.debug('all shutters ' + JSON.stringify(result));
     if (shutterSettings) {
         const res = shutterSettings.map(({ triggerID }) => ({ triggerID }));
-        const resTriggerActive = res.filter(d => d.triggerID != '');
+        const resTriggerActive = res.filter((/** @type {{ triggerID: string; }} */ d) => d.triggerID != '');
 
         for (const i in resTriggerActive) {
             if (resTrigger.indexOf(resTriggerActive[i].triggerID) === -1) {
@@ -1650,7 +1604,7 @@ function main(adapter) {
         });
 
         const resInsideTemp = shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
-        const rescurrentInsideTemp = resInsideTemp.filter(d => d.tempSensor != '');
+        const rescurrentInsideTemp = resInsideTemp.filter((/** @type {{ tempSensor: string; }} */ d) => d.tempSensor != '');
 
         for (const i in rescurrentInsideTemp) {
             if (resSunInsideTemp.indexOf(rescurrentInsideTemp[i].tempSensor) === -1) {
@@ -1663,7 +1617,7 @@ function main(adapter) {
         });
 
         const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
-        const rescurrentOutsideTemp = resOutsideTemp.filter(d => d.outsideTempSensor != '');
+        const rescurrentOutsideTemp = resOutsideTemp.filter((/** @type {{ outsideTempSensor: string; }} */ d) => d.outsideTempSensor != '');
 
         for (const i in rescurrentOutsideTemp) {
             if (resSunOutsideTemp.indexOf(rescurrentOutsideTemp[i].outsideTempSensor) === -1) {
@@ -1676,7 +1630,7 @@ function main(adapter) {
         });
 
         const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
-        const rescurrentLight = resLight.filter(d => d.lightSensor != '');
+        const rescurrentLight = resLight.filter((/** @type {{ lightSensor: string; }} */ d) => d.lightSensor != '');
 
         for (const i in rescurrentLight) {
             if (resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
@@ -1689,7 +1643,7 @@ function main(adapter) {
         });
 
         const resShutter = shutterSettings.map(({ name }) => ({ name }));
-        const rescurrentShutter = resShutter.filter(d => d.name != '');
+        const rescurrentShutter = resShutter.filter((/** @type {{ name: string; }} */ d) => d.name != '');
 
         for (const i in rescurrentShutter) {
             if (resShutterState.indexOf(rescurrentShutter[i].name) === -1) {
@@ -1702,11 +1656,7 @@ function main(adapter) {
         });
 
         for (const s in shutterSettings) {
-            /**
-             * @param {any} err
-             * @param {{ val: any; }} state
-             */
-            adapter.getForeignState(shutterSettings[s].name, (err, state) => {
+            adapter.getForeignState(shutterSettings[s].name, (state) => {
                 if (typeof state != undefined && state != null) {
                     shutterSettings[s].currentHeight = (state.val);
                     shutterSettings[s].oldHeight = (state.val);
@@ -1729,6 +1679,7 @@ function main(adapter) {
 
 // ++++++++++++++++++ start option of Adapter ++++++++++++++++++++++
 // If started as allInOne/compact mode => return function to create instance
+// @ts-ignore
 if (module && module.parent) {
     module.exports = startAdapter;
 } else {
