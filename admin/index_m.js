@@ -45,7 +45,7 @@ function load(settings, onChange) {
         }
         setTimeout(function () {
             // value
-            $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('true').trigger('change');
+            $('#events .values-input[data-name="triggerState"][data-index="' + id + '"]').val('none').trigger('change');
             $('#events .values-input[data-name="triggerStateTilted"][data-index="' + id + '"]').val('none').trigger('change');
             $('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').val('sunrise').trigger('change');
             //$('#events .values-input[data-name="typeUp"][data-index="' + id + '"]').select();
