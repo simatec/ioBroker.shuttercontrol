@@ -47,6 +47,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### __WORK IN PROGRESS__
 * (simatec) Bugfix Alarm settings
+* (simatec) Bugfix move shutter after closing window
+* (simatec) better translation for all languages
+* (simatec) small Bugfixes
 
 ### 1.4.1 (2021-12-01)
 * (simatec) Code cleaning
