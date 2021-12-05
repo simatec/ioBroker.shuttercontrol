@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "news": {
+      "1.4.3": {
+        "en": "Bugfix Trigger after shutter close\nBugfix XMas Level by frost\nXMas Level for GoldenHour added\nSummertime for Goldenhour added\nsmall Bugfixes",
+        "de": "Bugfix Trigger nach Rollladen schließen\nBugfix XMas Level von Frost\nXMas Level für GoldenHour hinzugefügt\nSommerzeit für Goldenhour hinzugefügt\nkleine Bugfixes",
+        "ru": "Исправление срабатывания триггера после закрытия шторки\nИсправление ошибки XMas Level by frost\nДобавлен рождественский уровень для GoldenHour\nДобавлено летнее время для Золотого часа\nнебольшие исправления",
+        "pt": "Bug corrigido após o fechamento do obturador\nBugfix XMas Level by frost\nNível XMas para GoldenHour adicionado\nSummertime for Goldenhour adicionado\npequenas correções de bugs",
+        "nl": "Bugfix Trigger na sluiter sluiten\nBugfix XMas Level door vorst\nXMas Level voor GoldenHour toegevoegd\nZomertijd voor Goldenhour toegevoegd\nkleine bugfixes",
+        "fr": "Déclenchement de bug après la fermeture de l'obturateur\nCorrection du niveau de Noël par le gel\nNiveau XMas pour GoldenHour ajouté\nHeure d'été pour Goldenhour ajoutée\npetites corrections de bugs",
+        "it": "Bugfix Trigger dopo la chiusura dell'otturatore\nBugfix XMas Level dal gelo\nAggiunto il livello di Natale per GoldenHour\nAggiunta l'ora legale per Goldenhour\npiccole correzioni di bug",
+        "es": "Disparador de corrección de errores después de cerrar el obturador\nCorrección de errores Nivel de Navidad por helada\nNivel de Navidad para GoldenHour agregado\nSe agregó el horario de verano para Goldenhour\npequeñas correcciones de errores",
+        "pl": "Bugfix Trigger po zamknięciu migawki\nBugfix XMas Poziom przez mróz\nDodano poziom świąteczny dla GoldenHour\nDodano czas letni dla Goldenhour\nmałe poprawki",
+        "zh-cn": "错误修复快门关闭后触发\n通过霜冻修复圣诞关卡\n添加了 GoldenHour 的圣诞关卡\n添加了黄金时段的夏季时间\n小错误修正"
+      },
       "1.4.2": {
         "en": "Bugfix Alarm settings\nBugfix move shutter after closing window\nbetter translation for all languages\nsmall Bugfixes",
         "de": "Bugfix Alarmeinstellungen\nBugfix Rollladen bewegen nach Fenster schließen\nbessere Übersetzung für alle Sprachen\nkleine Bugfixes",
@@ -74,18 +86,6 @@
         "es": "brillo hacia abajo Estado agregado\nCorrección del sensor de brillo",
         "pl": "Zmniejszenie jasności Dodano stan\nPoprawka czujnika jasności",
         "zh-cn": "亮度降低状态添加\n亮度传感器修复"
-      },
-      "1.3.6": {
-        "en": "small Bugfixes",
-        "de": "kleine Bugfixes",
-        "ru": "небольшие исправления",
-        "pt": "pequenas correções de bugs",
-        "nl": "kleine bugfixes",
-        "fr": "petites corrections de bugs",
-        "it": "piccole correzioni di bug",
-        "es": "pequeñas correcciones de errores",
-        "pl": "małe poprawki",
-        "zh-cn": "小错误修正"
       }
     },
     "title": "shuttercontrol",

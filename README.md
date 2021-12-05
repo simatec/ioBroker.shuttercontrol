@@ -44,8 +44,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-
-### __WORK IN PROGRESS__
+### 1.4.3 (2021-12-05)
 * (simatec) Bugfix Trigger after shutter close
 * (simatec) Bugfix XMas Level by frost
 * (simatec) XMas Level for GoldenHour added
