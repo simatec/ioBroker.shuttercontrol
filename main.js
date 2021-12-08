@@ -344,9 +344,80 @@ function startAdapter(options) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// +++++++++++++++++ Check all shutter values ​​and set default values ​​if values ​​are not available ++++++++++++++++++++++++++++
+
+async function shutterConfigCheck() {
+    return new Promise(async (resolve) => {
+        let num = 0;
+
+        if (shutterSettings) {
+            adapter.log.debug('shutter Config Check started');
+
+            try {
+                for (const s in shutterSettings) {
+                    shutterSettings[s].triggerState = shutterSettings[s].triggerState ? shutterSettings[s].triggerState : 'none';
+                    shutterSettings[s].triggerStateTilted = shutterSettings[s].triggerStateTilted ? shutterSettings[s].triggerStateTilted : 'none';
+                    shutterSettings[s].typeUp = shutterSettings[s].typeUp ? shutterSettings[s].typeUp : 'sunrise';
+                    shutterSettings[s].typeDown = shutterSettings[s].typeDown ? shutterSettings[s].typeDown : 'sunset';
+                    shutterSettings[s].heightUp = shutterSettings[s].heightUp ? shutterSettings[s].heightUp : '100';
+                    shutterSettings[s].heightDown = shutterSettings[s].heightDown ? shutterSettings[s].heightDown : '0';
+                    shutterSettings[s].triggerDrive = shutterSettings[s].triggerDrive ? shutterSettings[s].triggerDrive : '100';
+                    shutterSettings[s].triggerDriveTildet = shutterSettings[s].triggerDriveTildet ? shutterSettings[s].triggerDriveTildet : shutterSettings[s].triggerDrive;
+                    shutterSettings[s].triggerChange = shutterSettings[s].triggerChange ? shutterSettings[s].triggerChange : 'off';
+                    shutterSettings[s].elevation = shutterSettings[s].elevation ? shutterSettings[s].elevation : '8';
+                    shutterSettings[s].type = shutterSettings[s].type ? shutterSettings[s].type : 'in- & outside temperature and direction';
+                    shutterSettings[s].heightDownSun = shutterSettings[s].heightDownSun ? shutterSettings[s].heightDownSun : '30';
+                    shutterSettings[s].direction = shutterSettings[s].direction ? shutterSettings[s].direction : '120';
+                    shutterSettings[s].directionRange = shutterSettings[s].directionRange ? shutterSettings[s].directionRange : '50';
+                    shutterSettings[s].tempInside = shutterSettings[s].tempInside ? shutterSettings[s].tempInside : '23';
+                    shutterSettings[s].tempOutside = shutterSettings[s].tempOutside ? shutterSettings[s].tempOutside : '23';
+                    shutterSettings[s].valueLight = shutterSettings[s].valueLight ? shutterSettings[s].valueLight : '15';
+                    shutterSettings[s].autoDrive = shutterSettings[s].autoDrive ? shutterSettings[s].autoDrive : 'off';
+                    shutterSettings[s].hysteresisOutside = shutterSettings[s].hysteresisOutside ? shutterSettings[s].hysteresisOutside : '5';
+                    shutterSettings[s].hysteresisInside = shutterSettings[s].hysteresisInside ? shutterSettings[s].hysteresisInside : '5';
+                    shutterSettings[s].hysteresisLight = shutterSettings[s].hysteresisLight ? shutterSettings[s].hysteresisLight : '5';
+                    shutterSettings[s].XmasLevel = shutterSettings[s].XmasLevel ? shutterSettings[s].XmasLevel : '0';
+                    shutterSettings[s].betweenPositionLevel = shutterSettings[s].betweenPositionLevel ? shutterSettings[s].betweenPositionLevel : '50';
+                    shutterSettings[s].trigDelyUp = shutterSettings[s].trigDelyUp ? shutterSettings[s].trigDelyUp : '0';
+                    shutterSettings[s].trigDelyDown = shutterSettings[s].trigDelyDown ? shutterSettings[s].trigDelyDown : '0';
+                    shutterSettings[s].sunProtectEndDely = shutterSettings[s].sunProtectEndDely ? shutterSettings[s].sunProtectEndDely : '0';
+
+                    shutterSettings[s].LateDown = shutterSettings[s].LateDown != null ? shutterSettings[s].LateDown : false;
+                    shutterSettings[s].inSummerNotDown = shutterSettings[s].inSummerNotDown != null ? shutterSettings[s].inSummerNotDown : false;
+                    shutterSettings[s].KeepSunProtect = shutterSettings[s].KeepSunProtect != null ? shutterSettings[s].KeepSunProtect : false;
+                    shutterSettings[s].driveAfterClose = shutterSettings[s].driveAfterClose != null ? shutterSettings[s].driveAfterClose : false;
+                    shutterSettings[s].useXmasLevel = shutterSettings[s].useXmasLevel != null ? shutterSettings[s].useXmasLevel : false;
+                    shutterSettings[s].betweenPosition = shutterSettings[s].betweenPosition != null ? shutterSettings[s].betweenPosition : false;
+                    shutterSettings[s].enableAlarmWind1 = shutterSettings[s].enableAlarmWind1 != null ? shutterSettings[s].enableAlarmWind1 : false;
+                    shutterSettings[s].enableAlarmWind2 = shutterSettings[s].enableAlarmWind2 != null ? shutterSettings[s].enableAlarmWind2 : false;
+                    shutterSettings[s].enableAlarmRain = shutterSettings[s].enableAlarmRain != null ? shutterSettings[s].enableAlarmRain : false;
+                    shutterSettings[s].enableAlarmFrost = shutterSettings[s].enableAlarmFrost != null ? shutterSettings[s].enableAlarmFrost : false;
+                    shutterSettings[s].enableAlarmFire = shutterSettings[s].enableAlarmFire != null ? shutterSettings[s].enableAlarmFire : false;
+
+                    if (num == parseFloat(s)) {
+                        adapter.log.debug('shutter Config Check successfully completed');
+                        // @ts-ignore
+                        resolve();
+                    } else {
+                        num++;
+                    }
+                }
+            } catch (e) {
+                adapter.log.warn(`It is not possible to check the shutter configuration: ${e}`);
+                // @ts-ignore
+                resolve();
+            }
+        }
+    });
+}
+
 // +++++++++++++++++ save states on start and shutter change ++++++++++++++++++++++++++++
 
 async function saveCurrentStates(onStart) {
+    if (onStart) {
+        await shutterConfigCheck();
+    }
+
     let currentStates = {};
     let shutterName = [];
     let num = 0;
