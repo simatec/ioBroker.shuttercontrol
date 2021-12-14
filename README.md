@@ -44,6 +44,15 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+
+### __WORK IN PROGRESS__
+* (simatec) small Bugfixes
+* (simatec) Code cleaning
+* (simatec) try & catch added
+* (simatec) source code was converted to async
+* (simatec) Dependencies updated
+* (simatec) Dev-Dependencies updated
+
 ### 1.4.4 (2021-12-08)
 * (simatec) Bugfix Trigger after shutter close
 * (simatec) Bugfix XMas Level by frost
