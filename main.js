@@ -1183,7 +1183,7 @@ function delayCalc() {
 
 // +++++++++++++++++ create states for all new shutter in the config +++++++++++++++++++
 
-function createShutter() {
+async function createShutter() {
     const result = shutterSettings;
     if (result) {
         for (const i in result) {
@@ -1198,87 +1198,83 @@ function createShutter() {
             if (objectName && objectName !== '') {
                 try {
                     // Create Object for auto up
-                    adapter.setObjectNotExists('shutters.autoUp.' + objectName, {
+                    await adapter.setObjectNotExistsAsync('shutters.autoUp.' + objectName, {
                         "type": "state",
                         "common": {
                             "role": "switch",
                             "name": result[i].shutterName,
                             "type": "boolean",
                             "read": true,
-                            "write": true,
-                            "def": true
+                            "write": true
                         },
                         "native": {},
                     });
 
-                    adapter.getState('shutters.autoUp.' + objectName, (state) => {
-                        if ((state && state === null) || (state && state.val === null)) {
-                            adapter.setState('shutters.autoUp.' + objectName, { val: true, ack: true });
-                            adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
-                        }
-                    });
+                    const _autoUpState = await adapter.getStateAsync('shutters.autoUp.' + objectName);
+                    if (!_autoUpState) {
+                        await adapter.setStateAsync('shutters.autoUp.' + objectName, { val: true, ack: true });
+                        adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
+                    }
+
                     // Create Object for auto down
-                    adapter.setObjectNotExists('shutters.autoDown.' + objectName, {
+                    await adapter.setObjectNotExistsAsync('shutters.autoDown.' + objectName, {
                         "type": "state",
                         "common": {
                             "role": "switch",
                             "name": result[i].shutterName,
                             "type": "boolean",
                             "read": true,
-                            "write": true,
-                            "def": true
+                            "write": true
                         },
                         "native": {},
                     });
 
-                    adapter.getState('shutters.autoDown.' + objectName, (state) => {
-                        if ((state && state === null) || (state && state.val === null)) {
-                            adapter.setState('shutters.autoDown.' + objectName, { val: true, ack: true });
-                            adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
-                        }
-                    });
+                    const _autoDownState = await adapter.getStateAsync('shutters.autoDown.' + objectName);
+                    if (!_autoDownState) {
+                        await adapter.setStateAsync('shutters.autoDown.' + objectName, { val: true, ack: true });
+                        adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
+                    }
+
                     // Create Object for auto sun
-                    adapter.setObjectNotExists('shutters.autoSun.' + objectName, {
+                    await adapter.setObjectNotExistsAsync('shutters.autoSun.' + objectName, {
                         "type": "state",
                         "common": {
                             "role": "switch",
                             "name": result[i].shutterName,
                             "type": "boolean",
                             "read": true,
-                            "write": true,
-                            "def": true
+                            "write": true
                         },
                         "native": {},
                     });
 
-                    adapter.getState('shutters.autoSun.' + objectName, (state) => {
-                        if ((state && state === null) || (state && state.val === null)) {
-                            adapter.setState('shutters.autoSun.' + objectName, { val: true, ack: true });
-                            adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
-                        }
-                    });
+                    const _autoSunState = await adapter.getStateAsync('shutters.autoSun.' + objectName);
+                    if (!_autoSunState) {
+                        await adapter.setStateAsync('shutters.autoSun.' + objectName, { val: true, ack: true });
+                        adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
+                    }
+
                     // Create Object for auto state
-                    adapter.setObjectNotExists('shutters.autoState.' + objectName, {
+                    await adapter.setObjectNotExistsAsync('shutters.autoState.' + objectName, {
                         "type": "state",
                         "common": {
                             "role": "text",
                             "name": result[i].shutterName,
                             "type": "string",
                             "read": true,
-                            "write": false,
-                            "def": ""
+                            "write": false
                         },
                         "native": {},
                     });
 
-                    adapter.getState('shutters.autoState.' + objectName, (state) => {
-                        if ((state && state === null) || (state && state.val === null)) {
-                            adapter.setState('shutters.autoState.' + objectName, { val: 'none', ack: true });
-                            adapter.log.debug('Create Object: shutters.autoState.' + objectName);
-                        }
-                    });
+                    const _autoState = await adapter.getStateAsync('shutters.autoState.' + objectName);
+                    if (!_autoState) {
+                        await adapter.setStateAsync('shutters.autoState.' + objectName, { val: 'none', ack: true });
+                        adapter.log.debug('Create Object: shutters.autoState.' + objectName);
+                    }
+
                     // Create Object for auto level
-                    adapter.setObjectNotExists('shutters.autoLevel.' + objectName, {
+                    await adapter.setObjectNotExistsAsync('shutters.autoLevel.' + objectName, {
                         "type": "state",
                         "common": {
                             "role": "value",
@@ -1286,20 +1282,16 @@ function createShutter() {
                             "type": "number",
                             "unit": "%",
                             "read": true,
-                            "write": false,
-                            "def": 0
+                            "write": false
                         },
                         "native": {},
                     });
 
-                    adapter.getState('shutters.autoLevel.' + objectName, (state) => {
-                        if ((state && state === null) || (state && state.val === null)) {
-                            adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
-                        }
-                        if (state) {
-                            adapter.setState('shutters.autoLevel.' + objectName, { val: parseFloat(result[i].currentHeight), ack: true });
-                        }
-                    });
+                    const _autoLevel = await adapter.getStateAsync('shutters.autoLevel.' + objectName);
+                    if (!_autoLevel) {
+                        adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
+                        await adapter.setStateAsync('shutters.autoLevel.' + objectName, { val: result[i].currentHeight ? parseFloat(result[i].currentHeight) : 0, ack: true });
+                    }
                 } catch (e) {
                     adapter.log.warn('shutter cannot created ... Please check your shutter config: ' + e);
                 }
@@ -1346,8 +1338,10 @@ async function detectedOldShutter(result) {
                 const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                 fullRes.push(res);
             }
-            await sleep(1000);
-            deleteShutter(fullRes, resultID, resID);
+            if (fullRes.indexOf(resultID) === -1) {
+                await sleep(1000);
+                deleteShutter(fullRes, resultID, resID);
+            }
         }
 
         // delete old shutter auto down
@@ -1363,8 +1357,10 @@ async function detectedOldShutter(result) {
                 const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                 fullRes.push(res);
             }
-            await sleep(1000);
-            deleteShutter(fullRes, resultID, resID);
+            if (fullRes.indexOf(resultID) === -1) {
+                await sleep(1000);
+                deleteShutter(fullRes, resultID, resID);
+            }
         }
 
         // delete old shutter auto sun
@@ -1380,8 +1376,10 @@ async function detectedOldShutter(result) {
                 const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                 fullRes.push(res);
             }
-            await sleep(1000);
-            deleteShutter(fullRes, resultID, resID);
+            if (fullRes.indexOf(resultID) === -1) {
+                await sleep(1000);
+                deleteShutter(fullRes, resultID, resID);
+            }
         }
 
         // delete old shutter auto state
@@ -1397,8 +1395,10 @@ async function detectedOldShutter(result) {
                 const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                 fullRes.push(res);
             }
-            await sleep(1000);
-            deleteShutter(fullRes, resultID, resID);
+            if (fullRes.indexOf(resultID) === -1) {
+                await sleep(1000);
+                deleteShutter(fullRes, resultID, resID);
+            }
         }
 
         // delete old shutter auto level
@@ -1414,8 +1414,10 @@ async function detectedOldShutter(result) {
                 const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                 fullRes.push(res);
             }
-            await sleep(1000);
-            deleteShutter(fullRes, resultID, resID);
+            if (fullRes.indexOf(resultID) === -1) {
+                await sleep(1000);
+                deleteShutter(fullRes, resultID, resID);
+            }
         }
     }
 }
@@ -1569,6 +1571,11 @@ function main(adapter) {
     adapter.subscribeStates('control.*');
     adapter.subscribeStates('info.Elevation');
     adapter.subscribeStates('info.Azimut');
+    adapter.subscribeStates('shutters.autoUp.*');
+    adapter.subscribeStates('shutters.autoDown.*');
+    adapter.subscribeStates('shutters.autoSun.*');
+    adapter.subscribeStates('shutters.autoLevel.*');
+    adapter.subscribeStates('shutters.autoState.*');
 
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.heute.*')) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
