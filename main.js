@@ -1571,11 +1571,6 @@ function main(adapter) {
     adapter.subscribeStates('control.*');
     adapter.subscribeStates('info.Elevation');
     adapter.subscribeStates('info.Azimut');
-    adapter.subscribeStates('shutters.autoUp.*');
-    adapter.subscribeStates('shutters.autoDown.*');
-    adapter.subscribeStates('shutters.autoSun.*');
-    adapter.subscribeStates('shutters.autoLevel.*');
-    adapter.subscribeStates('shutters.autoState.*');
 
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.heute.*')) {
         adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
