@@ -98,13 +98,15 @@ function startAdapter(options) {
             if (adapter.config.HolidayDP !== '') {
                 if (id.includes(adapter.config.HolidayDP)) {
                     adapter.log.debug('HolidayDP changed to ' + JSON.stringify(state.val));
-                    await adapter.setStateAsync('control.Holiday', { val: state.val, ack: true });
+                    await adapter.setStateAsync('control.Holiday', { val: state.val, ack: true })
+                        .catch((e) => adapter.log.warn(e));
                 }
             }
             if (adapter.config.schoolfreeDP !== '') {
                 if (id.includes(adapter.config.schoolfreeDP)) {
                     adapter.log.debug('schoolfreeDP changed to ' + JSON.stringify(state.val));
-                    await adapter.setStateAsync('control.schoolfree', { val: state.val, ack: true });
+                    await adapter.setStateAsync('control.schoolfree', { val: state.val, ack: true })
+                        .catch((e) => adapter.log.warn(e));
                 }
             }
             if (id === adapter.namespace + '.control.Holiday') {
@@ -148,15 +150,18 @@ function startAdapter(options) {
                 }
             }
             if (id === adapter.config.triggerAutoLiving) {
-                await adapter.setStateAsync('control.autoLiving', { val: state.val, ack: true });
+                await adapter.setStateAsync('control.autoLiving', { val: state.val, ack: true })
+                    .catch((e) => adapter.log.warn(e));
                 adapter.log.debug('Auto Living is: ' + state.val);
             }
             if (id === adapter.config.triggerAutoSleep) {
-                await adapter.setStateAsync('control.autoSleep', { val: state.val, ack: true });
+                await adapter.setStateAsync('control.autoSleep', { val: state.val, ack: true })
+                    .catch((e) => adapter.log.warn(e));
                 adapter.log.debug('Auto Sleep is: ' + state.val);
             }
             if (id === adapter.config.triggerAutoChildren) {
-                await adapter.setStateAsync('control.autoChildren', { val: state.val, ack: true });
+                await adapter.setStateAsync('control.autoChildren', { val: state.val, ack: true })
+                    .catch((e) => adapter.log.warn(e));
                 adapter.log.debug('Auto Children is: ' + state.val);
             }
             if (id === adapter.config.lightsensorUpDown) {
@@ -225,7 +230,7 @@ function startAdapter(options) {
                         for (const s in shutterSettings) {
                             if (shutterSettings[s].shutterName == result[i].shutterName) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
-                                const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name);
+                                const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
                                 if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != _shutterState.val) {
                                     adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + _shutterState.val);
@@ -236,7 +241,8 @@ function startAdapter(options) {
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
+                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
+                                        .catch((e) => adapter.log.warn(e));
 
                                     adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
@@ -245,7 +251,8 @@ function startAdapter(options) {
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
+                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
+                                        .catch((e) => adapter.log.warn(e));
 
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
                                     adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
@@ -264,8 +271,10 @@ function startAdapter(options) {
                                     shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
                                     shutterSettings[s].firstCompleteUp = false;
 
-                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true });
-                                    await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(shutterSettings[s].currentHeight), ack: true });
+                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
+                                        .catch((e) => adapter.log.warn(e));
+                                    await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(shutterSettings[s].currentHeight), ack: true })
+                                        .catch((e) => adapter.log.warn(e));
 
                                     adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
                                 }
@@ -410,7 +419,7 @@ async function saveCurrentStates(onStart) {
     let shutterName = [];
     let num = 0;
 
-    const _currentStates = await adapter.getStateAsync('shutters.currentStates');
+    const _currentStates = await adapter.getStateAsync('shutters.currentStates').catch((e) => adapter.log.warn(e));
     if (_currentStates && _currentStates.val && _currentStates.val !== null) {
         try {
             currentStates = JSON.parse(_currentStates.val);
@@ -475,10 +484,12 @@ async function saveCurrentStates(onStart) {
                 }
 
                 await sleep(2000);
-                await adapter.setStateAsync('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+                await adapter.setStateAsync('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true })
+                    .catch((e) => adapter.log.warn(e));
             }
         } else if (num == shutterSettings.length && !onStart) {
-            await adapter.setStateAsync('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true });
+            await adapter.setStateAsync('shutters.currentStates', { val: JSON.stringify(currentStates), ack: true })
+                .catch((e) => adapter.log.warn(e));
         }
         await sleep(100);
     }
@@ -487,29 +498,34 @@ async function saveCurrentStates(onStart) {
 // +++++++++++++++++ Check States of Trigger after start ++++++++++++++++++++++++++++
 
 async function checkStates() {
-    const _holidayStates = await adapter.getStateAsync('control.Holiday');
+    const _holidayStates = await adapter.getStateAsync('control.Holiday').catch((e) => adapter.log.warn(e));
     if ((_holidayStates && _holidayStates === null) || (_holidayStates && _holidayStates.val === null)) {
-        await adapter.setStateAsync('control.Holiday', { val: false, ack: true });
+        await adapter.setStateAsync('control.Holiday', { val: false, ack: true })
+            .catch((e) => adapter.log.warn(e));
     }
 
-    const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree');
+    const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree').catch((e) => adapter.log.warn(e));
     if ((_schoolfreeStates && _schoolfreeStates === null) || (_schoolfreeStates && _schoolfreeStates.val === null)) {
-        await adapter.setStateAsync('control.schoolfree', { val: false, ack: true });
+        await adapter.setStateAsync('control.schoolfree', { val: false, ack: true })
+            .catch((e) => adapter.log.warn(e));
     }
 
-    const _autoLivingStates = await adapter.getStateAsync('control.autoLiving');
+    const _autoLivingStates = await adapter.getStateAsync('control.autoLiving').catch((e) => adapter.log.warn(e));
     if ((_autoLivingStates && _autoLivingStates === null) || (_autoLivingStates && _autoLivingStates.val === null)) {
-        await adapter.setStateAsync('control.autoLiving', { val: false, ack: true });
+        await adapter.setStateAsync('control.autoLiving', { val: false, ack: true })
+            .catch((e) => adapter.log.warn(e));
     }
 
-    const _autoSleepStates = await adapter.getStateAsync('control.autoSleep');
+    const _autoSleepStates = await adapter.getStateAsync('control.autoSleep').catch((e) => adapter.log.warn(e));
     if ((_autoSleepStates && _autoSleepStates === null) || (_autoSleepStates && _autoSleepStates.val === null)) {
-        await adapter.setStateAsync('control.autoSleep', { val: false, ack: true });
+        await adapter.setStateAsync('control.autoSleep', { val: false, ack: true })
+            .catch((e) => adapter.log.warn(e));
     }
 
-    const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren');
+    const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren').catch((e) => adapter.log.warn(e));
     if ((_autoChildrenStates && _autoChildrenStates === null) || (_autoChildrenStates && _autoChildrenStates.val === null)) {
-        await adapter.setStateAsync('control.autoChildren', { val: false, ack: true });
+        await adapter.setStateAsync('control.autoChildren', { val: false, ack: true })
+            .catch((e) => adapter.log.warn(e));
     }
 }
 
@@ -518,49 +534,49 @@ async function checkStates() {
 // +++++++++++++++++++ check all current States an changes +++++++++++++++++++++++++
 
 async function checkActualStates() {
-    const _holidayStates = await adapter.getStateAsync('control.Holiday');
+    const _holidayStates = await adapter.getStateAsync('control.Holiday').catch((e) => adapter.log.warn(e));
     if (_holidayStates) {
         HolidayStr = _holidayStates.val;
     }
 
-    const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree');
+    const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree').catch((e) => adapter.log.warn(e));
     if (_schoolfreeStates) {
         SchoolfreeStr = _schoolfreeStates.val;
     }
 
-    const _autoLivingStates = await adapter.getStateAsync('control.autoLiving');
+    const _autoLivingStates = await adapter.getStateAsync('control.autoLiving').catch((e) => adapter.log.warn(e));
     if (_autoLivingStates) {
         autoLivingStr = _autoLivingStates.val;
     }
 
-    const _autoSleepStates = await adapter.getStateAsync('control.autoSleep');
+    const _autoSleepStates = await adapter.getStateAsync('control.autoSleep').catch((e) => adapter.log.warn(e));
     if (_autoSleepStates) {
         autoSleepStr = _autoSleepStates.val;
     }
 
-    const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren');
+    const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren').catch((e) => adapter.log.warn(e));
     if (_autoChildrenStates) {
         autoChildrenStr = _autoChildrenStates.val;
     }
 
     if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance != 'none' || adapter.config.publicHolInstance != '')) {
-        const _publicHolidayStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.heute.boolean');
+        const _publicHolidayStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.heute.boolean').catch((e) => adapter.log.warn(e));
         if (typeof _publicHolidayStr != undefined && _publicHolidayStr != null) {
             publicHolidayStr = _publicHolidayStr.val;
         }
 
-        const _publicHolidayTomorowStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.morgen.boolean');
+        const _publicHolidayTomorowStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.morgen.boolean').catch((e) => adapter.log.warn(e));
         if (typeof _publicHolidayTomorowStr != undefined && _publicHolidayTomorowStr != null) {
             publicHolidayTomorowStr = _publicHolidayTomorowStr.val;
         }
     }
 
     if (adapter.config.schoolfree === true && (adapter.config.schoolfreeInstance != 'none' || adapter.config.schoolfreeInstance != '')) {
-        const _schoolfreeStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.today');
+        const _schoolfreeStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.today').catch((e) => adapter.log.warn(e));
         if (typeof _schoolfreeStr != undefined && _schoolfreeStr != null) {
             schoolfreeStr = _schoolfreeStr.val;
         }
-        const _schoolfreeTomorowStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.tomorrow');
+        const _schoolfreeTomorowStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.tomorrow').catch((e) => adapter.log.warn(e));
         if (typeof _schoolfreeTomorowStr != undefined && _schoolfreeTomorowStr != null) {
             schoolfreeTomorowStr = _schoolfreeTomorowStr.val;
         }
@@ -568,42 +584,44 @@ async function checkActualStates() {
 
     if (adapter.config.HolidayDP !== '') {
         adapter.log.debug('checking HolidayDP');
-        const _HolidayDP = await adapter.getForeignStateAsync(adapter.config.HolidayDP);
+        const _HolidayDP = await adapter.getForeignStateAsync(adapter.config.HolidayDP).catch((e) => adapter.log.warn(e));
         if (typeof _HolidayDP != undefined && _HolidayDP != null) {
             adapter.log.debug('got HolidayDP ' + _HolidayDP.val);
-            await adapter.setStateAsync('control.Holiday', { val: _HolidayDP.val, ack: true });
+            await adapter.setStateAsync('control.Holiday', { val: _HolidayDP.val, ack: true })
+                .catch((e) => adapter.log.warn(e));
         }
     }
 
     if (adapter.config.schoolfreeDP !== '') {
         adapter.log.debug('checking schoolfreeDP');
-        const _schoolfreeDP = await adapter.getForeignStateAsync(adapter.config.schoolfreeDP);
+        const _schoolfreeDP = await adapter.getForeignStateAsync(adapter.config.schoolfreeDP).catch((e) => adapter.log.warn(e));
         if (typeof _schoolfreeDP != undefined && _schoolfreeDP != null) {
             adapter.log.debug('got schoolfreeDP ' + _schoolfreeDP.val);
-            await adapter.setStateAsync('control.schoolfree', { val: _schoolfreeDP.val, ack: true });
+            await adapter.setStateAsync('control.schoolfree', { val: _schoolfreeDP.val, ack: true })
+                .catch((e) => adapter.log.warn(e));
         }
     }
-    const _ObjautoUp = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoUp.*', 'state');
+    const _ObjautoUp = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoUp.*', 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoUp) {
         ObjautoUp = _ObjautoUp;
     }
 
-    const _ObjautoDown = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoDown.*', 'state');
+    const _ObjautoDown = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoDown.*', 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoDown) {
         ObjautoDown = _ObjautoDown;
     }
 
-    const _ObjautoSun = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoSun.*', 'state');
+    const _ObjautoSun = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoSun.*', 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoSun) {
         ObjautoSun = _ObjautoSun;
     }
 
-    const _ObjautoState = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoState.*', 'state');
+    const _ObjautoState = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoState.*', 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoState) {
         ObjautoState = _ObjautoState;
     }
 
-    const _ObjautoLevel = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoLevel.*', 'state');
+    const _ObjautoLevel = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoLevel.*', 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoLevel) {
         ObjautoLevel = _ObjautoLevel;
     }
@@ -623,7 +641,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
     if (resultStates) {
         for (const i in resultStates) {
             const nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
-            const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name);
+            const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name).catch((e) => adapter.log.warn(e));
 
             if (typeof _shutterState != undefined && _shutterState != null) {
                 // Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. 
@@ -631,12 +649,14 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
                 resultStates[i].currentAction = 'none';
                 resultStates[i].firstCompleteUp = true;
 
-                await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: resultStates[i].currentAction, ack: true });
+                await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: resultStates[i].currentAction, ack: true })
+                    .catch((e) => adapter.log.warn(e));
                 adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + _shutterState.val);
 
                 if (typeof _shutterState.val != undefined && _shutterState.val != null) {
                     resultStates[i].currentHeight = _shutterState.val;
-                    await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true });
+                    await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true })
+                        .catch((e) => adapter.log.warn(e));
 
                     if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
                         adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
@@ -1210,9 +1230,10 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoUpState = await adapter.getStateAsync('shutters.autoUp.' + objectName);
+                    const _autoUpState = await adapter.getStateAsync('shutters.autoUp.' + objectName).catch((e) => adapter.log.warn(e));
                     if (!_autoUpState) {
-                        await adapter.setStateAsync('shutters.autoUp.' + objectName, { val: true, ack: true });
+                        await adapter.setStateAsync('shutters.autoUp.' + objectName, { val: true, ack: true })
+                            .catch((e) => adapter.log.warn(e));
                         adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
                     }
 
@@ -1229,9 +1250,10 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoDownState = await adapter.getStateAsync('shutters.autoDown.' + objectName);
+                    const _autoDownState = await adapter.getStateAsync('shutters.autoDown.' + objectName).catch((e) => adapter.log.warn(e));
                     if (!_autoDownState) {
-                        await adapter.setStateAsync('shutters.autoDown.' + objectName, { val: true, ack: true });
+                        await adapter.setStateAsync('shutters.autoDown.' + objectName, { val: true, ack: true })
+                            .catch((e) => adapter.log.warn(e));
                         adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
                     }
 
@@ -1248,9 +1270,10 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoSunState = await adapter.getStateAsync('shutters.autoSun.' + objectName);
+                    const _autoSunState = await adapter.getStateAsync('shutters.autoSun.' + objectName).catch((e) => adapter.log.warn(e));
                     if (!_autoSunState) {
-                        await adapter.setStateAsync('shutters.autoSun.' + objectName, { val: true, ack: true });
+                        await adapter.setStateAsync('shutters.autoSun.' + objectName, { val: true, ack: true })
+                            .catch((e) => adapter.log.warn(e));
                         adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
                     }
 
@@ -1267,9 +1290,10 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoState = await adapter.getStateAsync('shutters.autoState.' + objectName);
+                    const _autoState = await adapter.getStateAsync('shutters.autoState.' + objectName).catch((e) => adapter.log.warn(e));
                     if (!_autoState) {
-                        await adapter.setStateAsync('shutters.autoState.' + objectName, { val: 'none', ack: true });
+                        await adapter.setStateAsync('shutters.autoState.' + objectName, { val: 'none', ack: true })
+                            .catch((e) => adapter.log.warn(e));
                         adapter.log.debug('Create Object: shutters.autoState.' + objectName);
                     }
 
@@ -1287,10 +1311,11 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoLevel = await adapter.getStateAsync('shutters.autoLevel.' + objectName);
+                    const _autoLevel = await adapter.getStateAsync('shutters.autoLevel.' + objectName).catch((e) => adapter.log.warn(e));
                     if (!_autoLevel) {
                         adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
-                        await adapter.setStateAsync('shutters.autoLevel.' + objectName, { val: result[i].currentHeight ? parseFloat(result[i].currentHeight) : 0, ack: true });
+                        await adapter.setStateAsync('shutters.autoLevel.' + objectName, { val: result[i].currentHeight ? parseFloat(result[i].currentHeight) : 0, ack: true })
+                            .catch((e) => adapter.log.warn(e));
                     }
                 } catch (e) {
                     adapter.log.warn('shutter cannot created ... Please check your shutter config: ' + e);
