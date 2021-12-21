@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.6",
+    "version": "1.4.7",
     "news": {
+      "1.4.7": {
+        "en": "complete error handling for states added\nBugfix Down Late Option\nsmall Bugfixes\nDependencies updated\nDev-Dependencies updated",
+        "de": "komplette Fehlerbehandlung für Zustände hinzugefügt\nBugfix Down Late Option\nkleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
+        "ru": "добавлена полная обработка ошибок для состояний\nИсправление ошибки с опозданием\nнебольшие исправления\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
+        "pt": "tratamento de erros completo para estados adicionados\nOpção de correção de bug para baixo\npequenas correções de bugs\nDependências atualizadas\nDev-Dependencies atualizado",
+        "nl": "volledige foutafhandeling voor staten toegevoegd\nBugfix Down Late Optie\nkleine bugfixes\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "gestion complète des erreurs pour les états ajoutés\nOption de correction de bugs en retard\npetites corrections de bugs\nDépendances mises à jour\nDépendances de développement mises à jour",
+        "it": "gestione completa degli errori per gli stati aggiunti\nOpzione correzione bug in ritardo\npiccole correzioni di bug\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "manejo completo de errores para los estados agregados\nOpción de corrección de errores hacia abajo\npequeñas correcciones de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "dodano pełną obsługę błędów dla stanów\nOpcja późnego naprawiania błędów\nmałe poprawki\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "添加状态的完整错误处理\n错误修正下延迟选项\n小错误修正\n更新了依赖项\n开发依赖更新"
+      },
       "1.4.6": {
         "en": "Bugfixes shuttersettings\nBugfix shutter created",
         "de": "Bugfixes Verschlusseinstellungen\nBugfix Shutter erstellt",
@@ -74,18 +86,6 @@
         "es": "Limpieza de código\nEstados de alarma de corrección de errores\ntry & catch agregado",
         "pl": "Czyszczenie kodu\nStany alarmowe z poprawkami błędów\nspróbuj i złap dodany",
         "zh-cn": "代码清理\n错误修复警报状态\n尝试和捕捉添加"
-      },
-      "1.4.0": {
-        "en": "Source code completely redesigned\nMuch of the source code was converted to async\nmany small Bugfixes\nDependencies updated\nDev-Dependencies updated",
-        "de": "Quellcode komplett überarbeitet\nEin Großteil des Quellcodes wurde in async konvertiert\nviele kleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
-        "ru": "Исходный код полностью переработан\nБольшая часть исходного кода была преобразована в асинхронный режим.\nмного мелких исправлений\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
-        "pt": "Código-fonte completamente redesenhado\nMuito do código-fonte foi convertido para assíncrono\nmuitas pequenas correções de bugs\nDependências atualizadas\nDev-Dependencies atualizado",
-        "nl": "Broncode volledig opnieuw ontworpen\nEen groot deel van de broncode is geconverteerd naar async\nveel kleine bugfixes\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "Code source entièrement repensé\nUne grande partie du code source a été converti en async\nde nombreuses petites corrections de bugs\nDépendances mises à jour\nDépendances de développement mises à jour",
-        "it": "Codice sorgente completamente ridisegnato\nGran parte del codice sorgente è stato convertito in asincrono\nmolti piccoli bug risolti\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "Código fuente completamente rediseñado\nGran parte del código fuente se convirtió a asincrónico\nmuchas pequeñas correcciones de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "Całkowicie przeprojektowany kod źródłowy\nZnaczna część kodu źródłowego została przekonwertowana na asynchroniczną\nwiele małych poprawek\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
-        "zh-cn": "完全重新设计的源代码\n大部分源代码已转换为异步\n许多小错误修正\n更新了依赖项\n开发依赖更新"
       }
     },
     "title": "shuttercontrol",
