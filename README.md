@@ -44,6 +44,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+
+### __WORK IN PROGRESS__
+* (simatec) error handling for trigger added
+* (simatec) Bugfix Trigger delay
+
 ### 1.4.7 (2021-12-21)
 * (simatec) complete error handling for states added
 * (simatec) Bugfix Down Late Option
