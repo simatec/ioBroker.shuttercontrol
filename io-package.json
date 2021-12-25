@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.7",
+    "version": "1.4.8",
     "news": {
+      "1.4.8": {
+        "en": "error handling for trigger added\nBugfix Trigger delay",
+        "de": "Fehlerbehandlung für Trigger hinzugefügt\nBugfix Triggerverzögerung",
+        "ru": "добавлена обработка ошибок для триггера\nBugfix Задержка срабатывания триггера",
+        "pt": "tratamento de erros para gatilho adicionado\nBug fix Trigger delay",
+        "nl": "foutafhandeling voor trigger toegevoegd\nBugfix Trigger vertraging",
+        "fr": "gestion des erreurs pour le déclencheur ajouté\nRetard de déclenchement",
+        "it": "gestione degli errori per il trigger aggiunto\nBugfix Ritardo di attivazione",
+        "es": "manejo de errores para el disparador agregado\nRetraso del disparador de corrección de errores",
+        "pl": "dodano obsługę błędów dla wyzwalacza\nOpóźnienie wyzwalania błędu",
+        "zh-cn": "添加触发器的错误处理\n错误修正触发延迟"
+      },
       "1.4.7": {
         "en": "complete error handling for states added\nBugfix Down Late Option\nsmall Bugfixes\nDependencies updated\nDev-Dependencies updated",
         "de": "komplette Fehlerbehandlung für Zustände hinzugefügt\nBugfix Down Late Option\nkleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "Configuración de alarma de corrección de errores\nCorrección de errores mover el obturador después de cerrar la ventana\nmejor traducción para todos los idiomas\npequeñas correcciones de errores",
         "pl": "Ustawienia alarmu naprawiającego błędy\nNaprawiono błąd przesuwania migawki po zamknięciu okna\nlepsze tłumaczenie na wszystkie języki\nmałe poprawki",
         "zh-cn": "错误修正警报设置\n修正关闭窗口后移动快门\n更好地翻译所有语言\n小错误修正"
-      },
-      "1.4.1": {
-        "en": "Code cleaning\nBugfix Alarm States\ntry & catch added",
-        "de": "Code-Reinigung\nBugfix Alarmzustände\ntry & catch hinzugefügt",
-        "ru": "Очистка кода\nИсправление аварийных состояний\nпопробуй и поймай добавлено",
-        "pt": "Limpeza de código\nEstado de alarme de correção de bug\ntente e pegue adicionado",
-        "nl": "Code opschonen\nAlarmstatussen voor bugfix\nprobeer & vang toegevoegd",
-        "fr": "Nettoyage de codes\nÉtats d'alarme de correction de bugs\nessayer et attraper ajouté",
-        "it": "Pulizia del codice\nBugfix Stato di allarme\nprova e cattura aggiunto",
-        "es": "Limpieza de código\nEstados de alarma de corrección de errores\ntry & catch agregado",
-        "pl": "Czyszczenie kodu\nStany alarmowe z poprawkami błędów\nspróbuj i złap dodany",
-        "zh-cn": "代码清理\n错误修复警报状态\n尝试和捕捉添加"
       }
     },
     "title": "shuttercontrol",
