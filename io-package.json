@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.8",
+    "version": "1.4.9",
     "news": {
+      "1.4.9": {
+        "en": "error handling for trigger added\nBugfix Trigger delay\nDependencies updated\nDev-Dependencies updated",
+        "de": "Fehlerbehandlung für Trigger hinzugefügt\nBugfix Triggerverzögerung\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
+        "ru": "добавлена обработка ошибок для триггера\nBugfix Задержка срабатывания триггера\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
+        "pt": "tratamento de erros para gatilho adicionado\nBug fix Trigger delay\nDependências atualizadas\nDev-Dependencies atualizado",
+        "nl": "foutafhandeling voor trigger toegevoegd\nBugfix Trigger vertraging\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "gestion des erreurs pour le déclencheur ajouté\nRetard de déclenchement\nDépendances mises à jour\nDépendances de développement mises à jour",
+        "it": "gestione degli errori per il trigger aggiunto\nBugfix Ritardo di attivazione\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "manejo de errores para el disparador agregado\nRetraso del disparador de corrección de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "dodano obsługę błędów dla wyzwalacza\nOpóźnienie wyzwalania błędów\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "添加触发器的错误处理\n错误修正触发延迟\n更新了依赖项\n开发依赖更新"
+      },
       "1.4.8": {
         "en": "error handling for trigger added\nBugfix Trigger delay",
         "de": "Fehlerbehandlung für Trigger hinzugefügt\nBugfix Triggerverzögerung",
@@ -74,18 +86,6 @@
         "es": "Disparador de corrección de errores después de cerrar el obturador\nCorrección de errores Nivel de Navidad por helada\nNivel de Navidad para GoldenHour agregado\nSe agregó el horario de verano para Goldenhour\npequeñas correcciones de errores",
         "pl": "Bugfix Trigger po zamknięciu migawki\nBugfix XMas Poziom przez mróz\nDodano poziom świąteczny dla GoldenHour\nDodano czas letni dla Goldenhour\nmałe poprawki",
         "zh-cn": "错误修复快门关闭后触发\n通过霜冻修复圣诞关卡\n添加了 GoldenHour 的圣诞关卡\n添加了黄金时段的夏季时间\n小错误修正"
-      },
-      "1.4.2": {
-        "en": "Bugfix Alarm settings\nBugfix move shutter after closing window\nbetter translation for all languages\nsmall Bugfixes",
-        "de": "Bugfix Alarmeinstellungen\nBugfix Rollladen bewegen nach Fenster schließen\nbessere Übersetzung für alle Sprachen\nkleine Bugfixes",
-        "ru": "Исправление ошибок в настройках будильника\nИсправление перемещения шторки после закрытия окна\nлучший перевод для всех языков\nнебольшие исправления",
-        "pt": "Correção de bug Configurações de alarme\nBug corrigido ao mover o obturador após fechar a janela\nmelhor tradução para todos os idiomas\npequenas correções de bugs",
-        "nl": "Bugfix Alarminstellingen\nBugfix verplaatsen rolluik na sluiten venster\nbetere vertaling voor alle talen\nkleine bugfixes",
-        "fr": "Paramètres d'alarme de correction de bugs\nBugfix déplacer l'obturateur après la fermeture de la fenêtre\nmeilleure traduction pour toutes les langues\npetites corrections de bugs",
-        "it": "Bugfix Impostazioni allarme\nBugfix sposta l'otturatore dopo aver chiuso la finestra\ntraduzione migliore per tutte le lingue\npiccole correzioni di bug",
-        "es": "Configuración de alarma de corrección de errores\nCorrección de errores mover el obturador después de cerrar la ventana\nmejor traducción para todos los idiomas\npequeñas correcciones de errores",
-        "pl": "Ustawienia alarmu naprawiającego błędy\nNaprawiono błąd przesuwania migawki po zamknięciu okna\nlepsze tłumaczenie na wszystkie języki\nmałe poprawki",
-        "zh-cn": "错误修正警报设置\n修正关闭窗口后移动快门\n更好地翻译所有语言\n小错误修正"
       }
     },
     "title": "shuttercontrol",
