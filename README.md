@@ -48,6 +48,12 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Bugfix xmas time
+* (simatec) Bugfix Shutter delay
+* (simatec) Dependencies updated
+* (simatec) Dev-Dependencies updated
+
 ### 1.4.9 (2021-12-29)
 * (simatec) error handling for trigger added
 * (simatec) Bugfix Trigger delay
