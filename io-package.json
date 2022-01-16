@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.9",
+    "version": "1.4.10",
     "news": {
+      "1.4.10": {
+        "en": "Bugfix xmas time\nBugfix Shutter delay\nDependencies updated\nDev-Dependencies updated",
+        "de": "Bugfix Weihnachtszeit\nBugfix Verschlussverzögerung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
+        "ru": "Исправлено рождественское время\nЗадержка затвора\nЗависимости обновлены\nОбновлены Dev-зависимости",
+        "pt": "Correção de bugs na hora do natal\nAtraso do obturador de correção de bug\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
+        "nl": "Bugfix kersttijd\nBugfix Sluitervertraging\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "Correction de bugs à Noël\nDélai d'obturation\nDépendances mises à jour\nDev-Dépendances mises à jour",
+        "it": "Bug fix tempo di Natale\nBugfix Ritardo dell'otturatore\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "Corrección de errores tiempo de Navidad\nCorrección de errores Retraso del obturador\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "Świąteczny czas na naprawę błędów\nOpóźnienie migawki\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie",
+        "zh-cn": "错误修复圣诞节时间\n修正快门延迟\n已更新依赖项\n已更新开发依赖项"
+      },
       "1.4.9": {
         "en": "error handling for trigger added\nBugfix Trigger delay\nDependencies updated\nDev-Dependencies updated",
         "de": "Fehlerbehandlung für Trigger hinzugefügt\nBugfix Triggerverzögerung\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "Disparador de corrección de errores después de cerrar el obturador\nCorrección de errores Nivel de Navidad por helada\nNivel de Navidad para elevación agregado\nSe agregó el horario de verano para Elevation\npequeñas correcciones de errores\nComprobación de configuración del obturador agregada",
         "pl": "Bugfix Trigger po zamknięciu migawki\nBugfix XMas Poziom przez mróz\nDodano poziom XMas dla elewacji\nDodano czas letni na podniesienie\nmałe poprawki\nDodano sprawdzanie konfiguracji migawki",
         "zh-cn": "错误修复快门关闭后触发\n通过霜冻修复圣诞关卡\n添加了用于海拔的 XMas 级别\n添加了夏季高程\n小错误修正\n添加了快门配置检查"
-      },
-      "1.4.3": {
-        "en": "Bugfix Trigger after shutter close\nBugfix XMas Level by frost\nXMas Level for GoldenHour added\nSummertime for Goldenhour added\nsmall Bugfixes",
-        "de": "Bugfix Trigger nach Rollladen schließen\nBugfix XMas Level von Frost\nXMas Level für GoldenHour hinzugefügt\nSommerzeit für Goldenhour hinzugefügt\nkleine Bugfixes",
-        "ru": "Исправление срабатывания триггера после закрытия шторки\nИсправление ошибки XMas Level by frost\nДобавлен рождественский уровень для GoldenHour\nДобавлено летнее время для Золотого часа\nнебольшие исправления",
-        "pt": "Bug corrigido após o fechamento do obturador\nBugfix XMas Level by frost\nNível XMas para GoldenHour adicionado\nSummertime for Goldenhour adicionado\npequenas correções de bugs",
-        "nl": "Bugfix Trigger na sluiter sluiten\nBugfix XMas Level door vorst\nXMas Level voor GoldenHour toegevoegd\nZomertijd voor Goldenhour toegevoegd\nkleine bugfixes",
-        "fr": "Déclenchement de bug après la fermeture de l'obturateur\nCorrection du niveau de Noël par le gel\nNiveau XMas pour GoldenHour ajouté\nHeure d'été pour Goldenhour ajoutée\npetites corrections de bugs",
-        "it": "Bugfix Trigger dopo la chiusura dell'otturatore\nBugfix XMas Level dal gelo\nAggiunto il livello di Natale per GoldenHour\nAggiunta l'ora legale per Goldenhour\npiccole correzioni di bug",
-        "es": "Disparador de corrección de errores después de cerrar el obturador\nCorrección de errores Nivel de Navidad por helada\nNivel de Navidad para GoldenHour agregado\nSe agregó el horario de verano para Goldenhour\npequeñas correcciones de errores",
-        "pl": "Bugfix Trigger po zamknięciu migawki\nBugfix XMas Poziom przez mróz\nDodano poziom świąteczny dla GoldenHour\nDodano czas letni dla Goldenhour\nmałe poprawki",
-        "zh-cn": "错误修复快门关闭后触发\n通过霜冻修复圣诞关卡\n添加了 GoldenHour 的圣诞关卡\n添加了黄金时段的夏季时间\n小错误修正"
       }
     },
     "title": "shuttercontrol",
