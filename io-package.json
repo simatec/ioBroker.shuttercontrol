@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.10",
+    "version": "1.4.11",
     "news": {
+      "1.4.11": {
+        "en": "fix objects value\nDependencies updated\nDev-Dependencies updated",
+        "de": "Objektwert fixieren\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
+        "ru": "исправить стоимость объектов\nЗависимости обновлены\nОбновлены Dev-зависимости",
+        "pt": "corrigir o valor dos objetos\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
+        "nl": "waarde van objecten repareren\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "fixer la valeur des objets\nDépendances mises à jour\nDev-Dépendances mises à jour",
+        "it": "correggere il valore degli oggetti\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "fijar el valor de los objetos\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "napraw wartość obiektów\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "修复对象值\n已更新依赖项\n已更新开发依赖项"
+      },
       "1.4.10": {
         "en": "Bugfix xmas time\nBugfix Shutter delay\nDependencies updated\nDev-Dependencies updated",
         "de": "Bugfix Weihnachtszeit\nBugfix Verschlussverzögerung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "pequeñas correcciones de errores\nLimpieza de código\ntry & catch agregado\nel código fuente se convirtió a asincrónico\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "małe poprawki\nCzyszczenie kodu\nspróbuj i złap dodany\nkod źródłowy został przekonwertowany na asynchroniczny\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
         "zh-cn": "小错误修正\n代码清理\n尝试和捕捉添加\n源代码已转换为异步\n更新了依赖项\n开发依赖更新"
-      },
-      "1.4.4": {
-        "en": "Bugfix Trigger after shutter close\nBugfix XMas Level by frost\nXMas Level for Elevation added\nSummertime for Elevation added\nsmall Bugfixes\nshutter Config check added",
-        "de": "Bugfix Trigger nach Rollladen schließen\nBugfix XMas Level von Frost\nXMas Level für Elevation hinzugefügt\nSommerzeit für Elevation hinzugefügt\nkleine Bugfixes\nShutter-Config-Check hinzugefügt",
-        "ru": "Исправление срабатывания триггера после закрытия шторки\nИсправление ошибки XMas Level by frost\nДобавлен XMas Level for Elevation\nДобавлено летнее время для возвышений\nнебольшие исправления\nдобавлена проверка конфигурации затвора",
-        "pt": "Bug corrigido após o fechamento do obturador\nBugfix XMas Level by frost\nNível de XMas para elevação adicionado\nSummertime for Elevation adicionado\npequenas correções de bugs\nVerificação de configuração do obturador adicionada",
-        "nl": "Bugfix Trigger na sluiter sluiten\nBugfix XMas Level door vorst\nXMas-niveau voor hoogte toegevoegd\nZomertijd voor hoogte toegevoegd\nkleine bugfixes\nsluiterconfiguratiecontrole toegevoegd",
-        "fr": "Déclenchement de bug après la fermeture de l'obturateur\nCorrection du niveau de Noël par le gel\nNiveau XMas pour l'élévation ajouté\nHeure d'été pour Elevation ajoutée\npetites corrections de bugs\nVérification de la configuration de l'obturateur ajoutée",
-        "it": "Bugfix Trigger dopo la chiusura dell'otturatore\nBugfix XMas Level dal gelo\nAggiunto il livello di Natale per l'elevazione\nSummertime for Elevation aggiunta\npiccole correzioni di bug\ncontrollo della configurazione dell'otturatore aggiunto",
-        "es": "Disparador de corrección de errores después de cerrar el obturador\nCorrección de errores Nivel de Navidad por helada\nNivel de Navidad para elevación agregado\nSe agregó el horario de verano para Elevation\npequeñas correcciones de errores\nComprobación de configuración del obturador agregada",
-        "pl": "Bugfix Trigger po zamknięciu migawki\nBugfix XMas Poziom przez mróz\nDodano poziom XMas dla elewacji\nDodano czas letni na podniesienie\nmałe poprawki\nDodano sprawdzanie konfiguracji migawki",
-        "zh-cn": "错误修复快门关闭后触发\n通过霜冻修复圣诞关卡\n添加了用于海拔的 XMas 级别\n添加了夏季高程\n小错误修正\n添加了快门配置检查"
       }
     },
     "title": "shuttercontrol",
