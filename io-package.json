@@ -833,7 +833,7 @@
         "type": "number",
         "read": true,
         "write": false,
-        "def": ""
+        "def": 0
       },
       "native": {}
     },
@@ -846,7 +846,7 @@
         "type": "number",
         "read": true,
         "write": false,
-        "def": ""
+        "def": 0
       },
       "native": {}
     }
