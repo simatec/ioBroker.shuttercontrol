@@ -21,7 +21,7 @@
     "url": "https://github.com/simatec/ioBroker.shuttercontrol"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.5.1",
+    "@iobroker/adapter-core": "^2.6.0",
     "node-schedule": "^2.1.0",
     "suncalc2": "^1.8.1"
   },
