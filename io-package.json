@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.11",
+    "version": "1.4.12",
     "news": {
+      "1.4.12": {
+        "en": "Bugfix wrongly open after deactivation of weater alarm\nDependencies updated\nDev-Dependencies updated",
+        "de": "Bugfix fälschlicherweise nach Deaktivierung des Wetteralarms geöffnet\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
+        "ru": "Исправлено неправильное открытие после деактивации предупреждения о погоде.\nЗависимости обновлены\nОбновлены Dev-зависимости",
+        "pt": "Bugfix aberto incorretamente após a desativação do alarme meteorológico\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
+        "nl": "Bugfix verkeerd geopend na deactivering weeralarm\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "Correction d'un bug mal ouvert après la désactivation de l'alarme météo\nDépendances mises à jour\nDev-Dépendances mises à jour",
+        "it": "Bugfix erroneamente aperto dopo la disattivazione dell'allarme meteo\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "Corrección de error de apertura incorrecta después de la desactivación de la alarma meteorológica\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "Bugfix niepoprawnie otwiera się po dezaktywacji alarmu pogodowego\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
+        "zh-cn": "修正了禁用水警报后错误打开的问题\n已更新依赖项\n已更新开发依赖项"
+      },
       "1.4.11": {
         "en": "fix objects value\nDependencies updated\nDev-Dependencies updated",
         "de": "Objektwert fixieren\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "Corrección de errores de configuración de persianas\nObturador de corrección de errores creado",
         "pl": "Poprawki ustawień migawki\nUtworzono migawkę z poprawką błędów",
         "zh-cn": "错误修正百叶窗设置\n已创建错误修复快门"
-      },
-      "1.4.5": {
-        "en": "small Bugfixes\nCode cleaning\ntry & catch added\nsource code was converted to async\nDependencies updated\nDev-Dependencies updated",
-        "de": "kleine Bugfixes\nCode-Reinigung\ntry & catch hinzugefügt\nQuellcode wurde in asynchron konvertiert\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
-        "ru": "небольшие исправления\nОчистка кода\nпопробуй и поймай добавлено\nисходный код преобразован в асинхронный\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
-        "pt": "pequenas correções de bugs\nLimpeza de código\ntente e pegue adicionado\no código-fonte foi convertido para assíncrono\nDependências atualizadas\nDev-Dependencies atualizado",
-        "nl": "kleine bugfixes\nCode opschonen\nprobeer & vang toegevoegd\nbroncode is geconverteerd naar async\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "petites corrections de bugs\nNettoyage de codes\nessayer et attraper ajouté\nle code source a été converti en async\nDépendances mises à jour\nDépendances de développement mises à jour",
-        "it": "piccole correzioni di bug\nPulizia del codice\nprova e cattura aggiunto\nil codice sorgente è stato convertito in asincrono\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "pequeñas correcciones de errores\nLimpieza de código\ntry & catch agregado\nel código fuente se convirtió a asincrónico\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "małe poprawki\nCzyszczenie kodu\nspróbuj i złap dodany\nkod źródłowy został przekonwertowany na asynchroniczny\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
-        "zh-cn": "小错误修正\n代码清理\n尝试和捕捉添加\n源代码已转换为异步\n更新了依赖项\n开发依赖更新"
       }
     },
     "title": "shuttercontrol",
