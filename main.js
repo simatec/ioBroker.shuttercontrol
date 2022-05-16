@@ -241,6 +241,8 @@ function startAdapter(options) {
                                     //await sleep(waitTime4StateCheck);
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
+                                    shutterSettings[s].alarmTriggerAction = shutterSettings[s].currentAction;
+                                    shutterSettings[s].alarmTriggerLevel = _shutterState.val;
 
                                     await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
                                         .catch((e) => adapter.log.warn(e));
@@ -251,6 +253,8 @@ function startAdapter(options) {
                                 } else if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState == false) {
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
+                                    shutterSettings[s].alarmTriggerAction = shutterSettings[s].currentAction;
+                                    shutterSettings[s].alarmTriggerLevel = _shutterState.val;
 
                                     await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
                                         .catch((e) => adapter.log.warn(e));
