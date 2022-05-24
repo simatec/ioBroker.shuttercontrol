@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.12",
+    "version": "1.4.13",
     "news": {
+      "1.4.13": {
+        "en": "Bugfix Alarm handling\nDependencies updated\nDev-Dependencies updated\nmore debuglog for Trigger",
+        "de": "Bugfix Alarmbehandlung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert\nmehr debuglog für Trigger",
+        "ru": "Обработка сигналов тревоги\nЗависимости обновлены\nОбновлены Dev-зависимости\nбольше отладочного журнала для триггера",
+        "pt": "Manipulação de alarmes de correção de bugs\nDependências atualizadas\nDependências de desenvolvimento atualizadas\nmais debuglog para Trigger",
+        "nl": "Bugfix Alarmafhandeling\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt\nmeer debuglog voor Trigger",
+        "fr": "Gestion des alarmes\nDépendances mises à jour\nDev-Dépendances mises à jour\nplus de débogage pour Trigger",
+        "it": "Bugfix Gestione degli allarmi\nDipendenze aggiornate\nDev-dipendenze aggiornate\npiù debuglog per Trigger",
+        "es": "Corrección de errores Manejo de alarmas\nDependencias actualizadas\nDependencias de desarrollo actualizadas\nmás registro de depuración para Trigger",
+        "pl": "Obsługa alarmów\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie\nwięcej dziennika debugowania dla wyzwalacza",
+        "zh-cn": "错误修正警报处理\n已更新依赖项\n已更新开发依赖项\n触发器的更多调试日志"
+      },
       "1.4.12": {
         "en": "Bugfix wrongly open after deactivation of weater alarm\nDependencies updated\nDev-Dependencies updated",
         "de": "Bugfix fälschlicherweise nach Deaktivierung des Wetteralarms geöffnet\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "manejo completo de errores para los estados agregados\nOpción de corrección de errores hacia abajo\npequeñas correcciones de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "dodano pełną obsługę błędów dla stanów\nOpcja późnego naprawiania błędów\nmałe poprawki\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
         "zh-cn": "添加状态的完整错误处理\n错误修正下延迟选项\n小错误修正\n更新了依赖项\n开发依赖更新"
-      },
-      "1.4.6": {
-        "en": "Bugfixes shuttersettings\nBugfix shutter created",
-        "de": "Bugfixes Verschlusseinstellungen\nBugfix Shutter erstellt",
-        "ru": "Исправления shuttersettings\nИсправление шторки создано",
-        "pt": "Correções de bugs configurações do obturador\nObturador de correção de bug criado",
-        "nl": "Bugfixes sluiterinstellingen\nBugfix sluiter gemaakt",
-        "fr": "Corrections de bugs sur les paramètres d'obturation\nObturateur de correction de bug créé",
-        "it": "Correzioni di bug nelle impostazioni dell'otturatore\nBugfix otturatore creato",
-        "es": "Corrección de errores de configuración de persianas\nObturador de corrección de errores creado",
-        "pl": "Poprawki ustawień migawki\nUtworzono migawkę z poprawką błędów",
-        "zh-cn": "错误修正百叶窗设置\n已创建错误修复快门"
       }
     },
     "title": "shuttercontrol",
