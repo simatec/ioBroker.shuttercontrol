@@ -225,6 +225,7 @@ function startAdapter(options) {
                     if (adapter.config.currentShutterState == true && adapter.config.currentShutterStateTime) {
                         waitTime4StateCheck = (adapter.config.currentShutterStateTime ? adapter.config.currentShutterStateTime * 1000 : 60000);
                     }
+
                     await sleep(waitTime4StateCheck);
 
                     for (const i in result) {
@@ -238,7 +239,6 @@ function startAdapter(options) {
                                 }
                                 if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState == true) {
 
-                                    //await sleep(waitTime4StateCheck);
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
 
