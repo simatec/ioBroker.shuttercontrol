@@ -48,7 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.4.13 (2022-05-24)
 * (FoxRo) Bugfix Alarm handling
 * (simatec) Dependencies updated
 * (simatec) Dev-Dependencies updated
