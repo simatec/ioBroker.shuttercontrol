@@ -48,8 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-
-### __WORK IN PROGRESS__
+### 1.4.14 (2022-06-02)
 * (simatec) delay for Lightsensor added
 * (simatec) Dependencies updated
 * (simatec) Dev-Dependencies updated

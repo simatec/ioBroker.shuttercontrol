@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.13",
+    "version": "1.4.14",
     "news": {
+      "1.4.14": {
+        "en": "delay for Lightsensor added\nDependencies updated\nDev-Dependencies updated",
+        "de": "Verzögerung für Lichtsensor hinzugefügt\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
+        "ru": "добавлена задержка для Lightsensor\nЗависимости обновлены\nОбновлены Dev-зависимости",
+        "pt": "atraso para Lightsensor adicionado\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
+        "nl": "vertraging voor lichtsensor toegevoegd\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
+        "fr": "délai pour le capteur de lumière ajouté\nDépendances mises à jour\nDev-Dépendances mises à jour",
+        "it": "ritardo per sensore di luce aggiunto\nDipendenze aggiornate\nDev-dipendenze aggiornate",
+        "es": "retardo para Lightsensor agregado\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
+        "pl": "Dodano opóźnienie dla czujnika światła\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie",
+        "zh-cn": "添加了光传感器的延迟\n已更新依赖项\n已更新开发依赖项"
+      },
       "1.4.13": {
         "en": "Bugfix Alarm handling\nDependencies updated\nDev-Dependencies updated\nmore debuglog for Trigger",
         "de": "Bugfix Alarmbehandlung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert\nmehr debuglog für Trigger",
@@ -74,18 +86,6 @@
         "es": "manejo de errores para el disparador agregado\nRetraso del disparador de corrección de errores",
         "pl": "dodano obsługę błędów dla wyzwalacza\nOpóźnienie wyzwalania błędu",
         "zh-cn": "添加触发器的错误处理\n错误修正触发延迟"
-      },
-      "1.4.7": {
-        "en": "complete error handling for states added\nBugfix Down Late Option\nsmall Bugfixes\nDependencies updated\nDev-Dependencies updated",
-        "de": "komplette Fehlerbehandlung für Zustände hinzugefügt\nBugfix Down Late Option\nkleine Bugfixes\nAbhängigkeiten aktualisiert\nEntwicklungsabhängigkeiten aktualisiert",
-        "ru": "добавлена полная обработка ошибок для состояний\nИсправление ошибки с опозданием\nнебольшие исправления\nЗависимости обновлены\nОбновлены зависимости Dev-Dependencies",
-        "pt": "tratamento de erros completo para estados adicionados\nOpção de correção de bug para baixo\npequenas correções de bugs\nDependências atualizadas\nDev-Dependencies atualizado",
-        "nl": "volledige foutafhandeling voor staten toegevoegd\nBugfix Down Late Optie\nkleine bugfixes\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "gestion complète des erreurs pour les états ajoutés\nOption de correction de bugs en retard\npetites corrections de bugs\nDépendances mises à jour\nDépendances de développement mises à jour",
-        "it": "gestione completa degli errori per gli stati aggiunti\nOpzione correzione bug in ritardo\npiccole correzioni di bug\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "manejo completo de errores para los estados agregados\nOpción de corrección de errores hacia abajo\npequeñas correcciones de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "dodano pełną obsługę błędów dla stanów\nOpcja późnego naprawiania błędów\nmałe poprawki\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
-        "zh-cn": "添加状态的完整错误处理\n错误修正下延迟选项\n小错误修正\n更新了依赖项\n开发依赖更新"
       }
     },
     "title": "shuttercontrol",
