@@ -47,6 +47,7 @@ let ObjautoSun = [];
 let ObjautoState = [];
 let ObjautoLevel = [];
 let resShutterState = [];
+const lastLigthSensorValue = {};
 
 let waitTime4StateCheck = 100;
 let brightnessDown = false;
@@ -214,8 +215,12 @@ function startAdapter(options) {
             });
             resSunLight.forEach(async function (resSunLightID) {
                 if (id === resSunLightID && state.ts === state.lc) {
-                    adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
-                    sunProtect(adapter, elevation, azimuth, shutterSettings);
+                    // @ts-ignore
+                    if (Math.round((new Date(state.lc) - new Date(lastLigthSensorValue[`${resSunLightID}`].ts)) / 1000 / 60) > 2) {
+                        adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
+                        sunProtect(adapter, elevation, azimuth, shutterSettings);
+                        lastLigthSensorValue[`${resSunLightID}`].ts = state.lc;
+                    }
                 }
             });
             resShutterState.forEach(async function (resShutterID) {
@@ -1701,6 +1706,7 @@ function main(adapter) {
         for (const i in rescurrentLight) {
             if (resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
                 resSunLight.push(rescurrentLight[i].lightSensor);
+                lastLigthSensorValue[`${rescurrentLight[i].lightSensor}`] = { "ts": 0 };
             }
         }
         resSunLight.forEach(function (element) {
