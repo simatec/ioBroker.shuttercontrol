@@ -252,10 +252,9 @@ Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ---
 ### Einstellungen Helligkeitssensor
 
-Sollen die Rolläden anhand eines Helligkeitssensors autom. gefahren werden, kann dieser hier konfiguriert werden.
-Da die Helligkeitswerte bei jedem Sensor individuell sind.
+Sollen die Rolläden anhand eines Helligkeitssensors autom. gefahren werden, wird dieser hier konfiguriert.
 
-Der Helligkeitssensor kann bei den individuellen Rollädeneinstellungen unter den "Haupteinstellungen-Art der Steuerung für schließen des Rollladens" ausgewählt werden.
+Die Aktivierung erfolgt anschließend je Rolladen, bei den individuellen Rollädeneinstellungen unter den "Haupteinstellungen - Art der Steuerung für schließen des Rollladens" indem dort der Eintrag "Helligkeitssensor" ausgewählt wird.
 
 **Helligkeitswert für das schließen mit Helligkeitssensor**
 Helligkeitswert, ab welchen die Rolläden geschlossen werden sollen.
