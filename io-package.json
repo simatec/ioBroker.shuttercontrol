@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.14",
+    "version": "1.4.15",
     "news": {
+      "1.4.15": {
+        "en": "small Bugfixes\nDependencies updated\nDev-Dependencies updated\nDocu updated\ntravis deleted\nupdate translation\ndebug for shutterstate added",
+        "de": "kleine Bugfixes\nAusgaben aktualisiert\nDependencies aktualisiert\nDocu aktualisiert\ntravis gelöscht\nübersetzung aktualisieren\ndebug für shutterstate hinzugefügt",
+        "ru": "небольшие багфиксы\nОбновленные зависимости\nDev-Dependencies обновлено\nDocu обновление\ntravis удален\nобновление перевода\nотладка для затвора добавлена",
+        "pt": "pequenos bugs\nDependências atualizadas\nDev-Dependencies Atualizado\nDocu atualizado\ntravis excluído\natualização\ndebug for shutterstate adicionado",
+        "nl": "kleine Bugfix\nAfhankelijkheid geüpdateerd\nVertaling:\nDocu update\ntravis verwijderd\nvertaling:\ndebug voor sluitingstijd",
+        "fr": "petites Bugfixes\nDépendances mises à jour\nDev-Dependencies updated\nDocu updated\ntravis supprimé\nmise à jour traduction\ndebug for shutterstate added",
+        "it": "piccoli bugfix\nDipendenze aggiornate\nDev-Dependencies aggiornato\nDocu aggiornato\ntravis cancellato\naggiornamento\ndebug per shutterstate aggiunto",
+        "es": "pequeños Bugfixes\nActualización de las dependencias\nDev-Dependencies updated\nDocu actualizado\ntravis suprimida\nactualización\ndepuración para obturación añadido",
+        "pl": "mały Bugfix\nZależności\nDev-Dependencies (ang.)\nDocu zaktualizował\ntravis usunąć\ntranslacja\ndebugowanie zamkowe",
+        "zh-cn": "小额Bugfix\nB. 更新的属地\nDev-Dependus更新\n附录\n删除\n更新\n穿越国"
+      },
       "1.4.14": {
         "en": "delay for Lightsensor added\nDependencies updated\nDev-Dependencies updated",
         "de": "Verzögerung für Lichtsensor hinzugefügt\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
@@ -74,18 +86,6 @@
         "es": "manejo de errores para el disparador agregado\nRetraso del disparador de corrección de errores\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "dodano obsługę błędów dla wyzwalacza\nOpóźnienie wyzwalania błędów\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
         "zh-cn": "添加触发器的错误处理\n错误修正触发延迟\n更新了依赖项\n开发依赖更新"
-      },
-      "1.4.8": {
-        "en": "error handling for trigger added\nBugfix Trigger delay",
-        "de": "Fehlerbehandlung für Trigger hinzugefügt\nBugfix Triggerverzögerung",
-        "ru": "добавлена обработка ошибок для триггера\nBugfix Задержка срабатывания триггера",
-        "pt": "tratamento de erros para gatilho adicionado\nBug fix Trigger delay",
-        "nl": "foutafhandeling voor trigger toegevoegd\nBugfix Trigger vertraging",
-        "fr": "gestion des erreurs pour le déclencheur ajouté\nRetard de déclenchement",
-        "it": "gestione degli errori per il trigger aggiunto\nBugfix Ritardo di attivazione",
-        "es": "manejo de errores para el disparador agregado\nRetraso del disparador de corrección de errores",
-        "pl": "dodano obsługę błędów dla wyzwalacza\nOpóźnienie wyzwalania błędu",
-        "zh-cn": "添加触发器的错误处理\n错误修正触发延迟"
       }
     },
     "title": "shuttercontrol",
