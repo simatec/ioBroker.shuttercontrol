@@ -250,6 +250,26 @@ Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert
 ```true``` liefert und die Rollläden fahren entsprechend den Wochenendzeiten.
 
 ---
+### Einstellungen Helligkeitssensor
+
+Sollen die Rolläden anhand eines Helligkeitssensors autom. gefahren werden, wird dieser hier konfiguriert.
+
+Die Aktivierung erfolgt anschließend je Rolladen, bei den individuellen Rollädeneinstellungen unter den "Haupteinstellungen - Art der Steuerung für schließen des Rollladens" indem dort der Eintrag "Helligkeitssensor" ausgewählt wird.
+
+**Helligkeitswert für das schließen mit Helligkeitssensor**
+Helligkeitswert, ab welchen die Rolläden geschlossen werden sollen.
+
+**Helligkeitswert für das öffnen mit Helligkeitssensor**
+Helligkeitswert, ab welchen die Rolläden geöffnet werden sollen
+
+**Objekt-ID des Helligkeitssensors**
+Der Verweis auf den Helligkeitssensor, z.B. von einer Wetterstation oder von einem Bewegungsmelder im Außenbereich der Helligkeitssensor
+
+---
+### Schulferien Einstellungen
+**TODO**
+
+---
 ### Sonderzeiten
 
 ![extraSettingsSonder](img/ExtraSettingsSonder.png)
