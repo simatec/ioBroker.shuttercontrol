@@ -15,8 +15,6 @@
 [![Donate](https://img.shields.io/badge/donate-paypal-blue?style=flat)](https://paypal.me/mk1676)
 
 
-[![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
-
 This adapter uses the service Sentry.io to automatically report exceptions and code errors and new device schemas to me as the developer. More details see below!
 
 
