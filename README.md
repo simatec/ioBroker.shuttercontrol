@@ -15,8 +15,6 @@
 [![Donate](https://img.shields.io/badge/donate-paypal-blue?style=flat)](https://paypal.me/mk1676)
 
 
-[![NPM](https://nodei.co/npm/iobroker.shuttercontrol.png?downloads=true)](https://nodei.co/npm/iobroker.shuttercontrol/)
-
 This adapter uses the service Sentry.io to automatically report exceptions and code errors and new device schemas to me as the developer. More details see below!
 
 
@@ -48,6 +46,15 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) small Bugfixes
+* (simatec) Dependencies updated
+* (simatec) Dev-Dependencies updated
+* (simatec) Docu updated
+* (simatec) travis deleted
+* (simatec) update translation
+* (simatec) debug for shutterstate added
+
 ### 1.4.14 (2022-06-02)
 * (simatec) delay for Lightsensor added
 * (simatec) Dependencies updated
