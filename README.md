@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.4.18 (2022-09-24)
 * (simatec) Bugfixes Button Action
 
 ### 1.4.17 (2022-09-24)

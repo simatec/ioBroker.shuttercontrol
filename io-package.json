@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.17",
+    "version": "1.4.18",
     "news": {
+      "1.4.18": {
+        "en": "Bugfixes Button Action",
+        "de": "Bugfixes Button Aktion",
+        "ru": "Bugfixes Кнопка Action",
+        "pt": "Bugfixs Button Ação",
+        "nl": "Bugfixs Button Act",
+        "fr": "Bugfixes Button Action",
+        "it": "Bugfixs Button Azione",
+        "es": "Bugfixes Button Action",
+        "pl": "Akcji Buttona",
+        "zh-cn": "Bugfixing Button行动"
+      },
       "1.4.17": {
         "en": "small Bugfixes",
         "de": "kleine Bugfixes",
@@ -74,18 +86,6 @@
         "es": "Corrección de error de apertura incorrecta después de la desactivación de la alarma meteorológica\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "Bugfix niepoprawnie otwiera się po dezaktywacji alarmu pogodowego\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
         "zh-cn": "修正了禁用水警报后错误打开的问题\n已更新依赖项\n已更新开发依赖项"
-      },
-      "1.4.11": {
-        "en": "fix objects value\nDependencies updated\nDev-Dependencies updated",
-        "de": "Objektwert fixieren\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
-        "ru": "исправить стоимость объектов\nЗависимости обновлены\nОбновлены Dev-зависимости",
-        "pt": "corrigir o valor dos objetos\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
-        "nl": "waarde van objecten repareren\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "fixer la valeur des objets\nDépendances mises à jour\nDev-Dépendances mises à jour",
-        "it": "correggere il valore degli oggetti\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "fijar el valor de los objetos\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "napraw wartość obiektów\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
-        "zh-cn": "修复对象值\n已更新依赖项\n已更新开发依赖项"
       }
     },
     "title": "shuttercontrol",
