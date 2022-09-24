@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.16",
+    "version": "1.4.17",
     "news": {
+      "1.4.17": {
+        "en": "small Bugfixes",
+        "de": "kleine Bugfixes",
+        "ru": "небольшие багфиксы",
+        "pt": "pequenos bugs",
+        "nl": "kleine Bugfix",
+        "fr": "petites Bugfixes",
+        "it": "piccoli bugfix",
+        "es": "pequeños Bugfixes",
+        "pl": "mały Bugfix",
+        "zh-cn": "小额Bugfix"
+      },
       "1.4.16": {
         "en": "small Bugfixes\nDependencies updated\nDev-Dependencies updated\nDocu updated\ntravis deleted\nupdate translation\ndebug for shutterstate added",
         "de": "kleine Bugfixes\nAusgaben aktualisiert\nDependencies aktualisiert\nDocu aktualisiert\ntravis gelöscht\nübersetzung aktualisieren\ndebug für shutterstate hinzugefügt",
@@ -74,18 +86,6 @@
         "es": "fijar el valor de los objetos\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "napraw wartość obiektów\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
         "zh-cn": "修复对象值\n已更新依赖项\n已更新开发依赖项"
-      },
-      "1.4.10": {
-        "en": "Bugfix xmas time\nBugfix Shutter delay\nDependencies updated\nDev-Dependencies updated",
-        "de": "Bugfix Weihnachtszeit\nBugfix Verschlussverzögerung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
-        "ru": "Исправлено рождественское время\nЗадержка затвора\nЗависимости обновлены\nОбновлены Dev-зависимости",
-        "pt": "Correção de bugs na hora do natal\nAtraso do obturador de correção de bug\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
-        "nl": "Bugfix kersttijd\nBugfix Sluitervertraging\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "Correction de bugs à Noël\nDélai d'obturation\nDépendances mises à jour\nDev-Dépendances mises à jour",
-        "it": "Bug fix tempo di Natale\nBugfix Ritardo dell'otturatore\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "Corrección de errores tiempo de Navidad\nCorrección de errores Retraso del obturador\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "Świąteczny czas na naprawę błędów\nOpóźnienie migawki\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie",
-        "zh-cn": "错误修复圣诞节时间\n修正快门延迟\n已更新依赖项\n已更新开发依赖项"
       }
     },
     "title": "shuttercontrol",
