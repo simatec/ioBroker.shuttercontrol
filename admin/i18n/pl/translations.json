@@ -106,6 +106,8 @@
     "children-auto": "Obszar dziecięcy (automatyczny)",
     "close certain shutters later (the individual shutters must be activated in the shutter settings)": "zamknąć niektóre rolety później (poszczególne rolety muszą być aktywowane w ustawieniach rolet)",
     "direction": "Kierunek główny (pozycja słońca)",
+    "earliest time for closing with light sensor": "najwcześniejszy czas zamknięcia światła czujnika",
+    "earliest time for opening with light sensor": "najwcześniejszy czas otwierania światła",
     "elevation": "Uniesienie słońca",
     "enableAlarmFire": "Włącz alarm pożarowy dla tej rolki",
     "enableAlarmFrost": "Włącz alarm mrozu dla tej rolki",

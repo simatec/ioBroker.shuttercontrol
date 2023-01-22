@@ -106,6 +106,8 @@
     "children-auto": "儿童区（自动）",
     "close certain shutters later (the individual shutters must be activated in the shutter settings)": "稍后关闭某些百叶窗（必须在百叶窗设置中激活各个百叶窗）",
     "direction": "基本方向（太陽位置）",
+    "earliest time for closing with light sensor": "尽早与照相传感器关闭",
+    "earliest time for opening with light sensor": "尽早与照相传感器开放时间",
     "elevation": "太陽的高度",
     "enableAlarmFire": "为该滚筒启用火警",
     "enableAlarmFrost": "启用此滚筒的霜冻警报",
