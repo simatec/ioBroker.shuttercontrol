@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.18",
+    "version": "1.4.19",
     "news": {
+      "1.4.19": {
+        "en": "Time config for Brightness-Sensor added\nsmall Bugfixes\nDependencies updated",
+        "de": "Time config für Brightness-Sensor hinzugefügt\nkleine Bugfixes\nAusgaben aktualisiert",
+        "ru": "Время config для Brightness-Sensor добавлен\nнебольшие багфиксы\nОбновленные зависимости",
+        "pt": "Tempo de configuração para Brightness-Sensor adicionado\npequenos bugs\nDependências atualizadas",
+        "nl": "Tijdstip voor Brightness-Sensor toegevoegd\nkleine Bugfix\nAfhankelijkheid geüpdateerd",
+        "fr": "Configuration du temps pour Brightness-Sensor ajouté\npetites Bugfixes\nDépendances mises à jour",
+        "it": "Configurazione del tempo per Brightness-Sensor aggiunto\npiccoli bugfix\nDipendenze aggiornate",
+        "es": "Ajuste del tiempo para Brightness-Sensor añadido\npequeños Bugfixes\nActualización de las dependencias",
+        "pl": "Konfiguracja czasu Brightness-Sensor dodaje do Brightness-Sensor\nmały Bugfix\nZależności",
+        "uk": "Налаштування часу для Brightness-Sensor додано\nмаленькі Бугфікси\nЗалежність оновлено",
+        "zh-cn": "Brightness-Sensor补充说的时限\n小额Bugfix\nB. 更新的属地"
+      },
       "1.4.18": {
         "en": "Bugfixes Button Action",
         "de": "Bugfixes Button Aktion",
@@ -74,18 +87,6 @@
         "es": "Corrección de errores Manejo de alarmas\nDependencias actualizadas\nDependencias de desarrollo actualizadas\nmás registro de depuración para Trigger",
         "pl": "Obsługa alarmów\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie\nwięcej dziennika debugowania dla wyzwalacza",
         "zh-cn": "错误修正警报处理\n已更新依赖项\n已更新开发依赖项\n触发器的更多调试日志"
-      },
-      "1.4.12": {
-        "en": "Bugfix wrongly open after deactivation of weater alarm\nDependencies updated\nDev-Dependencies updated",
-        "de": "Bugfix fälschlicherweise nach Deaktivierung des Wetteralarms geöffnet\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
-        "ru": "Исправлено неправильное открытие после деактивации предупреждения о погоде.\nЗависимости обновлены\nОбновлены Dev-зависимости",
-        "pt": "Bugfix aberto incorretamente após a desativação do alarme meteorológico\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
-        "nl": "Bugfix verkeerd geopend na deactivering weeralarm\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "Correction d'un bug mal ouvert après la désactivation de l'alarme météo\nDépendances mises à jour\nDev-Dépendances mises à jour",
-        "it": "Bugfix erroneamente aperto dopo la disattivazione dell'allarme meteo\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "Corrección de error de apertura incorrecta después de la desactivación de la alarma meteorológica\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "Bugfix niepoprawnie otwiera się po dezaktywacji alarmu pogodowego\nZaktualizowano zależności\nZaktualizowano zależności programistyczne",
-        "zh-cn": "修正了禁用水警报后错误打开的问题\n已更新依赖项\n已更新开发依赖项"
       }
     },
     "title": "shuttercontrol",
