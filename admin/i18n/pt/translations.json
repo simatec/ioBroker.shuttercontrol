@@ -106,6 +106,8 @@
     "children-auto": "Área infantil (automático)",
     "close certain shutters later (the individual shutters must be activated in the shutter settings)": "feche algumas venezianas mais tarde (as venezianas individuais devem ser ativadas nas configurações de venezianas)",
     "direction": "Direção cardinal (posição do sol)",
+    "earliest time for closing with light sensor": "mais cedo para fechar com sensor de luz",
+    "earliest time for opening with light sensor": "mais cedo para abrir com sensor de luz",
     "elevation": "Elevação do sol",
     "enableAlarmFire": "Ativar alarme de incêndio para este rolo",
     "enableAlarmFrost": "Ativar alarme de gelo para este rolo",

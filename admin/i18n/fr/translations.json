@@ -106,6 +106,8 @@
     "children-auto": "Espace enfants (automatique)",
     "close certain shutters later (the individual shutters must be activated in the shutter settings)": "fermer certains volets plus tard (les volets individuels doivent être activés dans les réglages des volets)",
     "direction": "Direction cardinale (position du soleil)",
+    "earliest time for closing with light sensor": "temps de fermeture le plus tôt avec capteur de lumière",
+    "earliest time for opening with light sensor": "le plus tôt pour l'ouverture avec capteur de lumière",
     "elevation": "Élévation du soleil",
     "enableAlarmFire": "Activer l'alarme incendie pour ce rouleau",
     "enableAlarmFrost": "Activer l'alarme de gel pour ce rouleau",

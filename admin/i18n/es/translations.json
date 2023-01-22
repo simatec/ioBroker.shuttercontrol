@@ -106,6 +106,8 @@
     "children-auto": "Área infantil (automática)",
     "close certain shutters later (the individual shutters must be activated in the shutter settings)": "cerrar determinadas contraventanas más tarde (las contraventanas individuales deben estar activadas en la configuración de las contraventanas)",
     "direction": "Dirección cardinal (posición del sol)",
+    "earliest time for closing with light sensor": "tiempo más temprano para cerrar con sensor de luz",
+    "earliest time for opening with light sensor": "tiempo más temprano para abrir con sensor de luz",
     "elevation": "Elevación del sol",
     "enableAlarmFire": "Habilite la alarma de incendio para este rodillo",
     "enableAlarmFrost": "Habilite la alarma de escarcha para este rodillo",
