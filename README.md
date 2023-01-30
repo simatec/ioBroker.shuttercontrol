@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Bugfix Brightness-Sensor
+
 ### 1.4.19 (2023-01-22)
 * (simatec) Time config for Brightness-Sensor added
 * (simatec) small Bugfixes
