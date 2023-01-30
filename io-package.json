@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.19",
+    "version": "1.4.20",
     "news": {
+      "1.4.20": {
+        "en": "Bugfix Brightness-Sensor",
+        "de": "Bugfix Helligkeitssensor",
+        "ru": "Bugfix Яркость-Sensor",
+        "pt": "Bugfix Brightness-Sensor",
+        "nl": "Bugfix Brightness-Sensor",
+        "fr": "Bugfix Brightness-Sensor",
+        "it": "Bugfix Brightness-Sensor",
+        "es": "Bugfix Brightness-Sensor",
+        "pl": "Bugfix Brightness-Sensor",
+        "uk": "Bugfix Яскравість-сенсор",
+        "zh-cn": "Bugfix Bright-Sensor"
+      },
       "1.4.19": {
         "en": "Time config for Brightness-Sensor added\nsmall Bugfixes\nDependencies updated",
         "de": "Time config für Brightness-Sensor hinzugefügt\nkleine Bugfixes\nAusgaben aktualisiert",
@@ -75,18 +88,6 @@
         "es": "retardo para Lightsensor agregado\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
         "pl": "Dodano opóźnienie dla czujnika światła\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie",
         "zh-cn": "添加了光传感器的延迟\n已更新依赖项\n已更新开发依赖项"
-      },
-      "1.4.13": {
-        "en": "Bugfix Alarm handling\nDependencies updated\nDev-Dependencies updated\nmore debuglog for Trigger",
-        "de": "Bugfix Alarmbehandlung\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert\nmehr debuglog für Trigger",
-        "ru": "Обработка сигналов тревоги\nЗависимости обновлены\nОбновлены Dev-зависимости\nбольше отладочного журнала для триггера",
-        "pt": "Manipulação de alarmes de correção de bugs\nDependências atualizadas\nDependências de desenvolvimento atualizadas\nmais debuglog para Trigger",
-        "nl": "Bugfix Alarmafhandeling\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt\nmeer debuglog voor Trigger",
-        "fr": "Gestion des alarmes\nDépendances mises à jour\nDev-Dépendances mises à jour\nplus de débogage pour Trigger",
-        "it": "Bugfix Gestione degli allarmi\nDipendenze aggiornate\nDev-dipendenze aggiornate\npiù debuglog per Trigger",
-        "es": "Corrección de errores Manejo de alarmas\nDependencias actualizadas\nDependencias de desarrollo actualizadas\nmás registro de depuración para Trigger",
-        "pl": "Obsługa alarmów\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie\nwięcej dziennika debugowania dla wyzwalacza",
-        "zh-cn": "错误修正警报处理\n已更新依赖项\n已更新开发依赖项\n触发器的更多调试日志"
       }
     },
     "title": "shuttercontrol",
