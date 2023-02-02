@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.20",
+    "version": "1.4.21",
     "news": {
+      "1.4.21": {
+        "en": "fix Brightness Settings\nDependencies updated",
+        "de": "korrektur der Helligkeitseinstellungen\nAusgaben aktualisiert",
+        "ru": "исправить настройки яркости\nОбновленные зависимости",
+        "pt": "corrigir configurações de brilho\nDependências atualizadas",
+        "nl": "herstel Brightness Setting\nAfhankelijkheid geüpdateerd",
+        "fr": "correction des paramètres de luminosité\nDépendances mises à jour",
+        "it": "fix Impostazioni di luminosità\nDipendenze aggiornate",
+        "es": "arregla los ajustes de brillo\nActualización de las dependencias",
+        "pl": "brightness Settings (ang.)\nZależności",
+        "uk": "виправити налаштування яскравості\nЗалежність оновлено",
+        "zh-cn": "fix 版权规定\nB. 更新的属地"
+      },
       "1.4.20": {
         "en": "Bugfix Brightness-Sensor",
         "de": "Bugfix Helligkeitssensor",
@@ -76,18 +89,6 @@
         "es": "pequeños Bugfixes\nActualización de las dependencias\nDev-Dependencies updated\nDocu actualizado\ntravis suprimida\nactualización\ndepuración para obturación añadido",
         "pl": "mały Bugfix\nZależności\nDev-Dependencies (ang.)\nDocu zaktualizował\ntravis usunąć\ntranslacja\ndebugowanie zamkowe",
         "zh-cn": "小额Bugfix\nB. 更新的属地\nDev-Dependus更新\n附录\n删除\n更新\n穿越国"
-      },
-      "1.4.14": {
-        "en": "delay for Lightsensor added\nDependencies updated\nDev-Dependencies updated",
-        "de": "Verzögerung für Lichtsensor hinzugefügt\nAbhängigkeiten aktualisiert\nDev-Abhängigkeiten aktualisiert",
-        "ru": "добавлена задержка для Lightsensor\nЗависимости обновлены\nОбновлены Dev-зависимости",
-        "pt": "atraso para Lightsensor adicionado\nDependências atualizadas\nDependências de desenvolvimento atualizadas",
-        "nl": "vertraging voor lichtsensor toegevoegd\nAfhankelijkheden bijgewerkt\nDev-afhankelijkheden bijgewerkt",
-        "fr": "délai pour le capteur de lumière ajouté\nDépendances mises à jour\nDev-Dépendances mises à jour",
-        "it": "ritardo per sensore di luce aggiunto\nDipendenze aggiornate\nDev-dipendenze aggiornate",
-        "es": "retardo para Lightsensor agregado\nDependencias actualizadas\nDependencias de desarrollo actualizadas",
-        "pl": "Dodano opóźnienie dla czujnika światła\nZaktualizowano zależności\nZaktualizowano zależności deweloperskie",
-        "zh-cn": "添加了光传感器的延迟\n已更新依赖项\n已更新开发依赖项"
       }
     },
     "title": "shuttercontrol",
