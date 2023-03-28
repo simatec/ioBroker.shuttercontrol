@@ -24,7 +24,6 @@ The further configuration then serves to adapt to personal wishes.
 
 > Shuttercontrol is able to work with actors which can be controlled over an position object like LEVEL with values from 0 to 100% or 0-255 respectivly. The needed shutter timing must be done by the according actor. Actor for blinds with 2 separated objecs for "hight" and "lid angle" are supported and can be controled by using 2 Objects with the same configuraiton (one for "hight" one for "lid angle"
 
-> Attention: If the Shuttercontrol adaper is being restarted (Also after configuration changes) the shutters have to be initialized by moving them up with the button "openAll" (shuttercontrol.0.control.openAll), even they are already up! This will reinitialise all adapter internal values.
 
 ## installation
 The adapter is already in the latest repository. In order to install it you have to set its active repository (temporarily) to latest in the basic settings of ioBroker.

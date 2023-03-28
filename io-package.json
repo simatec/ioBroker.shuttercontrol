@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.22",
+    "version": "1.4.23",
     "news": {
+      "1.4.23": {
+        "en": "Bugfix Brightness-Sensor\nDependencies updated\nsmall fixes",
+        "de": "Bugfix Helligkeitssensor\nAusgaben aktualisiert\nkleine fixierungen",
+        "ru": "Bugfix Яркость-Sensor\nОбновленные зависимости\nнебольшие исправления",
+        "pt": "Bugfix Brightness-Sensor\nDependências atualizadas\npequenas correções",
+        "nl": "Bugfix Brightness-Sensor\nAfhankelijkheid geüpdateerd\nkleine fixes",
+        "fr": "Bugfix Brightness-Sensor\nDépendances mises à jour\npetites corrections",
+        "it": "Bugfix Brightness-Sensor\nDipendenze aggiornate\npiccole correzioni",
+        "es": "Bugfix Brightness-Sensor\nActualización de las dependencias\npequeños accesorios",
+        "pl": "Bugfix Brightness-Sensor\nZależności\ndrobne rozwiązanie",
+        "uk": "Bugfix Яскравість-сенсор\nЗалежність оновлено\nмаленькі кріплення",
+        "zh-cn": "Bugfix Bright-Sensor\nB. 更新的属地\n小型配件"
+      },
       "1.4.22": {
         "en": "Bugfix Brightness-Sensor\nDependencies updated\nFix Alarm Settings",
         "de": "Bugfix Helligkeitssensor\nAusgaben aktualisiert\nAlarmeinstellungen festlegen",
@@ -78,18 +91,6 @@
         "es": "pequeños Bugfixes",
         "pl": "mały Bugfix",
         "zh-cn": "小额Bugfix"
-      },
-      "1.4.16": {
-        "en": "small Bugfixes\nDependencies updated\nDev-Dependencies updated\nDocu updated\ntravis deleted\nupdate translation\ndebug for shutterstate added",
-        "de": "kleine Bugfixes\nAusgaben aktualisiert\nDependencies aktualisiert\nDocu aktualisiert\ntravis gelöscht\nübersetzung aktualisieren\ndebug für shutterstate hinzugefügt",
-        "ru": "небольшие багфиксы\nОбновленные зависимости\nDev-Dependencies обновлено\nDocu обновление\ntravis удален\nобновление перевода\nотладка для затвора добавлена",
-        "pt": "pequenos bugs\nDependências atualizadas\nDev-Dependencies Atualizado\nDocu atualizado\ntravis excluído\natualização\ndebug for shutterstate adicionado",
-        "nl": "kleine Bugfix\nAfhankelijkheid geüpdateerd\nVertaling:\nDocu update\ntravis verwijderd\nvertaling:\ndebug voor sluitingstijd",
-        "fr": "petites Bugfixes\nDépendances mises à jour\nDev-Dependencies updated\nDocu updated\ntravis supprimé\nmise à jour traduction\ndebug for shutterstate added",
-        "it": "piccoli bugfix\nDipendenze aggiornate\nDev-Dependencies aggiornato\nDocu aggiornato\ntravis cancellato\naggiornamento\ndebug per shutterstate aggiunto",
-        "es": "pequeños Bugfixes\nActualización de las dependencias\nDev-Dependencies updated\nDocu actualizado\ntravis suprimida\nactualización\ndepuración para obturación añadido",
-        "pl": "mały Bugfix\nZależności\nDev-Dependencies (ang.)\nDocu zaktualizował\ntravis usunąć\ntranslacja\ndebugowanie zamkowe",
-        "zh-cn": "小额Bugfix\nB. 更新的属地\nDev-Dependus更新\n附录\n删除\n更新\n穿越国"
       }
     },
     "title": "shuttercontrol",
@@ -118,7 +119,7 @@
       "zh-cn": "百叶窗的自动控制"
     },
     "authors": [
-      "simatec <nais@gmx.net>"
+      "simatec <shuttercontrol@simateccloud.de>"
     ],
     "keywords": [
       "ioBroker",
