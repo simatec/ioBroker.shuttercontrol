@@ -833,7 +833,10 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin)) {
                     upTimeLiving = adapter.config.WE_shutterUpLivingMin;
                     debugCnt = 14;
-                }
+                } else if (IsEqual(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin)) {
+                    upTimeLiving = astroTimeLivingUp;
+                    debugCnt = 15;
+                } 
             } else {
                 if (dayStr < 6 && dayStr > 0) {
                     if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
@@ -851,6 +854,9 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMin;
                         debugCnt = 8;
+                    } else if (IsEqual(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin)) {
+                        upTimeLiving = astroTimeLivingUp;
+                        debugCnt = 9;
                     }
                 }
             }
@@ -889,8 +895,10 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin)) {
                     upTimeSleep = adapter.config.WE_shutterUpSleepMin;
                     debugCnt = 14;
-                }
-
+                } else if (IsEqual(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin)) {
+                    upTimeSleep = astroTimeSleepUp;
+                    debugCnt = 15;
+                } 
 
             } else {
                 if (dayStr < 6 && dayStr > 0) {
@@ -910,7 +918,10 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMin;
                         debugCnt = 8;
-                    }
+                    } else if (IsEqual(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
+                        upTimeSleep = astroTimeSleepUp;
+                        debugCnt = 9;
+                    } 
                 }
             }
 
@@ -950,7 +961,10 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin)) {
                     upTimeChildren = adapter.config.WE_shutterUpChildrenMin;
                     debugCnt = 14;
-                }
+                } else if (IsEqual(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin)) {
+                    upTimeChildren = astroTimeChildrenUp;
+                    debugCnt = 15;
+                } 
 
 
             } else {
@@ -971,7 +985,10 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin)) {
                         upTimeChildren = adapter.config.W_shutterUpChildrenMin;
                         debugCnt = 8;
-                    }
+                    } else if (IsEqual(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin)) {
+                        upTimeChildren = astroTimeChildrenUp;
+                        debugCnt = 9;
+                    } 
                 }
             }
 
