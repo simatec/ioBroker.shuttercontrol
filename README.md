@@ -47,6 +47,13 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Fix end of Sunprotect
+* (simatec) small Fixes
+* (simatec) Fix shutter alarm
+* (simatec) Sentry fixes
+* (simatec) Bugfix Brightness down
+
 ### 1.4.23 (2023-03-28)
 * (simatec) Bugfix Brightness-Sensor
 * (simatec) Dependencies updated
