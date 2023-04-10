@@ -53,6 +53,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Fix shutter alarm
 * (simatec) Sentry fixes
 * (simatec) Bugfix Brightness down
+* (simatec) Dependencies updated
+* (j4nv) Fix Astro Time
 
 ### 1.4.23 (2023-03-28)
 * (simatec) Bugfix Brightness-Sensor
