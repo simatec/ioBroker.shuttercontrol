@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.23",
+    "version": "1.4.24",
     "news": {
+      "1.4.24": {
+        "en": "Fix end of Sunprotect\nsmall Fixes\nFix shutter alarm\nSentry fixes\nBugfix Brightness down\nDependencies updated\nFix Astro Time",
+        "de": "Festes Ende von Sunprotect\nkleine Feste\nAlarm für den Verschluss\nSentry Fixes\nBugfix Helligkeit unten\nAusgaben aktualisiert\nAstro Time",
+        "ru": "Fix конец Sunprotect\nнебольшие исправления\nИсправлена сигнализация затвора\nЧувствительные исправления\nBugfix Яркость вниз\nОбновленные зависимости\nFix Астро Время",
+        "pt": "Fix fim de Sunprotect\npequenas correções\nAlarme de desligamento fixo\nSentry correções\nBugfix Brilho para baixo\nDependências atualizadas\nCorrigir Tempo de Astro",
+        "nl": "Vertaling:\nkleine Fixes\nVertaling:\nVertaling:\nBugfix Brightness\nAfhankelijkheid geüpdateerd\nVertaling:",
+        "fr": "Fin fixe de Sunprotect\npetits Fixes\nAlarme d ' arrêt fixe\nSentry corrige\nBugfix Brightness down\nDépendances mises à jour\nTemps d'astrologie fixe",
+        "it": "Fissare la protezione solare\npiccoli corredi\nFissare l'allarme dell'otturatore\nSistema di rilevamento\nBugfix luminosità giù\nDipendenze aggiornate\nTempo dell'astro",
+        "es": "Final fijo de Sunprotect\npequeñas fijaciones\nAlarma de cierre fijo\nArreglos de centinelas\nBugfix Brightness abajo\nActualización de las dependencias\nTiempo de prueba",
+        "pl": "Pięć końca Słońca\nmały Fisz\nFixs shutter alarm\nStatystyka\nBugfix Bright\nZależności\nCzasopismo",
+        "uk": "Фіксований кінець Sunprotect\nмаленькі Фікси\nВиправлення тривожної сигналізації\nПанчохи\nBugfix Яскравість вниз\nЗалежність оновлено\nВиправлення часу Астро",
+        "zh-cn": "九. 防疫\n小型固定\nB. 警戒\nSentry fix\nBugfix Brightim\nB. 更新的属地\n固定时间"
+      },
       "1.4.23": {
         "en": "Bugfix Brightness-Sensor\nDependencies updated\nsmall fixes",
         "de": "Bugfix Helligkeitssensor\nAusgaben aktualisiert\nkleine fixierungen",
@@ -79,18 +92,6 @@
         "es": "Bugfixes Button Action",
         "pl": "Akcji Buttona",
         "zh-cn": "Bugfixing Button行动"
-      },
-      "1.4.17": {
-        "en": "small Bugfixes",
-        "de": "kleine Bugfixes",
-        "ru": "небольшие багфиксы",
-        "pt": "pequenos bugs",
-        "nl": "kleine Bugfix",
-        "fr": "petites Bugfixes",
-        "it": "piccoli bugfix",
-        "es": "pequeños Bugfixes",
-        "pl": "mały Bugfix",
-        "zh-cn": "小额Bugfix"
       }
     },
     "title": "shuttercontrol",
