@@ -241,10 +241,10 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (_shutterState && _shutterState.val !== undefined && shutterSettings[s].oldHeight !== _shutterState.val) {
+                                if (typeof _shutterState !== undefined && _shutterState.val !== undefined && shutterSettings[s].oldHeight !== _shutterState.val) {
                                     adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + _shutterState.val);
                                 }
-                                if (_shutterState && _shutterState.val !== undefined && _shutterState.val !== shutterSettings[s].currentHeight && _shutterState.val !== shutterSettings[s].oldHeight && adapter.config.currentShutterState === true) {
+                                if (typeof _shutterState !== undefined && _shutterState !== null && _shutterState.val !== shutterSettings[s].currentHeight && _shutterState.val !== shutterSettings[s].oldHeight && adapter.config.currentShutterState === true) {
 
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
@@ -264,7 +264,7 @@ function startAdapter(options) {
                                     adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (_shutterState && _shutterState.val !== undefined && _shutterState.val !== shutterSettings[s].currentHeight && _shutterState.val !== shutterSettings[s].oldHeight && adapter.config.currentShutterState === false) {
+                                } else if (typeof _shutterState !== undefined && _shutterState !== null && _shutterState.val !== shutterSettings[s].currentHeight && _shutterState.val !== shutterSettings[s].oldHeight && adapter.config.currentShutterState === false) {
                                     shutterSettings[s].currentAction = 'Manu_Mode';
                                     shutterSettings[s].triggerAction = 'Manu_Mode';
 
@@ -283,7 +283,7 @@ function startAdapter(options) {
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
                                     adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (_shutterState && _shutterState.val !== undefined && _shutterState.val === shutterSettings[s].currentHeight) {
+                                } else if (typeof _shutterState !== undefined && _shutterState !== null && _shutterState.val === shutterSettings[s].currentHeight) {
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 }
@@ -669,7 +669,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
             const nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
             const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name).catch((e) => adapter.log.warn(e));
 
-            if (_shutterState && _shutterState.val !== undefined) {
+            if (typeof _shutterState !== undefined && _shutterState !== null) {
                 // Case: Shutter in sunProtect mode. Auto-down in the evening before end of sunProtect. The sun is sill shining. Prevent that the shutter opens again with end of sunProtect. 
                 // currentAction=sunprotect would be set in sunProtect(). But not if currentAction=down. So this is checked in sunProtect(). Reset here to enable possibility to set sunProtect in the morning ->
                 resultStates[i].currentAction = 'none';
@@ -679,7 +679,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
                     .catch((e) => adapter.log.warn(e));
                 adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + _shutterState.val);
 
-                if (_shutterState && _shutterState.val !== undefined) {
+                if (typeof _shutterState.val !== undefined && _shutterState.val !== null) {
                     resultStates[i].currentHeight = _shutterState.val;
                     await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true })
                         .catch((e) => adapter.log.warn(e));
@@ -833,6 +833,9 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin)) {
                     upTimeLiving = adapter.config.WE_shutterUpLivingMin;
                     debugCnt = 14;
+                } else if (IsEqual(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMin)) {
+                    upTimeLiving = astroTimeLivingUp;
+                    debugCnt = 15;
                 }
             } else {
                 if (dayStr < 6 && dayStr > 0) {
@@ -851,6 +854,9 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMin;
                         debugCnt = 8;
+                    } else if (IsEqual(astroTimeLivingUp, adapter.config.W_shutterUpLivingMin)) {
+                        upTimeLiving = astroTimeLivingUp;
+                        debugCnt = 9;
                     }
                 }
             }
@@ -889,8 +895,10 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin)) {
                     upTimeSleep = adapter.config.WE_shutterUpSleepMin;
                     debugCnt = 14;
+                } else if (IsEqual(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMin)) {
+                    upTimeSleep = astroTimeSleepUp;
+                    debugCnt = 15;
                 }
-
 
             } else {
                 if (dayStr < 6 && dayStr > 0) {
@@ -910,6 +918,9 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMin;
                         debugCnt = 8;
+                    } else if (IsEqual(astroTimeSleepUp, adapter.config.W_shutterUpSleepMin)) {
+                        upTimeSleep = astroTimeSleepUp;
+                        debugCnt = 9;
                     }
                 }
             }
@@ -950,6 +961,9 @@ function shutterDriveCalc() {
                 } else if (IsEarlier(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin)) {
                     upTimeChildren = adapter.config.WE_shutterUpChildrenMin;
                     debugCnt = 14;
+                } else if (IsEqual(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMin)) {
+                    upTimeChildren = astroTimeChildrenUp;
+                    debugCnt = 15;
                 }
 
 
@@ -971,6 +985,9 @@ function shutterDriveCalc() {
                     } else if (IsEarlier(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin)) {
                         upTimeChildren = adapter.config.W_shutterUpChildrenMin;
                         debugCnt = 8;
+                    } else if (IsEqual(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMin)) {
+                        upTimeChildren = astroTimeChildrenUp;
+                        debugCnt = 9;
                     }
                 }
             }

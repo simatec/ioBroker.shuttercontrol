@@ -48,11 +48,16 @@ When the adapter crashes or an other Code error happens, this error message that
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
+* (simatec) small Fixes
+
+### 1.4.24 (2023-04-10)
 * (simatec) Fix end of Sunprotect
 * (simatec) small Fixes
 * (simatec) Fix shutter alarm
 * (simatec) Sentry fixes
 * (simatec) Bugfix Brightness down
+* (simatec) Dependencies updated
+* (j4nv) Fix Astro Time
 
 ### 1.4.23 (2023-03-28)
 * (simatec) Bugfix Brightness-Sensor
