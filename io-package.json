@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.24",
+    "version": "1.4.25",
     "news": {
+      "1.4.25": {
+        "en": "small Fixes",
+        "de": "kleine Feste",
+        "ru": "небольшие исправления",
+        "pt": "pequenas correções",
+        "nl": "kleine Fixes",
+        "fr": "petits Fixes",
+        "it": "piccoli corredi",
+        "es": "pequeñas fijaciones",
+        "pl": "mały Fisz",
+        "uk": "маленькі Фікси",
+        "zh-cn": "小型固定"
+      },
       "1.4.24": {
         "en": "Fix end of Sunprotect\nsmall Fixes\nFix shutter alarm\nSentry fixes\nBugfix Brightness down\nDependencies updated\nFix Astro Time",
         "de": "Festes Ende von Sunprotect\nkleine Feste\nAlarm für den Verschluss\nSentry Fixes\nBugfix Helligkeit unten\nAusgaben aktualisiert\nAstro Time",
@@ -80,18 +93,6 @@
         "pl": "Konfiguracja czasu Brightness-Sensor dodaje do Brightness-Sensor\nmały Bugfix\nZależności",
         "uk": "Налаштування часу для Brightness-Sensor додано\nмаленькі Бугфікси\nЗалежність оновлено",
         "zh-cn": "Brightness-Sensor补充说的时限\n小额Bugfix\nB. 更新的属地"
-      },
-      "1.4.18": {
-        "en": "Bugfixes Button Action",
-        "de": "Bugfixes Button Aktion",
-        "ru": "Bugfixes Кнопка Action",
-        "pt": "Bugfixs Button Ação",
-        "nl": "Bugfixs Button Act",
-        "fr": "Bugfixes Button Action",
-        "it": "Bugfixs Button Azione",
-        "es": "Bugfixes Button Action",
-        "pl": "Akcji Buttona",
-        "zh-cn": "Bugfixing Button行动"
       }
     },
     "title": "shuttercontrol",
