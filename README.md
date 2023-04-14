@@ -47,6 +47,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Fix Sunprotect
+
 ### 1.4.25 (2023-04-13)
 * (simatec) small Fixes
 
