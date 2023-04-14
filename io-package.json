@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.25",
+    "version": "1.4.26",
     "news": {
+      "1.4.26": {
+        "en": "Fix Sunprotect",
+        "de": "Sunprotekt reparieren",
+        "ru": "Исправление Sunprotect",
+        "pt": "Fix Sunprotect",
+        "nl": "Vertaling:",
+        "fr": "Fix Sunprotect",
+        "it": "Fissare la protezione solare",
+        "es": "Protección solar",
+        "pl": "Fix Sunprotekt",
+        "uk": "Виправлення Sunprotect",
+        "zh-cn": "Fix Sunprotect"
+      },
       "1.4.25": {
         "en": "small Fixes",
         "de": "kleine Feste",
@@ -80,19 +93,6 @@
         "pl": "Bugfix Brightness-Sensor",
         "uk": "Bugfix Яскравість-сенсор",
         "zh-cn": "Bugfix Bright-Sensor"
-      },
-      "1.4.19": {
-        "en": "Time config for Brightness-Sensor added\nsmall Bugfixes\nDependencies updated",
-        "de": "Time config für Brightness-Sensor hinzugefügt\nkleine Bugfixes\nAusgaben aktualisiert",
-        "ru": "Время config для Brightness-Sensor добавлен\nнебольшие багфиксы\nОбновленные зависимости",
-        "pt": "Tempo de configuração para Brightness-Sensor adicionado\npequenos bugs\nDependências atualizadas",
-        "nl": "Tijdstip voor Brightness-Sensor toegevoegd\nkleine Bugfix\nAfhankelijkheid geüpdateerd",
-        "fr": "Configuration du temps pour Brightness-Sensor ajouté\npetites Bugfixes\nDépendances mises à jour",
-        "it": "Configurazione del tempo per Brightness-Sensor aggiunto\npiccoli bugfix\nDipendenze aggiornate",
-        "es": "Ajuste del tiempo para Brightness-Sensor añadido\npequeños Bugfixes\nActualización de las dependencias",
-        "pl": "Konfiguracja czasu Brightness-Sensor dodaje do Brightness-Sensor\nmały Bugfix\nZależności",
-        "uk": "Налаштування часу для Brightness-Sensor додано\nмаленькі Бугфікси\nЗалежність оновлено",
-        "zh-cn": "Brightness-Sensor补充说的时限\n小额Bugfix\nB. 更新的属地"
       }
     },
     "title": "shuttercontrol",
