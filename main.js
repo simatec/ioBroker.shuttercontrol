@@ -241,7 +241,7 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (typeof _shutterState !== undefined && _shutterState.val !== undefined && shutterSettings[s].oldHeight !== _shutterState.val) {
+                                if (typeof _shutterState !== undefined && _shutterState !== null && shutterSettings[s].oldHeight !== _shutterState.val) {
                                     adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + _shutterState.val);
                                 }
                                 if (typeof _shutterState !== undefined && _shutterState !== null && _shutterState.val !== shutterSettings[s].currentHeight && _shutterState.val !== shutterSettings[s].oldHeight && adapter.config.currentShutterState === true) {
