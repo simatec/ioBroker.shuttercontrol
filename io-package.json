@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.26",
+    "version": "1.4.27",
     "news": {
+      "1.4.27": {
+        "en": "small Fixes",
+        "de": "kleine Feste",
+        "ru": "небольшие исправления",
+        "pt": "pequenas correções",
+        "nl": "kleine Fixes",
+        "fr": "petits Fixes",
+        "it": "piccoli corredi",
+        "es": "pequeñas fijaciones",
+        "pl": "mały Fisz",
+        "uk": "маленькі Фікси",
+        "zh-cn": "小型固定"
+      },
       "1.4.26": {
         "en": "Fix Sunprotect",
         "de": "Sunprotekt reparieren",
@@ -80,19 +93,6 @@
         "pl": "brightness Settings (ang.)\nZależności",
         "uk": "виправити налаштування яскравості\nЗалежність оновлено",
         "zh-cn": "fix 版权规定\nB. 更新的属地"
-      },
-      "1.4.20": {
-        "en": "Bugfix Brightness-Sensor",
-        "de": "Bugfix Helligkeitssensor",
-        "ru": "Bugfix Яркость-Sensor",
-        "pt": "Bugfix Brightness-Sensor",
-        "nl": "Bugfix Brightness-Sensor",
-        "fr": "Bugfix Brightness-Sensor",
-        "it": "Bugfix Brightness-Sensor",
-        "es": "Bugfix Brightness-Sensor",
-        "pl": "Bugfix Brightness-Sensor",
-        "uk": "Bugfix Яскравість-сенсор",
-        "zh-cn": "Bugfix Bright-Sensor"
       }
     },
     "title": "shuttercontrol",
