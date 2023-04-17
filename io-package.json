@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.27",
+    "version": "1.4.28",
     "news": {
+      "1.4.28": {
+        "en": "small Fixes",
+        "de": "kleine Feste",
+        "ru": "небольшие исправления",
+        "pt": "pequenas correções",
+        "nl": "kleine Fixes",
+        "fr": "petits Fixes",
+        "it": "piccoli corredi",
+        "es": "pequeñas fijaciones",
+        "pl": "mały Fisz",
+        "uk": "маленькі Фікси",
+        "zh-cn": "小型固定"
+      },
       "1.4.27": {
         "en": "small Fixes",
         "de": "kleine Feste",
@@ -80,19 +93,6 @@
         "pl": "Bugfix Brightness-Sensor\nZależności\nFix Alarm Setting (ang.)",
         "uk": "Bugfix Яскравість-сенсор\nЗалежність оновлено\nВиправлення параметрів сигналізації",
         "zh-cn": "Bugfix Bright-Sensor\nB. 更新的属地\nFix Alarm Seting"
-      },
-      "1.4.21": {
-        "en": "fix Brightness Settings\nDependencies updated",
-        "de": "korrektur der Helligkeitseinstellungen\nAusgaben aktualisiert",
-        "ru": "исправить настройки яркости\nОбновленные зависимости",
-        "pt": "corrigir configurações de brilho\nDependências atualizadas",
-        "nl": "herstel Brightness Setting\nAfhankelijkheid geüpdateerd",
-        "fr": "correction des paramètres de luminosité\nDépendances mises à jour",
-        "it": "fix Impostazioni di luminosità\nDipendenze aggiornate",
-        "es": "arregla los ajustes de brillo\nActualización de las dependencias",
-        "pl": "brightness Settings (ang.)\nZależności",
-        "uk": "виправити налаштування яскравості\nЗалежність оновлено",
-        "zh-cn": "fix 版权规定\nB. 更新的属地"
       }
     },
     "title": "shuttercontrol",
