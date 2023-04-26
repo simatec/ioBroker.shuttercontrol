@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.28",
+    "version": "1.4.29",
     "news": {
+      "1.4.29": {
+        "en": "Bugfix Brightness down",
+        "de": "Bugfix Helligkeit unten",
+        "ru": "Bugfix Яркость вниз",
+        "pt": "Bugfix Brilho para baixo",
+        "nl": "Bugfix Brightness",
+        "fr": "Bugfix Brightness down",
+        "it": "Bugfix luminosità giù",
+        "es": "Bugfix Brightness abajo",
+        "pl": "Bugfix Bright",
+        "uk": "Bugfix Яскравість вниз",
+        "zh-cn": "Bugfix Brightim"
+      },
       "1.4.28": {
         "en": "small Fixes",
         "de": "kleine Feste",
@@ -80,19 +93,6 @@
         "pl": "Bugfix Brightness-Sensor\nZależności\ndrobne rozwiązanie",
         "uk": "Bugfix Яскравість-сенсор\nЗалежність оновлено\nмаленькі кріплення",
         "zh-cn": "Bugfix Bright-Sensor\nB. 更新的属地\n小型配件"
-      },
-      "1.4.22": {
-        "en": "Bugfix Brightness-Sensor\nDependencies updated\nFix Alarm Settings",
-        "de": "Bugfix Helligkeitssensor\nAusgaben aktualisiert\nAlarmeinstellungen festlegen",
-        "ru": "Bugfix Яркость-Sensor\nОбновленные зависимости\nИсправление настроек тревоги",
-        "pt": "Bugfix Brightness-Sensor\nDependências atualizadas\nDefinir configurações de alarme",
-        "nl": "Bugfix Brightness-Sensor\nAfhankelijkheid geüpdateerd\nFix Alarm Setting",
-        "fr": "Bugfix Brightness-Sensor\nDépendances mises à jour\nRéglage des paramètres d'alarme",
-        "it": "Bugfix Brightness-Sensor\nDipendenze aggiornate\nImpostazioni di allarme",
-        "es": "Bugfix Brightness-Sensor\nActualización de las dependencias\nAjuste de Alarma",
-        "pl": "Bugfix Brightness-Sensor\nZależności\nFix Alarm Setting (ang.)",
-        "uk": "Bugfix Яскравість-сенсор\nЗалежність оновлено\nВиправлення параметрів сигналізації",
-        "zh-cn": "Bugfix Bright-Sensor\nB. 更新的属地\nFix Alarm Seting"
       }
     },
     "title": "shuttercontrol",
