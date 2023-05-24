@@ -618,12 +618,6 @@ Dieser Parameter kann verhindern, dass der Rollo bei wechselnder Bewölkung imme
 > Hinweis:  
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
 automatisch angefahrenen, setzt die Automatik aus!  
-> Ausnahme:  
-Wenn der Rollladen das erste Mal am Tag manuell auf 100% geöffnet
-wird, wird ebenso der Sonnenschutz ermöglicht. Hierbei fährt der Rollladen
-bei Bedarf kurz nach dem manuellen Hochfahren in den Sonnenschutz.
-Wird der Rollladen automatisch hochgefahren und sind die Voraussetzungen für
-den Sonnenschutz erfüllt, so fährt er direkt die Höhe des Sonnenschutzes an.
 
 **Rollladen Verzögerung bei Fenster öffnen (s)**
 Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
