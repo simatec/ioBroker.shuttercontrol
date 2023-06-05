@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shuttercontrol",
-  "version": "1.4.29",
+  "version": "1.5.0",
   "description": "Automatic control for shutters",
   "author": {
     "name": "simatec",

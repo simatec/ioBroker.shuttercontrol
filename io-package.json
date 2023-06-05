@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.4.29",
+    "version": "1.5.0",
     "news": {
+      "1.5.0": {
+        "en": "new Manu-Mode Check added\nsuncalc added\nDependencies updated",
+        "de": "neue Manu-Mode Check hinzugefügt\nsuncalc hinzugefügt\nAusgaben aktualisiert",
+        "ru": "новый Manu-Mode Проверить добавлено\nsuncalc добавлено\nОбновленные зависимости",
+        "pt": "novo Manu-Mode Verificação adicionada\nadicionar ao cesto\nDependências atualizadas",
+        "nl": "nieuwe Manu-Mode Controle toegevoegd\nsuncalc toegevoegd\nAfhankelijkheid geüpdateerd",
+        "fr": "nouveau Manu-Mode Check added\nsuncalc ajouté\nDépendances mises à jour",
+        "it": "nuovo Manu-Mode Check aggiunto\nsuncalc aggiunto\nDipendenze aggiornate",
+        "es": "nuevo Manu-Mode Check añadido\nsuncalc añadido\nActualización de las dependencias",
+        "pl": "nowy Manu-Mode Check dodać\ndodać\nZależności",
+        "uk": "новий Manu-Mode Перевірити\nдодано сонце\nЗалежність оновлено",
+        "zh-cn": "新马努-马西 检查站\n日增\nB. 更新的属地"
+      },
       "1.4.29": {
         "en": "Bugfix Brightness down",
         "de": "Bugfix Helligkeit unten",
@@ -80,19 +93,6 @@
         "pl": "Pięć końca Słońca\nmały Fisz\nFixs shutter alarm\nStatystyka\nBugfix Bright\nZależności\nCzasopismo",
         "uk": "Фіксований кінець Sunprotect\nмаленькі Фікси\nВиправлення тривожної сигналізації\nПанчохи\nBugfix Яскравість вниз\nЗалежність оновлено\nВиправлення часу Астро",
         "zh-cn": "九. 防疫\n小型固定\nB. 警戒\nSentry fix\nBugfix Brightim\nB. 更新的属地\n固定时间"
-      },
-      "1.4.23": {
-        "en": "Bugfix Brightness-Sensor\nDependencies updated\nsmall fixes",
-        "de": "Bugfix Helligkeitssensor\nAusgaben aktualisiert\nkleine fixierungen",
-        "ru": "Bugfix Яркость-Sensor\nОбновленные зависимости\nнебольшие исправления",
-        "pt": "Bugfix Brightness-Sensor\nDependências atualizadas\npequenas correções",
-        "nl": "Bugfix Brightness-Sensor\nAfhankelijkheid geüpdateerd\nkleine fixes",
-        "fr": "Bugfix Brightness-Sensor\nDépendances mises à jour\npetites corrections",
-        "it": "Bugfix Brightness-Sensor\nDipendenze aggiornate\npiccole correzioni",
-        "es": "Bugfix Brightness-Sensor\nActualización de las dependencias\npequeños accesorios",
-        "pl": "Bugfix Brightness-Sensor\nZależności\ndrobne rozwiązanie",
-        "uk": "Bugfix Яскравість-сенсор\nЗалежність оновлено\nмаленькі кріплення",
-        "zh-cn": "Bugfix Bright-Sensor\nB. 更新的属地\n小型配件"
       }
     },
     "title": "shuttercontrol",

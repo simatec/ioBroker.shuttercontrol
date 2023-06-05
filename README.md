@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.5.0 (2023-06-05)
 * (simatec) new Manu-Mode Check added
 * (simatec) suncalc added
 * (simatec) Dependencies updated
