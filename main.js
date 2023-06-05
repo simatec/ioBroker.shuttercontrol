@@ -244,10 +244,40 @@ function startAdapter(options) {
                                 if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != _shutterState.val) {
                                     adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + _shutterState.val);
                                 }
-                                if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState === true) {
+                                if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight) {
 
-                                    shutterSettings[s].currentAction = 'Manu_Mode';
-                                    shutterSettings[s].triggerAction = 'Manu_Mode';
+                                    switch (_shutterState.val) {
+                                        case parseFloat(shutterSettings[s].heightUp):
+                                            shutterSettings[s].currentAction = 'up';
+                                            shutterSettings[s].triggerAction = 'up';
+                                            shutterSettings[s].currentHeight = _shutterState.val;
+                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
+                                            break;
+                                        case parseFloat(shutterSettings[s].heightDown):
+                                            shutterSettings[s].currentAction = 'down';
+                                            shutterSettings[s].triggerAction = 'down';
+                                            shutterSettings[s].currentHeight = _shutterState.val;
+                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
+                                            break;
+                                        case parseFloat(shutterSettings[s].heightDownSun):
+                                            shutterSettings[s].currentAction = 'sunProtect';
+                                            shutterSettings[s].triggerAction = 'sunProtect';
+                                            shutterSettings[s].currentHeight = _shutterState.val;
+                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
+                                            break;
+                                        default:
+                                            shutterSettings[s].currentAction = 'Manu_Mode';
+                                            shutterSettings[s].triggerAction = 'Manu_Mode';
+
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
+                                            adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                    }
 
                                     adapter.log.debug(`#1 shutterName: ${shutterSettings[s].shutterName}`);
                                     adapter.log.debug(`#1 shutterState: ${_shutterState.val} %`);
@@ -261,27 +291,7 @@ function startAdapter(options) {
                                     await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
                                         .catch((e) => adapter.log.warn(e));
 
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
-                                    shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight && adapter.config.currentShutterState === false) {
-                                    shutterSettings[s].currentAction = 'Manu_Mode';
-                                    shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                    adapter.log.debug(`#2 shutterName: ${shutterSettings[s].shutterName}`);
-                                    adapter.log.debug(`#2 shutterState: ${_shutterState.val} %`);
-                                    adapter.log.debug(`#2 currentAction: ${shutterSettings[s].currentAction}`);
-                                    adapter.log.debug(`#2 triggerAction: ${shutterSettings[s].triggerAction}`);
-                                    adapter.log.debug(`#2 currentHeight: ${shutterSettings[s].currentHeight} %`);
-                                    adapter.log.debug(`#2 oldHeight: ${shutterSettings[s].oldHeight} %`);
-                                    adapter.log.debug(`#2 currentShutterState: ${adapter.config.currentShutterState === true ? 'activated' : 'disabled'}`);
-                                    adapter.log.debug(`#2 currentShutterStateTime: ${adapter.config.currentShutterStateTime} seconds`);
-
-                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
-                                        .catch((e) => adapter.log.warn(e));
-
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 } else if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val === shutterSettings[s].currentHeight) {
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');

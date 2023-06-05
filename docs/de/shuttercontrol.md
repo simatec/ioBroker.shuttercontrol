@@ -619,6 +619,9 @@ Dieser Parameter kann verhindern, dass der Rollo bei wechselnder Bewölkung imme
 Wird ein Rollladen manuell verstellt und entspricht die Position nicht der
 automatisch angefahrenen, setzt die Automatik aus!  
 
+> Ausnahme:
+Wird der Rollladen manuell in die konfigurierte Höhe für öffnen, schließen oder Sonnenschutz gefahren, bleibt die Automatik bestehen.
+ 
 **Rollladen Verzögerung bei Fenster öffnen (s)**
 Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)
 
