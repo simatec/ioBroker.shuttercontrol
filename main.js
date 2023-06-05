@@ -8,7 +8,7 @@ const utils = require('@iobroker/adapter-core');
 // @ts-ignore
 const schedule = require('node-schedule');
 // @ts-ignore
-const SunCalc = require('suncalc2');
+const SunCalc = require('suncalc');
 
 const sunProtect = require('./lib/sunProtect.js');                                                      // SunProtect
 const triggerChange = require('./lib/triggerChange.js');                                                // triggerChange
