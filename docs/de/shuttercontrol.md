@@ -476,90 +476,59 @@ Soll die Verdunklung bei einer fixen Elevation starten bzw. enden, wird dieser W
 ---
 
 ### Sonnenschutz-Einstellungen
-Der Sonnenschutz kann über Auslöser wie Himmelsrichtung, Außentemperatur, Innentemperatur
-und Lichtsensor für die Beschattung und deren Ende gesteuert werden und wird über
-**Art der Sonnenschutzsteuerung** eingestellt.
+Der Sonnenschutz kann über Auslöser wie die Himmelsrichtung und beliebige (sinnvolle) Sensoren für die Beschattung und deren Ende gesteuert werden.
 
 ![sunProtect](img/mainSunprotect.png)
 
+**Art der Sonnenschutzsteuerung:**
 
-**Rollladenhöhe beim Runterfahren:**  
-Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll (0 entspricht
-komplett geschlossen).
+Folgende gängige Kombinationen sind über Pulldown auswählbar und sollten zu Beginn der Einstellungen festgelegt werden:
 
-**Himmelsrichtung (Sonnenposition):**  
-Ausrichtung des Fensters auf der Windrose (0° = Nord; 180° = Süd)
+    • Aus
+    
+    • Innen- & Außentemperatur/Lichtsensor 
+    
+    • Himmelsrichtung 
+    
+    • Innen/Außentemperatur/Lichtsensor & Himmelsrichtung 
+    
+    • Außentemperatur/Lichtsensor & Himmelsrichtung 
+    
+    • Außentemperatur/Lichtsensor 
+    
+    • Innentemperatur 
+    
+**WICHTIGE Hinweise:**
+* Der Sonnenschutz löst erst aus wenn ALLE gewählten Auslöser aktiv sind (logische UND Verknüpfung) bzw. endet also wenn EINE Bedingung nicht erfüllt ist.
+* ALLE gewählten Auslöser müssen auch mit Werten gefüllt sein !
 
-**Art der Sonnenschutzsteuerung:**  
-Folgende Kombinationen sind über Pulldown auswählbar:
-* Innen- & Außentemperatur/Lichtsensor
-* Himmelsrichtung
-* Innen/Außentemperatur/Lichtsensor & Himmelsrichtung
-* Außentemperatur/Lichtsensor & Himmelsrichtung
-* Außentemperatur/Lichtsensor
-* Innentemperatur
- 
->Der Sonnenschutz löst erst aus wenn ALLE gewählten Auslöser aktiv sind (UND Verknüpfung).
+  Ausnahme: Der „Lichtsensor“ in der Auswahl ist IMMER optional und darf leer bleiben.
+* Die Sensoren sind nicht an die Beschreibung im Adapter gebunden, d.h. ein „Außentemperatursensor“ könnte auch eine „Differenztemperatur“ oder eine andere (sinnvolle physikalische) Messgröße sein.
 
->Wird eine Steuerung mit mehreren Sensoren gewünscht, muss die entsprechende Kombination in der Sonnenschutzart gewählt werden. Der Lichtsensor ist in denjenigen Auswahlen, wo dieser mit aufgeführt ist, jeweils optional. Ist der Lichtsensor konfiguriert, wird er mit den anderen Parametern UND verknüpft.
+**Rollladenhöhe beim Runterfahren:**
 
->Der Sonnenschutz wird aufgehoben, sobald eine der Bedingungen (Parameter) nicht mehr erfüllt ist.
+Der Wert wie weit der Rollladen bei Beschattung geschlossen werden soll (0 entspricht komplett geschlossen).
 
-**+/- Bereich der Sonnenposition für den aktiven Sonnenschutz:**  
-Bereich in dem die Sonne (um den Mittelpunkt) störend in das Fenster einstrahlen
-würde. Außerhalb dieses Bereichs findet keine Beschattung statt.
+**Himmelsrichtung (Sonnenposition):**
 
-**Sollwert Außentemperatur:**  
-Schwellwert zum Starten der Beschattung. Dieser Wert ist abhängig von dem im Feld
-**Objekt-ID für die Außentemperatur** ausgewählten Sensor.
+Ausrichtung des Fensters auf der Windrose (0° = Nord; 180° = Süd) und dem +/- Bereich in dem die Sonne (um den Mittelpunkt) störend in das Fenster einstrahlen würde.
 
-**Hysterese Außentemperatur (Prozent):**  
-Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei
-Schwankungen nicht ständig hoch und runter fährt.
-Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem die
-Beschattung beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung
-wieder endet.
+**Objekt-ID Sensor:**
 
-**Objekt-ID für die Außentemperatur:**  
-Der hier ausgewählte Sensor muss nicht zwingend die Außentemperatur messen. Er kann
-irgendeinen Wert, der zur Beschattungsauslösung hinzugezogen werden kann, liefern.
-Dies kann auch ein Hitzesensor (Temperaturdifferenzsensor) sein. Wird kein Außensensor
-eingesetzt, dieses Feld leer lassen.
+Hier den gewünschten Sensor auswählen.
 
-**Sollwert des Sonnenschutzlichtsensors:**  
-Schwellwert zum Starten der Beschattung. Dieser Wert ist abhängig von dem im Feld
-**Objekt-ID für die Sonnenschutzlichtsensors** ausgewählten Sensor.
+**Sollwert Sensor:**
 
-**Hysterese Lichtsensor (Prozent):**  
-Hier kann eine Hysterese nach unten in Prozent eingestellt werden, damit der
-Rollladen bei Schwankungen durch wechselnde Bewölkung nicht ständig hoch und runter fährt.
-Die Hysterese ist der Unterschied zwischen dem eingestellten Sollwert, bei dem die
-Beschattung beginnen soll, und dem unteren Helligkeitswert, bei dem die Beschattung
-wieder endet.
+Bei diesem Wert (oder größer) soll die Beschattung starten.
 
-> Beispiel:
-> Sollwert des Sonnenschutzlichtsensors ist auf 30.000, Hysterese auf 40 eingestellt:
-> Der Sonnenschutz ist aktiv ab 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt.
+**Hysterese in Prozent:**
 
-**Objekt-Id des Sonnenschutzlichtsensors:**  
-Analog zum Außentemperatursensor; wenn nicht benutzt leer lassen
+Damit bei Schwankungen des Sensorwerts, ausgehend vom Sollwert, die Rollläden nicht ständig runter – bzw. rauf fahren stellt man hier die Schwankungsbreite ein. d.h. um wieviel % der Sollwert runter geht darf ohne das der Rollladen seine Beschattungsposition ändert.
 
-**Sollwert Innentemperatursensor:**  
-Hier kann eine Temperatur eines zu dem Rollladen zugeordneten Innentemperatursensors
-eingegeben werden unter der keine Beschattung stattfinden soll, um z.B. die Wärme-
-einstrahlung im Winter zur Heizungsunterstützung zu nutzen.
-
-**Hysterese Innentemperatur (Prozent):**  
-Hier kann eine Hysterese in Prozent eingestellt werden, damit der Rollladen bei
-Innentemperaturschwankungen nicht ständig hoch und runter fährt. Die Hysterese
-ist der Unterschied zwischen dem oberen Temperaturwert, bei dem die Beschattung
-beginnen soll, und dem unteren Temperaturwert, bei dem die Beschattung wieder endet.
-
-**Objekt-ID des Innentemperatursensors:**  
-über das (+) den Temperatursensor (State) auswählen der eine Rollladenfahrt verhindert.
-Wird kein Innensensor eingesetzt, dieses Feld leer lassen.
+Beispiel: Sollwert des Sonnenschutzlichtsensors ist auf 30.000, Hysterese auf 40% eingestellt: Der Sonnenschutz ist aktiv ab 30.000 und bleibt aktiv bis der Wert unter 18.000 fällt (sinngemäß für Temperatur o.ä.)
 
 
+---
 
 ### Extra-Einstellungen Rollladen
 
