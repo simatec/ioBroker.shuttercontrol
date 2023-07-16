@@ -76,11 +76,13 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val('0').trigger('change');
             $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val('0').trigger('change');
+            $('#events .values-input[data-name="tempHeatProtection"][data-index="' + id + '"]').val('30').trigger('change');
             
             // switch
             $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="inSummerNotDown"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="KeepSunProtect"][data-index="' + id + '"]').val(true).trigger('change');
+            $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').val(false).trigger('change');
@@ -370,6 +372,7 @@ function tableOnReady() {
         $('#trigDelyUp').val($('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val());
         $('#trigDelyDown').val($('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val());
         $('#sunProtectEndDely').val($('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val());
+        $('#tempHeatProtection').val($('#events .values-input[data-name="tempHeatProtection"][data-index="' + id + '"]').val());
         
         // switch
         var varLateDown = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
@@ -383,11 +386,17 @@ function tableOnReady() {
         var varenableAlarmRain = $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmFrost = $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmFire = $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked');
+        var varheatProtection = $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked');
 
         if (varuseXmasLevel == true) {
             $('.col-XmasLevel').show();
         } else {
             $('.col-XmasLevel').hide();
+        }
+        if (varheatProtection == true) {
+            $('.col-heatProtect').show();
+        } else {
+            $('.col-heatProtect').hide();
         }
         if (varbetweenPosition == true) {
             $('.col-betweenPosition').show();
@@ -406,6 +415,7 @@ function tableOnReady() {
         $('#enableAlarmRain').prop('checked', varenableAlarmRain);
         $('#enableAlarmFrost').prop('checked', varenableAlarmFrost);
         $('#enableAlarmFire').prop('checked', varenableAlarmFire);
+        $('#heatProtection').prop('checked', varheatProtection);
 
         setTimeout(function () {
             initDialogShutter(function (sid) {
@@ -440,6 +450,7 @@ function tableOnReady() {
                 var trigDelyUp = $('#trigDelyUp').val();
                 var trigDelyDown = $('#trigDelyDown').val();
                 var sunProtectEndDely = $('#sunProtectEndDely').val();
+                var tempHeatProtection = $('#tempHeatProtection').val();
                 
                 // switch
                 var newLateDown = $('#LateDown').prop('checked');
@@ -453,6 +464,7 @@ function tableOnReady() {
                 var newenableAlarmRain = $('#enableAlarmRain').prop('checked');
                 var newenableAlarmFrost = $('#enableAlarmFrost').prop('checked');
                 var newenableAlarmFire = $('#enableAlarmFire').prop('checked');
+                var newHeatProtection = $('#heatProtection').prop('checked');
 
                 // value
                 $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -485,6 +497,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="trigDelyUp"][data-index="' + id + '"]').val(trigDelyUp).trigger('change');
                 $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val(trigDelyDown).trigger('change');
                 $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val(sunProtectEndDely).trigger('change');
+                $('#events .values-input[data-name="tempHeatProtection"][data-index="' + id + '"]').val(tempHeatProtection).trigger('change');
                 
                 // switch
                 $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
@@ -498,6 +511,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked', newenableAlarmRain).trigger('change');
                 $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked', newenableAlarmFrost).trigger('change');
                 $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked', newenableAlarmFire).trigger('change');
+                $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked', newHeatProtection).trigger('change');
             });
         }, 20)
     });
@@ -545,8 +559,6 @@ function showHideSettings() {
     } else {
         $('.checkShutterState').hide();
     }
-    console.log('livingAutomatic' + $('#livingAutomatic')[0].value);
-
     if ($('#livingAutomatic')[0].value == "livingTime") {
         $('.col-W_shutterUpLivingMin').hide();
         $('.col-WE_shutterUpLivingMin').hide();
@@ -562,13 +574,13 @@ function showHideSettings() {
         $('.col-W_shutterUpSleepMin').show();
         $('.col-WE_shutterUpSleepMin').show();
     }
-
+    
     if ($('#useXmasLevel').prop('checked')) {
         $('.col-XmasLevel').show();
     } else {
         $('.col-XmasLevel').hide();
     }
-
+    
     if ($('#LateAllDown').prop('checked')) {
         $('.LateAllDownTime').show();
     } else {
@@ -579,6 +591,12 @@ function showHideSettings() {
         $('.col-betweenPosition').show();
     } else {
         $('.col-betweenPosition').hide();
+    }
+    
+    if ($('#heatProtection').prop('checked')) {
+        $('.col-heatProtect').show();
+    } else {
+        $('.col-heatProtect').hide();
     }
 }
 

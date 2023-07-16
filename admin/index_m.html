@@ -122,16 +122,12 @@
                                             <th data-name="enableAlarmRain" id="events_col_46" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">enableAlarmRain</th>
                                             <th data-name="enableAlarmFrost" id="events_col_47" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">enableAlarmFrost</th>
                                             <th data-name="enableAlarmFire" id="events_col_48" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">enableAlarmFire</th>
-                                            <!--
-                                            <th data-name="alarmWind1Level" id="events_col_49" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">alarmWind1Level</th>
-                                            <th data-name="alarmWind2Level" id="events_col_50" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">alarmWind2Level</th>
-                                            <th data-name="alarmRainLevel" id="events_col_51" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">alarmRainLevel</th>
-                                            <th data-name="alarmFrostLevel" id="events_col_52" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">alarmFrostLevel</th>
-                                            <th data-name="alarmFireLevel" id="events_col_53" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">alarmFireLevel</th>
-                                            -->
                                             <th data-name="alarmTriggerAction" id="events_col_54" style="width: 0px" data-style="width: 0px" data-type="text" class="translate"></th>
                                             <th data-name="alarmTriggerLevel" id="events_col_55" data-type="number" style="width: 0px" class="translate"></th>
                                             <th data-name="lastAutoAction" id="events_col_56" style="width: 0px" data-style="width: 0px" data-type="text" class="translate">lastAutoAction</th>
+                                            <th data-name="tempHeatProtection" id="events_col_57" style="width: 0px" data-style="width: 0px" data-type="number" class="translate">tempHeatProtection</th>
+                                            <th data-name="heatProtection" id="events_col_58" style="width: 0px" data-style="width: 0px" data-type="checkbox" class="translate">heatProtection</th>
+
                                             <!-- ****************************************************************** -->
                                         </tr>
                                     </thead>
@@ -568,14 +564,31 @@
                             </div>
                             <div class="collapsible-body">
                                 <div class="row">
-                                    <div class="col s6 l2 input-field">
+                                    <div class="col s6 l4 input-field">
                                         <input type="checkbox" class="value" id="currentShutterState" />
                                         <span for="currentShutterState" class="translate">check current Shutter State</span>
                                     </div>
-                                    <div class="col s6 l2 input-field checkShutterState">
+                                    <div class="col s6 l4 input-field checkShutterState">
                                         <input type="number" class="value" id="currentShutterStateTime" />
                                         <label for="currentShutterStateTime" class="translate"></label>
                                         <span class="translate">Waiting time for checking the shutter status (seconds)</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6 l4 input-field">
+                                        <input type="checkbox" class="value" id="blockManuMode" />
+                                        <span for="blockManuMode" class="translate">Blocking the Manu mode for known shutter heights</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12 m4">
+                                        <select class="value" id="shutterStateRound">
+                                            <option value=1 class="translate">off</option>
+                                            <option value=5 class="translate">on 5s rounds</option>
+                                            <option value=10 class="translate">on 10s rounds</option>
+                                        </select>
+                                        <label for="shutterStateRound" class="translate"></label>
+                                        <span class="translate">Rounding up or down the current shutter heights</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -990,10 +1003,21 @@
                                                 <input type="checkbox" id="KeepSunProtect" class="value" />
                                                 <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
                                             </div>
-                                            <div class="col s6 l2 input-field">
+                                            <div class="col s6 l4 input-field">
+                                                <input type="checkbox" id="heatProtection" class="value" />
+                                                <label for="heatProtection" class="translate">Heat protection (completely close the roller shutter in the heat)</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s6 l4 input-field">
                                                 <input type="number" class="value" id="sunProtectEndDely" min=0 max=999 />
                                                 <label for="sunProtectEndDely" class="translate"></label>
                                                 <span class="translate">sunProtectEndDely</span>
+                                            </div>
+                                            <div class="col s6 l4 input-field col-heatProtect">
+                                                <input type="number" id="tempHeatProtection" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0 °C" step="0.1" />
+                                                <label for="tempHeatProtection" class="translate"></label>
+                                                <span class="translate">Outdoor temperature upper limit for activating thermal protection</span>
                                             </div>
                                         </div>
                                     </div>

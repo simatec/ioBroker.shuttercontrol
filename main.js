@@ -241,46 +241,53 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != _shutterState.val) {
-                                    adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + _shutterState.val);
+                                if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+                                    adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
                                 }
-                                if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val != shutterSettings[s].currentHeight && _shutterState.val != shutterSettings[s].oldHeight) {
+                                if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].currentHeight && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].oldHeight) {
+                                    if (adapter.config.blockManuMode === true) {
+                                        switch (Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+                                            case parseFloat(shutterSettings[s].heightUp):
+                                                shutterSettings[s].currentAction = 'up';
+                                                shutterSettings[s].triggerAction = 'up';
+                                                shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
+                                                shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                    switch (_shutterState.val) {
-                                        case parseFloat(shutterSettings[s].heightUp):
-                                            shutterSettings[s].currentAction = 'up';
-                                            shutterSettings[s].triggerAction = 'up';
-                                            shutterSettings[s].currentHeight = _shutterState.val;
-                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                break;
+                                            case parseFloat(shutterSettings[s].heightDown):
+                                                shutterSettings[s].currentAction = 'down';
+                                                shutterSettings[s].triggerAction = 'down';
+                                                shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
+                                                shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
-                                            break;
-                                        case parseFloat(shutterSettings[s].heightDown):
-                                            shutterSettings[s].currentAction = 'down';
-                                            shutterSettings[s].triggerAction = 'down';
-                                            shutterSettings[s].currentHeight = _shutterState.val;
-                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                break;
+                                            case parseFloat(shutterSettings[s].heightDownSun):
+                                                shutterSettings[s].currentAction = 'sunProtect';
+                                                shutterSettings[s].triggerAction = 'sunProtect';
+                                                shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
+                                                shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
-                                            break;
-                                        case parseFloat(shutterSettings[s].heightDownSun):
-                                            shutterSettings[s].currentAction = 'sunProtect';
-                                            shutterSettings[s].triggerAction = 'sunProtect';
-                                            shutterSettings[s].currentHeight = _shutterState.val;
-                                            shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
+                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                break;
+                                            default:
+                                                shutterSettings[s].currentAction = 'Manu_Mode';
+                                                shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                            adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
-                                            break;
-                                        default:
-                                            shutterSettings[s].currentAction = 'Manu_Mode';
-                                            shutterSettings[s].triggerAction = 'Manu_Mode';
+                                                adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
+                                                adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                        }
+                                    } else {
+                                        shutterSettings[s].currentAction = 'Manu_Mode';
+                                        shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                            adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + _shutterState.val + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val);
-                                            adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                        adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
+                                        adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
                                     }
 
                                     adapter.log.debug(`#1 shutterName: ${shutterSettings[s].shutterName}`);
-                                    adapter.log.debug(`#1 shutterState: ${_shutterState.val} %`);
+                                    adapter.log.debug(`#1 shutterState: ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound} %`);
                                     adapter.log.debug(`#1 currentAction: ${shutterSettings[s].currentAction}`);
                                     adapter.log.debug(`#1 triggerAction: ${shutterSettings[s].triggerAction}`);
                                     adapter.log.debug(`#1 currentHeight: ${shutterSettings[s].currentHeight} %`);
@@ -293,8 +300,8 @@ function startAdapter(options) {
 
 
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (typeof _shutterState != undefined && _shutterState != null && _shutterState.val === shutterSettings[s].currentHeight) {
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + _shutterState.val + '. automatic is active');
+                                } else if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
+                                    adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 }
                                 await sleep(1000);
@@ -687,10 +694,10 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
 
                 await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: resultStates[i].currentAction, ack: true })
                     .catch((e) => adapter.log.warn(e));
-                adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + _shutterState.val);
+                adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
 
                 if (typeof _shutterState.val != undefined && _shutterState.val != null) {
-                    resultStates[i].currentHeight = _shutterState.val;
+                    resultStates[i].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                     await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true })
                         .catch((e) => adapter.log.warn(e));
 

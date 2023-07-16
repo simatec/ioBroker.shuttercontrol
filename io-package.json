@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "news": {
+      "1.6.0": {
+        "en": "Manu mode block added\nHeat protection added\nAdded rounding of incoming shutter states\nUkrainian language added\nsmall Bugfixes\nDependencies updated",
+        "de": "Manu Mode Block hinzugefügt\nWärmeschutz hinzugefügt\nHinzugefügte Rundung der eintreffenden Verschlusszustände\nUkrainische Sprache hinzugefügt\nkleine Bugfixes\nAusgaben aktualisiert",
+        "ru": "Добавлен режим Manu\nДобавлена защита тепла\nДобавлен округление входящих состояний затвора\nУкраинский язык добавлен\nнебольшие багфиксы\nОбновленные зависимости",
+        "pt": "Bloco de modo Manu adicionado\nProteção de calor adicionada\nAdicionada arredondamento de estados do obturador de entrada\nIdioma ucraniano adicionado\npequenos bugs\nDependências atualizadas",
+        "nl": "Manu mode blok toegevoegd\nHeat bescherming toegevoegd\nToegevoegd bij het verzamelen van inkomende sluiter staat\nOekraïense taal toegevoegd\nkleine Bugfix\nAfhankelijkheid geüpdateerd",
+        "fr": "Manu bloc de mode ajouté\nProtection thermique ajoutée\nAjout d ' un arrondissement des états d ' arrêt entrants\nUkrainien ajouté\npetites Bugfixes\nDépendances mises à jour",
+        "it": "Blocco modalità Manu aggiunto\nProtezione del calore aggiunto\nArrotondamento aggiunto degli stati dell'otturatore in arrivo\nLingua ucraina aggiunto\npiccoli bugfix\nDipendenze aggiornate",
+        "es": "Manu bloque de modo añadido\nProtección de calor añadido\nAgregado redondeo de estados de obturación entrante\nIdioma ucraniano añadido\npequeños Bugfixes\nActualización de las dependencias",
+        "pl": "Manu\nOchrona Heat\nZamknięta ściana przedniej części tabeli stanowi ok\nJęzyk ukraiński\nmały Bugfix\nZależności",
+        "uk": "Блок режимів Manu додано\nТеплозахист додано\nДодано округлення вхідних затворних станів\nУкраїнська мова\nмаленькі Бугфікси\nЗалежність оновлено",
+        "zh-cn": "马努模式\n保护\n增加一轮穿梭州\n乌克兰语文\n小额Bugfix\nB. 更新的属地"
+      },
       "1.5.0": {
         "en": "new Manu-Mode Check added\nsuncalc added\nDependencies updated",
         "de": "neue Manu-Mode Check hinzugefügt\nsuncalc hinzugefügt\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "mały Fisz",
         "uk": "маленькі Фікси",
         "zh-cn": "小型固定"
-      },
-      "1.4.24": {
-        "en": "Fix end of Sunprotect\nsmall Fixes\nFix shutter alarm\nSentry fixes\nBugfix Brightness down\nDependencies updated\nFix Astro Time",
-        "de": "Festes Ende von Sunprotect\nkleine Feste\nAlarm für den Verschluss\nSentry Fixes\nBugfix Helligkeit unten\nAusgaben aktualisiert\nAstro Time",
-        "ru": "Fix конец Sunprotect\nнебольшие исправления\nИсправлена сигнализация затвора\nЧувствительные исправления\nBugfix Яркость вниз\nОбновленные зависимости\nFix Астро Время",
-        "pt": "Fix fim de Sunprotect\npequenas correções\nAlarme de desligamento fixo\nSentry correções\nBugfix Brilho para baixo\nDependências atualizadas\nCorrigir Tempo de Astro",
-        "nl": "Vertaling:\nkleine Fixes\nVertaling:\nVertaling:\nBugfix Brightness\nAfhankelijkheid geüpdateerd\nVertaling:",
-        "fr": "Fin fixe de Sunprotect\npetits Fixes\nAlarme d ' arrêt fixe\nSentry corrige\nBugfix Brightness down\nDépendances mises à jour\nTemps d'astrologie fixe",
-        "it": "Fissare la protezione solare\npiccoli corredi\nFissare l'allarme dell'otturatore\nSistema di rilevamento\nBugfix luminosità giù\nDipendenze aggiornate\nTempo dell'astro",
-        "es": "Final fijo de Sunprotect\npequeñas fijaciones\nAlarma de cierre fijo\nArreglos de centinelas\nBugfix Brightness abajo\nActualización de las dependencias\nTiempo de prueba",
-        "pl": "Pięć końca Słońca\nmały Fisz\nFixs shutter alarm\nStatystyka\nBugfix Bright\nZależności\nCzasopismo",
-        "uk": "Фіксований кінець Sunprotect\nмаленькі Фікси\nВиправлення тривожної сигналізації\nПанчохи\nBugfix Яскравість вниз\nЗалежність оновлено\nВиправлення часу Астро",
-        "zh-cn": "九. 防疫\n小型固定\nB. 警戒\nSentry fix\nBugfix Brightim\nB. 更新的属地\n固定时间"
       }
     },
     "title": "shuttercontrol",
@@ -146,6 +146,16 @@
     "connectionType": "local",
     "dataSource": "push",
     "stopBeforeUpdate": true,
+    "dependencies": [
+      {
+        "js-controller": ">=4.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
     "adminUI": {
       "config": "materialize"
     },
@@ -164,6 +174,8 @@
     "UseSunMode": true,
     "currentShutterState": false,
     "currentShutterStateTime": 60,
+    "blockManuMode": false,
+    "shutterStateRound": 1,
     "W_shutterDownLiving": "22:00",
     "W_shutterUpLivingMin": "05:00",
     "W_shutterUpLivingMax": "06:00",
@@ -245,6 +257,7 @@
     "alarmRain": "",
     "alarmFrost": "",
     "alarmFire": "",
+    "heatProtection": false,
     "events": [
       {
         "enabled": true,
@@ -253,7 +266,9 @@
         "triggerID": "",
         "LateDown": true,
         "inSummerNotDown": false,
-        "KeepSunProtect": true,
+        "KeepSunProtect": false,
+        "heatProtection": false,
+        "tempHeatProtection": "30",
         "typeUp": "goldenhour End",
         "typeDown": "elevation",
         "type": "in- & outside temperature",
