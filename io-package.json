@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "news": {
+      "1.6.1": {
+        "en": "Fix Heat protection",
+        "de": "Wärmeschutz",
+        "ru": "Fix Защита тепла",
+        "pt": "Proteção contra calor",
+        "nl": "Fix Heat bescherming",
+        "fr": "Protection thermique",
+        "it": "Fissare la protezione del calore",
+        "es": "Protección de calor fijo",
+        "pl": "Fix Heat",
+        "uk": "Фіксований захист тепла",
+        "zh-cn": "Fix Heat保护"
+      },
       "1.6.0": {
         "en": "Manu mode block added\nHeat protection added\nAdded rounding of incoming shutter states\nUkrainian language added\nsmall Bugfixes\nDependencies updated",
         "de": "Manu Mode Block hinzugefügt\nWärmeschutz hinzugefügt\nHinzugefügte Rundung der eintreffenden Verschlusszustände\nUkrainische Sprache hinzugefügt\nkleine Bugfixes\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Fix Sunprotekt",
         "uk": "Виправлення Sunprotect",
         "zh-cn": "Fix Sunprotect"
-      },
-      "1.4.25": {
-        "en": "small Fixes",
-        "de": "kleine Feste",
-        "ru": "небольшие исправления",
-        "pt": "pequenas correções",
-        "nl": "kleine Fixes",
-        "fr": "petits Fixes",
-        "it": "piccoli corredi",
-        "es": "pequeñas fijaciones",
-        "pl": "mały Fisz",
-        "uk": "маленькі Фікси",
-        "zh-cn": "小型固定"
       }
     },
     "title": "shuttercontrol",
