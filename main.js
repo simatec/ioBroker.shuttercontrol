@@ -241,7 +241,7 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+								if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
                                     adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
                                 }
                                 if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].currentHeight && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].oldHeight) {
@@ -279,24 +279,21 @@ function startAdapter(options) {
                                                 adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
                                         }
                                     } else {
-										adapter.log.debug(shutterSettings[s].shutterName + ' AP C current Action ' + shutterSettings[s].currentAction);
-                                        if (shutterSettings[s].currentAction != 'none' && shutterSettings[s].currentAction != 'OpenInSunProtect') {
+                                        if (shutterSettings[s].firstCompleteUp != true && shutterSettings[s].currentAction != 'none' && shutterSettings[s].currentAction != 'OpenInSunProtect') {
 											shutterSettings[s].currentAction = 'Manu_Mode';
 											shutterSettings[s].triggerAction = 'Manu_Mode';
-											adapter.log.debug('AP Sunprotect Test Manu_Mode A'); 
+											adapter.log.debug('set Manu_Mode #1 ' + shutterSettings[s].shutterName); 
 										}
 										else {
-											adapter.log.debug('AP Sunprotect Test Manu_Mode B');	
-											
 											//Shutter is closed -> open manually to heightUp (should be 100% or 0%) before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
-											adapter.log.debug(shutterSettings[s].shutterName + ' AP M firstCompleteUp ' + shutterSettings[s].firstCompleteUp + ' - ' + state.val + '=' + shutterSettings[s].heightUp + ' - ' + shutterSettings[s].currentAction);
-											if (shutterSettings[s].firstCompleteUp == true && state.val == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted') {
-												shutterSettings[s].currentHeight = state.val;
-												shutterSettings[s].triggerHeight = state.val;
+											if (shutterSettings[s].firstCompleteUp == true && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted') {
+												shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
+												shutterSettings[s].triggerHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
 												shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
 												shutterSettings[s].triggerAction = 'Manu_Mode';
 												shutterSettings[s].firstCompleteUp = false;
-												adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + state.val + '. Possibility to activate sunprotect enabled.');
+												adapter.log.debug('Reset firstCompleteUp #1 for ' + shutterSettings[s].shutterName);
+												adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Possibility to activate sunprotect enabled.');
 
 												await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
 													.catch((e) => adapter.log.warn(e));
@@ -307,12 +304,8 @@ function startAdapter(options) {
 											else {
 												shutterSettings[s].currentAction = 'Manu_Mode';
 												shutterSettings[s].triggerAction = 'Manu_Mode';
-												adapter.log.debug('AP Sunprotect Test Manu_Mode A2');
-											}
-											if (shutterSettings[s].firstCompleteUp == true && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted' && shutterSettings[s].currentAction != 'none' && (state.val === shutterSettings[s].heightUp || state.val === shutterSettings[s].heightDownSun)) {
-												shutterSettings[s].firstCompleteUp = false; //reset firstCompleteUp if shutter has been moved up
-												adapter.log.debug('AP 1 Test Reset firstCompleteUp ' + shutterSettings[s].shutterName);	
-											}											
+												adapter.log.debug('set Manu_Mode #2 ' + shutterSettings[s].shutterName); 
+											}										
 										}
 
                                         adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
@@ -331,23 +324,26 @@ function startAdapter(options) {
                                     await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
                                         .catch((e) => adapter.log.warn(e));
 
-
+									await sleep(2000);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 } else if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
                                     adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
-                                    shutterSettings[s].firstCompleteUp = false;
-									adapter.log.debug('AP 2 Test Reset firstCompleteUp ' + shutterSettings[s].shutterName);	
+									await sleep(2000);
 									shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 }
-                                await sleep(1000);
-                                saveCurrentStates(false);
-
-
 
                                 //save old height
-                                await sleep(60000 + waitTime4StateCheck);
-                                shutterSettings[s].oldHeight = state.val;    //set old Height after 60 Sek - after 60 Sek end position should be reached
-                                saveCurrentStates(false);
+                                await sleep(2000); //already waited waitTime4StateCheck seconds.
+								var timeout_set_oldHeight;
+								timeout_set_oldHeight = setTimeout(async () => {	//async set with timeout because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
+								  timeout_set_oldHeight = null;
+								  shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
+								  if (shutterSettings[s].firstCompleteUp === true) {
+									  shutterSettings[s].firstCompleteUp = false;
+									  adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
+								  }
+								}, 5000 + waitTime4StateCheck);
+								saveCurrentStates(false);
                             }
                         }
                     }
@@ -720,6 +716,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
 
                 if (typeof _shutterState.val != undefined && _shutterState.val != null) {
                     resultStates[i].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
+                    resultStates[i].oldHeight = resultStates[i].currentHeight
                     await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true })
                         .catch((e) => adapter.log.warn(e));
 
@@ -729,6 +726,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
                         adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
                     }
                 }
+				saveCurrentStates(false);
             }
         }
     }
