@@ -49,6 +49,8 @@ When the adapter crashes or an other Code error happens, this error message that
 ### __WORK IN PROGRESS__
 * (simatec) Dependencies updated
 * (simatec) node 20 tests added
+* (simatec) Fix ending Sunprotect with open door/window
+* (5G7K) Fix timing & some states for sunprotect
 
 ### 1.6.1 (2023-07-17)
 * (simatec) Fix Heat protection
