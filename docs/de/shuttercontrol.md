@@ -298,10 +298,8 @@ abgelaufen ist.
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
 **Überprüfen des aktuellen Rollladenstatus:**  
-Bei einigen Usern (unter anderen shelly User) tritt das Problem auf, dass sich das
-Level noch einmal etwas verändert. Aus diesem Grund gibt es hier eine Checkbox.
-Bei aktivierter Checkbox, prüft shuttercontrol 1 Minute nach der letzten Fahrt des
-Rollladens das aktuelle Level und speichert es temporär.
+Bei einigen Usern (unter anderen shelly User) tritt das Problem auf, dass sich das Level bis zum Erreichen der finalen Position fortlaufend oder zum Ende nochmal ändert. Dadurch kann die Erkennung der letzten Aktion fehlerhaft sein und z.B. der "manu_mode" fälschlicherweise gesetzt werden. Aus diesem Grund gibt es hier eine Checkbox.
+Bei aktivierter Checkbox, prüft shuttercontrol die finale Position nochmal nach n Sekunden. Setze die Wartezeit auf die Laufzeit deines Rollladens, der am längsten benötigt.
 
 **Objekt ID des Auslösers für den Schlafbereich (Auto):**  
 Mit diesem Auslöser wird der Automodus des Schlafbereichs aktiviert.
