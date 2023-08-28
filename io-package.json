@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "news": {
+      "1.6.2": {
+        "en": "Dependencies updated\nnode 20 tests added\nFix ending Sunprotect with open door/window\nFix timing & some states for sunprotect",
+        "de": "Ausgaben aktualisiert\nknoten 20 tests hinzugefügt\nFix End Sunprotect mit offener Tür/Fenster\nFix Timing und einige Zustände für Sonnenschutz",
+        "ru": "Обновленные зависимости\nвсего 20 тестов добавлено\nFix ending Sunprotect с открытой дверью/окно\nИсправление сроков и некоторых государств для sunprotect",
+        "pt": "Dependências atualizadas\nnode 20 testes adicionados\nFix final Sunprotect com porta aberta / janela\nFix timing & alguns estados para proteção solar",
+        "nl": "Afhankelijkheid geüpdateerd\n20 testen toegevoegd\nVertaling:\nVertaling:",
+        "fr": "Dépendances mises à jour\nnode 20 tests ajoutés\nFixe fin Sunprotect avec porte ouverte/fenêtre\nFixer le timing & certains états pour sunprotect",
+        "it": "Dipendenze aggiornate\nnodo 20 test aggiunti\nFissare la protezione solare con la porta aperta/finestra\nFissare i tempi e alcuni stati per protezione solare",
+        "es": "Actualización de las dependencias\nnodo 20 pruebas agregadas\nAcabado fijo protector solar con puerta abierta / ventana\nTiempo de fijación \" algunos estados para protección solar",
+        "pl": "Zależności\n20 testów\nFix kończy Sunprotect z otwartym drzwiem/wysokiem\nFix i niektóre stany na słońce",
+        "uk": "Залежність оновлено\nдодано набір 20 тестів\nФіксація затримки Sunprotect з відкритими дверима/вікно\nВиправлення часу та деяких станів для захисту від сонця",
+        "zh-cn": "B. 更新的属地\n无20次试验增加\nFix 关闭Sunprotect,开门/日。\n固定时间和某些州"
+      },
       "1.6.1": {
         "en": "Fix Heat protection",
         "de": "Wärmeschutz",
@@ -80,19 +93,6 @@
         "pl": "mały Fisz",
         "uk": "маленькі Фікси",
         "zh-cn": "小型固定"
-      },
-      "1.4.26": {
-        "en": "Fix Sunprotect",
-        "de": "Sunprotekt reparieren",
-        "ru": "Исправление Sunprotect",
-        "pt": "Fix Sunprotect",
-        "nl": "Vertaling:",
-        "fr": "Fix Sunprotect",
-        "it": "Fissare la protezione solare",
-        "es": "Protección solar",
-        "pl": "Fix Sunprotekt",
-        "uk": "Виправлення Sunprotect",
-        "zh-cn": "Fix Sunprotect"
       }
     },
     "title": "shuttercontrol",
