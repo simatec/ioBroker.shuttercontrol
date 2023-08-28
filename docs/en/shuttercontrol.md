@@ -245,7 +245,7 @@ These settings are actually self-explanatory: latitude and longitude of the plac
 
 ## Extra settings
 
-**Checking the current shutter status:** For some users (among other shelly users) the problem arises that the level changes again. For this reason there is a checkbox here. Should the checkbox be active, shuttercontroll will check the current level 1 minute after the last trip of the shutter and save it temporarily.
+**Checking the current shutter status:** For some users (among other shelly users) the problem arises that the level changes again or several times until the endposition is reached. As a result, the recognition of the last action may be incorrect and, for example, the "manu_mode" may be set incorrectly. For this reason there is a checkbox here. If the check box is activated, shuttercontrol checks the final level again after n seconds. Set the waiting time to the running time of your shutter that needs the longest. 
 
 **Use of public holidays:** If the roller shutters are to be used on public holidays as well as on weekends, the checkbox is activated and an instance of the public holiday adapter is selected.
 You can create two instances of the holiday adapter if necessary; a to display all possible holidays and a working time relevant holidays, which then access shuttercontrol.
