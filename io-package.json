@@ -176,6 +176,7 @@
     "currentShutterStateTime": 60,
     "blockManuMode": false,
     "shutterStateRound": 1,
+    "satIsWeek": false,
     "W_shutterDownLiving": "22:00",
     "W_shutterUpLivingMin": "05:00",
     "W_shutterUpLivingMax": "06:00",
