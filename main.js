@@ -1193,14 +1193,14 @@ function delayCalc() {
     const resultFull = shutterSettings; // Full Result
 
     if (resultFull) {
-        if ((upTimeLiving) === (upTimeSleep)) {
+        if (upTimeLiving === upTimeSleep) {
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living'); // Filter Area Living
             const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result) {
                 delayUp++;
             }
-            if ((autoLivingStr) === true) {
+            if (autoLivingStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living-auto'); // Filter Area Living
                 const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1210,7 +1210,7 @@ function delayCalc() {
             }
         }
 
-        if ((upTimeSleep) === (upTimeChildren)) {
+        if (upTimeSleep === upTimeChildren) {
             delayUpChildren = delayUp;
 
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep'); // Filter Area Sleep
@@ -1219,7 +1219,7 @@ function delayCalc() {
             for (const i in result) {
                 delayUpChildren++;
             }
-            if ((autoSleepStr) === true) {
+            if (autoSleepStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
                 const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1228,14 +1228,14 @@ function delayCalc() {
                 }
             }
         }
-        if ((downTimeLiving) === (downTimeSleep)) {
+        if (downTimeLiving === downTimeSleep) {
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living'); // Filter Area Living
             const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result3) {
                 delayDown++;
             }
-            if ((autoLivingStr) === true) {
+            if (autoLivingStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living-auto'); // Filter Area Living
                 const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1245,7 +1245,7 @@ function delayCalc() {
             }
         }
 
-        if ((downTimeSleep) === (downTimeChildren)) {
+        if (downTimeSleep === downTimeChildren) {
             delayDownChildren = delayDown;
 
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep'); // Filter Area Sleep
@@ -1255,7 +1255,7 @@ function delayCalc() {
                 delayDownChildren++;
             }
 
-            if ((autoSleepStr) === true) {
+            if (autoSleepStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
                 const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
