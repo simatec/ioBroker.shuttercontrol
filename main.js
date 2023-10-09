@@ -1792,9 +1792,9 @@ function main(adapter) {
         for (const s in shutterSettings) {
             adapter.getForeignState(shutterSettings[s].name, (state) => {
                 if (typeof state != undefined && state != null) {
-                    shutterSettings[s].currentHeight = (state.val);
-                    shutterSettings[s].oldHeight = (state.val);
-                    shutterSettings[s].triggerHeight = (state.val);
+                    shutterSettings[s].currentHeight = state.val;
+                    shutterSettings[s].oldHeight = state.val;
+                    shutterSettings[s].triggerHeight = state.val;
 
                     adapter.log.debug('save current height: ' + shutterSettings[s].currentHeight + '%' + ' from ' + shutterSettings[s].shutterName);
 
