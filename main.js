@@ -334,18 +334,19 @@ function startAdapter(options) {
 
                                 //save old height
                                 await sleep(2000); //already waited waitTime4StateCheck seconds.
-
-                                let timeout_set_oldHeight;
-
-                                timeout_set_oldHeight = setTimeout(async () => {	//async set with timeout because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
-                                    timeout_set_oldHeight = null;
-                                    shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
-                                    if (shutterSettings[s].firstCompleteUp === true) {
-                                        shutterSettings[s].firstCompleteUp = false;
-                                        adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
-                                    }
-                                }, 5000 + waitTime4StateCheck);
                                 saveCurrentStates(false);
+
+                                //await sleep because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
+                                await sleep(5000 + waitTime4StateCheck);
+
+                                shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
+
+                                if (shutterSettings[s].firstCompleteUp === true) {
+                                    shutterSettings[s].firstCompleteUp = false;
+                                    adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
+                                }
+                                saveCurrentStates(false);
+
                             }
                         }
                     }
