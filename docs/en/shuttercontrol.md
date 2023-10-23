@@ -149,7 +149,7 @@ _[Back to top](#top)_
 
 ## EXTRA SETTINGS
 
-![ConfigExtra](img/ConfigExtra.png)
+![ConfigExtra](img/KonfigExtra.png)
 
 ### Astro settings
 
