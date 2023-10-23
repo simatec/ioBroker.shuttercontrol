@@ -20,6 +20,9 @@
     "type": "git",
     "url": "https://github.com/simatec/ioBroker.shuttercontrol"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },  
   "dependencies": {
     "@iobroker/adapter-core": "^3.0.3",
     "node-schedule": "^2.1.1",

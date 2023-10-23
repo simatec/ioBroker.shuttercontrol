@@ -334,18 +334,19 @@ function startAdapter(options) {
 
                                 //save old height
                                 await sleep(2000); //already waited waitTime4StateCheck seconds.
-
-                                let timeout_set_oldHeight;
-
-                                timeout_set_oldHeight = setTimeout(async () => {	//async set with timeout because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
-                                    timeout_set_oldHeight = null;
-                                    shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
-                                    if (shutterSettings[s].firstCompleteUp === true) {
-                                        shutterSettings[s].firstCompleteUp = false;
-                                        adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
-                                    }
-                                }, 5000 + waitTime4StateCheck);
                                 saveCurrentStates(false);
+
+                                //await sleep because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
+                                await sleep(5000 + waitTime4StateCheck);
+
+                                shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
+
+                                if (shutterSettings[s].firstCompleteUp === true) {
+                                    shutterSettings[s].firstCompleteUp = false;
+                                    adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
+                                }
+                                saveCurrentStates(false);
+
                             }
                         }
                     }
@@ -846,7 +847,7 @@ function shutterDriveCalc() {
     // ******** Set Up-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
                 upTimeLiving = adapter.config.WE_shutterUpLivingMax;
                 debugCnt = 1;
             } else {
@@ -855,7 +856,7 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
 
                 if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
                     upTimeLiving = adapter.config.WE_shutterUpLivingMax;
@@ -874,7 +875,7 @@ function shutterDriveCalc() {
                     debugCnt = 14;
                 }
             } else {
-                if (dayStr < 6 && dayStr > 0) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
                     if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMax;
                         debugCnt = 4;
@@ -905,7 +906,7 @@ function shutterDriveCalc() {
     // ******** Set Up-Time Sleep Area ********
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
                 upTimeSleep = adapter.config.WE_shutterUpSleepMax;
                 debugCnt = 1;
             } else {
@@ -914,7 +915,7 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
 
                 if (IsLater(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMax)) {
                     upTimeSleep = adapter.config.WE_shutterUpSleepMax;
@@ -934,7 +935,7 @@ function shutterDriveCalc() {
                 }
 
             } else {
-                if (dayStr < 6 && dayStr > 0) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
 
                     if (IsLater(astroTimeSleepUp, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMax;
@@ -965,7 +966,7 @@ function shutterDriveCalc() {
 
     switch (adapter.config.childrenAutomatic) {
         case 'childrenTime':
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
                 upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
                 debugCnt = 1;
             } else {
@@ -974,7 +975,7 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (dayStr === 6 || dayStr === 0 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayStr) === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
 
                 if (IsLater(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMax)) {
                     upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
@@ -995,7 +996,7 @@ function shutterDriveCalc() {
 
 
             } else {
-                if (dayStr < 6 && dayStr > 0) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
 
                     if (IsLater(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMax)) {
                         upTimeChildren = adapter.config.W_shutterUpChildrenMax;
@@ -1025,7 +1026,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -1034,23 +1035,23 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEarlier(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEarlier(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 3;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsLater(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsLater(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 4;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 5;
 
-            } else if (dayStr < 5 && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 debugCnt = 6;
-            } else if (dayStr < 5 && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 7;
-            } else if (dayStr < 5 && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 8;
             }
@@ -1064,7 +1065,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Children Area ******** 
     switch (adapter.config.childrenAutomatic) {
         case 'childrenTime':
-            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) {
                 downTimeChildren = adapter.config.WE_shutterDownChildren;
                 debugCnt = 1;
             } else {
@@ -1073,23 +1074,23 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) && (adapter.config.WE_shutterDownChildren) < (astroTimeChildrenDown)) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) && adapter.config.WE_shutterDownChildren < astroTimeChildrenDown) {
                 downTimeChildren = adapter.config.WE_shutterDownChildren;
                 debugCnt = 3;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && (adapter.config.WE_shutterDownChildren) > (astroTimeChildrenDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && adapter.config.WE_shutterDownChildren > astroTimeChildrenDown) {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 4;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && (adapter.config.WE_shutterDownChildren) === (astroTimeChildrenDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && adapter.config.WE_shutterDownChildren === astroTimeChildrenDown) {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 5;
 
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) > (adapter.config.W_shutterDownChildren)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown > adapter.config.W_shutterDownChildren) {
                 downTimeChildren = adapter.config.W_shutterDownChildren;
                 debugCnt = 6;
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) < (adapter.config.W_shutterDownChildren)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown < adapter.config.W_shutterDownChildren) {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 7;
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeChildrenDown) === (adapter.config.W_shutterDownChildren)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown === adapter.config.W_shutterDownChildren) {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 8;
             }
@@ -1102,7 +1103,7 @@ function shutterDriveCalc() {
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if (dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
@@ -1111,23 +1112,23 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && (adapter.config.WE_shutterDownSleep) < (astroTimeSleepDown)) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep < astroTimeSleepDown) {
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 3;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && (adapter.config.WE_shutterDownSleep) > (astroTimeSleepDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep > astroTimeSleepDown) {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 4;
-            } else if ((dayStr === 5 || dayStr === 6 || (HolidayStr) === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || (publicHolidayTomorowStr) === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && (adapter.config.WE_shutterDownSleep) === (astroTimeSleepDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep === astroTimeSleepDown) {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 5;
 
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) > (adapter.config.W_shutterDownSleep)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown > adapter.config.W_shutterDownSleep) {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 debugCnt = 6;
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) < (adapter.config.W_shutterDownSleep)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown < adapter.config.W_shutterDownSleep) {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 7;
-            } else if ((dayStr < 5 || dayStr === 0) && (astroTimeSleepDown) === (adapter.config.W_shutterDownSleep)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown === adapter.config.W_shutterDownSleep) {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 8;
             }
@@ -1193,14 +1194,14 @@ function delayCalc() {
     const resultFull = shutterSettings; // Full Result
 
     if (resultFull) {
-        if ((upTimeLiving) === (upTimeSleep)) {
+        if (upTimeLiving === upTimeSleep) {
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living'); // Filter Area Living
             const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result) {
                 delayUp++;
             }
-            if ((autoLivingStr) === true) {
+            if (autoLivingStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living-auto'); // Filter Area Living
                 const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1210,7 +1211,7 @@ function delayCalc() {
             }
         }
 
-        if ((upTimeSleep) === (upTimeChildren)) {
+        if (upTimeSleep === upTimeChildren) {
             delayUpChildren = delayUp;
 
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep'); // Filter Area Sleep
@@ -1219,7 +1220,7 @@ function delayCalc() {
             for (const i in result) {
                 delayUpChildren++;
             }
-            if ((autoSleepStr) === true) {
+            if (autoSleepStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
                 const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1228,14 +1229,14 @@ function delayCalc() {
                 }
             }
         }
-        if ((downTimeLiving) === (downTimeSleep)) {
+        if (downTimeLiving === downTimeSleep) {
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living'); // Filter Area Living
             const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
             for (const i in result3) {
                 delayDown++;
             }
-            if ((autoLivingStr) === true) {
+            if (autoLivingStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living-auto'); // Filter Area Living
                 const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1245,7 +1246,7 @@ function delayCalc() {
             }
         }
 
-        if ((downTimeSleep) === (downTimeChildren)) {
+        if (downTimeSleep === downTimeChildren) {
             delayDownChildren = delayDown;
 
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep'); // Filter Area Sleep
@@ -1255,7 +1256,7 @@ function delayCalc() {
                 delayDownChildren++;
             }
 
-            if ((autoSleepStr) === true) {
+            if (autoSleepStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
                 const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
 
@@ -1791,9 +1792,9 @@ function main(adapter) {
         for (const s in shutterSettings) {
             adapter.getForeignState(shutterSettings[s].name, (state) => {
                 if (typeof state != undefined && state != null) {
-                    shutterSettings[s].currentHeight = (state.val);
-                    shutterSettings[s].oldHeight = (state.val);
-                    shutterSettings[s].triggerHeight = (state.val);
+                    shutterSettings[s].currentHeight = state.val;
+                    shutterSettings[s].oldHeight = state.val;
+                    shutterSettings[s].triggerHeight = state.val;
 
                     adapter.log.debug('save current height: ' + shutterSettings[s].currentHeight + '%' + ' from ' + shutterSettings[s].shutterName);
 

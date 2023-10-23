@@ -46,6 +46,12 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Saturday added as work week
+* (simatec) Dependencies updated
+* (simatec) Fix Auto-Living, Auto-Sleep & Auto-Children
+* (simatec) Timeout Fix
+
 ### 1.6.2 (2023-08-28)
 * (simatec) Dependencies updated
 * (simatec) node 20 tests added
