@@ -1044,14 +1044,13 @@ function shutterDriveCalc() {
             } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 5;
-
-            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 debugCnt = 6;
-            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 7;
-            } else if ((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 8;
             }
@@ -1083,7 +1082,6 @@ function shutterDriveCalc() {
             } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && adapter.config.WE_shutterDownChildren === astroTimeChildrenDown) {
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 5;
-
             } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown > adapter.config.W_shutterDownChildren) {
                 downTimeChildren = adapter.config.W_shutterDownChildren;
                 debugCnt = 6;
@@ -1121,7 +1119,6 @@ function shutterDriveCalc() {
             } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep === astroTimeSleepDown) {
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 5;
-
             } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown > adapter.config.W_shutterDownSleep) {
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 debugCnt = 6;
