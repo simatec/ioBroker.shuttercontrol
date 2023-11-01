@@ -1,5 +1,4 @@
 ![Logo](img/shuttercontrol.png)
-# Shuttercontrol - Adapter zur automatischen Rollladensteuerung
 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
@@ -7,7 +6,6 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
 [![Known Vulnerabilities](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol/badge.svg)](https://snyk.io/test/github/simatec/ioBroker.shuttercontrol)
 
-[![Travis-CI](http://img.shields.io/travis/simatec/ioBroker.shuttercontrol/master.svg)](https://travis-ci.org/simatec/ioBroker.shuttercontrol)
 ![Test and Release](https://github.com/simatec/ioBroker.shuttercontrol/workflows/Test%20and%20Release/badge.svg)
 [![License](https://img.shields.io/github/license/simatec/ioBroker.shuttercontrol?style=flat)](https://github.com/simatec/ioBroker.shuttercontrol/blob/master/LICENSE)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue?style=flat)](https://paypal.me/mk1676)
@@ -18,35 +16,13 @@
   
 [![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mk1676)
 
-# Inhalt
-* [Grundlegendes](#grundlegendes) 
-* [Installation](#installation)
-* [Konfiguration](#konfiguration)
-	* [HAUPTEINSTELLUNGEN](#haupteinstellungen)
- 		* [Adapterkonfiguration sichern oder hochladen](#adapterkonfiguration-sichern-oder-hochladen)
-	* [ZEIT-EINSTELLUNGEN](#zeit-einstellungen)
-	* [EXTRA-EINSTELLUNGEN](#extra-einstellungen)
-		* [Astro-Einstellungen](#astro-einstellungen)
-		* [Sommer-Einstellungen](#sommer-einstellungen)
-		* [Weihnachtseinstellungen](#weihnachtseinstellungen)
- 		* [Urlaubs- und Feiertagseinstellungen](#urlaubs--und-feiertagseinstellungen)
-  		* [Einstellungen Helligkeitssensor](#einstellungen-helligkeitssensor)
-  		* [Schulferien Einstellungen](#schulferien-einstellungen)
-  		* [Sonderzeiten](#sonderzeiten)
-  		* [Extra-Einstellungen](#extra-einstellungen)
-	 	* [Alarm-Einstellungen](#alarm-einstellungen)
-	* [Rollladeneinstellungen](#rollladeneinstellungen)
-		* [Haupteinstellungen Rollladen](#haupteinstellungen-rollladen)
-		* [Sonnenschutz-Einstellungen](#sonnenschutz-einstellungen)
-		* [Extra-Einstellungen](#extra-einstellungen-rollladen)
-* [Datenpunkte](#datenpunkte)
-	* [shuttercontrol.0.control](#shuttercontrol0control)
-	* [shuttercontrol.0.info](#shuttercontrol0info)
-	* [shuttercontrol.0.shutters](#shuttercontrol0shutters)
 
-## Grundlegendes
+---
 
->:grey_exclamation: Die Anleitung ist gültig für Version stable 1.6.2 :grey_exclamation:
+
+# Grundlegendes
+
+>:grey_exclamation: Die Anleitung ist gültig ab Version stable 1.6.2 :grey_exclamation:
 
 Shuttercontrol ist ein Adapter für eine sehr umfangreiche Steuerung von Rollläden,
 Jalousien oder Markisen und umfasst sowohl die automatische Beschattung als auch
@@ -78,35 +54,44 @@ anbieten, können unter Verwendung von zwei Rollladenobjekten mit gleicher Param
 werden.
 
 
+---
 
-## Installation
+
+# Installation
 Der Adapter befindet sich im "stable" Verwahrungsort von ioBroker. Im Reiter "Adapter" wird dann 
 "shuttercontrol" ausgewählt und über (+) eine Instanz des Shuttercontrol-Adapters erzeugt.
 
-## Konfiguration
+# Konfiguration
 Nach der Erstellung der Instanz öffnet sich automatisch das Konfigurationsfenster mit den 
 Reitern HAUPTEINSTELLUNGEN, ZEIT-EINSTELLUNGEN und EXTRA-EINSTELLUNGEN.
 
 >:point_right: Die Reiter [Zeit-Einstellungen][] und [Extra-Einstellungen][] sollten zuerst bearbeitet werden, 
 also bevor Rollläden über den Bleistift in den HAUPTEINSTELLUNGEN hinzugefügt werden.
 
-### HAUPTEINSTELLUNGEN
+
+---
+
+
+## HAUPTEINSTELLUNGEN
 
 
 ![main](img/main.png)
 ---
 >:point_right: Über das Fragezeichen oben rechts (7), kann die Dokumentation auf github erreicht werden.
 
-#### Adapterkonfiguration sichern oder hochladen
+### Adapterkonfiguration sichern oder hochladen
 
 Oben rechts kann mit klicken auf den Pfeil nach unten(9) die Adapterkonfiguration als .json Datei gesichert werden.  
 Mit klicken auf den Pfeil nach oben (8) kann eine vorhandene Adapterkonfiguration im .json Format hochgeladen werden.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-### ZEIT-EINSTELLUNGEN
+
+## ZEIT-EINSTELLUNGEN
 Hier werden grundlegende Zeit- bzw. Astro Einstellungen vorgenommen, die später in
 den [Rollladeneinstellungen][] für jeden Rollladen verwendet werden.
 
@@ -116,7 +101,7 @@ und **Sonntags** immer zur eingestellten Zeit der **Arbeitswoche** :heavy_exclam
 
 ![timeSettings](img/timeSettings.png)
 
-#### Einstellungen für den Wohnbereich, Schlafbereich und Kinderbereich
+### Einstellungen für den Wohnbereich, Schlafbereich und Kinderbereich
 Über Dropdown werden die einzelnen Einstellungen geöffnet. Die Beschreibung ist exemplarisch für den Wohnbereich beschrieben und gilt analog
 für alle Bereiche.
 
@@ -157,14 +142,16 @@ Stand noch nicht überschritten hat, muss diese Zeit auf den spätesten
 Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-### EXTRA-EINSTELLUNGEN
+## EXTRA-EINSTELLUNGEN
 
 ![KonfigExtra](img/KonfigExtra.png)
 
-#### Astro-Einstellungen
+### Astro-Einstellungen
 
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
@@ -184,10 +171,12 @@ um den sich die Rollladenfahrten von der in der [Zeit-Einstellungen][] ausgewäh
 kann hier eine globale Zeitverzögerung in Sekunden eingestellt werden.*
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Sommer-Einstellungen
+### Sommer-Einstellungen
 
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
@@ -196,10 +185,12 @@ kann hier eine globale Zeitverzögerung in Sekunden eingestellt werden.*
 Unter [Rollladen-Einstellungen][] des jeweiligen Rolladens wird dann durch setzen der Checkbox bei ```Rollladen im Sommer nicht schließen``` verhindert, das dieser Rollladen im Sommer schließt.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Weihnachtseinstellungen
+### Weihnachtseinstellungen
 
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
@@ -210,10 +201,12 @@ die zu dieser Zeit gewünschte Funktion eingeschaltet und
 die gewünschte Rollladenposition festgelegt.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Urlaubs- und Feiertagseinstellungen
+### Urlaubs- und Feiertagseinstellungen
 
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
@@ -226,10 +219,12 @@ die gewünschte Rollladenposition festgelegt.
 Hier kann z.Bsp. ein Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert ```true``` liefert und damit die Rollläden zu den Wochenendzeiten fahren lässt.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Einstellungen Helligkeitssensor
+### Einstellungen Helligkeitssensor
 
 ![extraSettingsBrightnesssensor](img/ExtraSettingsBrightnesssensor.png)
 
@@ -245,10 +240,12 @@ beim Punkt **Art der Steuerung für schließen (bzw. öffnen) des Rollladens**, 
 **Objekt-ID des Helligkeitssensors** *Der Verweis auf den Helligkeitssensor, z.B. von einer Wetterstation oder von einem Bewegungsmelder im Außenbereich oder separaten Helligkeitssensor*
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Schulferien Einstellungen
+### Schulferien Einstellungen
 
 ![extraSettingsSchoolholidays](img/ExtraSettingsSchoolholidays.png)
 
@@ -257,10 +254,12 @@ Die Rollläden öffnen dann in der Ferienzeit zu den eingestellten Zeiten für d
 Der Ferienbetrieb kann für jeden Bereich einzeln aktiviert werden.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Sonderzeiten
+### Sonderzeiten
 
 ![extraSettingsSonder](img/ExtraSettingsSonder.png)
 
@@ -280,10 +279,12 @@ bei **Rollladen spät schließen** separat aktiviert bzw. falls nicht gewünscht
 abgelaufen ist.*
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Extra-Einstellungen
+### Extra-Einstellungen
 
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
@@ -304,7 +305,7 @@ Hier kann die Postition der Rolllläden in 5er oder 10er Schritten gerundet werd
 **Objekt ID des Triggers für den Kinderbereich (Auto):** *Mit diesem Auslöser wird der Automodus des Kinderbereichs aktiviert.*
 
 ---
-#### Alarm-Einstellungen
+### Alarm-Einstellungen
 
 ![extraSettingsAlarm](img/ExtraSettingsAlarm.png)
 
@@ -340,10 +341,12 @@ Beim deaktivieren der einzelnen Alarme wird aber auf folgende Priorität geachte
 Der Frost Alarm wirkt sich nur dann direkt aus, wenn die aktivierten Rollos bereits geschlossen sind (Gefahr von Festfrieren des Rollos). Wenn der Frostalarm bei noch offenem Rollladen ausgelöst wird, fährt der Rollladen beim Schliessen automatisch nur auf die für Frostalarm eingestelle Höhe. 
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-### Rollladeneinstellungen
+## Rollladeneinstellungen
 
 
 ![main1](img/main1.png)
@@ -388,7 +391,7 @@ jeder Rollladen einzeln weiter konfiguriert.
 
 ---
 
-#### Haupteinstellungen Rollladen
+### Haupteinstellungen Rollladen
 
 ![mainShutter.png](img/mainShutter.png)
 
@@ -485,10 +488,12 @@ bei Türen um durchgehen zu können.*
 
 
 
-* [zurück zum Inhaltsverzeichnis][]  
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Sonnenschutz-Einstellungen
+### Sonnenschutz-Einstellungen
 ![sunProtect](img/mainSunprotect.png)
 
 **Art der Sonnenschutzsteuerung:**  
@@ -560,14 +565,16 @@ Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem di
 Ist kein Innensensor als Auslöser gewählt, dieses Feld leer lassen.
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-#### Extra-Einstellungen Rollladen
+### Extra-Einstellungen Rollladen
 
 ![mainExtra](img/mainExtra.png)
 
-##### Rollladen-Einstellungen
+### Rollladen-Einstellungen
 
 ![mainExtraShutterSettings](img/mainExtraShutterSettings.png)
 
@@ -587,7 +594,7 @@ Position gefahren.
 > :point_right: Dies funktioniert nur, wenn der Aussperrschutz nicht auf "Aus" steht! 
 
 
-##### Weihnachtseinstellungen
+### Weihnachtseinstellungen
 
 ![mainExtraChristmas](img/mainExtraChristmas.png)
 
@@ -605,7 +612,7 @@ eingestellt.
 > verwendet werden.  
 > :point_right: Diese beiden Optionen sind auch unabhängig von den Weihnachtseinstellungen verwendbar.
 
-##### Sonnenschutz-Einstellungen
+### Sonnenschutz-Einstellungen
 
 ![mainExtraSun](img/mainExtraSun.png)
 
@@ -626,7 +633,7 @@ automatisch angefahrenen, setzt die Automatik aus!
 
 > :point_right: Wird der Rollladen manuell in die konfigurierte Höhe für öffnen, schließen oder Sonnenschutz gefahren, bleibt die Automatik allerdings bestehen.
 
-##### Extra-Einstellungen
+### Extra-Einstellungen
 ![mainExtraExtra](img/mainExtraExtra.png)
 
 **Rollladen Verzögerung bei Fenster öffnen (s)** *Parameter um das Öffnen des Rollladens zu verzögern, nachdem das Fenster/Türe geöffnet wurde (in Sekunden)*
@@ -635,17 +642,19 @@ automatisch angefahrenen, setzt die Automatik aus!
 
 **In Zwischenposition fahren und später komplett schliessen** *Bei Aktivierung wird **Rollladenhöhe in der Zwischenposition** sichtbar. Der Rollladen fährt dann beim Schließen in die eingestellte Zwischenposition und schließt später komplett*
 
-##### Alarm Einstellung
+### Alarm Einstellung
 ![mainExtraAlarm](img/mainExtraAlarm.png)
 
 Hier werden die über [Alarm-Einstellungen][] vordefinierten Alarme für den aktuellen Rollladen aktiviert oder deaktiviert. 
 
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-## Datenpunkte
+# Datenpunkte
 Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 * shuttercontrol.x.control
 * shuttercontrol.x.info
@@ -654,7 +663,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 > :point_right: x steht für die jeweilig installierte Instanz
 
 ---
-### shuttercontrol0control
+## shuttercontrol0control
 
 ![datapointscontrol](img/datapointscontrol.png)
 
@@ -720,21 +729,26 @@ Button um **alle** Rollläden im Wohnbereich zu öffnen
 *Button um die Rollläden im Schlafbereich in die Sonnenschutzposition zu fahren*
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
-### shuttercontrol0info
+
+## shuttercontrol0info
 Datenpunkte zur Anzeige berechneter Werte und zur Überprüfung von konfigurierten
 Zeiten:
 
 ![datapointsinfo](img/datapointsinfo.png)
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
+
+
 ---
 
 
-### shuttercontrol0shutters
+## shuttercontrol0shutters
 ![datapointsshutters](img/datapointsshutters.png)
 
 * autoDown  
@@ -756,32 +770,5 @@ bzw. mit ```true```aktiviert werden.*
 bzw. mit ```true```aktiviert werden.*
 
 
-* [zurück zum Inhaltsverzeichnis][]
+_[Zurück zum Anfang](#top)_
 
-
-[zurück zum Inhaltsverzeichnis]: #Inhalt
-[Grundlegendes]: #grundlegendes 
-[Installation]: #installation
-[Konfiguration]: #konfiguration
-[HAUPTEINSTELLUNGEN]: #haupteinstellungen
-[ZEIT-EINSTELLUNGEN]: #zeit-einstellungen
-[EXTRA-EINSTELLUNGEN]: #extra-einstellungen
-[Astro-Einstellungen]: #astro-einstellungen
-[Sommer-Einstellungen]: #sommer-einstellungen
-[Weihnachtseinstellungen]: #weihnachtseinstellungen
-[Urlaubs- und Feiertagseinstellungen]: #urlaubs--und-feiertagseinstellungen
-[Einstellungen Helligkeitssensor]: #einstellungen-helligkeitssensor
-[Schulferien Einstellungen]: #schulferien-einstellungen
-[Sonderzeiten]: #sonderzeiten
-[Extra-Einstellungen]: #extra-einstellungen
-[Alarm-Einstellungen]: #alarm-einstellungen
-[Rollladeneinstellungen]: #rollladeneinstellungen
-[Haupteinstellungen Rollladen]: #haupteinstellungen-rollladen
-[Sonnenschutz-Einstellungen]: #sonnenschutz-einstellungen
-[Extra-Einstellungen Rollladen]: #extra-einstellungen-rollladen
-[Rollladen-Einstellungen]: #rollladen-einstellungen
-[Alarm Einstellung]: #alarm-einstellung
-[Datenpunkte]: #datenpunkte
-[shuttercontrol.0.control]: #shuttercontrol0control
-[shuttercontrol.0.info]: #shuttercontrol0info
-[shuttercontrol.0.shutters]: #shuttercontrol0shutters
