@@ -24,7 +24,7 @@
     "node": ">=16.0.0"
   },  
   "dependencies": {
-    "@iobroker/adapter-core": "^3.0.3",
+    "@iobroker/adapter-core": "^3.0.4",
     "node-schedule": "^2.1.1",
     "suncalc": "^1.9.0"
   },
