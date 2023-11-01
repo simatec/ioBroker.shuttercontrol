@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shuttercontrol",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Automatic control for shutters",
   "author": {
     "name": "simatec",
@@ -22,7 +22,7 @@
   },
   "engines": {
     "node": ">=16.0.0"
-  },  
+  },
   "dependencies": {
     "@iobroker/adapter-core": "^3.0.4",
     "node-schedule": "^2.1.1",
