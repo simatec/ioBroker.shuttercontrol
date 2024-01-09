@@ -145,6 +145,7 @@
     "materialize": true,
     "connectionType": "local",
     "dataSource": "push",
+    "tier": 2,
     "stopBeforeUpdate": true,
     "dependencies": [
       {
