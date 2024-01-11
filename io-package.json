@@ -131,6 +131,10 @@
       "Jalousie",
       "Rollladensteuerung"
     ],
+    "docs": {
+      "en": "docs/en/shuttercontrol.md",
+      "de": "docs/de/shuttercontrol.md"
+    },
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "main": "main.js",
