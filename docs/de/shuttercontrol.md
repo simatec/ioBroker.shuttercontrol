@@ -85,7 +85,7 @@ Oben rechts kann mit klicken auf den Pfeil nach unten(9) die Adapterkonfiguratio
 Mit klicken auf den Pfeil nach oben (8) kann eine vorhandene Adapterkonfiguration im .json Format hochgeladen werden.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -142,7 +142,7 @@ Stand noch nicht überschritten hat, muss diese Zeit auf den spätesten
 Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -171,7 +171,7 @@ um den sich die Rollladenfahrten von der in der [Zeit-Einstellungen][] ausgewäh
 kann hier eine globale Zeitverzögerung in Sekunden eingestellt werden.*
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -185,7 +185,7 @@ _[Zurück zum Anfang](#top)_
 Unter [Rollladen-Einstellungen][] des jeweiligen Rolladens wird dann durch setzen der Checkbox bei ```Rollladen im Sommer nicht schließen``` verhindert, das dieser Rollladen im Sommer schließt.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -201,7 +201,7 @@ die zu dieser Zeit gewünschte Funktion eingeschaltet und
 die gewünschte Rollladenposition festgelegt.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -219,7 +219,7 @@ _[Zurück zum Anfang](#top)_
 Hier kann z.Bsp. ein Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert ```true``` liefert und damit die Rollläden zu den Wochenendzeiten fahren lässt.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -240,7 +240,7 @@ beim Punkt **Art der Steuerung für schließen (bzw. öffnen) des Rollladens**, 
 **Objekt-ID des Helligkeitssensors** *Der Verweis auf den Helligkeitssensor, z.B. von einer Wetterstation oder von einem Bewegungsmelder im Außenbereich oder separaten Helligkeitssensor*
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -254,7 +254,7 @@ Die Rollläden öffnen dann in der Ferienzeit zu den eingestellten Zeiten für d
 Der Ferienbetrieb kann für jeden Bereich einzeln aktiviert werden.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -279,7 +279,7 @@ bei **Rollladen spät schließen** separat aktiviert bzw. falls nicht gewünscht
 abgelaufen ist.*
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -341,7 +341,7 @@ Beim deaktivieren der einzelnen Alarme wird aber auf folgende Priorität geachte
 Der Frost Alarm wirkt sich nur dann direkt aus, wenn die aktivierten Rollos bereits geschlossen sind (Gefahr von Festfrieren des Rollos). Wenn der Frostalarm bei noch offenem Rollladen ausgelöst wird, fährt der Rollladen beim Schliessen automatisch nur auf die für Frostalarm eingestelle Höhe. 
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -488,7 +488,7 @@ bei Türen um durchgehen zu können.*
 
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -565,7 +565,7 @@ Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem di
 Ist kein Innensensor als Auslöser gewählt, dieses Feld leer lassen.
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -649,7 +649,7 @@ Hier werden die über [Alarm-Einstellungen][] vordefinierten Alarme für den akt
 
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -729,7 +729,7 @@ Button um **alle** Rollläden im Wohnbereich zu öffnen
 *Button um die Rollläden im Schlafbereich in die Sonnenschutzposition zu fahren*
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -742,7 +742,7 @@ Zeiten:
 ![datapointsinfo](img/datapointsinfo.png)
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 
 
 ---
@@ -770,5 +770,5 @@ bzw. mit ```true```aktiviert werden.*
 bzw. mit ```true```aktiviert werden.*
 
 
-_[Zurück zum Anfang](#top)_
+_[Zurück zum Anfang](#start-of-content)_
 

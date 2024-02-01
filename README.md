@@ -48,6 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
 * (simatec) Dependencies updated
+* (simatec) @iobroker/adapter-dev added
 
 ### 1.6.3 (2023-11-01)
 * (simatec) Saturday added as work week
