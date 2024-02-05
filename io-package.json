@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.6.3",
+    "version": "1.7.0",
     "news": {
+      "1.7.0": {
+        "en": "Dependencies updated\n@iobroker/adapter-dev added\nDesign optimizations\nGulp deleted\nDocu updated\nmany small fixes",
+        "de": "Ausgaben aktualisiert\n@iobroker/adapter-dev hinzugefügt\nDesignoptimierungen\nGulp gelöscht\nDocu aktualisiert\nviele kleine fixierungen",
+        "ru": "Обновленные данные о зависимостях\n@iobroker/adapter-dev\nОптимизация дизайна\nУдалить\nDocu\nмного небольших исправлений",
+        "pt": "Dependências atualizadas\n@iobroker/adapter-dev adicionado\nOtimizações de design\nGulp excluído\nDocu atualizado\nmuitas pequenas correções",
+        "nl": "Afhankelijkheden bijgewerkt\n@iobroker/adapter-dev toegevoegd\nOntwerpoptimalisaties\nGulp verwijderd\nDocu bijgewerkt\nveel kleine fixes",
+        "fr": "Dépendances actualisées\n@iobroker/adaptateur-dev ajouté\nOptimisations de conception\nGulp supprimé\nDocu mis à jour\nde nombreuses petites corrections",
+        "it": "Dipendenze aggiornate\n@iobroker/adapter-dev aggiunto\nOttimizzazione del design\nGulp cancellato\nDocu aggiornato\nmolte piccole correzioni",
+        "es": "Actualización de las dependencias\n@iobroker/adapter-dev añadido\nOptimizaciones de diseño\nGulp eliminado\nDocu actualizado\nmuchos pequeños arreglos",
+        "pl": "Aktualizacja zależności\n@ iobroker / adapter- dev dodany\nOptymalizacja projektu\nGulp usunięty\nAktualizacja doku\nwiele małych poprawek",
+        "uk": "Залежність оновлено\n@iobroker/adapter-dev додано\nОптимізація дизайну\nВідхилити\nDocu оновлений\nбагато маленьких фіксаторів",
+        "zh-cn": "更新的依赖关系\n@iobroduc/adapter-dev 添加到\n设计优化\nGulp 已删除\n更新 Docu\n许多小修正"
+      },
       "1.6.3": {
         "en": "Saturday added as work week\nDependencies updated\nFix Auto-Living, Auto-Sleep & Auto-Children\nTimeout Fix\nUpdate German Docu\nWiki added",
         "de": "Samstag hinzugefügt als Arbeitswoche\nAusgaben aktualisiert\nAuto-Living, Auto-Sleep & Auto-Children\nTimeout Fix\nDeutsche Docu aktualisieren\nWiki hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Bugfix Bright",
         "uk": "Bugfix Яскравість вниз",
         "zh-cn": "Bugfix Brightim"
-      },
-      "1.4.28": {
-        "en": "small Fixes",
-        "de": "kleine Feste",
-        "ru": "небольшие исправления",
-        "pt": "pequenas correções",
-        "nl": "kleine Fixes",
-        "fr": "petits Fixes",
-        "it": "piccoli corredi",
-        "es": "pequeñas fijaciones",
-        "pl": "mały Fisz",
-        "uk": "маленькі Фікси",
-        "zh-cn": "小型固定"
       }
     },
     "titleLang": {
