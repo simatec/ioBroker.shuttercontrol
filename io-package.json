@@ -95,7 +95,6 @@
         "zh-cn": "小型固定"
       }
     },
-    "title": "shuttercontrol",
     "titleLang": {
       "en": "shuttercontrol",
       "de": "Rolladensteuerung",
@@ -106,6 +105,7 @@
       "it": "otturatore",
       "es": "obturador",
       "pl": "migawka",
+      "uk": "керування затвором",
       "zh-cn": "快门"
     },
     "desc": {
@@ -118,18 +118,25 @@
       "it": "Controllo automatico per tapparelle",
       "es": "Control automático de persianas.",
       "pl": "Automatyczne sterowanie żaluzjami",
+      "uk": "Автоматичне керування ролетами",
       "zh-cn": "百叶窗的自动控制"
     },
     "authors": [
       "simatec <shuttercontrol@simateccloud.de>"
     ],
     "keywords": [
-      "ioBroker",
-      "Smart Home",
       "home automation",
       "Rollladen",
       "Jalousie",
-      "Rollladensteuerung"
+      "Rollladensteuerung",
+      "shutter",
+      "Homematic",
+      "Sunprotec",
+      "Sonnenschutz",
+      "Astro",
+      "Elevation",
+      "Sonneuntergang",
+      "Sonnenaufgang"
     ],
     "docs": {
       "en": "docs/en/shuttercontrol.md",

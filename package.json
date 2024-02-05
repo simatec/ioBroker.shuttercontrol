@@ -9,12 +9,18 @@
   "homepage": "https://github.com/simatec/ioBroker.shuttercontrol",
   "license": "MIT",
   "keywords": [
-    "ioBroker",
-    "Smart Home",
     "home automation",
     "Rollladen",
     "Jalousie",
-    "Rollladensteuerung"
+    "Rollladensteuerung",
+    "shutter",
+    "Homematic",
+    "Sunprotec",
+    "Sonnenschutz",
+    "Astro",
+    "Elevation",
+    "Sonneuntergang",
+    "Sonnenaufgang"
   ],
   "repository": {
     "type": "git",
