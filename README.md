@@ -49,6 +49,10 @@ When the adapter crashes or an other Code error happens, this error message that
 ### __WORK IN PROGRESS__
 * (simatec) Dependencies updated
 * (simatec) @iobroker/adapter-dev added
+* (simatec) Design optimizations
+* (simatec) Gulp deleted
+* (simatec) Docu updated
+* (simatec) many small fixes
 
 ### 1.6.3 (2023-11-01)
 * (simatec) Saturday added as work week
