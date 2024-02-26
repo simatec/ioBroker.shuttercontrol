@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Dependencies updated
+
 ### 1.7.0 (2024-02-05)
 * (simatec) Dependencies updated
 * (simatec) @iobroker/adapter-dev added
