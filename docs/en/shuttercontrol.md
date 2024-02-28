@@ -1,5 +1,7 @@
 ![Logo](img/shuttercontrol.png)
 
+# Documentation and instructions for Shuttercontrol
+
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-stable.svg)
 [![NPM version](http://img.shields.io/npm/v/iobroker.shuttercontrol.svg)](https://www.npmjs.com/package/iobroker.shuttercontrol)
@@ -11,7 +13,9 @@
 [![Donate](https://img.shields.io/badge/donate-paypal-blue?style=flat)](https://paypal.me/mk1676)
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/simatec)
 
+---
 
+## Support adapter development
 **If you like the adapter, please consider making a donation:**
   
 [![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mk1676)
@@ -20,7 +24,7 @@
 ---
 
 
-# Basics
+## Basics
 
 >:grey_exclamation: The manual is valid from version stable 1.6.2 :grey_exclamation:
 
@@ -57,11 +61,11 @@ be used.
 ---
 
 
-# Installation
+## Installation
 The adapter is located in the "stable" repository of ioBroker. In the "Adapter" tab 
 "shuttercontrol" is selected and an instance of the shuttercontrol adapter is created via (+).
 
-# Configuration
+## Configuration
 After the creation of the instance, the configuration window opens automatically with the 
 tabs MAIN SETTINGS, TIME SETTINGS and EXTRA SETTINGS.
 
@@ -72,14 +76,14 @@ i.e. before shutters are added via the pencil in the MAIN SETTINGS.
 ---
 
 
-## MAIN SETTINGS
+### MAIN SETTINGS
 
 
 ![main](img/main.png)
 ---
 >:point_right: The documentation on github can be accessed via the question mark at the top right (7).
 
-### Save or upload adapter configuration
+#### Save or upload adapter configuration
 
 Click on the arrow pointing downwards (9) in the top right-hand corner to save the adapter configuration as a .json file.  
 Click on the up arrow (8) to upload an existing adapter configuration in .json format.
@@ -91,7 +95,7 @@ _[Back to top](#start-of-content)_
 ---
 
 
-## TIME SETTINGS
+### TIME SETTINGS
 Basic time or Astro settings are made here, which are later used in the [Shutter settings][] for each shutter.
 the [Shutter settings][] for each shutter.
 
@@ -101,7 +105,7 @@ and **Sundays** always at the set time of the **working week** :heavy_exclamatio
 
 ![timeSettings](img/timeSettings.png)
 
-### Settings for the living area, sleeping area and children's area
+#### Settings for the living area, sleeping area and children's area
 The individual settings are opened via dropdown. The description is given as an example for the living area and applies analogously to all areas.
 for all areas.
 
@@ -147,11 +151,11 @@ _[Back to top](#start-of-content)_
 
 ---
 
-## EXTRA SETTINGS
+### EXTRA SETTINGS
 
 ![ConfigExtra](img/KonfigExtra.png)
 
-### Astro settings
+#### Astro settings
 
 ![extraSettingsAstro](img/ExtraSettingsAstro.png)
 
@@ -175,7 +179,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Summer settings
+#### Summer settings
 
 ![extraSettingsSummer](img/ExtraSettingsSummer.png)
 
@@ -189,7 +193,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Christmas settings
+#### Christmas settings
 
 ![extraSettingsChristmas](img/ExtraSettingsChristmas.png)
 
@@ -205,7 +209,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Holiday and public holiday settings
+#### Holiday and public holiday settings
 
 ![extraSettingsHolidays](img/ExtraSettingsHolidays.png)
 
@@ -223,7 +227,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Brightness Sensor Settings
+#### Brightness Sensor Settings
 
 ![extraSettingsBrightnesssensor](img/ExtraSettingsBrightnesssensor.png)
 
@@ -244,7 +248,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### School Holidays Settings
+#### School Holidays Settings
 
 ![extraSettingsSchoolholidays](img/ExtraSettingsSchoolholidays.png)
 
@@ -258,7 +262,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Special times
+#### Special times
 
 ![extraSettingsSonder](img/ExtraSettingsSonder.png)
 
@@ -282,7 +286,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Extra settings
+#### Extra settings
 
 ![extraSettingsExtra](img/ExtraSettingsExtra.png)
 
@@ -303,7 +307,7 @@ Here the position of the roller shutters can be rounded in steps of 5 or 10.
 **Object ID of the trigger for the children's area (Auto):** *This trigger activates the children's area's Auto mode.
 
 ---
-### Alarm settings
+#### Alarm settings
 
 ![extraSettingsAlarm](img/ExtraSettingsAlarm.png)
 
@@ -344,7 +348,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-## Shutter settings
+### Shutter settings
 
 
 ![main1](img/main1.png)
@@ -389,7 +393,7 @@ each shutter is further configured individually.
 
 ---
 
-### Main shutter settings
+#### Main shutter settings
 
 ![mainShutter.png](img/mainShutter.png)
 
@@ -491,7 +495,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Sun protection settings
+#### Sun protection settings
 ![sunProtect](img/mainSunprotect.png)
 
 **Type of sun protection control:**
@@ -568,11 +572,11 @@ _[Back to top](#start-of-content)_
 
 ---
 
-### Extra settings roller shutter
+#### Extra settings roller shutter
 
 ![mainExtra](img/mainExtra.png)
 
-### Roller shutter settings
+#### Roller shutter settings
 
 ![mainExtraShutterSettings](img/mainExtraShutterSettings.png)
 
@@ -592,7 +596,7 @@ Position driven.
 > :point_right: This only works if the lockout protection is not set to "Off"!
 
 
-### Christmas Settings
+#### Christmas Settings
 
 ![mainExtraChristmas](img/mainExtraChristmas.png)
 
@@ -611,7 +615,7 @@ set.
 > :point_right: These two options can also be used independently of the Christmas settings.
 
 
-### Sun protection settings
+#### Sun protection settings
 
 ![mainExtraSun](img/mainExtraSun.png)
 
@@ -633,7 +637,7 @@ automatically, the automatic system stops!
 > :point_right: If the roller shutter is manually moved to the configured height for opening, closing or sun protection, the automatic function remains.
 
 
-### Extra settings
+#### Extra settings
 ![mainExtraExtra](img/mainExtraExtra.png)
 
 **Roller shutter delay when opening window (s)** *Parameter to delay opening of the roller shutter after the window/door has been opened (in seconds)*
@@ -642,7 +646,7 @@ automatically, the automatic system stops!
 
 **Move to intermediate position and later close completely** *When activated, **roller shutter height in the intermediate position** becomes visible. The roller shutter then moves to the set intermediate position when closing and later closes completely*
 
-### Alarm setting
+#### Alarm setting
 ![mainExtraAlarm](img/mainExtraAlarm.png)
 
 Here the alarms predefined for the current roller shutter via [Alarm Settings][] are activated or deactivated.
@@ -654,7 +658,7 @@ _[Back to top](#start-of-content)_
 
 ---
 
-# Data points
+## Data points
 Shuttercontrol creates various data points under the following folders:
 
 * shuttercontrol.x.control
@@ -666,7 +670,7 @@ Shuttercontrol creates various data points under the following folders:
 ---
 
 
-## shuttercontrol0control
+### shuttercontrol0control
 
 ![datapointscontrol](img/datapointscontrol.png)
 
@@ -738,7 +742,7 @@ _[Back to top](#start-of-content)_
 ---
 
 
-## shuttercontrol0info
+### shuttercontrol0info
 Data points for displaying calculated values and checking configured ones
 Times:
 
@@ -751,7 +755,7 @@ _[Back to top](#start-of-content)_
 ---
 
 
-## shuttercontrol0shutters
+### shuttercontrol0shutters
 ![datapointsshutters](img/datapointsshutters.png)
 
 * autoDown
