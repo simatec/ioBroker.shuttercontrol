@@ -13,7 +13,9 @@
 [![Donate](https://img.shields.io/badge/donate-paypal-blue?style=flat)](https://paypal.me/mk1676)
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/simatec)
 
+---
 
+## Unterstütze die Adapterentwicklung
 **Wenn Ihnen der Adapter gefällt, denken Sie bitte über eine Spende nach:**
   
 [![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mk1676)
@@ -67,7 +69,7 @@ Der Adapter befindet sich im "stable" Verwahrungsort von ioBroker. Im Reiter "Ad
 Nach der Erstellung der Instanz öffnet sich automatisch das Konfigurationsfenster mit den 
 Reitern HAUPTEINSTELLUNGEN, ZEIT-EINSTELLUNGEN und EXTRA-EINSTELLUNGEN.
 
->:point_right: Die Reiter [Zeit-Einstellungen][] und [Extra-Einstellungen][] sollten zuerst bearbeitet werden, 
+>:point_right: Die Reiter [Zeit-Einstellungen](#zeit-einstellungen) und [Extra-Einstellungen](#extra-einstellungen) sollten zuerst bearbeitet werden, 
 also bevor Rollläden über den Bleistift in den HAUPTEINSTELLUNGEN hinzugefügt werden.
 
 
@@ -87,7 +89,7 @@ Oben rechts kann mit klicken auf den Pfeil nach unten(9) die Adapterkonfiguratio
 Mit klicken auf den Pfeil nach oben (8) kann eine vorhandene Adapterkonfiguration im .json Format hochgeladen werden.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -95,7 +97,7 @@ _[Zurück zum Anfang](#start-of-content)_
 
 ### ZEIT-EINSTELLUNGEN
 Hier werden grundlegende Zeit- bzw. Astro Einstellungen vorgenommen, die später in
-den [Rollladeneinstellungen][] für jeden Rollladen verwendet werden.
+den [Rollladeneinstellungen](#rollladeneinstellungen) für jeden Rollladen verwendet werden.
 
 >:heavy_exclamation_mark: Shuttercontrol schließt Rollläden **Freitags** immer zur eingestellten Zeit vom **Wochenende**  
 und **Sonntags** immer zur eingestellten Zeit der **Arbeitswoche** :heavy_exclamation_mark:
@@ -144,7 +146,7 @@ Stand noch nicht überschritten hat, muss diese Zeit auf den spätesten
 Zeitpunkt dieses Sonnenstandes (am 21.12.) eingestellt werden.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -167,13 +169,13 @@ unterschreitet, endet die Beschattung durch Shuttercontrol.*
 kann hiermit berücksichtigt werden und die Beschattungsautomatik früher beenden.
 
 **Zeitverzögerung beim Hochfahren bzw. für das Herunterfahren (Minuten):** *Hier kann ein +/- Offset eingegeben werden,  
-um den sich die Rollladenfahrten von der in der [Zeit-Einstellungen][] ausgewählten Art der Automatiksteuerung verschieben soll.*
+um den sich die Rollladenfahrten von der in der [Zeit-Einstellungen](#zeit-einstellungen) ausgewählten Art der Automatiksteuerung verschieben soll.*
 
 **Zeitverzögerung für das versetzte Fahren der Rollläden (Sekunden):** *Damit nicht alle Rollläden gleichzeitig fahren,  
 kann hier eine globale Zeitverzögerung in Sekunden eingestellt werden.*
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -184,10 +186,10 @@ _[Zurück zum Anfang](#start-of-content)_
 
 **Beginn des Sommers** und **Ende des Sommers:** *Hier kann der Beginn bzw. Ende des Sommers nach eigenen Wünschen festgelegt werden.*
 
-Unter [Rollladen-Einstellungen][] des jeweiligen Rolladens wird dann durch setzen der Checkbox bei ```Rollladen im Sommer nicht schließen``` verhindert, das dieser Rollladen im Sommer schließt.
+Unter [Rollladen-Einstellungen](#rollladen-einstellungen) des jeweiligen Rolladens wird dann durch setzen der Checkbox bei ```Rollladen im Sommer nicht schließen``` verhindert, das dieser Rollladen im Sommer schließt.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -198,12 +200,12 @@ _[Zurück zum Anfang](#start-of-content)_
 
 **Beginn der Weihnachtszeit** und **Ende der Weihnachtszeit:** *Hier kann der Beginn bzw. Ende der Weihnachtszeit nach eigenen Wünschen festgelegt werden.*
 
-Unter [Extra-Einstellungen Rollladen][] Weihnachsteinstellungen wird
+Unter [Extra-Einstellungen Rollladen](#extra-einstellungen-rollladen) Weihnachsteinstellungen wird
 die zu dieser Zeit gewünschte Funktion eingeschaltet und
 die gewünschte Rollladenposition festgelegt.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -221,7 +223,7 @@ _[Zurück zum Anfang](#start-of-content)_
 Hier kann z.Bsp. ein Datenpunkt aus dem iCal-Adapter verwenden werden, der im Urlaubsfall den Wert ```true``` liefert und damit die Rollläden zu den Wochenendzeiten fahren lässt.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -232,7 +234,7 @@ _[Zurück zum Anfang](#start-of-content)_
 
 Sollen die Rolläden anhand eines Helligkeitssensors autom. gefahren werden, wird dieser hier konfiguriert.
 
-Die Aktivierung erfolgt anschließend für jeden Rollladen individuell unter [Haupteinstellungen Rollladen][] 
+Die Aktivierung erfolgt anschließend für jeden Rollladen individuell unter [Haupteinstellungen Rollladen](#haupteinstellungen-rollladen) 
 beim Punkt **Art der Steuerung für schließen (bzw. öffnen) des Rollladens**, indem dort der Eintrag "Helligkeitssensor" ausgewählt wird.
 
 **Helligkeitswert für das schließen mit Helligkeitssensor** *Helligkeitswert, ab dem die Rolläden geschlossen werden sollen.*
@@ -242,7 +244,7 @@ beim Punkt **Art der Steuerung für schließen (bzw. öffnen) des Rollladens**, 
 **Objekt-ID des Helligkeitssensors** *Der Verweis auf den Helligkeitssensor, z.B. von einer Wetterstation oder von einem Bewegungsmelder im Außenbereich oder separaten Helligkeitssensor*
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -256,7 +258,7 @@ Die Rollläden öffnen dann in der Ferienzeit zu den eingestellten Zeiten für d
 Der Ferienbetrieb kann für jeden Bereich einzeln aktiviert werden.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -272,7 +274,7 @@ oder die Tür noch offen war, oder wenn nach dem Herunterfahren z.Bsp. die Terra
 nochmal geöffnet wird.  
 Mit setzen des Hakens erscheint die Einstellung **Zeitpunkt, zu dem die dafür konfigurierten Rollläden spät schließen sollen**
 
-> Diese Funktion muss für jeden Rollladen bei den  [Rollladen-Einstellungen][] mit dem Haken
+> Diese Funktion muss für jeden Rollladen bei den  [Rollladen-Einstellungen](#rollladen-einstellungen) mit dem Haken
 bei **Rollladen spät schließen** separat aktiviert bzw. falls nicht gewünscht deaktiviert werden.
 
 **Alle Rollläden in der Zwischenpostition vollständig schließen** *Zeit, wann alle Rollläden abends vollständig geschlossen werden (z.Bsp. 22:00Uhr)*
@@ -281,7 +283,7 @@ bei **Rollladen spät schließen** separat aktiviert bzw. falls nicht gewünscht
 abgelaufen ist.*
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -314,7 +316,7 @@ Hier kann die Postition der Rolllläden in 5er oder 10er Schritten gerundet werd
 >:point_right: Zu jedem Alarm wird zur Ansteuerung ein logischer Datenpunkt (true/false) benötigt, 
 > der den **Alarm aktiviert** = Status **true** bzw. den **Alarm deaktiviert** = Status **false**.  
 >:point_right: Weiter muss zu jedem Alarm festgelegt werden, auf welche Höhe (0-100%) der Rollladen im Alarm-Fall fährt.  
->:point_right: Bei der [Alarm Einstellung][] des jeweiligen Rollladen wird dann definiert, auf welche Alarme der 
+>:point_right: Bei der [Alarm Einstellung](#alarm-einstellung) des jeweiligen Rollladen wird dann definiert, auf welche Alarme der 
 Rollladen reagieren soll.  
 
 
@@ -343,7 +345,7 @@ Beim deaktivieren der einzelnen Alarme wird aber auf folgende Priorität geachte
 Der Frost Alarm wirkt sich nur dann direkt aus, wenn die aktivierten Rollos bereits geschlossen sind (Gefahr von Festfrieren des Rollos). Wenn der Frostalarm bei noch offenem Rollladen ausgelöst wird, fährt der Rollladen beim Schliessen automatisch nur auf die für Frostalarm eingestelle Höhe. 
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -388,7 +390,7 @@ und kann danach nach eigenen Wünschen abgeändert werden.*
 
 
 Nach dem Anlegen der Rollläden wird durch das betätigen des Bleistifts (3) beim entsprechenden Rollladen mit den Reitern
-[HAUPTEINSTELLUNGEN Rollladen][], [SONNENSCHUTZ-EINSTELLUNGEN][] und [EXTRA-EINSTELLUNGEN][]  
+[HAUPTEINSTELLUNGEN Rollladen](#haupteinstellungen-rollladen), [SONNENSCHUTZ-EINSTELLUNGEN](#sonnenschutz-einstellungen) und [EXTRA-EINSTELLUNGEN](#sonnenschutz-einstellungen)  
 jeder Rollladen einzeln weiter konfiguriert.
 
 ---
@@ -399,7 +401,7 @@ jeder Rollladen einzeln weiter konfiguriert.
 
 Im oberen Bereich werden die Zeitpunkte für das Öffnen bzw. Schließen des Rollladens
 separat per Pulldown-Menü ausgewählt.
-> :point_right: Diese Zeiten wurden  bereits in  [Zeit-Einstellungen][] konfiguriert.
+> :point_right: Diese Zeiten wurden  bereits in  [Zeit-Einstellungen](#zeit-einstellungen) konfiguriert.
 
 Auswahlmöglichkeiten:
 * **Aus:** *keine Zeitvorgaben verwenden*
@@ -432,7 +434,7 @@ Steht dieser auf false wird der Rollladen **nicht** automatisch gefahren.*
 * **Golden Hour:** *Der Rollläden fährt zur Golden Hour, die je nach Breitengrad und Jahreszeit ca. 1 Stunde
 vor Sonnenuntergang bzw. nach Sonnenaufgang ist.*
 
-* **Helligkeitssensor:** *Der Rollladen fährt auschließlich nach dem Helligkeitssensor, der unter [Einstellungen Helligkeitssensor][] eingestellt wird.*
+* **Helligkeitssensor:** *Der Rollladen fährt auschließlich nach dem Helligkeitssensor, der unter [Einstellungen Helligkeitssensor](#einstellungen-helligkeitssensor) eingestellt wird.*
 
 * **nur manueller Betrieb:** *Der Rollladen kann nur manuell in die ausgewählte Richtung bewegt werden.
 :point_right: Über die Buttons unter ```shuttercontrol.0.control``` ist keine Bewegung möglich.  
@@ -490,7 +492,7 @@ bei Türen um durchgehen zu können.*
 
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -567,7 +569,7 @@ Die Hysterese ist der Unterschied zwischen dem oberen Temperaturwert, bei dem di
 Ist kein Innensensor als Auslöser gewählt, dieses Feld leer lassen.
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -582,12 +584,12 @@ _[Zurück zum Anfang](#start-of-content)_
 
 **Rollladen spät schliessen**  
 Mit dieser Option wird der Rollladen zu einer definierten Zeit (einstellbar in den 
-[Sonderzeiten][]) zusätzlich heruntergefahren.
+[Sonderzeiten](#sonderzeiten)) zusätzlich heruntergefahren.
 > :exclamation: Der Aussperrschutz wird hierbei nicht berücksichtigt und der Rollladen trotz offenem Fenster runter gefahren! (Aussperr Gefahr!!) :exclamation:
 
 **Rollladen im Sommer nicht schliessen**  
 Manche Rollläden sollen im Sommer nicht geschlossen werden. Der Zeitraum Sommer wird 
-in den [Sommer-Einstellungen][] festgelegt.
+in den [Sommer-Einstellungen](#sommer-einstellungen) festgelegt.
 
 **Fahren, nachdem Fenster geschlossen wurde**  
 Der Rollladen wird nach dem Schliessen des Fensters/Türe auf die zuletzt angeforderte 
@@ -607,7 +609,7 @@ auf einen einzustellenden Pegel gefahren.
 > :point_right: **Der Rollladenpegel zur Weihnachtszeit** ist nur dann sichtbar und einstellbar, 
 wenn der Haken für **Der Rollladenpegel zur Weihnachtszeit wird verwendet** gesetzt ist. 
 
-Der Zeitraum wann diese Funktion aktiviert sein soll, wird unter [Weihnachtseinstellungen][] 
+Der Zeitraum wann diese Funktion aktiviert sein soll, wird unter [Weihnachtseinstellungen](#weihnachtseinstellungen) 
 eingestellt. 
 > :point_right: Sollen später am Abend der Rollladen komplett geschlossen werden, kann die Option 
 > **Rollladen spät schliessen** oder **In Zwischenposition fahren und später komplett schliessen** 
@@ -647,11 +649,11 @@ automatisch angefahrenen, setzt die Automatik aus!
 #### Alarm Einstellung
 ![mainExtraAlarm](img/mainExtraAlarm.png)
 
-Hier werden die über [Alarm-Einstellungen][] vordefinierten Alarme für den aktuellen Rollladen aktiviert oder deaktiviert. 
+Hier werden die über [Alarm-Einstellungen](#alarm-einstellungen) vordefinierten Alarme für den aktuellen Rollladen aktiviert oder deaktiviert. 
 
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -731,7 +733,7 @@ Button um **alle** Rollläden im Wohnbereich zu öffnen
 *Button um die Rollläden im Schlafbereich in die Sonnenschutzposition zu fahren*
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -744,7 +746,7 @@ Zeiten:
 ![datapointsinfo](img/datapointsinfo.png)
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
 
 ---
@@ -772,5 +774,5 @@ bzw. mit ```true```aktiviert werden.*
 bzw. mit ```true```aktiviert werden.*
 
 
-_[Zurück zum Anfang](#start-of-content)_
+_[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
