@@ -209,7 +209,7 @@ function startAdapter(options) {
                 }
             });
             resSunOutsideTemp.forEach(async function (resSunOutsideTempID) {
-                if (id === resSunOutsideTempID && state.ts === state.lc) {
+                if (id === resSunOutsideTempID && state.ts === state.lc && state.val !== null) {
                     adapter.log.debug('outsidetemperature changed: ' + resSunOutsideTempID + ' Value: ' + state.val);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
