@@ -142,7 +142,10 @@
       "en": "docs/en/shuttercontrol.md",
       "de": "docs/de/shuttercontrol.md"
     },
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
     "main": "main.js",
     "icon": "shuttercontrol.png",
