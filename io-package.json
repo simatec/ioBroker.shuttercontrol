@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "news": {
+      "1.7.2": {
+        "en": "(simatec) Fix Shutterstate enabled",
+        "de": "(simatec) Fix Shutterstate aktiviert",
+        "ru": "Fix Shutterstate включен",
+        "pt": "(simatec) Fix Shutterstate habilitado",
+        "nl": "(simatec) Fix Shutterstate ingeschakeld",
+        "fr": "(simatec) Fix Shutterstate activé",
+        "it": "(simatec) Fix Shutterstate abilitato",
+        "es": "(simatec) Fijar Shutterstate habilitado",
+        "pl": "(simatec) Napraw stan wahadłowca włączony",
+        "uk": "(simatec) Fix Shutterstate включений",
+        "zh-cn": "(simatec) 固定关闭状态启用"
+      },
       "1.7.1": {
         "en": "(simatec) Dependencies updated\n(simatec) Docu updated",
         "de": "(simatec) Abhängigkeiten aktualisiert\n(simatec) Docu aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Manu\nOchrona Heat\nZamknięta ściana przedniej części tabeli stanowi ok\nJęzyk ukraiński\nmały Bugfix\nZależności",
         "uk": "Блок режимів Manu додано\nТеплозахист додано\nДодано округлення вхідних затворних станів\nУкраїнська мова\nмаленькі Бугфікси\nЗалежність оновлено",
         "zh-cn": "马努模式\n保护\n增加一轮穿梭州\n乌克兰语文\n小额Bugfix\nB. 更新的属地"
-      },
-      "1.5.0": {
-        "en": "new Manu-Mode Check added\nsuncalc added\nDependencies updated",
-        "de": "neue Manu-Mode Check hinzugefügt\nsuncalc hinzugefügt\nAusgaben aktualisiert",
-        "ru": "новый Manu-Mode Проверить добавлено\nsuncalc добавлено\nОбновленные зависимости",
-        "pt": "novo Manu-Mode Verificação adicionada\nadicionar ao cesto\nDependências atualizadas",
-        "nl": "nieuwe Manu-Mode Controle toegevoegd\nsuncalc toegevoegd\nAfhankelijkheid geüpdateerd",
-        "fr": "nouveau Manu-Mode Check added\nsuncalc ajouté\nDépendances mises à jour",
-        "it": "nuovo Manu-Mode Check aggiunto\nsuncalc aggiunto\nDipendenze aggiornate",
-        "es": "nuevo Manu-Mode Check añadido\nsuncalc añadido\nActualización de las dependencias",
-        "pl": "nowy Manu-Mode Check dodać\ndodać\nZależności",
-        "uk": "новий Manu-Mode Перевірити\nдодано сонце\nЗалежність оновлено",
-        "zh-cn": "新马努-马西 检查站\n日增\nB. 更新的属地"
       }
     },
     "titleLang": {

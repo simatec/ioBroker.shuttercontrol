@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.7.2 (2024-06-20)
 * (simatec) Fix Shutterstate enabled
 
 ### 1.7.1 (2024-06-19)
