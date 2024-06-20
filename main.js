@@ -1193,14 +1193,14 @@ function delayCalc() {
     if (resultFull) {
         if (upTimeLiving === upTimeSleep) {
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living'); // Filter Area Living
-            const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+            const result = resLiving.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result) {
                 delayUp++;
             }
             if (autoLivingStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living-auto'); // Filter Area Living
-                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result2) {
                     delayUp++;
@@ -1212,14 +1212,14 @@ function delayCalc() {
             delayUpChildren = delayUp;
 
             const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep'); // Filter Area Sleep
-            const result = resLiving.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+            const result = resLiving.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result) {
                 delayUpChildren++;
             }
             if (autoSleepStr === true) {
                 const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
-                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result2) {
                     delayUpChildren++;
@@ -1228,14 +1228,14 @@ function delayCalc() {
         }
         if (downTimeLiving === downTimeSleep) {
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living'); // Filter Area Living
-            const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+            const result3 = resLiving2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result3) {
                 delayDown++;
             }
             if (autoLivingStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living-auto'); // Filter Area Living
-                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result4) {
                     delayDown++;
@@ -1247,7 +1247,7 @@ function delayCalc() {
             delayDownChildren = delayDown;
 
             const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep'); // Filter Area Sleep
-            const result3 = resLiving2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+            const result3 = resLiving2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result3) {
                 delayDownChildren++;
@@ -1255,7 +1255,7 @@ function delayCalc() {
 
             if (autoSleepStr === true) {
                 const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
-                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean; }} */ d) => d.enabled === true); // Filter enabled
+                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result4) {
                     delayDownChildren++;
