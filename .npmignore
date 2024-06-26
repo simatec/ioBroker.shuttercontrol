@@ -32,3 +32,6 @@ test
 /package-lock.json
 .DS_Store
 iob_npm.done
+
+# ioBroker dev-server
+.dev-server/

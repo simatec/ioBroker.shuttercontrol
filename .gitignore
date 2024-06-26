@@ -18,3 +18,7 @@ admin/i18n/*/flat.txt
 /todo.txt
 *.orig
 iob_npm.done
+
+
+# ioBroker dev-server
+.dev-server/
