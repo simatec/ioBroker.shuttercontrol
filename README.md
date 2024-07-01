@@ -46,6 +46,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+
+### __WORK IN PROGRESS__
+* (simatec) Dependencies updated
+
 ### 1.7.3 (2024-06-20)
 * (simatec) Fix Sunprotect End-Delay
 
