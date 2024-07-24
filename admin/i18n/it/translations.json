@@ -167,7 +167,7 @@
     "sleep-auto": "Zona notte (automatica)",
     "summer settings": "impostazioni estive",
     "sun protection settings": "Impostazioni di protezione solare",
-    "sunProtectEndDely": "Ritardo alla fine della protezione solare (min)",
+    "sunProtectEndDely": "Ritardo per cadere sotto il livello di luminosità fino alla fine della ombreggiatura (minuti)",
     "sunrise": "Alba",
     "sunset": "tramonto",
     "trigDelyDown": "Ritardo dell'otturatore alla chiusura della finestra",

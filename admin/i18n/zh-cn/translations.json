@@ -167,7 +167,7 @@
     "sleep-auto": "睡眠區（自動）",
     "summer settings": "夏天的设置",
     "sun protection settings": "防曬設置",
-    "sunProtectEndDely": "延迟结束防晒（分钟)",
+    "sunProtectEndDely": "低于亮度水平的延迟,直到阴影结束(分钟)",
     "sunrise": "日出",
     "sunset": "日落",
     "trigDelyDown": "关闭窗户时的快门延迟",

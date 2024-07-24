@@ -167,7 +167,7 @@
     "sleep-auto": "Área de dormir (automática)",
     "summer settings": "configurações de verão",
     "sun protection settings": "Configurações de proteção solar",
-    "sunProtectEndDely": "Atraso para encerrar a proteção solar (min)",
+    "sunProtectEndDely": "Atraso para cair abaixo do nível de brilho até que a sombra seja terminada (minutos)",
     "sunrise": "nascer do sol",
     "sunset": "pôr do sol",
     "trigDelyDown": "Atraso do obturador ao fechar a janela",

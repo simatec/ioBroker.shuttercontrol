@@ -167,7 +167,7 @@
     "sleep-auto": "Sleeping area (automatic)",
     "summer settings": "Summer settings",
     "sun protection settings": "Sun protection settings",
-    "sunProtectEndDely": "Delay to end sun protection (minutes)",
+    "sunProtectEndDely": "Delay for falling below the brightness level until shading is ended (minutes)",
     "sunrise": "Sunrise",
     "sunset": "Sunset",
     "trigDelyDown": "Delay shutter down when window is closed (seconds)",

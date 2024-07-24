@@ -167,7 +167,7 @@
     "sleep-auto": "Slaapgedeelte (automatisch)",
     "summer settings": "zomer instellingen",
     "sun protection settings": "Instellingen voor zonbescherming",
-    "sunProtectEndDely": "Vertraging tot einde zonwering (min)",
+    "sunProtectEndDely": "Vertraging voor het dalen onder het helderheidsniveau totdat schaduw is beëindigd (minuten)",
     "sunrise": "zonsopkomst",
     "sunset": "zonsondergang",
     "trigDelyDown": "Sluitervertraging bij het sluiten van het raam",

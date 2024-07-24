@@ -167,7 +167,7 @@
     "sleep-auto": "Zone de couchage (automatique)",
     "summer settings": "paramètres d'été",
     "sun protection settings": "Paramètres de protection solaire",
-    "sunProtectEndDely": "Délai pour mettre fin à la protection solaire (min)",
+    "sunProtectEndDely": "Délai pour tomber sous le niveau de luminosité jusqu'à la fin de l'ombrage (minutes)",
     "sunrise": "lever du soleil",
     "sunset": "le coucher du soleil",
     "trigDelyDown": "Délai d'obturation à la fermeture de la fenêtre",

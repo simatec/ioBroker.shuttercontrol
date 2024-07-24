@@ -167,7 +167,7 @@
     "sleep-auto": "Schlafbereich (Automatik)",
     "summer settings": "Sommer-Einstellungen",
     "sun protection settings": "Sonnenschutz-Einstellungen",
-    "sunProtectEndDely": "Verzögerung bis Beschattung beendet wird (Min)",
+    "sunProtectEndDely": "Verzögerung für die Unterschreitung der Helligkeit bis die Beschattung beendet wird (Minuten)",
     "sunrise": "Sonnenaufgang",
     "sunset": "Sonnenuntergang",
     "trigDelyDown": "Rolladen Verzögerung bei Fenster schliessen (s)",

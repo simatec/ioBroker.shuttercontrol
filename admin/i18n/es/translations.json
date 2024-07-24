@@ -167,7 +167,7 @@
     "sleep-auto": "Área de dormir (automática)",
     "summer settings": "configuración de verano",
     "sun protection settings": "Configuraciones de protección solar",
-    "sunProtectEndDely": "Retraso para finalizar la protección solar (min)",
+    "sunProtectEndDely": "Retraso por caer por debajo del nivel de brillo hasta que se termine el afeitado (minutos)",
     "sunrise": "amanecer",
     "sunset": "puesta de sol",
     "trigDelyDown": "Retraso del obturador al cerrar la ventana",

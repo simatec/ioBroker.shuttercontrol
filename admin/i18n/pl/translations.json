@@ -167,7 +167,7 @@
     "sleep-auto": "Miejsce do spania (automatyczne)",
     "summer settings": "ustawienia letnie",
     "sun protection settings": "Ustawienia ochrony przeciwsłonecznej",
-    "sunProtectEndDely": "Opóźnienie do zakończenia ochrony przeciwsłonecznej (min)",
+    "sunProtectEndDely": "Opóźnienie spadku poniżej poziomu jasności do zakończenia zacienienia (minuty)",
     "sunrise": "wschód słońca",
     "sunset": "zachód słońca",
     "trigDelyDown": "Opóźnienie migawki przy zamykaniu okna",
