@@ -628,6 +628,10 @@ Damit wird verhindert, dass der Rollladen mehrfach pro Tag hoch und runter fähr
 Sehr praktisch im Jalousie-Betrieb, wenn die Höhe unten gehalten wird (Option angehakt),
 und lediglich die Lamellen auf und zu fahren.
 
+**Verzögerung für die Unterschreitung der Helligkeit bis die Beschattung beendet wird (Minuten)**
+Hier wird die Zeit eingestellt, wo bei einer Verdunkelung und Unterschreitung der eingestellten Hellingkeit, eine Verzögerung stattfinden soll.
+Der Standardwert ist 0 und kann bei Bedarf angepasst werden. Diese Option funktioniert nur in Verbindung mit einem Helligkeitssensor
+
 **Wärmeschutz**  
 Diese Option ermöglicht das vollständige Schließen des Rollladen bei Hitze.
 Nach Aktivierung dieser Option erscheint das Feld zur Temperatureingabe in °C.

@@ -627,6 +627,10 @@ This prevents the roller shutter from going up and down several times a day.
 Very practical in blind operation when the height is kept down (option checked),
 and just open and close the slats.
 
+**Delay for falling below the brightness until shading is ended (minutes)**
+The time is set here at which a delay should take place if the shade is darkened and the brightness falls below the set level.
+The default value is 0 and can be adjusted if required. This option only works in conjunction with a brightness sensor
+
 **Heat protection**
 This option allows the roller shutter to be completely closed in hot weather.
 After activating this option, the field for entering the temperature in °C appears.
