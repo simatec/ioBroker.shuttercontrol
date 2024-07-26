@@ -91,6 +91,7 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="ignoreTriggerAutoState"][data-index="' + id + '"]').val(false).trigger('change');
         }, 1000);
 
         initSelectId(function (sid) {
@@ -386,6 +387,7 @@ function tableOnReady() {
         var varenableAlarmRain = $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmFrost = $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmFire = $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked');
+        var varignoreTriggerAutoState = $('#events .values-input[data-name="ignoreTriggerAutoState"][data-index="' + id + '"]').prop('checked');
         var varheatProtection = $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked');
 
         if (varuseXmasLevel == true) {
@@ -415,6 +417,8 @@ function tableOnReady() {
         $('#enableAlarmRain').prop('checked', varenableAlarmRain);
         $('#enableAlarmFrost').prop('checked', varenableAlarmFrost);
         $('#enableAlarmFire').prop('checked', varenableAlarmFire);
+        $('#ignoreTriggerAutoState').prop('checked', varignoreTriggerAutoState);
+        
         $('#heatProtection').prop('checked', varheatProtection);
 
         setTimeout(function () {
@@ -464,6 +468,7 @@ function tableOnReady() {
                 var newenableAlarmRain = $('#enableAlarmRain').prop('checked');
                 var newenableAlarmFrost = $('#enableAlarmFrost').prop('checked');
                 var newenableAlarmFire = $('#enableAlarmFire').prop('checked');
+                var newignoreTriggerAutoState = $('#ignoreTriggerAutoState').prop('checked');
                 var newHeatProtection = $('#heatProtection').prop('checked');
 
                 // value
@@ -511,6 +516,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked', newenableAlarmRain).trigger('change');
                 $('#events .values-input[data-name="enableAlarmFrost"][data-index="' + id + '"]').prop('checked', newenableAlarmFrost).trigger('change');
                 $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked', newenableAlarmFire).trigger('change');
+                $('#events .values-input[data-name="ignoreTriggerAutoState"][data-index="' + id + '"]').prop('checked', newignoreTriggerAutoState).trigger('change');
                 $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked', newHeatProtection).trigger('change');
             });
         }, 20)

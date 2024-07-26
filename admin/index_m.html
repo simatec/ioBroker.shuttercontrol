@@ -1043,6 +1043,23 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
+                                            <div class="col s6 l4 input-field">
+                                                <input type="checkbox" id="ignoreTriggerAutoState" class="value" />
+                                                <label for="ignoreTriggerAutoState" class="translate">Ignore the status of autoUp and autoDown when opening the window</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s6 l4 input-field">
+                                                <input type="checkbox" id="betweenPosition" class="value" />
+                                                <label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
+                                            </div>
+                                            <div class="col s6 l4 input-field col-betweenPosition">
+                                                <input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
+                                                <label for="betweenPositionLevel" class="translate"></label>
+                                                <span class="translate">shutter height in the intermediate position</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col s6 l2 input-field">
                                                 <input type="number" class="value" id="trigDelyUp" min=0 max=999 />
                                                 <label for="trigDelyUp" class="translate"></label>
@@ -1052,15 +1069,6 @@
                                                 <input type="number" class="value" id="trigDelyDown" min=0 max=999 />
                                                 <label for="trigDelyDown" class="translate"></label>
                                                 <span class="translate">trigDelyDown</span>
-                                            </div>
-                                            <div class="col s6 l4 input-field">
-                                                <input type="checkbox" id="betweenPosition" class="value" />
-                                                <label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
-                                            </div>
-                                            <div class="col s6 l4 input-field col-betweenPosition">
-                                                <input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
-                                                <label for="betweenPositionLevel" class="translate"></label>
-                                                <span class="translate">shutter height in the intermediate position</span>
                                             </div>
                                         </div>
                                     </div>

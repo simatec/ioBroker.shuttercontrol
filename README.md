@@ -51,6 +51,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Dependencies updated
 * (simatec) Fix End-Delay for Sunprotect
 * (simatec) Update Translations
+* (simatec) Trigger changed
 
 ### 1.7.3 (2024-06-20)
 * (simatec) Fix Sunprotect End-Delay
