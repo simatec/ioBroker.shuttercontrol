@@ -99,54 +99,54 @@ function startAdapter(options) {
         if (state) {
             if (adapter.config.HolidayDP !== '') {
                 if (id.includes(adapter.config.HolidayDP)) {
-                    adapter.log.debug('HolidayDP changed to ' + state.val);
+                    adapter.log.debug(`HolidayDP changed to: ${state.val}`);
                     await adapter.setStateAsync('control.Holiday', { val: state.val, ack: true })
                         .catch((e) => adapter.log.warn(e));
                 }
             }
             if (adapter.config.schoolfreeDP !== '') {
                 if (id.includes(adapter.config.schoolfreeDP)) {
-                    adapter.log.debug('schoolfreeDP changed to ' + state.val);
+                    adapter.log.debug(`schoolfreeDP changed to: ${state.val}`);
                     await adapter.setStateAsync('control.schoolfree', { val: state.val, ack: true })
                         .catch((e) => adapter.log.warn(e));
                 }
             }
-            if (id === adapter.namespace + '.control.Holiday') {
+            if (id === `${adapter.namespace}.control.Holiday`) {
                 HolidayStr = state.val;
                 shutterDriveCalc();
             }
-            if (id === adapter.namespace + '.control.schoolfree') {
+            if (id === `${adapter.namespace}.control.schoolfree`) {
                 SchoolfreeStr = state.val;
                 shutterDriveCalc();
             }
-            if (id === adapter.namespace + '.control.autoLiving') {
+            if (id === `${adapter.namespace}.control.autoLiving`) {
                 autoLivingStr = state.val;
                 shutterDriveCalc();
             }
-            if (id === adapter.namespace + '.control.autoSleep') {
+            if (id === `${adapter.namespace}.control.autoSleep`) {
                 autoSleepStr = state.val;
                 shutterDriveCalc();
             }
-            if (id === adapter.namespace + '.control.autoChildren') {
+            if (id === `${adapter.namespace}.control.autoChildren`) {
                 autoChildrenStr = state.val;
                 shutterDriveCalc();
             }
             if (adapter.config.publicHolidays === true) {
-                if (id === adapter.config.publicHolInstance + '.heute.boolean') {
+                if (id === `${adapter.config.publicHolInstance}.heute.boolean`) {
                     publicHolidayStr = state.val;
                     shutterDriveCalc();
                 }
-                if (id === adapter.config.publicHolInstance + '.morgen.boolean') {
+                if (id === `${adapter.config.publicHolInstance}.morgen.boolean`) {
                     publicHolidayTomorowStr = state.val;
                     shutterDriveCalc();
                 }
             }
             if (adapter.config.schoolfree === true) {
-                if (id === adapter.config.schoolfreeInstance + '.info.today') {
+                if (id === `${adapter.config.schoolfreeInstance}.info.today`) {
                     schoolfreeStr = state.val;
                     shutterDriveCalc();
                 }
-                if (id === adapter.config.schoolfreeInstance + '.info.tomorrow') {
+                if (id === `${adapter.config.schoolfreeInstance}.info.tomorrow`) {
                     schoolfreeTomorowStr = state.val;
                     shutterDriveCalc();
                 }
@@ -154,63 +154,63 @@ function startAdapter(options) {
             if (id === adapter.config.triggerAutoLiving) {
                 await adapter.setStateAsync('control.autoLiving', { val: state.val, ack: true })
                     .catch((e) => adapter.log.warn(e));
-                adapter.log.debug('Auto Living is: ' + state.val);
+                adapter.log.debug(`Auto Living is: ${state.val}`);
             }
             if (id === adapter.config.triggerAutoSleep) {
                 await adapter.setStateAsync('control.autoSleep', { val: state.val, ack: true })
                     .catch((e) => adapter.log.warn(e));
-                adapter.log.debug('Auto Sleep is: ' + state.val);
+                adapter.log.debug(`Auto Sleep is: ${state.val}`);
             }
             if (id === adapter.config.triggerAutoChildren) {
                 await adapter.setStateAsync('control.autoChildren', { val: state.val, ack: true })
                     .catch((e) => adapter.log.warn(e));
-                adapter.log.debug('Auto Children is: ' + state.val);
+                adapter.log.debug(`Auto Children is: ${state.val}`);
             }
             if (id === adapter.config.lightsensorUpDown) {
                 shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
-                adapter.log.debug('Brightness sensor value: ' + state.val);
+                adapter.log.debug(`Brightness sensor value: ${state.val}`);
 
                 await sleep(10000);
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
-                adapter.log.debug('Brightness State Down is: ' + brightnessDown);
+                adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
             }
             if (id === adapter.config.alarmWind1) {
-                adapter.log.debug('Alarm Wind 1 changed: ' + state.val);
+                adapter.log.debug(`Alarm Wind 1 changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmWind1', shutterSettings);
             }
             if (id === adapter.config.alarmWind2) {
-                adapter.log.debug('Alarm Wind 2 changed: ' + state.val);
+                adapter.log.debug(`Alarm Wind 2 changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmWind2', shutterSettings);
             }
             if (id === adapter.config.alarmRain) {
-                adapter.log.debug('Alarm Rain changed: ' + state.val);
+                adapter.log.debug(`Alarm Rain changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmRain', shutterSettings);
             }
             if (id === adapter.config.alarmFrost) {
-                adapter.log.debug('Alarm Frost changed: ' + state.val);
+                adapter.log.debug(`Alarm Frost changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmFrost', shutterSettings);
             }
             if (id === adapter.config.alarmFire) {
-                adapter.log.debug('Alarm Fire changed: ' + state.val);
+                adapter.log.debug(`Alarm Fire changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmFire', shutterSettings);
             }
 
             resTrigger.forEach(async function (resultTriggerID) {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     resTriggerChange = resultTriggerID;
-                    adapter.log.debug('TriggerID changed: ' + resultTriggerID + ' Value: ' + state.val);
+                    adapter.log.debug(`TriggerID changed: ${resultTriggerID} | Value: ${state.val}`);
                     triggerChange(resTriggerChange, adapter, shutterSettings);
                 }
             });
             resSunInsideTemp.forEach(async function (resSunInsideTempID) {
                 if (id === resSunInsideTempID && state.ts === state.lc) {
-                    adapter.log.debug('insidetemperature changed: ' + resSunInsideTempID + ' Value: ' + state.val);
+                    adapter.log.debug(`insidetemperature changed: ${resSunInsideTempID} | Value: ${state.val}`);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
             resSunOutsideTemp.forEach(async function (resSunOutsideTempID) {
                 if (id === resSunOutsideTempID && state.ts === state.lc && state.val !== null) {
-                    adapter.log.debug('outsidetemperature changed: ' + resSunOutsideTempID + ' Value: ' + state.val);
+                    adapter.log.debug(`outsidetemperature changed: ${resSunOutsideTempID} | Value: ${state.val}`);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
@@ -218,7 +218,7 @@ function startAdapter(options) {
                 if (id === resSunLightID && state.ts === state.lc) {
                     // @ts-ignore
                     if (Math.round((new Date(state.lc) - new Date(lastLigthSensorValue[`${resSunLightID}`].ts)) / 1000 / 60) > 2) {
-                        adapter.log.debug('Lightsensor changed: ' + resSunLightID + ' Value: ' + state.val);
+                        adapter.log.debug(`Lightsensor changed: ${resSunLightID} | Value: ${state.val}`);
                         sunProtect(adapter, elevation, azimuth, shutterSettings);
                         lastLigthSensorValue[`${resSunLightID}`].ts = state.lc;
                     }
@@ -231,9 +231,9 @@ function startAdapter(options) {
                     if (adapter.config.currentShutterState === true && adapter.config.currentShutterStateTime) {
                         waitTime4StateCheck = (adapter.config.currentShutterStateTime ? adapter.config.currentShutterStateTime * 1000 : 60000);
                     }
-                    adapter.log.debug(`#0 wait for shutter check started`);
+                    adapter.log.debug('#0 wait for shutter check started');
                     await sleep(waitTime4StateCheck);
-                    adapter.log.debug(`#0 wait for shutter check end`);
+                    adapter.log.debug('#0 wait for shutter check end');
 
                     for (const i in result) {
                         for (const s in shutterSettings) {
@@ -241,10 +241,13 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (typeof _shutterState != undefined && _shutterState != null && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
-                                    adapter.log.debug('Shutter state changed: ' + shutterSettings[s].shutterName + ' old value = ' + shutterSettings[s].oldHeight + ' new value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
+                                if (_shutterState?.val && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+                                    adapter.log.debug(`Shutter state changed: ${shutterSettings[s].shutterName} old value = ${shutterSettings[s].oldHeight}% | new value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
                                 }
-                                if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].currentHeight && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].oldHeight) {
+                                if (_shutterState?.val &&
+                                    Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].currentHeight &&
+                                    Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].oldHeight) {
+
                                     if (adapter.config.blockManuMode === true) {
                                         switch (Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
                                             case parseFloat(shutterSettings[s].heightUp):
@@ -253,7 +256,7 @@ function startAdapter(options) {
                                                 shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                                                 shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | automatic is active`);
                                                 break;
                                             case parseFloat(shutterSettings[s].heightDown):
                                                 shutterSettings[s].currentAction = 'down';
@@ -261,7 +264,7 @@ function startAdapter(options) {
                                                 shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                                                 shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | automatic is active`);
                                                 break;
                                             case parseFloat(shutterSettings[s].heightDownSun):
                                                 shutterSettings[s].currentAction = 'sunProtect';
@@ -269,31 +272,42 @@ function startAdapter(options) {
                                                 shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                                                 shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight;
 
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | automatic is active`);
                                                 break;
                                             default:
                                                 shutterSettings[s].currentAction = 'Manu_Mode';
                                                 shutterSettings[s].triggerAction = 'Manu_Mode';
 
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} drived manually to ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} Updated trigger action to ${shutterSettings[s].triggerAction} to prevent moving after window close`);
                                         }
                                     } else {
-                                        if (shutterSettings[s].firstCompleteUp != true && shutterSettings[s].currentAction != 'none' && shutterSettings[s].currentAction != 'OpenInSunProtect') {
+                                        if (shutterSettings[s].firstCompleteUp != true &&
+                                            shutterSettings[s].currentAction != 'none' &&
+                                            shutterSettings[s].currentAction != 'OpenInSunProtect') {
+
                                             shutterSettings[s].currentAction = 'Manu_Mode';
                                             shutterSettings[s].triggerAction = 'Manu_Mode';
-                                            adapter.log.debug('set Manu_Mode #1 ' + shutterSettings[s].shutterName);
+                                            adapter.log.debug(`set Manu_Mode #1 ${shutterSettings[s].shutterName}`);
                                         }
                                         else {
-                                            //Shutter is closed -> open manually to heightUp (should be 100% or 0%) before it has been opened automatically -> enable possibility to activate sunprotect height if required --> if sunprotect is required: shutter is set to sunProtect height
-                                            if (shutterSettings[s].firstCompleteUp == true && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterSettings[s].heightUp && shutterSettings[s].currentAction != 'up' && shutterSettings[s].currentAction != 'triggered' && shutterSettings[s].currentAction != 'triggered_Tilted') {
+                                            /*  Shutter is closed -> open manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
+                                                enable possibility to activate sunprotect height if required --> 
+                                                if sunprotect is required: shutter is set to sunProtect height
+                                            */
+                                            if (shutterSettings[s].firstCompleteUp == true &&
+                                                Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterSettings[s].heightUp &&
+                                                shutterSettings[s].currentAction != 'up' &&
+                                                shutterSettings[s].currentAction != 'triggered' &&
+                                                shutterSettings[s].currentAction != 'triggered_Tilted') {
+
                                                 shutterSettings[s].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                                                 shutterSettings[s].triggerHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                                                 shutterSettings[s].currentAction = 'none'; //reset mode. e.g. mode can be set to sunProtect later if window is closed
                                                 shutterSettings[s].triggerAction = 'Manu_Mode';
                                                 shutterSettings[s].firstCompleteUp = false;
-                                                adapter.log.debug('Reset firstCompleteUp #1 for ' + shutterSettings[s].shutterName);
-                                                adapter.log.debug(shutterSettings[s].shutterName + ' opened manually to ' + shutterSettings[s].heightUp + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Possibility to activate sunprotect enabled.');
+                                                adapter.log.debug(`Reset firstCompleteUp #1 for ${shutterSettings[s].shutterName}`);
+                                                adapter.log.debug(`${shutterSettings[s].shutterName} opened manually to ${shutterSettings[s].heightUp}% | Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | Possibility to activate sunprotect enabled`);
 
                                                 await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
                                                     .catch((e) => adapter.log.warn(e));
@@ -304,20 +318,20 @@ function startAdapter(options) {
                                             else {
                                                 shutterSettings[s].currentAction = 'Manu_Mode';
                                                 shutterSettings[s].triggerAction = 'Manu_Mode';
-                                                adapter.log.debug('set Manu_Mode #2 ' + shutterSettings[s].shutterName);
+                                                adapter.log.debug(`set Manu_Mode #2 ${shutterSettings[s].shutterName}`);
                                             }
                                         }
 
-                                        adapter.log.debug(shutterSettings[s].shutterName + ' drived manually to ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
-                                        adapter.log.debug(shutterSettings[s].shutterName + ' Updated trigger action to ' + shutterSettings[s].triggerAction + ' to prevent moving after window close ');
+                                        adapter.log.debug(`${shutterSettings[s].shutterName} drived manually to ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
+                                        adapter.log.debug(`${shutterSettings[s].shutterName} Updated trigger action to ${shutterSettings[s].triggerAction} to prevent moving after window close`);
                                     }
 
                                     adapter.log.debug(`#1 shutterName: ${shutterSettings[s].shutterName}`);
-                                    adapter.log.debug(`#1 shutterState: ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound} %`);
+                                    adapter.log.debug(`#1 shutterState: ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
                                     adapter.log.debug(`#1 currentAction: ${shutterSettings[s].currentAction}`);
                                     adapter.log.debug(`#1 triggerAction: ${shutterSettings[s].triggerAction}`);
-                                    adapter.log.debug(`#1 currentHeight: ${shutterSettings[s].currentHeight} %`);
-                                    adapter.log.debug(`#1 oldHeight: ${shutterSettings[s].oldHeight} %`);
+                                    adapter.log.debug(`#1 currentHeight: ${shutterSettings[s].currentHeight}%`);
+                                    adapter.log.debug(`#1 oldHeight: ${shutterSettings[s].oldHeight}%`);
                                     adapter.log.debug(`#1 currentShutterState: ${adapter.config.currentShutterState === true ? 'activated' : 'disabled'}`);
                                     adapter.log.debug(`#1 currentShutterStateTime: ${adapter.config.currentShutterStateTime} seconds`);
 
@@ -326,8 +340,8 @@ function startAdapter(options) {
 
                                     await sleep(2000);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (typeof _shutterState != undefined && _shutterState != null && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
-                                    adapter.log.debug(shutterSettings[s].shutterName + ' Old value = ' + shutterSettings[s].oldHeight + '. New value = ' + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound + '. automatic is active');
+                                } else if (_shutterState?.val && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
+                                    adapter.log.debug(`${shutterSettings[s].shutterName} Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | automatic is active`);
                                     await sleep(2000);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
                                 }
@@ -336,66 +350,69 @@ function startAdapter(options) {
                                 await sleep(2000); //already waited waitTime4StateCheck seconds.
                                 saveCurrentStates(false);
 
-                                //await sleep because e.g. Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%). By this the value is set only after the final height state has been processed
+                                /*
+                                    await sleep because e.g.
+                                    Shelly submits several position by MQTT and not only the last one (0% 1% ... 97% - 98% - 100%).
+                                    By this the value is set only after the final height state has been processed
+                                */
                                 await sleep(5000 + waitTime4StateCheck);
 
                                 shutterSettings[s].oldHeight = shutterSettings[s].currentHeight;
 
                                 if (shutterSettings[s].firstCompleteUp === true) {
                                     shutterSettings[s].firstCompleteUp = false;
-                                    adapter.log.debug('Reset firstCompleteUp #2 for ' + shutterSettings[s].shutterName);
+                                    adapter.log.debug(`Reset firstCompleteUp #2 for ${shutterSettings[s].shutterName}`);
                                 }
                                 saveCurrentStates(false);
-
                             }
                         }
                     }
                 }
             });
 
-            if (id === adapter.namespace + '.info.Azimut') {
+            if (id === `${adapter.namespace}.info.Azimut`) {
                 sunProtect(adapter, elevation, azimuth, shutterSettings);
             }
-            if (id === adapter.namespace + '.info.Elevation') {
+            if (id === `${adapter.namespace}.info.Elevation`) {
                 elevationDown(adapter, elevation, azimuth, shutterSettings);
             }
-            if (id === adapter.namespace + '.control.closeAll') {
+            if (id === `${adapter.namespace}.control.closeAll`) {
                 buttonAction(adapter, 'closeAll', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.openAll') {
+            if (id === `${adapter.namespace}.control.openAll`) {
                 buttonAction(adapter, 'openAll', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.closeLiving') {
+            if (id === `${adapter.namespace}.control.closeLiving`) {
                 buttonAction(adapter, 'closeLiving', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.openLiving') {
+            if (id === `${adapter.namespace}.control.openLiving`) {
                 buttonAction(adapter, 'openLiving', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.closeSleep') {
+            if (id === `${adapter.namespace}.control.closeSleep`) {
                 buttonAction(adapter, 'closeSleep', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.openSleep') {
+            if (id === `${adapter.namespace}.control.openSleep`) {
                 buttonAction(adapter, 'openSleep', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.closeChildren') {
+            if (id === `${adapter.namespace}.control.closeChildren`) {
                 buttonAction(adapter, 'closeChildren', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.openChildren') {
+            if (id === `${adapter.namespace}.control.openChildren`) {
                 buttonAction(adapter, 'openChildren', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.sunProtect') {
+            if (id === `${adapter.namespace}.control.sunProtect`) {
                 buttonAction(adapter, 'sunProtect', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.sunProtectSleep') {
+            if (id === `${adapter.namespace}.control.sunProtectSleep`) {
                 buttonAction(adapter, 'sunProtectSleep', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.sunProtectChildren') {
+            if (id === `${adapter.namespace}.control.sunProtectChildren`) {
                 buttonAction(adapter, 'sunProtectChildren', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.sunProtectLiving') {
+            if (id === `${adapter.namespace}.control.sunProtectLiving`) {
                 buttonAction(adapter, 'sunProtectLiving', shutterSettings);
             }
-            if (id === adapter.namespace + '.control.autoAll') {
+            if (id === `${adapter.namespace}.control.autoAll`) {
                 buttonAction(adapter, 'autoAll', shutterSettings);
             }
         }
@@ -507,7 +524,7 @@ async function saveCurrentStates(onStart) {
             currentStates[`${nameDevice}`].alarmTriggerLevel = shutterSettings[s].alarmTriggerLevel;
             currentStates[`${nameDevice}`].lastAutoAction = shutterSettings[s].lastAutoAction;
         } else if (currentStates && currentStates[`${nameDevice}`] && onStart) {
-            adapter.log.debug(nameDevice + ': save settings');
+            adapter.log.debug(`${nameDevice}: save settings`);
             shutterSettings[s].currentAction = currentStates[`${nameDevice}`].currentAction;
             shutterSettings[s].currentHeight = currentStates[`${nameDevice}`].currentHeight;
             shutterSettings[s].triggerAction = currentStates[`${nameDevice}`].triggerAction;
@@ -518,7 +535,7 @@ async function saveCurrentStates(onStart) {
             shutterSettings[s].alarmTriggerLevel = currentStates[`${nameDevice}`].alarmTriggerLevel;
             shutterSettings[s].lastAutoAction = currentStates[`${nameDevice}`].lastAutoAction;
         } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
-            adapter.log.debug(nameDevice + ': settings added');
+            adapter.log.debug(`${nameDevice}: settings added`);
             currentStates[`${nameDevice}`] = null;
 
             const states = ({
@@ -541,7 +558,7 @@ async function saveCurrentStates(onStart) {
             for (const i in currentStates) {
                 if (shutterName.indexOf(currentStates[i].shutterName) === -1) {
                     const name = currentStates[i].shutterName.replace(/[.;, ]/g, '_')
-                    adapter.log.debug(name + ': settings deleted');
+                    adapter.log.debug(`${name}: settings deleted`);
                     delete currentStates[`${name}`];
                 }
 
@@ -597,49 +614,55 @@ async function checkStates() {
 
 async function checkActualStates() {
     const _holidayStates = await adapter.getStateAsync('control.Holiday').catch((e) => adapter.log.warn(e));
-    if (_holidayStates) {
+    if (_holidayStates?.val) {
         HolidayStr = _holidayStates.val;
     }
 
     const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree').catch((e) => adapter.log.warn(e));
-    if (_schoolfreeStates) {
+    if (_schoolfreeStates?.val) {
         SchoolfreeStr = _schoolfreeStates.val;
     }
 
     const _autoLivingStates = await adapter.getStateAsync('control.autoLiving').catch((e) => adapter.log.warn(e));
-    if (_autoLivingStates) {
+    if (_autoLivingStates?.val) {
         autoLivingStr = _autoLivingStates.val;
     }
 
     const _autoSleepStates = await adapter.getStateAsync('control.autoSleep').catch((e) => adapter.log.warn(e));
-    if (_autoSleepStates) {
+    if (_autoSleepStates?.val) {
         autoSleepStr = _autoSleepStates.val;
     }
 
     const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren').catch((e) => adapter.log.warn(e));
-    if (_autoChildrenStates) {
+    if (_autoChildrenStates?.val) {
         autoChildrenStr = _autoChildrenStates.val;
     }
 
-    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance != 'none' || adapter.config.publicHolInstance != '')) {
-        const _publicHolidayStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.heute.boolean').catch((e) => adapter.log.warn(e));
-        if (typeof _publicHolidayStr != undefined && _publicHolidayStr != null) {
+    if (adapter.config.publicHolidays === true &&
+        (adapter.config.publicHolInstance != 'none' ||
+            adapter.config.publicHolInstance != '')) {
+
+        const _publicHolidayStr = await adapter.getForeignStateAsync(`${adapter.config.publicHolInstance}.heute.boolean`).catch((e) => adapter.log.warn(e));
+        if (_publicHolidayStr?.val) {
             publicHolidayStr = _publicHolidayStr.val;
         }
 
-        const _publicHolidayTomorowStr = await adapter.getForeignStateAsync(adapter.config.publicHolInstance + '.morgen.boolean').catch((e) => adapter.log.warn(e));
-        if (typeof _publicHolidayTomorowStr != undefined && _publicHolidayTomorowStr != null) {
+        const _publicHolidayTomorowStr = await adapter.getForeignStateAsync(`${adapter.config.publicHolInstance}.morgen.boolean`).catch((e) => adapter.log.warn(e));
+        if (_publicHolidayTomorowStr?.val) {
             publicHolidayTomorowStr = _publicHolidayTomorowStr.val;
         }
     }
 
-    if (adapter.config.schoolfree === true && (adapter.config.schoolfreeInstance != 'none' || adapter.config.schoolfreeInstance != '')) {
-        const _schoolfreeStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.today').catch((e) => adapter.log.warn(e));
-        if (typeof _schoolfreeStr != undefined && _schoolfreeStr != null) {
+    if (adapter.config.schoolfree === true &&
+        (adapter.config.schoolfreeInstance != 'none' ||
+            adapter.config.schoolfreeInstance != '')) {
+
+        const _schoolfreeStr = await adapter.getForeignStateAsync(`${adapter.config.schoolfreeInstance}.info.today`).catch((e) => adapter.log.warn(e));
+        if (_schoolfreeStr?.val) {
             schoolfreeStr = _schoolfreeStr.val;
         }
-        const _schoolfreeTomorowStr = await adapter.getForeignStateAsync(adapter.config.schoolfreeInstance + '.info.tomorrow').catch((e) => adapter.log.warn(e));
-        if (typeof _schoolfreeTomorowStr != undefined && _schoolfreeTomorowStr != null) {
+        const _schoolfreeTomorowStr = await adapter.getForeignStateAsync(`${adapter.config.schoolfreeInstance}.info.tomorrow`).catch((e) => adapter.log.warn(e));
+        if (_schoolfreeTomorowStr?.val) {
             schoolfreeTomorowStr = _schoolfreeTomorowStr.val;
         }
     }
@@ -647,8 +670,8 @@ async function checkActualStates() {
     if (adapter.config.HolidayDP !== '') {
         adapter.log.debug('checking HolidayDP');
         const _HolidayDP = await adapter.getForeignStateAsync(adapter.config.HolidayDP).catch((e) => adapter.log.warn(e));
-        if (typeof _HolidayDP != undefined && _HolidayDP != null) {
-            adapter.log.debug('got HolidayDP ' + _HolidayDP.val);
+        if (_HolidayDP?.val) {
+            adapter.log.debug(`got HolidayDP: ${_HolidayDP.val}`);
             await adapter.setStateAsync('control.Holiday', { val: _HolidayDP.val, ack: true })
                 .catch((e) => adapter.log.warn(e));
         }
@@ -657,33 +680,33 @@ async function checkActualStates() {
     if (adapter.config.schoolfreeDP !== '') {
         adapter.log.debug('checking schoolfreeDP');
         const _schoolfreeDP = await adapter.getForeignStateAsync(adapter.config.schoolfreeDP).catch((e) => adapter.log.warn(e));
-        if (typeof _schoolfreeDP != undefined && _schoolfreeDP != null) {
-            adapter.log.debug('got schoolfreeDP ' + _schoolfreeDP.val);
+        if (_schoolfreeDP?.val) {
+            adapter.log.debug(`got schoolfreeDP: ${_schoolfreeDP.val}`);
             await adapter.setStateAsync('control.schoolfree', { val: _schoolfreeDP.val, ack: true })
                 .catch((e) => adapter.log.warn(e));
         }
     }
-    const _ObjautoUp = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoUp.*', 'state').catch((e) => adapter.log.warn(e));
+    const _ObjautoUp = await adapter.getForeignObjectsAsync(`${adapter.namespace}.shutters.autoUp.*`, 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoUp) {
         ObjautoUp = _ObjautoUp;
     }
 
-    const _ObjautoDown = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoDown.*', 'state').catch((e) => adapter.log.warn(e));
+    const _ObjautoDown = await adapter.getForeignObjectsAsync(`${adapter.namespace}.shutters.autoDown.*`, 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoDown) {
         ObjautoDown = _ObjautoDown;
     }
 
-    const _ObjautoSun = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoSun.*', 'state').catch((e) => adapter.log.warn(e));
+    const _ObjautoSun = await adapter.getForeignObjectsAsync(`${adapter.namespace}.shutters.autoSun.*`, 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoSun) {
         ObjautoSun = _ObjautoSun;
     }
 
-    const _ObjautoState = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoState.*', 'state').catch((e) => adapter.log.warn(e));
+    const _ObjautoState = await adapter.getForeignObjectsAsync(`${adapter.namespace}.shutters.autoState.*`, 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoState) {
         ObjautoState = _ObjautoState;
     }
 
-    const _ObjautoLevel = await adapter.getForeignObjectsAsync(adapter.namespace + '.shutters.autoLevel.*', 'state').catch((e) => adapter.log.warn(e));
+    const _ObjautoLevel = await adapter.getForeignObjectsAsync(`${adapter.namespace}.shutters.autoLevel.*`, 'state').catch((e) => adapter.log.warn(e));
     if (_ObjautoLevel) {
         ObjautoLevel = _ObjautoLevel;
     }
@@ -705,7 +728,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
             const nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
             const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name).catch((e) => adapter.log.warn(e));
 
-            if (typeof _shutterState != undefined && _shutterState != null) {
+            if (_shutterState?.val) {
                 // Reset Actions every night
                 resultStates[i].currentAction = 'none';
                 resultStates[i].triggerAction = 'none';
@@ -713,20 +736,21 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
                 resultStates[i].lastAutoAction = 'none';
                 resultStates[i].alarmTriggerAction = 'none';
 
-                await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: resultStates[i].currentAction, ack: true })
+                await adapter.setStateAsync(`shutters.autoState.${nameDevice}`, { val: resultStates[i].currentAction, ack: true })
                     .catch((e) => adapter.log.warn(e));
-                adapter.log.debug(resultStates[i].shutterName + " set currentHeight to " + Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound);
+                adapter.log.debug(`${resultStates[i].shutterName} set currentHeight to ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
 
-                if (typeof _shutterState.val != undefined && _shutterState.val != null) {
+                if (_shutterState?.val) {
                     resultStates[i].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
-                    resultStates[i].oldHeight = resultStates[i].currentHeight
-                    await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(resultStates[i].currentHeight), ack: true })
+                    resultStates[i].oldHeight = resultStates[i].currentHeight;
+
+                    await adapter.setStateAsync(`shutters.autoLevel.${nameDevice}`, { val: parseFloat(resultStates[i].currentHeight), ack: true })
                         .catch((e) => adapter.log.warn(e));
 
                     if (parseFloat(resultStates[i].heightDown) < parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is disabled ...');
+                        adapter.log.debug(`${resultStates[i].shutterName} level conversion is disabled!`);
                     } else if (parseFloat(resultStates[i].heightDown) > parseFloat(resultStates[i].heightUp)) {
-                        adapter.log.debug(resultStates[i].shutterName + ' level conversion is enabled');
+                        adapter.log.debug(`${resultStates[i].shutterName} level conversion is enabled!`);
                     }
                 }
                 saveCurrentStates(false);
@@ -740,8 +764,14 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
 // +++++++++++++++++ Get longitude an latidude from system config ++++++++++++++++++++
 
 async function GetSystemData() {
-    if (typeof adapter.config.longitude === undefined || adapter.config.longitude === null || adapter.config.longitude.length === 0 || isNaN(adapter.config.longitude)
-        || typeof adapter.config.latitude === undefined || adapter.config.latitude === null || adapter.config.latitude.length === 0 || isNaN(adapter.config.latitude)) {
+    if (typeof adapter.config.longitude === undefined ||
+        adapter.config.longitude === null ||
+        adapter.config.longitude.length === 0 ||
+        isNaN(adapter.config.longitude) ||
+        typeof adapter.config.latitude === undefined ||
+        adapter.config.latitude === null ||
+        adapter.config.latitude.length === 0 ||
+        isNaN(adapter.config.latitude)) {
 
         try {
             const obj = await adapter.getForeignObjectAsync('system.config', 'state');
@@ -788,15 +818,15 @@ function shutterDriveCalc() {
         adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
     }
 
-    adapter.log.debug('goldenHourEnd today: ' + goldenHourEnd);
+    adapter.log.debug(`goldenHourEnd today: ${goldenHourEnd}`);
     adapter.setState('info.GoldenHourEnd', { val: goldenHourEnd, ack: true });
-    adapter.log.debug('goldenHour today: ' + goldenHour);
+    adapter.log.debug(`goldenHour today: ${goldenHour}`);
     adapter.setState('info.GoldenHour', { val: goldenHour, ack: true });
 
-    adapter.log.debug('current day: ' + dayStr);
-    adapter.log.debug('Sunrise today: ' + sunriseStr);
+    adapter.log.debug(`current day: ${dayStr}`);
+    adapter.log.debug(`Sunrise today: ${sunriseStr}`);
     adapter.setState('info.Sunrise', { val: sunriseStr, ack: true });
-    adapter.log.debug('Sunset today: ' + sunsetStr);
+    adapter.log.debug(`Sunset today: ${sunsetStr}`);
     adapter.setState('info.Sunset', { val: sunsetStr, ack: true });
 
     sunriseStr = addMinutes(sunriseStr, adapter.config.astroDelayUp);       // Add Delay for Sunrise
@@ -804,10 +834,10 @@ function shutterDriveCalc() {
     goldenHour = addMinutes(goldenHour, adapter.config.astroDelayDown);     // Add Delay for GoldenHour
     goldenHourEnd = addMinutes(goldenHourEnd, adapter.config.astroDelayUp); // Add Delay for GoldenHourEnd
 
-    adapter.log.debug('Starting up shutters GoldenHour area: ' + goldenHourEnd);
-    adapter.log.debug('Shutdown shutters GoldenHour area: ' + goldenHour);
-    adapter.log.debug('Starting up shutters Sunrise area: ' + sunriseStr);
-    adapter.log.debug('Shutdown shutters Sunset area: ' + sunsetStr);
+    adapter.log.debug(`Starting up shutters GoldenHour area: ${goldenHourEnd}`);
+    adapter.log.debug(`Shutdown shutters GoldenHour area: ${goldenHour}`);
+    adapter.log.debug(`Starting up shutters Sunrise area: ${sunriseStr}`);
+    adapter.log.debug(`Shutdown shutters Sunset area: ${sunsetStr}`);
 
     shutterGoldenHour(adapter, goldenHourEnd, goldenHour, shutterSettings);
     shutterSunriseSunset(adapter, sunriseStr, sunsetStr, shutterSettings);
@@ -847,7 +877,13 @@ function shutterDriveCalc() {
     // ******** Set Up-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
+
                 upTimeLiving = adapter.config.WE_shutterUpLivingMax;
                 debugCnt = 1;
             } else {
@@ -856,7 +892,12 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeLivingArea === true)) {
 
                 if (IsLater(astroTimeLivingUp, adapter.config.WE_shutterUpLivingMax)) {
                     upTimeLiving = adapter.config.WE_shutterUpLivingMax;
@@ -875,7 +916,9 @@ function shutterDriveCalc() {
                     debugCnt = 14;
                 }
             } else {
-                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) ||
+                    (dayStr > 0 && adapter.config.satIsWeek === true)) {
+
                     if (IsLater(astroTimeLivingUp, adapter.config.W_shutterUpLivingMax)) {
                         upTimeLiving = adapter.config.W_shutterUpLivingMax;
                         debugCnt = 4;
@@ -900,13 +943,19 @@ function shutterDriveCalc() {
             break;
     }
     adapter.setState('info.upTimeLiving', { val: upTimeLiving, ack: true });
-    adapter.log.debug('Starting up shutters living area: ' + upTimeLiving + " debug " + debugCnt);
+    adapter.log.debug(`Starting up shutters living area: ${upTimeLiving} | debug: ${debugCnt}`);
     shutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings);
 
     // ******** Set Up-Time Sleep Area ********
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
+
                 upTimeSleep = adapter.config.WE_shutterUpSleepMax;
                 debugCnt = 1;
             } else {
@@ -915,7 +964,12 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeSleepArea === true)) {
 
                 if (IsLater(astroTimeSleepUp, adapter.config.WE_shutterUpSleepMax)) {
                     upTimeSleep = adapter.config.WE_shutterUpSleepMax;
@@ -935,7 +989,8 @@ function shutterDriveCalc() {
                 }
 
             } else {
-                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) ||
+                    (dayStr > 0 && adapter.config.satIsWeek === true)) {
 
                     if (IsLater(astroTimeSleepUp, adapter.config.W_shutterUpSleepMax)) {
                         upTimeSleep = adapter.config.W_shutterUpSleepMax;
@@ -959,14 +1014,20 @@ function shutterDriveCalc() {
             break;
     }
     adapter.setState('info.upTimeSleep', { val: upTimeSleep, ack: true });
-    adapter.log.debug('Starting up shutters sleep area: ' + upTimeSleep + " debug " + debugCnt);
+    adapter.log.debug(`Starting up shutters sleep area: ${upTimeSleep} | debug ${debugCnt}`);
     shutterUpSleep(adapter, upTimeSleep, delayUp, autoSleepStr, shutterSettings)
 
     // ******** Set Up-Time Children Area ********
 
     switch (adapter.config.childrenAutomatic) {
         case 'childrenTime':
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+
                 upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
                 debugCnt = 1;
             } else {
@@ -975,7 +1036,12 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if ((dayStr === 6 && adapter.config.satIsWeek === false) || dayStr === 0 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayStr === true || (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 6 && adapter.config.satIsWeek === false) ||
+                dayStr === 0 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                publicHolidayStr === true ||
+                (schoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true)) {
 
                 if (IsLater(astroTimeChildrenUp, adapter.config.WE_shutterUpChildrenMax)) {
                     upTimeChildren = adapter.config.WE_shutterUpChildrenMax;
@@ -996,7 +1062,8 @@ function shutterDriveCalc() {
 
 
             } else {
-                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) || (dayStr > 0 && adapter.config.satIsWeek === true)) {
+                if ((dayStr < 6 && dayStr > 0 && adapter.config.satIsWeek === false) ||
+                    (dayStr > 0 && adapter.config.satIsWeek === true)) {
 
                     if (IsLater(astroTimeChildrenUp, adapter.config.W_shutterUpChildrenMax)) {
                         upTimeChildren = adapter.config.W_shutterUpChildrenMax;
@@ -1020,13 +1087,19 @@ function shutterDriveCalc() {
             break;
     }
     adapter.setState('info.upTimeChildren', { val: upTimeChildren, ack: true });
-    adapter.log.debug('Starting up shutters children area: ' + upTimeChildren + " debug " + debugCnt);
+    adapter.log.debug(`Starting up shutters children area: ${upTimeChildren} | debug ${debugCnt}`);
     shutterUpChildren(adapter, upTimeChildren, delayUpChildren, autoChildrenStr, shutterSettings)
 
     // ******** Set Down-Time Living Area ********
     switch (adapter.config.livingAutomatic) {
         case 'livingTime':
-            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) {
+
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 1;
             } else {
@@ -1035,22 +1108,55 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEarlier(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) &&
+                IsEarlier(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+
                 downTimeLiving = adapter.config.WE_shutterDownLiving;
                 debugCnt = 3;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsLater(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) &&
+                IsLater(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 4;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) && IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeLivingArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeLivingArea === true)) &&
+                IsEqual(adapter.config.WE_shutterDownLiving, astroTimeLivingDown)) {
+
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 5;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                IsLater(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+
                 downTimeLiving = adapter.config.W_shutterDownLiving;
                 debugCnt = 6;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                IsEarlier(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 7;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                IsEqual(astroTimeLivingDown, adapter.config.W_shutterDownLiving)) {
+
                 downTimeLiving = astroTimeLivingDown;
                 debugCnt = 8;
             }
@@ -1058,13 +1164,19 @@ function shutterDriveCalc() {
     }
 
     adapter.setState('info.downTimeLiving', { val: downTimeLiving, ack: true });
-    adapter.log.debug('Shutdown shutters living area: ' + downTimeLiving + " debug " + debugCnt);
+    adapter.log.debug(`Shutdown shutters living area: ${downTimeLiving} | debug ${debugCnt}`);
     shutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings);
 
     // ******** Set Down-Time Children Area ******** 
     switch (adapter.config.childrenAutomatic) {
         case 'childrenTime':
-            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) {
+
                 downTimeChildren = adapter.config.WE_shutterDownChildren;
                 debugCnt = 1;
             } else {
@@ -1073,35 +1185,71 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) && adapter.config.WE_shutterDownChildren < astroTimeChildrenDown) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) &&
+                adapter.config.WE_shutterDownChildren < astroTimeChildrenDown) {
+
                 downTimeChildren = adapter.config.WE_shutterDownChildren;
                 debugCnt = 3;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && adapter.config.WE_shutterDownChildren > astroTimeChildrenDown) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                (publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true))) &&
+                adapter.config.WE_shutterDownChildren > astroTimeChildrenDown) {
+
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 4;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) || (publicHolidayTomorowStr || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true)) === true) && adapter.config.WE_shutterDownChildren === astroTimeChildrenDown) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeChildrenArea === true) ||
+                (publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeChildrenArea === true))) &&
+                adapter.config.WE_shutterDownChildren === astroTimeChildrenDown) {
+
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 5;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown > adapter.config.W_shutterDownChildren) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                astroTimeChildrenDown > adapter.config.W_shutterDownChildren) {
+
                 downTimeChildren = adapter.config.W_shutterDownChildren;
                 debugCnt = 6;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown < adapter.config.W_shutterDownChildren) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                astroTimeChildrenDown < adapter.config.W_shutterDownChildren) {
+
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 7;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeChildrenDown === adapter.config.W_shutterDownChildren) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) && astroTimeChildrenDown === adapter.config.W_shutterDownChildren) {
+
                 downTimeChildren = astroTimeChildrenDown;
                 debugCnt = 8;
             }
             break;
     }
     adapter.setState('info.downTimeChildren', { val: downTimeChildren, ack: true });
-    adapter.log.debug('Shutdown shutters children area: ' + downTimeChildren + " debug " + debugCnt);
+    adapter.log.debug(`Shutdown shutters children area: ${downTimeChildren} | debug ${debugCnt}`);
     shutterDownChildren(adapter, downTimeChildren, delayDownChildren, autoChildrenStr, shutterSettings);
 
     // ******** Set Down-Time Sleep Area ******** 
     switch (adapter.config.sleepAutomatic) {
         case 'sleepTime':
-            if ((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) {
+            if ((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) {
+
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 1;
             } else {
@@ -1110,29 +1258,62 @@ function shutterDriveCalc() {
             }
             break;
         default:
-            if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep < astroTimeSleepDown) {
+            if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) &&
+                adapter.config.WE_shutterDownSleep < astroTimeSleepDown) {
+
                 downTimeSleep = adapter.config.WE_shutterDownSleep;
                 debugCnt = 3;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep > astroTimeSleepDown) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) &&
+                adapter.config.WE_shutterDownSleep > astroTimeSleepDown) {
+
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 4;
-            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) || dayStr === 6 || HolidayStr === true || (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) || publicHolidayTomorowStr === true || (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) && adapter.config.WE_shutterDownSleep === astroTimeSleepDown) {
+            } else if (((dayStr === 5 && adapter.config.satIsWeek === false) ||
+                dayStr === 6 ||
+                HolidayStr === true ||
+                (SchoolfreeStr === true && adapter.config.schoolfreeSleepArea === true) ||
+                publicHolidayTomorowStr === true ||
+                (schoolfreeTomorowStr === true && adapter.config.schoolfreeSleepArea === true)) &&
+                adapter.config.WE_shutterDownSleep === astroTimeSleepDown) {
+
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 5;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown > adapter.config.W_shutterDownSleep) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                astroTimeSleepDown > adapter.config.W_shutterDownSleep) {
+
                 downTimeSleep = adapter.config.W_shutterDownSleep;
                 debugCnt = 6;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown < adapter.config.W_shutterDownSleep) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                astroTimeSleepDown < adapter.config.W_shutterDownSleep) {
+
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 7;
-            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) || (dayStr < 6 && adapter.config.satIsWeek === true) || dayStr === 0) && astroTimeSleepDown === adapter.config.W_shutterDownSleep) {
+            } else if (((dayStr < 5 && adapter.config.satIsWeek === false) ||
+                (dayStr < 6 && adapter.config.satIsWeek === true) ||
+                dayStr === 0) &&
+                astroTimeSleepDown === adapter.config.W_shutterDownSleep) {
+
                 downTimeSleep = astroTimeSleepDown;
                 debugCnt = 8;
             }
             break;
     }
     adapter.setState('info.downTimeSleep', { val: downTimeSleep, ack: true });
-    adapter.log.debug('Shutdown shutters sleep area: ' + downTimeSleep + " debug " + debugCnt);
+    adapter.log.debug(`Shutdown shutters sleep area: ${downTimeSleep} | debug ${debugCnt}`);
     shutterDownSleep(adapter, downTimeSleep, delayDown, autoSleepStr, shutterSettings);
     shutterDownLate(adapter, shutterSettings);
     shutterDownComplete(adapter, delayDown, shutterSettings);
@@ -1161,9 +1342,9 @@ function sunPos() {
     azimuth = Math.round(10 * currentAzimuth) / 10;
     elevation = Math.round(10 * currentAltitude) / 10;
 
-    adapter.log.debug('Sun Azimut: ' + azimuth + '°');
+    adapter.log.debug(`Sun Azimut: ${azimuth}°`);
     adapter.setState('info.Azimut', { val: azimuth, ack: true });
-    adapter.log.debug('Sun Elevation: ' + elevation + '°');
+    adapter.log.debug(`Sun Elevation: ${elevation}°`);
     adapter.setState('info.Elevation', { val: elevation, ack: true });
 }
 
@@ -1283,7 +1464,7 @@ async function createShutter() {
             if (objectName && objectName !== '') {
                 try {
                     // Create Object for auto up
-                    await adapter.setObjectNotExistsAsync('shutters.autoUp.' + objectName, {
+                    await adapter.setObjectNotExistsAsync(`shutters.autoUp.${objectName}`, {
                         "type": "state",
                         "common": {
                             "role": "switch",
@@ -1295,15 +1476,15 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoUpState = await adapter.getStateAsync('shutters.autoUp.' + objectName).catch((e) => adapter.log.warn(e));
+                    const _autoUpState = await adapter.getStateAsync(`shutters.autoUp.${objectName}`).catch((e) => adapter.log.warn(e));
                     if (!_autoUpState) {
-                        await adapter.setStateAsync('shutters.autoUp.' + objectName, { val: true, ack: true })
+                        await adapter.setStateAsync(`shutters.autoUp.${objectName}`, { val: true, ack: true })
                             .catch((e) => adapter.log.warn(e));
-                        adapter.log.debug('Create Object: shutters.autoUp.' + objectName);
+                        adapter.log.debug(`Create Object: shutters.autoUp.${objectName}`);
                     }
 
                     // Create Object for auto down
-                    await adapter.setObjectNotExistsAsync('shutters.autoDown.' + objectName, {
+                    await adapter.setObjectNotExistsAsync(`shutters.autoDown.${objectName}`, {
                         "type": "state",
                         "common": {
                             "role": "switch",
@@ -1315,15 +1496,15 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoDownState = await adapter.getStateAsync('shutters.autoDown.' + objectName).catch((e) => adapter.log.warn(e));
+                    const _autoDownState = await adapter.getStateAsync(`shutters.autoDown.${objectName}`).catch((e) => adapter.log.warn(e));
                     if (!_autoDownState) {
-                        await adapter.setStateAsync('shutters.autoDown.' + objectName, { val: true, ack: true })
+                        await adapter.setStateAsync(`shutters.autoDown.${objectName}`, { val: true, ack: true })
                             .catch((e) => adapter.log.warn(e));
-                        adapter.log.debug('Create Object: shutters.autoDown.' + objectName);
+                        adapter.log.debug(`Create Object: shutters.autoDown.${objectName}`);
                     }
 
                     // Create Object for auto sun
-                    await adapter.setObjectNotExistsAsync('shutters.autoSun.' + objectName, {
+                    await adapter.setObjectNotExistsAsync(`shutters.autoSun.${objectName}`, {
                         "type": "state",
                         "common": {
                             "role": "switch",
@@ -1335,15 +1516,15 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoSunState = await adapter.getStateAsync('shutters.autoSun.' + objectName).catch((e) => adapter.log.warn(e));
+                    const _autoSunState = await adapter.getStateAsync(`shutters.autoSun.${objectName}`).catch((e) => adapter.log.warn(e));
                     if (!_autoSunState) {
-                        await adapter.setStateAsync('shutters.autoSun.' + objectName, { val: true, ack: true })
+                        await adapter.setStateAsync(`shutters.autoSun.${objectName}`, { val: true, ack: true })
                             .catch((e) => adapter.log.warn(e));
-                        adapter.log.debug('Create Object: shutters.autoSun.' + objectName);
+                        adapter.log.debug(`Create Object: shutters.autoSun.${objectName}`);
                     }
 
                     // Create Object for auto state
-                    await adapter.setObjectNotExistsAsync('shutters.autoState.' + objectName, {
+                    await adapter.setObjectNotExistsAsync(`shutters.autoState.${objectName}`, {
                         "type": "state",
                         "common": {
                             "role": "text",
@@ -1355,15 +1536,15 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoState = await adapter.getStateAsync('shutters.autoState.' + objectName).catch((e) => adapter.log.warn(e));
+                    const _autoState = await adapter.getStateAsync(`shutters.autoState.${objectName}`).catch((e) => adapter.log.warn(e));
                     if (!_autoState) {
-                        await adapter.setStateAsync('shutters.autoState.' + objectName, { val: 'none', ack: true })
+                        await adapter.setStateAsync(`shutters.autoState.${objectName}`, { val: 'none', ack: true })
                             .catch((e) => adapter.log.warn(e));
-                        adapter.log.debug('Create Object: shutters.autoState.' + objectName);
+                        adapter.log.debug(`Create Object: shutters.autoState.${objectName}`);
                     }
 
                     // Create Object for auto level
-                    await adapter.setObjectNotExistsAsync('shutters.autoLevel.' + objectName, {
+                    await adapter.setObjectNotExistsAsync(`shutters.autoLevel.${objectName}`, {
                         "type": "state",
                         "common": {
                             "role": "value",
@@ -1376,14 +1557,14 @@ async function createShutter() {
                         "native": {},
                     });
 
-                    const _autoLevel = await adapter.getStateAsync('shutters.autoLevel.' + objectName).catch((e) => adapter.log.warn(e));
+                    const _autoLevel = await adapter.getStateAsync(`shutters.autoLevel.${objectName}`).catch((e) => adapter.log.warn(e));
                     if (!_autoLevel) {
-                        adapter.log.debug('Create Object: shutters.autoLevel.' + objectName);
-                        await adapter.setStateAsync('shutters.autoLevel.' + objectName, { val: result[i].currentHeight ? parseFloat(result[i].currentHeight) : 0, ack: true })
+                        adapter.log.debug(`Create Object: shutters.autoLevel.${objectName}`);
+                        await adapter.setStateAsync(`shutters.autoLevel.${objectName}`, { val: result[i].currentHeight ? parseFloat(result[i].currentHeight) : 0, ack: true })
                             .catch((e) => adapter.log.warn(e));
                     }
                 } catch (e) {
-                    adapter.log.warn('shutter cannot created ... Please check your shutter config: ' + e);
+                    adapter.log.warn(`shutter cannot created! Please check your shutter config: ${e}`);
                 }
             } else {
                 adapter.log.warn('shutter cannot created ... Please check in your config the shutter Name');
@@ -1398,7 +1579,7 @@ async function createShutter() {
 
 function deleteShutter(fullRes, resultID, resID) {
     if (fullRes.indexOf(resultID) === -1) {
-        adapter.log.info('DELETE: ' + resID);
+        adapter.log.info(`DELETE: ${resID}`);
         try {
             adapter.delObject(resID, function (err) {
                 if (err) {
@@ -1523,7 +1704,7 @@ async function detectedOldShutter(result) {
 function IsLater(timeVal, timeLimit) {
     let ret = false;
     try {
-        adapter.log.debug('check IsLater : ' + timeVal + " " + timeLimit);
+        adapter.log.debug(`check IsLater: ${timeVal} " " ${timeLimit}`);
 
         if (typeof timeVal === "string" && typeof timeLimit === "string") {
             const valIn = timeVal.split(":");
@@ -1534,19 +1715,19 @@ function IsLater(timeVal, timeLimit) {
                 if (parseInt(valIn[0]) > parseInt(valLimits[0])
                     || (parseInt(valIn[0]) === parseInt(valLimits[0]) && parseInt(valIn[1]) > parseInt(valLimits[1]))) {
                     ret = true;
-                    adapter.log.debug('yes, IsLater : ' + timeVal + " " + timeLimit);
+                    adapter.log.debug(`yes, IsLater: ${timeVal} " " ${timeLimit}`);
                 }
             }
             else {
-                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+                adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
         }
         else {
-            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+            adapter.log.error(`not a string '${typeof timeVal} " " ${typeof timeLimit}`);
         }
     }
     catch (e) {
-        adapter.log.error("exception in IsLater [" + e + "]");
+        adapter.log.error(`exception in IsLater ["${e}"]`);
     }
     return ret;
 }
@@ -1562,7 +1743,7 @@ function IsLater(timeVal, timeLimit) {
 function IsEarlier(timeVal, timeLimit) {
     let ret = false;
     try {
-        adapter.log.debug('check IsEarlier : ' + timeVal + " " + timeLimit);
+        adapter.log.debug(`check IsEarlier: ${timeVal} " " ${timeLimit}`);
 
         if (typeof timeVal === "string" && typeof timeLimit === "string") {
             const valIn = timeVal.split(":");
@@ -1573,19 +1754,19 @@ function IsEarlier(timeVal, timeLimit) {
                 if (parseInt(valIn[0]) < parseInt(valLimits[0])
                     || (parseInt(valIn[0]) === parseInt(valLimits[0]) && parseInt(valIn[1]) < parseInt(valLimits[1]))) {
                     ret = true;
-                    adapter.log.debug('yes, IsEarlier : ' + timeVal + " " + timeLimit);
+                    adapter.log.debug(`yes, IsEarlier: ${timeVal} " " ${timeLimit}`);
                 }
             }
             else {
-                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+                adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
         }
         else {
-            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+            adapter.log.error(`not a string ${typeof timeVal} " " ${typeof timeLimit}`);
         }
     }
     catch (e) {
-        adapter.log.error("exception in IsEarlier [" + e + "]");
+        adapter.log.error(`exception in IsEarlier ["${e}"]`);
     }
     return ret;
 }
@@ -1600,7 +1781,7 @@ function IsEarlier(timeVal, timeLimit) {
 function IsEqual(timeVal, timeLimit) {
     let ret = false;
     try {
-        adapter.log.debug('check IsEqual : ' + timeVal + " " + timeLimit);
+        adapter.log.debug(`check IsEqual: ${timeVal} " " ${timeLimit}`);
 
         if (typeof timeVal === "string" && typeof timeLimit === "string") {
             const valIn = timeVal.split(":");
@@ -1610,19 +1791,19 @@ function IsEqual(timeVal, timeLimit) {
 
                 if (parseInt(valIn[0]) === parseInt(valLimits[0]) && parseInt(valIn[1]) === parseInt(valLimits[1])) {
                     ret = true;
-                    adapter.log.debug('yes, IsEqual : ' + timeVal + " " + timeLimit);
+                    adapter.log.debug(`yes, IsEqual: ${timeVal} " " ${timeLimit}`);
                 }
             }
             else {
-                adapter.log.error('string does not contain : ' + timeVal + " " + timeLimit);
+                adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
         }
         else {
-            adapter.log.error('not a string ' + typeof timeVal + " " + typeof timeLimit);
+            adapter.log.error(`not a string ${typeof timeVal} " " ${typeof timeLimit}`);
         }
     }
     catch (e) {
-        adapter.log.error("exception in IsEqual [" + e + "]");
+        adapter.log.error(`exception in IsEqual ["${e}"]`);
     }
     return ret;
 }
@@ -1662,25 +1843,25 @@ function main(adapter) {
     adapter.subscribeStates('info.Elevation');
     adapter.subscribeStates('info.Azimut');
 
-    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.heute.*')) {
-        adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.heute.*');
+    if (adapter.config.publicHolidays === true && (`${adapter.config.publicHolInstance}.heute.*`)) {
+        adapter.subscribeForeignStates(`${adapter.config.publicHolInstance}.heute.*`);
     }
-    if (adapter.config.publicHolidays === true && (adapter.config.publicHolInstance + '.morgen.*')) {
-        adapter.subscribeForeignStates(adapter.config.publicHolInstance + '.morgen.*');
+    if (adapter.config.publicHolidays === true && (`${adapter.config.publicHolInstance}.morgen.*`)) {
+        adapter.subscribeForeignStates(`${adapter.config.publicHolInstance}.morgen.*`);
     }
 
-    if (adapter.config.schoolfree === true && (adapter.config.schoolfreeInstance + '.info.*')) {
-        adapter.subscribeForeignStates(adapter.config.schoolfreeInstance + '.info.*');
+    if (adapter.config.schoolfree === true && (`${adapter.config.schoolfreeInstance}.info.*`)) {
+        adapter.subscribeForeignStates(`${adapter.config.schoolfreeInstance}.info.*`);
     }
 
     if (adapter.config.HolidayDP !== '') {
         adapter.subscribeForeignStates(adapter.config.HolidayDP);
-        adapter.log.info('subscribe ' + adapter.config.HolidayDP);
+        adapter.log.info(`subscribe: ${adapter.config.HolidayDP}`);
     }
 
     if (adapter.config.schoolfreeDP !== '') {
         adapter.subscribeForeignStates(adapter.config.schoolfreeDP);
-        adapter.log.info('subscribe ' + adapter.config.schoolfreeDP);
+        adapter.log.info(`subscribe: ${adapter.config.schoolfreeDP}`);
     }
 
     if (adapter.config.triggerAutoLiving != '') {
@@ -1697,7 +1878,7 @@ function main(adapter) {
         adapter.getForeignState(adapter.config.lightsensorUpDown, (state) => {
             if (state && state.val && state.val !== null) {
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
-                adapter.log.debug('Brightness State Down is: ' + brightnessDown);
+                adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
             }
         });
     }
@@ -1718,7 +1899,6 @@ function main(adapter) {
         adapter.subscribeForeignStates(adapter.config.alarmFire);
     }
 
-    //adapter.log.debug('all shutters ' + JSON.stringify(result));
     if (shutterSettings) {
         const res = shutterSettings.map(({ triggerID }) => ({ triggerID }));
         const resTriggerActive = res.filter((/** @type {{ triggerID: string; }} */ d) => d.triggerID != '');
@@ -1730,7 +1910,7 @@ function main(adapter) {
         }
         resTrigger.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug('trigger for shuttercontrol: ' + element);
+            adapter.log.debug(`trigger for shuttercontrol: ${element}`);
         });
 
         const resInsideTemp = shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
@@ -1743,7 +1923,7 @@ function main(adapter) {
         }
         resSunInsideTemp.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug('trigger for inside temperature: ' + element);
+            adapter.log.debug(`trigger for inside temperature: ${element}`);
         });
 
         const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
@@ -1756,7 +1936,7 @@ function main(adapter) {
         }
         resSunOutsideTemp.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug('trigger for outside temperature: ' + element);
+            adapter.log.debug(`trigger for outside temperature: ${element}`);
         });
 
         const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
@@ -1770,7 +1950,7 @@ function main(adapter) {
         }
         resSunLight.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug('trigger for Light Sensor: ' + element);
+            adapter.log.debug(`trigger for Light Sensor: ${element}`);
         });
 
         const resShutter = shutterSettings.map(({ name }) => ({ name }));
@@ -1783,7 +1963,7 @@ function main(adapter) {
         }
         resShutterState.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug('Shutter State: ' + element);
+            adapter.log.debug(`Shutter State: ${element}%`);
         });
 
         for (const s in shutterSettings) {
@@ -1793,12 +1973,12 @@ function main(adapter) {
                     shutterSettings[s].oldHeight = state.val;
                     shutterSettings[s].triggerHeight = state.val;
 
-                    adapter.log.debug('save current height: ' + shutterSettings[s].currentHeight + '%' + ' from ' + shutterSettings[s].shutterName);
+                    adapter.log.debug(`save current height: '${shutterSettings[s].currentHeight}% from ${shutterSettings[s].shutterName}`);
 
                     if (parseFloat(shutterSettings[s].heightDown) < parseFloat(shutterSettings[s].heightUp)) {
-                        adapter.log.debug(shutterSettings[s].shutterName + ' level conversion is disabled ...');
+                        adapter.log.debug(`${shutterSettings[s].shutterName}: level conversion is disabled!`);
                     } else if (parseFloat(shutterSettings[s].heightDown) > parseFloat(shutterSettings[s].heightUp)) {
-                        adapter.log.debug(shutterSettings[s].shutterName + ' level conversion is enabled');
+                        adapter.log.debug(`${shutterSettings[s].shutterName}: level conversion is enabled!`);
                     }
                 }
             });
