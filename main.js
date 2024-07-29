@@ -1963,7 +1963,7 @@ function main(adapter) {
         }
         resShutterState.forEach(function (element) {
             adapter.subscribeForeignStates(element);
-            adapter.log.debug(`Shutter State: ${element}%`);
+            adapter.log.debug(`Shutter State: ${element}`);
         });
 
         for (const s in shutterSettings) {
