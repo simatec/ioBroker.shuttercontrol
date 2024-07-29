@@ -204,13 +204,13 @@ function startAdapter(options) {
             });
             resSunInsideTemp.forEach(async function (resSunInsideTempID) {
                 if (id === resSunInsideTempID && state.ts === state.lc) {
-                    adapter.log.debug(`insidetemperature changed: ${resSunInsideTempID} | Value: ${state.val}`);
+                    adapter.log.debug(`insidetemperature changed: ${resSunInsideTempID} | Value: ${state.val}°C`);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
             resSunOutsideTemp.forEach(async function (resSunOutsideTempID) {
                 if (id === resSunOutsideTempID && state.ts === state.lc && state.val !== null) {
-                    adapter.log.debug(`outsidetemperature changed: ${resSunOutsideTempID} | Value: ${state.val}`);
+                    adapter.log.debug(`outsidetemperature changed: ${resSunOutsideTempID} | Value: ${state.val}°C`);
                     sunProtect(adapter, elevation, azimuth, shutterSettings);
                 }
             });
@@ -218,7 +218,7 @@ function startAdapter(options) {
                 if (id === resSunLightID && state.ts === state.lc) {
                     // @ts-ignore
                     if (Math.round((new Date(state.lc) - new Date(lastLigthSensorValue[`${resSunLightID}`].ts)) / 1000 / 60) > 2) {
-                        adapter.log.debug(`Lightsensor changed: ${resSunLightID} | Value: ${state.val}`);
+                        adapter.log.debug(`Lightsensor changed: ${resSunLightID} | Value: ${state.val}lux`);
                         sunProtect(adapter, elevation, azimuth, shutterSettings);
                         lastLigthSensorValue[`${resSunLightID}`].ts = state.lc;
                     }
