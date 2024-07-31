@@ -53,6 +53,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Trigger changed
 * (simatec) Code revision and improvements
 * (simatec) many small fixes
+* (simatec) Fix sleep up when open the Window
 
 ### 1.7.3 (2024-06-20)
 * (simatec) Fix Sunprotect End-Delay
