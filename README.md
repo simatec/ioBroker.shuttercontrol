@@ -55,6 +55,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) many small fixes
 * (simatec) Fix Sunprotect end by Shutter up
 * (simatec) Fix Shutter up when open the Window
+* (simatec) Test & Release updated
 
 ### 1.7.3 (2024-06-20)
 * (simatec) Fix Sunprotect End-Delay
