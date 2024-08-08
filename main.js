@@ -241,10 +241,12 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (_shutterState?.val && shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                    shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
+
                                     adapter.log.debug(`Shutter state changed: ${shutterSettings[s].shutterName} old value = ${shutterSettings[s].oldHeight}% | new value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
                                 }
-                                if (_shutterState?.val &&
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined &&
                                     Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].currentHeight &&
                                     Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].oldHeight) {
 
@@ -340,7 +342,7 @@ function startAdapter(options) {
 
                                     await sleep(2000);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
-                                } else if (_shutterState?.val && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
+                                } else if (_shutterState?.val !== null && _shutterState?.val !== undefined && Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound === shutterSettings[s].currentHeight) {
                                     adapter.log.debug(`${shutterSettings[s].shutterName} Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | automatic is active`);
                                     await sleep(2000);
                                     shutterSettings = await shutterState(shutterSettings[s].name, adapter, shutterSettings, false);
@@ -614,27 +616,27 @@ async function checkStates() {
 
 async function checkActualStates() {
     const _holidayStates = await adapter.getStateAsync('control.Holiday').catch((e) => adapter.log.warn(e));
-    if (_holidayStates?.val) {
+    if (_holidayStates?.val !== null && _holidayStates?.val !== undefined) {
         HolidayStr = _holidayStates.val;
     }
 
     const _schoolfreeStates = await adapter.getStateAsync('control.schoolfree').catch((e) => adapter.log.warn(e));
-    if (_schoolfreeStates?.val) {
+    if (_schoolfreeStates?.val !== null && _schoolfreeStates?.val !== undefined) {
         SchoolfreeStr = _schoolfreeStates.val;
     }
 
     const _autoLivingStates = await adapter.getStateAsync('control.autoLiving').catch((e) => adapter.log.warn(e));
-    if (_autoLivingStates?.val) {
+    if (_autoLivingStates?.val !== null && _autoLivingStates?.val !== undefined) {
         autoLivingStr = _autoLivingStates.val;
     }
 
     const _autoSleepStates = await adapter.getStateAsync('control.autoSleep').catch((e) => adapter.log.warn(e));
-    if (_autoSleepStates?.val) {
+    if (_autoSleepStates?.val !== null && _autoSleepStates?.val !== undefined) {
         autoSleepStr = _autoSleepStates.val;
     }
 
     const _autoChildrenStates = await adapter.getStateAsync('control.autoChildren').catch((e) => adapter.log.warn(e));
-    if (_autoChildrenStates?.val) {
+    if (_autoChildrenStates?.val !== null && _autoChildrenStates?.val !== undefined) {
         autoChildrenStr = _autoChildrenStates.val;
     }
 
@@ -643,12 +645,12 @@ async function checkActualStates() {
             adapter.config.publicHolInstance != '')) {
 
         const _publicHolidayStr = await adapter.getForeignStateAsync(`${adapter.config.publicHolInstance}.heute.boolean`).catch((e) => adapter.log.warn(e));
-        if (_publicHolidayStr?.val) {
+        if (_publicHolidayStr?.val !== null && _publicHolidayStr?.val !== undefined) {
             publicHolidayStr = _publicHolidayStr.val;
         }
 
         const _publicHolidayTomorowStr = await adapter.getForeignStateAsync(`${adapter.config.publicHolInstance}.morgen.boolean`).catch((e) => adapter.log.warn(e));
-        if (_publicHolidayTomorowStr?.val) {
+        if (_publicHolidayTomorowStr?.val !== null && _publicHolidayTomorowStr?.val !== undefined) {
             publicHolidayTomorowStr = _publicHolidayTomorowStr.val;
         }
     }
@@ -658,11 +660,11 @@ async function checkActualStates() {
             adapter.config.schoolfreeInstance != '')) {
 
         const _schoolfreeStr = await adapter.getForeignStateAsync(`${adapter.config.schoolfreeInstance}.info.today`).catch((e) => adapter.log.warn(e));
-        if (_schoolfreeStr?.val) {
+        if (_schoolfreeStr?.val !== null && _schoolfreeStr?.val !== undefined) {
             schoolfreeStr = _schoolfreeStr.val;
         }
         const _schoolfreeTomorowStr = await adapter.getForeignStateAsync(`${adapter.config.schoolfreeInstance}.info.tomorrow`).catch((e) => adapter.log.warn(e));
-        if (_schoolfreeTomorowStr?.val) {
+        if (_schoolfreeTomorowStr?.val !== null && _schoolfreeTomorowStr?.val !== undefined) {
             schoolfreeTomorowStr = _schoolfreeTomorowStr.val;
         }
     }
@@ -670,7 +672,7 @@ async function checkActualStates() {
     if (adapter.config.HolidayDP !== '') {
         adapter.log.debug('checking HolidayDP');
         const _HolidayDP = await adapter.getForeignStateAsync(adapter.config.HolidayDP).catch((e) => adapter.log.warn(e));
-        if (_HolidayDP?.val) {
+        if (_HolidayDP?.val !== null && _HolidayDP?.val !== undefined) {
             adapter.log.debug(`got HolidayDP: ${_HolidayDP.val}`);
             await adapter.setStateAsync('control.Holiday', { val: _HolidayDP.val, ack: true })
                 .catch((e) => adapter.log.warn(e));
@@ -680,7 +682,7 @@ async function checkActualStates() {
     if (adapter.config.schoolfreeDP !== '') {
         adapter.log.debug('checking schoolfreeDP');
         const _schoolfreeDP = await adapter.getForeignStateAsync(adapter.config.schoolfreeDP).catch((e) => adapter.log.warn(e));
-        if (_schoolfreeDP?.val) {
+        if (_schoolfreeDP?.val !== null && _schoolfreeDP?.val !== undefined) {
             adapter.log.debug(`got schoolfreeDP: ${_schoolfreeDP.val}`);
             await adapter.setStateAsync('control.schoolfree', { val: _schoolfreeDP.val, ack: true })
                 .catch((e) => adapter.log.warn(e));
@@ -728,7 +730,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
             const nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
             const _shutterState = await adapter.getForeignStateAsync(resultStates[i].name).catch((e) => adapter.log.warn(e));
 
-            if (_shutterState?.val) {
+            if (_shutterState?.val !== null && _shutterState?.val !== undefined) {
                 // Reset Actions every night
                 resultStates[i].currentAction = 'none';
                 resultStates[i].triggerAction = 'none';
@@ -740,7 +742,7 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
                     .catch((e) => adapter.log.warn(e));
                 adapter.log.debug(`${resultStates[i].shutterName} set currentHeight to ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);
 
-                if (_shutterState?.val) {
+                if (_shutterState?.val !== null && _shutterState?.val !== undefined) {
                     resultStates[i].currentHeight = Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound;
                     resultStates[i].oldHeight = resultStates[i].currentHeight;
 
