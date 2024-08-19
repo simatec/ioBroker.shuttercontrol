@@ -147,7 +147,6 @@
       "type": "free"
     },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "shuttercontrol.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/simatec/ioBroker.shuttercontrol/master/admin/shuttercontrol.png",
@@ -156,14 +155,13 @@
     "mode": "daemon",
     "type": "climate-control",
     "compact": true,
-    "materialize": true,
     "connectionType": "local",
     "dataSource": "push",
     "tier": 2,
     "stopBeforeUpdate": true,
     "dependencies": [
       {
-        "js-controller": ">=4.0.0"
+        "js-controller": ">=5.0.19"
       }
     ],
     "globalDependencies": [
