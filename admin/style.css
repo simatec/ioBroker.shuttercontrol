@@ -396,4 +396,8 @@
         left: 0px;
         box-sizing: border-box;
     }
+
+    .m [type=checkbox]+span:not(.lever) {
+        height: auto;
+    }
 }
