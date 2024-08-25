@@ -1,5 +1,6 @@
 ![Logo](img/shuttercontrol.png)
 
+
 # Dokumentation und Anleitung für Shuttercontrol
 
 ![Number of Installations](http://iobroker.live/badges/shuttercontrol-installed.svg) 

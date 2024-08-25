@@ -2,6 +2,7 @@
 * {
     box-sizing: border-box
 }
+
 .m {
     /* Don't cut off dropdowns! 
     overflow: initial;*/
@@ -10,31 +11,98 @@
 
 /* Add your styles here */
 /* Header section*/
-#header-area {margin-top: 2px; margin-bottom: 1px; background-color:#174475;}
-#header-area #header-logo-title .logo {float:left; margin-right: 10px;}
-#header-area #header-logo-title p {line-height: normal !important; margin: 0 !important; padding: 8px 0 0 8px;}
-#header-area #header-logo-title p>span.h-title {font-size: 2em !important; color:white; }
-#header-area #header-logo-title p>span.h-sub-title {font-size: 1.1em !important; color:white; font-style: italic; }
+#header-area {
+    margin-top: 2px;
+    margin-bottom: 1px;
+    background-color: #174475;
+}
+
+#header-area #header-logo-title .logo {
+    float: left;
+    margin-right: 10px;
+}
+
+#header-area #header-logo-title p {
+    line-height: normal !important;
+    margin: 0 !important;
+    padding: 8px 0 0 8px;
+}
+
+#header-area #header-logo-title p>span.h-title {
+    font-size: 2em !important;
+    color: white;
+}
+
+#header-area #header-logo-title p>span.h-sub-title {
+    font-size: 1.1em !important;
+    color: white;
+    font-style: italic;
+}
 
 /* Tabs menu */
-.m .tabs .tab a { color: rgba(13, 134, 231, 0.7); } /* Color */
-.m .tabs .tab a { padding: 0 5px; } /* space of x px at beginning and end of text  */
-.m .tabs { background-color: rgb(255, 255, 255) !important;}
-.m .tabs .active { border-bottom: 2px solid #0d47a1; font-weight: bold;}
-.m .tabs .tab a.active, .m .tabs .tab a:hover { color:#0d47a1; }
-.m .tabs .tab a:hover { border-bottom: 2px solid #46a0e9 !important; }
-.m .row .col.m1 { width: 14%;}
-#tab-area { padding-left:0;padding-right:0; margin-top: 0px; margin-bottom: 1px; background-color:#174475; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) }
+.m .tabs .tab a {
+    color: rgba(13, 134, 231, 0.7);
+}
+
+/* Color */
+.m .tabs .tab a {
+    padding: 0 5px;
+}
+
+/* space of x px at beginning and end of text  */
+.m .tabs {
+    background-color: rgb(255, 255, 255) !important;
+    scrollbar-width: none;
+}
+
+.m .tabs .active {
+    border-bottom: 2px solid #0d47a1;
+    font-weight: bold;
+}
+
+.m .tabs .tab a.active,
+.m .tabs .tab a:hover {
+    color: #0d47a1;
+}
+
+.m .tabs .tab a:hover {
+    border-bottom: 2px solid #46a0e9 !important;
+}
+
+.m .row .col.m1 {
+    width: 14%;
+}
+
+#tab-area {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    background-color: #174475;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
+}
 
 /* Tabs menu react-dark */
-.m.react-dark .tabs .tab a.active, .m .tabs .tab a:hover { color: #2196f3; }
-.m.react-dark .tabs { background-color: #272727 !important;}
+.m.react-dark .tabs .tab a.active,
+.m .tabs .tab a:hover {
+    color: #2196f3;
+}
+
+.m.react-dark .tabs {
+    background-color: #272727 !important;
+}
 
 /* Tabs menu react-blue */
-.m.react-blue .tabs .tab a.active, .m .tabs .tab a:hover { color: #2196f3; }
-.m.react-blue .tabs { background-color: #272727 !important;}
+.m.react-blue .tabs .tab a.active,
+.m .tabs .tab a:hover {
+    color: #2196f3;
+}
 
-.m .col .select-wrapper + label {
+.m.react-blue .tabs {
+    background-color: #272727 !important;
+}
+
+.m .col .select-wrapper+label {
     top: -26px;
 }
 
@@ -118,6 +186,7 @@
     margin-top: -25px;
     height: auto !important;
 }
+
 #dialog-shutter-edit .titlePopUp {
     width: 100% !important;
     background: #174475;
@@ -127,9 +196,10 @@
 
 #dialog-shutter-edit .page {
     width: calc(100% - 10px) !important;
-    padding-left:20;
+    padding-left: 20;
     height: calc(100% - 100px);
 }
+
 /*
 #dialog-shutter-edit .btn {
     margin-right: 1.5rem;
@@ -140,6 +210,7 @@
     visibility: hidden !important;
     display: none !important;
 }
+
 /* hidden table column */
 #events th:nth-of-type(n+7) {
     visibility: hidden !important;
@@ -162,13 +233,16 @@
     overflow: visible !important;
     top: 10px !important;
 }
+
 .m .collapsible-header {
     padding: 0.5rem;
 }
+
 .trigger-add {
     margin-top: 1.3rem;
     margin-left: -0.5rem;
 }
+
 .m .modal .modal-footer {
     padding-right: 2rem;
 }
@@ -178,51 +252,148 @@
     background-color: #3399cc;
     min-height: 48px;
 }
-.m .btn.disabled, .m .btn-small.disabled {
+
+.m .btn.disabled,
+.m .btn-small.disabled {
     background-color: rgba(0, 0, 0, 0.12) !important;
     color: rgba(0, 0, 0, 0.26) !important;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
 }
-.m .btn-save, .m .btn-save-close, .m .btn-cancel {
+
+.m .btn-save,
+.m .btn-save-close,
+.m .btn-cancel {
     background-color: #e0e0e0;
     color: #000000;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
 }
-.m .btn-save:hover, .m .btn-save-close:hover, .m .btn-cancel:hover {
-    background-color: #e0e0e0!important;
+
+.m .btn-save:hover,
+.m .btn-save-close:hover,
+.m .btn-cancel:hover {
+    background-color: #e0e0e0 !important;
     filter: brightness(105%);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Help Buttons */
-.m .btn-floating i.material-icons, .m.react-blue .btn-floating i.material-icons, .m.react-dark .btn-floating i.material-icons {
-    color: rgba(0, 0, 0, 0.87)!important;
-    background-color: rgb(224, 224, 224)!important;
+.m .btn-floating i.material-icons,
+.m.react-blue .btn-floating i.material-icons,
+.m.react-dark .btn-floating i.material-icons {
+    color: rgba(0, 0, 0, 0.87) !important;
+    background-color: rgb(224, 224, 224) !important;
     line-height: 36px;
 }
+
 .m .btn-floating i.material-icons:hover {
-    background-color: #e0e0e0!important;
+    background-color: #e0e0e0 !important;
     filter: brightness(105%);
 }
+
 .m .btn-floating {
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
-    height: 36px!important;
-    width: 36px!important;
+    height: 36px !important;
+    width: 36px !important;
 }
+
 .m .btn-floating:hover {
     box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Table Button*/
 .m .values-buttons.btn-floating.btn-small {
-    width: 32.4px!important;
-    height: 32.4px!important;
+    width: 32.4px !important;
+    height: 32.4px !important;
 }
-.m .values-buttons.btn-floating.btn-small i.material-icons, .m.react-blue .values-buttons.btn-floating.btn-small i.material-icons, .m.react-dark .values-buttons.btn-floating.btn-small i.material-icons {
-    line-height: 32.4px!important;
+
+.m .values-buttons.btn-floating.btn-small i.material-icons,
+.m.react-blue .values-buttons.btn-floating.btn-small i.material-icons,
+.m.react-dark .values-buttons.btn-floating.btn-small i.material-icons {
+    line-height: 32.4px !important;
+}
+
+/* Styling for small Screen (Responsive) */
+@media screen and (max-width: 768px) {
+
+    #events,
+    #events thead,
+    #events tbody,
+    #events th,
+    #events td,
+    #events tr {
+        display: block;
+        width: 100%;
+    }
+
+    #events thead tr {
+        display: none;
+    }
+
+    #events tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #f9f9f9;
+    }
+
+    #events td {
+        display: block;
+        text-align: left;
+        padding: 10px;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    #events td:before {
+        content: attr(data-name);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    /* hidden table column */
+    #events td:nth-of-type(1) {
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    /* hidden table column */
+    #events th:nth-of-type(1) {
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    #events td:nth-of-type(2) {
+        text-align: center !important;
+    }
+
+    .adapter-body {
+        overflow: hidden;
+    }
+
+    .help-link {
+        display: none;
+    }
+
+    #dialog-shutter-edit {
+        max-height: 98% !important;
+        max-width: 98% !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: visible !important;
+        top: 7px !important;
+    }
+
+    .m #dialog-select-member {
+        width: calc(100% - 0.3rem) !important;
+        height: calc(100% - 0.3rem) !important;
+        left: 0px;
+        box-sizing: border-box;
+    }
 }

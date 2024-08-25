@@ -1,0 +1,42 @@
+name: Sync Docu to Wiki
+
+on:
+  push:
+    paths:
+      - 'docs/de/shuttercontrol.md'
+      - 'docs/en/shuttercontrol.md'
+      - 'docs/de/img/*'
+
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Clone wiki repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git ./wiki
+
+      - name: Copy Docu to Wiki
+        run: |
+          cp docs/de/shuttercontrol.md ./wiki/Shuttercontrol-Wiki-Deutsch.md
+          cp docs/en/shuttercontrol.md ./wiki/Shuttercontrol-Wiki-English.md
+          cp docs/en/img/* ./wiki/img/
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd wiki
+          git add .
+          git commit -m "Sync Docu to Wiki"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
