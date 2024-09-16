@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 1.8.0 (2024-09-16)
 * (simatec) Dependencies updated
 * (simatec) Fix End-Delay for Sunprotect
 * (simatec) Update Translations
