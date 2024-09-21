@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "news": {
+      "1.8.1": {
+        "en": "small Design Fix",
+        "de": "kleines Design Fix",
+        "ru": "маленький дизайн Fix",
+        "pt": "pequeno Design Fix",
+        "nl": "kleine ontwerp Fix",
+        "fr": "petite fixation de conception",
+        "it": "piccolo Design Fix",
+        "es": "pequeño diseño fijar",
+        "pl": "mały projekt Fix",
+        "uk": "невеликий дизайн виправити",
+        "zh-cn": "小设计"
+      },
       "1.8.0": {
         "en": "Dependencies updated\nFix End-Delay for Sunprotect\nUpdate Translations\nTrigger changed\nCode revision and improvements\nmany small fixes\nFix Sunprotect end by Shutter up\nFix Shutter up when open the Window\nTest & Release updated\nFix Trigger\nResponsive Design added\nDocu Sync2Wiki added",
         "de": "Ausgaben aktualisiert\nFix End-Delay für Sonnenschutz\nÜbersetzungen aktualisieren\nTrigger geändert\nCode-Revision und Verbesserungen\nviele kleine fixierungen\nFix Sunprotect Ende von Shutter up\nHalten Sie die Klappe, wenn Sie das Fenster öffnen\nTest und Release aktualisiert\nFehler behoben\nResponsive Design hinzugefügt\nDocu Sync2 Wiki hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "W sobotę dodano do pracy tydzień pracy\nZależności\nAuto-Living, Auto-Sleep & Auto-Children (ang.)\nTimeline Fix\nUpdate Germany Docu\nWiki dodaje się",
         "uk": "Субота додано до робочого тижня\nЗалежність оновлено\nФіксація автозбереження, Автозбереження та авто-дитячі\nВиправлення часу\nОновлення німецького документа\nВікі додано",
         "zh-cn": "星期六\nB. 更新的属地\nFix自动化-Liv,自动化-Sleep &自动化-Children\n时间安排\n最新消息\n瓦基加"
-      },
-      "1.6.2": {
-        "en": "Dependencies updated\nnode 20 tests added\nFix ending Sunprotect with open door/window\nFix timing & some states for sunprotect",
-        "de": "Ausgaben aktualisiert\nknoten 20 tests hinzugefügt\nFix End Sunprotect mit offener Tür/Fenster\nFix Timing und einige Zustände für Sonnenschutz",
-        "ru": "Обновленные зависимости\nвсего 20 тестов добавлено\nFix ending Sunprotect с открытой дверью/окно\nИсправление сроков и некоторых государств для sunprotect",
-        "pt": "Dependências atualizadas\nnode 20 testes adicionados\nFix final Sunprotect com porta aberta / janela\nFix timing & alguns estados para proteção solar",
-        "nl": "Afhankelijkheid geüpdateerd\n20 testen toegevoegd\nVertaling:\nVertaling:",
-        "fr": "Dépendances mises à jour\nnode 20 tests ajoutés\nFixe fin Sunprotect avec porte ouverte/fenêtre\nFixer le timing & certains états pour sunprotect",
-        "it": "Dipendenze aggiornate\nnodo 20 test aggiunti\nFissare la protezione solare con la porta aperta/finestra\nFissare i tempi e alcuni stati per protezione solare",
-        "es": "Actualización de las dependencias\nnodo 20 pruebas agregadas\nAcabado fijo protector solar con puerta abierta / ventana\nTiempo de fijación \" algunos estados para protección solar",
-        "pl": "Zależności\n20 testów\nFix kończy Sunprotect z otwartym drzwiem/wysokiem\nFix i niektóre stany na słońce",
-        "uk": "Залежність оновлено\nдодано набір 20 тестів\nФіксація затримки Sunprotect з відкритими дверима/вікно\nВиправлення часу та деяких станів для захисту від сонця",
-        "zh-cn": "B. 更新的属地\n无20次试验增加\nFix 关闭Sunprotect,开门/日。\n固定时间和某些州"
       }
     },
     "titleLang": {
