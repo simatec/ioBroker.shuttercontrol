@@ -35,6 +35,7 @@ function load(settings, onChange) {
 
     values2table('events', events, onChange, tableOnReady);
 
+    translateTable();
     showHideSettings();
 
     $('#responseOIDDialog').on('click', function () {
@@ -291,6 +292,16 @@ function load(settings, onChange) {
     function loadOptions() {
         $('.collapsible').collapsible();
     }
+}
+
+function translateTable() {
+    const element = document.querySelector('#events');
+
+    const name = _('Name');
+    const objectID = _('Object-ID shutter');
+
+    element.style.setProperty('--my-name', `"${name}"`);
+    element.style.setProperty('--my-id', `"${objectID}"`);
 }
 
 function fillPosition() {

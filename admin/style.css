@@ -337,6 +337,7 @@
     #events tr {
         margin-bottom: 15px;
         border: 1px solid #ddd;
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
         padding: 10px;
         background: #f9f9f9;
     }
@@ -350,7 +351,6 @@
     }
 
     #events td:before {
-        content: attr(data-name);
         font-weight: bold;
         display: block;
         margin-bottom: 5px;
@@ -368,9 +368,22 @@
         visibility: hidden !important;
         display: none !important;
     }
-
+    
     #events td:nth-of-type(2) {
-        text-align: center !important;
+        margin-bottom: 2.0rem;
+    }
+    
+    #events td:nth-of-type(3):before {
+        content: var(--my-name);
+    }
+
+    #events td:nth-of-type(4):before {
+        content: var(--my-id);
+    }
+
+    #events td:nth-of-type(5) {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
     }
 
     .adapter-body {
@@ -399,5 +412,9 @@
 
     .m [type=checkbox]+span:not(.lever) {
         height: auto;
+    }
+
+    .m .modal .modal-content {
+        padding: 5px;
     }
 }
