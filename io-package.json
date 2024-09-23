@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.1",
+    "version": "1.8.2",
     "news": {
+      "1.8.2": {
+        "en": "Responsive design Fix",
+        "de": "Responsive Design Fehler",
+        "ru": "Реакция Fix",
+        "pt": "Design responsivo Fixação",
+        "nl": "Responsief ontwerp Repareren",
+        "fr": "Conception sensible Correction",
+        "it": "Design reattivo Fisso",
+        "es": "Diseño responsable Corrección",
+        "pl": "Odpowiednia konstrukcja Napraw",
+        "uk": "Відповідальний дизайн Фіксація",
+        "zh-cn": "反应设计 修补"
+      },
       "1.8.1": {
         "en": "small Design Fix",
         "de": "kleines Design Fix",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja zależności\n@ iobroker / adapter- dev dodany\nOptymalizacja projektu\nGulp usunięty\nAktualizacja doku\nwiele małych poprawek",
         "uk": "Залежність оновлено\n@iobroker/adapter-dev додано\nОптимізація дизайну\nВідхилити\nDocu оновлений\nбагато маленьких фіксаторів",
         "zh-cn": "更新的依赖关系\n@iobroduc/adapter-dev 添加到\n设计优化\nGulp 已删除\n更新 Docu\n许多小修正"
-      },
-      "1.6.3": {
-        "en": "Saturday added as work week\nDependencies updated\nFix Auto-Living, Auto-Sleep & Auto-Children\nTimeout Fix\nUpdate German Docu\nWiki added",
-        "de": "Samstag hinzugefügt als Arbeitswoche\nAusgaben aktualisiert\nAuto-Living, Auto-Sleep & Auto-Children\nTimeout Fix\nDeutsche Docu aktualisieren\nWiki hinzugefügt",
-        "ru": "Суббота добавлена как рабочая неделя\nОбновленные зависимости\nFix Auto-Living, Auto-Sleep & Auto-Дети\nTimeout Fix\nОбновить немецкий Docu\nWiki добавлено",
-        "pt": "Sábado adicionado como semana de trabalho\nDependências atualizadas\nFix Auto-Living, Auto-Sleep & Auto-Children\nFix de tempo limite\nAtualizar Alemão Docu\nWiki adicionado",
-        "nl": "Zaterdag toegevoegd als werkweek\nAfhankelijkheid geüpdateerd\nQuality over Quantity (QoQ) Releases Vertaling:\nTime-out Fix\nUpdate Duitse Docu\nWiki toegevoegd",
-        "fr": "Samedi ajouté comme semaine de travail\nDépendances mises à jour\nFix Auto-Living, Auto-Sleep & Auto-Children\nTimeout Fix\nMettre à jour le Docu allemand\nWiki ajouté",
-        "it": "Sabato aggiunto come settimana di lavoro\nDipendenze aggiornate\nRiparare Auto-Living, Auto-Sleep & Auto-Children\nCorrezione di tempo\nAggiornamento tedesco Docu\nWiki aggiunto",
-        "es": "Sábado añadido como semana laboral\nActualización de las dependencias\nFijar auto-vivir, auto-sleep \" Auto-Children\nTimeout Fix\nActualización Alemán Docu\nWiki añadido",
-        "pl": "W sobotę dodano do pracy tydzień pracy\nZależności\nAuto-Living, Auto-Sleep & Auto-Children (ang.)\nTimeline Fix\nUpdate Germany Docu\nWiki dodaje się",
-        "uk": "Субота додано до робочого тижня\nЗалежність оновлено\nФіксація автозбереження, Автозбереження та авто-дитячі\nВиправлення часу\nОновлення німецького документа\nВікі додано",
-        "zh-cn": "星期六\nB. 更新的属地\nFix自动化-Liv,自动化-Sleep &自动化-Children\n时间安排\n最新消息\n瓦基加"
       }
     },
     "titleLang": {
