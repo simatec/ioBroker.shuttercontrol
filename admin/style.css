@@ -334,12 +334,18 @@
         display: none;
     }
 
-    #events tr {
+    .m #events tr {
         margin-bottom: 15px;
         border: 1px solid #ddd;
+        border-radius: 5px;
         box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
         padding: 10px;
         background: #f9f9f9;
+    }
+
+    .m.react-dark #events tr,
+    .m.react-blue #events tr {
+        background: #272727 !important;
     }
 
     #events td {
@@ -368,11 +374,11 @@
         visibility: hidden !important;
         display: none !important;
     }
-    
+
     #events td:nth-of-type(2) {
         margin-bottom: 2.0rem;
     }
-    
+
     #events td:nth-of-type(3):before {
         content: var(--my-name);
     }
