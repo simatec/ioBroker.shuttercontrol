@@ -319,6 +319,9 @@
 
 /* Styling for small Screen (Responsive) */
 @media screen and (max-width: 768px) {
+    .m .page {
+        height: calc(100% - 120px);
+    }
 
     #events,
     #events thead,
@@ -422,5 +425,19 @@
 
     .m .modal .modal-content {
         padding: 5px;
+    }
+}
+
+@media screen and (max-width: 601px) {
+    .m .page {
+        height: calc(100% - 110px);
+    }
+
+    .m .dropdown-menu.show {
+        top: -10px !important;
+    }
+
+    .m .dropdown-toggle {
+        right: 10px;
     }
 }
