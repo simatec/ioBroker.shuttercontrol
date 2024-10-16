@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.2",
+    "version": "1.8.3",
     "news": {
+      "1.8.3": {
+        "en": "Fix Alarm\nFix Design\nDependencies updated",
+        "de": "Alarmstufe\nFehlerhaftes Design\nAusgaben aktualisiert",
+        "ru": "Fix Alarm\nFix Design\nОбновленные данные о зависимостях",
+        "pt": "Alarme de fixação\nDesign fixo\nDependências atualizadas",
+        "nl": "Herinnering herstellen\nFix ontwerp\nAfhankelijkheden bijgewerkt",
+        "fr": "Correction de l'alarme\nConception de la correction\nDépendances actualisées",
+        "it": "Risolvere l'allarme\nFisso Design\nDipendenze aggiornate",
+        "es": "Alarma fija\nDiseño fijo\nActualización de las dependencias",
+        "pl": "Napraw alarm\nFix Design\nAktualizacja zależności",
+        "uk": "Виправлення сигналізації\nФіксований дизайн\nЗалежність оновлено",
+        "zh-cn": "修正警报\n固定设计\n更新的依赖关系"
+      },
       "1.8.2": {
         "en": "Responsive design Fix",
         "de": "Responsive Design Fehler",
@@ -80,19 +93,6 @@
         "pl": "(simatec)\n(simatec) Aktualizacja doku",
         "uk": "(simatec) Залежність оновлено\n(Simatec) Docu оновлений",
         "zh-cn": "(simatec) 更新的依赖性\n(静音) 更新 Docu"
-      },
-      "1.7.0": {
-        "en": "Dependencies updated\n@iobroker/adapter-dev added\nDesign optimizations\nGulp deleted\nDocu updated\nmany small fixes",
-        "de": "Ausgaben aktualisiert\n@iobroker/adapter-dev hinzugefügt\nDesignoptimierungen\nGulp gelöscht\nDocu aktualisiert\nviele kleine fixierungen",
-        "ru": "Обновленные данные о зависимостях\n@iobroker/adapter-dev\nОптимизация дизайна\nУдалить\nDocu\nмного небольших исправлений",
-        "pt": "Dependências atualizadas\n@iobroker/adapter-dev adicionado\nOtimizações de design\nGulp excluído\nDocu atualizado\nmuitas pequenas correções",
-        "nl": "Afhankelijkheden bijgewerkt\n@iobroker/adapter-dev toegevoegd\nOntwerpoptimalisaties\nGulp verwijderd\nDocu bijgewerkt\nveel kleine fixes",
-        "fr": "Dépendances actualisées\n@iobroker/adaptateur-dev ajouté\nOptimisations de conception\nGulp supprimé\nDocu mis à jour\nde nombreuses petites corrections",
-        "it": "Dipendenze aggiornate\n@iobroker/adapter-dev aggiunto\nOttimizzazione del design\nGulp cancellato\nDocu aggiornato\nmolte piccole correzioni",
-        "es": "Actualización de las dependencias\n@iobroker/adapter-dev añadido\nOptimizaciones de diseño\nGulp eliminado\nDocu actualizado\nmuchos pequeños arreglos",
-        "pl": "Aktualizacja zależności\n@ iobroker / adapter- dev dodany\nOptymalizacja projektu\nGulp usunięty\nAktualizacja doku\nwiele małych poprawek",
-        "uk": "Залежність оновлено\n@iobroker/adapter-dev додано\nОптимізація дизайну\nВідхилити\nDocu оновлений\nбагато маленьких фіксаторів",
-        "zh-cn": "更新的依赖关系\n@iobroduc/adapter-dev 添加到\n设计优化\nGulp 已删除\n更新 Docu\n许多小修正"
       }
     },
     "titleLang": {
