@@ -197,7 +197,7 @@
 #dialog-shutter-edit .page {
     width: calc(100% - 10px) !important;
     padding-left: 20;
-    height: calc(100% - 100px);
+    height: calc(100% - 115px);
 }
 
 /*
@@ -315,6 +315,17 @@
 .m.react-blue .values-buttons.btn-floating.btn-small i.material-icons,
 .m.react-dark .values-buttons.btn-floating.btn-small i.material-icons {
     line-height: 32.4px !important;
+}
+
+/* Only for Firefox */
+@supports (-moz-appearance: none) {
+    .adapter-body {
+        overflow: hidden;
+    }
+    
+    .m .page {
+        height: calc(100vh - 180px);
+    }
 }
 
 /* Styling for small Screen (Responsive) */

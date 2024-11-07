@@ -170,6 +170,20 @@ function startAdapter(options) {
                 shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
                 adapter.log.debug(`Brightness sensor value: ${state.val}`);
 
+                if (state.val === 0 && brightnessDown === false) {
+                    const shutterDownBrightnessTime = adapter.config.lightsensorDownTime;
+                    const downTime = shutterDownBrightnessTime.split(':');
+
+                    schedule.cancelJob('shutterDownBrightness');
+
+                    const downBrightness = schedule.scheduleJob('shutterDownBrightness', downTime[1] + ' ' + downTime[0] + ' * * *', async function () {
+                        shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
+                    });
+                // @ts-ignore
+                } else if (state.val > 0) {
+                    schedule.cancelJob('shutterDownBrightness');
+                }
+
                 await sleep(10000);
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
                 adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
@@ -241,7 +255,7 @@ function startAdapter(options) {
                                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
 
-                                if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined &&
                                     shutterSettings[s].oldHeight != Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound) {
 
                                     adapter.log.debug(`Shutter state changed: ${shutterSettings[s].shutterName} old value = ${shutterSettings[s].oldHeight}% | new value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}%`);

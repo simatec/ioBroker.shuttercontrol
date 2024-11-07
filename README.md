@@ -49,6 +49,8 @@ When the adapter crashes or an other Code error happens, this error message that
 ### __WORK IN PROGRESS__
 * (simatec) Issue Info added
 * (simatec) Dependencies updated
+* (simatec) Design Fix
+* (simatec) Bugfix Brightness down
 
 ### 1.8.3 (2024-10-16)
 * (simatec) Fix Alarm
