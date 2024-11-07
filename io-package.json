@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.3",
+    "version": "1.8.4",
     "news": {
+      "1.8.4": {
+        "en": "Issue Info added\nDependencies updated\nDesign Fix\nBugfix Brightness down",
+        "de": "Ausgabe Info hinzugefügt\nAusgaben aktualisiert\nDesign Fix\nBugfix Helligkeit unten",
+        "ru": "Добавлено\nОбновленные данные о зависимостях\nДизайн Fix\nЯркость",
+        "pt": "InformaÃ§Ã£o de emissÃ£o adicionada\nDependências atualizadas\nCorreção de Design\nBugfix Brilho para baixo",
+        "nl": "Issue Info toegevoegd\nAfhankelijkheden bijgewerkt\nOntwerpfix\nBugfix Helderheid naar beneden",
+        "fr": "Numéro d'information ajouté\nDépendances actualisées\nCorrection de conception\nBugfix Brightness down",
+        "it": "Numero Info aggiunto\nDipendenze aggiornate\nDesign Fix\nBugfix luminosità giù",
+        "es": "Información sobre el número añadido\nActualización de las dependencias\nDiseño fijo\nBugfix Brightness abajo",
+        "pl": "Dodano informację\nAktualizacja zależności\nPopraw projekt\nBugfix Jasność w dół",
+        "uk": "Інформація про випуск\nЗалежність оновлено\nФіксація дизайну\nBugfix яскравість вниз",
+        "zh-cn": "添加问题信息\n更新的依赖关系\n设计\n错误修正亮度"
+      },
       "1.8.3": {
         "en": "Fix Alarm\nFix Design\nDependencies updated",
         "de": "Alarmstufe\nFehlerhaftes Design\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "(simatec) Napraw stan wahadłowca włączony",
         "uk": "(simatec) Fix Shutterstate включений",
         "zh-cn": "(simatec) 固定关闭状态启用"
-      },
-      "1.7.1": {
-        "en": "(simatec) Dependencies updated\n(simatec) Docu updated",
-        "de": "(simatec) Abhängigkeiten aktualisiert\n(simatec) Docu aktualisiert",
-        "ru": "(simatec) Обновление зависимостей\n(simatec) Доку",
-        "pt": "(simatec) Dependências atualizadas\n(simatec) Docu atualizado",
-        "nl": "Afhankelijkheden bijgewerkt\n(simatec) Docu bijgewerkt",
-        "fr": "(simatec) Dépendances actualisées\n(simatec) Docu mis à jour",
-        "it": "(simatec) Dipendenze aggiornate\n(simatec) Docu aggiornato",
-        "es": "Dependencias actualizadas\n(simatec) Docu actualizado",
-        "pl": "(simatec)\n(simatec) Aktualizacja doku",
-        "uk": "(simatec) Залежність оновлено\n(Simatec) Docu оновлений",
-        "zh-cn": "(simatec) 更新的依赖性\n(静音) 更新 Docu"
       }
     },
     "titleLang": {
