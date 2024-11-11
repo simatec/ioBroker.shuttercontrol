@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Bugfix Brightness down
+
 ### 1.8.4 (2024-11-07)
 * (simatec) Issue Info added
 * (simatec) Dependencies updated

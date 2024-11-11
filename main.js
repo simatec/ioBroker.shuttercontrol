@@ -177,9 +177,15 @@ function startAdapter(options) {
                     schedule.cancelJob('shutterDownBrightness');
 
                     const downBrightness = schedule.scheduleJob('shutterDownBrightness', downTime[1] + ' ' + downTime[0] + ' * * *', async function () {
+                        adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
+                        adapter.log.debug(`Brightness sensor value: ${state.val}`);
                         shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
+
+                        await sleep(10000);
+                        brightnessDown = brightnessState(adapter, state.val, brightnessDown);
+                        adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
                     });
-                // @ts-ignore
+                    // @ts-ignore
                 } else if (state.val > 0) {
                     schedule.cancelJob('shutterDownBrightness');
                 }
