@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.4",
+    "version": "1.8.5",
     "news": {
+      "1.8.5": {
+        "en": "Bugfix Brightness down\neslint-config added\nDependencies updated",
+        "de": "Bugfix Helligkeit unten\neslint-config hinzugefügt\nAusgaben aktualisiert",
+        "ru": "Яркость\nдобавлена eslint-config\nОбновленные данные о зависимостях",
+        "pt": "Bugfix Brilho para baixo\neslint-config adicionado\nDependências atualizadas",
+        "nl": "Bugfix Helderheid naar beneden\neslint-config toegevoegd\nAfhankelijkheden bijgewerkt",
+        "fr": "Bugfix Brightness down\neslint-config ajouté\nDépendances actualisées",
+        "it": "Bugfix luminosità giù\neslint-config aggiunto\nDipendenze aggiornate",
+        "es": "Bugfix Brightness abajo\neslint-config añadido\nActualización de las dependencias",
+        "pl": "Bugfix Jasność w dół\neslint- config dodany\nAktualizacja zależności",
+        "uk": "Bugfix яскравість вниз\neslint-config додано\nЗалежність оновлено",
+        "zh-cn": "错误修正亮度\n添加埃斯林特配置\n更新的依赖关系"
+      },
       "1.8.4": {
         "en": "Issue Info added\nDependencies updated\nDesign Fix\nBugfix Brightness down",
         "de": "Ausgabe Info hinzugefügt\nAusgaben aktualisiert\nDesign Fix\nBugfix Helligkeit unten",
@@ -80,19 +93,6 @@
         "pl": "(simatec) Fix Sunprotect End- Delay",
         "uk": "(simatec) Виправлення Sunprotect End-Delay",
         "zh-cn": "(simatec) 修补太阳保护终端延迟"
-      },
-      "1.7.2": {
-        "en": "(simatec) Fix Shutterstate enabled",
-        "de": "(simatec) Fix Shutterstate aktiviert",
-        "ru": "Fix Shutterstate включен",
-        "pt": "(simatec) Fix Shutterstate habilitado",
-        "nl": "(simatec) Fix Shutterstate ingeschakeld",
-        "fr": "(simatec) Fix Shutterstate activé",
-        "it": "(simatec) Fix Shutterstate abilitato",
-        "es": "(simatec) Fijar Shutterstate habilitado",
-        "pl": "(simatec) Napraw stan wahadłowca włączony",
-        "uk": "(simatec) Fix Shutterstate включений",
-        "zh-cn": "(simatec) 固定关闭状态启用"
       }
     },
     "titleLang": {
