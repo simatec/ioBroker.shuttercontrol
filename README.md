@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) eslint-config fix
+
 ### 1.8.5 (2024-11-27)
 * (simatec) Bugfix Brightness down
 * (simatec) eslint-config added

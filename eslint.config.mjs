@@ -8,6 +8,8 @@ export default [
     {
         // specify files to exclude from linting here
         ignores: [
+            '.dev-server/',
+            '.vscode/',
             '*.test.js',
             'test/**/*.js',
             '*.config.mjs',
