@@ -176,7 +176,7 @@ function startAdapter(options) {
 
                     schedule.cancelJob('shutterDownBrightness');
 
-                    const downBrightness = schedule.scheduleJob('shutterDownBrightness', downTime[1] + ' ' + downTime[0] + ' * * *', async function () {
+                    const downBrightness = schedule.scheduleJob('shutterDownBrightness', `${downTime[1]} ${downTime[0]} * * *`, async function () {
                         adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
                         adapter.log.debug(`Brightness sensor value: ${state.val}`);
                         shutterBrightnessSensor(adapter, state.val, shutterSettings, brightnessDown);
@@ -246,7 +246,7 @@ function startAdapter(options) {
             });
             resShutterState.forEach(async function (resShutterID) {
                 if (id === resShutterID && state.ts === state.lc) {
-                    const result = shutterSettings.filter((/** @type {{ name: any; }} */ d) => d.name === resShutterID);
+                    const result = shutterSettings.filter((d) => d.name === resShutterID);
 
                     if (adapter.config.currentShutterState === true && adapter.config.currentShutterStateTime) {
                         waitTime4StateCheck = (adapter.config.currentShutterStateTime ? adapter.config.currentShutterStateTime * 1000 : 60000);
@@ -311,8 +311,7 @@ function startAdapter(options) {
                                             shutterSettings[s].currentAction = 'Manu_Mode';
                                             shutterSettings[s].triggerAction = 'Manu_Mode';
                                             adapter.log.debug(`set Manu_Mode #1 ${shutterSettings[s].shutterName}`);
-                                        }
-                                        else {
+                                        } else {
                                             /*  Shutter is closed -> open manually to heightUp (should be 100% or 0%) before it has been opened automatically -> 
                                                 enable possibility to activate sunprotect height if required --> 
                                                 if sunprotect is required: shutter is set to sunProtect height
@@ -331,13 +330,12 @@ function startAdapter(options) {
                                                 adapter.log.debug(`Reset firstCompleteUp #1 for ${shutterSettings[s].shutterName}`);
                                                 adapter.log.debug(`${shutterSettings[s].shutterName} opened manually to ${shutterSettings[s].heightUp}% | Old value = ${shutterSettings[s].oldHeight}% | New value = ${Math.round(_shutterState.val / adapter.config.shutterStateRound) * adapter.config.shutterStateRound}% | Possibility to activate sunprotect enabled`);
 
-                                                await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
+                                                await adapter.setStateAsync(`shutters.autoState.${nameDevice}`, { val: shutterSettings[s].currentAction, ack: true })
                                                     .catch((e) => adapter.log.warn(e));
-                                                await adapter.setStateAsync('shutters.autoLevel.' + nameDevice, { val: parseFloat(shutterSettings[s].currentHeight), ack: true })
+                                                await adapter.setStateAsync(`shutters.autoLevel.${nameDevice}`, { val: parseFloat(shutterSettings[s].currentHeight), ack: true })
                                                     .catch((e) => adapter.log.warn(e));
 
-                                            }
-                                            else {
+                                            } else {
                                                 shutterSettings[s].currentAction = 'Manu_Mode';
                                                 shutterSettings[s].triggerAction = 'Manu_Mode';
                                                 adapter.log.debug(`set Manu_Mode #2 ${shutterSettings[s].shutterName}`);
@@ -357,7 +355,7 @@ function startAdapter(options) {
                                     adapter.log.debug(`#1 currentShutterState: ${adapter.config.currentShutterState === true ? 'activated' : 'disabled'}`);
                                     adapter.log.debug(`#1 currentShutterStateTime: ${adapter.config.currentShutterStateTime} seconds`);
 
-                                    await adapter.setStateAsync('shutters.autoState.' + nameDevice, { val: shutterSettings[s].currentAction, ack: true })
+                                    await adapter.setStateAsync(`shutters.autoState.${nameDevice}`, { val: shutterSettings[s].currentAction, ack: true })
                                         .catch((e) => adapter.log.warn(e));
 
                                     await sleep(2000);
@@ -442,7 +440,7 @@ function startAdapter(options) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// +++++++++++++++++ Check all shutter values ​​and set default values ​​if values ​​are not available ++++++++++++++++++++++++++++
+/* ************************ Check all shutter values​and set default values ​​if values ​are not available ********************************* */
 
 async function shutterConfigCheck() {
     return new Promise(async (resolve) => {
@@ -561,16 +559,16 @@ async function saveCurrentStates(onStart) {
             currentStates[`${nameDevice}`] = null;
 
             const states = ({
-                "shutterName": shutterSettings[s].shutterName,
-                "currentAction": shutterSettings[s].currentAction,
-                "currentHeight": shutterSettings[s].currentHeight,
-                "triggerAction": shutterSettings[s].triggerAction,
-                "triggerHeight": shutterSettings[s].triggerHeight,
-                "oldHeight": shutterSettings[s].oldHeight,
-                "firstCompleteUp": shutterSettings[s].firstCompleteUp,
-                "alarmTriggerLevel": shutterSettings[s].alarmTriggerLevel,
-                "alarmTriggerAction": shutterSettings[s].alarmTriggerAction,
-                "lastAutoAction": shutterSettings[s].lastAutoAction
+                shutterName: shutterSettings[s].shutterName,
+                currentAction: shutterSettings[s].currentAction,
+                currentHeight: shutterSettings[s].currentHeight,
+                triggerAction: shutterSettings[s].triggerAction,
+                triggerHeight: shutterSettings[s].triggerHeight,
+                oldHeight: shutterSettings[s].oldHeight,
+                firstCompleteUp: shutterSettings[s].firstCompleteUp,
+                alarmTriggerLevel: shutterSettings[s].alarmTriggerLevel,
+                alarmTriggerAction: shutterSettings[s].alarmTriggerAction,
+                lastAutoAction: shutterSettings[s].lastAutoAction
             });
 
             currentStates[`${nameDevice}`] = states;
@@ -829,13 +827,13 @@ function shutterDriveCalc() {
         adapter.log.debug('calculate astrodata ...');
 
         // format sunset/sunrise time from the Date object
-        sunsetStr = ('0' + times.sunset.getHours()).slice(-2) + ':' + ('0' + times.sunset.getMinutes()).slice(-2);
-        sunriseStr = ('0' + times.sunrise.getHours()).slice(-2) + ':' + ('0' + times.sunrise.getMinutes()).slice(-2);
+        sunsetStr = `${(`0${times.sunset.getHours()}`).slice(-2)}:${(`0${times.sunset.getMinutes()}`).slice(-2)}`;
+        sunriseStr = `${(`0${times.sunrise.getHours()}`).slice(-2)}:${(`0${times.sunrise.getMinutes()}`).slice(-2)}`;
         dayStr = times.sunrise.getDay();
 
         // format goldenhour/goldenhourend time from the Date object
-        goldenHour = ('0' + times.goldenHour.getHours()).slice(-2) + ':' + ('0' + times.goldenHour.getMinutes()).slice(-2);
-        goldenHourEnd = ('0' + times.goldenHourEnd.getHours()).slice(-2) + ':' + ('0' + times.goldenHourEnd.getMinutes()).slice(-2);
+        goldenHour = `${(`0${times.goldenHour.getHours()}`).slice(-2)}:${(`0${times.goldenHour.getMinutes()}`).slice(-2)}`;
+        goldenHourEnd = `${(`0${times.goldenHourEnd.getHours()}`).slice(-2)}:${(`0${times.goldenHourEnd.getMinutes()}`).slice(-2)}`;
     } catch (e) {
         adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
     }
@@ -1375,10 +1373,12 @@ function sunPos() {
 // ++++++++++++++++++++ Add delay Time ++++++++++++++++++++++++
 
 function addMinutes(time, minsToAdd) {
-    function D(J) { return (J < 10 ? '0' : '') + J; }
+    function D(J) {
+        return (J < 10 ? '0' : '') + J;
+    }
     const piece = time.split(':');
     const mins = piece[0] * 60 + +piece[1] + +minsToAdd;
-    return D(mins % (24 * 60) / 60 | 0) + ':' + D(mins % 60);
+    return `${D(mins % (24 * 60) / 60 | 0)}:${D(mins % 60)}`;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1395,15 +1395,15 @@ function delayCalc() {
 
     if (resultFull) {
         if (upTimeLiving === upTimeSleep) {
-            const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living'); // Filter Area Living
-            const result = resLiving.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+            const resLiving = resultFull.filter((d) => d.typeUp === 'living'); // Filter Area Living
+            const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result) {
                 delayUp++;
             }
             if (autoLivingStr === true) {
-                const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'living-auto'); // Filter Area Living
-                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+                const resLivingAuto = resultFull.filter((d) => d.typeUp === 'living-auto'); // Filter Area Living
+                const result2 = resLivingAuto.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result2) {
                     delayUp++;
@@ -1414,15 +1414,15 @@ function delayCalc() {
         if (upTimeSleep === upTimeChildren) {
             delayUpChildren = delayUp;
 
-            const resLiving = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep'); // Filter Area Sleep
-            const result = resLiving.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+            const resLiving = resultFull.filter((d) => d.typeUp === 'sleep'); // Filter Area Sleep
+            const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result) {
                 delayUpChildren++;
             }
             if (autoSleepStr === true) {
-                const resLivingAuto = resultFull.filter((/** @type {{ typeUp: string; }} */ d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
-                const result2 = resLivingAuto.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+                const resLivingAuto = resultFull.filter((d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
+                const result2 = resLivingAuto.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result2) {
                     delayUpChildren++;
@@ -1430,15 +1430,15 @@ function delayCalc() {
             }
         }
         if (downTimeLiving === downTimeSleep) {
-            const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living'); // Filter Area Living
-            const result3 = resLiving2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+            const resLiving2 = resultFull.filter((d) => d.typeDown === 'living'); // Filter Area Living
+            const result3 = resLiving2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result3) {
                 delayDown++;
             }
             if (autoLivingStr === true) {
-                const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'living-auto'); // Filter Area Living
-                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+                const resLivingAuto2 = resultFull.filter((d) => d.typeDown === 'living-auto'); // Filter Area Living
+                const result4 = resLivingAuto2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result4) {
                     delayDown++;
@@ -1449,16 +1449,16 @@ function delayCalc() {
         if (downTimeSleep === downTimeChildren) {
             delayDownChildren = delayDown;
 
-            const resLiving2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep'); // Filter Area Sleep
-            const result3 = resLiving2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+            const resLiving2 = resultFull.filter((d) => d.typeDown === 'sleep'); // Filter Area Sleep
+            const result3 = resLiving2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
             for (const i in result3) {
                 delayDownChildren++;
             }
 
             if (autoSleepStr === true) {
-                const resLivingAuto2 = resultFull.filter((/** @type {{ typeDown: string; }} */ d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
-                const result4 = resLivingAuto2.filter((/** @type {{ enabled: boolean | string; }} */ d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+                const resLivingAuto2 = resultFull.filter((d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
+                const result4 = resLivingAuto2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
                 for (const i in result4) {
                     delayDownChildren++;
@@ -1487,15 +1487,15 @@ async function createShutter() {
                 try {
                     // Create Object for auto up
                     await adapter.setObjectNotExistsAsync(`shutters.autoUp.${objectName}`, {
-                        "type": "state",
-                        "common": {
-                            "role": "switch",
-                            "name": result[i].shutterName,
-                            "type": "boolean",
-                            "read": true,
-                            "write": true
+                        type: "state",
+                        common: {
+                            role: "switch",
+                            name: result[i].shutterName,
+                            type: "boolean",
+                            read: true,
+                            write: true
                         },
-                        "native": {},
+                        native: {},
                     });
 
                     const _autoUpState = await adapter.getStateAsync(`shutters.autoUp.${objectName}`).catch((e) => adapter.log.warn(e));
@@ -1507,15 +1507,15 @@ async function createShutter() {
 
                     // Create Object for auto down
                     await adapter.setObjectNotExistsAsync(`shutters.autoDown.${objectName}`, {
-                        "type": "state",
-                        "common": {
-                            "role": "switch",
-                            "name": result[i].shutterName,
-                            "type": "boolean",
-                            "read": true,
-                            "write": true
+                        type: "state",
+                        common: {
+                            role: "switch",
+                            name: result[i].shutterName,
+                            type: "boolean",
+                            read: true,
+                            write: true
                         },
-                        "native": {},
+                        native: {},
                     });
 
                     const _autoDownState = await adapter.getStateAsync(`shutters.autoDown.${objectName}`).catch((e) => adapter.log.warn(e));
@@ -1527,15 +1527,15 @@ async function createShutter() {
 
                     // Create Object for auto sun
                     await adapter.setObjectNotExistsAsync(`shutters.autoSun.${objectName}`, {
-                        "type": "state",
-                        "common": {
-                            "role": "switch",
-                            "name": result[i].shutterName,
-                            "type": "boolean",
-                            "read": true,
-                            "write": true
+                        type: "state",
+                        common: {
+                            role: "switch",
+                            name: result[i].shutterName,
+                            type: "boolean",
+                            read: true,
+                            write: true
                         },
-                        "native": {},
+                        native: {},
                     });
 
                     const _autoSunState = await adapter.getStateAsync(`shutters.autoSun.${objectName}`).catch((e) => adapter.log.warn(e));
@@ -1547,15 +1547,15 @@ async function createShutter() {
 
                     // Create Object for auto state
                     await adapter.setObjectNotExistsAsync(`shutters.autoState.${objectName}`, {
-                        "type": "state",
-                        "common": {
-                            "role": "text",
-                            "name": result[i].shutterName,
-                            "type": "string",
-                            "read": true,
-                            "write": false
+                        type: "state",
+                        common: {
+                            role: "text",
+                            name: result[i].shutterName,
+                            type: "string",
+                            read: true,
+                            write: false
                         },
-                        "native": {},
+                        native: {},
                     });
 
                     const _autoState = await adapter.getStateAsync(`shutters.autoState.${objectName}`).catch((e) => adapter.log.warn(e));
@@ -1567,16 +1567,16 @@ async function createShutter() {
 
                     // Create Object for auto level
                     await adapter.setObjectNotExistsAsync(`shutters.autoLevel.${objectName}`, {
-                        "type": "state",
-                        "common": {
-                            "role": "value",
-                            "name": result[i].shutterName,
-                            "type": "number",
-                            "unit": "%",
-                            "read": true,
-                            "write": false
+                        type: "state",
+                        common: {
+                            role: "value",
+                            name: result[i].shutterName,
+                            type: "number",
+                            unit: "%",
+                            read: true,
+                            write: false
                         },
-                        "native": {},
+                        native: {},
                     });
 
                     const _autoLevel = await adapter.getStateAsync(`shutters.autoLevel.${objectName}`).catch((e) => adapter.log.warn(e));
@@ -1739,16 +1739,13 @@ function IsLater(timeVal, timeLimit) {
                     ret = true;
                     adapter.log.debug(`yes, IsLater: ${timeVal} " " ${timeLimit}`);
                 }
-            }
-            else {
+            } else {
                 adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
-        }
-        else {
+        } else {
             adapter.log.error(`not a string '${typeof timeVal} " " ${typeof timeLimit}`);
         }
-    }
-    catch (e) {
+    } catch (e) {
         adapter.log.error(`exception in IsLater ["${e}"]`);
     }
     return ret;
@@ -1778,16 +1775,13 @@ function IsEarlier(timeVal, timeLimit) {
                     ret = true;
                     adapter.log.debug(`yes, IsEarlier: ${timeVal} " " ${timeLimit}`);
                 }
-            }
-            else {
+            } else {
                 adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
-        }
-        else {
+        } else {
             adapter.log.error(`not a string ${typeof timeVal} " " ${typeof timeLimit}`);
         }
-    }
-    catch (e) {
+    } catch (e) {
         adapter.log.error(`exception in IsEarlier ["${e}"]`);
     }
     return ret;
@@ -1815,16 +1809,13 @@ function IsEqual(timeVal, timeLimit) {
                     ret = true;
                     adapter.log.debug(`yes, IsEqual: ${timeVal} " " ${timeLimit}`);
                 }
-            }
-            else {
+            } else {
                 adapter.log.error(`string does not contain: ${timeVal} " " ${timeLimit}`);
             }
-        }
-        else {
+        } else {
             adapter.log.error(`not a string ${typeof timeVal} " " ${typeof timeLimit}`);
         }
-    }
-    catch (e) {
+    } catch (e) {
         adapter.log.error(`exception in IsEqual ["${e}"]`);
     }
     return ret;
@@ -1923,7 +1914,7 @@ function main(adapter) {
 
     if (shutterSettings) {
         const res = shutterSettings.map(({ triggerID }) => ({ triggerID }));
-        const resTriggerActive = res.filter((/** @type {{ triggerID: string; }} */ d) => d.triggerID != '');
+        const resTriggerActive = res.filter((d) => d.triggerID != '');
 
         for (const i in resTriggerActive) {
             if (resTrigger.indexOf(resTriggerActive[i].triggerID) === -1) {
@@ -1936,7 +1927,7 @@ function main(adapter) {
         });
 
         const resInsideTemp = shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
-        const rescurrentInsideTemp = resInsideTemp.filter((/** @type {{ tempSensor: string; }} */ d) => d.tempSensor != '');
+        const rescurrentInsideTemp = resInsideTemp.filter((d) => d.tempSensor != '');
 
         for (const i in rescurrentInsideTemp) {
             if (resSunInsideTemp.indexOf(rescurrentInsideTemp[i].tempSensor) === -1) {
@@ -1949,7 +1940,7 @@ function main(adapter) {
         });
 
         const resOutsideTemp = shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
-        const rescurrentOutsideTemp = resOutsideTemp.filter((/** @type {{ outsideTempSensor: string; }} */ d) => d.outsideTempSensor != '');
+        const rescurrentOutsideTemp = resOutsideTemp.filter((d) => d.outsideTempSensor != '');
 
         for (const i in rescurrentOutsideTemp) {
             if (resSunOutsideTemp.indexOf(rescurrentOutsideTemp[i].outsideTempSensor) === -1) {
@@ -1962,12 +1953,12 @@ function main(adapter) {
         });
 
         const resLight = shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
-        const rescurrentLight = resLight.filter((/** @type {{ lightSensor: string; }} */ d) => d.lightSensor != '');
+        const rescurrentLight = resLight.filter((d) => d.lightSensor != '');
 
         for (const i in rescurrentLight) {
             if (resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
                 resSunLight.push(rescurrentLight[i].lightSensor);
-                lastLigthSensorValue[`${rescurrentLight[i].lightSensor}`] = { "ts": 0 };
+                lastLigthSensorValue[`${rescurrentLight[i].lightSensor}`] = { ts: 0 };
             }
         }
         resSunLight.forEach(function (element) {
@@ -1976,7 +1967,7 @@ function main(adapter) {
         });
 
         const resShutter = shutterSettings.map(({ name }) => ({ name }));
-        const rescurrentShutter = resShutter.filter((/** @type {{ name: string; }} */ d) => d.name != '');
+        const rescurrentShutter = resShutter.filter((d) => d.name != '');
 
         for (const i in rescurrentShutter) {
             if (resShutterState.indexOf(rescurrentShutter[i].name) === -1) {
