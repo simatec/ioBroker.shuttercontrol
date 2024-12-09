@@ -1720,8 +1720,8 @@ async function detectedOldShutter(result) {
 // +++++++++++++++++++ Is Later function ++++++++++++++++++++++
 
 /**
- * @param {string} timeVal
- * @param {string} timeLimit
+ * @param timeVal
+ * @param timeLimit
  */
 function IsLater(timeVal, timeLimit) {
     let ret = false;
@@ -1756,8 +1756,8 @@ function IsLater(timeVal, timeLimit) {
 // +++++++++++++++++ Is Earlier function +++++++++++++++++++++
 
 /**
- * @param {string } timeVal
- * @param {string } [timeLimit]
+ * @param timeVal
+ * @param [timeLimit]
  */
 function IsEarlier(timeVal, timeLimit) {
     let ret = false;
@@ -1791,8 +1791,8 @@ function IsEarlier(timeVal, timeLimit) {
 
 // ++++++++++++++++++++++++++ is Equal function ++++++++++++++++++++++
 /**
- * @param {string} timeVal
- * @param {string} timeLimit
+ * @param timeVal
+ * @param timeLimit
  */
 function IsEqual(timeVal, timeLimit) {
     let ret = false;

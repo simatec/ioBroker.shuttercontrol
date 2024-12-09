@@ -43,7 +43,7 @@ export default [
             //'no-useless-escape': 'off',
             //'jsdoc/require-param': 'off',
             //'@typescript-eslint/no-require-imports': 'off',
-            'jsdoc/no-types': 'off',
+            //'jsdoc/no-types': 'off',
             //'jsdoc/tag-lines': 'off',
         },
     },
