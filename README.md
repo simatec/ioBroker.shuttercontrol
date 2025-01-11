@@ -50,6 +50,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) eslint-config fix
 * (simatec) Dependencies updated
 * (simatec) Update License
+* (simatec) Fix Frost Alarm
 
 ### 1.8.5 (2024-11-27)
 * (simatec) Bugfix Brightness down
