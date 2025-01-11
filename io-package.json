@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.5",
+    "version": "1.8.6",
     "news": {
+      "1.8.6": {
+        "en": "eslint-config fix\nDependencies updated\nUpdate License\nFix Frost Alarm",
+        "de": "eslint-config fix\nAusgaben aktualisiert\nLizenz aktualisieren\nFrost Alarm",
+        "ru": "eslint-конфигурация\nОбновленные данные о зависимостях\nЛицензия обновления\nFix Frost Alarm",
+        "pt": "eslint-config fix\nDependências atualizadas\nLicença de atualização\nCorrigir o alarme de Frost",
+        "nl": "eslint-config fix\nAfhankelijkheden bijgewerkt\nLicentie bijwerken\nFrost-alarm herstellen",
+        "fr": "fixateur eslint-config\nDépendances actualisées\nMettre à jour la licence\nCorrection de l'alarme de gel",
+        "it": "eslint-config fix\nDipendenze aggiornate\nLicenza di aggiornamento\nFissare l'allarme Frost",
+        "es": "eslint-config fix\nActualización de las dependencias\nActualizar Licencia\nFijar Alarma Frost",
+        "pl": "fix eslint- config\nAktualizacja zależności\nUaktualnij licencję\nNapraw alarm Frost",
+        "uk": "eslint-config виправити\nЗалежність оновлено\nОновлення ліцензії\nВиправлення фрастової сигналізації",
+        "zh-cn": "埃斯林特配置修复\n更新的依赖关系\n更新许可证\n修复霜警警报"
+      },
       "1.8.5": {
         "en": "Bugfix Brightness down\neslint-config added\nDependencies updated",
         "de": "Bugfix Helligkeit unten\neslint-config hinzugefügt\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja zależności\nFix End- Opóźnienie dla Sunprotect\nAktualizuj tłumaczenia\nZmieniono trygger\nPrzegląd kodeksu i ulepszenia\nwiele małych poprawek\nNapraw Sunprotect end by Shutter up\nFix Shutter się po otwarciu okna\nAktualizacja testu i wydania\nFix Trigger\nDodano projekt odpowiedzialny\nDoku Sync2 Dodano Wiki",
         "uk": "Залежність оновлено\nВиправлення End-Delay для Sunprotect\nОновлення перекладів\nТригер змінився\nРевізити та вдосконалення коду\nбагато маленьких фіксаторів\nВиправлення Sunprotect end по Shutter up\nВиправлення перетерти при відкритті вікна\nТест & Реліз оновлений\nВиправлення Trigger\nДодано адаптивний дизайн\nСинхронізація документів Вікі додано",
         "zh-cn": "更新的依赖关系\n修正太阳保护的终端延时\n更新翻译\n触发器已更改\n守则的修订和改进\n许多小修正\n将防晒板关闭\n打开窗口时把关上\n测试和发布更新\n修复触发器\n添加响应设计\nDocu 同步2 维基添加"
-      },
-      "1.7.3": {
-        "en": "(simatec) Fix Sunprotect End-Delay",
-        "de": "(simatec) Sunprotect End-Delay reparieren",
-        "ru": "Fix Sunprotect End-Delay",
-        "pt": "(simatec) Fix Sunprotect End-Delay",
-        "nl": "Fix Sunprotect End-Delay",
-        "fr": "(simatec) Correction de Sunprotect Fin-Delay",
-        "it": "(simatec) Fix Sunprotect End-Delay",
-        "es": "(simatec) Fix Sunprotect End-Delay",
-        "pl": "(simatec) Fix Sunprotect End- Delay",
-        "uk": "(simatec) Виправлення Sunprotect End-Delay",
-        "zh-cn": "(simatec) 修补太阳保护终端延迟"
       }
     },
     "titleLang": {
