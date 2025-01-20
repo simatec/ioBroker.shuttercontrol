@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.6",
+    "version": "1.8.7",
     "news": {
+      "1.8.7": {
+        "en": "Design Fix",
+        "de": "Design Fix",
+        "ru": "Дизайн Fix",
+        "pt": "Correção de Design",
+        "nl": "Ontwerpfix",
+        "fr": "Correction de conception",
+        "it": "Design Fix",
+        "es": "Diseño fijo",
+        "pl": "Popraw projekt",
+        "uk": "Фіксація дизайну",
+        "zh-cn": "设计"
+      },
       "1.8.6": {
         "en": "eslint-config fix\nDependencies updated\nUpdate License\nFix Frost Alarm",
         "de": "eslint-config fix\nAusgaben aktualisiert\nLizenz aktualisieren\nFrost Alarm",
@@ -80,19 +93,6 @@
         "pl": "mały projekt Fix",
         "uk": "невеликий дизайн виправити",
         "zh-cn": "小设计"
-      },
-      "1.8.0": {
-        "en": "Dependencies updated\nFix End-Delay for Sunprotect\nUpdate Translations\nTrigger changed\nCode revision and improvements\nmany small fixes\nFix Sunprotect end by Shutter up\nFix Shutter up when open the Window\nTest & Release updated\nFix Trigger\nResponsive Design added\nDocu Sync2Wiki added",
-        "de": "Ausgaben aktualisiert\nFix End-Delay für Sonnenschutz\nÜbersetzungen aktualisieren\nTrigger geändert\nCode-Revision und Verbesserungen\nviele kleine fixierungen\nFix Sunprotect Ende von Shutter up\nHalten Sie die Klappe, wenn Sie das Fenster öffnen\nTest und Release aktualisiert\nFehler behoben\nResponsive Design hinzugefügt\nDocu Sync2 Wiki hinzugefügt",
-        "ru": "Обновленные данные о зависимостях\nFix End-Delay для Sunprotect\nОбновление переводов\nТриггер изменился\nПересмотр и совершенствование кодекса\nмного небольших исправлений\nФикс Sunprotect end by Shutter\nИсправить затвор при открытии окна\nТест и выпуск обновлен\nFix Trigger\nResponsive Design\nDocu Sync2 Wiki добавлен",
-        "pt": "Dependências atualizadas\nFix End-Delay para Sunprotect\nAtualizar traduções\nTrigger mudou\nRevisão de código e melhorias\nmuitas pequenas correções\nFix Sunprotect end by Shutter up\nFix Shutter para cima quando abrir a janela\nTeste e versão atualizada\nAcionador de fixação\nDesign responsivo adicionado\nDocu Sync2 Wiki adicionado",
-        "nl": "Afhankelijkheden bijgewerkt\nFix End-Delay voor Sunprotect\nVertalingen bijwerken\nTrigger gewijzigd\nHerziening van de code en verbeteringen\nveel kleine fixes\nFix Sunprotect end by Shutter up\nFix Shutter up bij het openen van het venster\nTest & Release bijgewerkt\nFix Trigger\nResponsive Design toegevoegd\nDocu Sync2 Wiki toegevoegd",
-        "fr": "Dépendances actualisées\nCorrection de l'end-delay pour Sunprotect\nMettre à jour les traductions\nDéclencheur modifié\nRévision et amélioration du code\nde nombreuses petites corrections\nRéparez Sunprotect end par Shutter up\nCorrection de l'ouverture de la fenêtre\nMise à jour du test et de la publication\nCorrection du déclencheur\nDesign sensible ajouté\nDocu Sync2 Wiki ajouté",
-        "it": "Dipendenze aggiornate\nRisolvere il ritardo per la protezione solare\nTraduzioni di aggiornamento\nTrigger cambiato\nRevisione del codice e miglioramenti\nmolte piccole correzioni\nFissare la protezione solare fine da Shutter up\nFissare l'otturatore quando aprire la finestra\nTest & Rilascia aggiornato\nRisolvere il Trigger\nResponsive Design aggiunto\nDocu Sync2 Wiki aggiunto",
-        "es": "Actualización de las dependencias\nFijar End-Delay para Sunprotect\nTraducción actualizada\nTrigger cambió\nRevisión y mejora del Código\nmuchos pequeños arreglos\nFijar el extremo protector solar por Shutter up\nArregla el transbordador cuando abra la ventana\nTest & Release updated\nCorrección\nDiseño responsable añadido\nDocu Sync2 Wiki añadido",
-        "pl": "Aktualizacja zależności\nFix End- Opóźnienie dla Sunprotect\nAktualizuj tłumaczenia\nZmieniono trygger\nPrzegląd kodeksu i ulepszenia\nwiele małych poprawek\nNapraw Sunprotect end by Shutter up\nFix Shutter się po otwarciu okna\nAktualizacja testu i wydania\nFix Trigger\nDodano projekt odpowiedzialny\nDoku Sync2 Dodano Wiki",
-        "uk": "Залежність оновлено\nВиправлення End-Delay для Sunprotect\nОновлення перекладів\nТригер змінився\nРевізити та вдосконалення коду\nбагато маленьких фіксаторів\nВиправлення Sunprotect end по Shutter up\nВиправлення перетерти при відкритті вікна\nТест & Реліз оновлений\nВиправлення Trigger\nДодано адаптивний дизайн\nСинхронізація документів Вікі додано",
-        "zh-cn": "更新的依赖关系\n修正太阳保护的终端延时\n更新翻译\n触发器已更改\n守则的修订和改进\n许多小修正\n将防晒板关闭\n打开窗口时把关上\n测试和发布更新\n修复触发器\n添加响应设计\nDocu 同步2 维基添加"
       }
     },
     "titleLang": {
