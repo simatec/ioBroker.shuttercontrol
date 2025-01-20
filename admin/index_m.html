@@ -549,24 +549,24 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s12 l4 input-field LateAllDownTime">
+                                    <div class="col s12 m6 l4 input-field LateAllDownTime">
                                         <input type="text" class="timepicker value" id="LateAllDownTime" />
                                         <label for="LateAllDownTime" class="translate"></label>
                                         <span class="translate">Time at which the roller shutters configured for this should close late</span>
                                     </div>
-                                    <div class="col s12 l4 input-field">
+                                    <div class="col s12 m6 l4 input-field">
                                         <input type="text" class="timepicker value" id="betweenPositionTime" />
                                         <label for="betweenPositionTime" class="translate"></label>
                                         <span class="translate">Time to completely close the shutters from the intermediate position</span>
                                     </div>
-                                    <div class="col s12 l4 input-field">
+                                    <div class="col s12 m6 l4 input-field">
                                         <input type="number" class="value" id="noGoTime" />
                                         <label for="noGoTime" class="translate"></label>
                                         <span class="translate">Time left to detect second sleep (minutes)</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s12 l4 input-field">
+                                    <div class="col s12 m6 l4 input-field">
                                         <input type="checkbox" class="value" id="satIsWeek" />
                                         <span for="satIsWeek" class="translate">Saturday is working week</span>
                                     </div>
@@ -579,18 +579,18 @@
                             </div>
                             <div class="collapsible-body">
                                 <div class="row">
-                                    <div class="col s12 l4 input-field">
+                                    <div class="col s12 m6 l4 input-field">
                                         <input type="checkbox" class="value" id="currentShutterState" />
                                         <span for="currentShutterState" class="translate">check current Shutter State</span>
                                     </div>
-                                    <div class="col s12 l4 input-field checkShutterState">
+                                    <div class="col s12 m6 l4 input-field checkShutterState">
                                         <input type="number" class="value" id="currentShutterStateTime" />
                                         <label for="currentShutterStateTime" class="translate"></label>
                                         <span class="translate">Waiting time for checking the shutter status (seconds)</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s12 l4 input-field">
+                                    <div class="col s12 m6 l4 input-field">
                                         <input type="checkbox" class="value" id="blockManuMode" />
                                         <span for="blockManuMode" class="translate">Blocking the Manu mode for known shutter heights</span>
                                     </div>
@@ -744,11 +744,11 @@
                                 <h6 class="title" style="background-color:#174475;"><span class="translate">Edit Device:</span> <span id="dialogDeviceEditShutter"></span></h6>
                             </div>
                         </div>
-                        <div class="col s12">
+                        <div class="col s12 m12 l12 modalTab">
                             <ul class="tabs">
-                                <li class="tab col s8 l4"><a href="#tab-settingsPopUp" class="translate active">main settings</a></li>
-                                <li class="tab col s12 l4 tab-sunPopUp"><a href="#tab-sunPopUp" class="translate">sun protection settings</a></li>
-                                <li class="tab col s8 l4 tab-extraPopUp"><a href="#tab-extraPopUp" class="translate">Extra Settings</a></li>
+                                <li class="tab col s12 m6 l4"><a href="#tab-settingsPopUp" class="translate active">main settings</a></li>
+                                <li class="tab col s12 m6 l4 tab-sunPopUp"><a href="#tab-sunPopUp" class="translate">sun protection settings</a></li>
+                                <li class="tab col s12 m6 l4 tab-extraPopUp"><a href="#tab-extraPopUp" class="translate">Extra Settings</a></li>
                             </ul>
                         </div>
                         <div id="tab-sunPopUp" class="col s12 page">
@@ -763,7 +763,7 @@
                                     <label for="direction" class="translate"></label>
                                     <span class="translate">direction</span>
                                 </div>
-                                <div class="input-field col s12 l4">
+                                <div class="input-field col s12 m6 l6">
                                     <select class="value" id="type">
                                         <option value="off" class="translate">off</option>
                                         <option value="in- & outside temperature" class="translate">in and outside temperature</option>
@@ -793,7 +793,7 @@
                                     <label for="hysteresisOutside" class="translate"></label>
                                     <span class="translate">hysteresis Outsidetemperature (percent)</span>
                                 </div>
-                                <div class="col s12 l4 input-field">
+                                <div class="col s12 m6 l6 input-field">
                                     <input type="text" class="value" id="actualValueTemp" />
                                     <label for="actualValueTemp" class="translate"></label>
                                     <span class="translate">Object ID Actual value of the sun protection temperature</span>
@@ -813,7 +813,7 @@
                                     <label for="hysteresisLight" class="translate"></label>
                                     <span class="translate">hysteresis Lightsensor (percent)</span>
                                 </div>
-                                <div class="col s12 l4 input-field">
+                                <div class="col s12 m6 l6 input-field">
                                     <input type="text" class="value" id="actualValueLight" />
                                     <label for="actualValueLight" class="translate"></label>
                                     <span class="translate">Object ID of the sun protection Lightsensor</span>
@@ -833,7 +833,7 @@
                                     <label for="hysteresisInside" class="translate"></label>
                                     <span class="translate">hysteresis Insidetemperature (percent)</span>
                                 </div>
-                                <div class="col s12 l4 input-field">
+                                <div class="col s12 m6 l6 input-field">
                                     <input type="text" class="value" id="actualValueTempInside" />
                                     <label for="actualValueTempInside" class="translate"></label>
                                     <span class="translate">Object ID of the Inside Temperature</span>
@@ -955,7 +955,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col s12 l4 input-field">
+                                <div class="col s12 m6 l6 input-field">
                                     <input type="text" class="value" id="triggerID" />
                                     <label for="triggerID" class="translate"></label>
                                     <span class="translate">Trigger ID</span>
@@ -973,15 +973,15 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="LateDown" class="value" />
                                                 <label for="LateDown" class="translate">late_down</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="inSummerNotDown" class="value" />
                                                 <label for="inSummerNotDown" class="translate">inSummerNotDown</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="driveAfterClose" class="value" />
                                                 <label for="driveAfterClose" class="translate">DriveAfterClose</label>
                                             </div>
@@ -995,11 +995,11 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="useXmasLevel" class="value" />
                                                 <label for="useXmasLevel" class="translate">useXmasLevel</label>
                                             </div>
-                                            <div class="col s12 l4 input-field col-XmasLevel">
+                                            <div class="col s12 m6 l6 input-field col-XmasLevel">
                                                 <input type="number" class="value" id="XmasLevel" min=0 max=100 />
                                                 <label for="XmasLevel" class="translate"></label>
                                                 <span class="translate">XmasLevel</span>
@@ -1014,22 +1014,22 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="KeepSunProtect" class="value" />
                                                 <label for="KeepSunProtect" class="translate">KeepSunProtect</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="heatProtection" class="value" />
                                                 <label for="heatProtection" class="translate">Heat protection (completely close the roller shutter in the heat)</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="number" class="value" id="sunProtectEndDely" min=0 max=999 />
                                                 <label for="sunProtectEndDely" class="translate"></label>
                                                 <span class="translate">sunProtectEndDely</span>
                                             </div>
-                                            <div class="col s12 l4 input-field col-heatProtect">
+                                            <div class="col s12 m6 l6 input-field col-heatProtect">
                                                 <input type="number" id="tempHeatProtection" class="form-control" min="0.0" max="40.0" placeholder="0.0-40.0 °C" step="0.1" />
                                                 <label for="tempHeatProtection" class="translate"></label>
                                                 <span class="translate">Outdoor temperature upper limit for activating thermal protection</span>
@@ -1044,17 +1044,17 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="ignoreTriggerAutoState" class="value" />
                                                 <label for="ignoreTriggerAutoState" class="translate">Ignore the status of autoUp and autoDown when opening the window</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="betweenPosition" class="value" />
                                                 <label for="betweenPosition" class="translate">First move to an intermediate position and close later</label>
                                             </div>
-                                            <div class="col s12 l4 input-field col-betweenPosition">
+                                            <div class="col s12 m6 l6 input-field col-betweenPosition">
                                                 <input type="number" class="value" id="betweenPositionLevel" min=0 max=100 />
                                                 <label for="betweenPositionLevel" class="translate"></label>
                                                 <span class="translate">shutter height in the intermediate position</span>
@@ -1081,23 +1081,23 @@
                                     </div>
                                     <div class="collapsible-body">
                                         <div class="row">
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="enableAlarmWind1" class="value" />
                                                 <label for="enableAlarmWind1" class="translate">enableAlarmWind1</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="enableAlarmWind2" class="value" />
                                                 <label for="enableAlarmWind2" class="translate">enableAlarmWind2</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="enableAlarmRain" class="value" />
                                                 <label for="enableAlarmRain" class="translate">enableAlarmRain</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="enableAlarmFrost" class="value" />
                                                 <label for="enableAlarmFrost" class="translate">enableAlarmFrost</label>
                                             </div>
-                                            <div class="col s12 l4 input-field">
+                                            <div class="col s12 m6 l6 input-field">
                                                 <input type="checkbox" id="enableAlarmFire" class="value" />
                                                 <label for="enableAlarmFire" class="translate">enableAlarmFire</label>
                                             </div>

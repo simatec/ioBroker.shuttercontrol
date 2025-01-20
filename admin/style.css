@@ -102,6 +102,11 @@
     background-color: #272727 !important;
 }
 
+.m .modalTab {
+    width: calc(100% - 1.6rem) !important;
+    margin-left: 0.8rem !important;
+}
+
 .m .col .select-wrapper+label {
     top: -26px;
 }
