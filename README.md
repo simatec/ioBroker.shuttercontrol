@@ -48,6 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
 * (simatec) Design Fix
+* (simatec) Fix dialog-select-member
 
 ### 1.8.7 (2025-01-20)
 * (simatec) Design Fix
