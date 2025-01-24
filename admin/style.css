@@ -451,6 +451,8 @@
 
     .m .dropdown-menu.show {
         top: -10px !important;
+        position: absolute;
+        margin-top: -3px;
     }
 
     .m .dropdown-toggle {
