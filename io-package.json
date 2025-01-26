@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.7",
+    "version": "1.8.8",
     "news": {
+      "1.8.8": {
+        "en": "Design Fix\nFix dialog-select-member\nDependencies updated",
+        "de": "Design Fix\nDialog-Auswahl-Mitglied festlegen\nAusgaben aktualisiert",
+        "ru": "Дизайн Fix\nFix диалоговое голосование\nОбновленные данные о зависимостях",
+        "pt": "Correção de Design\nCorrigir diálogo-selecionar-membro\nDependências atualizadas",
+        "nl": "Ontwerpfix\nDialoog selecteren-lid herstellen\nAfhankelijkheden bijgewerkt",
+        "fr": "Correction de conception\nCorrection du membre de dialogue-sélectionner\nDépendances actualisées",
+        "it": "Design Fix\nFisso finestra di dialogo-select-member\nDipendenze aggiornate",
+        "es": "Diseño fijo\nArreglar diálogo-select-member\nActualización de las dependencias",
+        "pl": "Popraw projekt\nFix dialog- select- member\nAktualizacja zależności",
+        "uk": "Фіксація дизайну\nВиправлено діалогове вікно-виберіть-член\nЗалежність оновлено",
+        "zh-cn": "设计\n修补对话框选择成员\n更新的依赖关系"
+      },
       "1.8.7": {
         "en": "Design Fix",
         "de": "Design Fix",
@@ -80,19 +93,6 @@
         "pl": "Odpowiednia konstrukcja Napraw",
         "uk": "Відповідальний дизайн Фіксація",
         "zh-cn": "反应设计 修补"
-      },
-      "1.8.1": {
-        "en": "small Design Fix",
-        "de": "kleines Design Fix",
-        "ru": "маленький дизайн Fix",
-        "pt": "pequeno Design Fix",
-        "nl": "kleine ontwerp Fix",
-        "fr": "petite fixation de conception",
-        "it": "piccolo Design Fix",
-        "es": "pequeño diseño fijar",
-        "pl": "mały projekt Fix",
-        "uk": "невеликий дизайн виправити",
-        "zh-cn": "小设计"
       }
     },
     "titleLang": {
