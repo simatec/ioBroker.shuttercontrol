@@ -81,7 +81,7 @@
     "release-major": "release-script major --yes",
     "translate": "translate-adapter",
     "dev-server-run": "dev-server run shuttercontrol",
-    "dev-server-watch": "dev-server watch shuttercontrol",
+    "dev-server-watch": "dev-server upload shuttercontrol && dev-server watch shuttercontrol",
     "lint": "eslint -c eslint.config.mjs ."
   },
   "bugs": {

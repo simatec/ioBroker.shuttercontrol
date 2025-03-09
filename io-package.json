@@ -159,6 +159,7 @@
     "dataSource": "push",
     "tier": 2,
     "stopBeforeUpdate": true,
+    "messagebox": true,
     "dependencies": [
       {
         "js-controller": ">=5.0.19"
@@ -169,8 +170,15 @@
         "admin": ">=7.4.10"
       }
     ],
+    "adminTab": {
+      "link": "jsonTab.json5",
+      "sendTo": true,
+      "singleton": false,
+      "name": "Shuttercontrol"
+    },
     "adminUI": {
-      "config": "materialize"
+      "config": "materialize",
+      "tab": "html"
     },
     "plugins": {
       "sentry": {
