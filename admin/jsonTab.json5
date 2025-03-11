@@ -47,6 +47,10 @@
                 "label": "Holiday",
                 "oid": "control.Holiday",
                 "ack": true,
+                "unit": "Uhr",
+                "narrow": true,
+                "addColon": true,
+                "highlight": true,
                 "xs": 12,
                 "sm": 12,
                 "md": 6,
@@ -323,12 +327,25 @@
                 "lg": 3,
                 "xl": 3
               },
+              "_helpLine1": {
+                "newLine": true,
+                "type": "divider",
+                "color": "primary",
+                "xs": 12,
+                "sm": 12,
+                "md": 12,
+                "lg": 12,
+                "xl": 12
+              },
               "sunrise": {
                 "type": "state",
                 "readOnly": true,
                 "label": "Sunrise Time",
                 "oid": "info.Sunrise",
                 "unit": "Uhr",
+                "narrow": true,
+                "addColon": true,
+                "highlight": true,
                 "xs": 12,
                 "sm": 12,
                 "md": 4,
@@ -370,6 +387,16 @@
                 "md": 4,
                 "lg": 3,
                 "xl": 3
+              },
+              "_helpLine2": {
+                "newLine": true,
+                "type": "divider",
+                "color": "primary",
+                "xs": 12,
+                "sm": 12,
+                "md": 12,
+                "lg": 12,
+                "xl": 12
               },
               "downTimeSleep": {
                 "type": "state",
@@ -418,6 +445,16 @@
                 "md": 4,
                 "lg": 3,
                 "xl": 3
+              },
+              "_helpLine3": {
+                "newLine": true,
+                "type": "divider",
+                "color": "primary",
+                "xs": 12,
+                "sm": 12,
+                "md": 12,
+                "lg": 12,
+                "xl": 12
               },
             }
         },
