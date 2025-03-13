@@ -48,6 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
 * (simatec) Dependencies updated
+* (simatec) jsonTab added
 
 ### 1.8.8 (2025-01-26)
 * (simatec) Design Fix
