@@ -449,43 +449,6 @@ function startAdapter(options) {
             shutterSettings[s].autoUp = `shutters.autoUp.${nameDevice}`;
             shutterSettings[s].autoSun = `shutters.autoSun.${nameDevice}`;
             shutterSettings[s].autoState = `shutters.autoState.${nameDevice}`;
-            /*
-            delete shutterSettings[s].triggerStateTilted;
-            delete shutterSettings[s].typeUp;
-            delete shutterSettings[s].typeDown;
-            delete shutterSettings[s].heightUp;
-            delete shutterSettings[s].heightDown;
-            delete shutterSettings[s].triggerDrive;
-            delete shutterSettings[s].triggerDriveTildet;
-            delete shutterSettings[s].triggerChange;
-            delete shutterSettings[s].elevation;
-            delete shutterSettings[s].type;
-            delete shutterSettings[s].heightDownSun;
-            delete shutterSettings[s].directionRange;
-            delete shutterSettings[s].tempInside;
-            delete shutterSettings[s].tempOutside;
-            delete shutterSettings[s].valueLight;
-            delete shutterSettings[s].autoDrive;
-            delete shutterSettings[s].hysteresisOutside;
-            delete shutterSettings[s].hysteresisInside;
-            delete shutterSettings[s].hysteresisLight;
-            delete shutterSettings[s].XmasLevel;
-            delete shutterSettings[s].betweenPositionLevel;
-            delete shutterSettings[s].trigDelyUp;
-            delete shutterSettings[s].trigDelyDown;
-            delete shutterSettings[s].sunProtectEndDely;
-            delete shutterSettings[s].LateDown;
-            delete shutterSettings[s].inSummerNotDown;
-            delete shutterSettings[s].KeepSunProtect;
-            delete shutterSettings[s].driveAfterClose;
-            delete shutterSettings[s].useXmasLevel;
-            delete shutterSettings[s].betweenPosition;
-            delete shutterSettings[s].enableAlarmWind1;
-            delete shutterSettings[s].enableAlarmWind2;
-            delete shutterSettings[s].enableAlarmRain;
-            delete shutterSettings[s].enableAlarmFrost;
-            delete shutterSettings[s].enableAlarmFire;
-            */
         }
             adapter.sendTo(obj.from, obj.command, { data: { events: shutterSettings } }, obj.callback);
         }
