@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "1.8.8",
+    "version": "2.0.0",
     "news": {
+      "2.0.0": {
+        "en": "Dependencies updated\njsonTab added",
+        "de": "Ausgaben aktualisiert\njsonTab hinzugefügt",
+        "ru": "Обновленные зависимости\nджейсон Таб добавил",
+        "pt": "Dependências atualizadas\njsonTab adicionado",
+        "nl": "Afhankelijkheden bijgewerkt\njsonTab toegevoegd",
+        "fr": "Dépendances actualisées\njsonTab ajouté",
+        "it": "Dipendenze aggiornate\njsonTab aggiunto",
+        "es": "Actualización de las dependencias\njsonTab añadido",
+        "pl": "Aktualizacja zależności\njsonTab dodany",
+        "uk": "Залежність оновлено\njsonTab додано",
+        "zh-cn": "更新的依赖关系\n添加了 jsonTab"
+      },
       "1.8.8": {
         "en": "Design Fix\nFix dialog-select-member\nDependencies updated",
         "de": "Design Fix\nDialog-Auswahl-Mitglied festlegen\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Napraw alarm\nFix Design\nAktualizacja zależności",
         "uk": "Виправлення сигналізації\nФіксований дизайн\nЗалежність оновлено",
         "zh-cn": "修正警报\n固定设计\n更新的依赖关系"
-      },
-      "1.8.2": {
-        "en": "Responsive design Fix",
-        "de": "Responsive Design Fehler",
-        "ru": "Реакция Fix",
-        "pt": "Design responsivo Fixação",
-        "nl": "Responsief ontwerp Repareren",
-        "fr": "Conception sensible Correction",
-        "it": "Design reattivo Fisso",
-        "es": "Diseño responsable Corrección",
-        "pl": "Odpowiednia konstrukcja Napraw",
-        "uk": "Відповідальний дизайн Фіксація",
-        "zh-cn": "反应设计 修补"
       }
     },
     "titleLang": {
