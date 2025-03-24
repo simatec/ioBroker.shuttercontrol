@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 2.0.1 (2025-03-24)
 * (simatec) Fix Translations
 * (simatec) Tab Icons added
 

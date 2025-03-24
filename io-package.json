@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "news": {
+      "2.0.1": {
+        "en": "Fix Translations\nTab Icons added",
+        "de": "Übersetzungen reparieren\nTab Icons hinzugefügt",
+        "ru": "Исправить переводы\nДобавлены иконки Tab",
+        "pt": "Corrigir traduções\nTab Icons adicionado",
+        "nl": "Vertalingen herstellen\nTab-pictogrammen toegevoegd",
+        "fr": "Correction des traductions\nIcônes de l'onglet ajouté",
+        "it": "Riparare le traduzioni\nScheda Icone aggiunto",
+        "es": "Corregir traducciones\nTab Icons añadido",
+        "pl": "Napraw tłumaczenia\nDodano ikony tab",
+        "uk": "Виправлення перекладів\nВкладка іконок додано",
+        "zh-cn": "修正翻译\n添加标签图标"
+      },
       "2.0.0": {
         "en": "Dependencies updated\njsonTab added",
         "de": "Ausgaben aktualisiert\njsonTab hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Dodano informację\nAktualizacja zależności\nPopraw projekt\nBugfix Jasność w dół",
         "uk": "Інформація про випуск\nЗалежність оновлено\nФіксація дизайну\nBugfix яскравість вниз",
         "zh-cn": "添加问题信息\n更新的依赖关系\n设计\n错误修正亮度"
-      },
-      "1.8.3": {
-        "en": "Fix Alarm\nFix Design\nDependencies updated",
-        "de": "Alarmstufe\nFehlerhaftes Design\nAusgaben aktualisiert",
-        "ru": "Fix Alarm\nFix Design\nОбновленные данные о зависимостях",
-        "pt": "Alarme de fixação\nDesign fixo\nDependências atualizadas",
-        "nl": "Herinnering herstellen\nFix ontwerp\nAfhankelijkheden bijgewerkt",
-        "fr": "Correction de l'alarme\nConception de la correction\nDépendances actualisées",
-        "it": "Risolvere l'allarme\nFisso Design\nDipendenze aggiornate",
-        "es": "Alarma fija\nDiseño fijo\nActualización de las dependencias",
-        "pl": "Napraw alarm\nFix Design\nAktualizacja zależności",
-        "uk": "Виправлення сигналізації\nФіксований дизайн\nЗалежність оновлено",
-        "zh-cn": "修正警报\n固定设计\n更新的依赖关系"
       }
     },
     "titleLang": {
