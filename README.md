@@ -46,6 +46,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Fix Translations
+* (simatec) Tab Icons added
+
 ### 2.0.0 (2025-03-23)
 * (simatec) Dependencies updated
 * (simatec) jsonTab added
