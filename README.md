@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 2.0.2 (2025-06-29)
 * (simatec) Fix Responsive Design for Tab Menu
 * (simatec) Dependencies updated
 
