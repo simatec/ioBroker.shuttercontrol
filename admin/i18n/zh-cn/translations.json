@@ -220,5 +220,18 @@
     "Up Time Living Area": "UP时间居住区",
     "Up Time Sleep Area": "时间睡眠区域",
     "Information and journey times": "信息和旅程时间",
-    "clock": "钟"
+    "clock": "钟",
+    "up": "打开",
+    "down": "关闭",
+    "sunProtect": "日光",
+    "none": "没有任何",
+    "OpenInSunProtect": "在日光下开放",
+    "Manu_Mode": "手动模式",
+    "manu_sunProtect": "手动防晒",
+    "wind1": "风级1",
+    "wind2": "风级2",
+    "triggered": "触发",
+    "frost": "霜",
+    "rain": "雨",
+    "fire": "火"
 }

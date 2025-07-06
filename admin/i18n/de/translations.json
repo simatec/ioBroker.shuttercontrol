@@ -220,5 +220,18 @@
     "Up Time Living Area": "Öffnungszeit Wohnbereich",
     "Up Time Sleep Area": "Öffnungszeit Schlafbereich",
     "Information and journey times": "Informations- und Rollladenzeiten",
-    "clock": "Uhr"
+    "clock": "Uhr",
+    "up": "Offen",
+    "down": "Geschlossen",
+    "sunProtect": "sonnenschutz",
+    "none": "nicht vorhanden",
+    "OpenInSunProtect": "Offen im Sonnenschutz",
+    "Manu_Mode": "manueller Modus",
+    "manu_sunProtect": "Manueller Sonnenschutz",
+    "wind1": "Windstufe 1",
+    "wind2": "Windstufe 2",
+    "triggered": "Fenster geöffnet",
+    "frost": "Frost",
+    "rain": "Regen",
+    "fire": "Feuer"
 }

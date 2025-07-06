@@ -220,5 +220,18 @@
     "Up Time Living Area": "Up Time Living Area",
     "Up Time Sleep Area": "Up Time Sleep Area",
     "Information and journey times": "Informatie- en reistijden",
-    "clock": "klok"
+    "clock": "klok",
+    "up": "Open",
+    "down": "Gesloten",
+    "sunProtect": "Zonneprotect",
+    "none": "geen",
+    "OpenInSunProtect": "Open in SunProtect",
+    "Manu_Mode": "Handmatige modus",
+    "manu_sunProtect": "Handmatige zonbescherming",
+    "wind1": "Windniveau 1",
+    "wind2": "Windniveau 2",
+    "triggered": "geactiveerd",
+    "frost": "vorst",
+    "rain": "regen",
+    "fire": "vuur"
 }

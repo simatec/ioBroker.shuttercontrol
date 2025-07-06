@@ -220,5 +220,18 @@
     "Up Time Living Area": "Sala de estar de tiempo arriba",
     "Up Time Sleep Area": "Área de sueño de tiempo arriba",
     "Information and journey times": "Información y tiempos de viaje",
-    "clock": "reloj"
+    "clock": "reloj",
+    "up": "Abierto",
+    "down": "Cerrado",
+    "sunProtect": "Protección por sol",
+    "none": "ninguno",
+    "OpenInSunProtect": "Abierto en SunProtect",
+    "Manu_Mode": "Modo manual",
+    "manu_sunProtect": "Protección solar manual",
+    "wind1": "Nivel de viento 1",
+    "wind2": "Nivel de viento 2",
+    "triggered": "motivado",
+    "frost": "helada",
+    "rain": "lluvia",
+    "fire": "fuego"
 }
