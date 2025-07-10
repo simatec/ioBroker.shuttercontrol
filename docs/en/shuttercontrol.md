@@ -673,6 +673,26 @@ Shuttercontrol creates various data points under the following folders:
 
 ---
 
+### Status of the roller shutters
+
+A roller shutter can have the following status
+
+* up: Roller shutter open
+* down: Roller shutter closed
+* sunProtect: Roller shutter in sun protection mode
+* none: no status available
+* OpenInSunProtect: Window or door open in sun protection mode
+* Manu_Mode: manual mode (roller shutter was moved manually)
+* manu_sunProtect: manually moved into sun protection mode
+* Wind1: Wind level 1 alarm
+* wind2: Wind level 2 alarm
+* triggered: Window opened and roller shutter moved to the open position
+* frost: Frost alarm
+* rain: Rain alarm
+* fire: Fire alarm
+
+---
+
 
 ### shuttercontrol0control
 

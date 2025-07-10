@@ -673,7 +673,7 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 
 ---
 
-## Status der Rollläden
+### Status der Rollläden
 
 Folgenden Status kann ein Rollladen haben
 * up: Rollladen geöffnet
