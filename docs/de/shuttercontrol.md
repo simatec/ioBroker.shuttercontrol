@@ -672,6 +672,27 @@ Shuttercontrol legt verschiedene Datenpunkte unter folgenden Ordnern an:
 > :point_right: x steht für die jeweilig installierte Instanz
 
 ---
+
+## Status der Rollläden
+
+Folgenden Status kann ein Rollladen haben
+* up: Rollladen geöffnet
+* down: Rollladen geschlossen
+* sunProtect: Rollladen im Sonnenschutz
+* none: kein Status vorhanden
+* OpenInSunProtect: Fenster oder Tür geöffnet im Sonnenschutz
+* Manu_Mode: manueller Modus (Rollladen wurde manuell bewegt)
+* manu_sunProtect: manuell in den Sonnenschutz gefahren
+* wind1: Alarm Windstufe 1
+* wind2: Alarm Windstufe 2
+* triggered: Fenster geöffnet und Rollladen in die Fenster offen Position gefahren
+* frost: Alarm Frost
+* rain: Alarm Regen
+* fire: Alarm Feuer
+
+---
+
+
 ### shuttercontrol0control
 
 ![datapointscontrol](img/datapointscontrol.png)
