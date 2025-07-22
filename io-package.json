@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "news": {
+      "2.0.3": {
+        "en": "Translations updated",
+        "de": "Übersetzungen aktualisiert",
+        "ru": "Обновленные переводы",
+        "pt": "Traduções actualizadas",
+        "nl": "Vertalingen bijgewerkt",
+        "fr": "Traductions actualisées",
+        "it": "Traduzioni aggiornata",
+        "es": "Traducción actualizada",
+        "pl": "Aktualizacja tłumaczeń",
+        "uk": "Переклади оновлені",
+        "zh-cn": "更新翻译"
+      },
       "2.0.2": {
         "en": "Fix Responsive Design for Tab Menu\nDependencies updated",
         "de": "Reparieren Responsive Design für Tab Menu\nAusgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "fix eslint- config\nAktualizacja zależności\nUaktualnij licencję\nNapraw alarm Frost",
         "uk": "eslint-config виправити\nЗалежність оновлено\nОновлення ліцензії\nВиправлення фрастової сигналізації",
         "zh-cn": "埃斯林特配置修复\n更新的依赖关系\n更新许可证\n修复霜警警报"
-      },
-      "1.8.5": {
-        "en": "Bugfix Brightness down\neslint-config added\nDependencies updated",
-        "de": "Bugfix Helligkeit unten\neslint-config hinzugefügt\nAusgaben aktualisiert",
-        "ru": "Яркость\nдобавлена eslint-config\nОбновленные данные о зависимостях",
-        "pt": "Bugfix Brilho para baixo\neslint-config adicionado\nDependências atualizadas",
-        "nl": "Bugfix Helderheid naar beneden\neslint-config toegevoegd\nAfhankelijkheden bijgewerkt",
-        "fr": "Bugfix Brightness down\neslint-config ajouté\nDépendances actualisées",
-        "it": "Bugfix luminosità giù\neslint-config aggiunto\nDipendenze aggiornate",
-        "es": "Bugfix Brightness abajo\neslint-config añadido\nActualización de las dependencias",
-        "pl": "Bugfix Jasność w dół\neslint- config dodany\nAktualizacja zależności",
-        "uk": "Bugfix яскравість вниз\neslint-config додано\nЗалежність оновлено",
-        "zh-cn": "错误修正亮度\n添加埃斯林特配置\n更新的依赖关系"
       }
     },
     "titleLang": {
