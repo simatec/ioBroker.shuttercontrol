@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "news": {
+      "2.0.4": {
+        "en": "Dependencies updated",
+        "de": "Ausgaben aktualisiert",
+        "ru": "Обновленные зависимости",
+        "pt": "Dependências atualizadas",
+        "nl": "Afhankelijkheden bijgewerkt",
+        "fr": "Dépendances actualisées",
+        "it": "Dipendenze aggiornate",
+        "es": "Actualización de las dependencias",
+        "pl": "Aktualizacja zależności",
+        "uk": "Залежність оновлено",
+        "zh-cn": "更新的依赖关系"
+      },
       "2.0.3": {
         "en": "Translations updated",
         "de": "Übersetzungen aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Popraw projekt",
         "uk": "Фіксація дизайну",
         "zh-cn": "设计"
-      },
-      "1.8.6": {
-        "en": "eslint-config fix\nDependencies updated\nUpdate License\nFix Frost Alarm",
-        "de": "eslint-config fix\nAusgaben aktualisiert\nLizenz aktualisieren\nFrost Alarm",
-        "ru": "eslint-конфигурация\nОбновленные данные о зависимостях\nЛицензия обновления\nFix Frost Alarm",
-        "pt": "eslint-config fix\nDependências atualizadas\nLicença de atualização\nCorrigir o alarme de Frost",
-        "nl": "eslint-config fix\nAfhankelijkheden bijgewerkt\nLicentie bijwerken\nFrost-alarm herstellen",
-        "fr": "fixateur eslint-config\nDépendances actualisées\nMettre à jour la licence\nCorrection de l'alarme de gel",
-        "it": "eslint-config fix\nDipendenze aggiornate\nLicenza di aggiornamento\nFissare l'allarme Frost",
-        "es": "eslint-config fix\nActualización de las dependencias\nActualizar Licencia\nFijar Alarma Frost",
-        "pl": "fix eslint- config\nAktualizacja zależności\nUaktualnij licencję\nNapraw alarm Frost",
-        "uk": "eslint-config виправити\nЗалежність оновлено\nОновлення ліцензії\nВиправлення фрастової сигналізації",
-        "zh-cn": "埃斯林特配置修复\n更新的依赖关系\n更新许可证\n修复霜警警报"
       }
     },
     "titleLang": {
