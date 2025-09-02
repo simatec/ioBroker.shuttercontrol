@@ -42,12 +42,7 @@
     "@alcalzone/release-script-plugin-manual-review": "^3.7.0",
     "@iobroker/adapter-dev": "^1.4.0",
     "@iobroker/eslint-config": "^2.1.0",
-    "@iobroker/testing": "^5.1.0",
-    "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
-    "mocha": "^11.7.1",
-    "sinon": "^18.0.0",
-    "sinon-chai": "^3.7.0"
+    "@iobroker/testing": "^5.1.1"
   },
   "main": "main.js",
   "files": [
