@@ -440,17 +440,21 @@ function startAdapter(options) {
 
     adapter.on('message', (obj) => {
         if (obj?.command === 'tab' && obj.callback) {
-           const  shutterSettings = adapter.config.events;
+            const shutterSettings = adapter.config.events;
 
-           for (const s in shutterSettings) {
-            const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
+            for (const s in shutterSettings) {
+                const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
 
-            shutterSettings[s].autoDown = `shutters.autoDown.${nameDevice}`;
-            shutterSettings[s].autoUp = `shutters.autoUp.${nameDevice}`;
-            shutterSettings[s].autoSun = `shutters.autoSun.${nameDevice}`;
-            shutterSettings[s].autoState = `shutters.autoState.${nameDevice}`;
-        }
-            adapter.sendTo(obj.from, obj.command, { data: { events: shutterSettings } }, obj.callback);
+                shutterSettings[s].autoDown = `shutters.autoDown.${nameDevice}`;
+                shutterSettings[s].autoUp = `shutters.autoUp.${nameDevice}`;
+                shutterSettings[s].autoSun = `shutters.autoSun.${nameDevice}`;
+                shutterSettings[s].autoState = `shutters.autoState.${nameDevice}`;
+            }
+            try {
+                adapter.sendTo(obj.from, obj.command, { data: { events: shutterSettings } }, obj.callback);
+            } catch (e) {
+                adapter.log.error('Tab-Menu is not loaded');
+            }
         }
     });
 }
