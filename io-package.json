@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "news": {
+      "2.0.5": {
+        "en": "dependencies updated\nTry & Catch for Tab-Menu added",
+        "de": "aktualisierte abhängigkeiten\nVersuchen & Fangen für Tab-Menu hinzugefügt",
+        "ru": "обновленные зависимости\nTry & Catch для Tab-Menu",
+        "pt": "dependências atualizadas\nTente & pegar para Tab-Menu adicionado",
+        "nl": "afhankelijkheden bijgewerkt\nProbeer & Vangen voor Tab-Menu toegevoegd",
+        "fr": "dépendances mises à jour\nEssayer et attraper pour Tab-Menu ajouté",
+        "it": "dipendenze aggiornate\nProva & Catch per Tab-Menu aggiunto",
+        "es": "dependencias actualizadas\nPruebe \" Catch for Tab-Menu añadido",
+        "pl": "zaktualizowane zależności\nSpróbuj & złapać dla tab- Menu dodane",
+        "uk": "оновлені залежності\nСпробуйте & Catch для Tab-Menu додано",
+        "zh-cn": "更新依赖关系\n尝试为 Tab- Menu 添加抓取( C)"
+      },
       "2.0.4": {
         "en": "Dependencies updated",
         "de": "Ausgaben aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Popraw projekt\nFix dialog- select- member\nAktualizacja zależności",
         "uk": "Фіксація дизайну\nВиправлено діалогове вікно-виберіть-член\nЗалежність оновлено",
         "zh-cn": "设计\n修补对话框选择成员\n更新的依赖关系"
-      },
-      "1.8.7": {
-        "en": "Design Fix",
-        "de": "Design Fix",
-        "ru": "Дизайн Fix",
-        "pt": "Correção de Design",
-        "nl": "Ontwerpfix",
-        "fr": "Correction de conception",
-        "it": "Design Fix",
-        "es": "Diseño fijo",
-        "pl": "Popraw projekt",
-        "uk": "Фіксація дизайну",
-        "zh-cn": "设计"
       }
     },
     "titleLang": {
