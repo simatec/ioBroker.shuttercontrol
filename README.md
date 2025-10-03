@@ -46,6 +46,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) dependencies updated
+
 ### 2.0.5 (2025-09-03)
 * (simatec) dependencies updated
 * (simatec) Try & Catch for Tab-Menu added
