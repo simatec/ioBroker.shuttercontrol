@@ -12,7 +12,7 @@ Thumbs.db
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
 
-.vscode
+.commitinfo
 .DS_Store
 /shuttercontrol.njsproj
 /todo.txt
