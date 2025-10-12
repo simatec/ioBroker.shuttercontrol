@@ -174,7 +174,19 @@
       "link": "jsonTab.json5",
       "sendTo": true,
       "singleton": false,
-      "name": "Shuttercontrol"
+      "name": {
+        "en": "Shuttercontrol",
+        "de": "Rolladensteuerung",
+        "ru": "затвор",
+        "pt": "obturador",
+        "nl": "Luik",
+        "fr": "obturateur",
+        "it": "otturatore",
+        "es": "obturador",
+        "pl": "migawka",
+        "uk": "керування затвором",
+        "zh-cn": "快门"
+      }
     },
     "adminUI": {
       "config": "materialize",

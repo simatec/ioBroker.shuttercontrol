@@ -48,6 +48,7 @@ When the adapter crashes or an other Code error happens, this error message that
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
 * (simatec) dependencies updated
+* (simatec) adminTab Fix
 
 ### 2.0.5 (2025-09-03)
 * (simatec) dependencies updated
