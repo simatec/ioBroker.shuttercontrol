@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "news": {
+      "2.0.6": {
+        "en": "dependencies updated\nadminTab Fix",
+        "de": "aktualisierte abhängigkeiten\nadmin Zurück zur Übersicht",
+        "ru": "обновленные зависимости\nадмин Tab Fix",
+        "pt": "dependências atualizadas\nadministrador Correção da Página",
+        "nl": "afhankelijkheden bijgewerkt\nadmin Tab Fix",
+        "fr": "dépendances mises à jour\nadministrateur Correction de l'onglet",
+        "it": "dipendenze aggiornate\nadmin Scheda di fissaggio",
+        "es": "dependencias actualizadas\nadmin Tab Fix",
+        "pl": "zaktualizowane zależności\nadmin Napraw kartę",
+        "uk": "оновлені залежності\nадмін Табличка",
+        "zh-cn": "更新依赖关系\n管理员 标签"
+      },
       "2.0.5": {
         "en": "dependencies updated\nTry & Catch for Tab-Menu added",
         "de": "aktualisierte abhängigkeiten\nVersuchen & Fangen für Tab-Menu hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja zależności\njsonTab dodany",
         "uk": "Залежність оновлено\njsonTab додано",
         "zh-cn": "更新的依赖关系\n添加了 jsonTab"
-      },
-      "1.8.8": {
-        "en": "Design Fix\nFix dialog-select-member\nDependencies updated",
-        "de": "Design Fix\nDialog-Auswahl-Mitglied festlegen\nAusgaben aktualisiert",
-        "ru": "Дизайн Fix\nFix диалоговое голосование\nОбновленные данные о зависимостях",
-        "pt": "Correção de Design\nCorrigir diálogo-selecionar-membro\nDependências atualizadas",
-        "nl": "Ontwerpfix\nDialoog selecteren-lid herstellen\nAfhankelijkheden bijgewerkt",
-        "fr": "Correction de conception\nCorrection du membre de dialogue-sélectionner\nDépendances actualisées",
-        "it": "Design Fix\nFisso finestra di dialogo-select-member\nDipendenze aggiornate",
-        "es": "Diseño fijo\nArreglar diálogo-select-member\nActualización de las dependencias",
-        "pl": "Popraw projekt\nFix dialog- select- member\nAktualizacja zależności",
-        "uk": "Фіксація дизайну\nВиправлено діалогове вікно-виберіть-член\nЗалежність оновлено",
-        "zh-cn": "设计\n修补对话框选择成员\n更新的依赖关系"
       }
     },
     "titleLang": {
