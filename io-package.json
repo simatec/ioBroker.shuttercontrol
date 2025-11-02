@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "news": {
+      "2.0.7": {
+        "en": "Fix npm publish\ndependencies updated",
+        "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
+        "ru": "Издательство Fix npm\nобновленные зависимости",
+        "pt": "Corrigir a publicação do npm\ndependências atualizadas",
+        "nl": "Fix npm publiceren\nafhankelijkheden bijgewerkt",
+        "fr": "Correction de npm publier\ndépendances mises à jour",
+        "it": "Fisso npm pubblicazione\ndipendenze aggiornate",
+        "es": "Corrección npm publicar\ndependencias actualizadas",
+        "pl": "Napraw publikację npm\nzaktualizowane zależności",
+        "uk": "Виправлення npm опублікування\nоновлені залежності",
+        "zh-cn": "修复 npm 发布\n更新依赖关系"
+      },
       "2.0.6": {
         "en": "dependencies updated\nadminTab Fix",
         "de": "aktualisierte abhängigkeiten\nadmin Zurück zur Übersicht",
@@ -80,19 +93,6 @@
         "pl": "Napraw tłumaczenia\nDodano ikony tab",
         "uk": "Виправлення перекладів\nВкладка іконок додано",
         "zh-cn": "修正翻译\n添加标签图标"
-      },
-      "2.0.0": {
-        "en": "Dependencies updated\njsonTab added",
-        "de": "Ausgaben aktualisiert\njsonTab hinzugefügt",
-        "ru": "Обновленные зависимости\nджейсон Таб добавил",
-        "pt": "Dependências atualizadas\njsonTab adicionado",
-        "nl": "Afhankelijkheden bijgewerkt\njsonTab toegevoegd",
-        "fr": "Dépendances actualisées\njsonTab ajouté",
-        "it": "Dipendenze aggiornate\njsonTab aggiunto",
-        "es": "Actualización de las dependencias\njsonTab añadido",
-        "pl": "Aktualizacja zależności\njsonTab dodany",
-        "uk": "Залежність оновлено\njsonTab додано",
-        "zh-cn": "更新的依赖关系\n添加了 jsonTab"
       }
     },
     "titleLang": {
