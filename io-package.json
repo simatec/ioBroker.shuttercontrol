@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "news": {
+      "2.0.8": {
+        "en": "Update dependabot",
+        "de": "Update abhängigabot",
+        "ru": "Обновление Dependabot",
+        "pt": "Atualizar dependabot",
+        "nl": "Dependabot bijwerken",
+        "fr": "Mettre à jour donabot",
+        "it": "Aggiornamento dipendeabot",
+        "es": "Actualizar dependeabot",
+        "pl": "Uaktualnij zależny",
+        "uk": "Оновлення залежності",
+        "zh-cn": "更新根据目录"
+      },
       "2.0.7": {
         "en": "Fix npm publish\ndependencies updated",
         "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
@@ -80,19 +93,6 @@
         "pl": "Fix Responsive Design for Tab Menu\nAktualizacja zależności",
         "uk": "Фіксований адаптивний дизайн для вкладного меню\nЗалежність оновлено",
         "zh-cn": "修复 Tab 菜单的响应设计\n更新的依赖关系"
-      },
-      "2.0.1": {
-        "en": "Fix Translations\nTab Icons added",
-        "de": "Übersetzungen reparieren\nTab Icons hinzugefügt",
-        "ru": "Исправить переводы\nДобавлены иконки Tab",
-        "pt": "Corrigir traduções\nTab Icons adicionado",
-        "nl": "Vertalingen herstellen\nTab-pictogrammen toegevoegd",
-        "fr": "Correction des traductions\nIcônes de l'onglet ajouté",
-        "it": "Riparare le traduzioni\nScheda Icone aggiunto",
-        "es": "Corregir traducciones\nTab Icons añadido",
-        "pl": "Napraw tłumaczenia\nDodano ikony tab",
-        "uk": "Виправлення перекладів\nВкладка іконок додано",
-        "zh-cn": "修正翻译\n添加标签图标"
       }
     },
     "titleLang": {
