@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 2.0.9 (2025-11-29)
 * (un9483) Fix Frost Alarm
 
 ### 2.0.8 (2025-11-23)

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "news": {
+      "2.0.9": {
+        "en": "Fix Frost Alarm",
+        "de": "Frost Alarm",
+        "ru": "Обсуждение Frost Alarm",
+        "pt": "Corrigir o Alarme de Gelo",
+        "nl": "Frost-alarm herstellen",
+        "fr": "Correction de l'alarme de gel",
+        "it": "Fissare l'allarme Frost",
+        "es": "Fijar Alarma Frost",
+        "pl": "Napraw alarm Frost",
+        "uk": "Виправлення фрастової сигналізації",
+        "zh-cn": "修复霜警警报"
+      },
       "2.0.8": {
         "en": "Update dependabot",
         "de": "Update abhängigabot",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja tłumaczeń",
         "uk": "Переклади оновлені",
         "zh-cn": "更新翻译"
-      },
-      "2.0.2": {
-        "en": "Fix Responsive Design for Tab Menu\nDependencies updated",
-        "de": "Reparieren Responsive Design für Tab Menu\nAusgaben aktualisiert",
-        "ru": "Исправьте адаптивный дизайн для меню Tab\nОбновленные зависимости",
-        "pt": "Corrigir o Design Responsivo para o Menu Tab\nDependências atualizadas",
-        "nl": "Responsief ontwerp voor het menu Tabs repareren\nAfhankelijkheden bijgewerkt",
-        "fr": "Correction de la conception réactive pour le menu Tab\nDépendances actualisées",
-        "it": "Risolvere il disegno reattivo per il menu della scheda\nDipendenze aggiornate",
-        "es": "Diseño responsivo fijo para el menú de pestañas\nActualización de las dependencias",
-        "pl": "Fix Responsive Design for Tab Menu\nAktualizacja zależności",
-        "uk": "Фіксований адаптивний дизайн для вкладного меню\nЗалежність оновлено",
-        "zh-cn": "修复 Tab 菜单的响应设计\n更新的依赖关系"
       }
     },
     "titleLang": {
