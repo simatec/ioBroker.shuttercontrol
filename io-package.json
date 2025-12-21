@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.10",
+    "version": "2.0.11",
     "news": {
+      "2.0.11": {
+        "en": "Update dependabot",
+        "de": "Update abhängigabot",
+        "ru": "Обновление Dependabot",
+        "pt": "Atualizar dependabot",
+        "nl": "Dependabot bijwerken",
+        "fr": "Mettre à jour donabot",
+        "it": "Aggiornamento dipendeabot",
+        "es": "Actualizar dependeabot",
+        "pl": "Uaktualnij zależny",
+        "uk": "Оновлення залежності",
+        "zh-cn": "更新根据目录"
+      },
       "2.0.10": {
         "en": "Fix JSON Tab",
         "de": "JSON Register",
@@ -80,19 +93,6 @@
         "pl": "zaktualizowane zależności\nSpróbuj & złapać dla tab- Menu dodane",
         "uk": "оновлені залежності\nСпробуйте & Catch для Tab-Menu додано",
         "zh-cn": "更新依赖关系\n尝试为 Tab- Menu 添加抓取( C)"
-      },
-      "2.0.4": {
-        "en": "Dependencies updated",
-        "de": "Ausgaben aktualisiert",
-        "ru": "Обновленные зависимости",
-        "pt": "Dependências atualizadas",
-        "nl": "Afhankelijkheden bijgewerkt",
-        "fr": "Dépendances actualisées",
-        "it": "Dipendenze aggiornate",
-        "es": "Actualización de las dependencias",
-        "pl": "Aktualizacja zależności",
-        "uk": "Залежність оновлено",
-        "zh-cn": "更新的依赖关系"
       }
     },
     "titleLang": {

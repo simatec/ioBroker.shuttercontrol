@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 2.0.11 (2025-12-21)
 * (simatec) Update dependabot
 
 ### 2.0.10 (2025-12-21)
