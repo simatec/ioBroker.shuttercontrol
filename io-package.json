@@ -172,7 +172,6 @@
     ],
     "adminTab": {
       "link": "jsonTab.json5",
-      "sendTo": true,
       "singleton": false,
       "name": {
         "en": "Shuttercontrol",
