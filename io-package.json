@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.9",
+    "version": "2.0.10",
     "news": {
+      "2.0.10": {
+        "en": "Fix JSON Tab",
+        "de": "JSON Register",
+        "ru": "Исправить JSON Tab",
+        "pt": "Corrigir a Página JSON",
+        "nl": "Fix JSON Tab",
+        "fr": "Correction de l'onglet JSON",
+        "it": "Fissare la scheda JSON",
+        "es": "Fijar JSON Tab",
+        "pl": "Napraw kartę JSON",
+        "uk": "Виправлення вкладки JSON",
+        "zh-cn": "修复 JSON 标签"
+      },
       "2.0.9": {
         "en": "Fix Frost Alarm",
         "de": "Frost Alarm",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja zależności",
         "uk": "Залежність оновлено",
         "zh-cn": "更新的依赖关系"
-      },
-      "2.0.3": {
-        "en": "Translations updated",
-        "de": "Übersetzungen aktualisiert",
-        "ru": "Обновленные переводы",
-        "pt": "Traduções actualizadas",
-        "nl": "Vertalingen bijgewerkt",
-        "fr": "Traductions actualisées",
-        "it": "Traduzioni aggiornata",
-        "es": "Traducción actualizada",
-        "pl": "Aktualizacja tłumaczeń",
-        "uk": "Переклади оновлені",
-        "zh-cn": "更新翻译"
       }
     },
     "titleLang": {
