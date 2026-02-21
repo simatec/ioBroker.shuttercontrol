@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.11",
+    "version": "2.0.12",
     "news": {
+      "2.0.12": {
+        "en": "License updated\nUpdate dependabot",
+        "de": "Lizenz aktualisiert\nUpdate abhängigabot",
+        "ru": "Лицензия обновлена\nОбновление Dependabot",
+        "pt": "Licença atualizada\nAtualizar dependabot",
+        "nl": "Licentie bijgewerkt\nDependabot bijwerken",
+        "fr": "Licence mise à jour\nMettre à jour donabot",
+        "it": "Licenza aggiornata\nAggiornamento dipendeabot",
+        "es": "Licencia actualizada\nActualizar dependeabot",
+        "pl": "Aktualizacja licencji\nUaktualnij zależny",
+        "uk": "Оновлення ліцензії\nОновлення залежності",
+        "zh-cn": "许可证更新\n更新根据目录"
+      },
       "2.0.11": {
         "en": "Update dependabot",
         "de": "Update abhängigabot",
@@ -80,19 +93,6 @@
         "pl": "zaktualizowane zależności\nadmin Napraw kartę",
         "uk": "оновлені залежності\nадмін Табличка",
         "zh-cn": "更新依赖关系\n管理员 标签"
-      },
-      "2.0.5": {
-        "en": "dependencies updated\nTry & Catch for Tab-Menu added",
-        "de": "aktualisierte abhängigkeiten\nVersuchen & Fangen für Tab-Menu hinzugefügt",
-        "ru": "обновленные зависимости\nTry & Catch для Tab-Menu",
-        "pt": "dependências atualizadas\nTente & pegar para Tab-Menu adicionado",
-        "nl": "afhankelijkheden bijgewerkt\nProbeer & Vangen voor Tab-Menu toegevoegd",
-        "fr": "dépendances mises à jour\nEssayer et attraper pour Tab-Menu ajouté",
-        "it": "dipendenze aggiornate\nProva & Catch per Tab-Menu aggiunto",
-        "es": "dependencias actualizadas\nPruebe \" Catch for Tab-Menu añadido",
-        "pl": "zaktualizowane zależności\nSpróbuj & złapać dla tab- Menu dodane",
-        "uk": "оновлені залежності\nСпробуйте & Catch для Tab-Menu додано",
-        "zh-cn": "更新依赖关系\n尝试为 Tab- Menu 添加抓取( C)"
       }
     },
     "titleLang": {
