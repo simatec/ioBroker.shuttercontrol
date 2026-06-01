@@ -42,7 +42,8 @@
     "@alcalzone/release-script-plugin-manual-review": "^5.1.1",
     "@iobroker/adapter-dev": "^1.5.0",
     "@iobroker/eslint-config": "^2.2.0",
-    "@iobroker/testing": "^5.2.2"
+    "@iobroker/testing": "^5.2.2",
+    "@tsconfig/node20": "^20.1.9"
   },
   "main": "main.js",
   "files": [
