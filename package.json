@@ -31,7 +31,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.3.2",
+    "@iobroker/adapter-core": "^3.4.1",
     "node-schedule": "^2.1.1",
     "suncalc": "^1.9.0"
   },
