@@ -326,6 +326,7 @@
         "useXmasLevel": false,
         "betweenPosition": false,
         "betweenPositionLevel": "50",
+        "useOpenWindowLevel": false,
         "trigDelyUp": 1,
         "trigDelyDown": 1,
         "sunProtectEndDely": 0,

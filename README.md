@@ -47,6 +47,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
 ### __WORK IN PROGRESS__
+* (Eistee82) The shutter heights for an open or tilted window can now also be used when an automatic closes - the shutter is closed completely first and moved to the ventilation height afterwards, so the configured percentage always matches the same position. The second drive starts after the configured waiting time for checking the shutter status, because devices that report the target position right after the command would otherwise lose it
 * (simatec) Update dependabot
 
 ### 2.0.12 (2026-02-21)

@@ -87,6 +87,7 @@ function load(settings, onChange) {
             $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').val(true).trigger('change');
             $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').val(false).trigger('change');
+            $('#events .values-input[data-name="useOpenWindowLevel"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').val(false).trigger('change');
             $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').val(false).trigger('change');
@@ -393,6 +394,7 @@ function tableOnReady() {
         var vardriveAfterClose = $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked');
         var varuseXmasLevel = $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked');
         var varbetweenPosition = $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked');
+        var varuseOpenWindowLevel = $('#events .values-input[data-name="useOpenWindowLevel"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmWind1 = $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmWind2 = $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').prop('checked');
         var varenableAlarmRain = $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked');
@@ -423,6 +425,7 @@ function tableOnReady() {
         $('#driveAfterClose').prop('checked', vardriveAfterClose);
         $('#useXmasLevel').prop('checked', varuseXmasLevel);
         $('#betweenPosition').prop('checked', varbetweenPosition);
+        $('#useOpenWindowLevel').prop('checked', varuseOpenWindowLevel);
         $('#enableAlarmWind1').prop('checked', varenableAlarmWind1);
         $('#enableAlarmWind2').prop('checked', varenableAlarmWind2);
         $('#enableAlarmRain').prop('checked', varenableAlarmRain);
@@ -474,6 +477,7 @@ function tableOnReady() {
                 var newdriveAfterClose = $('#driveAfterClose').prop('checked');
                 var newuseXmasLevel = $('#useXmasLevel').prop('checked');
                 var newbetweenPosition = $('#betweenPosition').prop('checked');
+                var newuseOpenWindowLevel = $('#useOpenWindowLevel').prop('checked');
                 var newenableAlarmWind1 = $('#enableAlarmWind1').prop('checked');
                 var newenableAlarmWind2 = $('#enableAlarmWind2').prop('checked');
                 var newenableAlarmRain = $('#enableAlarmRain').prop('checked');
@@ -522,6 +526,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="driveAfterClose"][data-index="' + id + '"]').prop('checked', newdriveAfterClose).trigger('change');
                 $('#events .values-input[data-name="useXmasLevel"][data-index="' + id + '"]').prop('checked', newuseXmasLevel).trigger('change');
                 $('#events .values-input[data-name="betweenPosition"][data-index="' + id + '"]').prop('checked', newbetweenPosition).trigger('change');
+                $('#events .values-input[data-name="useOpenWindowLevel"][data-index="' + id + '"]').prop('checked', newuseOpenWindowLevel).trigger('change');
                 $('#events .values-input[data-name="enableAlarmWind1"][data-index="' + id + '"]').prop('checked', newenableAlarmWind1).trigger('change');
                 $('#events .values-input[data-name="enableAlarmWind2"][data-index="' + id + '"]').prop('checked', newenableAlarmWind2).trigger('change');
                 $('#events .values-input[data-name="enableAlarmRain"][data-index="' + id + '"]').prop('checked', newenableAlarmRain).trigger('change');

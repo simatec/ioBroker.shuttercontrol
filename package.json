@@ -49,6 +49,7 @@
     "admin/",
     "!admin/**/*/flat.txt",
     "lib/",
+    "!lib/**/*.test.js",
     "!.dev-server",
     "!.vscode",
     "!.github",
@@ -68,7 +69,8 @@
   "scripts": {
     "test": "npm run test:package && npm run test:unit",
     "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
+    "test:unit": "mocha test/unit --exit && npm run test:lib",
+    "test:lib": "mocha \"lib/*.test.js\" --exit",
     "test:integration": "mocha test/integration --exit",
     "release": "release-script",
     "release-patch": "release-script patch --yes",
