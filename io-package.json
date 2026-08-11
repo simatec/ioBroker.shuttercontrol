@@ -472,7 +472,7 @@
         "role": "button",
         "name": "close all Shutter",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -494,7 +494,7 @@
         "role": "button",
         "name": "open all Shutter",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -516,7 +516,7 @@
         "role": "button",
         "name": "close Shutter from Living area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -538,7 +538,7 @@
         "role": "button",
         "name": "open Shutter from Living area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -560,7 +560,7 @@
         "role": "button",
         "name": "close Shutter from Sleep area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -582,7 +582,7 @@
         "role": "button",
         "name": "open Shutter from Sleep area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -604,7 +604,7 @@
         "role": "button",
         "name": "close Shutter from Children area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -626,7 +626,7 @@
         "role": "button",
         "name": "open Shutter from Children area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -648,7 +648,7 @@
         "role": "button",
         "name": "close Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -670,7 +670,7 @@
         "role": "button",
         "name": "close Sleep Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -692,7 +692,7 @@
         "role": "button",
         "name": "close Living Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -714,7 +714,7 @@
         "role": "button",
         "name": "close Children Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -736,7 +736,7 @@
         "role": "button",
         "name": "set all Shutter to Auto Mode",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
