@@ -755,7 +755,7 @@
       "_id": "info.upTimeSleep",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Up Time Sleep Area",
         "type": "string",
         "read": true,
@@ -768,7 +768,7 @@
       "_id": "info.upTimeChildren",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Up Time Children Area",
         "type": "string",
         "read": true,
@@ -781,7 +781,7 @@
       "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Up Time Living Area",
         "type": "string",
         "read": true,
@@ -794,7 +794,7 @@
       "_id": "info.downTimeSleep",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "down Time Sleep Area",
         "type": "string",
         "read": true,
@@ -807,7 +807,7 @@
       "_id": "info.downTimeChildren",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "down Time Children Area",
         "type": "string",
         "read": true,
@@ -820,7 +820,7 @@
       "_id": "info.downTimeLiving",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "down Time Living Area",
         "type": "string",
         "read": true,
@@ -833,7 +833,7 @@
       "_id": "info.Sunrise",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Sunrise Time",
         "type": "string",
         "read": true,
@@ -846,7 +846,7 @@
       "_id": "info.Sunset",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Sunset Time",
         "type": "string",
         "read": true,
@@ -859,7 +859,7 @@
       "_id": "info.GoldenHour",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Goldenhour Time",
         "type": "string",
         "read": true,
@@ -872,7 +872,7 @@
       "_id": "info.GoldenHourEnd",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "Goldenhour end Time",
         "type": "string",
         "read": true,
@@ -885,7 +885,7 @@
       "_id": "info.Elevation",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "current Elevation",
         "type": "number",
         "read": true,
@@ -898,7 +898,7 @@
       "_id": "info.Azimut",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value",
         "name": "current Azimut",
         "type": "number",
         "read": true,
