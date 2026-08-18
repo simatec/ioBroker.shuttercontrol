@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.12",
+    "version": "2.1.0",
     "news": {
+      "2.1.0": {
+        "en": "Code Cleaning\nAdd the ventilation height to the down automatics with an open window\nUpdate dependabot",
+        "de": "Codebereinigung\nFügen Sie die Lüftungshöhe zu den automatischen Abwärtsklappen bei geöffnetem Fenster hinzu.\nUpdate dependabot",
+        "ru": "Очистка кода\nДобавьте высоту вентиляции к автоматическим выключателям с открытым окном.\nОбновить dependabot",
+        "pt": "Limpeza de código\nAumente a altura da ventilação nas portas automáticas com a janela aberta.\nAtualizar Dependabot",
+        "nl": "Code opschonen\nVoeg de ventilatiehoogte toe aan de automatische neerwaartse beweging bij een open raam.\nUpdate dependabot",
+        "fr": "Nettoyage du code\nAjoutez la hauteur de ventilation aux enrouleurs automatiques vers le bas avec la fenêtre ouverte\nMise à jour de dependabot",
+        "it": "Pulizia del codice\nAggiungere l'altezza di ventilazione ai comandi automatici disinseribili con finestra aperta\nAggiornare dependabot",
+        "es": "Limpieza de código\nAñade la altura de ventilación a los sistemas automáticos de apertura hacia abajo con la ventana abierta.\nActualizar dependabot",
+        "pl": "Czyszczenie kodu\nDodaj wysokość wentylacji do automatyki opuszczania przy otwartym oknie\nAktualizacja dependabota",
+        "uk": "Очищення коду\nДодайте висоту вентиляції до нижньої автоматики з відкритим вікном\nОновлення dependabot",
+        "zh-cn": "代码清理\n打开窗户后，将通风高度添加到向下自动通风系统中。\n更新 dependabot"
+      },
       "2.0.12": {
         "en": "License updated\nUpdate dependabot",
         "de": "Lizenz aktualisiert\nUpdate abhängigabot",
@@ -80,19 +93,6 @@
         "pl": "Napraw publikację npm\nzaktualizowane zależności",
         "uk": "Виправлення npm опублікування\nоновлені залежності",
         "zh-cn": "修复 npm 发布\n更新依赖关系"
-      },
-      "2.0.6": {
-        "en": "dependencies updated\nadminTab Fix",
-        "de": "aktualisierte abhängigkeiten\nadmin Zurück zur Übersicht",
-        "ru": "обновленные зависимости\nадмин Tab Fix",
-        "pt": "dependências atualizadas\nadministrador Correção da Página",
-        "nl": "afhankelijkheden bijgewerkt\nadmin Tab Fix",
-        "fr": "dépendances mises à jour\nadministrateur Correction de l'onglet",
-        "it": "dipendenze aggiornate\nadmin Scheda di fissaggio",
-        "es": "dependencias actualizadas\nadmin Tab Fix",
-        "pl": "zaktualizowane zależności\nadmin Napraw kartę",
-        "uk": "оновлені залежності\nадмін Табличка",
-        "zh-cn": "更新依赖关系\n管理员 标签"
       }
     },
     "titleLang": {
