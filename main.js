@@ -453,6 +453,7 @@ function startAdapter(options) {
                 shutterSettings[s].autoState = `shutters.autoState.${nameDevice}`;
             }
             try {
+                adapter.log.warn(JSON.stringify(shutterSettings));
                 adapter.sendTo(obj.from, obj.command, { data: { events: shutterSettings } }, obj.callback);
             } catch (e) {
                 adapter.log.error('Tab-Menu is not loaded');
@@ -1377,13 +1378,11 @@ function sunPos() {
         adapter.log.debug('calculate astrodata ...');
     } catch (e) {
         adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        return;
     }
 
-    const currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180; // get sunrise azimuth in degrees
-    const currentAltitude = currentPos.altitude * 180 / Math.PI; // get sunrise altitude in degrees
-
-    azimuth = Math.round(10 * currentAzimuth) / 10;
-    elevation = Math.round(10 * currentAltitude) / 10;
+    azimuth = Math.round(10 * currentPos.azimuth) / 10;
+    elevation = Math.round(10 * currentPos.altitude) / 10;
 
     adapter.log.debug(`Sun Azimut: ${azimuth}°`);
     adapter.setState('info.Azimut', { val: azimuth, ack: true });

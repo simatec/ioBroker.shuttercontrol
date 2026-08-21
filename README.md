@@ -46,6 +46,11 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) small Bugfix
+* (simatec) Update dependabot
+* (simatec) Fix Azimut & Elevation
+
 ### 2.1.0 (2026-08-18)
 * (simatec) Code Cleaning
 * (Eistee82) Add the ventilation height to the down automatics with an open window
