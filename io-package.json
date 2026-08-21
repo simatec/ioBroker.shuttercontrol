@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "news": {
+      "2.1.1": {
+        "en": "small Bugfix\nUpdate dependabot\nFix Azimut & Elevation",
+        "de": "kleiner Bugfix\nUpdate dependabot\nFixieren Sie Azimut und Elevation",
+        "ru": "небольшое исправление ошибки\nОбновить dependabot\nИсправить азимут и угол возвышения",
+        "pt": "Pequena correção de bug\nAtualizar Dependabot\nCorrigir azimute e elevação",
+        "nl": "kleine bugfix\nUpdate dependabot\nAzimut en elevatie corrigeren",
+        "fr": "Correction de bug mineure\nMise à jour de dependabot\nFixer l'azimut et l'élévation",
+        "it": "Piccola correzione di bug\nAggiorna Dependabot\nCorreggi azimut ed elevazione",
+        "es": "pequeña corrección de errores\nActualizar dependabot\nCorregir acimut y elevación",
+        "pl": "mała poprawka błędu\nAktualizacja dependabota\nNapraw azymut i wysokość",
+        "uk": "невелике виправлення помилки\nОновлення dependabot\nВиправити азимут та висоту",
+        "zh-cn": "小错误修复\n更新 dependabot\n修正方位角和仰角"
+      },
       "2.1.0": {
         "en": "Code Cleaning\nAdd the ventilation height to the down automatics with an open window\nUpdate dependabot",
         "de": "Codebereinigung\nFügen Sie die Lüftungshöhe zu den automatischen Abwärtsklappen bei geöffnetem Fenster hinzu.\nUpdate dependabot",
@@ -80,19 +93,6 @@
         "pl": "Uaktualnij zależny",
         "uk": "Оновлення залежності",
         "zh-cn": "更新根据目录"
-      },
-      "2.0.7": {
-        "en": "Fix npm publish\ndependencies updated",
-        "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
-        "ru": "Издательство Fix npm\nобновленные зависимости",
-        "pt": "Corrigir a publicação do npm\ndependências atualizadas",
-        "nl": "Fix npm publiceren\nafhankelijkheden bijgewerkt",
-        "fr": "Correction de npm publier\ndépendances mises à jour",
-        "it": "Fisso npm pubblicazione\ndipendenze aggiornate",
-        "es": "Corrección npm publicar\ndependencias actualizadas",
-        "pl": "Napraw publikację npm\nzaktualizowane zależności",
-        "uk": "Виправлення npm опублікування\nоновлені залежності",
-        "zh-cn": "修复 npm 发布\n更新依赖关系"
       }
     },
     "titleLang": {

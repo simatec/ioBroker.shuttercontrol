@@ -1,4 +1,7 @@
 # Older changes
+## 2.0.9 (2025-11-29)
+* (un9483) Fix Frost Alarm
+
 ## 2.0.8 (2025-11-23)
 * (simatec) Update dependabot
 
