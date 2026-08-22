@@ -60,7 +60,7 @@
         "de": "JSON Register",
         "ru": "Исправить JSON Tab",
         "pt": "Corrigir a Página JSON",
-        "nl": "Fix JSON Tab",
+        "nl": "Tabblad JSON repareren",
         "fr": "Correction de l'onglet JSON",
         "it": "Fissare la scheda JSON",
         "es": "Fijar JSON Tab",
@@ -756,7 +756,7 @@
       "_id": "info.upTimeSleep",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Up Time Sleep Area",
         "type": "string",
         "read": true,
@@ -769,7 +769,7 @@
       "_id": "info.upTimeChildren",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Up Time Children Area",
         "type": "string",
         "read": true,
@@ -782,7 +782,7 @@
       "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Up Time Living Area",
         "type": "string",
         "read": true,
@@ -795,7 +795,7 @@
       "_id": "info.downTimeSleep",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "down Time Sleep Area",
         "type": "string",
         "read": true,
@@ -808,7 +808,7 @@
       "_id": "info.downTimeChildren",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "down Time Children Area",
         "type": "string",
         "read": true,
@@ -821,7 +821,7 @@
       "_id": "info.downTimeLiving",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "down Time Living Area",
         "type": "string",
         "read": true,
@@ -834,7 +834,7 @@
       "_id": "info.Sunrise",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Sunrise Time",
         "type": "string",
         "read": true,
@@ -847,7 +847,7 @@
       "_id": "info.Sunset",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Sunset Time",
         "type": "string",
         "read": true,
@@ -860,7 +860,7 @@
       "_id": "info.GoldenHour",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Goldenhour Time",
         "type": "string",
         "read": true,
@@ -873,7 +873,7 @@
       "_id": "info.GoldenHourEnd",
       "type": "state",
       "common": {
-        "role": "value.time",
+        "role": "state",
         "name": "Goldenhour end Time",
         "type": "string",
         "read": true,
