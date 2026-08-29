@@ -453,7 +453,6 @@ function startAdapter(options) {
                 shutterSettings[s].autoState = `shutters.autoState.${nameDevice}`;
             }
             try {
-                adapter.log.warn(JSON.stringify(shutterSettings));
                 adapter.sendTo(obj.from, obj.command, { data: { events: shutterSettings } }, obj.callback);
             } catch (e) {
                 adapter.log.error('Tab-Menu is not loaded');
