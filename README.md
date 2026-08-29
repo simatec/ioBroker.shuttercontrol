@@ -46,7 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 <!-- ### __WORK IN PROGRESS__ -->
-### __WORK IN PROGRESS__
+### 2.1.2 (2026-08-29)
 * (simatec) Update dependabot
 * (simatec) Fix jsonTab
 
@@ -66,9 +66,6 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 2.0.11 (2025-12-21)
 * (simatec) Update dependabot
-
-### 2.0.10 (2025-12-21)
-* (simatec) Fix JSON Tab
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

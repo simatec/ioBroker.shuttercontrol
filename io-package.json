@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "news": {
+      "2.1.2": {
+        "en": "Update dependabot\nFix jsonTab",
+        "de": "Update dependabot\njsonTab reparieren",
+        "ru": "Обновить dependabot\nИсправить jsonTab",
+        "pt": "Atualizar Dependabot\nCorrigir jsonTab",
+        "nl": "Update dependabot\nJsonTab repareren",
+        "fr": "Mise à jour de dependabot\nCorrection de l'onglet json",
+        "it": "Aggiornare dependabot\nCorreggi jsonTab",
+        "es": "Actualizar dependabot\nCorregir jsonTab",
+        "pl": "Aktualizacja dependabota\nNapraw jsonTab",
+        "uk": "Оновлення dependabot\nВиправити jsonTab",
+        "zh-cn": "更新 Dependabot\n修复 jsonTab"
+      },
       "2.1.1": {
         "en": "small Bugfix\nUpdate dependabot\nFix Azimut & Elevation",
         "de": "kleiner Bugfix\nUpdate dependabot\nFixieren Sie Azimut und Elevation",
@@ -80,19 +93,6 @@
         "pl": "Napraw alarm Frost",
         "uk": "Виправлення фрастової сигналізації",
         "zh-cn": "修复霜警警报"
-      },
-      "2.0.8": {
-        "en": "Update dependabot",
-        "de": "Update abhängigabot",
-        "ru": "Обновление Dependabot",
-        "pt": "Atualizar dependabot",
-        "nl": "Dependabot bijwerken",
-        "fr": "Mettre à jour donabot",
-        "it": "Aggiornamento dipendeabot",
-        "es": "Actualizar dependeabot",
-        "pl": "Uaktualnij zależny",
-        "uk": "Оновлення залежності",
-        "zh-cn": "更新根据目录"
       }
     },
     "titleLang": {
