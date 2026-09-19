@@ -479,7 +479,40 @@ bei Türen um durchgehen zu können.*
 * **Schließen**: Nur Schliessen erlaubt. Bei Verdunklungs- / Beschattungsbeginn fährt der Rollladen trotz offenem Fenster herunter. Der Rollladen wird bei offenem Fenster nicht geöffnet.
 * **Öffnen und Schließen**: Der Rollladen darf sich bei offenem Fenster in beide Richtungen bewegen
 
+**Diese Höhen auch verwenden, wenn eine Automatik bei offenem oder gekipptem Fenster schließt:** *Ist diese Option aktiv und das
+Fenster beim automatischen Runterfahren offen oder gekippt, fährt der Rollladen anschließend auf
+**Rollladenhöhe bei öffnen des Fensters oder Tür** bzw. **Rollladenhöhe bei gekippten Fenster oder Tür**. Diese Höhen werden bisher
+nur angefahren, wenn sich der Fenster/Tür Sensor ändert — mit dieser Option gelten sie auch, wenn eine Automatik zufährt.
+Ist unter **Wert des Fenster/Tür Sensors im gekippten Zustand** "nicht vorhanden" eingestellt, wird immer die Höhe für das
+offene Fenster verwendet.*
 
+> :point_right: Der Rollladen fährt dabei **zuerst vollständig auf die Verdunklungsposition** und erst danach auf die Lüftungshöhe.
+Das ist Absicht: Rollladenmotoren laufen abwärts meist schneller als aufwärts, dadurch entspricht der gleiche Prozentwert von oben
+angefahren einer anderen Position als von unten angefahren. Aus der geschlossenen Endlage heraus stimmt der eingestellte Wert immer
+mit der Position überein, die auch beim Öffnen des Fensters angefahren wird.
+
+> :point_right: Zwischen beiden Fahrten wartet der Adapter die unter **Extra-Einstellungen** eingestellte **Wartezeit für die
+Überprüfung des Rollladenstatus** ab (Standard 60 Sekunden). Diese Zeit muss mindestens so lang sein wie die Laufzeit des
+Rollladens. Die Rückmeldung des Aktors reicht als Kriterium nicht aus: Manche Aktoren — zum Beispiel über zigbee2mqtt angebundene —
+melden die Zielposition schon wenige Millisekunden nach dem Befehl zurück und nicht erst am Ende der Fahrt. Ein zweiter Befehl
+während der laufenden Fahrt geht bei diesen Geräten verloren — der Rollladen meldet dann zwar die Lüftungshöhe, bleibt aber unten
+stehen.
+
+> :point_right: Die Option ändert ausschließlich die **Zielhöhe**, nicht die Fahrerlaubnis. Ob der Rollladen bei offenem Fenster
+überhaupt fahren darf, entscheidet weiterhin der Aussperrschutz. Steht dieser auf "Aus" oder "Öffnen", bewegt sich der Rollladen
+bei offenem Fenster nach wie vor nicht.
+
+> :point_right: Ein aktiver Frostalarm hat Vorrang — dann wird weiterhin die Frostschutz-Position angefahren.
+
+> :point_right: Wird das Fenster geschlossen, während der Rollladen noch auf die Verdunklungsposition fährt, bleibt er dort und die
+Lüftungshöhe wird nicht mehr angefahren.
+
+> :point_right: Die volle Verdunklungsposition wird gespeichert und nachgefahren, sobald das Fenster geschlossen wird. Dafür muss
+**Rollladen fahren bei Änderung des Fenster/Tür Zustandes** auf "Schließen" bzw. "Öffnen und Schließen" stehen, oder
+**Fahren, nachdem Fenster geschlossen wurde** aktiv sein.
+
+> :point_right: Die Option wirkt bei allen Runterfahr-Automatiken (Zeitautomatik, Sonnenauf-/-untergang, Golden Hour, Sonnenhöhe,
+Helligkeitssensor und spätes Runterfahren). Die Beschattung und der manuelle "Alle zu"-Button bleiben davon unberührt.
 
 **Rollladenhöhe beim Runterfahren:** *Positionswert bei geschlossenen Rollladen*
 

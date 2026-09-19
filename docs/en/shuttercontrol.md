@@ -476,7 +476,38 @@ for doors to be able to pass through.
 * **Close**: Only closing is permitted. At the start of darkening / shading, the roller shutter moves down despite the window being open. The roller shutter is not opened when the window is open.
 * **Opening and closing**: The roller shutter may move in both directions when the window is open.
 
+**Also use these heights when an automatic closes with an open or tilted window:** *If this option is active and the window is open
+or tilted when the automatic mode drives down, the roller shutter afterwards moves to **Shutter height
+when opening the window or door** respectively **Shutter height when the window or door is tilted**. So far those heights are only
+used when the window / door sensor changes — with this option they also apply when an automatic closes.
+If **Value of the window / door sensor when tilted** is set to "unavailable", the height for the open window is always used.*
 
+> :point_right: The roller shutter **first closes completely** to the darkening position and only then moves to the ventilation
+height. This is intentional: shutter motors are usually faster downwards than upwards, so the same percentage reached from above is
+a different position than reached from below. Starting from the closed end position, the configured value always matches the
+position that is also used when the window is opened.
+
+> :point_right: Between the two drives the adapter waits the **Waiting time for checking the shutter status** configured under
+**Extra Settings** (60 seconds by default). That time has to be at least as long as the run time of the roller shutter. The
+acknowledgement of the device is not a sufficient criterion: some devices — those connected through zigbee2mqtt for example —
+report the target position a few milliseconds after the command instead of at the end of the drive. A second command sent while
+the motor is still running is lost on those devices — the roller shutter then reports the ventilation height but stays closed.
+
+> :point_right: The option only changes the **target height**, not the drive permission. Whether the roller shutter may move at all
+while the window is open is still decided by the lock-out protection. If that is set to "Off" or "Open", the roller shutter still
+does not move when the window is open.
+
+> :point_right: An active frost alarm takes precedence — the frost protection position is still used in that case.
+
+> :point_right: If the window is closed while the roller shutter is still moving to the darkening position, it stays there and the
+ventilation height is no longer used.
+
+> :point_right: The full darkening position is stored and driven to as soon as the window is closed. This requires
+**Shutters move when the window / door status changes** to be set to "Close" or "Opening and closing", or
+**Drive to position after window has been closed** to be enabled.
+
+> :point_right: The option applies to all down automatics (time automatic, sunrise/sunset, golden hour, sun elevation,
+brightness sensor and late down). Sun protection and the manual "all down" button are not affected.
 
 **Roller shutter height when moving down:** *Position value when the roller shutter is closed.
 

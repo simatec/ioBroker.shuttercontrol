@@ -1,8 +1,47 @@
 {
   "common": {
     "name": "shuttercontrol",
-    "version": "2.0.12",
+    "version": "2.1.2",
     "news": {
+      "2.1.2": {
+        "en": "Update dependabot\nFix jsonTab",
+        "de": "Update dependabot\njsonTab reparieren",
+        "ru": "Обновить dependabot\nИсправить jsonTab",
+        "pt": "Atualizar Dependabot\nCorrigir jsonTab",
+        "nl": "Update dependabot\nJsonTab repareren",
+        "fr": "Mise à jour de dependabot\nCorrection de l'onglet json",
+        "it": "Aggiornare dependabot\nCorreggi jsonTab",
+        "es": "Actualizar dependabot\nCorregir jsonTab",
+        "pl": "Aktualizacja dependabota\nNapraw jsonTab",
+        "uk": "Оновлення dependabot\nВиправити jsonTab",
+        "zh-cn": "更新 Dependabot\n修复 jsonTab"
+      },
+      "2.1.1": {
+        "en": "small Bugfix\nUpdate dependabot\nFix Azimut & Elevation",
+        "de": "kleiner Bugfix\nUpdate dependabot\nFixieren Sie Azimut und Elevation",
+        "ru": "небольшое исправление ошибки\nОбновить dependabot\nИсправить азимут и угол возвышения",
+        "pt": "Pequena correção de bug\nAtualizar Dependabot\nCorrigir azimute e elevação",
+        "nl": "kleine bugfix\nUpdate dependabot\nAzimut en elevatie corrigeren",
+        "fr": "Correction de bug mineure\nMise à jour de dependabot\nFixer l'azimut et l'élévation",
+        "it": "Piccola correzione di bug\nAggiorna Dependabot\nCorreggi azimut ed elevazione",
+        "es": "pequeña corrección de errores\nActualizar dependabot\nCorregir acimut y elevación",
+        "pl": "mała poprawka błędu\nAktualizacja dependabota\nNapraw azymut i wysokość",
+        "uk": "невелике виправлення помилки\nОновлення dependabot\nВиправити азимут та висоту",
+        "zh-cn": "小错误修复\n更新 dependabot\n修正方位角和仰角"
+      },
+      "2.1.0": {
+        "en": "Code Cleaning\nAdd the ventilation height to the down automatics with an open window\nUpdate dependabot",
+        "de": "Codebereinigung\nFügen Sie die Lüftungshöhe zu den automatischen Abwärtsklappen bei geöffnetem Fenster hinzu.\nUpdate dependabot",
+        "ru": "Очистка кода\nДобавьте высоту вентиляции к автоматическим выключателям с открытым окном.\nОбновить dependabot",
+        "pt": "Limpeza de código\nAumente a altura da ventilação nas portas automáticas com a janela aberta.\nAtualizar Dependabot",
+        "nl": "Code opschonen\nVoeg de ventilatiehoogte toe aan de automatische neerwaartse beweging bij een open raam.\nUpdate dependabot",
+        "fr": "Nettoyage du code\nAjoutez la hauteur de ventilation aux enrouleurs automatiques vers le bas avec la fenêtre ouverte\nMise à jour de dependabot",
+        "it": "Pulizia del codice\nAggiungere l'altezza di ventilazione ai comandi automatici disinseribili con finestra aperta\nAggiornare dependabot",
+        "es": "Limpieza de código\nAñade la altura de ventilación a los sistemas automáticos de apertura hacia abajo con la ventana abierta.\nActualizar dependabot",
+        "pl": "Czyszczenie kodu\nDodaj wysokość wentylacji do automatyki opuszczania przy otwartym oknie\nAktualizacja dependabota",
+        "uk": "Очищення коду\nДодайте висоту вентиляції до нижньої автоматики з відкритим вікном\nОновлення dependabot",
+        "zh-cn": "代码清理\n打开窗户后，将通风高度添加到向下自动通风系统中。\n更新 dependabot"
+      },
       "2.0.12": {
         "en": "License updated\nUpdate dependabot",
         "de": "Lizenz aktualisiert\nUpdate abhängigabot",
@@ -34,7 +73,7 @@
         "de": "JSON Register",
         "ru": "Исправить JSON Tab",
         "pt": "Corrigir a Página JSON",
-        "nl": "Fix JSON Tab",
+        "nl": "Tabblad JSON repareren",
         "fr": "Correction de l'onglet JSON",
         "it": "Fissare la scheda JSON",
         "es": "Fijar JSON Tab",
@@ -54,45 +93,6 @@
         "pl": "Napraw alarm Frost",
         "uk": "Виправлення фрастової сигналізації",
         "zh-cn": "修复霜警警报"
-      },
-      "2.0.8": {
-        "en": "Update dependabot",
-        "de": "Update abhängigabot",
-        "ru": "Обновление Dependabot",
-        "pt": "Atualizar dependabot",
-        "nl": "Dependabot bijwerken",
-        "fr": "Mettre à jour donabot",
-        "it": "Aggiornamento dipendeabot",
-        "es": "Actualizar dependeabot",
-        "pl": "Uaktualnij zależny",
-        "uk": "Оновлення залежності",
-        "zh-cn": "更新根据目录"
-      },
-      "2.0.7": {
-        "en": "Fix npm publish\ndependencies updated",
-        "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
-        "ru": "Издательство Fix npm\nобновленные зависимости",
-        "pt": "Corrigir a publicação do npm\ndependências atualizadas",
-        "nl": "Fix npm publiceren\nafhankelijkheden bijgewerkt",
-        "fr": "Correction de npm publier\ndépendances mises à jour",
-        "it": "Fisso npm pubblicazione\ndipendenze aggiornate",
-        "es": "Corrección npm publicar\ndependencias actualizadas",
-        "pl": "Napraw publikację npm\nzaktualizowane zależności",
-        "uk": "Виправлення npm опублікування\nоновлені залежності",
-        "zh-cn": "修复 npm 发布\n更新依赖关系"
-      },
-      "2.0.6": {
-        "en": "dependencies updated\nadminTab Fix",
-        "de": "aktualisierte abhängigkeiten\nadmin Zurück zur Übersicht",
-        "ru": "обновленные зависимости\nадмин Tab Fix",
-        "pt": "dependências atualizadas\nadministrador Correção da Página",
-        "nl": "afhankelijkheden bijgewerkt\nadmin Tab Fix",
-        "fr": "dépendances mises à jour\nadministrateur Correction de l'onglet",
-        "it": "dipendenze aggiornate\nadmin Scheda di fissaggio",
-        "es": "dependencias actualizadas\nadmin Tab Fix",
-        "pl": "zaktualizowane zależności\nadmin Napraw kartę",
-        "uk": "оновлені залежності\nадмін Табличка",
-        "zh-cn": "更新依赖关系\n管理员 标签"
       }
     },
     "titleLang": {
@@ -326,6 +326,7 @@
         "useXmasLevel": false,
         "betweenPosition": false,
         "betweenPositionLevel": "50",
+        "useOpenWindowLevel": false,
         "trigDelyUp": 1,
         "trigDelyDown": 1,
         "sunProtectEndDely": 0,
@@ -472,7 +473,7 @@
         "role": "button",
         "name": "close all Shutter",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -494,7 +495,7 @@
         "role": "button",
         "name": "open all Shutter",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -516,7 +517,7 @@
         "role": "button",
         "name": "close Shutter from Living area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -538,7 +539,7 @@
         "role": "button",
         "name": "open Shutter from Living area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -560,7 +561,7 @@
         "role": "button",
         "name": "close Shutter from Sleep area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -582,7 +583,7 @@
         "role": "button",
         "name": "open Shutter from Sleep area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -604,7 +605,7 @@
         "role": "button",
         "name": "close Shutter from Children area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -626,7 +627,7 @@
         "role": "button",
         "name": "open Shutter from Children area",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -648,7 +649,7 @@
         "role": "button",
         "name": "close Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -670,7 +671,7 @@
         "role": "button",
         "name": "close Sleep Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -692,7 +693,7 @@
         "role": "button",
         "name": "close Living Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -714,7 +715,7 @@
         "role": "button",
         "name": "close Children Shutter for sun protect",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -736,7 +737,7 @@
         "role": "button",
         "name": "set all Shutter to Auto Mode",
         "type": "boolean",
-        "read": true,
+        "read": false,
         "write": true,
         "def": false
       },
@@ -755,7 +756,7 @@
       "_id": "info.upTimeSleep",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Up Time Sleep Area",
         "type": "string",
         "read": true,
@@ -768,7 +769,7 @@
       "_id": "info.upTimeChildren",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Up Time Children Area",
         "type": "string",
         "read": true,
@@ -781,7 +782,7 @@
       "_id": "info.upTimeLiving",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Up Time Living Area",
         "type": "string",
         "read": true,
@@ -794,7 +795,7 @@
       "_id": "info.downTimeSleep",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "down Time Sleep Area",
         "type": "string",
         "read": true,
@@ -807,7 +808,7 @@
       "_id": "info.downTimeChildren",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "down Time Children Area",
         "type": "string",
         "read": true,
@@ -820,7 +821,7 @@
       "_id": "info.downTimeLiving",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "down Time Living Area",
         "type": "string",
         "read": true,
@@ -833,7 +834,7 @@
       "_id": "info.Sunrise",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Sunrise Time",
         "type": "string",
         "read": true,
@@ -846,7 +847,7 @@
       "_id": "info.Sunset",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Sunset Time",
         "type": "string",
         "read": true,
@@ -859,7 +860,7 @@
       "_id": "info.GoldenHour",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Goldenhour Time",
         "type": "string",
         "read": true,
@@ -872,7 +873,7 @@
       "_id": "info.GoldenHourEnd",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "state",
         "name": "Goldenhour end Time",
         "type": "string",
         "read": true,
@@ -885,7 +886,7 @@
       "_id": "info.Elevation",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value.sun.elevation",
         "name": "current Elevation",
         "type": "number",
         "read": true,
@@ -898,7 +899,7 @@
       "_id": "info.Azimut",
       "type": "state",
       "common": {
-        "role": "indicator",
+        "role": "value.sun.azimuth",
         "name": "current Azimut",
         "type": "number",
         "read": true,

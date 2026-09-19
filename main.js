@@ -27,6 +27,7 @@ const shutterState = require('./lib/shutterState.js');        			               
 const shutterDownComplete = require('./lib/shutterDownComplete.js');                                    // shutterDownComplete
 const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shutterBrightnessSensor;    // shutterBrightnessSensor
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
+const clearWindowLevelTimers = require('./lib/windowLevel.js').clearWindowLevelTimers;                  // windowLevel timers
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
 
 let adapter;
@@ -72,6 +73,7 @@ function startAdapter(options) {
             adapter.log.info('cleaned everything up...');
             clearTimeout(timer);
             clearTimeout(timerSleep);
+            clearWindowLevelTimers(adapter);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
             schedule.cancelJob('shutterDownGoldenHour');
@@ -513,6 +515,7 @@ async function shutterConfigCheck() {
                     shutterSettings[s].driveAfterClose = shutterSettings[s].driveAfterClose != null ? shutterSettings[s].driveAfterClose : false;
                     shutterSettings[s].useXmasLevel = shutterSettings[s].useXmasLevel != null ? shutterSettings[s].useXmasLevel : false;
                     shutterSettings[s].betweenPosition = shutterSettings[s].betweenPosition != null ? shutterSettings[s].betweenPosition : false;
+                    shutterSettings[s].useOpenWindowLevel = shutterSettings[s].useOpenWindowLevel != null ? shutterSettings[s].useOpenWindowLevel : false;
                     shutterSettings[s].enableAlarmWind1 = shutterSettings[s].enableAlarmWind1 != null ? shutterSettings[s].enableAlarmWind1 : false;
                     shutterSettings[s].enableAlarmWind2 = shutterSettings[s].enableAlarmWind2 != null ? shutterSettings[s].enableAlarmWind2 : false;
                     shutterSettings[s].enableAlarmRain = shutterSettings[s].enableAlarmRain != null ? shutterSettings[s].enableAlarmRain : false;
@@ -1383,13 +1386,11 @@ function sunPos() {
         adapter.log.debug('calculate astrodata ...');
     } catch (e) {
         adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        return;
     }
 
-    const currentAzimuth = currentPos.azimuth * 180 / Math.PI + 180; // get sunrise azimuth in degrees
-    const currentAltitude = currentPos.altitude * 180 / Math.PI; // get sunrise altitude in degrees
-
-    azimuth = Math.round(10 * currentAzimuth) / 10;
-    elevation = Math.round(10 * currentAltitude) / 10;
+    azimuth = Math.round(10 * currentPos.azimuth) / 10;
+    elevation = Math.round(10 * currentPos.altitude) / 10;
 
     adapter.log.debug(`Sun Azimut: ${azimuth}°`);
     adapter.setState('info.Azimut', { val: azimuth, ack: true });
