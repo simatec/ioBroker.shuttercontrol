@@ -180,6 +180,26 @@ function load(settings, onChange) {
         });
     });
 
+    $('#slatIdPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#slatId').val(), function (newId) {
+                if (newId) {
+                    $('#slatId').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+
+    $('#heightCurrentIdPopUp').on('click', function () {
+        initSelectId(function (sid) {
+            sid.selectId('show', $('#heightCurrentId').val(), function (newId) {
+                if (newId) {
+                    $('#heightCurrentId').val(newId).trigger('change');
+                }
+            });
+        });
+    });
+
     $('#HolidayDPPopUp').on('click', function () {
         initSelectId(function (sid) {
             sid.selectId('show', $('#HolidayDP').val(), function (newId) {
@@ -386,6 +406,14 @@ function tableOnReady() {
         $('#trigDelyDown').val($('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val());
         $('#sunProtectEndDely').val($('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val());
         $('#tempHeatProtection').val($('#events .values-input[data-name="tempHeatProtection"][data-index="' + id + '"]').val());
+        $('#slatId').val($('#events .values-input[data-name="slatId"][data-index="' + id + '"]').val() || '');
+        $('#heightCurrentId').val($('#events .values-input[data-name="heightCurrentId"][data-index="' + id + '"]').val() || '');
+        $('#slatHeightUp').val($('#events .values-input[data-name="slatHeightUp"][data-index="' + id + '"]').val() || '');
+        $('#slatHeightDown').val($('#events .values-input[data-name="slatHeightDown"][data-index="' + id + '"]').val() || '');
+        $('#slatHeightDownSun').val($('#events .values-input[data-name="slatHeightDownSun"][data-index="' + id + '"]').val() || '');
+        $('#slatWaitTimeout').val($('#events .values-input[data-name="slatWaitTimeout"][data-index="' + id + '"]').val() || '');
+        $('#slatWaitInterval').val($('#events .values-input[data-name="slatWaitInterval"][data-index="' + id + '"]').val() || '');
+        $('#heightWaitTimeout').val($('#events .values-input[data-name="heightWaitTimeout"][data-index="' + id + '"]').val() || '');
         
         // switch
         var varLateDown = $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked');
@@ -402,6 +430,7 @@ function tableOnReady() {
         var varenableAlarmFire = $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked');
         var varignoreTriggerAutoState = $('#events .values-input[data-name="ignoreTriggerAutoState"][data-index="' + id + '"]').prop('checked');
         var varheatProtection = $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked');
+        var varslatEnabled = !!$('#events .values-input[data-name="slatEnabled"][data-index="' + id + '"]').prop('checked');
 
         if (varuseXmasLevel == true) {
             $('.col-XmasLevel').show();
@@ -434,6 +463,7 @@ function tableOnReady() {
         $('#ignoreTriggerAutoState').prop('checked', varignoreTriggerAutoState);
         
         $('#heatProtection').prop('checked', varheatProtection);
+        $('#slatEnabled').prop('checked', varslatEnabled);
 
         setTimeout(function () {
             initDialogShutter(function (sid) {
@@ -469,6 +499,14 @@ function tableOnReady() {
                 var trigDelyDown = $('#trigDelyDown').val();
                 var sunProtectEndDely = $('#sunProtectEndDely').val();
                 var tempHeatProtection = $('#tempHeatProtection').val();
+                var newSlatId = $('#slatId').val();
+                var newHeightCurrentId = $('#heightCurrentId').val();
+                var newSlatHeightUp = $('#slatHeightUp').val();
+                var newSlatHeightDown = $('#slatHeightDown').val();
+                var newSlatHeightDownSun = $('#slatHeightDownSun').val();
+                var newSlatWaitTimeout = $('#slatWaitTimeout').val();
+                var newSlatWaitInterval = $('#slatWaitInterval').val();
+                var newHeightWaitTimeout = $('#heightWaitTimeout').val();
                 
                 // switch
                 var newLateDown = $('#LateDown').prop('checked');
@@ -485,6 +523,7 @@ function tableOnReady() {
                 var newenableAlarmFire = $('#enableAlarmFire').prop('checked');
                 var newignoreTriggerAutoState = $('#ignoreTriggerAutoState').prop('checked');
                 var newHeatProtection = $('#heatProtection').prop('checked');
+                var newSlatEnabled = $('#slatEnabled').prop('checked');
 
                 // value
                 $('#events .values-input[data-name="tempInside"][data-index="' + id + '"]').val(newTemInside).trigger('change');
@@ -518,6 +557,14 @@ function tableOnReady() {
                 $('#events .values-input[data-name="trigDelyDown"][data-index="' + id + '"]').val(trigDelyDown).trigger('change');
                 $('#events .values-input[data-name="sunProtectEndDely"][data-index="' + id + '"]').val(sunProtectEndDely).trigger('change');
                 $('#events .values-input[data-name="tempHeatProtection"][data-index="' + id + '"]').val(tempHeatProtection).trigger('change');
+                $('#events .values-input[data-name="slatId"][data-index="' + id + '"]').val(newSlatId).trigger('change');
+                $('#events .values-input[data-name="heightCurrentId"][data-index="' + id + '"]').val(newHeightCurrentId).trigger('change');
+                $('#events .values-input[data-name="slatHeightUp"][data-index="' + id + '"]').val(newSlatHeightUp).trigger('change');
+                $('#events .values-input[data-name="slatHeightDown"][data-index="' + id + '"]').val(newSlatHeightDown).trigger('change');
+                $('#events .values-input[data-name="slatHeightDownSun"][data-index="' + id + '"]').val(newSlatHeightDownSun).trigger('change');
+                $('#events .values-input[data-name="slatWaitTimeout"][data-index="' + id + '"]').val(newSlatWaitTimeout).trigger('change');
+                $('#events .values-input[data-name="slatWaitInterval"][data-index="' + id + '"]').val(newSlatWaitInterval).trigger('change');
+                $('#events .values-input[data-name="heightWaitTimeout"][data-index="' + id + '"]').val(newHeightWaitTimeout).trigger('change');
                 
                 // switch
                 $('#events .values-input[data-name="LateDown"][data-index="' + id + '"]').prop('checked', newLateDown).trigger('change');
@@ -534,6 +581,7 @@ function tableOnReady() {
                 $('#events .values-input[data-name="enableAlarmFire"][data-index="' + id + '"]').prop('checked', newenableAlarmFire).trigger('change');
                 $('#events .values-input[data-name="ignoreTriggerAutoState"][data-index="' + id + '"]').prop('checked', newignoreTriggerAutoState).trigger('change');
                 $('#events .values-input[data-name="heatProtection"][data-index="' + id + '"]').prop('checked', newHeatProtection).trigger('change');
+                $('#events .values-input[data-name="slatEnabled"][data-index="' + id + '"]').prop('checked', newSlatEnabled).trigger('change');
             });
         }, 20)
     });
