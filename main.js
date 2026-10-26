@@ -485,6 +485,15 @@ async function shutterConfigCheck() {
                     shutterSettings[s].elevation = shutterSettings[s].elevation ? shutterSettings[s].elevation : '8';
                     shutterSettings[s].type = shutterSettings[s].type ? shutterSettings[s].type : 'in- & outside temperature and direction';
                     shutterSettings[s].heightDownSun = shutterSettings[s].heightDownSun ? shutterSettings[s].heightDownSun : '30';
+                    shutterSettings[s].slatEnabled = shutterSettings[s].slatEnabled ? shutterSettings[s].slatEnabled : false;
+                    shutterSettings[s].slatId = shutterSettings[s].slatId ? shutterSettings[s].slatId : '';
+                    shutterSettings[s].slatHeightUp = shutterSettings[s].slatHeightUp ? shutterSettings[s].slatHeightUp : '0';
+                    shutterSettings[s].slatHeightDown = shutterSettings[s].slatHeightDown ? shutterSettings[s].slatHeightDown : '0';
+                    shutterSettings[s].slatHeightDownSun = shutterSettings[s].slatHeightDownSun ? shutterSettings[s].slatHeightDownSun : '45';
+                    shutterSettings[s].slatWaitTimeout = shutterSettings[s].slatWaitTimeout ? shutterSettings[s].slatWaitTimeout : '30000';
+                    shutterSettings[s].slatWaitInterval = shutterSettings[s].slatWaitInterval ? shutterSettings[s].slatWaitInterval : '1000';
+                    shutterSettings[s].heightCurrentId = shutterSettings[s].heightCurrentId ? shutterSettings[s].heightCurrentId : '';
+                    shutterSettings[s].heightWaitTimeout = shutterSettings[s].heightWaitTimeout ? shutterSettings[s].heightWaitTimeout : '1000';
                     shutterSettings[s].direction = shutterSettings[s].direction ? shutterSettings[s].direction : '120';
                     shutterSettings[s].directionRange = shutterSettings[s].directionRange ? shutterSettings[s].directionRange : '50';
                     shutterSettings[s].tempInside = shutterSettings[s].tempInside ? shutterSettings[s].tempInside : '23';
