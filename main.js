@@ -29,6 +29,7 @@ const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shut
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
 const clearWindowLevelTimers = require('./lib/windowLevel.js').clearWindowLevelTimers;                  // windowLevel timers
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
+const isAlarmStateChanged = require('./lib/shutterAlarm.js').isAlarmStateChanged;                       // ShutterAlarm - real value change
 
 let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
@@ -196,23 +197,29 @@ function startAdapter(options) {
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
                 adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
             }
-            if (id === adapter.config.alarmWind1) {
+            // a refresh of an alarm state with the same value is no new alarm and no end of an alarm
+            const alarmChanged = isAlarmStateChanged(state);
+            if (!alarmChanged &&
+                [adapter.config.alarmWind1, adapter.config.alarmWind2, adapter.config.alarmRain, adapter.config.alarmFrost, adapter.config.alarmFire].includes(id)) {
+                adapter.log.debug(`Alarm state ${id} refreshed without change (${state.val}) - nothing to do`);
+            }
+            if (id === adapter.config.alarmWind1 && alarmChanged) {
                 adapter.log.debug(`Alarm Wind 1 changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmWind1', shutterSettings);
             }
-            if (id === adapter.config.alarmWind2) {
+            if (id === adapter.config.alarmWind2 && alarmChanged) {
                 adapter.log.debug(`Alarm Wind 2 changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmWind2', shutterSettings);
             }
-            if (id === adapter.config.alarmRain) {
+            if (id === adapter.config.alarmRain && alarmChanged) {
                 adapter.log.debug(`Alarm Rain changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmRain', shutterSettings);
             }
-            if (id === adapter.config.alarmFrost) {
+            if (id === adapter.config.alarmFrost && alarmChanged) {
                 adapter.log.debug(`Alarm Frost changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmFrost', shutterSettings);
             }
-            if (id === adapter.config.alarmFire) {
+            if (id === adapter.config.alarmFire && alarmChanged) {
                 adapter.log.debug(`Alarm Fire changed: ${state.val}`);
                 shutterAlarm(adapter, 'alarmFire', shutterSettings);
             }
