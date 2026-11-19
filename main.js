@@ -29,6 +29,7 @@ const shutterBrightnessSensor = require('./lib/shutterBrightnessSensor.js').shut
 const brightnessState = require('./lib/shutterBrightnessSensor.js').brightnessState;                    // brightnessState
 const clearWindowLevelTimers = require('./lib/windowLevel.js').clearWindowLevelTimers;                  // windowLevel timers
 const shutterAlarm = require('./lib/shutterAlarm.js').shutterAlarm;                                     // ShutterAlarm
+const applyStartHeight = require('./lib/shutterState.js').applyStartHeight;                             // heights on start
 
 let adapter;
 const adapterName = require('./package.json').name.split('.').pop();
@@ -577,8 +578,10 @@ async function saveCurrentStates(onStart) {
             shutterSettings[s].alarmTriggerAction = currentStates[`${nameDevice}`].alarmTriggerAction;
             shutterSettings[s].alarmTriggerLevel = currentStates[`${nameDevice}`].alarmTriggerLevel;
             shutterSettings[s].lastAutoAction = currentStates[`${nameDevice}`].lastAutoAction;
+            await setStartHeight(shutterSettings[s]);
         } else if (currentStates && !currentStates[`${nameDevice}`] && onStart) {
             adapter.log.debug(`${nameDevice}: settings added`);
+            await setStartHeight(shutterSettings[s]);
             currentStates[`${nameDevice}`] = null;
 
             const states = ({
@@ -614,6 +617,28 @@ async function saveCurrentStates(onStart) {
                 .catch((e) => adapter.log.warn(e));
         }
         await sleep(100);
+    }
+}
+
+/**
+ * Reads the current position of a shutter on start and fills its heights that are still unknown.
+ * Must run after the values from shutters.currentStates were restored - those values are kept.
+ *
+ * @param {object} shutter settings of the shutter
+ */
+async function setStartHeight(shutter) {
+    const state = await adapter.getForeignStateAsync(shutter.name).catch((e) => adapter.log.warn(e));
+    if (state?.val === null || state?.val === undefined) {
+        return;
+    }
+    const filled = applyStartHeight(shutter, state.val, adapter.config.shutterStateRound);
+    if (filled.length) {
+        adapter.log.debug(`${shutter.shutterName}: ${filled.join(', ')} set to current height ${shutter.currentHeight}%`);
+    }
+    if (parseFloat(shutter.heightDown) < parseFloat(shutter.heightUp)) {
+        adapter.log.debug(`${shutter.shutterName}: level conversion is disabled!`);
+    } else if (parseFloat(shutter.heightDown) > parseFloat(shutter.heightUp)) {
+        adapter.log.debug(`${shutter.shutterName}: level conversion is enabled!`);
     }
 }
 
@@ -1855,8 +1880,8 @@ async function sleep(ms) {
 
 function main(adapter) {
 
-    adapter.getForeignObject('system.config', (obj) => {
-        if (obj) {
+    adapter.getForeignObject('system.config', (err, obj) => {
+        if (!err && obj) {
             checkStates();
         }
     });
@@ -1909,8 +1934,8 @@ function main(adapter) {
     }
     if (adapter.config.lightsensorUpDown != '') {
         adapter.subscribeForeignStates(adapter.config.lightsensorUpDown);
-        adapter.getForeignState(adapter.config.lightsensorUpDown, (state) => {
-            if (state && state.val && state.val !== null) {
+        adapter.getForeignState(adapter.config.lightsensorUpDown, (err, state) => {
+            if (!err && state && state.val !== null && state.val !== undefined) {
                 brightnessDown = brightnessState(adapter, state.val, brightnessDown);
                 adapter.log.debug(`Brightness State Down is: ${brightnessDown}`);
             }
@@ -1999,24 +2024,6 @@ function main(adapter) {
             adapter.subscribeForeignStates(element);
             adapter.log.debug(`Shutter State: ${element}`);
         });
-
-        for (const s in shutterSettings) {
-            adapter.getForeignState(shutterSettings[s].name, (state) => {
-                if (typeof state != undefined && state != null) {
-                    shutterSettings[s].currentHeight = state.val;
-                    shutterSettings[s].oldHeight = state.val;
-                    shutterSettings[s].triggerHeight = state.val;
-
-                    adapter.log.debug(`save current height: '${shutterSettings[s].currentHeight}% from ${shutterSettings[s].shutterName}`);
-
-                    if (parseFloat(shutterSettings[s].heightDown) < parseFloat(shutterSettings[s].heightUp)) {
-                        adapter.log.debug(`${shutterSettings[s].shutterName}: level conversion is disabled!`);
-                    } else if (parseFloat(shutterSettings[s].heightDown) > parseFloat(shutterSettings[s].heightUp)) {
-                        adapter.log.debug(`${shutterSettings[s].shutterName}: level conversion is enabled!`);
-                    }
-                }
-            });
-        }
     }
 }
 
