@@ -806,20 +806,34 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
 
 // +++++++++++++++++ Get longitude an latidude from system config ++++++++++++++++++++
 
+/**
+ * Checks a latitude or longitude value.
+ *
+ * @param {string|number|null|undefined} value value from the configuration
+ * @param {number} limit 90 for the latitude, 180 for the longitude
+ * @returns {boolean} true if the value is a valid coordinate
+ */
+function isValidCoordinate(value, limit) {
+    if (value === undefined || value === null || String(value).trim() === '') {
+        return false;
+    }
+    const num = Number(value);
+    return Number.isFinite(num) && Math.abs(num) <= limit;
+}
+
+/**
+ * @returns {boolean} true if latitude and longitude are configured
+ */
+function hasValidCoordinates() {
+    return isValidCoordinate(adapter.config.latitude, 90) && isValidCoordinate(adapter.config.longitude, 180);
+}
+
 async function GetSystemData() {
-    if (typeof adapter.config.longitude === undefined ||
-        adapter.config.longitude === null ||
-        adapter.config.longitude.length === 0 ||
-        isNaN(adapter.config.longitude) ||
-        typeof adapter.config.latitude === undefined ||
-        adapter.config.latitude === null ||
-        adapter.config.latitude.length === 0 ||
-        isNaN(adapter.config.latitude)) {
-
+    if (!hasValidCoordinates()) {
         try {
-            const obj = await adapter.getForeignObjectAsync('system.config', 'state');
+            const obj = await adapter.getForeignObjectAsync('system.config');
 
-            if (obj && obj.common && obj.common.longitude && obj.common.latitude) {
+            if (obj && obj.common && isValidCoordinate(obj.common.latitude, 90) && isValidCoordinate(obj.common.longitude, 180)) {
                 adapter.config.longitude = obj.common.longitude;
                 adapter.config.latitude = obj.common.latitude;
 
@@ -845,6 +859,11 @@ function shutterDriveCalc() {
 
     let times; // get today's sunlight times 
 
+    if (!hasValidCoordinates()) {
+        adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        return;
+    }
+
     try {
         times = SunCalc.getTimes(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
@@ -859,6 +878,8 @@ function shutterDriveCalc() {
         goldenHourEnd = `${(`0${times.goldenHourEnd.getHours()}`).slice(-2)}:${(`0${times.goldenHourEnd.getMinutes()}`).slice(-2)}`;
     } catch (e) {
         adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        // without astro times the travel times can not be calculated
+        return;
     }
 
     adapter.log.debug(`goldenHourEnd today: ${goldenHourEnd}`);
@@ -1372,6 +1393,10 @@ let elevation;
 
 function sunPos() {
     let currentPos;
+    if (!hasValidCoordinates()) {
+        adapter.log.error('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        return;
+    }
     try {
         currentPos = SunCalc.getPosition(new Date(), adapter.config.latitude, adapter.config.longitude);
         adapter.log.debug('calculate astrodata ...');
