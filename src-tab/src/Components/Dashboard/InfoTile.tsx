@@ -24,11 +24,11 @@ export default function InfoTile(props: {
     return (
         <DashboardCard
             t={t}
-            style={{ padding: '8px 12px', display: 'flex', alignItems: 'center', gap: 12 }}
+            style={{ padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 12 }}
         >
             <IconBox
                 t={t}
-                size={38}
+                size={40}
             >
                 {props.icon}
             </IconBox>

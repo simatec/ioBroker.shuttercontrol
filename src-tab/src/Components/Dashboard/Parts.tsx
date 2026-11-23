@@ -67,7 +67,7 @@ export function SectionHeader(props: {
                 alignItems: 'center',
                 gap: 10,
                 padding: '0 2px 6px 2px',
-                margin: '12px 0 8px 0',
+                margin: '18px 0 12px 0',
                 borderBottom: `1px solid ${props.t.divider}`,
             }}
         >
@@ -227,7 +227,7 @@ export function ActionTile(props: {
                 font: 'inherit',
                 width: '100%',
                 height: '100%',
-                minHeight: props.vertical ? 84 : 38,
+                minHeight: props.vertical ? 84 : 44,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: props.vertical ? 'column' : 'row',

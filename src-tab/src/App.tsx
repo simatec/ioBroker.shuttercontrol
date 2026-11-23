@@ -672,7 +672,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                         <DashboardCard
                             key={group.title}
                             t={t}
-                            style={{ padding: 8, display: 'flex', flexDirection: 'column', gap: 6 }}
+                            style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}
                         >
                             <div
                                 style={{
@@ -719,11 +719,17 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                     icon={<SettingsOutlined fontSize="inherit" />}
                     title={I18n.t('Control unit settings')}
                 />
-                <div
-                    style={{
+                {/* the 5 switches fill the whole width: 5 per row on wide screens */}
+                <Box
+                    sx={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(215px, 1fr))',
-                        gap: 12,
+                        gridTemplateColumns: {
+                            xs: '1fr',
+                            sm: 'repeat(2, minmax(0, 1fr))',
+                            md: 'repeat(3, minmax(0, 1fr))',
+                            lg: 'repeat(5, minmax(0, 1fr))',
+                        },
+                        gap: '12px',
                     }}
                 >
                     {SETTING_STATES.map(setting => (
@@ -736,7 +742,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                             onChange={value => void this.onSetting(setting.id, value)}
                         />
                     ))}
-                </div>
+                </Box>
             </>
         );
     }
@@ -795,7 +801,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                                 overflow: 'auto',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                padding: { xs: '0 10px 12px', sm: '0 20px 12px' },
+                                padding: { xs: '0 10px 16px', sm: '0 20px 20px' },
                             }}
                         >
                             {/* the blocks fade in one after another when the page opens */}

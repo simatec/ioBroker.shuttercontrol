@@ -28,11 +28,11 @@ export default function SwitchTile(props: {
     return (
         <DashboardCard
             t={t}
-            style={{ padding: '6px 8px 6px 12px', display: 'flex', alignItems: 'center', gap: 12 }}
+            style={{ padding: '12px 8px 12px 14px', display: 'flex', alignItems: 'center', gap: 12 }}
         >
             <IconBox
                 t={t}
-                size={38}
+                size={40}
             >
                 {props.icon}
             </IconBox>
@@ -43,11 +43,15 @@ export default function SwitchTile(props: {
                     color: t.text,
                     fontSize: '0.92rem',
                     fontWeight: 600,
+                    lineHeight: 1.3,
+                    // wrap between words; only a word that does not fit at all is broken
+                    overflowWrap: 'break-word',
                 }}
             >
                 {props.label}
             </div>
             <Switch
+                sx={{ flexShrink: 0 }}
                 checked={props.value}
                 disabled={props.disabled}
                 onChange={e => props.onChange(e.target.checked)}
