@@ -46,6 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 ### __WORK IN PROGRESS__
+* (simatec) New admin tab in React (replaces jsonTab)
 * (simatec) Fix reading of latitude/longitude from the system settings (js-controller 7)
 * (simatec) Fix crash when no coordinates are configured
 * (simatec) Skip the astro calculation when latitude/longitude are missing or invalid

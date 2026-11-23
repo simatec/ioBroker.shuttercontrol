@@ -1,0 +1,31 @@
+// Specialized tsconfig for the admin directory,
+// includes DOM typings and configures the admin build
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "allowJs": false,
+        "resolveJsonModule": true,
+        "strictNullChecks": true,
+        "strict": true,
+        "useUnknownInCatchVariables": false,
+        "target": "es2022",
+        "moduleResolution": "Bundler",
+        "allowSyntheticDefaultImports": true,
+        "checkJs": false,
+        // Only type-check: the bundle is produced by vite. `buildReact` starts vite and tsc in
+        // parallel, so an emit here races the vite build and leaves stray .js/.map files in ./build
+        // that then get copied into admin/.
+        "noEmit": true,
+        "rootDir": "./src",
+        "sourceMap": true,
+        "sourceRoot": "./src",
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "verbatimModuleSyntax": true,
+        "lib": ["es2018", "DOM"],
+        "jsx": "react",
+        "types": ["vite/client", "@iobroker/types"]
+    },
+    "include": ["./src/**/*.js", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.jsx", "./src/**/*.json", "./src/**/*.css", "./*.js"],
+    "exclude": ["**/node_modules", "**/dist"]
+}

@@ -171,25 +171,25 @@
       }
     ],
     "adminTab": {
-      "link": "jsonTab.json5",
       "singleton": false,
+      "ignoreConfigUpdate": true,
       "name": {
-        "en": "Shuttercontrol",
-        "de": "Rolladensteuerung",
-        "ru": "затвор",
-        "pt": "obturador",
-        "nl": "Luik",
-        "fr": "obturateur",
-        "it": "otturatore",
-        "es": "obturador",
-        "pl": "migawka",
-        "uk": "керування затвором",
-        "zh-cn": "快门"
+        "en": "Shutters",
+        "de": "Rollläden",
+        "ru": "Рольставни",
+        "pt": "Estores",
+        "nl": "Rolluiken",
+        "fr": "Volets",
+        "it": "Tapparelle",
+        "es": "Persianas",
+        "pl": "Rolety",
+        "uk": "Ролети",
+        "zh-cn": "卷帘"
       }
     },
     "adminUI": {
       "config": "materialize",
-      "tab": "json"
+      "tab": "materialize"
     },
     "plugins": {
       "sentry": {

@@ -8,6 +8,9 @@ export default [
     {
         // specify files to exclude from linting here
         ignores: [
+            'src-tab/**/*',
+            'admin/assets/**/*',
+            'tasks.js',
             '.dev-server/',
             '.vscode/',
             '**/*.test.js',
