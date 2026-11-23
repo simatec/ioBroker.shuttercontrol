@@ -217,7 +217,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                         onChange={e => this.updateShutter(index, { enabled: e.target.checked })}
                     />
                 </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: 180 }}>
+                <TableCell sx={{ ...cellSx, minWidth: { xs: 140, md: 180 } }}>
                     <TextField
                         variant="standard"
                         fullWidth
@@ -227,7 +227,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                         onChange={e => this.updateShutter(index, { shutterName: e.target.value })}
                     />
                 </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: 260 }}>
+                <TableCell sx={{ ...cellSx, minWidth: { xs: 200, md: 260 } }}>
                     <TextField
                         variant="standard"
                         fullWidth
@@ -261,7 +261,16 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                         {ShutterConfig.getOptionLabel(TYPE_DOWN_OPTIONS, shutter.typeDown)}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ ...cellSx, whiteSpace: 'nowrap', width: 210 }}>
+                <TableCell
+                    sx={{
+                        ...cellSx,
+                        whiteSpace: 'nowrap',
+                        width: 210,
+                        position: 'sticky',
+                        right: 0,
+                        bgcolor: 'background.paper',
+                    }}
+                >
                     <Tooltip title={I18n.t('Edit shutter settings')}>
                         <IconButton
                             size="small"
@@ -272,7 +281,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                             <Edit />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title={I18n.t('Copy')}>
+                    <Tooltip title={I18n.t('Copy shutter')}>
                         <IconButton
                             size="small"
                             onClick={() => this.onCopy(index)}
@@ -322,7 +331,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
         shutters.forEach(s => (names[s.shutterName] = (names[s.shutterName] || 0) + 1));
 
         return (
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1, flexWrap: 'wrap' }}>
                     <Button
                         variant="contained"
@@ -347,7 +356,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                 <TableContainer
                     component={Paper}
                     variant="outlined"
-                    sx={{ overflowX: 'auto' }}
+                    sx={{ overflowX: 'auto', maxWidth: '100%', WebkitOverflowScrolling: 'touch' }}
                 >
                     <Table
                         size="small"
@@ -365,7 +374,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                                 <TableCell sx={{ ...cellSx, display: { xs: 'none', lg: 'table-cell' } }}>
                                     {I18n.t('type down')}
                                 </TableCell>
-                                <TableCell sx={cellSx} />
+                                <TableCell sx={{ ...cellSx, position: 'sticky', right: 0, zIndex: 3 }} />
                             </TableRow>
                         </TableHead>
                         <TableBody>

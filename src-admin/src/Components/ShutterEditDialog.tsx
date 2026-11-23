@@ -512,7 +512,7 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
                                     {value ? (
                                         <IconButton
                                             size="small"
-                                            title={I18n.t('Clear')}
+                                            title={I18n.t('Clear object ID')}
                                             onClick={() => setValue(field.attr, '')}
                                         >
                                             <Close fontSize="small" />
@@ -606,10 +606,10 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
             maxWidth="lg"
             fullScreen={fullScreen}
             onClose={(_e, reason) => reason !== 'backdropClick' && props.onClose(null)}
-            slotProps={{ paper: { sx: { minHeight: fullScreen ? undefined : '80vh' } } }}
+            slotProps={{ paper: { sx: { height: fullScreen ? undefined : '85vh' } } }}
         >
             <DialogTitle sx={{ pb: 0 }}>
-                {I18n.t('Edit Device:')} {data.shutterName}
+                {I18n.t('Edit shutter:')} {data.shutterName}
                 <Typography
                     component="div"
                     variant="caption"
@@ -636,7 +636,10 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
                     ))}
                 </Tabs>
             </Box>
-            <DialogContent sx={{ pt: 2 }}>
+            <DialogContent
+                key={tab}
+                sx={{ pt: 2 }}
+            >
                 <Box sx={{ pt: 1 }}>{TABS[tab].sections.map((section, i) => renderSection(section, i))}</Box>
             </DialogContent>
             <DialogActions>
