@@ -407,22 +407,27 @@ const TABS: { label: string; icon: React.JSX.Element; sections: SectionDef[] }[]
     { label: 'Extra Settings', icon: <Tune />, sections: EXTRA_SECTIONS },
 ];
 
-/** Checks the value of a number field. Returns the error text or an empty string */
-function checkNumber(field: FieldDef, value: unknown): string {
+/**
+ * Checks the value of a number field.
+ * An invalid number is an error, which blocks the OK button. A value outside the recommended range
+ * is only a warning, because the former materialize page did not check the ranges and existing
+ * configurations may contain such values.
+ */
+function checkNumber(field: FieldDef, value: unknown): { text: string; blocking: boolean } {
     if (value === '' || value === undefined || value === null) {
-        return '';
+        return { text: '', blocking: false };
     }
     const num = parseFloat(toStr(value).replace(',', '.'));
     if (isNaN(num)) {
-        return I18n.t('Invalid number');
+        return { text: I18n.t('Invalid number'), blocking: true };
     }
     if (field.min !== undefined && num < field.min) {
-        return `${I18n.t('Minimum')}: ${field.min}`;
+        return { text: `${I18n.t('Recommended minimum')}: ${field.min}`, blocking: false };
     }
     if (field.max !== undefined && num > field.max) {
-        return `${I18n.t('Maximum')}: ${field.max}`;
+        return { text: `${I18n.t('Recommended maximum')}: ${field.max}`, blocking: false };
     }
-    return '';
+    return { text: '', blocking: false };
 }
 
 export interface ShutterEditDialogProps {
@@ -446,7 +451,7 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
 
     const allFields = TABS.flatMap(t => t.sections.flatMap(s => s.fields));
     const hasErrors = allFields.some(
-        f => f.type === 'number' && (!f.visibleIf || data[f.visibleIf]) && checkNumber(f, data[f.attr]),
+        f => f.type === 'number' && (!f.visibleIf || data[f.visibleIf]) && checkNumber(f, data[f.attr]).blocking,
     );
 
     const renderField = (field: FieldDef): React.JSX.Element | null => {
@@ -532,7 +537,7 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
                 />
             );
         } else {
-            const error = checkNumber(field, value);
+            const check = checkNumber(field, value);
             control = (
                 <TextField
                     variant="standard"
@@ -540,11 +545,14 @@ export default function ShutterEditDialog(props: ShutterEditDialogProps): React.
                     type="number"
                     label={label}
                     value={toStr(value)}
-                    error={!!error}
-                    helperText={error || undefined}
+                    error={check.blocking}
+                    helperText={check.text || undefined}
                     onChange={e => setValue(field.attr, e.target.value)}
                     slotProps={{
                         htmlInput: { min: field.min, max: field.max, step: field.step || 1 },
+                        formHelperText: {
+                            sx: check.text && !check.blocking ? { color: 'warning.main' } : undefined,
+                        },
                         input: field.unit
                             ? { endAdornment: <InputAdornment position="end">{field.unit}</InputAdornment> }
                             : undefined,

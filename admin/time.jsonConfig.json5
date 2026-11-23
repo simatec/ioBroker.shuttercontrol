@@ -103,7 +103,6 @@
                 driveDelayUpLiving: {
                     type: 'number',
                     label: 'Time delay for driving the shutters (seconds)',
-                    min: 0,
                     xs: 12,
                     sm: 6,
                     md: 4,
@@ -267,7 +266,6 @@
                 driveDelayUpSleep: {
                     type: 'number',
                     label: 'Time delay for driving the shutters (seconds)',
-                    min: 0,
                     xs: 12,
                     sm: 6,
                     md: 4,
@@ -431,7 +429,6 @@
                 driveDelayUpChildren: {
                     type: 'number',
                     label: 'Time delay for driving the shutters (seconds)',
-                    min: 0,
                     xs: 12,
                     sm: 6,
                     md: 4,

@@ -44,8 +44,6 @@
                 sunProtEndElevation: {
                     type: 'number',
                     label: 'Sun Protect End with Elevation',
-                    min: -50,
-                    max: 100,
                     step: 0.1,
                     unit: '°',
                     newLine: true,
@@ -77,7 +75,6 @@
                 driveDelayUpAstro: {
                     type: 'number',
                     label: 'Time delay for driving the shutters (seconds)',
-                    min: 0,
                     xs: 12,
                     sm: 6,
                     md: 4,
@@ -219,7 +216,6 @@
                 lightsensorDown: {
                     type: 'number',
                     label: 'Brightness value for down with lightsensor',
-                    min: 0,
                     unit: 'lux',
                     xs: 12,
                     sm: 6,
@@ -230,7 +226,6 @@
                 lightsensorUp: {
                     type: 'number',
                     label: 'Brightness value for up with lightsensor',
-                    min: 0,
                     unit: 'lux',
                     xs: 12,
                     sm: 6,
@@ -425,7 +420,6 @@
                 noGoTime: {
                     type: 'number',
                     label: 'Time left to detect second sleep (minutes)',
-                    min: 0,
                     xs: 12,
                     sm: 6,
                     md: 4,
@@ -467,7 +461,6 @@
                 currentShutterStateTime: {
                     type: 'number',
                     label: 'Waiting time for checking the shutter status (seconds)',
-                    min: 0,
                     hidden: '!data.currentShutterState',
                     xs: 12,
                     sm: 6,
@@ -556,8 +549,6 @@
                 alarmWind1Level: {
                     type: 'number',
                     label: 'Alarm Wind 1 Level',
-                    min: 0,
-                    max: 100,
                     unit: '%',
                     newLine: true,
                     xs: 12,
@@ -579,8 +570,6 @@
                 alarmWind2Level: {
                     type: 'number',
                     label: 'Alarm Wind 2 Level',
-                    min: 0,
-                    max: 100,
                     unit: '%',
                     newLine: true,
                     xs: 12,
@@ -602,8 +591,6 @@
                 alarmRainLevel: {
                     type: 'number',
                     label: 'Alarm Rain Level',
-                    min: 0,
-                    max: 100,
                     unit: '%',
                     newLine: true,
                     xs: 12,
@@ -625,8 +612,6 @@
                 alarmFrostLevel: {
                     type: 'number',
                     label: 'Alarm Frost Level',
-                    min: 0,
-                    max: 100,
                     unit: '%',
                     newLine: true,
                     xs: 12,
@@ -648,8 +633,6 @@
                 alarmFireLevel: {
                     type: 'number',
                     label: 'Alarm Fire Level',
-                    min: 0,
-                    max: 100,
                     unit: '%',
                     newLine: true,
                     xs: 12,
