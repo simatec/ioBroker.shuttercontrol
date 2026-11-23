@@ -28,6 +28,7 @@ function copyAllFiles() {
         `!src-tab/build/static/js/*.map`,
     ], 'admin/');
     copyFiles(['src-tab/build/assets/*'], 'admin/assets');
+    copyFiles(['src-tab/src/i18n/*.json'], 'admin/tab/i18n');
 }
 
 function patchFiles() {
