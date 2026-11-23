@@ -234,5 +234,7 @@
     "triggered": "innescato",
     "frost": "gelo",
     "rain": "piovere",
-    "fire": "fuoco"
+    "fire": "fuoco",
+    "Format: DD.MM.": "Formato: GG.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Se latitudine e longitudine sono vuote, viene usata la posizione delle impostazioni di sistema"
 }

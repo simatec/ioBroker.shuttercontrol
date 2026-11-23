@@ -1,0 +1,22 @@
+{
+    i18n: true,
+    type: 'tabs',
+    iconPosition: 'top',
+    items: {
+        _shutters: {
+            type: 'panel',
+            icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMjAgMTlWM0g0djE2SDJ2MmgyMHYtMmgtMnpNNiA1aDEydjJINlY1em0wIDRoMTJ2Mkg2Vjl6bTAgNGgxMnYySDZ2LTJ6bTAgNGgxMnYySDZ2LTJ6Ii8+PC9zdmc+',
+            '#include': 'shutters.jsonConfig.json5',
+        },
+        _time: {
+            type: 'panel',
+            icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTEuOTkgMkM2LjQ3IDIgMiA2LjQ4IDIgMTJzNC40NyAxMCA5Ljk5IDEwQzE3LjUyIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUyIDIgMTEuOTkgMnpNMTIgMjBjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4em0uNS0xM0gxMXY2bDUuMjUgMy4xNS43NS0xLjIzLTQuNS0yLjY3eiIvPjwvc3ZnPg==',
+            '#include': 'time.jsonConfig.json5',
+        },
+        _extra: {
+            type: 'panel',
+            icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMyAxN3YyaDZ2LTJIM3pNMyA1djJoMTBWNUgzem0xMCAxNnYtMmg4di0yaC04di0yaC0ydjZoMnpNNyA5djJIM3YyaDR2MmgyVjlIN3ptMTQgNHYtMkgxMXYyaDEwem0tNi00aDJWN2g0VjVoLTRWM2gtMnY2eiIvPjwvc3ZnPg==',
+            '#include': 'extra.jsonConfig.json5',
+        },
+    },
+}

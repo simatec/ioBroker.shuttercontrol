@@ -234,5 +234,7 @@
     "triggered": "déclenché",
     "frost": "gel",
     "rain": "pluie",
-    "fire": "feu"
+    "fire": "feu",
+    "Format: DD.MM.": "Format : JJ.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Si la latitude et la longitude sont vides, la position des paramètres système est utilisée"
 }

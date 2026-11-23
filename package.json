@@ -83,18 +83,24 @@
     "release-minor": "release-script minor --yes",
     "release-major": "release-script major --yes",
     "translate": "translate-adapter",
-    "update-packages": "npx -y npm-check-updates --upgrade && cd src-tab && npx -y npm-check-updates --upgrade",
-    "npm": "npm i && cd src-tab && npm i -f",
+    "update-packages": "npx -y npm-check-updates --upgrade && cd src-tab && npx -y npm-check-updates --upgrade && cd ../src-admin && npx -y npm-check-updates --upgrade",
+    "npm": "npm i && cd src-tab && npm i -f && cd ../src-admin && npm i -f",
     "dev-server-run": "dev-server run shuttercontrol",
     "dev-server-watch": "dev-server upload shuttercontrol && dev-server watch shuttercontrol",
     "lint": "eslint -c eslint.config.mjs .",
+    "admin-0-clean": "node tasks --admin-0-clean",
+    "admin-1-npm": "node tasks --admin-1-npm",
+    "admin-2-compile": "node tasks --admin-2-compile",
+    "admin-3-copy": "node tasks --admin-3-copy",
+    "admin-build": "node tasks --admin-build",
     "0-clean": "node tasks --0-clean",
     "1-npm": "node tasks --1-npm",
     "2-build": "node tasks --2-build",
     "3-copy": "node tasks --3-copy",
     "4-patch": "node tasks --4-patch",
+    "tab-build": "node tasks --tab-build",
     "build": "node tasks",
-    "lint-frontend": "cd src-tab && eslint -c eslint.config.mjs"
+    "lint-frontend": "cd src-tab && eslint -c eslint.config.mjs && cd ../src-admin && eslint -c eslint.config.mjs"
   },
   "bugs": {
     "url": "https://github.com/simatec/ioBroker.shuttercontrol/issues"

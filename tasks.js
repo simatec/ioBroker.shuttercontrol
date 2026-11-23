@@ -5,6 +5,35 @@
 const fs = require('node:fs');
 const { deleteFoldersRecursive, buildReact, copyFiles, npmInstall } = require('@iobroker/build-tools');
 
+// ---------------------------------------------------------------------------------------------
+// src-admin: custom components of the jsonConfig (module federation), built to admin/custom
+// ---------------------------------------------------------------------------------------------
+
+function buildAdmin() {
+    return buildReact(`${__dirname}/src-admin/`, { rootDir: `${__dirname}/src-admin/`, vite: true });
+}
+
+function cleanAdmin() {
+    deleteFoldersRecursive(`${__dirname}/admin/custom`);
+    deleteFoldersRecursive(`${__dirname}/src-admin/build`);
+}
+
+function copyAllAdminFiles() {
+    copyFiles(['src-admin/build/assets/*.css'], 'admin/custom/assets');
+    copyFiles(['src-admin/build/assets/*.js'], 'admin/custom/assets');
+    copyFiles(['src-admin/build/assets/*.png'], 'admin/custom/assets');
+    copyFiles(['src-admin/build/customComponents.js'], 'admin/custom');
+    // The GUI API gate of @iobroker/json-config reads this manifest to detect which component
+    // library the remote was built against, so it must sit next to the remote entry.
+    copyFiles(['src-admin/build/mf-manifest.json'], 'admin/custom');
+    // src-admin is not part of the npm package, so the language files must be copied into admin
+    copyFiles(['src-admin/src/i18n/*.json'], 'admin/custom/i18n');
+}
+
+// ---------------------------------------------------------------------------------------------
+// src-tab: the React tab, built to admin (tab_m.html)
+// ---------------------------------------------------------------------------------------------
+
 function clean() {
     deleteFoldersRecursive(`${__dirname}/src-tab/build`);
     deleteFoldersRecursive(`${__dirname}/admin`, [
@@ -12,11 +41,7 @@ function clean() {
         'shuttercontrol.svg',
         '.json',
         '.json5',
-        'img',
-        'index_m.html',
-        'index_m.js',
-        'style.css',
-        'words.js',
+        'custom',
         'i18n',
     ]);
 }
@@ -28,6 +53,7 @@ function copyAllFiles() {
         `!src-tab/build/static/js/*.map`,
     ], 'admin/');
     copyFiles(['src-tab/build/assets/*'], 'admin/assets');
+    // src-tab is not part of the npm package, so the language files must be copied into admin
     copyFiles(['src-tab/src/i18n/*.json'], 'admin/tab/i18n');
 }
 
@@ -42,7 +68,44 @@ function patchFiles() {
     }
 }
 
-if (process.argv.includes('--0-clean')) {
+function buildTab() {
+    clean();
+    let installPromise;
+    if (!fs.existsSync(`${__dirname}/src-tab/node_modules`)) {
+        installPromise = npmInstall(`${__dirname}/src-tab/`);
+    } else {
+        installPromise = Promise.resolve();
+    }
+    return installPromise
+        .then(() => buildReact(`${__dirname}/src-tab/`, { rootDir: __dirname, vite: true }))
+        .then(() => copyAllFiles())
+        .then(() => patchFiles());
+}
+
+function buildAdminAll() {
+    cleanAdmin();
+    let installPromise;
+    if (!fs.existsSync(`${__dirname}/src-admin/node_modules`)) {
+        installPromise = npmInstall(`${__dirname}/src-admin/`);
+    } else {
+        installPromise = Promise.resolve();
+    }
+    return installPromise
+        .then(() => buildAdmin())
+        .then(() => copyAllAdminFiles());
+}
+
+if (process.argv.includes('--admin-0-clean')) {
+    cleanAdmin();
+} else if (process.argv.includes('--admin-1-npm')) {
+    npmInstall(`${__dirname}/src-admin/`).catch(e => console.error(e));
+} else if (process.argv.includes('--admin-2-compile')) {
+    buildAdmin().catch(e => console.error(e));
+} else if (process.argv.includes('--admin-3-copy')) {
+    copyAllAdminFiles();
+} else if (process.argv.includes('--admin-build')) {
+    buildAdminAll().catch(e => console.error(e));
+} else if (process.argv.includes('--0-clean')) {
     clean();
 } else if (process.argv.includes('--1-npm')) {
     if (!fs.existsSync(`${__dirname}/src-tab/node_modules`)) {
@@ -54,17 +117,14 @@ if (process.argv.includes('--0-clean')) {
     copyAllFiles();
 } else if (process.argv.includes('--4-patch')) {
     patchFiles();
+} else if (process.argv.includes('--tab-build')) {
+    buildTab().catch(e => console.error(e));
 } else {
-    clean();
-    let installPromise;
-    if (!fs.existsSync(`${__dirname}/src-tab/node_modules`)) {
-        installPromise = npmInstall(`${__dirname}/src-tab/`).catch(e => console.error(e));
-    } else {
-        installPromise = Promise.resolve();
-    }
-    installPromise
-        .then(() => buildReact(`${__dirname}/src-tab/`, { rootDir: __dirname, vite: true }))
-        .then(() => copyAllFiles())
-        .then(() => patchFiles())
-        .catch(e => console.error(e));
+    // build everything: first the custom components of the configuration, then the tab
+    buildAdminAll()
+        .then(() => buildTab())
+        .catch(e => {
+            console.error(e);
+            process.exit(1);
+        });
 }

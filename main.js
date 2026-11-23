@@ -257,8 +257,10 @@ function startAdapter(options) {
                 if (id === resShutterID && state.ts === state.lc) {
                     const result = shutterSettings.filter((d) => d.name === resShutterID);
 
-                    if (adapter.config.currentShutterState === true && adapter.config.currentShutterStateTime) {
-                        waitTime4StateCheck = (adapter.config.currentShutterStateTime ? adapter.config.currentShutterStateTime * 1000 : 60000);
+                    // the old admin stored the time as string ("0" = no waiting), the jsonConfig stores a number
+                    const currentShutterStateTime = parseFloat(`${adapter.config.currentShutterStateTime}`);
+                    if (adapter.config.currentShutterState === true && !isNaN(currentShutterStateTime)) {
+                        waitTime4StateCheck = currentShutterStateTime * 1000;
                     }
                     adapter.log.debug('#0 wait for shutter check started');
                     await sleep(waitTime4StateCheck);
@@ -689,8 +691,8 @@ async function checkActualStates() {
     }
 
     if (adapter.config.publicHolidays === true &&
-        (adapter.config.publicHolInstance != 'none' ||
-            adapter.config.publicHolInstance != '')) {
+        adapter.config.publicHolInstance &&
+        adapter.config.publicHolInstance != 'none') {
 
         const _publicHolidayStr = await adapter.getForeignStateAsync(`${adapter.config.publicHolInstance}.heute.boolean`).catch((e) => adapter.log.warn(e));
         if (_publicHolidayStr?.val !== null && _publicHolidayStr?.val !== undefined) {
@@ -821,11 +823,22 @@ const calc = schedule.scheduleJob('calcTimer', '30 2 * * *', async function () {
  * @returns {boolean} true if the value is a valid coordinate
  */
 function isValidCoordinate(value, limit) {
+    const num = parseCoordinate(value);
+    return num !== null && Math.abs(num) <= limit;
+}
+
+/**
+ * Converts a latitude or longitude into a number. A decimal comma (e.g. "9,75") is accepted.
+ *
+ * @param {string|number|null|undefined} value value from the configuration
+ * @returns {number|null} the number or null if the value is empty or not a number
+ */
+function parseCoordinate(value) {
     if (value === undefined || value === null || String(value).trim() === '') {
-        return false;
+        return null;
     }
-    const num = Number(value);
-    return Number.isFinite(num) && Math.abs(num) <= limit;
+    const num = Number(String(value).trim().replace(',', '.'));
+    return Number.isFinite(num) ? num : null;
 }
 
 /**
@@ -836,7 +849,11 @@ function hasValidCoordinates() {
 }
 
 async function GetSystemData() {
-    if (!hasValidCoordinates()) {
+    if (hasValidCoordinates()) {
+        // use numbers for SunCalc, also if the coordinates were entered with a decimal comma
+        adapter.config.latitude = parseCoordinate(adapter.config.latitude);
+        adapter.config.longitude = parseCoordinate(adapter.config.longitude);
+    } else {
         try {
             const obj = await adapter.getForeignObjectAsync('system.config');
 

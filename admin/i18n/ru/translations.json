@@ -234,5 +234,7 @@
     "triggered": "запускается",
     "frost": "мороз",
     "rain": "дождь",
-    "fire": "огонь"
+    "fire": "огонь",
+    "Format: DD.MM.": "Формат: ДД.ММ.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Если широта и долгота не заданы, используется местоположение из системных настроек"
 }

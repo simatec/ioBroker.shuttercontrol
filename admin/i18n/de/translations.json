@@ -234,5 +234,7 @@
     "triggered": "Fenster geöffnet",
     "frost": "Frost",
     "rain": "Regen",
-    "fire": "Feuer"
+    "fire": "Feuer",
+    "Format: DD.MM.": "Format: TT.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Sind Breiten- und Längengrad leer, wird die Position aus den Systemeinstellungen verwendet"
 }
