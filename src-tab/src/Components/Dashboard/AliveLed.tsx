@@ -10,7 +10,7 @@ import { type AdminConnection, I18n, IconStatusLed } from '@iobroker/gui-compone
  *
  * @param props properties
  * @param props.socket connection
- * @param props.instanceId e.g. `backitup.0`
+ * @param props.instanceId e.g. `shuttercontrol.0`
  * @param props.alive the instance runs
  */
 export default function AliveLed(props: {

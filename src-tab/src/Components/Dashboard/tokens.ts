@@ -1,5 +1,5 @@
 /**
- * Colors of the BackItUp tab. One set per theme mode, so the dashboard looks the same
+ * Colors of the Shuttercontrol tab. One set per theme mode, so the dashboard looks the same
  * in all admin themes (modernDark, dark, modernLight, light).
  */
 export interface DashboardTokens {
@@ -28,7 +28,7 @@ export interface DashboardTokens {
     roundButtonBg: string;
     roundButtonHoverBg: string;
     roundButtonColor: string;
-    /** Dropdown menus (backup source) */
+    /** Dropdown menus */
     menuBg: string;
     menuShadow: string;
     menuHover: string;
@@ -116,24 +116,7 @@ export function getTokens(dark: boolean): DashboardTokens {
     return dark ? DARK : LIGHT;
 }
 
-/** The hero card is blue in both modes, so it has fixed colors */
-export const HERO = {
-    background: 'linear-gradient(120deg, #0A2350 0%, #0B3478 45%, #0A4FB8 80%, #0B62D6 100%)',
-    border: 'rgba(96, 165, 250, 0.45)',
-    shadow: '0 10px 30px rgba(11, 98, 214, 0.25)',
-    text: '#FFFFFF',
-    label: 'rgba(214, 228, 255, 0.85)',
-    divider: 'rgba(160, 200, 255, 0.28)',
-    icon: '#9CCBFF',
-    success: '#4ADE80',
-    successBg: 'rgba(34, 197, 94, 0.16)',
-    successBorder: 'rgba(74, 222, 128, 0.6)',
-    error: '#FCA5A5',
-    errorBg: 'rgba(239, 68, 68, 0.2)',
-    errorBorder: 'rgba(252, 165, 165, 0.6)',
-};
-
-/** Primary action (start ioBroker backup) */
+/** Primary action tile (open/close all shutters) */
 export const PRIMARY_TILE = {
     background: 'linear-gradient(180deg, #2E93F9 0%, #0B6BEA 100%)',
     hoverBackground: 'linear-gradient(180deg, #48A1FA 0%, #1B7BF5 100%)',

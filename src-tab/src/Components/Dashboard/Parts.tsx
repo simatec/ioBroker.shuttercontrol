@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, CircularProgress, Fab, Tooltip } from '@mui/material';
-import { Check, ChevronRight, Close } from '@mui/icons-material';
+import { ChevronRight } from '@mui/icons-material';
 
 import { type DashboardTokens, PRIMARY_TILE } from './tokens';
 import { type HoverEffect, hoverEffectSx, NO_MOTION } from './motion';
@@ -88,50 +88,6 @@ export function SectionHeader(props: {
     );
 }
 
-/** Small round "ok" mark used in the option list */
-export function CheckMark(props: { size?: number; color?: string }): React.JSX.Element {
-    const size = props.size || 18;
-    return (
-        <span
-            style={{
-                width: size,
-                height: size,
-                borderRadius: '50%',
-                background: props.color || '#2F8BFF',
-                color: '#FFFFFF',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-            }}
-        >
-            <Check style={{ fontSize: Math.round(size * 0.72) }} />
-        </span>
-    );
-}
-
-/** Round red/green status mark used in the backup list */
-export function StatusMark(props: { ok: boolean; t: DashboardTokens }): React.JSX.Element {
-    const color = props.ok ? (props.t.dark ? '#22C55E' : '#16A34A') : props.t.dark ? '#EF4444' : '#DC2626';
-    return (
-        <span
-            style={{
-                width: 20,
-                height: 20,
-                borderRadius: '50%',
-                background: color,
-                color: '#FFFFFF',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-            }}
-        >
-            {props.ok ? <Check style={{ fontSize: 14 }} /> : <Close style={{ fontSize: 13 }} />}
-        </span>
-    );
-}
-
 /** Pill with a colored border, e.g. "Successful", "Failed" or "Active" */
 export function Pill(props: {
     color: string;
@@ -170,16 +126,16 @@ export function Pill(props: {
                 paddingRight: props.large ? '8px !important' : '6px !important',
                 transition: 'filter 0.15s ease, transform 0.15s ease',
                 '&:hover': { filter: 'brightness(1.25)' },
-                '&:hover .bk-pill-arrow': { transform: 'translateX(3px)' },
+                '&:hover .sc-pill-arrow': { transform: 'translateX(3px)' },
                 '&:focus-visible': { outline: `2px solid ${props.color}`, outlineOffset: 2 },
-                '& .bk-pill-arrow': { transition: 'transform 0.15s ease', marginLeft: '-2px' },
+                '& .sc-pill-arrow': { transition: 'transform 0.15s ease', marginLeft: '-2px' },
                 ...NO_MOTION,
             }}
         >
             {props.icon}
             {props.children}
             <ChevronRight
-                className="bk-pill-arrow"
+                className="sc-pill-arrow"
                 style={{ fontSize: props.large ? 18 : 16 }}
             />
         </Box>
@@ -306,7 +262,7 @@ export function ActionTile(props: {
             }}
         >
             <span
-                className="bk-tile-icon"
+                className="sc-tile-icon"
                 style={{
                     display: 'flex',
                     color: primary ? PRIMARY_TILE.text : t.tileIcon,
