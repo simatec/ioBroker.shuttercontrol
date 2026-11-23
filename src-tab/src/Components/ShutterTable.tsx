@@ -233,6 +233,81 @@ export default class ShutterTable extends React.Component<ShutterTableProps, Shu
             );
         }
 
+        return (
+            <>
+                {/* small screens: one card per shutter, so no column is hidden off-screen */}
+                <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: '10px' }}>
+                    {this.props.shutters.map((shutter, i) => this.renderCard(shutter, i))}
+                </Box>
+                <Box sx={{ display: { xs: 'none', md: 'block' } }}>{this.renderTable()}</Box>
+            </>
+        );
+    }
+
+    /**
+     * Card of one shutter for small screens.
+     *
+     * @param shutter shutter
+     * @param index position in the list
+     */
+    renderCard(shutter: ShutterEntry, index: number): React.JSX.Element {
+        const { t } = this.props;
+        return (
+            <DashboardCard
+                key={`${shutter.shutterName}_${index}`}
+                t={t}
+                style={{ padding: '10px 12px' }}
+            >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                    <span
+                        style={{
+                            flex: 1,
+                            minWidth: 0,
+                            fontWeight: 700,
+                            color: t.text,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        {shutter.shutterName}
+                    </span>
+                    {this.renderMode(shutter)}
+                </div>
+                {SWITCHES.map(sw => (
+                    <div
+                        key={sw.attr}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: 8,
+                            borderTop: `1px solid ${t.rowDivider}`,
+                            color: t.textSecondary,
+                            fontSize: '0.9rem',
+                        }}
+                    >
+                        {I18n.t(sw.title)}
+                        {this.renderSwitch(shutter, sw.attr, sw.title)}
+                    </div>
+                ))}
+                <div
+                    style={{
+                        borderTop: `1px solid ${t.rowDivider}`,
+                        paddingTop: 6,
+                        color: t.textSecondary,
+                        fontSize: '0.9rem',
+                    }}
+                >
+                    {I18n.t('Shutter level')}
+                    <div style={{ padding: '0 6px', color: t.text }}>{this.renderLevel(shutter)}</div>
+                </div>
+            </DashboardCard>
+        );
+    }
+
+    renderTable(): React.JSX.Element {
+        const { t } = this.props;
         const headCell = { color: t.textSecondary, fontWeight: 700, borderColor: t.divider, whiteSpace: 'nowrap' };
         const cell = { color: t.text, borderColor: t.rowDivider };
 
