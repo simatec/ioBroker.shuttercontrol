@@ -67,7 +67,7 @@ export function SectionHeader(props: {
                 alignItems: 'center',
                 gap: 10,
                 padding: '0 2px 6px 2px',
-                margin: '16px 0 10px 0',
+                margin: '12px 0 8px 0',
                 borderBottom: `1px solid ${props.t.divider}`,
             }}
         >
@@ -209,6 +209,8 @@ export function ActionTile(props: {
     title?: string;
     /** How the icon moves when the mouse is over the tile */
     hoverEffect?: HoverEffect;
+    /** Accessible name, if the visible label alone is not clear (e.g. "Open" inside an area card) */
+    ariaLabel?: string;
 }): React.JSX.Element {
     const { t } = props;
     const primary = !!props.primary;
@@ -218,13 +220,14 @@ export function ActionTile(props: {
             component="button"
             type="button"
             disabled={props.disabled}
+            aria-label={props.ariaLabel}
             onClick={props.disabled ? undefined : props.onClick}
             sx={{
                 appearance: 'none',
                 font: 'inherit',
                 width: '100%',
                 height: '100%',
-                minHeight: props.vertical ? 84 : 44,
+                minHeight: props.vertical ? 84 : 38,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: props.vertical ? 'column' : 'row',

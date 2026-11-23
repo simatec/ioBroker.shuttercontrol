@@ -52,7 +52,7 @@ import InfoTile from './Components/Dashboard/InfoTile';
 import SwitchTile from './Components/Dashboard/SwitchTile';
 import { revealSx } from './Components/Dashboard/motion';
 import { getTokens, type DashboardTokens } from './Components/Dashboard/tokens';
-import { ActionTile, RoundButton, SectionHeader } from './Components/Dashboard/Parts';
+import { ActionTile, DashboardCard, RoundButton, SectionHeader } from './Components/Dashboard/Parts';
 import {
     ShutterAutoIcon,
     ShutterCloseIcon,
@@ -102,7 +102,7 @@ const INFO_STATES: { id: string; label: string; unit?: string; icon: React.React
 const ACTION_GROUPS: {
     title: string;
     icon: React.ReactNode;
-    actions: { id: string; label: string; icon: React.ReactNode; primary?: boolean }[];
+    actions: { id: string; label: string; short: string; icon: React.ReactNode; primary?: boolean }[];
 }[] = [
     {
         title: 'Living Area',
@@ -110,16 +110,19 @@ const ACTION_GROUPS: {
         actions: [
             {
                 id: 'openLiving',
+                short: 'Open',
                 label: 'Open all shutters in the living area',
                 icon: <ShutterOpenIcon fontSize="inherit" />,
             },
             {
                 id: 'closeLiving',
+                short: 'Close',
                 label: 'Close all shutters in the living area',
                 icon: <ShutterCloseIcon fontSize="inherit" />,
             },
             {
                 id: 'sunProtectLiving',
+                short: 'Sun protection',
                 label: 'Move Living area into the sun protection',
                 icon: <ShutterSunIcon fontSize="inherit" />,
             },
@@ -131,16 +134,19 @@ const ACTION_GROUPS: {
         actions: [
             {
                 id: 'openSleep',
+                short: 'Open',
                 label: 'Open all shutters in sleeping area',
                 icon: <ShutterOpenIcon fontSize="inherit" />,
             },
             {
                 id: 'closeSleep',
+                short: 'Close',
                 label: 'Close all shutters in sleeping area',
                 icon: <ShutterCloseIcon fontSize="inherit" />,
             },
             {
                 id: 'sunProtectSleep',
+                short: 'Sun protection',
                 label: 'Move Sleep area into the sun protection',
                 icon: <ShutterSunIcon fontSize="inherit" />,
             },
@@ -152,16 +158,19 @@ const ACTION_GROUPS: {
         actions: [
             {
                 id: 'openChildren',
+                short: 'Open',
                 label: "Open all shutters in children's area",
                 icon: <ShutterOpenIcon fontSize="inherit" />,
             },
             {
                 id: 'closeChildren',
+                short: 'Close',
                 label: "Close all shutters in children's area",
                 icon: <ShutterCloseIcon fontSize="inherit" />,
             },
             {
                 id: 'sunProtectChildren',
+                short: 'Sun protection',
                 label: "Move children's area into the sun protection",
                 icon: <ShutterSunIcon fontSize="inherit" />,
             },
@@ -171,19 +180,32 @@ const ACTION_GROUPS: {
         title: 'All shutters',
         icon: <Window fontSize="inherit" />,
         actions: [
-            { id: 'openAll', label: 'Open all shutters', icon: <ShutterOpenIcon fontSize="inherit" />, primary: true },
+            {
+                id: 'openAll',
+                short: 'Open',
+                label: 'Open all shutters',
+                icon: <ShutterOpenIcon fontSize="inherit" />,
+                primary: true,
+            },
             {
                 id: 'closeAll',
+                short: 'Close',
                 label: 'Close all shutters',
                 icon: <ShutterCloseIcon fontSize="inherit" />,
                 primary: true,
             },
             {
                 id: 'sunProtect',
+                short: 'Sun protection',
                 label: 'Move shutters into the sun protection',
                 icon: <ShutterSunIcon fontSize="inherit" />,
             },
-            { id: 'autoAll', label: 'Automatic mode for all shutters', icon: <ShutterAutoIcon fontSize="inherit" /> },
+            {
+                id: 'autoAll',
+                short: 'Automatic mode',
+                label: 'Automatic mode for all shutters',
+                icon: <ShutterAutoIcon fontSize="inherit" />,
+            },
         ],
     },
 ];
@@ -634,48 +656,57 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                     icon={<TouchApp fontSize="inherit" />}
                     title={I18n.t('Shutter mode control')}
                 />
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {/* one card per area, side by side on wide screens, so the whole page fits without scrolling */}
+                <Box
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: {
+                            xs: '1fr',
+                            sm: 'repeat(2, minmax(0, 1fr))',
+                            lg: 'repeat(4, minmax(0, 1fr))',
+                        },
+                        gap: '12px',
+                    }}
+                >
                     {ACTION_GROUPS.map(group => (
-                        <div key={group.title}>
+                        <DashboardCard
+                            key={group.title}
+                            t={t}
+                            style={{ padding: 8, display: 'flex', flexDirection: 'column', gap: 6 }}
+                        >
                             <div
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: 8,
-                                    marginBottom: 8,
-                                    color: t.textSecondary,
-                                    fontSize: '0.9rem',
-                                    fontWeight: 600,
+                                    padding: '0 4px',
+                                    color: t.text,
+                                    fontSize: '0.92rem',
+                                    fontWeight: 700,
                                 }}
                             >
                                 <span style={{ display: 'flex', fontSize: 18, color: t.accent }}>{group.icon}</span>
                                 {I18n.t(group.title)}
                             </div>
-                            <div
-                                style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
-                                    gap: 12,
-                                }}
-                            >
-                                {group.actions.map(action => (
-                                    <ActionTile
-                                        key={action.id}
-                                        t={t}
-                                        vertical
-                                        primary={action.primary}
-                                        icon={action.icon}
-                                        hoverEffect={action.id.startsWith('close') ? 'drop' : 'lift'}
-                                        label={I18n.t(action.label)}
-                                        disabled={!this.state.myAlive}
-                                        title={this.state.myAlive ? undefined : I18n.t('Instance is not running')}
-                                        onClick={() => void this.onAction(action.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                            {group.actions.map(action => (
+                                <ActionTile
+                                    key={action.id}
+                                    t={t}
+                                    primary={action.primary}
+                                    icon={action.icon}
+                                    hoverEffect={action.id.startsWith('close') ? 'drop' : 'lift'}
+                                    label={I18n.t(action.short)}
+                                    ariaLabel={I18n.t(action.label)}
+                                    disabled={!this.state.myAlive}
+                                    title={
+                                        this.state.myAlive ? I18n.t(action.label) : I18n.t('Instance is not running')
+                                    }
+                                    onClick={() => void this.onAction(action.id)}
+                                />
+                            ))}
+                        </DashboardCard>
                     ))}
-                </div>
+                </Box>
             </>
         );
     }
@@ -691,7 +722,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(215px, 1fr))',
                         gap: 12,
                     }}
                 >
@@ -764,7 +795,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                                 overflow: 'auto',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                padding: { xs: '0 10px 16px', sm: '0 20px 20px' },
+                                padding: { xs: '0 10px 12px', sm: '0 20px 12px' },
                             }}
                         >
                             {/* the blocks fade in one after another when the page opens */}

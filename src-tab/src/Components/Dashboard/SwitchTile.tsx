@@ -28,7 +28,7 @@ export default function SwitchTile(props: {
     return (
         <DashboardCard
             t={t}
-            style={{ padding: '8px 8px 8px 12px', display: 'flex', alignItems: 'center', gap: 12 }}
+            style={{ padding: '6px 8px 6px 12px', display: 'flex', alignItems: 'center', gap: 12 }}
         >
             <IconBox
                 t={t}
