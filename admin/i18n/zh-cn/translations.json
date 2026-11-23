@@ -234,5 +234,7 @@
     "triggered": "触发",
     "frost": "霜",
     "rain": "雨",
-    "fire": "火"
+    "fire": "火",
+    "Format: DD.MM.": "格式：DD.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "如果纬度和经度为空，则使用系统设置中的位置"
 }

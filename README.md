@@ -50,6 +50,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Fix reading of latitude/longitude from the system settings (js-controller 7)
 * (simatec) Fix crash when no coordinates are configured
 * (simatec) Skip the astro calculation when latitude/longitude are missing or invalid
+* (simatec) Admin configuration migrated from materialize to jsonConfig (custom React components for the shutter table and the shutter dialog)
 
 ### 2.1.2 (2026-08-29)
 * (simatec) Update dependabot

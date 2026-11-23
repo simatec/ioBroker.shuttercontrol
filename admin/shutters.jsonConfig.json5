@@ -1,0 +1,45 @@
+{
+    type: 'panel',
+    label: 'main settings',
+    items: {
+        _headerInfo: {
+            // logo, title and donate buttons
+            type: 'custom',
+            guiApi: 2,
+            i18n: true,
+            url: 'custom/customComponents.js',
+            name: 'ConfigCustomShuttercontrolSet/Components/Header',
+            xs: 12,
+            sm: 12,
+            md: 12,
+            lg: 12,
+            xl: 12,
+        },
+        _header: {
+            newLine: true,
+            type: 'header',
+            text: 'Shutter config',
+            size: 2,
+            xs: 12,
+            sm: 12,
+            md: 12,
+            lg: 12,
+            xl: 12,
+        },
+        events: {
+            // Table of the shutters incl. the edit dialog with the shutter settings.
+            // jsonConfig has no table with an edit dialog, so this is a custom React component (src-admin)
+            newLine: true,
+            type: 'custom',
+            guiApi: 2,
+            i18n: true,
+            url: 'custom/customComponents.js',
+            name: 'ConfigCustomShuttercontrolSet/Components/ShutterConfig',
+            xs: 12,
+            sm: 12,
+            md: 12,
+            lg: 12,
+            xl: 12,
+        },
+    },
+}

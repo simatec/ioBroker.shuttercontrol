@@ -234,5 +234,7 @@
     "triggered": "wyzwalane",
     "frost": "mróz",
     "rain": "deszcz",
-    "fire": "ogień"
+    "fire": "ogień",
+    "Format: DD.MM.": "Format: DD.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Jeśli szerokość i długość geograficzna są puste, używana jest pozycja z ustawień systemowych"
 }

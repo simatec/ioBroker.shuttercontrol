@@ -9,6 +9,7 @@ export default [
         // specify files to exclude from linting here
         ignores: [
             'src-tab/**/*',
+            'src-admin/**/*',
             'admin/assets/**/*',
             'tasks.js',
             '.dev-server/',
@@ -19,7 +20,6 @@ export default [
             'build',
             'admin/**/*.js',
             'admin/build',
-            'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts'
         ]

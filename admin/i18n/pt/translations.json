@@ -234,5 +234,7 @@
     "triggered": "provocado",
     "frost": "geada",
     "rain": "chuva",
-    "fire": "fogo"
+    "fire": "fogo",
+    "Format: DD.MM.": "Formato: DD.MM.",
+    "If latitude and longitude are empty, the position from the system settings is used": "Se a latitude e a longitude estiverem vazias, será usada a posição das configurações do sistema"
 }
