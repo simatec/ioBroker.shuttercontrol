@@ -599,9 +599,11 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                 <Box
                     sx={{
                         display: 'grid',
+                        // 12 values: 6 per row on wide screens, 2 rows
                         gridTemplateColumns: {
                             xs: 'repeat(2, minmax(0, 1fr))',
-                            sm: 'repeat(auto-fill, minmax(210px, 1fr))',
+                            sm: 'repeat(3, minmax(0, 1fr))',
+                            lg: 'repeat(6, minmax(0, 1fr))',
                         },
                         gap: { xs: '8px', sm: '12px' },
                     }}

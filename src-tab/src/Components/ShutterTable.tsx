@@ -4,7 +4,8 @@ import { Box, Slider, Switch, Table, TableBody, TableCell, TableHead, TableRow }
 
 import { type AdminConnection, I18n } from '@iobroker/gui-components';
 
-import { DashboardCard, Pill } from './Dashboard/Parts';
+import { DashboardCard } from './Dashboard/Parts';
+import ShutterStatus from './Dashboard/ShutterStatus';
 import { type DashboardTokens } from './Dashboard/tokens';
 
 /** One configured shutter, with the IDs the adapter answers on the `tab` command */
@@ -203,19 +204,11 @@ export default class ShutterTable extends React.Component<ShutterTableProps, Shu
     }
 
     renderMode(shutter: ShutterEntry): React.JSX.Element {
-        const { t } = this.props;
-        const mode = this.state.values[this.getId(shutter, 'autoState')];
-        if (mode === undefined || mode === null || mode === '') {
-            return <span style={{ color: t.textMuted }}>--</span>;
-        }
         return (
-            <Pill
-                color={t.accent}
-                background={t.iconBoxBg}
-                border={t.iconBoxBorder}
-            >
-                {String(mode)}
-            </Pill>
+            <ShutterStatus
+                t={this.props.t}
+                value={this.state.values[this.getId(shutter, 'autoState')]}
+            />
         );
     }
 
