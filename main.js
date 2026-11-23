@@ -22,6 +22,7 @@ const shutterDownLate = require('./lib/shutterDownLate.js');                    
 const shutterDownChildren = require('./lib/shutterDownChildren.js');                                    // shutterDownChildren
 const shutterUpChildren = require('./lib/shutterUpChildren.js');                                        // shutterUpChildren
 const shutterDownSleep = require('./lib/shutterDownSleep.js');                                          // shutterDownSleep
+const sleepWithAdapter = require('./lib/sleep.js');                                                     // wait with the adapter timer
 const buttonAction = require('./lib/buttonAction.js');                                                  // buttonAction
 const shutterState = require('./lib/shutterState.js');        			                                // shutterState
 const shutterDownComplete = require('./lib/shutterDownComplete.js');                                    // shutterDownComplete
@@ -36,7 +37,7 @@ const adapterName = require('./package.json').name.split('.').pop();
 
 let autoLivingStr, autoSleepStr, autoChildrenStr, delayUp, delayUpChildren, delayDown, delayDownChildren, resTriggerChange, shutterSettings;
 let astroTimeLivingUp, astroTimeLivingDown, astroTimeSleepUp, astroTimeSleepDown, astroTimeChildrenUp, astroTimeChildrenDown;
-let timer, timerSleep;
+let timer;
 
 let resTrigger = [];
 let resSunInsideTemp = [];
@@ -72,8 +73,7 @@ function startAdapter(options) {
 
         try {
             adapter.log.info('cleaned everything up...');
-            clearTimeout(timer);
-            clearTimeout(timerSleep);
+            adapter.clearTimeout(timer);
             clearWindowLevelTimers(adapter);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
@@ -1874,11 +1874,14 @@ function IsEqual(timeVal, timeLimit) {
     return ret;
 }
 
-async function sleep(ms) {
-    return new Promise(async (resolve) => {
-        // @ts-ignore
-        timerSleep = setTimeout(async () => resolve(), ms);
-    });
+/**
+ * Waits for the given time with the timer of the adapter (own timer per call, stopped on unload).
+ *
+ * @param {number} ms time to wait in milliseconds
+ * @returns {Promise<void>} resolves after the time
+ */
+function sleep(ms) {
+    return sleepWithAdapter(adapter, ms);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1896,7 +1899,7 @@ function main(adapter) {
     // read shutter settings from config
     shutterSettings = adapter.config.events;
     saveCurrentStates(true);
-    timer = setTimeout(function () {
+    timer = adapter.setTimeout(function () {
         checkActualStates();
         const calcPos = schedule.scheduleJob('calcPosTimer', '*/5 * * * *', function () {
             sunPos();
