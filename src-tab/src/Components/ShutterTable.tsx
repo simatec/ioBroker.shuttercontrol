@@ -42,6 +42,9 @@ interface ShutterTableState {
     dragging: Record<string, number>;
 }
 
+/** Fast level changes within this time (ms) are sent as one value */
+const LEVEL_WRITE_DELAY = 400;
+
 const SWITCHES: { attr: 'autoDown' | 'autoUp' | 'autoSun'; title: string }[] = [
     { attr: 'autoDown', title: 'Automatic closing' },
     { attr: 'autoUp', title: 'Automatic opening' },
@@ -54,6 +57,9 @@ const SWITCHES: { attr: 'autoDown' | 'autoUp' | 'autoSun'; title: string }[] = [
  */
 export default class ShutterTable extends React.Component<ShutterTableProps, ShutterTableState> {
     private subscribed: string[] = [];
+
+    /** Pending writes of the shutter levels, see commitLevel */
+    private levelTimers: Record<string, ReturnType<typeof setTimeout>> = {};
 
     constructor(props: ShutterTableProps) {
         super(props);
@@ -72,6 +78,15 @@ export default class ShutterTable extends React.Component<ShutterTableProps, Shu
     }
 
     componentWillUnmount(): void {
+        // send the pending levels, so no change gets lost
+        for (const [id, timer] of Object.entries(this.levelTimers)) {
+            clearTimeout(timer);
+            const value = this.state.dragging[id];
+            if (value !== undefined) {
+                void this.props.socket.setState(id, value, false);
+            }
+        }
+        this.levelTimers = {};
         this.unsubscribe();
     }
 
@@ -145,10 +160,34 @@ export default class ShutterTable extends React.Component<ShutterTableProps, Shu
     }
 
     onStateChange = (id: string, state: ioBroker.State | null | undefined): void => {
-        if (this.state.values[id] !== state?.val) {
-            this.setState({ values: { ...this.state.values, [id]: state?.val } });
-        }
+        // functional update: several changes can arrive before React applied the previous one
+        this.setState(prev =>
+            prev.values[id] === state?.val ? null : { values: { ...prev.values, [id]: state?.val } },
+        );
     };
+
+    /**
+     * Writes a new shutter level. Fast changes (e.g. arrow keys) are collected, so only the last value is sent
+     * and the shutter does not drive to every step in between. Until then the slider shows the new value.
+     *
+     * @param id state ID of the shutter level
+     * @param value new level
+     */
+    commitLevel(id: string, value: number): void {
+        this.setState(prev => ({ dragging: { ...prev.dragging, [id]: value } }));
+        if (this.levelTimers[id]) {
+            clearTimeout(this.levelTimers[id]);
+        }
+        this.levelTimers[id] = setTimeout(() => {
+            delete this.levelTimers[id];
+            this.setState(prev => {
+                const dragging = { ...prev.dragging };
+                delete dragging[id];
+                return { dragging, values: { ...prev.values, [id]: value } };
+            });
+            void this.props.socket.setState(id, value, false);
+        }, LEVEL_WRITE_DELAY);
+    }
 
     renderSwitch(shutter: ShutterEntry, attr: 'autoDown' | 'autoUp' | 'autoSun', title: string): React.JSX.Element {
         const id = this.getId(shutter, attr);
@@ -183,16 +222,10 @@ export default class ShutterTable extends React.Component<ShutterTableProps, Shu
                     value={value}
                     disabled={!info.writable}
                     valueLabelDisplay="auto"
-                    onChange={(_e, newValue) => this.setState({ dragging: { ...this.state.dragging, [id]: newValue } })}
-                    onChangeCommitted={(_e, newValue) => {
-                        const dragging = { ...this.state.dragging };
-                        delete dragging[id];
-                        this.setState({
-                            dragging,
-                            values: { ...this.state.values, [id]: newValue },
-                        });
-                        void this.props.socket.setState(id, newValue, false);
-                    }}
+                    onChange={(_e, newValue) =>
+                        this.setState(prev => ({ dragging: { ...prev.dragging, [id]: newValue } }))
+                    }
+                    onChangeCommitted={(_e, newValue) => this.commitLevel(id, newValue)}
                     slotProps={{ input: { 'aria-label': `${shutter.shutterName}: ${I18n.t('Shutter level')}` } }}
                 />
                 <span style={{ minWidth: 48, textAlign: 'right', fontWeight: 600, whiteSpace: 'nowrap' }}>

@@ -38,7 +38,10 @@ export default function InfoTile(props: {
                         color: t.textSecondary,
                         fontSize: '0.8rem',
                         lineHeight: 1.25,
-                        overflowWrap: 'anywhere',
+                        // long compound words ("Sonnenaufgangszeit") get a hyphen instead of a break mid-word
+                        hyphens: 'auto',
+                        WebkitHyphens: 'auto',
+                        overflowWrap: 'break-word',
                     }}
                 >
                     {props.label}

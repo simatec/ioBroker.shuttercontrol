@@ -298,6 +298,8 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
     }
 
     async onConnectionReady(): Promise<void> {
+        // the language of the page is needed for the hyphenation of long labels
+        document.documentElement.lang = I18n.getLanguage();
         const myAlive = await this.socket.getState(`system.adapter.${this.statePrefix}.alive`);
         const newState: Partial<AppState> = {
             myAlive: !!myAlive?.val,
@@ -330,9 +332,10 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
 
     onValue = (id: string, state: ioBroker.State | null | undefined): void => {
         const key = id.substring(this.statePrefix.length + 1);
-        if (this.state.values[key] !== state?.val) {
-            this.setState({ values: { ...this.state.values, [key]: state?.val } });
-        }
+        // functional update: several changes can arrive before React applied the previous one
+        this.setState(prev =>
+            prev.values[key] === state?.val ? null : { values: { ...prev.values, [key]: state?.val } },
+        );
     };
 
     componentWillUnmount(): void {
@@ -394,7 +397,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
      * @param value new value
      */
     async onSetting(id: string, value: boolean): Promise<void> {
-        this.setState({ values: { ...this.state.values, [id]: value } });
+        this.setState(prev => ({ values: { ...prev.values, [id]: value } }));
         try {
             await this.socket.setState(`${this.statePrefix}.${id}`, value, true);
         } catch (e) {
