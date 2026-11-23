@@ -61,18 +61,6 @@ import {
 } from './Components/Dashboard/ShutterIcons';
 import ShutterTable, { type ShutterEntry } from './Components/ShutterTable';
 
-import enLang from './i18n/en.json';
-import deLang from './i18n/de.json';
-import ruLang from './i18n/ru.json';
-import ptLang from './i18n/pt.json';
-import nlLang from './i18n/nl.json';
-import frLang from './i18n/fr.json';
-import itLang from './i18n/it.json';
-import esLang from './i18n/es.json';
-import plLang from './i18n/pl.json';
-import ukLang from './i18n/uk.json';
-import zhCnLang from './i18n/zh-cn.json';
-
 const isDarkThemeName = (themeName?: string): boolean => themeName === 'modernDark' || themeName === 'dark';
 
 const DONATE_URL = 'https://paypal.me/mk1676';
@@ -227,6 +215,23 @@ interface AppState extends GenericAppState {
     /** Shutters of the configuration, like the adapter answers on the `tab` command */
     shutters: ShutterEntry[];
     moreMenu: HTMLElement | null;
+    /** The language files from admin/tab/i18n are loaded */
+    i18nLoaded: boolean;
+}
+
+/**
+ * Loads one language file of the tab. The files are in admin/tab/i18n (copied there by the build),
+ * so the adapter package ships them like the language files of the configuration.
+ *
+ * @param lang language
+ */
+async function loadLanguage(lang: string): Promise<Record<string, string> | null> {
+    try {
+        const response = await fetch(`tab/i18n/${lang}.json`);
+        return response.ok ? ((await response.json()) as Record<string, string>) : null;
+    } catch {
+        return null;
+    }
 }
 
 export default class App extends GenericApp<GenericAppProps, AppState> {
@@ -234,19 +239,6 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
         const extendedProps = { ...props };
         // @ts-expect-error fix later
         extendedProps.Connection = AdminConnection;
-        extendedProps.translations = {
-            en: enLang,
-            de: deLang,
-            ru: ruLang,
-            pt: ptLang,
-            nl: nlLang,
-            fr: frLang,
-            it: itLang,
-            es: esLang,
-            pl: plLang,
-            uk: ukLang,
-            'zh-cn': zhCnLang,
-        };
 
         extendedProps.sentryDSN = window.sentryDSN;
         // extendedProps.socket = {
@@ -271,6 +263,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
             values: {},
             shutters: [],
             moreMenu: null,
+            i18nLoaded: false,
         };
     }
 
@@ -319,9 +312,26 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
             });
     }
 
+    /** Loads the language of the user and English as fallback from admin/tab/i18n */
+    static async loadTranslations(): Promise<void> {
+        const lang = I18n.getLanguage();
+        const [en, words] = await Promise.all([loadLanguage('en'), lang === 'en' ? null : loadLanguage(lang)]);
+        if (en) {
+            I18n.extendTranslations(en, 'en');
+        }
+        if (words) {
+            I18n.extendTranslations(words, lang);
+        }
+        if (!en && !words) {
+            console.warn('Cannot load the language files of the tab');
+        }
+    }
+
     async onConnectionReady(): Promise<void> {
         // the language of the page is needed for the hyphenation of long labels
         document.documentElement.lang = I18n.getLanguage();
+        await App.loadTranslations();
+        this.setState({ i18nLoaded: true });
         const myAlive = await this.socket.getState(`system.adapter.${this.statePrefix}.alive`);
         const newState: Partial<AppState> = {
             myAlive: !!myAlive?.val,
@@ -766,7 +776,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
     }
 
     render(): React.JSX.Element {
-        if (!this.state.loaded) {
+        if (!this.state.loaded || !this.state.i18nLoaded) {
             return (
                 <StyledEngineProvider injectFirst>
                     <ThemeProvider theme={this.state.theme}>
