@@ -817,7 +817,7 @@ async function GetSystemData() {
         isNaN(adapter.config.latitude)) {
 
         try {
-            const obj = await adapter.getForeignObjectAsync('system.config', 'state');
+            const obj = await adapter.getForeignObjectAsync('system.config');
 
             if (obj && obj.common && obj.common.longitude && obj.common.latitude) {
                 adapter.config.longitude = obj.common.longitude;
@@ -859,6 +859,8 @@ function shutterDriveCalc() {
         goldenHourEnd = `${(`0${times.goldenHourEnd.getHours()}`).slice(-2)}:${(`0${times.goldenHourEnd.getMinutes()}`).slice(-2)}`;
     } catch (e) {
         adapter.log.warn('cannot calculate astrodata ... please check your config for latitude und longitude!!');
+        // without astro times the travel times can not be calculated
+        return;
     }
 
     adapter.log.debug(`goldenHourEnd today: ${goldenHourEnd}`);
