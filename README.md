@@ -45,7 +45,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 
 ## Changelog
-<!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) New admin tab in React (replaces jsonTab)
+
 ### 2.1.2 (2026-08-29)
 * (simatec) Update dependabot
 * (simatec) Fix jsonTab
