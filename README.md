@@ -56,6 +56,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Fix the check of the public holiday instance
 * (simatec) Backend migrated to TypeScript (src/ → build/)
 * (simatec) Use adapter.delay() and adapter.setTimeout() instead of custom sleep functions and plain timers
+* (simatec) Fix overlapping runs (e.g. sun protection, alarms, buttons) cancelling each other's wait, which skipped shutters
+* (simatec) Fix start-up checks of the control states and the initial brightness state
 * (simatec) Unused translation helper (axios) removed
 * (simatec) i18n files migrated to the short format ({lang}.json)
 * (simatec) tsconfig.json added
