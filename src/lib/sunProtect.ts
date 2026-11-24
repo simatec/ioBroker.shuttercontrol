@@ -32,8 +32,8 @@ export async function sunProtect(
         const result = shutterSettings.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
         if (elevation > adapter.config.sunProtEndElevation) {
-            for (const i in result) {
-                for (const s in shutterSettings) {
+            for (let i = 0; i < result.length; i++) {
+                for (let s = 0; s < shutterSettings.length; s++) {
                     if (shutterSettings[s].shutterName == result[i].shutterName) {
                         let resultDirectionRangeMinus = 0;
                         let resultDirectionRangePlus = 0;
@@ -1864,8 +1864,8 @@ export async function sunProtect(
         const sunProtEndStart = parseInt(String(adapter.config.sunProtEndElevation));
         const sunProtEndStop = (adapter.config.sunProtEndElevation - 1);
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
 
                     if (elevation <= sunProtEndStart &&

@@ -22,8 +22,8 @@ export async function shutterDownComplete(adapter: ioBroker.Adapter, delayDown: 
                 const resLiving = shutterSettings.filter((d) => d.betweenPosition == true); // Filter Area Living
                 const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result) {
-                    for (const s in shutterSettings) {
+                for (let i = 0; i < result.length; i++) {
+                    for (let s = 0; s < shutterSettings.length; s++) {
                         if (shutterSettings[s].shutterName == result[i].shutterName &&
                             shutterSettings[s].currentAction == 'middle') {
 

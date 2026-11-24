@@ -13,14 +13,14 @@ async function driveshutterUpChildren(adapter: ioBroker.Adapter, upTimeChildren:
         let number = 0;
 
         if (childrenType === 'children') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
             timeoutChildrenAuto = number !== 0 ? number * driveDelayUpChildren : driveDelayUpChildren;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                     const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
@@ -148,7 +148,7 @@ async function driveshutterUpChildren(adapter: ioBroker.Adapter, upTimeChildren:
 
             await adapter.delay(timeoutChildrenAuto);
             childrenType = 'children-auto';
-            driveshutterUpChildren(adapter, upTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto, noGoDelay);
+            void driveshutterUpChildren(adapter, upTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto, noGoDelay);
         } else {
             return (shutterSettings);
         }
@@ -178,7 +178,7 @@ export async function shutterUpChildren(adapter: ioBroker.Adapter, upTimeChildre
         const upChildren = schedule.scheduleJob('shutterUpChildren', `${(upTime as string[])[1]} ${(upTime as string[])[0]} * * *`, async function () {
             delayUp = delayUp * driveDelayUpLiving;
             await adapter.delay(delayUp);
-            driveshutterUpChildren(adapter, upTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto, noGoDelay);
+            void driveshutterUpChildren(adapter, upTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto, noGoDelay);
         });
     } catch (e) {
         adapter.log.debug('error on uptime for childrenarea ... please check your config!!');

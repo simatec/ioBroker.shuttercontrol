@@ -27,8 +27,8 @@ export async function elevationDown(adapter: ioBroker.Adapter, elevation: number
         const resLiving = shutterSettings.filter((d) => d.typeDown == 'elevation');
         const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true');
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                     const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);
@@ -176,7 +176,7 @@ export async function elevationDown(adapter: ioBroker.Adapter, elevation: number
         }
         adapter.setTimeout(async function () {
             if (elevation <= adapter.config.sunProtEndElevation) {
-                sunProtect(adapter, elevation, azimuth, shutterSettings);
+                void sunProtect(adapter, elevation, azimuth, shutterSettings);
             }
         }, 120000);
         return (shutterSettings);

@@ -13,14 +13,14 @@ async function driveshutterUpLiving(adapter: ioBroker.Adapter, upTimeLiving: str
         let number = 0;
 
         if (livingType === 'living') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
             timeoutLivingAuto = number !== 0 ? number * driveDelayUpLiving : driveDelayUpLiving;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                     const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
@@ -149,7 +149,7 @@ async function driveshutterUpLiving(adapter: ioBroker.Adapter, upTimeLiving: str
                 
             await adapter.delay(timeoutLivingAuto);
             livingType = 'living-auto';
-            driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
+            void driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
         } else {
             return (shutterSettings);
         }
@@ -169,7 +169,7 @@ export async function shutterUpLiving(adapter: ioBroker.Adapter, upTimeLiving: s
     schedule.cancelJob('shutterUpLiving');
 
     const upLiving = schedule.scheduleJob('shutterUpLiving', `${upTime[1]  } ${  upTime[0]  } * * *`, async function () {
-        driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
+        void driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
     });
 }
 

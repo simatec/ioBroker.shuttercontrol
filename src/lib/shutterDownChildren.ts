@@ -19,15 +19,15 @@ async function driveshutterDownChildren(adapter: ioBroker.Adapter, downTimeChild
         let number = 0;
 
         if (childrenType == 'children') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
 
             timeoutChildrenAuto = number * driveDelayUpChildren;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                     const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);
@@ -167,7 +167,7 @@ async function driveshutterDownChildren(adapter: ioBroker.Adapter, downTimeChild
         if (autoChildrenStr == true && childrenType == 'children') {
             await adapter.delay(timeoutChildrenAuto);
             childrenType = 'children-auto';
-            driveshutterDownChildren(adapter, downTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto);
+            void driveshutterDownChildren(adapter, downTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto);
         } else {
             return (shutterSettings);
         }
@@ -195,7 +195,7 @@ export async function shutterDownChildren(adapter: ioBroker.Adapter, downTimeChi
         const downChildren = schedule.scheduleJob('shutterDownChildren', `${(downTime as string[])[1]  } ${  (downTime as string[])[0]  } * * *`, async function () {
             delayDown = delayDown * driveDelayUpLiving;
             await adapter.delay(delayDown);
-            driveshutterDownChildren(adapter, downTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto);
+            void driveshutterDownChildren(adapter, downTimeChildren, autoChildrenStr, shutterSettings, childrenType, driveDelayUpChildren, timeoutChildrenAuto);
         });
     } catch (e) {
         adapter.log.debug('error on downtime for childrenarea ... please check your config!!');

@@ -60,8 +60,8 @@ export async function buttonAction(adapter: ioBroker.Adapter, buttonState: strin
 
         const result = (resLiving as ShutterSettings[]).filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                     let targetLevel2Set = 0;

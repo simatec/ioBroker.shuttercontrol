@@ -243,7 +243,7 @@ class Shuttercontrol extends Adapter {
             const res = this.shutterSettings.map(({ triggerID }) => ({ triggerID }));
             const resTriggerActive = res.filter((d) => d.triggerID != '');
 
-            for (const i in resTriggerActive) {
+            for (let i = 0; i < resTriggerActive.length; i++) {
                 if (this.resTrigger.indexOf(resTriggerActive[i].triggerID) === -1) {
                     this.resTrigger.push(resTriggerActive[i].triggerID);
                 }
@@ -256,7 +256,7 @@ class Shuttercontrol extends Adapter {
             const resInsideTemp = this.shutterSettings.map(({ tempSensor }) => ({ tempSensor }));
             const rescurrentInsideTemp = resInsideTemp.filter((d) => d.tempSensor != '');
 
-            for (const i in rescurrentInsideTemp) {
+            for (let i = 0; i < rescurrentInsideTemp.length; i++) {
                 if (this.resSunInsideTemp.indexOf(rescurrentInsideTemp[i].tempSensor) === -1) {
                     this.resSunInsideTemp.push(rescurrentInsideTemp[i].tempSensor);
                 }
@@ -269,7 +269,7 @@ class Shuttercontrol extends Adapter {
             const resOutsideTemp = this.shutterSettings.map(({ outsideTempSensor }) => ({ outsideTempSensor }));
             const rescurrentOutsideTemp = resOutsideTemp.filter((d) => d.outsideTempSensor != '');
 
-            for (const i in rescurrentOutsideTemp) {
+            for (let i = 0; i < rescurrentOutsideTemp.length; i++) {
                 if (this.resSunOutsideTemp.indexOf(rescurrentOutsideTemp[i].outsideTempSensor) === -1) {
                     this.resSunOutsideTemp.push(rescurrentOutsideTemp[i].outsideTempSensor);
                 }
@@ -282,7 +282,7 @@ class Shuttercontrol extends Adapter {
             const resLight = this.shutterSettings.map(({ lightSensor }) => ({ lightSensor }));
             const rescurrentLight = resLight.filter((d) => d.lightSensor != '');
 
-            for (const i in rescurrentLight) {
+            for (let i = 0; i < rescurrentLight.length; i++) {
                 if (this.resSunLight.indexOf(rescurrentLight[i].lightSensor) === -1) {
                     this.resSunLight.push(rescurrentLight[i].lightSensor);
                     this.lastLigthSensorValue[`${rescurrentLight[i].lightSensor}`] = { ts: 0 };
@@ -296,7 +296,7 @@ class Shuttercontrol extends Adapter {
             const resShutter = this.shutterSettings.map(({ name }) => ({ name }));
             const rescurrentShutter = resShutter.filter((d) => d.name != '');
 
-            for (const i in rescurrentShutter) {
+            for (let i = 0; i < rescurrentShutter.length; i++) {
                 if (this.resShutterState.indexOf(rescurrentShutter[i].name) === -1) {
                     this.resShutterState.push(rescurrentShutter[i].name);
                 }
@@ -481,8 +481,8 @@ class Shuttercontrol extends Adapter {
                     await this.delay(this.waitTime4StateCheck);
                     this.log.debug('#0 wait for shutter check end');
 
-                    for (const i in result) {
-                        for (const s in this.shutterSettings) {
+                    for (let i = 0; i < result.length; i++) {
+                        for (let s = 0; s < this.shutterSettings.length; s++) {
                             if (this.shutterSettings[s].shutterName === result[i].shutterName) {
                                 const nameDevice = this.shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                                 const _shutterState = await this.getForeignStateAsync(this.shutterSettings[s].name).catch((e) => this.log.warn(e));
@@ -668,7 +668,7 @@ class Shuttercontrol extends Adapter {
         if (obj?.command === 'tab' && obj.callback) {
             const shutterSettings: ShutterTabRow[] = this.config.events;
 
-            for (const s in shutterSettings) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
 
                 shutterSettings[s].autoDown = `shutters.autoDown.${nameDevice}`;
@@ -723,7 +723,7 @@ class Shuttercontrol extends Adapter {
             this.log.debug('shutter Config Check started');
 
             try {
-                for (const s in this.shutterSettings) {
+                for (let s = 0; s < this.shutterSettings.length; s++) {
                     this.shutterSettings[s].triggerState = this.shutterSettings[s].triggerState ? this.shutterSettings[s].triggerState : 'none';
                     this.shutterSettings[s].triggerStateTilted = this.shutterSettings[s].triggerStateTilted ? this.shutterSettings[s].triggerStateTilted : 'none';
                     this.shutterSettings[s].typeUp = this.shutterSettings[s].typeUp ? this.shutterSettings[s].typeUp : 'sunrise';
@@ -764,7 +764,7 @@ class Shuttercontrol extends Adapter {
                     this.shutterSettings[s].enableAlarmFrost = this.shutterSettings[s].enableAlarmFrost != null ? this.shutterSettings[s].enableAlarmFrost : false;
                     this.shutterSettings[s].enableAlarmFire = this.shutterSettings[s].enableAlarmFire != null ? this.shutterSettings[s].enableAlarmFire : false;
 
-                    if (num === parseFloat(s)) {
+                    if (num === s) {
                         // the former Promise wrapper resolved here; the loop went on (synchronously) all the same
                         this.log.debug('shutter Config Check successfully completed');
                     } else {
@@ -798,7 +798,8 @@ class Shuttercontrol extends Adapter {
             }
         }
 
-        for (const s in this.shutterSettings) {
+        // config.events may be missing in a broken configuration - for...in did nothing then as well
+        for (let s = 0; s < (this.shutterSettings ?? []).length; s++) {
             const nameDevice = this.shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
             shutterName.push(this.shutterSettings[s].shutterName);
             num++;
@@ -1014,7 +1015,7 @@ class Shuttercontrol extends Adapter {
 
         const resultStates = this.shutterSettings;
         if (resultStates) {
-            for (const i in resultStates) {
+            for (let i = 0; i < resultStates.length; i++) {
                 const nameDevice = resultStates[i].shutterName.replace(/[.;, ]/g, '_');
                 const _shutterState = await this.getForeignStateAsync(resultStates[i].name).catch((e) => this.log.warn(e));
 
@@ -1661,14 +1662,14 @@ class Shuttercontrol extends Adapter {
                 const resLiving = resultFull.filter((d) => d.typeUp === 'living'); // Filter Area Living
                 const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result) {
+                for (let i = 0; i < result.length; i++) {
                     this.delayUp++;
                 }
                 if (this.autoLivingStr === true) {
                     const resLivingAuto = resultFull.filter((d) => d.typeUp === 'living-auto'); // Filter Area Living
                     const result2 = resLivingAuto.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                    for (const i in result2) {
+                    for (let i = 0; i < result2.length; i++) {
                         this.delayUp++;
                     }
                 }
@@ -1680,14 +1681,14 @@ class Shuttercontrol extends Adapter {
                 const resLiving = resultFull.filter((d) => d.typeUp === 'sleep'); // Filter Area Sleep
                 const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result) {
+                for (let i = 0; i < result.length; i++) {
                     this.delayUpChildren++;
                 }
                 if (this.autoSleepStr === true) {
                     const resLivingAuto = resultFull.filter((d) => d.typeUp === 'sleep-auto'); // Filter Area Sleep
                     const result2 = resLivingAuto.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                    for (const i in result2) {
+                    for (let i = 0; i < result2.length; i++) {
                         this.delayUpChildren++;
                     }
                 }
@@ -1696,14 +1697,14 @@ class Shuttercontrol extends Adapter {
                 const resLiving2 = resultFull.filter((d) => d.typeDown === 'living'); // Filter Area Living
                 const result3 = resLiving2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result3) {
+                for (let i = 0; i < result3.length; i++) {
                     this.delayDown++;
                 }
                 if (this.autoLivingStr === true) {
                     const resLivingAuto2 = resultFull.filter((d) => d.typeDown === 'living-auto'); // Filter Area Living
                     const result4 = resLivingAuto2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                    for (const i in result4) {
+                    for (let i = 0; i < result4.length; i++) {
                         this.delayDown++;
                     }
                 }
@@ -1715,7 +1716,7 @@ class Shuttercontrol extends Adapter {
                 const resLiving2 = resultFull.filter((d) => d.typeDown === 'sleep'); // Filter Area Sleep
                 const result3 = resLiving2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result3) {
+                for (let i = 0; i < result3.length; i++) {
                     this.delayDownChildren++;
                 }
 
@@ -1723,7 +1724,7 @@ class Shuttercontrol extends Adapter {
                     const resLivingAuto2 = resultFull.filter((d) => d.typeDown === 'sleep-auto'); // Filter Area Sleep
                     const result4 = resLivingAuto2.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                    for (const i in result4) {
+                    for (let i = 0; i < result4.length; i++) {
                         this.delayDownChildren++;
                     }
                 }
@@ -1737,7 +1738,7 @@ class Shuttercontrol extends Adapter {
     private async createShutter(): Promise<void> {
         const result = this.shutterSettings;
         if (result) {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 let objectName;
 
                 if (result[i].shutterName !== '') {
@@ -1890,7 +1891,7 @@ class Shuttercontrol extends Adapter {
                 const resultName = result.map(({ shutterName }) => ({ shutterName }));
                 const fullRes: string[] = [];
 
-                for (const i in resultName) {
+                for (let i = 0; i < resultName.length; i++) {
                     const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                     fullRes.push(res);
                 }
@@ -1909,7 +1910,7 @@ class Shuttercontrol extends Adapter {
                 const resultName = result.map(({ shutterName }) => ({ shutterName }));
                 const fullRes: string[] = [];
 
-                for (const i in resultName) {
+                for (let i = 0; i < resultName.length; i++) {
                     const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                     fullRes.push(res);
                 }
@@ -1928,7 +1929,7 @@ class Shuttercontrol extends Adapter {
                 const resultName = result.map(({ shutterName }) => ({ shutterName }));
                 const fullRes: string[] = [];
 
-                for (const i in resultName) {
+                for (let i = 0; i < resultName.length; i++) {
                     const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                     fullRes.push(res);
                 }
@@ -1947,7 +1948,7 @@ class Shuttercontrol extends Adapter {
                 const resultName = result.map(({ shutterName }) => ({ shutterName }));
                 const fullRes: string[] = [];
 
-                for (const i in resultName) {
+                for (let i = 0; i < resultName.length; i++) {
                     const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                     fullRes.push(res);
                 }
@@ -1966,7 +1967,7 @@ class Shuttercontrol extends Adapter {
                 const resultName = result.map(({ shutterName }) => ({ shutterName }));
                 const fullRes: string[] = [];
 
-                for (const i in resultName) {
+                for (let i = 0; i < resultName.length; i++) {
                     const res = resultName[i].shutterName.replace(/[.;, ]/g, '_');
                     fullRes.push(res);
                 }

@@ -14,8 +14,8 @@ export async function triggerChange(resTriggerChange: string, adapter: ioBroker.
         const arrayChangeTrigger = shutterSettings.filter((d) => d.triggerID == resTriggerChange); // Filter changed Trigger
         const result = arrayChangeTrigger.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     if (shutterSettings[s].triggerChange == 'onlyUp' ||
                         shutterSettings[s].triggerChange == 'upDown' ||
@@ -125,7 +125,7 @@ export async function triggerChange(resTriggerChange: string, adapter: ioBroker.
                                         shutterSettings[s].triggerAction != null &&
                                         Math.round(parseFloat(String(_shutterState.val)) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterSettings[s].triggerHeight &&
                                         Math.round(parseFloat(String(_shutterState.val)) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == parseFloat(String(shutterSettings[s].currentHeight)) &&
-                                        (shutterSettings[s].triggerChange as string) != 'off') {
+                                        (shutterSettings[s].triggerChange) != 'off') {
 
                                         await adapter.delay(shutterSettings[s].trigDelyDown ? Number(shutterSettings[s].trigDelyDown) * 1000 : 10);
 
@@ -152,7 +152,7 @@ export async function triggerChange(resTriggerChange: string, adapter: ioBroker.
                                     } else if (_shutterState?.val !== null && _shutterState?.val !== undefined &&
                                         shutterSettings[s].triggerHeight != null &&
                                         Math.round(parseFloat(String(_shutterState.val)) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterSettings[s].triggerHeight &&
-                                        (shutterSettings[s].triggerChange as string) != 'off') {
+                                        (shutterSettings[s].triggerChange) != 'off') {
 
                                         if (shutterSettings[s].triggerAction == '') {
                                             adapter.log.debug(`Warning! - not allowed empty values detected - close your window and initialize your shutters with button up! - triggerAction: ${shutterSettings[s].triggerAction} at device: ${shutterSettings[s].shutterName}`);

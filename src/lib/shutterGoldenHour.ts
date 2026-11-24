@@ -34,8 +34,8 @@ export async function shutterGoldenHour(adapter: ioBroker.Adapter, goldenHourEnd
                 const resLiving = shutterSettings.filter((d) => d.typeUp == 'goldenhour End'); // Filter Area goldenhour end
                 const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result) {
-                    for (const s in shutterSettings) {
+                for (let i = 0; i < result.length; i++) {
+                    for (let s = 0; s < shutterSettings.length; s++) {
                         if (shutterSettings[s].shutterName == result[i].shutterName) {
                             const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                             const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
@@ -164,8 +164,8 @@ export async function shutterGoldenHour(adapter: ioBroker.Adapter, goldenHourEnd
                 const resLiving = shutterSettings.filter((d) => d.typeDown == 'goldenhour'); // Filter Area Goldenhour
                 const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-                for (const i in result) {
-                    for (const s in shutterSettings) {
+                for (let i = 0; i < result.length; i++) {
+                    for (let s = 0; s < shutterSettings.length; s++) {
                         if (shutterSettings[s].shutterName == result[i].shutterName) {
                             const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                             const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);

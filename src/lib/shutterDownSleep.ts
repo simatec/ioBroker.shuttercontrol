@@ -20,14 +20,14 @@ async function driveshutterDownSleep(adapter: ioBroker.Adapter, downTimeSleep: s
         let number = 0;
 
         if (sleepType == 'sleep') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
             timeoutSleepAuto = number * driveDelayUpSleep;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                     const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);
@@ -168,7 +168,7 @@ async function driveshutterDownSleep(adapter: ioBroker.Adapter, downTimeSleep: s
         if (autoSleepStr == true && sleepType == 'sleep') {
             await adapter.delay(timeoutSleepAuto);
             sleepType = 'sleep-auto';
-            driveshutterDownSleep(adapter, downTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto);
+            void driveshutterDownSleep(adapter, downTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto);
         } else {
             return (shutterSettings);
         }
@@ -191,6 +191,6 @@ export async function shutterDownSleep(adapter: ioBroker.Adapter, downTimeSleep:
         delayDown = delayDown * driveDelayUpLiving;
 
         await adapter.delay(delayDown);
-        driveshutterDownSleep(adapter, downTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto);
+        void driveshutterDownSleep(adapter, downTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto);
     });
 }

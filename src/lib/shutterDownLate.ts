@@ -19,8 +19,8 @@ export async function shutterDownLate(adapter: ioBroker.Adapter, shutterSettings
                     const resEnabled = shutterSettings.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
                     const resLateDown = resEnabled.filter((d) => d.LateDown === true); // Filter late down
 
-                    for (const i in resLateDown) {
-                        for (const s in shutterSettings) {
+                    for (let i = 0; i < resLateDown.length; i++) {
+                        for (let s = 0; s < shutterSettings.length; s++) {
                             if (shutterSettings[s].shutterName == resLateDown[i].shutterName) {
                                 let targetLevel2Set = parseFloat(String(shutterSettings[s].heightDown));
                                 let downAction = 'down';

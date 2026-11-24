@@ -62,8 +62,8 @@ export async function shutterBrightnessSensor(adapter: ioBroker.Adapter, brightn
             const resLiving = shutterSettings.filter((d) => d.typeDown == 'lightsensor'); // Filter Area Living
             const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-            for (const i in result) {
-                for (const s in shutterSettings) {
+            for (let i = 0; i < result.length; i++) {
+                for (let s = 0; s < shutterSettings.length; s++) {
                     if (shutterSettings[s].shutterName == result[i].shutterName) {
                         const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                         const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);
@@ -105,8 +105,8 @@ export async function shutterBrightnessSensor(adapter: ioBroker.Adapter, brightn
 
                             if (_autoDownState?.val === true) {
                                 if (shutterSettings[s].currentAction != 'triggered' ||
-                                    (shutterSettings[s].currentAction as string) != 'triggered_Tilted' ||
-                                    (shutterSettings[s].currentAction as string) != 'down') {
+                                    (shutterSettings[s].currentAction) != 'triggered_Tilted' ||
+                                    (shutterSettings[s].currentAction) != 'down') {
 
                                     if (pendingAlarm == false) {
                                         const _triggerState = shutterSettings[s].triggerID != '' ? await adapter.getForeignStateAsync(shutterSettings[s].triggerID).catch((e) => adapter.log.warn(e)) : null;
@@ -222,8 +222,8 @@ export async function shutterBrightnessSensor(adapter: ioBroker.Adapter, brightn
             const resLiving = shutterSettings.filter((d) => d.typeUp == 'lightsensor'); // Filter Area Living
             const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
 
-            for (const i in result) {
-                for (const s in shutterSettings) {
+            for (let i = 0; i < result.length; i++) {
+                for (let s = 0; s < shutterSettings.length; s++) {
                     if (shutterSettings[s].shutterName == result[i].shutterName) {
                         const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                         const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);

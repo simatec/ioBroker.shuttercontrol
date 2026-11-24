@@ -20,14 +20,14 @@ async function driveshutterDownLiving(adapter: ioBroker.Adapter, downTimeLiving:
         let number = 0;
 
         if (livingType == 'living') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
             timeoutLivingAuto = number * driveDelayUpLiving;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const inSummerNotDown = await CheckInSummerNotDown(adapter, shutterSettings[s]);
                     const XmasLevel = await GetXmasLevel(adapter, shutterSettings[s]);
@@ -165,7 +165,7 @@ async function driveshutterDownLiving(adapter: ioBroker.Adapter, downTimeLiving:
         if (autoLivingStr == true && livingType == 'living') {
             await adapter.delay(timeoutLivingAuto);
             livingType = 'living-auto';
-            driveshutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto);
+            void driveshutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto);
         } else {
             return (shutterSettings);
         }
@@ -186,7 +186,7 @@ export async function shutterDownLiving(adapter: ioBroker.Adapter, downTimeLivin
     schedule.cancelJob('shutterDownLiving');
 
     const downLiving = schedule.scheduleJob('shutterDownLiving', `${downTime[1]} ${downTime[0]} * * *`, async function () {
-        driveshutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto);
+        void driveshutterDownLiving(adapter, downTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto);
     });
 }
 

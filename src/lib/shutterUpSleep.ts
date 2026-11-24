@@ -13,14 +13,14 @@ async function driveshutterUpSleep(adapter: ioBroker.Adapter, upTimeSleep: strin
         let number = 0;
 
         if (sleepType == 'sleep') {
-            for (const i in result) {
+            for (let i = 0; i < result.length; i++) {
                 number++;
             }
             timeoutSleepAuto = number !== 0 ? number * driveDelayUpSleep : driveDelayUpSleep;
         }
 
-        for (const i in result) {
-            for (const s in shutterSettings) {
+        for (let i = 0; i < result.length; i++) {
+            for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
                     const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
                     const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
@@ -150,7 +150,7 @@ async function driveshutterUpSleep(adapter: ioBroker.Adapter, upTimeSleep: strin
 
             await adapter.delay(timeoutSleepAuto);
             sleepType = 'sleep-auto';
-            driveshutterUpSleep(adapter, upTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto, noGoDelay);
+            void driveshutterUpSleep(adapter, upTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto, noGoDelay);
         } else {
             return (shutterSettings);
         }
@@ -173,7 +173,7 @@ export async function shutterUpSleep(adapter: ioBroker.Adapter, upTimeSleep: str
         delayUp = delayUp * driveDelayUpLiving;
 
         await adapter.delay(delayUp);
-        driveshutterUpSleep(adapter, upTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto, noGoDelay);
+        void driveshutterUpSleep(adapter, upTimeSleep, autoSleepStr, shutterSettings, sleepType, driveDelayUpSleep, timeoutSleepAuto, noGoDelay);
     });
 }
 
