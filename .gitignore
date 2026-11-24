@@ -22,3 +22,8 @@ iob_npm.done
 
 # ioBroker dev-server
 .dev-server/
+
+# The compiled backend. Built from src/ by `npm run build`, which CI and `prepublishOnly` run,
+# so nothing in here belongs in the repository. The npm tarball still ships it: `files` in
+# package.json lists build/ and takes precedence over this file.
+/build/

@@ -10,19 +10,37 @@ export default [
         ignores: [
             'src-tab/**/*',
             'src-admin/**/*',
-            'admin/assets/**/*',
+            'admin/**/*',
+            'node_modules/**/*',
+            'test/**/*',
+            'build/**/*',
             'tasks.js',
+            'tmp/**/*',
+            '.**/*',
             '.dev-server/',
             '.vscode/',
-            '**/*.test.js',
+            '*.test.js',
             'test/**/*.js',
             '*.config.mjs',
+            '.ncurc.js',
             'build',
-            'admin/**/*.js',
             'admin/build',
+            'admin/assets',
+            'admin/custom/**/*',
             'admin/admin.d.ts',
-            '**/adapter-config.d.ts'
-        ]
+            '**/adapter-config.d.ts',
+        ],
+    },
+
+    {
+        // Backend sources.
+        files: ['src/**/*.ts'],
+        rules: {
+            // Several entry points of the automatics are declared `async` without awaiting anything.
+            // That is part of their existing shape - dropping the keyword would turn the returned
+            // promise into undefined for any caller that awaits them.
+            '@typescript-eslint/require-await': 'off',
+        },
     },
 
     {
@@ -36,10 +54,8 @@ export default [
             'curly': 'off',
             'jsdoc/require-returns-description': 'off',
             'no-else-return': 'off',
-            '@typescript-eslint/ban-ts-comment': 'off',
             'jsdoc/require-param-description': 'off',
             'no-constant-binary-expression': 'off',
-            'valid-typeof': 'off',
             'no-irregular-whitespace': 'off',
             //'no-prototype-builtins': 'off',
             //'no-case-declarations': 'off',
@@ -50,5 +66,4 @@ export default [
             //'jsdoc/tag-lines': 'off',
         },
     },
-
 ];

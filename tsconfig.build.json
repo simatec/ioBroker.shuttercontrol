@@ -1,0 +1,14 @@
+// Build config: compiles the backend from src/ into build/, mirroring the tree, so
+// src/lib/foo.ts -> build/lib/foo.js. rootDir and outDir come from tsconfig.json.
+//
+// build/main.js is the entry point named in package.json. The lib modules are loaded from
+// there with relative imports, so keep the tree shape when moving things.
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "noEmitOnError": true,
+        "declaration": false,
+    },
+    "exclude": ["node_modules/**", "admin/**", "src-admin/**", "src-tab/**", "test/**", "build/**"]
+}
