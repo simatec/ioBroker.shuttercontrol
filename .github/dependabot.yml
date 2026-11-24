@@ -33,3 +33,27 @@ updates:
       - dependency-name: '@types/node'
         update-types:
           - 'version-update:semver-major'
+      - dependency-name: 'typescript'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+
+  - package-ecosystem: 'npm'
+    directories:
+      - '/src-admin'
+      - '/src-tab'
+    schedule:
+      interval: 'cron'
+      timezone: 'Europe/Berlin'
+      cronjob: '44 3 10 * *'
+    target-branch: 'master'
+    labels:
+      - 'dev dependencies'
+    open-pull-requests-limit: 15
+    versioning-strategy: 'increase'
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'

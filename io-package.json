@@ -155,6 +155,7 @@
     "mode": "daemon",
     "type": "climate-control",
     "compact": true,
+    "nogit": true,
     "connectionType": "local",
     "dataSource": "push",
     "tier": 2,
