@@ -51,6 +51,9 @@ function adapterMock(options) {
             timers.cleared++;
             global.clearTimeout(timer);
         },
+        delay(ms) {
+            return new Promise((resolve) => global.setTimeout(resolve, ms));
+        },
     };
 }
 

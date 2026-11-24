@@ -44,6 +44,16 @@ function adapterMock(options) {
             opts.shutterLevel = val;
         },
         async setStateAsync() { },
+        // the adapter timers of the js-controller, the code waits with adapter.delay
+        delay(ms) {
+            return new Promise((resolve) => global.setTimeout(resolve, ms));
+        },
+        setTimeout(cb, ms) {
+            return global.setTimeout(cb, ms);
+        },
+        clearTimeout(timer) {
+            global.clearTimeout(timer);
+        },
     };
 }
 
