@@ -42,9 +42,27 @@ When the adapter crashes or an other Code error happens, this error message that
 
 *************************************************************************************************************************************
 
-
-
 ## Changelog
+<!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
+* (simatec) New admin tab in React (replaces jsonTab)
+* (simatec) Fix reading of latitude/longitude from the system settings (js-controller 7)
+* (simatec) Fix crash when no coordinates are configured
+* (simatec) Skip the astro calculation when latitude/longitude are missing or invalid
+* (simatec) Admin configuration migrated from materialize to jsonConfig (custom React components for the shutter table and the shutter dialog)
+* (simatec) Accept latitude/longitude with a decimal comma
+* (simatec) Fix the delay of the complete down drive after the intermediate position
+* (simatec) Fix the check of the public holiday instance
+* (simatec) Backend migrated to TypeScript (src/ → build/)
+* (simatec) Use adapter.delay() and adapter.setTimeout() instead of custom sleep functions and plain timers
+* (simatec) Fix overlapping runs (e.g. sun protection, alarms, buttons) cancelling each other's wait, which skipped shutters
+* (simatec) Fix start-up checks of the control states and the initial brightness state
+* (simatec) Cancel the brightness down job on unload
+* (simatec) Unused translation helper (axios) removed
+* (simatec) i18n files migrated to the short format ({lang}.json)
+* (simatec) tsconfig.json added
+
 ### 3.0.0 (2026-11-24)
 * (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
 * (simatec) New admin tab in React (replaces jsonTab)
