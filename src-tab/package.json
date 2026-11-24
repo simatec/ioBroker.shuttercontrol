@@ -1,6 +1,6 @@
 {
     "name": "shuttercontrol-tab",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.14.0",

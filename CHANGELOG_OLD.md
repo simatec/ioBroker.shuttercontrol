@@ -1,4 +1,8 @@
 # Older changes
+## 2.0.12 (2026-02-21)
+* (simatec) License updated
+* (simatec) Update dependabot
+
 ## 2.0.11 (2025-12-21)
 * (simatec) Update dependabot
 
