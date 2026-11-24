@@ -705,6 +705,7 @@ class Shuttercontrol extends Adapter {
             schedule.cancelJob('calcPosTimer');
             schedule.cancelJob('shutterUpChildren');
             schedule.cancelJob('shutterDownChildren');
+            schedule.cancelJob('shutterDownBrightness');
             callback();
         } catch {
             callback();

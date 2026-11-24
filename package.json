@@ -69,6 +69,7 @@
     "test:unit": "mocha test/unit --exit && npm run test:lib",
     "test:lib": "mocha \"test/lib/*.test.js\" --exit",
     "test:integration": "mocha test/integration --exit",
+    "test:integration:shutters": "mocha test/integrationShutters.js --exit",
     "prepublishOnly": "npm run build",
     "release": "release-script",
     "release-patch": "release-script patch --yes",
