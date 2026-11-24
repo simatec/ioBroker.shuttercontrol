@@ -4,6 +4,7 @@ import {
     Box,
     Button,
     Checkbox,
+    FormControlLabel,
     IconButton,
     InputAdornment,
     Paper,
@@ -42,6 +43,28 @@ interface ShutterConfigState extends ConfigGenericState {
 }
 
 const cellSx = { py: 0.5, px: 1 };
+
+/**
+ * The layout depends on the width of the component (container query), not on the width of the window:
+ * the admin shows a menu on the left side, which may be open or closed.
+ * - narrower than 720px: one card per shutter (phones, tablets, small windows)
+ * - from 720px: table
+ * - from 1000px: the table also shows the automatics for up and down
+ */
+const tableSx = {
+    display: 'none',
+    '@container (min-width: 720px)': { display: 'block' },
+};
+const cardsSx = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 1.5,
+    '@container (min-width: 720px)': { display: 'none' },
+};
+const typeColumnSx = {
+    display: 'none',
+    '@container (min-width: 1000px)': { display: 'table-cell' },
+};
 
 /**
  * The shutter table of the configuration (`native.events`).
@@ -201,6 +224,120 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
         return option ? I18n.t(option.label) : toStr(value);
     }
 
+    renderNameField(shutter: ShutterEntry, index: number, duplicate: boolean, withLabel?: boolean): React.JSX.Element {
+        return (
+            <TextField
+                variant="standard"
+                fullWidth
+                label={withLabel ? I18n.t('Name') : undefined}
+                value={shutter.shutterName || ''}
+                error={duplicate || !shutter.shutterName}
+                helperText={duplicate ? I18n.t('The name is used more than once') : undefined}
+                onChange={e => this.updateShutter(index, { shutterName: e.target.value })}
+            />
+        );
+    }
+
+    renderIdField(shutter: ShutterEntry, index: number, withLabel?: boolean): React.JSX.Element {
+        return (
+            <TextField
+                variant="standard"
+                fullWidth
+                label={withLabel ? I18n.t('Object-ID shutter') : undefined}
+                value={shutter.name || ''}
+                error={!shutter.name}
+                onChange={e => this.updateShutter(index, { name: e.target.value.trim() })}
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    size="small"
+                                    title={I18n.t('Select object ID')}
+                                    onClick={() => this.setState({ selectIdIndex: index })}
+                                >
+                                    <ListAlt fontSize="small" />
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    },
+                }}
+            />
+        );
+    }
+
+    renderEnabled(shutter: ShutterEntry, index: number): React.JSX.Element {
+        return (
+            <Checkbox
+                checked={shutter.enabled === true || (shutter.enabled as unknown) === 'true'}
+                onChange={e => this.updateShutter(index, { enabled: e.target.checked })}
+                slotProps={{ input: { 'aria-label': I18n.t('active') } }}
+            />
+        );
+    }
+
+    renderActions(index: number, count: number): React.JSX.Element {
+        return (
+            <>
+                <Tooltip title={I18n.t('Edit shutter settings')}>
+                    <IconButton
+                        size="small"
+                        color="primary"
+                        className="shutter-edit"
+                        aria-label={I18n.t('Edit shutter settings')}
+                        onClick={() => this.setState({ editIndex: index })}
+                    >
+                        <Edit />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={I18n.t('Copy shutter')}>
+                    <IconButton
+                        size="small"
+                        aria-label={I18n.t('Copy shutter')}
+                        onClick={() => this.onCopy(index)}
+                    >
+                        <ContentCopy />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={I18n.t('Move up')}>
+                    <span>
+                        <IconButton
+                            size="small"
+                            aria-label={I18n.t('Move up')}
+                            disabled={index === 0}
+                            onClick={() => this.onMove(index, -1)}
+                        >
+                            <ArrowUpward />
+                        </IconButton>
+                    </span>
+                </Tooltip>
+                <Tooltip title={I18n.t('Move down')}>
+                    <span>
+                        <IconButton
+                            size="small"
+                            aria-label={I18n.t('Move down')}
+                            disabled={index === count - 1}
+                            onClick={() => this.onMove(index, 1)}
+                        >
+                            <ArrowDownward />
+                        </IconButton>
+                    </span>
+                </Tooltip>
+                <Tooltip title={I18n.t('Delete')}>
+                    <IconButton
+                        size="small"
+                        color="error"
+                        aria-label={I18n.t('Delete')}
+                        onClick={() => this.setState({ deleteIndex: index })}
+                    >
+                        <Delete />
+                    </IconButton>
+                </Tooltip>
+            </>
+        );
+    }
+
+    /** One row of the table (wide containers) */
     renderRow(shutter: ShutterEntry, index: number, count: number, names: Record<string, number>): React.JSX.Element {
         const duplicate = (names[shutter.shutterName] || 0) > 1;
         return (
@@ -212,116 +349,87 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
             >
                 <TableCell sx={{ ...cellSx, textAlign: 'center', width: 40 }}>{index + 1}</TableCell>
                 <TableCell sx={{ ...cellSx, width: 60, textAlign: 'center' }}>
-                    <Checkbox
-                        checked={shutter.enabled === true || (shutter.enabled as unknown) === 'true'}
-                        onChange={e => this.updateShutter(index, { enabled: e.target.checked })}
-                    />
+                    {this.renderEnabled(shutter, index)}
                 </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: { xs: 140, md: 180 } }}>
-                    <TextField
-                        variant="standard"
-                        fullWidth
-                        value={shutter.shutterName || ''}
-                        error={duplicate || !shutter.shutterName}
-                        helperText={duplicate ? I18n.t('The name is used more than once') : undefined}
-                        onChange={e => this.updateShutter(index, { shutterName: e.target.value })}
-                    />
+                <TableCell sx={{ ...cellSx, minWidth: 160 }}>
+                    {this.renderNameField(shutter, index, duplicate)}
                 </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: { xs: 200, md: 260 } }}>
-                    <TextField
-                        variant="standard"
-                        fullWidth
-                        value={shutter.name || ''}
-                        error={!shutter.name}
-                        onChange={e => this.updateShutter(index, { name: e.target.value.trim() })}
-                        slotProps={{
-                            input: {
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            size="small"
-                                            title={I18n.t('Select object ID')}
-                                            onClick={() => this.setState({ selectIdIndex: index })}
-                                        >
-                                            <ListAlt fontSize="small" />
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            },
-                        }}
-                    />
-                </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: 120, display: { xs: 'none', lg: 'table-cell' } }}>
+                <TableCell sx={{ ...cellSx, minWidth: 220 }}>{this.renderIdField(shutter, index)}</TableCell>
+                <TableCell sx={{ ...cellSx, ...typeColumnSx, minWidth: 110 }}>
                     <Typography variant="body2">
                         {ShutterConfig.getOptionLabel(TYPE_UP_OPTIONS, shutter.typeUp)}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ ...cellSx, minWidth: 120, display: { xs: 'none', lg: 'table-cell' } }}>
+                <TableCell sx={{ ...cellSx, ...typeColumnSx, minWidth: 110 }}>
                     <Typography variant="body2">
                         {ShutterConfig.getOptionLabel(TYPE_DOWN_OPTIONS, shutter.typeDown)}
                     </Typography>
                 </TableCell>
-                <TableCell
-                    sx={{
-                        ...cellSx,
-                        whiteSpace: 'nowrap',
-                        width: 210,
-                        position: 'sticky',
-                        right: 0,
-                        bgcolor: 'background.paper',
-                    }}
-                >
-                    <Tooltip title={I18n.t('Edit shutter settings')}>
-                        <IconButton
-                            size="small"
-                            color="primary"
-                            className="shutter-edit"
-                            onClick={() => this.setState({ editIndex: index })}
-                        >
-                            <Edit />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title={I18n.t('Copy shutter')}>
-                        <IconButton
-                            size="small"
-                            onClick={() => this.onCopy(index)}
-                        >
-                            <ContentCopy />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title={I18n.t('Move up')}>
-                        <span>
-                            <IconButton
-                                size="small"
-                                disabled={index === 0}
-                                onClick={() => this.onMove(index, -1)}
-                            >
-                                <ArrowUpward />
-                            </IconButton>
-                        </span>
-                    </Tooltip>
-                    <Tooltip title={I18n.t('Move down')}>
-                        <span>
-                            <IconButton
-                                size="small"
-                                disabled={index === count - 1}
-                                onClick={() => this.onMove(index, 1)}
-                            >
-                                <ArrowDownward />
-                            </IconButton>
-                        </span>
-                    </Tooltip>
-                    <Tooltip title={I18n.t('Delete')}>
-                        <IconButton
-                            size="small"
-                            color="error"
-                            onClick={() => this.setState({ deleteIndex: index })}
-                        >
-                            <Delete />
-                        </IconButton>
-                    </Tooltip>
+                <TableCell sx={{ ...cellSx, whiteSpace: 'nowrap', width: 200 }}>
+                    {this.renderActions(index, count)}
                 </TableCell>
             </TableRow>
+        );
+    }
+
+    /** One shutter as card (narrow containers, e.g. phones and tablets) */
+    renderCard(shutter: ShutterEntry, index: number, count: number, names: Record<string, number>): React.JSX.Element {
+        const duplicate = (names[shutter.shutterName] || 0) > 1;
+        return (
+            <Paper
+                key={index}
+                variant="outlined"
+                className="shutter-card"
+                sx={{ p: 1.5, opacity: shutter.enabled ? 1 : 0.6 }}
+            >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography
+                        variant="subtitle2"
+                        sx={{ minWidth: 28, fontWeight: 'bold' }}
+                    >
+                        {index + 1}.
+                    </Typography>
+                    <FormControlLabel
+                        control={this.renderEnabled(shutter, index)}
+                        label={I18n.t('active')}
+                        sx={{ mr: 0 }}
+                    />
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mt: 0.5 }}>
+                    {this.renderNameField(shutter, index, duplicate, true)}
+                    {this.renderIdField(shutter, index, true)}
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', columnGap: 2, rowGap: 0.5, opacity: 0.8 }}>
+                        <Typography
+                            variant="body2"
+                            title={I18n.t('type up')}
+                            sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                        >
+                            <ArrowUpward fontSize="small" />
+                            {ShutterConfig.getOptionLabel(TYPE_UP_OPTIONS, shutter.typeUp)}
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            title={I18n.t('type down')}
+                            sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                        >
+                            <ArrowDownward fontSize="small" />
+                            {ShutterConfig.getOptionLabel(TYPE_DOWN_OPTIONS, shutter.typeDown)}
+                        </Typography>
+                    </Box>
+                </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        flexWrap: 'wrap',
+                        mt: 1,
+                        pt: 0.5,
+                        borderTop: theme => `1px solid ${theme.palette.divider}`,
+                    }}
+                >
+                    {this.renderActions(index, count)}
+                </Box>
+            </Paper>
         );
     }
 
@@ -331,7 +439,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
         shutters.forEach(s => (names[s.shutterName] = (names[s.shutterName] || 0) + 1));
 
         return (
-            <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
+            <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', containerType: 'inline-size' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1, flexWrap: 'wrap' }}>
                     <Button
                         variant="contained"
@@ -356,7 +464,7 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                 <TableContainer
                     component={Paper}
                     variant="outlined"
-                    sx={{ overflowX: 'auto', maxWidth: '100%', WebkitOverflowScrolling: 'touch' }}
+                    sx={{ ...tableSx, overflowX: 'auto', maxWidth: '100%' }}
                 >
                     <Table
                         size="small"
@@ -368,13 +476,9 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                                 <TableCell sx={{ ...cellSx, textAlign: 'center' }}>{I18n.t('active')}</TableCell>
                                 <TableCell sx={cellSx}>{I18n.t('Name')}</TableCell>
                                 <TableCell sx={cellSx}>{I18n.t('Object-ID shutter')}</TableCell>
-                                <TableCell sx={{ ...cellSx, display: { xs: 'none', lg: 'table-cell' } }}>
-                                    {I18n.t('type up')}
-                                </TableCell>
-                                <TableCell sx={{ ...cellSx, display: { xs: 'none', lg: 'table-cell' } }}>
-                                    {I18n.t('type down')}
-                                </TableCell>
-                                <TableCell sx={{ ...cellSx, position: 'sticky', right: 0, zIndex: 3 }} />
+                                <TableCell sx={{ ...cellSx, ...typeColumnSx }}>{I18n.t('type up')}</TableCell>
+                                <TableCell sx={{ ...cellSx, ...typeColumnSx }}>{I18n.t('type down')}</TableCell>
+                                <TableCell sx={cellSx} />
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -393,6 +497,21 @@ export default class ShutterConfig extends ConfigGeneric<ConfigGenericProps, Shu
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Box
+                    className="shutter-cards"
+                    sx={cardsSx}
+                >
+                    {shutters.length ? (
+                        shutters.map((shutter, i) => this.renderCard(shutter, i, shutters.length, names))
+                    ) : (
+                        <Paper
+                            variant="outlined"
+                            sx={{ textAlign: 'center', p: 3, opacity: 0.7 }}
+                        >
+                            {I18n.t('No shutters configured yet. Click on "Add shutter".')}
+                        </Paper>
+                    )}
+                </Box>
                 {this.renderEditDialog()}
                 {this.renderSelectIdDialog()}
                 {this.renderDeleteDialog()}
