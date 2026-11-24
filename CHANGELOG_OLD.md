@@ -1,4 +1,7 @@
 # Older changes
+## 2.0.11 (2025-12-21)
+* (simatec) Update dependabot
+
 ## 2.0.10 (2025-12-21)
 * (simatec) Fix JSON Tab
 

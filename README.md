@@ -45,7 +45,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 3.0.0 (2026-11-24)
 * (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
 * (simatec) New admin tab in React (replaces jsonTab)
 * (simatec) Fix reading of latitude/longitude from the system settings (js-controller 7)
@@ -80,9 +80,6 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 2.0.12 (2026-02-21)
 * (simatec) License updated
-* (simatec) Update dependabot
-
-### 2.0.11 (2025-12-21)
 * (simatec) Update dependabot
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
