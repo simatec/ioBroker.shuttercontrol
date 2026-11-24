@@ -1,0 +1,175 @@
+import * as schedule from 'node-schedule';
+import { checkPendingAlarm } from './shutterAlarm';
+import { setShutterState, setShutterInfo } from './setShutter';
+import type { ShutterSettings } from './types';
+
+async function driveshutterUpLiving(adapter: ioBroker.Adapter, upTimeLiving: string, autoLivingStr: string | boolean, shutterSettings: ShutterSettings[], livingType: string, driveDelayUpLiving: number, timeoutLivingAuto: number, noGoDelay: number): Promise<ShutterSettings[] | undefined> {
+    if (shutterSettings) {
+        adapter.log.debug(`Living-type: ${livingType}`);
+
+        const resLiving = shutterSettings.filter((d) => d.typeUp == livingType); // Filter Area Living
+        const result = resLiving.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+
+        let number = 0;
+
+        if (livingType === 'living') {
+            for (const i in result) {
+                number++;
+            }
+            timeoutLivingAuto = number !== 0 ? number * driveDelayUpLiving : driveDelayUpLiving;
+        }
+
+        for (const i in result) {
+            for (const s in shutterSettings) {
+                if (shutterSettings[s].shutterName == result[i].shutterName) {
+                    const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
+                    const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
+
+                    const _autoUpState = await adapter.getStateAsync(`shutters.autoUp.${nameDevice}`).catch((e) => adapter.log.warn(e));
+
+                    if (_autoUpState?.val === true) {
+                        let shutterHeight = 0;
+
+                        if (shutterSettings[s].currentAction == 'sunProtect' || shutterSettings[s].currentAction == 'OpenInSunProtect') {
+                            shutterHeight = parseFloat(String(shutterSettings[s].heightDownSun));
+                            shutterSettings[s].currentAction = 'sunProtect';
+                        } else {
+                            shutterHeight = parseFloat(String(shutterSettings[s].heightUp));
+                            shutterSettings[s].currentAction = 'up';
+                        }
+
+                        // saving current required values to alarmtrigger
+                        shutterSettings[s].alarmTriggerLevel = shutterHeight;
+                        shutterSettings[s].alarmTriggerAction = shutterSettings[s].currentAction;
+
+                        if (pendingAlarm == false) {
+                            const _triggerState = shutterSettings[s].triggerID != '' ? await adapter.getForeignStateAsync(shutterSettings[s].triggerID).catch((e) => adapter.log.warn(e)) : null;
+                            const mustValue = (`${  shutterSettings[s].triggerState}`);
+                            const mustValueTilted = shutterSettings[s].triggerStateTilted == 'none' ? (`${  shutterSettings[s].triggerState}`) : (`${  shutterSettings[s].triggerStateTilted}`);
+                            const currentValue = _triggerState?.val !== null && _triggerState?.val !== undefined ? (`${  _triggerState.val}`) : '';
+
+                            if (currentValue === mustValue || 
+                                currentValue === mustValueTilted || 
+                                (currentValue != mustValue && 
+                                    currentValue != mustValueTilted && 
+                                    shutterSettings[s].autoDrive != 'onlyDown' && 
+                                    shutterSettings[s].autoDrive != 'off')) {
+
+                                const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
+
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterHeight && 
+                                    Date.now() >= (_shutterState.lc + noGoDelay)) {
+
+                                    shutterSettings[s].currentHeight = shutterHeight;
+                                    shutterSettings[s].lastAutoAction = 'up_LivingTime';
+                                    shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight; // reset Trigger
+                                    shutterSettings[s].triggerAction = shutterSettings[s].currentAction; // reset Trigger
+
+                                    await setShutterState(adapter, shutterSettings, shutterSettings[s], shutterHeight, nameDevice, 'Living up #13');
+
+                                    adapter.log.debug(`last automatic Action for ${shutterSettings[s].shutterName}: ${shutterSettings[s].lastAutoAction}`);
+                                    adapter.log.debug(`shutterUpLiving #1 ${  shutterSettings[s].shutterName  } old height: ${  shutterSettings[s].oldHeight  }% new height: ${  shutterHeight  }%`);
+                                } else if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterHeight && 
+                                    Date.now() >= (_shutterState.lc + noGoDelay)) {
+
+                                    shutterSettings[s].currentHeight = shutterHeight;
+                                    shutterSettings[s].triggerHeight = shutterSettings[s].currentHeight; // reset Trigger
+                                    shutterSettings[s].triggerAction = shutterSettings[s].currentAction; // reset Trigger
+
+                                    await setShutterInfo(adapter, shutterSettings, shutterSettings[s], nameDevice);
+
+                                    adapter.log.debug(`shutterUpLiving #1 ${  shutterSettings[s].shutterName  } already up at: ${  shutterHeight  }% - setting current action: ${  shutterSettings[s].currentAction}`);
+                                }
+                            } else if (shutterSettings[s].triggerID == '') {
+                                const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
+
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != shutterHeight && 
+                                    Date.now() >= (_shutterState.lc + noGoDelay)) {
+
+                                    shutterSettings[s].currentHeight = shutterHeight;
+                                    shutterSettings[s].lastAutoAction = 'up_LivingTime';
+
+                                    await setShutterState(adapter, shutterSettings, shutterSettings[s], shutterHeight, nameDevice, 'Living up #13');
+
+                                    adapter.log.debug(`last automatic Action for ${shutterSettings[s].shutterName}: ${shutterSettings[s].lastAutoAction}`);
+                                    adapter.log.debug(`shutterUpLiving #2 ${  shutterSettings[s].shutterName  } old height: ${  shutterSettings[s].oldHeight  }% new height: ${  shutterHeight  }%`);
+                                } else if (_shutterState?.val !== null && _shutterState?.val !== undefined && 
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterHeight && 
+                                    Date.now() >= (_shutterState.lc + noGoDelay)) {
+
+                                    shutterSettings[s].currentHeight = shutterHeight;
+
+                                    await setShutterInfo(adapter, shutterSettings, shutterSettings[s], nameDevice);
+
+                                    adapter.log.debug(`shutterUpLiving #2 ${  shutterSettings[s].shutterName  } already up at: ${  shutterHeight  }% - setting current action: ${  shutterSettings[s].currentAction}`);
+                                }
+                            } else if (currentValue != mustValue &&
+                                currentValue != mustValueTilted &&
+                                shutterSettings[s].driveAfterClose == true) {
+
+                                const _shutterState = await adapter.getForeignStateAsync(shutterSettings[s].name).catch((e) => adapter.log.warn(e));
+
+                                if (_shutterState?.val !== null && _shutterState?.val !== undefined &&
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound != (shutterSettings[s] as ShutterSettings & { shutterHeight?: number }).shutterHeight) {
+
+                                    shutterSettings[s].triggerHeight = shutterHeight;
+                                    shutterSettings[s].triggerAction = shutterSettings[s].currentAction;
+
+                                    adapter.log.info(`#15 Will open ID: ${  shutterSettings[s].shutterName  } value: ${  shutterHeight  }%` + ` after the window has been closed `);
+                                    adapter.log.debug(`save new trigger height: ${  shutterHeight  }%`);
+                                    adapter.log.debug(`save new trigger action: ${  shutterSettings[s].triggerAction}`);
+                                } else if (_shutterState?.val !== null && _shutterState?.val !== undefined &&
+                                    Math.round((_shutterState.val as number) / adapter.config.shutterStateRound) * adapter.config.shutterStateRound == shutterHeight) {
+
+                                    shutterSettings[s].triggerHeight = shutterHeight;
+                                    shutterSettings[s].triggerAction = shutterSettings[s].currentAction;
+
+                                    adapter.log.info(`#16 Will open ID: ${shutterSettings[s].shutterName} value: ${shutterHeight}% after is the value for living up`);
+                                    adapter.log.debug(`save new trigger height: ${shutterHeight}%`);
+                                    adapter.log.debug(`save new trigger action: ${shutterSettings[s].triggerAction}`);
+                                }
+                            }
+                        } else {
+                            adapter.log.info(`Living up not moving now due to active alarm: ${  shutterSettings[s].shutterName  } value: ${  shutterHeight  }%`);
+                        }
+                        await adapter.delay(driveDelayUpLiving);
+                    }
+                }
+            }
+        }
+        adapter.log.debug(`Adapter Auto-Living is: ${autoLivingStr}`);
+
+        // start living-auto after drive living shutter
+        if ((autoLivingStr === true || 
+            autoLivingStr === 'true') && 
+            livingType === 'living') {
+                
+            await adapter.delay(timeoutLivingAuto);
+            livingType = 'living-auto';
+            driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
+        } else {
+            return (shutterSettings);
+        }
+    }
+}
+
+export async function shutterUpLiving(adapter: ioBroker.Adapter, upTimeLiving: string | undefined, autoLivingStr: string | boolean, shutterSettings: ShutterSettings[]): Promise<void> {
+    const driveDelayUpLiving = adapter.config.driveDelayUpLiving != 0 ? adapter.config.driveDelayUpLiving * 1000 : 20;
+    const noGoDelay = adapter.config.noGoTime * 1000 * 60;
+
+    upTimeLiving = upTimeLiving == undefined ? adapter.config.W_shutterUpLivingMax : upTimeLiving;
+
+    const livingType = 'living';
+    const upTime = upTimeLiving.split(':');
+    const timeoutLivingAuto = 0;
+
+    schedule.cancelJob('shutterUpLiving');
+
+    const upLiving = schedule.scheduleJob('shutterUpLiving', `${upTime[1]  } ${  upTime[0]  } * * *`, async function () {
+        driveshutterUpLiving(adapter, upTimeLiving, autoLivingStr, shutterSettings, livingType, driveDelayUpLiving, timeoutLivingAuto, noGoDelay);
+    });
+}
+
