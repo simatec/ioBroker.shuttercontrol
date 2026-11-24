@@ -1,8 +1,8 @@
 'use strict';
 
 const { expect } = require('chai');
-const { shutterAlarm, isAlarmStateChanged, hasAlarmTriggerLevel } = require('./shutterAlarm.js');
-const { setShutterState } = require('./setShutter.js');
+const { shutterAlarm, isAlarmStateChanged, hasAlarmTriggerLevel } = require('../../build/lib/shutterAlarm.js');
+const { setShutterState } = require('../../build/lib/setShutter.js');
 
 const SHUTTER_ID = 'zigbee.0.shutter.position';
 const RAIN_ID = 'javascript.0.rain';

@@ -54,6 +54,11 @@ When the adapter crashes or an other Code error happens, this error message that
 * (simatec) Accept latitude/longitude with a decimal comma
 * (simatec) Fix the delay of the complete down drive after the intermediate position
 * (simatec) Fix the check of the public holiday instance
+* (simatec) Backend migrated to TypeScript (src/ → build/)
+* (simatec) Use adapter.delay() and adapter.setTimeout() instead of custom sleep functions and plain timers
+* (simatec) Unused translation helper (axios) removed
+* (simatec) i18n files migrated to the short format ({lang}.json)
+* (simatec) tsconfig.json added
 
 ### 2.1.2 (2026-08-29)
 * (simatec) Update dependabot

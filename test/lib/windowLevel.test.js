@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require('chai');
-const { getWindowDownLevel, driveWindowLevel, clearWindowLevelTimers } = require('./windowLevel.js');
+const { getWindowDownLevel, driveWindowLevel, clearWindowLevelTimers } = require('../../build/lib/windowLevel.js');
 
 const SHUTTER_ID = 'zigbee.0.shutter.position';
 const WINDOW_ID = 'javascript.0.window';
