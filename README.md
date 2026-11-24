@@ -46,6 +46,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 ### __WORK IN PROGRESS__
+* (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
 * (simatec) New admin tab in React (replaces jsonTab)
 * (simatec) Fix reading of latitude/longitude from the system settings (js-controller 7)
 * (simatec) Fix crash when no coordinates are configured

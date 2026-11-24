@@ -38,7 +38,7 @@ import {
     type ShutterEntry,
 } from './shutterDefaults';
 
-type FieldSize = { xs?: number; sm?: number; md?: number; lg?: number };
+type FieldSize = { xs?: number; sm?: number; md?: number; lg?: number; xl?: number };
 
 /** Description of one input of the dialog */
 interface FieldDef {
@@ -61,10 +61,13 @@ interface SectionDef {
     fields: FieldDef[];
 }
 
-const NUMBER_SIZE: FieldSize = { xs: 12, sm: 6, md: 4, lg: 3 };
-const SELECT_SIZE: FieldSize = { xs: 12, sm: 6, md: 4, lg: 4 };
-const ID_SIZE: FieldSize = { xs: 12, sm: 12, md: 8, lg: 6 };
-const CHECK_SIZE: FieldSize = { xs: 12, sm: 12, md: 6, lg: 6 };
+/** Standard layout of the responsive design initiative of ioBroker: xs 12, sm 12, md 6, lg 4, xl 4 */
+const NUMBER_SIZE: FieldSize = { xs: 12, sm: 12, md: 6, lg: 4, xl: 4 };
+const SELECT_SIZE: FieldSize = NUMBER_SIZE;
+const ID_SIZE: FieldSize = NUMBER_SIZE;
+const CHECK_SIZE: FieldSize = NUMBER_SIZE;
+/** Inputs with very long labels */
+const FULL_SIZE: FieldSize = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12 };
 
 /** "main settings" of the former materialize dialog */
 const MAIN_SECTIONS: SectionDef[] = [
@@ -160,7 +163,7 @@ const MAIN_SECTIONS: SectionDef[] = [
                 attr: 'useOpenWindowLevel',
                 label: 'Also use these heights when an automatic closes with an open or tilted window',
                 type: 'checkbox',
-                size: { xs: 12 },
+                size: FULL_SIZE,
                 newLine: true,
             },
         ],
@@ -358,7 +361,7 @@ const EXTRA_SECTIONS: SectionDef[] = [
                 attr: 'ignoreTriggerAutoState',
                 label: 'Ignore the status of autoUp and autoDown when opening the window',
                 type: 'checkbox',
-                size: { xs: 12 },
+                size: FULL_SIZE,
             },
             {
                 attr: 'betweenPosition',
