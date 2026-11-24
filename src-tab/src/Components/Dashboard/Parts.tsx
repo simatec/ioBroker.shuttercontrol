@@ -234,7 +234,7 @@ export function ActionTile(props: {
                 alignItems: 'center',
                 justifyContent: props.vertical ? 'center' : 'flex-start',
                 gap: props.vertical ? '6px' : '12px',
-                padding: props.vertical ? '10px 10px' : '0 14px',
+                padding: props.vertical ? '10px 10px' : '0 18px',
                 borderRadius: '12px',
                 cursor: props.disabled ? 'default' : 'pointer',
                 textAlign: props.vertical ? 'center' : 'left',
@@ -282,7 +282,6 @@ export function ActionTile(props: {
                 )}
             </span>
             <span style={{ flex: props.vertical ? undefined : 1 }}>{props.label}</span>
-            {props.vertical ? null : <ChevronRight style={{ opacity: 0.8 }} />}
         </Box>
     );
 
