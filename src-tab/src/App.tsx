@@ -446,7 +446,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                     display: 'flex',
                     alignItems: 'center',
                     gap: { xs: '10px', sm: '14px' },
-                    padding: { xs: '6px 12px', sm: '8px 20px' },
+                    padding: { xs: '6px 12px', sm: '8px 28px' },
                     borderBottom: `1px solid ${t.divider}`,
                     background: t.dark ? 'rgba(255, 255, 255, 0.015)' : '#FFFFFF',
                 }}
@@ -602,7 +602,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                 sx={{
                     flexShrink: 0,
                     minHeight: 44,
-                    padding: { xs: '0 4px', sm: '0 12px' },
+                    padding: { xs: '0 4px', sm: '0 20px' },
                     borderBottom: `1px solid ${t.divider}`,
                     '& .MuiTab-root': { minHeight: 44, textTransform: 'none', fontWeight: 600 },
                 }}
@@ -640,7 +640,8 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                             sm: 'repeat(3, minmax(0, 1fr))',
                             lg: 'repeat(6, minmax(0, 1fr))',
                         },
-                        gap: { xs: '8px', sm: '12px' },
+                        columnGap: { xs: '8px', sm: '20px' },
+                        rowGap: { xs: '8px', sm: '14px' },
                     }}
                 >
                     {INFO_STATES.map(info => (
@@ -675,14 +676,15 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                             sm: 'repeat(2, minmax(0, 1fr))',
                             lg: 'repeat(4, minmax(0, 1fr))',
                         },
-                        gap: '12px',
+                        columnGap: { xs: '10px', sm: '20px' },
+                        rowGap: { xs: '10px', sm: '14px' },
                     }}
                 >
                     {ACTION_GROUPS.map(group => (
                         <DashboardCard
                             key={group.title}
                             t={t}
-                            style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}
+                            style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}
                         >
                             <div
                                 style={{
@@ -739,7 +741,8 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                             md: 'repeat(3, minmax(0, 1fr))',
                             lg: 'repeat(5, minmax(0, 1fr))',
                         },
-                        gap: '12px',
+                        columnGap: { xs: '10px', sm: '20px' },
+                        rowGap: { xs: '10px', sm: '14px' },
                     }}
                 >
                     {SETTING_STATES.map(setting => (
@@ -811,7 +814,7 @@ export default class App extends GenericApp<GenericAppProps, AppState> {
                                 overflow: 'auto',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                padding: { xs: '0 10px 16px', sm: '0 20px 20px' },
+                                padding: { xs: '0 12px 16px', sm: '0 28px 24px' },
                             }}
                         >
                             {/* the blocks fade in one after another when the page opens */}

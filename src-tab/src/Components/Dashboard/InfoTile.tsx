@@ -24,7 +24,7 @@ export default function InfoTile(props: {
     return (
         <DashboardCard
             t={t}
-            style={{ padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 12 }}
+            style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}
         >
             <IconBox
                 t={t}
