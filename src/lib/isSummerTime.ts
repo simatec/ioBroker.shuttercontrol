@@ -85,6 +85,37 @@ export async function CheckInSummerNotDown(adapter: ioBroker.Adapter, shutter: S
 }
 
 /**
+ * Converts a state value into a boolean ('true', 1 and true are true).
+ *
+ * @param val state value
+ * @returns the boolean value
+ */
+export function toBool(val: ioBroker.StateValue | undefined): boolean {
+    return val === true || val === 'true' || val === 1 || val === '1';
+}
+
+/**
+ * Checks whether the christmas mode is active. The switch control.Xmas is used; it follows the configured
+ * christmas period (XMasStart / XMasEnd) and can be changed manually. Without a value of the switch the
+ * configured period is used.
+ *
+ * @param adapter adapter instance
+ * @returns true when the christmas mode is active
+ */
+export async function IsXmasActive(adapter: ioBroker.Adapter): Promise<boolean> {
+    try {
+        const state = await adapter.getStateAsync('control.Xmas');
+        if (state && state.val !== null && state.val !== undefined) {
+            adapter.log.debug(`xmas mode by control.Xmas: ${state.val}`);
+            return toBool(state.val);
+        }
+    } catch (e) {
+        adapter.log.debug(`control.Xmas cannot be read: ${e}`);
+    }
+    return IsSummerTime(adapter, adapter.config.XMasStart ?? '', adapter.config.XMasEnd ?? '');
+}
+
+/**
  * Returns the xmas level of the shutter during the xmas period.
  *
  * @param adapter adapter instance
@@ -97,7 +128,7 @@ export async function GetXmasLevel(adapter: ioBroker.Adapter, shutter: ShutterSe
     adapter.log.debug(`check xmas for ${shutter.shutterName}`);
     if (shutter.useXmasLevel) {
         //we should use xmasl level for the current shutter
-        const resultXmasTime = await IsSummerTime(adapter, adapter.config.XMasStart, adapter.config.XMasEnd);
+        const resultXmasTime = await IsXmasActive(adapter);
         if (resultXmasTime) {
             //and we are in xmas time
             XmasLevel = parseFloat(String(shutter.XmasLevel)); //then store level to be used here

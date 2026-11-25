@@ -24,6 +24,7 @@ import { shutterDownComplete } from './lib/shutterDownComplete'; // shutterDownC
 import { shutterBrightnessSensor, brightnessState } from './lib/shutterBrightnessSensor'; // shutterBrightnessSensor / brightnessState
 import { clearWindowLevelTimers } from './lib/windowLevel'; // windowLevel timers
 import { shutterAlarm, isAlarmStateChanged } from './lib/shutterAlarm'; // ShutterAlarm / real value change
+import { IsSummerTime, toBool } from './lib/isSummerTime'; // christmas period
 
 import type { ShutterRuntimeState, ShutterSettings } from './lib/types';
 
@@ -157,6 +158,11 @@ class Shuttercontrol extends Adapter {
         // (created at module load in the former main.js)
         schedule.scheduleJob('calcTimer', '30 2 * * *', async () => {
             await this.calcTimer();
+        });
+
+        // ++++++++++++++++++ check the christmas period every day shortly after midnight +++++++++++++++++++++++
+        schedule.scheduleJob('xmasTimer', '5 0 0 * * *', async () => {
+            await this.syncXmasState();
         });
 
         // the former callback had the signature (obj) and therefore checked the error argument
@@ -338,6 +344,13 @@ class Shuttercontrol extends Adapter {
             if (id === `${this.namespace}.control.schoolfree`) {
                 this.SchoolfreeStr = state.val;
                 this.shutterDriveCalc();
+            }
+            if (id === `${this.namespace}.control.Xmas` && !state.ack) {
+                // manual change of the christmas mode - valid until the christmas period starts or ends the next time
+                const xmas = toBool(state.val);
+                this.log.info(`christmas mode switched ${xmas ? 'on' : 'off'} manually`);
+                await this.setStateAsync('control.Xmas', { val: xmas, ack: true })
+                    .catch((e) => this.log.warn(e));
             }
             if (id === `${this.namespace}.control.autoLiving`) {
                 this.autoLivingStr = state.val;
@@ -693,6 +706,7 @@ class Shuttercontrol extends Adapter {
             clearWindowLevelTimers(this);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
+            schedule.cancelJob('xmasTimer');
             schedule.cancelJob('shutterDownGoldenHour');
             schedule.cancelJob('shutterUpSunrise');
             schedule.cancelJob('shutterDownSunset');
@@ -897,6 +911,41 @@ class Shuttercontrol extends Adapter {
         if (_autoChildrenStates && _autoChildrenStates.val === null) {
             await this.setStateAsync('control.autoChildren', { val: false, ack: true })
                 .catch((e) => this.log.warn(e));
+        }
+
+        await this.syncXmasState();
+    }
+
+    // +++++++++++++++++ christmas period: info.Xmas and switch control.Xmas ++++++++++++++++++++++++++++
+
+    /**
+     * Writes info.Xmas (configured christmas period is active) and keeps the switch control.Xmas in sync
+     * with it. The switch is only set when the period starts or ends (or when it has no value yet), so a
+     * manual change of control.Xmas stays valid until the next start or end of the period - also over a
+     * restart of the adapter.
+     */
+    private async syncXmasState(): Promise<void> {
+        try {
+            const inPeriod = await IsSummerTime(this, this.config.XMasStart ?? '', this.config.XMasEnd ?? '');
+
+            const _infoXmas = await this.getStateAsync('info.Xmas').catch((e) => this.log.warn(e));
+            const periodChanged = !_infoXmas || _infoXmas.val === null || toBool(_infoXmas.val) !== inPeriod;
+
+            if (periodChanged) {
+                await this.setStateAsync('info.Xmas', { val: inPeriod, ack: true })
+                    .catch((e) => this.log.warn(e));
+            }
+
+            const _controlXmas = await this.getStateAsync('control.Xmas').catch((e) => this.log.warn(e));
+            if (periodChanged || !_controlXmas || _controlXmas.val === null) {
+                this.log.info(`christmas period ${inPeriod ? 'active' : 'not active'} - christmas mode ${inPeriod ? 'on' : 'off'}`);
+                await this.setStateAsync('control.Xmas', { val: inPeriod, ack: true })
+                    .catch((e) => this.log.warn(e));
+            } else {
+                this.log.debug(`christmas period ${inPeriod ? 'active' : 'not active'}, christmas mode: ${_controlXmas.val}`);
+            }
+        } catch (e) {
+            this.log.warn(`christmas period cannot be checked: ${e}`);
         }
     }
 

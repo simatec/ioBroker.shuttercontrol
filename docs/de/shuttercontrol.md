@@ -205,6 +205,11 @@ Unter [Extra-Einstellungen Rollladen](#extra-einstellungen-rollladen) Weihnachst
 die zu dieser Zeit gewünschte Funktion eingeschaltet und
 die gewünschte Rollladenposition festgelegt.
 
+> :point_right: Ob der Zeitraum gerade aktiv ist, zeigt der Datenpunkt ```shuttercontrol.x.info.Xmas```.
+Der Weihnachtsbetrieb selbst wird über den Schalter ```shuttercontrol.x.control.Xmas``` gesteuert.
+Er folgt dem eingestellten Zeitraum, kann aber auch manuell oder per Skript geschaltet werden
+(siehe [shuttercontrol0control](#shuttercontrol0control)).
+
 
 _[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
 
@@ -779,6 +784,13 @@ Button um **alle** Rollläden im Wohnbereich zu öffnen
 * schoolfree  
 *Button um die Ferienzeit manuell zu aktivieren und die Rollläden zur eingestellten Zeit am Wochenende öffnen zu lassen*
 
+* Xmas  
+*Schalter für den Weihnachtsbetrieb. Bei ```true``` fahren die Rollläden, bei denen der Rollladenpegel 
+zur Weihnachtszeit verwendet wird, beim Schließen auf diesen Pegel.*
+> :point_right: Der Schalter wird zu Beginn des eingestellten Weihnachtszeitraums automatisch auf ```true``` 
+und am Ende auf ```false``` gesetzt. Eine manuelle Änderung (z.B. per Skript oder VIS) bleibt bis zum nächsten 
+Beginn bzw. Ende des Zeitraums erhalten - auch über einen Neustart des Adapters hinweg.
+
 * sunProtect  
 *Button um die Rollläden in die Sonnenschutzpostion zu fahren*
 
@@ -803,6 +815,10 @@ Datenpunkte zur Anzeige berechneter Werte und zur Überprüfung von konfiguriert
 Zeiten:
 
 ![datapointsinfo](img/datapointsinfo.png)
+
+* Xmas  
+*Ist ```true```, solange der unter [Weihnachtseinstellungen](#weihnachtseinstellungen) eingestellte 
+Zeitraum aktiv ist (nur lesbar). Kann z.B. für die Steuerung der Weihnachtsbeleuchtung verwendet werden.*
 
 
 _[Zurück zum Anfang](#dokumentation-und-anleitung-für-shuttercontrol)_
