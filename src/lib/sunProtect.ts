@@ -105,13 +105,18 @@ export async function sunProtect(
                                             heightDownSun = shutterSettings[s].heightDownSun;
                                         }
 
+                                        // bright again: stop a running end delay and also reset an expired one ('0') -
+                                        // otherwise the next time it gets darker the sun protection ends without any delay
                                         if (shutterSettings[s].sunProtectEndtimerid != '' &&
-                                            shutterSettings[s].sunProtectEndtimerid != '0' &&
                                             shutterSettings[s].lightSensor != '' &&
                                             Number(shutterSettings[s].valueLight) < sunLight) {
 
-                                            adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
-                                            adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            if (shutterSettings[s].sunProtectEndtimerid != '0') {
+                                                adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                                adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            } else {
+                                                adapter.log.debug(`Reset expired sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                            }
                                             shutterSettings[s].sunProtectEndtimerid = '';
                                         }
 
@@ -437,13 +442,18 @@ export async function sunProtect(
                                         const _sunLight = shutterSettings[s].lightSensor != '' ? await adapter.getForeignStateAsync(shutterSettings[s].lightSensor).catch((e) => adapter.log.warn(e)) : null;
                                         sunLight = _sunLight?.val ? parseFloat(String(_sunLight.val)) : 0;
 
+                                        // bright again: stop a running end delay and also reset an expired one ('0') -
+                                        // otherwise the next time it gets darker the sun protection ends without any delay
                                         if (shutterSettings[s].sunProtectEndtimerid != '' &&
-                                            shutterSettings[s].sunProtectEndtimerid != '0' &&
                                             shutterSettings[s].lightSensor != '' &&
                                             Number(shutterSettings[s].valueLight) < sunLight) {
 
-                                            adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
-                                            adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            if (shutterSettings[s].sunProtectEndtimerid != '0') {
+                                                adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                                adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            } else {
+                                                adapter.log.debug(`Reset expired sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                            }
                                             shutterSettings[s].sunProtectEndtimerid = '';
                                         }
 
@@ -773,13 +783,18 @@ export async function sunProtect(
                                         const _sunLight = shutterSettings[s].lightSensor != '' ? await adapter.getForeignStateAsync(shutterSettings[s].lightSensor).catch((e) => adapter.log.warn(e)) : null;
                                         sunLight = _sunLight?.val ? parseFloat(String(_sunLight.val)) : 0;
 
+                                        // bright again: stop a running end delay and also reset an expired one ('0') -
+                                        // otherwise the next time it gets darker the sun protection ends without any delay
                                         if (shutterSettings[s].sunProtectEndtimerid != '' &&
-                                            shutterSettings[s].sunProtectEndtimerid != '0' &&
                                             shutterSettings[s].lightSensor != '' &&
                                             Number(shutterSettings[s].valueLight) < sunLight) {
 
-                                            adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
-                                            adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            if (shutterSettings[s].sunProtectEndtimerid != '0') {
+                                                adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                                adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            } else {
+                                                adapter.log.debug(`Reset expired sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                            }
                                             shutterSettings[s].sunProtectEndtimerid = '';
                                         }
 
@@ -1330,13 +1345,18 @@ export async function sunProtect(
                                         const _sunLight = shutterSettings[s].lightSensor != '' ? await adapter.getForeignStateAsync(shutterSettings[s].lightSensor).catch((e) => adapter.log.warn(e)) : null;
                                         sunLight = _sunLight?.val ? parseFloat(String(_sunLight.val)) : 0;
 
+                                        // bright again: stop a running end delay and also reset an expired one ('0') -
+                                        // otherwise the next time it gets darker the sun protection ends without any delay
                                         if (shutterSettings[s].sunProtectEndtimerid != '' &&
-                                            shutterSettings[s].sunProtectEndtimerid != '0' &&
                                             shutterSettings[s].lightSensor != '' &&
                                             Number(shutterSettings[s].valueLight) < sunLight) {
 
-                                            adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
-                                            adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            if (shutterSettings[s].sunProtectEndtimerid != '0') {
+                                                adapter.log.debug(`Stopping sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                                adapter.clearTimeout(shutterSettings[s].sunProtectEndtimerid as unknown as ioBroker.Timeout);
+                                            } else {
+                                                adapter.log.debug(`Reset expired sunprotect delay for ${shutterSettings[s].shutterName}`);
+                                            }
                                             shutterSettings[s].sunProtectEndtimerid = '';
                                         }
                                         if (currentValue === mustValue ||
