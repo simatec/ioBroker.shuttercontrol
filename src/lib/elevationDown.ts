@@ -53,9 +53,9 @@ export async function elevationDown(adapter: ioBroker.Adapter, elevation: number
                     targetLevel2Set = XmasLevel > -1 ? XmasLevel : targetLevel2Set;
                     downAction = XmasLevel > -1 ? 'Xmas' : downAction;
 
-                    // save current required position to alarmtrigger before overwriting
-                    shutterSettings[s].alarmTriggerLevel = targetLevel2Set;
-                    shutterSettings[s].alarmTriggerAction = downAction;
+                    // position to return to after an alarm - stored below only if the shutter is really driven (or waits for an alarm)
+                    const alarmTriggerLevel = targetLevel2Set;
+                    const alarmTriggerAction = downAction;
 
                     // overwrite target position and downAction if frost alarm is set.
                     if (statusAlarmFrost && shutterSettings[s].enableAlarmFrost == true && downAction != 'Xmas') {
@@ -72,6 +72,8 @@ export async function elevationDown(adapter: ioBroker.Adapter, elevation: number
                                 elevation >= elevationEnd &&
                                 shutterSettings[s].currentAction != 'down' &&
                                 azimuth > 180) {
+                                shutterSettings[s].alarmTriggerLevel = alarmTriggerLevel;
+                                shutterSettings[s].alarmTriggerAction = alarmTriggerAction;
 
                                 if (pendingAlarm == false) {
                                     const _triggerState = shutterSettings[s].triggerID != '' ? await adapter.getForeignStateAsync(shutterSettings[s].triggerID).catch((e) => adapter.log.warn(e)) : null;
