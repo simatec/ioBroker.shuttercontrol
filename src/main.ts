@@ -172,6 +172,9 @@ class Shuttercontrol extends Adapter {
             }
         });
 
+        // christmas period: info.Xmas and switch control.Xmas
+        void this.syncXmasState();
+
         // read shutter settings from config
         this.shutterSettings = this.config.events;
         void this.saveCurrentStates(true);
@@ -912,8 +915,6 @@ class Shuttercontrol extends Adapter {
             await this.setStateAsync('control.autoChildren', { val: false, ack: true })
                 .catch((e) => this.log.warn(e));
         }
-
-        await this.syncXmasState();
     }
 
     // +++++++++++++++++ christmas period: info.Xmas and switch control.Xmas ++++++++++++++++++++++++++++
@@ -925,27 +926,35 @@ class Shuttercontrol extends Adapter {
      * restart of the adapter.
      */
     private async syncXmasState(): Promise<void> {
+        let inPeriod: boolean;
+        let _infoXmas: ioBroker.State | null | undefined;
+        let _controlXmas: ioBroker.State | null | undefined;
         try {
-            const inPeriod = await IsSummerTime(this, this.config.XMasStart ?? '', this.config.XMasEnd ?? '');
+            inPeriod = await IsSummerTime(this, this.config.XMasStart ?? '', this.config.XMasEnd ?? '');
+            // a failed read must not be taken as "no value" - this would overwrite a manual change of control.Xmas
+            _infoXmas = await this.getStateAsync('info.Xmas');
+            _controlXmas = await this.getStateAsync('control.Xmas');
+        } catch (e) {
+            this.log.warn(`christmas period cannot be checked: ${e}`);
+            return;
+        }
 
-            const _infoXmas = await this.getStateAsync('info.Xmas').catch((e) => this.log.warn(e));
-            const periodChanged = !_infoXmas || _infoXmas.val === null || toBool(_infoXmas.val) !== inPeriod;
+        const periodChanged = !_infoXmas || _infoXmas.val === null || toBool(_infoXmas.val) !== inPeriod;
 
-            if (periodChanged) {
-                await this.setStateAsync('info.Xmas', { val: inPeriod, ack: true })
-                    .catch((e) => this.log.warn(e));
-            }
-
-            const _controlXmas = await this.getStateAsync('control.Xmas').catch((e) => this.log.warn(e));
+        try {
             if (periodChanged || !_controlXmas || _controlXmas.val === null) {
                 this.log.info(`christmas period ${inPeriod ? 'active' : 'not active'} - christmas mode ${inPeriod ? 'on' : 'off'}`);
-                await this.setStateAsync('control.Xmas', { val: inPeriod, ack: true })
-                    .catch((e) => this.log.warn(e));
+                await this.setStateAsync('control.Xmas', { val: inPeriod, ack: true });
             } else {
                 this.log.debug(`christmas period ${inPeriod ? 'active' : 'not active'}, christmas mode: ${_controlXmas.val}`);
             }
+            // info.Xmas is the reference for the next check, so it is written last: if control.Xmas could
+            // not be written, the change of the period is detected again at the next check
+            if (periodChanged) {
+                await this.setStateAsync('info.Xmas', { val: inPeriod, ack: true });
+            }
         } catch (e) {
-            this.log.warn(`christmas period cannot be checked: ${e}`);
+            this.log.warn(`christmas states cannot be written: ${e}`);
         }
     }
 
