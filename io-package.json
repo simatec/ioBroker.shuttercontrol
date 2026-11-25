@@ -429,6 +429,20 @@
       "native": {}
     },
     {
+      "_id": "control.Xmas",
+      "type": "state",
+      "common": {
+        "role": "switch",
+        "name": "Christmas mode",
+        "desc": "Follows the configured christmas period, can be switched manually",
+        "type": "boolean",
+        "read": true,
+        "write": true,
+        "def": false
+      },
+      "native": {}
+    },
+    {
       "_id": "control.autoLiving",
       "type": "state",
       "common": {
@@ -906,6 +920,19 @@
         "read": true,
         "write": false,
         "def": 0
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.Xmas",
+      "type": "state",
+      "common": {
+        "role": "indicator",
+        "name": "Christmas period active",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
       },
       "native": {}
     }

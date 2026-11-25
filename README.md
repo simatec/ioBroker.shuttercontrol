@@ -43,7 +43,11 @@ When the adapter crashes or an other Code error happens, this error message that
 *************************************************************************************************************************************
 
 ## Changelog
-<!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (simatec) New state info.Xmas: true while the configured christmas period is active (#827)
+* (simatec) New switch control.Xmas: christmas mode follows the configured period and can be switched manually (#827)
+* (simatec) Fix christmas/summer period check: an end day 31 was shifted in shorter months (e.g. 24.12.-31.12. was active in February)
+
 ### 3.0.1 (2026-11-24)
 * (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
 * (simatec) New admin tab in React (replaces jsonTab)

@@ -203,6 +203,11 @@ Under [Extra settings for roller shutters](#extra-settings-roller-shutter) Chris
 the function desired at this time is switched on and
 the desired roller shutter position.
 
+> :point_right: The data point ```shuttercontrol.x.info.Xmas``` shows whether the period is currently active.
+The Christmas mode itself is controlled by the switch ```shuttercontrol.x.control.Xmas```.
+It follows the configured period, but can also be switched manually or by a script
+(see [shuttercontrol0control](#shuttercontrol0control)).
+
 
 _[Back to top](#documentation-and-instructions-for-shuttercontrol)_
 
@@ -778,6 +783,13 @@ Button to open **all** roller shutters in the living area
 * school free
 *Button to manually activate the holiday season and have the roller shutters open at the set time on the weekend*
 
+* Xmas
+*Switch for the Christmas mode. If ```true```, the roller shutters that use the Christmas level
+move to this level when closing.*
+> :point_right: The switch is set to ```true``` automatically at the start of the configured Christmas period
+and to ```false``` at its end. A manual change (e.g. by a script or VIS) is kept until the period starts
+or ends the next time - also over a restart of the adapter.
+
 * sunProtect
 *Button to move the roller shutters into the sun protection position*
 
@@ -802,6 +814,10 @@ Data points for displaying calculated values and checking configured ones
 Times:
 
 ![datapointsinfo](img/datapointsinfo.png)
+
+* Xmas
+*Is ```true``` while the period configured under [Christmas settings](#christmas-settings) is active
+(read only). Can be used e.g. to control the Christmas lights.*
 
 
 _[Back to top](#documentation-and-instructions-for-shuttercontrol)_
