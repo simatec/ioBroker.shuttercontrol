@@ -43,7 +43,9 @@ When the adapter crashes or an other Code error happens, this error message that
 *************************************************************************************************************************************
 
 ## Changelog
-<!-- ### __WORK IN PROGRESS__ -->
+### __WORK IN PROGRESS__
+* (Schimi1983) Fix the close and sun protect buttons of an area: shutters with the "-auto" area are selected by their down area (#954)
+
 ### 3.0.1 (2026-11-24)
 * (simatec) Responsive design of the configuration according to the ioBroker responsive design initiative (cards instead of the table on narrow screens)
 * (simatec) New admin tab in React (replaces jsonTab)
