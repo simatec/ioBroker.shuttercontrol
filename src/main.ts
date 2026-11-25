@@ -24,6 +24,7 @@ import { shutterDownComplete } from './lib/shutterDownComplete'; // shutterDownC
 import { shutterBrightnessSensor, brightnessState } from './lib/shutterBrightnessSensor'; // shutterBrightnessSensor / brightnessState
 import { clearWindowLevelTimers } from './lib/windowLevel'; // windowLevel timers
 import { shutterAlarm, isAlarmStateChanged } from './lib/shutterAlarm'; // ShutterAlarm / real value change
+import { IsSummerTime, toBool } from './lib/isSummerTime'; // christmas period
 
 import type { ShutterRuntimeState, ShutterSettings } from './lib/types';
 
@@ -159,12 +160,20 @@ class Shuttercontrol extends Adapter {
             await this.calcTimer();
         });
 
+        // ++++++++++++++++++ check the christmas period every day shortly after midnight +++++++++++++++++++++++
+        schedule.scheduleJob('xmasTimer', '5 0 0 * * *', async () => {
+            await this.syncXmasState();
+        });
+
         // the former callback had the signature (obj) and therefore checked the error argument
         void this.getForeignObject('system.config', (err, obj) => {
             if (obj) {
                 void this.checkStates();
             }
         });
+
+        // christmas period: info.Xmas and switch control.Xmas
+        void this.syncXmasState();
 
         // read shutter settings from config
         this.shutterSettings = this.config.events;
@@ -338,6 +347,13 @@ class Shuttercontrol extends Adapter {
             if (id === `${this.namespace}.control.schoolfree`) {
                 this.SchoolfreeStr = state.val;
                 this.shutterDriveCalc();
+            }
+            if (id === `${this.namespace}.control.Xmas` && !state.ack) {
+                // manual change of the christmas mode - valid until the christmas period starts or ends the next time
+                const xmas = toBool(state.val);
+                this.log.info(`christmas mode switched ${xmas ? 'on' : 'off'} manually`);
+                await this.setStateAsync('control.Xmas', { val: xmas, ack: true })
+                    .catch((e) => this.log.warn(e));
             }
             if (id === `${this.namespace}.control.autoLiving`) {
                 this.autoLivingStr = state.val;
@@ -693,6 +709,7 @@ class Shuttercontrol extends Adapter {
             clearWindowLevelTimers(this);
             schedule.cancelJob('shutterUpGoldenHourEnd');
             schedule.cancelJob('calcTimer');
+            schedule.cancelJob('xmasTimer');
             schedule.cancelJob('shutterDownGoldenHour');
             schedule.cancelJob('shutterUpSunrise');
             schedule.cancelJob('shutterDownSunset');
@@ -897,6 +914,47 @@ class Shuttercontrol extends Adapter {
         if (_autoChildrenStates && _autoChildrenStates.val === null) {
             await this.setStateAsync('control.autoChildren', { val: false, ack: true })
                 .catch((e) => this.log.warn(e));
+        }
+    }
+
+    // +++++++++++++++++ christmas period: info.Xmas and switch control.Xmas ++++++++++++++++++++++++++++
+
+    /**
+     * Writes info.Xmas (configured christmas period is active) and keeps the switch control.Xmas in sync
+     * with it. The switch is only set when the period starts or ends (or when it has no value yet), so a
+     * manual change of control.Xmas stays valid until the next start or end of the period - also over a
+     * restart of the adapter.
+     */
+    private async syncXmasState(): Promise<void> {
+        let inPeriod: boolean;
+        let _infoXmas: ioBroker.State | null | undefined;
+        let _controlXmas: ioBroker.State | null | undefined;
+        try {
+            inPeriod = await IsSummerTime(this, this.config.XMasStart ?? '', this.config.XMasEnd ?? '');
+            // a failed read must not be taken as "no value" - this would overwrite a manual change of control.Xmas
+            _infoXmas = await this.getStateAsync('info.Xmas');
+            _controlXmas = await this.getStateAsync('control.Xmas');
+        } catch (e) {
+            this.log.warn(`christmas period cannot be checked: ${e}`);
+            return;
+        }
+
+        const periodChanged = !_infoXmas || _infoXmas.val === null || toBool(_infoXmas.val) !== inPeriod;
+
+        try {
+            if (periodChanged || !_controlXmas || _controlXmas.val === null) {
+                this.log.info(`christmas period ${inPeriod ? 'active' : 'not active'} - christmas mode ${inPeriod ? 'on' : 'off'}`);
+                await this.setStateAsync('control.Xmas', { val: inPeriod, ack: true });
+            } else {
+                this.log.debug(`christmas period ${inPeriod ? 'active' : 'not active'}, christmas mode: ${_controlXmas.val}`);
+            }
+            // info.Xmas is the reference for the next check, so it is written last: if control.Xmas could
+            // not be written, the change of the period is detected again at the next check
+            if (periodChanged) {
+                await this.setStateAsync('info.Xmas', { val: inPeriod, ack: true });
+            }
+        } catch (e) {
+            this.log.warn(`christmas states cannot be written: ${e}`);
         }
     }
 
