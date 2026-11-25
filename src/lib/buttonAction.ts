@@ -21,19 +21,19 @@ export async function buttonAction(adapter: ioBroker.Adapter, buttonState: strin
                 resLiving = shutterSettings.filter((d) => d.typeUp == 'living' || d.typeUp == 'living-auto');
                 break;
             case 'closeLiving':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'living' || d.typeUp == 'living-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'living' || d.typeDown == 'living-auto');
                 break;
             case 'openSleep':
                 resLiving = shutterSettings.filter((d) => d.typeUp == 'sleep' || d.typeUp == 'sleep-auto');
                 break;
             case 'closeSleep':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'sleep' || d.typeUp == 'sleep-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'sleep' || d.typeDown == 'sleep-auto');
                 break;
             case 'openChildren':
                 resLiving = shutterSettings.filter((d) => d.typeUp == 'children' || d.typeUp == 'children-auto');
                 break;
             case 'closeChildren':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'children' || d.typeUp == 'children-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'children' || d.typeDown == 'children-auto');
                 break;
             case 'openAll':
                 resLiving = shutterSettings.filter((d) => d.typeUp != 'manual-only');
@@ -45,13 +45,13 @@ export async function buttonAction(adapter: ioBroker.Adapter, buttonState: strin
                 resLiving = shutterSettings.filter((d) => d.typeDown != 'manual-only');
                 break;
             case 'sunProtectSleep':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'sleep' || d.typeUp == 'sleep-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'sleep' || d.typeDown == 'sleep-auto');
                 break;
             case 'sunProtectChildren':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'children' || d.typeUp == 'children-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'children' || d.typeDown == 'children-auto');
                 break;
             case 'sunProtectLiving':
-                resLiving = shutterSettings.filter((d) => d.typeDown == 'living' || d.typeUp == 'living-auto');
+                resLiving = shutterSettings.filter((d) => d.typeDown == 'living' || d.typeDown == 'living-auto');
                 break;
             case 'autoAll':
                 resLiving = shutterSettings.filter((d) => d.typeUp != 'manual-only');

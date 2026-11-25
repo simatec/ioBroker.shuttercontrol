@@ -44,6 +44,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 ### __WORK IN PROGRESS__
+* (Schimi1983) Fix the close and sun protect buttons of an area: shutters with the "-auto" area are selected by their down area (#954)
 * (Schimi1983) Fix the sun protection end delay: an expired delay is reset when it gets bright again, so the next darker phase starts a new delay instead of ending the sun protection at once (#953)
 * (simatec) New state info.Xmas: true while the configured christmas period is active (#827)
 * (simatec) New switch control.Xmas: christmas mode follows the configured period and can be switched manually (#827)
