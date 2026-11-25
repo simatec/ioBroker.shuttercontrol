@@ -1,7 +1,28 @@
 import type { ShutterFlag, ShutterSettings } from './types';
 
 /**
- * Checks whether today is within the given period (day.month).
+ * Converts a date of the configuration (dd.mm or dd.mm.) into a comparable number (month * 100 + day).
+ *
+ * @param value date as dd.mm
+ * @returns month * 100 + day or null when the value is not a valid date
+ */
+function toMonthDay(value: string): number | null {
+    const parts = String(value ?? '').split('.');
+    if (parts.length < 2) {
+        return null;
+    }
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    if (isNaN(day) || isNaN(month) || day < 1 || day > 31 || month < 1 || month > 12) {
+        return null;
+    }
+    return month * 100 + day;
+}
+
+/**
+ * Checks whether today is within the given period (day.month). Start and end day are included, a period
+ * over the turn of the year (e.g. 01.12. - 06.01.) is supported. Only the calendar day is compared, so the
+ * result does not depend on the time of day or on the length of the current month.
  *
  * @param adapter adapter instance
  * @param StartDate start of the period (dd.mm)
@@ -13,45 +34,20 @@ export async function IsSummerTime(adapter: ioBroker.Adapter, StartDate: string,
     try {
         adapter.log.debug(`check in time ${StartDate} ${EndDate}`);
 
-        if (StartDate.length > 0 && EndDate.length > 0) {
-            const StartPeriod = StartDate.split('.');
-            const EndPeriod = EndDate.split('.');
+        const start = toMonthDay(StartDate);
+        const end = toMonthDay(EndDate);
 
-            if (StartPeriod.length >= 2 && EndPeriod.length >= 2) {
-                const StartDate = new Date();
-                StartDate.setDate(parseInt(StartPeriod[0]));
-                StartDate.setMonth(parseInt(StartPeriod[1]) - 1);
-                adapter.log.debug(`Start ${StartDate.toDateString()}`);
+        if (start !== null && end !== null) {
+            const now = new Date();
+            const today = (now.getMonth() + 1) * 100 + now.getDate();
 
-                const EndDate = new Date();
-                EndDate.setDate(parseInt(EndPeriod[0]));
-                EndDate.setMonth(parseInt(EndPeriod[1]) - 1);
-                adapter.log.debug(`End ${EndDate.toDateString()}`);
+            // start <= end: period within one year, otherwise over the turn of the year
+            ret = start <= end ? today >= start && today <= end : today >= start || today <= end;
 
-                const now = new Date();
-
-                // by year changed
-                if (EndDate < StartDate) {
-                    if (now > EndDate) {
-                        //end already past, increase end year
-                        EndDate.setFullYear(EndDate.getFullYear() + 1);
-                        adapter.log.debug(`corrected End ${EndDate.toDateString()}`);
-                    } else {
-                        //else decrease Start year
-                        StartDate.setFullYear(StartDate.getFullYear() - 1);
-                        adapter.log.debug(`corrected Start ${StartDate.toDateString()}`);
-                    }
-                }
-
-                if (now >= StartDate && now <= EndDate) {
-                    adapter.log.debug('we are in period');
-                    ret = true;
-                } else {
-                    adapter.log.debug(
-                        `we are not in period, after start ${StartDate.toDateString()} and before end ${EndDate.toDateString()}`,
-                    );
-                    ret = false;
-                }
+            if (ret) {
+                adapter.log.debug('we are in period');
+            } else {
+                adapter.log.debug(`we are not in period ${StartDate} - ${EndDate}`);
             }
         }
     } catch (e) {
@@ -85,6 +81,37 @@ export async function CheckInSummerNotDown(adapter: ioBroker.Adapter, shutter: S
 }
 
 /**
+ * Converts a state value into a boolean ('true', 1 and true are true).
+ *
+ * @param val state value
+ * @returns the boolean value
+ */
+export function toBool(val: ioBroker.StateValue | undefined): boolean {
+    return val === true || val === 'true' || val === 1 || val === '1';
+}
+
+/**
+ * Checks whether the christmas mode is active. The switch control.Xmas is used; it follows the configured
+ * christmas period (XMasStart / XMasEnd) and can be changed manually. Without a value of the switch the
+ * configured period is used.
+ *
+ * @param adapter adapter instance
+ * @returns true when the christmas mode is active
+ */
+export async function IsXmasActive(adapter: ioBroker.Adapter): Promise<boolean> {
+    try {
+        const state = await adapter.getStateAsync('control.Xmas');
+        if (state && state.val !== null && state.val !== undefined) {
+            adapter.log.debug(`xmas mode by control.Xmas: ${state.val}`);
+            return toBool(state.val);
+        }
+    } catch (e) {
+        adapter.log.debug(`control.Xmas cannot be read: ${e}`);
+    }
+    return IsSummerTime(adapter, adapter.config.XMasStart ?? '', adapter.config.XMasEnd ?? '');
+}
+
+/**
  * Returns the xmas level of the shutter during the xmas period.
  *
  * @param adapter adapter instance
@@ -95,9 +122,9 @@ export async function GetXmasLevel(adapter: ioBroker.Adapter, shutter: ShutterSe
     let XmasLevel = -1;
 
     adapter.log.debug(`check xmas for ${shutter.shutterName}`);
-    if (shutter.useXmasLevel) {
+    if (toBool(shutter.useXmasLevel)) {
         //we should use xmasl level for the current shutter
-        const resultXmasTime = await IsSummerTime(adapter, adapter.config.XMasStart, adapter.config.XMasEnd);
+        const resultXmasTime = await IsXmasActive(adapter);
         if (resultXmasTime) {
             //and we are in xmas time
             XmasLevel = parseFloat(String(shutter.XmasLevel)); //then store level to be used here

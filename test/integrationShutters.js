@@ -806,6 +806,33 @@ tests.integration(path.join(__dirname, '..'), {
                 assert.deepStrictEqual(errorLogs(), []);
             });
 
+            it('christmas: info.Xmas / control.Xmas follow the period, control.Xmas can be switched manually', async function () {
+                this.timeout(60000);
+                // the configured period (yesterday - tomorrow) is active -> both true after the start
+                const info = await waitFor(async () => {
+                    const st = await getState(`${NS}.info.Xmas`);
+                    return st && st.val === true && st.ack ? st : null;
+                }, 20000);
+                assert.ok(info, 'info.Xmas not true in the christmas period');
+                const ctrl = await waitFor(async () => {
+                    const st = await getState(`${NS}.control.Xmas`);
+                    return st && st.val === true && st.ack ? st : null;
+                }, 20000);
+                assert.ok(ctrl, 'control.Xmas not switched on by the christmas period');
+
+                // manual switch (ack=false) -> acknowledged, info.Xmas stays
+                for (const v of [false, true]) {
+                    await setState(`${NS}.control.Xmas`, v, false);
+                    const st = await waitFor(async () => {
+                        const s = await getState(`${NS}.control.Xmas`);
+                        return s && s.val === v && s.ack ? s : null;
+                    });
+                    assert.ok(st, `control.Xmas = ${v} not acknowledged`);
+                    assert.strictEqual(await val(`${NS}.info.Xmas`), true, 'info.Xmas changed by the switch');
+                }
+                assert.deepStrictEqual(errorLogs(), []);
+            });
+
             it('window trigger (upDown): open -> triggerDrive, tilted -> triggerDriveTildet, closed -> back', async function () {
                 this.timeout(120000);
                 await allUp();
