@@ -168,24 +168,24 @@ class Shuttercontrol extends Adapter {
         // the former callback had the signature (obj) and therefore checked the error argument
         void this.getForeignObject('system.config', (err, obj) => {
             if (obj) {
-                void this.checkStates();
+                this.runTask(this.checkStates(), 'checkStates');
             }
         });
 
         // christmas period: info.Xmas and switch control.Xmas
-        void this.syncXmasState();
+        this.runTask(this.syncXmasState(), 'syncXmasState');
 
         // read shutter settings from config
         this.shutterSettings = this.config.events;
-        void this.saveCurrentStates(true);
+        this.runTask(this.saveCurrentStates(true), 'saveCurrentStates');
         this.timer = this.setTimeout(() => {
-            void this.checkActualStates();
+            this.runTask(this.checkActualStates(), 'checkActualStates');
             schedule.scheduleJob('calcPosTimer', '*/5 * * * *', () => {
                 this.sunPos();
             });
         }, 2000);
 
-        void this.GetSystemData();
+        this.runTask(this.GetSystemData(), 'GetSystemData');
 
         this.subscribeStates('control.*');
         this.subscribeStates('info.Elevation');
@@ -327,7 +327,7 @@ class Shuttercontrol extends Adapter {
     private async onStateChange(id: string, state: ioBroker.State | null | undefined): Promise<void> {
         if (state) {
             if (this.config.HolidayDP !== '') {
-                if (id.includes(this.config.HolidayDP)) {
+                if (id === this.config.HolidayDP) {
                     this.log.debug(`HolidayDP changed to: ${state.val}`);
                     await this.setStateAsync('control.Holiday', { val: state.val, ack: true })
                         .catch((e) => this.log.warn(e));
@@ -403,7 +403,7 @@ class Shuttercontrol extends Adapter {
                 this.log.debug(`Auto Children is: ${state.val}`);
             }
             if (id === this.config.lightsensorUpDown) {
-                void shutterBrightnessSensor(this, state.val as number, this.shutterSettings, this.brightnessDown);
+                this.runTask(shutterBrightnessSensor(this, state.val as number, this.shutterSettings, this.brightnessDown), 'shutterBrightnessSensor');
                 this.log.debug(`Brightness sensor value: ${state.val}`);
 
                 if (state.val === 0 && this.brightnessDown === false) {
@@ -415,7 +415,7 @@ class Shuttercontrol extends Adapter {
                     schedule.scheduleJob('shutterDownBrightness', `${downTime[1]} ${downTime[0]} * * *`, async () => {
                         this.log.debug(`Brightness State Down is: ${this.brightnessDown}`);
                         this.log.debug(`Brightness sensor value: ${state.val}`);
-                        void shutterBrightnessSensor(this, state.val as number, this.shutterSettings, this.brightnessDown);
+                        this.runTask(shutterBrightnessSensor(this, state.val as number, this.shutterSettings, this.brightnessDown), 'shutterBrightnessSensor');
 
                         await this.delay(10000);
                         this.brightnessDown = brightnessState(this, state.val as number, this.brightnessDown);
@@ -437,49 +437,49 @@ class Shuttercontrol extends Adapter {
             }
             if (id === this.config.alarmWind1 && alarmChanged) {
                 this.log.debug(`Alarm Wind 1 changed: ${state.val}`);
-                void shutterAlarm(this, 'alarmWind1', this.shutterSettings);
+                this.runTask(shutterAlarm(this, 'alarmWind1', this.shutterSettings), 'shutterAlarm');
             }
             if (id === this.config.alarmWind2 && alarmChanged) {
                 this.log.debug(`Alarm Wind 2 changed: ${state.val}`);
-                void shutterAlarm(this, 'alarmWind2', this.shutterSettings);
+                this.runTask(shutterAlarm(this, 'alarmWind2', this.shutterSettings), 'shutterAlarm');
             }
             if (id === this.config.alarmRain && alarmChanged) {
                 this.log.debug(`Alarm Rain changed: ${state.val}`);
-                void shutterAlarm(this, 'alarmRain', this.shutterSettings);
+                this.runTask(shutterAlarm(this, 'alarmRain', this.shutterSettings), 'shutterAlarm');
             }
             if (id === this.config.alarmFrost && alarmChanged) {
                 this.log.debug(`Alarm Frost changed: ${state.val}`);
-                void shutterAlarm(this, 'alarmFrost', this.shutterSettings);
+                this.runTask(shutterAlarm(this, 'alarmFrost', this.shutterSettings), 'shutterAlarm');
             }
             if (id === this.config.alarmFire && alarmChanged) {
                 this.log.debug(`Alarm Fire changed: ${state.val}`);
-                void shutterAlarm(this, 'alarmFire', this.shutterSettings);
+                this.runTask(shutterAlarm(this, 'alarmFire', this.shutterSettings), 'shutterAlarm');
             }
 
             this.resTrigger.forEach(async (resultTriggerID) => {
                 if (id === resultTriggerID && state.ts === state.lc) {
                     this.resTriggerChange = resultTriggerID;
                     this.log.debug(`TriggerID changed: ${resultTriggerID} | Value: ${state.val}`);
-                    void triggerChange(this.resTriggerChange, this, this.shutterSettings);
+                    this.runTask(triggerChange(this.resTriggerChange, this, this.shutterSettings), 'triggerChange');
                 }
             });
             this.resSunInsideTemp.forEach(async (resSunInsideTempID) => {
                 if (id === resSunInsideTempID && state.ts === state.lc) {
                     this.log.debug(`insidetemperature changed: ${resSunInsideTempID} | Value: ${state.val}°C`);
-                    void sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings);
+                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
                 }
             });
             this.resSunOutsideTemp.forEach(async (resSunOutsideTempID) => {
                 if (id === resSunOutsideTempID && state.ts === state.lc && state.val !== null) {
                     this.log.debug(`outsidetemperature changed: ${resSunOutsideTempID} | Value: ${state.val}°C`);
-                    void sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings);
+                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
                 }
             });
             this.resSunLight.forEach(async (resSunLightID) => {
                 if (id === resSunLightID && state.ts === state.lc) {
                     if (Math.round((new Date(state.lc).getTime() - new Date(this.lastLigthSensorValue[`${resSunLightID}`].ts).getTime()) / 1000 / 60) > 2) {
                         this.log.debug(`Lightsensor changed: ${resSunLightID} | Value: ${state.val}lux`);
-                        void sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings);
+                        this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
                         this.lastLigthSensorValue[`${resSunLightID}`].ts = state.lc;
                     }
                 }
@@ -610,7 +610,7 @@ class Shuttercontrol extends Adapter {
 
                                 //save old height
                                 await this.delay(2000); //already waited this.waitTime4StateCheck seconds.
-                                void this.saveCurrentStates(false);
+                                this.runTask(this.saveCurrentStates(false), 'saveCurrentStates');
 
                                 /*
                                     await sleep because e.g.
@@ -625,7 +625,7 @@ class Shuttercontrol extends Adapter {
                                     this.shutterSettings[s].firstCompleteUp = false;
                                     this.log.debug(`Reset firstCompleteUp #2 for ${this.shutterSettings[s].shutterName}`);
                                 }
-                                void this.saveCurrentStates(false);
+                                this.runTask(this.saveCurrentStates(false), 'saveCurrentStates');
                             }
                         }
                     }
@@ -633,49 +633,49 @@ class Shuttercontrol extends Adapter {
             });
 
             if (id === `${this.namespace}.info.Azimut`) {
-                void sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings);
+                this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
             }
             if (id === `${this.namespace}.info.Elevation`) {
-                void elevationDown(this, this.elevation as number, this.azimuth as number, this.shutterSettings);
+                this.runTask(elevationDown(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'elevationDown');
             }
             if (id === `${this.namespace}.control.closeAll`) {
-                void buttonAction(this, 'closeAll', this.shutterSettings);
+                this.runTask(buttonAction(this, 'closeAll', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.openAll`) {
-                void buttonAction(this, 'openAll', this.shutterSettings);
+                this.runTask(buttonAction(this, 'openAll', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.closeLiving`) {
-                void buttonAction(this, 'closeLiving', this.shutterSettings);
+                this.runTask(buttonAction(this, 'closeLiving', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.openLiving`) {
-                void buttonAction(this, 'openLiving', this.shutterSettings);
+                this.runTask(buttonAction(this, 'openLiving', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.closeSleep`) {
-                void buttonAction(this, 'closeSleep', this.shutterSettings);
+                this.runTask(buttonAction(this, 'closeSleep', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.openSleep`) {
-                void buttonAction(this, 'openSleep', this.shutterSettings);
+                this.runTask(buttonAction(this, 'openSleep', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.closeChildren`) {
-                void buttonAction(this, 'closeChildren', this.shutterSettings);
+                this.runTask(buttonAction(this, 'closeChildren', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.openChildren`) {
-                void buttonAction(this, 'openChildren', this.shutterSettings);
+                this.runTask(buttonAction(this, 'openChildren', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.sunProtect`) {
-                void buttonAction(this, 'sunProtect', this.shutterSettings);
+                this.runTask(buttonAction(this, 'sunProtect', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.sunProtectSleep`) {
-                void buttonAction(this, 'sunProtectSleep', this.shutterSettings);
+                this.runTask(buttonAction(this, 'sunProtectSleep', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.sunProtectChildren`) {
-                void buttonAction(this, 'sunProtectChildren', this.shutterSettings);
+                this.runTask(buttonAction(this, 'sunProtectChildren', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.sunProtectLiving`) {
-                void buttonAction(this, 'sunProtectLiving', this.shutterSettings);
+                this.runTask(buttonAction(this, 'sunProtectLiving', this.shutterSettings), 'buttonAction');
             }
             if (id === `${this.namespace}.control.autoAll`) {
-                void buttonAction(this, 'autoAll', this.shutterSettings);
+                this.runTask(buttonAction(this, 'autoAll', this.shutterSettings), 'buttonAction');
             }
         }
     }
@@ -1063,7 +1063,7 @@ class Shuttercontrol extends Adapter {
 
         await this.delay(1000);
         this.shutterDriveCalc();
-        void this.createShutter();
+        this.runTask(this.createShutter(), 'createShutter');
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1102,7 +1102,7 @@ class Shuttercontrol extends Adapter {
                             this.log.debug(`${resultStates[i].shutterName} level conversion is enabled!`);
                         }
                     }
-                    void this.saveCurrentStates(false);
+                    this.runTask(this.saveCurrentStates(false), 'saveCurrentStates');
                 }
             }
         }
@@ -1195,8 +1195,8 @@ class Shuttercontrol extends Adapter {
         this.log.debug(`Starting up shutters Sunrise area: ${this.sunriseStr}`);
         this.log.debug(`Shutdown shutters Sunset area: ${this.sunsetStr}`);
 
-        void shutterGoldenHour(this, this.goldenHourEnd, this.goldenHour, this.shutterSettings);
-        void shutterSunriseSunset(this, this.sunriseStr, this.sunsetStr, this.shutterSettings);
+        this.runTask(shutterGoldenHour(this, this.goldenHourEnd, this.goldenHour, this.shutterSettings), 'shutterGoldenHour');
+        this.runTask(shutterSunriseSunset(this, this.sunriseStr, this.sunsetStr, this.shutterSettings), 'shutterSunriseSunset');
 
         switch (this.config.livingAutomatic) {
             case 'livingSunriseSunset':
@@ -1300,7 +1300,7 @@ class Shuttercontrol extends Adapter {
         }
         void this.setState('info.upTimeLiving', { val: this.upTimeLiving, ack: true });
         this.log.debug(`Starting up shutters living area: ${this.upTimeLiving} | debug: ${debugCnt}`);
-        void shutterUpLiving(this, this.upTimeLiving, this.autoLivingStr as string | boolean, this.shutterSettings);
+        this.runTask(shutterUpLiving(this, this.upTimeLiving, this.autoLivingStr as string | boolean, this.shutterSettings), 'shutterUpLiving');
 
         // ******** Set Up-Time Sleep Area ********
         switch (this.config.sleepAutomatic) {
@@ -1371,7 +1371,7 @@ class Shuttercontrol extends Adapter {
         }
         void this.setState('info.upTimeSleep', { val: this.upTimeSleep, ack: true });
         this.log.debug(`Starting up shutters sleep area: ${this.upTimeSleep} | debug ${debugCnt}`);
-        void shutterUpSleep(this, this.upTimeSleep, this.delayUp, this.autoSleepStr as string | boolean, this.shutterSettings);
+        this.runTask(shutterUpSleep(this, this.upTimeSleep, this.delayUp, this.autoSleepStr as string | boolean, this.shutterSettings), 'shutterUpSleep');
 
         // ******** Set Up-Time Children Area ********
 
@@ -1444,7 +1444,7 @@ class Shuttercontrol extends Adapter {
         }
         void this.setState('info.upTimeChildren', { val: this.upTimeChildren, ack: true });
         this.log.debug(`Starting up shutters children area: ${this.upTimeChildren} | debug ${debugCnt}`);
-        void shutterUpChildren(this, this.upTimeChildren, this.delayUpChildren, this.autoChildrenStr as string | boolean, this.shutterSettings);
+        this.runTask(shutterUpChildren(this, this.upTimeChildren, this.delayUpChildren, this.autoChildrenStr as string | boolean, this.shutterSettings), 'shutterUpChildren');
 
         // ******** Set Down-Time Living Area ********
         switch (this.config.livingAutomatic) {
@@ -1521,7 +1521,7 @@ class Shuttercontrol extends Adapter {
 
         void this.setState('info.downTimeLiving', { val: this.downTimeLiving, ack: true });
         this.log.debug(`Shutdown shutters living area: ${this.downTimeLiving} | debug ${debugCnt}`);
-        void shutterDownLiving(this, this.downTimeLiving as string, this.autoLivingStr as string | boolean, this.shutterSettings);
+        this.runTask(shutterDownLiving(this, this.downTimeLiving as string, this.autoLivingStr as string | boolean, this.shutterSettings), 'shutterDownLiving');
 
         // ******** Set Down-Time Children Area ******** 
         switch (this.config.childrenAutomatic) {
@@ -1594,7 +1594,7 @@ class Shuttercontrol extends Adapter {
         }
         void this.setState('info.downTimeChildren', { val: this.downTimeChildren, ack: true });
         this.log.debug(`Shutdown shutters children area: ${this.downTimeChildren} | debug ${debugCnt}`);
-        void shutterDownChildren(this, this.downTimeChildren as string, this.delayDownChildren, this.autoChildrenStr as string | boolean, this.shutterSettings);
+        this.runTask(shutterDownChildren(this, this.downTimeChildren as string, this.delayDownChildren, this.autoChildrenStr as string | boolean, this.shutterSettings), 'shutterDownChildren');
 
         // ******** Set Down-Time Sleep Area ******** 
         switch (this.config.sleepAutomatic) {
@@ -1670,9 +1670,9 @@ class Shuttercontrol extends Adapter {
         }
         void this.setState('info.downTimeSleep', { val: this.downTimeSleep, ack: true });
         this.log.debug(`Shutdown shutters sleep area: ${this.downTimeSleep} | debug ${debugCnt}`);
-        void shutterDownSleep(this, this.downTimeSleep as string, this.delayDown, this.autoSleepStr as string | boolean, this.shutterSettings);
-        void shutterDownLate(this, this.shutterSettings);
-        void shutterDownComplete(this, this.delayDown, this.shutterSettings);
+        this.runTask(shutterDownSleep(this, this.downTimeSleep as string, this.delayDown, this.autoSleepStr as string | boolean, this.shutterSettings), 'shutterDownSleep');
+        this.runTask(shutterDownLate(this, this.shutterSettings), 'shutterDownLate');
+        this.runTask(shutterDownComplete(this, this.delayDown, this.shutterSettings), 'shutterDownComplete');
         this.delayCalc();
     }
 
@@ -1704,6 +1704,17 @@ class Shuttercontrol extends Adapter {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Starts an asynchronous task without waiting for it. A failure is logged as error instead of
+     * becoming an unhandled rejection, which would terminate (and restart) the whole adapter.
+     *
+     * @param task the running task
+     * @param name name of the task for the log
+     */
+    private runTask(task: Promise<unknown>, name: string): void {
+        task.catch((e: unknown) => this.log.error(`${name} failed: ${e instanceof Error ? (e.stack ?? e.message) : String(e)}`));
+    }
 
     // +++++++++++++++++ calc the shutter delay +++++++++++++++++++
 
@@ -1914,7 +1925,7 @@ class Shuttercontrol extends Adapter {
                     this.log.warn('shutter cannot created ... Please check in your config the shutter Name');
                 }
             }
-            void this.detectedOldShutter(result);
+            this.runTask(this.detectedOldShutter(result), 'detectedOldShutter');
         }
     }
 
