@@ -44,6 +44,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 ### __WORK IN PROGRESS__
+* (Schimi1983) The position to return to after an alarm is only stored when the shutter is really driven down (or held by an alarm), no longer when "in summer not down" or autoDown off skip the drive, and no longer every 5 minutes for shutters of type elevation (#851)
 * (Schimi1983) Errors in background tasks (alarms, sun protection, buttons, astro drives) are logged instead of terminating the adapter
 * (Schimi1983) Fix the close and sun protect buttons of an area: shutters with the "-auto" area are selected by their down area (#954)
 * (Schimi1983) Fix the sun protection end delay: an expired delay is reset when it gets bright again, so the next darker phase starts a new delay instead of ending the sun protection at once (#953)

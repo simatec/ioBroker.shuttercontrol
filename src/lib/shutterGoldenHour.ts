@@ -190,9 +190,9 @@ export async function shutterGoldenHour(adapter: ioBroker.Adapter, goldenHourEnd
                             targetLevel2Set = XmasLevel > -1 ? XmasLevel : targetLevel2Set;
                             downAction = XmasLevel > -1 ? 'Xmas' : downAction;
 
-                            // save current required position to alarmtrigger before overwriting
-                            shutterSettings[s].alarmTriggerLevel = targetLevel2Set;
-                            shutterSettings[s].alarmTriggerAction = downAction;
+                            // position to return to after an alarm - stored below only if the shutter is really driven (or waits for an alarm)
+                            const alarmTriggerLevel = targetLevel2Set;
+                            const alarmTriggerAction = downAction;
 
                             // overwrite target position and downAction if frost alarm is set.
                             if (statusAlarmFrost == true &&
@@ -207,6 +207,9 @@ export async function shutterGoldenHour(adapter: ioBroker.Adapter, goldenHourEnd
                                 const _autoDownState = await adapter.getStateAsync(`shutters.autoDown.${nameDevice}`).catch((e) => adapter.log.warn(e));
 
                                 if (_autoDownState?.val === true) {
+                                    shutterSettings[s].alarmTriggerLevel = alarmTriggerLevel;
+                                    shutterSettings[s].alarmTriggerAction = alarmTriggerAction;
+
                                     if (pendingAlarm == false) {
                                         const _triggerState = shutterSettings[s].triggerID != '' ? await adapter.getForeignStateAsync(shutterSettings[s].triggerID).catch((e) => adapter.log.warn(e)) : null;
                                         const mustValue = (`${shutterSettings[s].triggerState}`);

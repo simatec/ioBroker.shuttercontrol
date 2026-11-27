@@ -38,9 +38,9 @@ export async function shutterDownComplete(adapter: ioBroker.Adapter, delayDown: 
                             targetLevel2Set = XmasLevel > -1 ? XmasLevel : parseFloat(String(shutterSettings[s].heightDown)); // xmas level or standard down level
                             downAction = XmasLevel > -1 ? 'Xmas' : downAction; // xmas Action or standard down Action
 
-                            // save current required position to alarmtrigger before overwriting
-                            shutterSettings[s].alarmTriggerLevel = targetLevel2Set;
-                            shutterSettings[s].alarmTriggerAction = downAction;
+                            // position to return to after an alarm - stored below only if the shutter is really driven (or waits for an alarm)
+                            const alarmTriggerLevel = targetLevel2Set;
+                            const alarmTriggerAction = downAction;
 
                             // overwrite target position and downAction if frost alarm is set.
                             if (statusAlarmFrost == true &&
@@ -57,6 +57,9 @@ export async function shutterDownComplete(adapter: ioBroker.Adapter, delayDown: 
                                 const _autoDownState = await adapter.getStateAsync(`shutters.autoDown.${nameDevice}`).catch((e) => adapter.log.warn(e));
 
                                 if (_autoDownState?.val) {
+                                    shutterSettings[s].alarmTriggerLevel = alarmTriggerLevel;
+                                    shutterSettings[s].alarmTriggerAction = alarmTriggerAction;
+
                                     if (pendingAlarm == false) {
                                         const _triggerState = shutterSettings[s].triggerID != '' ? await adapter.getForeignStateAsync(shutterSettings[s].triggerID).catch((e) => adapter.log.warn(e)) : null;
                                         const mustValue = (`${  shutterSettings[s].triggerState}`);
