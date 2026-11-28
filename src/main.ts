@@ -466,20 +466,20 @@ class Shuttercontrol extends Adapter {
             this.resSunInsideTemp.forEach(async (resSunInsideTempID) => {
                 if (id === resSunInsideTempID && state.ts === state.lc) {
                     this.log.debug(`insidetemperature changed: ${resSunInsideTempID} | Value: ${state.val}°C`);
-                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
+                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings, resSunInsideTempID), 'sunProtect');
                 }
             });
             this.resSunOutsideTemp.forEach(async (resSunOutsideTempID) => {
                 if (id === resSunOutsideTempID && state.ts === state.lc && state.val !== null) {
                     this.log.debug(`outsidetemperature changed: ${resSunOutsideTempID} | Value: ${state.val}°C`);
-                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
+                    this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings, resSunOutsideTempID), 'sunProtect');
                 }
             });
             this.resSunLight.forEach(async (resSunLightID) => {
                 if (id === resSunLightID && state.ts === state.lc) {
                     if (Math.round((new Date(state.lc).getTime() - new Date(this.lastLigthSensorValue[`${resSunLightID}`].ts).getTime()) / 1000 / 60) > 2) {
                         this.log.debug(`Lightsensor changed: ${resSunLightID} | Value: ${state.val}lux`);
-                        this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings), 'sunProtect');
+                        this.runTask(sunProtect(this, this.elevation as number, this.azimuth as number, this.shutterSettings, resSunLightID), 'sunProtect');
                         this.lastLigthSensorValue[`${resSunLightID}`].ts = state.lc;
                     }
                 }

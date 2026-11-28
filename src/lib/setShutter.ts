@@ -2,6 +2,18 @@ import { shutterState } from './shutterState'; // shutterState
 import type { ShutterSettings } from './types';
 
 let checkShutterState = true;
+// number of drive commands sent - lets callers see whether a shutter was really driven
+let driveCount = 0;
+
+/**
+ * Number of drive commands sent since the adapter start.
+ * Callers compare two values to find out whether a shutter was driven in between.
+ *
+ * @returns count of drive commands
+ */
+export function getDriveCount(): number {
+    return driveCount;
+}
 
 /**
  * Sends the target level to the shutter and stores the auto level and auto state.
@@ -31,6 +43,7 @@ export async function setShutterState(
 
     adapter.log.info(`${logInfo} Set ID: ${currentShutterSettings.shutterName} value: ${shutterHeight}%`);
 
+    driveCount++;
     try {
         await adapter.setForeignStateAsync(currentShutterSettings.name, shutterHeight, false);
     } catch (err) {

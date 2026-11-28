@@ -1,5 +1,5 @@
 import { checkPendingAlarm } from './shutterAlarm'; // shutterAlarm
-import { setShutterState } from './setShutter'; // set Shutter State
+import { setShutterState, getDriveCount } from './setShutter'; // set Shutter State
 import type { ShutterSettings, ShutterValue } from './types';
 
 /*
@@ -17,24 +17,37 @@ import type { ShutterSettings, ShutterValue } from './types';
  * @param elevation current sun elevation
  * @param azimuth current sun azimuth
  * @param shutterSettings all configured shutters
+ * @param sensorId only check the shutters that use this temperature or light sensor (all shutters if empty)
  */
 export async function sunProtect(
     adapter: ioBroker.Adapter,
     elevation: number,
     azimuth: number,
     shutterSettings: ShutterSettings[],
+    sensorId?: string,
 ): Promise<ShutterSettings[] | undefined> {
     const driveDelayUpSleep = adapter.config.driveDelayUpAstro != 0 ? adapter.config.driveDelayUpAstro * 1000 : 20;
     const vRound = adapter.config.shutterStateRound;
 
+    // the drive delay keeps several shutters from starting at the same time - only needed after a real drive
+    const driveDelay = async (drivesBefore: number): Promise<void> => {
+        if (getDriveCount() !== drivesBefore) {
+            await adapter.delay(driveDelayUpSleep);
+        }
+    };
+    // a changed sensor only concerns the shutters that use it; sun position changes check all shutters
+    const usesSensor = (d: ShutterSettings): boolean => !sensorId ||
+        d.tempSensor === sensorId || d.outsideTempSensor === sensorId || d.lightSensor === sensorId;
+
     await adapter.delay(2000);
     if (shutterSettings) {
-        const result = shutterSettings.filter((d) => d.enabled === true || d.enabled === 'true'); // Filter enabled
+        const result = shutterSettings.filter((d) => (d.enabled === true || d.enabled === 'true') && usesSensor(d)); // Filter enabled
 
         if (elevation > adapter.config.sunProtEndElevation) {
             for (let i = 0; i < result.length; i++) {
                 for (let s = 0; s < shutterSettings.length; s++) {
                     if (shutterSettings[s].shutterName == result[i].shutterName) {
+                        const drivesBefore = getDriveCount();
                         let resultDirectionRangeMinus = 0;
                         let resultDirectionRangePlus = 0;
                         let convertShutter = false;
@@ -390,7 +403,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
 
                                 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -739,7 +752,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
 
                                 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1070,7 +1083,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
 
                                 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1304,7 +1317,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
 
                                 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1623,7 +1636,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
 
                                 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1862,7 +1875,7 @@ export async function sunProtect(
                                             }
                                         }
                                     }
-                                    await adapter.delay(driveDelayUpSleep);
+                                    await driveDelay(drivesBefore);
                                     break;
                             }
                         }
@@ -1879,7 +1892,7 @@ export async function sunProtect(
     // +++++++++++++++++ End of sunprotect with Elevationslimit +++++++++++++++
 
     if (shutterSettings) {
-        const result = shutterSettings.filter((d) => d.enabled === true || d.enabled === 'true');
+        const result = shutterSettings.filter((d) => (d.enabled === true || d.enabled === 'true') && usesSensor(d));
 
         const sunProtEndStart = parseInt(String(adapter.config.sunProtEndElevation));
         const sunProtEndStop = (adapter.config.sunProtEndElevation - 1);
@@ -1887,6 +1900,7 @@ export async function sunProtect(
         for (let i = 0; i < result.length; i++) {
             for (let s = 0; s < shutterSettings.length; s++) {
                 if (shutterSettings[s].shutterName == result[i].shutterName) {
+                    const drivesBefore = getDriveCount();
 
                     if (elevation <= sunProtEndStart &&
                         elevation >= sunProtEndStop &&
@@ -2001,7 +2015,7 @@ export async function sunProtect(
                                     adapter.log.info(`SunProtect not moving up now due to active alarm: ${shutterSettings[s].shutterName} value: ${shutterSettings[s].heightUp}%`);
                                 }
                             }
-                            await adapter.delay(driveDelayUpSleep);
+                            await driveDelay(drivesBefore);
                         }
                     }
                 }
