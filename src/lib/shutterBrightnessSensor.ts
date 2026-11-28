@@ -12,6 +12,25 @@ function getDate(d?: Date): string {
     return `${(`0${  d.getHours()}`).slice(-2)  }:${  (`0${  d.getMinutes()}`).slice(-2)}`;
 }
 
+// actions of a shutter that was closed for the night (down, between position, xmas, frost, closed with pending sun protection)
+const NIGHT_ACTIONS = ['down', 'middle', 'Xmas', 'frost', 'OpenInSunProtect'];
+// last automatic actions that closed the shutter for the night
+const NIGHT_AUTO_ACTIONS = ['Down_Brightness', 'Down_LivingTime', 'Down_SleepTime', 'Down_ChildrenTime', 'Down_Complete', 'Down_Late', 'Sunset_down', 'GoldenHour_down', 'Elevation_down'];
+
+/**
+ * The brightness sensor only opens a shutter that is closed for the night. During the day the brightness
+ * changes all the time - without this check every new value moved the shutter again and overwrote
+ * sun protection, heat protection and manual positions (#794).
+ *
+ * @param shutter settings of the shutter
+ * @returns true if the shutter is in its night position
+ */
+export function isInNightPosition(shutter: ShutterSettings): boolean {
+    // while a window is open the action before the window was opened counts
+    const action = String(shutter.currentAction).startsWith('triggered') ? shutter.triggerAction : shutter.currentAction;
+    return NIGHT_ACTIONS.includes(String(action)) || NIGHT_AUTO_ACTIONS.includes(String(shutter.lastAutoAction));
+}
+
 /**
  * Evaluates whether the brightness requires the shutters to be down
  *
@@ -229,6 +248,12 @@ export async function shutterBrightnessSensor(adapter: ioBroker.Adapter, brightn
                 for (let s = 0; s < shutterSettings.length; s++) {
                     if (shutterSettings[s].shutterName == result[i].shutterName) {
                         const nameDevice = shutterSettings[s].shutterName.replace(/[.;, ]/g, '_');
+
+                        if (!isInNightPosition(shutterSettings[s])) {
+                            adapter.log.debug(`Lightsensor up ${shutterSettings[s].shutterName}: not in night position (current action: ${shutterSettings[s].currentAction}, last automatic action: ${shutterSettings[s].lastAutoAction}) - nothing to do`);
+                            continue;
+                        }
+
                         const pendingAlarm = await checkPendingAlarm(adapter, shutterSettings[s]);
 
                         const _autoUpState = await adapter.getStateAsync(`shutters.autoUp.${nameDevice}`).catch((e) => adapter.log.warn(e));
